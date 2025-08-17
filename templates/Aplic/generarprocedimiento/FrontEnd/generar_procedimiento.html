@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="mb-3">Generar Procedimiento</h3>
+<form method="POST">
+    {% for linea in lineas %}
+    {% set idx = loop.index0 %}
+    <div>
+        <input type="checkbox" name="eliminar_{{ idx }}">
+        <textarea name="linea_{{ idx }}" rows="3" cols="100" style="{% if '<U>' in linea %}background-color: yellow; font-weight: bold;{% endif %}">{{ linea }}</textarea>
+    </div>
+    {% endfor %}
+    <div>
+        <label>Agregar nueva línea:</label>
+        <input type="text" name="nueva_linea">
+    </div>
+    <button type="submit">Guardar Cambios</button>
+</form>
+{% endblock %}

@@ -1,0 +1,62 @@
+[
+    {
+        "titulo": "Cambio de turno 18/07/2025",
+        "fecha": "2025-07-18",
+        "descripcion": "trabaje de 06 a 14",
+        "id": 2
+    },
+    {
+        "titulo": "Cambio de turno 21/07/2025",
+        "fecha": "2025-07-21",
+        "descripcion": "trabaje de 06 a 14",
+        "id": 3
+    },
+    {
+        "titulo": "Cambio de turno 22/07/2025",
+        "fecha": "2025-07-22",
+        "descripcion": "trabaje de 09 a 18 (verificación del auto)",
+        "id": 4
+    },
+    {
+        "titulo": "Bajada de OT RP Hallden",
+        "fecha": "2025-07-28",
+        "descripcion": "RP Jueves Hallden 07/08/2025 ",
+        "id": 5
+    },
+    {
+        "titulo": "Bajada de OT RP Robots ",
+        "fecha": "2025-08-11",
+        "descripcion": "RP Robots Lunes 18/08/2025 ",
+        "id": 6
+    },
+    {
+        "titulo": "Bajada OT de RP Littell",
+        "fecha": "2025-08-18",
+        "descripcion": "RP Littell  Martes 26/08/2025",
+        "id": 7
+    },
+    {
+        "titulo": "Cambio de turno 31/07/2025",
+        "fecha": "2025-07-31",
+        "descripcion": "Cambio de de turno de 12 a 20 para verificar equipos de emergencia",
+        "id": 8
+    },
+    {
+        "titulo": "Pedir Repuestos",
+        "fecha": "2025-07-31",
+        "descripcion": "Fuente de 24v cod: 71327209  y cables de 1.5 y 2.5",
+        "id": 9
+    },
+    {
+        "titulo": "Grabar tutorial de hacer una PM11",
+        "fecha": "2025-07-31",
+        "descripcion": "Hacer una grabación de una ot pm11",
+        "id": 10
+    },
+    {
+        "titulo": "Modificar plan para RP robot",
+        "fecha": "2025-08-30",
+        "descripcion": "Crear una operación para el mantenimiento de escobillas de envolvedora emb 40",
+        "id": 11
+    }
+]

@@ -1,0 +1,120 @@
+<div class="d-flex gap-3 align-items-center mb-3 mt-3">
+  <form class="form-exportar-pdf no-loader" method="POST" action="{{ url_for('indexEstadoRep.exportar_pdf') }}">
+    <input type="hidden" name="ruta_jerarquia" value="{{ tab.ruta_jerarquia }}">
+    <input type="hidden" name="buscar" class="buscar_pdf">
+    <button type="submit" class="btn btn-outline-light">Exportar a PDF</button>
+  </form>
+
+  <input type="hidden" data-ruta_jerarquia="{{ tab.ruta_jerarquia }}" data-sanitized_id="{{ tab.sanitized_id }}">
+
+  <div>
+    <button type="button" class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#agregarModal">
+      ➕ Agregar nuevo repuesto
+    </button>
+  </div>
+</div>
+
+<div id="tabla-container">
+  <input type="text" class="form-control mb-3 buscar_input" placeholder="🔍 Buscar en todos los campos..."
+    onkeyup="filtrarTabla(this)">
+
+  <div class="mb-3">
+
+    {% include 'Aplic/estadosderepuestos/FrontEnd/component/selectEstados.html' %}
+  </div>
+
+  <div class="table-responsive tabla-scroll">
+    <table class="table table-hover table-striped table-dark align-middle w-100 mb-0">
+      <thead class="sticky-header">
+        <tr>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Código</th>
+          <th>Cantidad</th>
+          <th>Almacén</th>
+          <th>Ubicación Técnica</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% if repuestos and repuestos|length > 0 %}
+        {% for r in repuestos %}
+        <tr>
+          <td>
+            {% include 'Aplic/estadosderepuestos/FrontEnd/component/imageRep.html' %}
+          </td>
+          <td>{{ r.nombre }}</td>
+          <td>{{ r.codigo }}</td>
+          <td>{{ r.cantidad }}</td>
+          <td>{{ r.equipo }}</td>
+          <td>
+            <ul class="mb-0">
+              {% for ruta in r.ruta_jerarquia %}
+              <li>{{ ruta }}</li>
+              {% endfor %}
+            </ul>
+          </td>
+          <td>{{ r.estado }}</td>
+          <td>
+            {% include 'Aplic/estadosderepuestos/FrontEnd/component/buttonEdit.html' %}
+            {% include 'Aplic/estadosderepuestos/FrontEnd/component/buttonDelete.html' %}
+          </td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+          <td colspan="8" class="text-center">No hay repuestos para esta categoría.</td>
+        </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+
+  function filtrarTabla(input) {
+    const tabPane = input.closest('.tab-pane');
+    const filtro = input.value.toLowerCase();
+    const filas = tabPane.querySelectorAll('tbody tr');
+
+    filas.forEach(fila => {
+      const texto = fila.textContent.toLowerCase();
+      fila.style.display = texto.includes(filtro) ? '' : 'none';
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Filtrado por texto al tipear
+    document.querySelectorAll('.buscar_input').forEach(input => {
+      input.addEventListener('keyup', function () {
+        filtrarTabla(this);
+      });
+    });
+
+    // Filtrado por select de estado
+    document.querySelectorAll('.select_estado').forEach(select => {
+      select.addEventListener('change', function () {
+        const tabPane = this.closest('.tab-pane');
+        const buscarInput = tabPane.querySelector('.buscar_input');
+        if (buscarInput) {
+          buscarInput.value = this.value;
+          filtrarTabla(buscarInput);
+        }
+      });
+    });
+
+    // Exportar PDF por pestaña
+    document.querySelectorAll('.form-exportar-pdf').forEach(form => {
+      form.addEventListener('submit', function () {
+        const tabPane = this.closest('.tab-pane');
+        const buscarInput = tabPane.querySelector('.buscar_input');
+        const buscarPdf = this.querySelector('.buscar_pdf');
+        if (buscarInput && buscarPdf) {
+          buscarPdf.value = buscarInput.value || '';
+        }
+      });
+    });
+  });
+</script>

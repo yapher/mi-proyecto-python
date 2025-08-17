@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="mb-3">tareas</h3>
+
+<form action="/agregar" method="POST" class="bg-form" style="margin-bottom: 20px;">
+    <input type="text" name="titulo" placeholder="Título" required class="form-control mb-2">
+    <input type="date" name="fecha" required class="form-control mb-2">
+    <input type="text" name="descripcion" placeholder="Descripción" required class="form-control mb-2">
+    <button type="submit" class="btn btn-agregar">Agregar Evento</button>
+</form>
+
+<ul class="event-list">
+    {% for evento in eventos|sort(attribute='fecha') %}
+    <li>
+        <div class="event-info" data-id="{{ evento.id }}" data-titulo="{{ evento.titulo | escape }}"
+            data-fecha="{{ evento.fecha }}" data-descripcion="{{ evento.descripcion | escape }}">
+            <strong>{{ evento.titulo }}</strong> - {{ evento.fecha }}<br>
+            <span class="descripcion-text">{{ evento.descripcion }}</span>
+        </div>
+        <a href="/eliminar/{{ evento.id }}" class="btn btn-eliminar" onclick="event.stopPropagation();">Eliminar</a>
+    </li>
+    {% endfor %}
+</ul>
+
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="popup" tabindex="-1" aria-labelledby="popupLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-form text-white">
+            <form id="edit-form" method="POST">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="popupLabel">Editar evento</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="id" id="edit-id">
+                    <div class="mb-3">
+                        <label for="edit-titulo" class="form-label">Título:</label>
+                        <input type="text" id="edit-titulo" name="titulo" required class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-fecha" class="form-label">Fecha:</label>
+                        <input type="date" id="edit-fecha" name="fecha" required class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-descripcion" class="form-label">Descripción:</label>
+                        <textarea id="edit-descripcion" name="descripcion" rows="4" required
+                            class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-editar">Guardar</button>
+                    <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Asegúrate que Bootstrap JS está cargado antes de este script
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtener el modal de Bootstrap
+        var popupModalEl = document.getElementById('popup');
+        var popupModal = new bootstrap.Modal(popupModalEl, { keyboard: false });
+
+        const form = document.getElementById('edit-form');
+
+        document.querySelectorAll('.event-info').forEach(function (div) {
+            div.addEventListener('click', function () {
+                const id = this.getAttribute('data-id');
+                const titulo = this.getAttribute('data-titulo');
+                const fecha = this.getAttribute('data-fecha');
+                const descripcion = this.getAttribute('data-descripcion');
+
+                document.getElementById('edit-id').value = id;
+                document.getElementById('edit-titulo').value = titulo;
+                document.getElementById('edit-fecha').value = fecha;
+                document.getElementById('edit-descripcion').value = descripcion;
+
+                form.action = '/editar/' + id;
+
+                // Mostrar el modal usando Bootstrap API
+                popupModal.show();
+            });
+        });
+
+        // El boton cancelar y el botón cerrar ya manejan el cierre por data-bs-dismiss="modal"
+        // No hace falta un listener extra para cerrar el modal
+
+    });
+</script>
+{% endblock %}

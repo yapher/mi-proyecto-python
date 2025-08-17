@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="mb-3">Bajada de OT</h3>
+
+<form action="{{ url_for('bajada_de_ot.generar_json_ot') }}" method="post">
+    <button type="submit" class="btn btn-primary">
+        Generar archivo JSON de órdenes
+    </button>
+</form>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} mt-3">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+{% endblock %}

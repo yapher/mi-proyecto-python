@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<h3 class="mb-3">Crear listado de repuesto por línea</h3>
+
+<form method="POST">
+    <div class="form-group">
+        <label for="ruta">Líneas de Producción:</label>
+        <select class="form-control" id="ruta" name="ruta" required>
+            <option value="">Seleccione una línea</option>
+            {% for item in rutas %}
+                <option value="{{ item.ruta }}">{{ item.ruta }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <br>
+    <button type="submit" class="btn btn-success">Guardar</button>
+    <a href="/" class="btn btn-secondary">Cancelar</a>
+</form>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="mb-3">Crear Rubros</h3>
+{% include "Aplic/crearrubros/FrontEnd/component/cudRubro.html" %}
+<div class="table-responsive tabla-scroll">
+    <table class="table table-hover table-striped table-dark align-middle w-100 mb-0">
+        <thead class="sticky-header">
+            <tr>
+                <th>Emoji</th>
+                <th>Nombre</th>
+                <th>Ruta</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tabla">
+            <!-- Se llena dinámicamente -->
+        </tbody>
+    </table>
+</div>
+<script>
+    
+
+    
+    function prepararEdicion(ruta_jerarquia, nombre, emoji, ruta_menu) {
+    document.getElementById("nombre").value = nombre;
+    document.getElementById("emoji").value = emoji;
+    document.getElementById("ruta_menu").value = ruta_menu || "";
+    document.getElementById("ruta_original").value = ruta_jerarquia;
+
+    document.querySelector(".btn-agregar").style.display = "none";
+    document.querySelector(".btn-editar").style.display = "inline";
+    document.querySelector(".btn-cancelar").style.display = "inline";
+
+    const rutaPadre = obtenerRutaPadreDesdeJerarquia(ruta_jerarquia);
+    renderSelectoresNiveles(rutaPadre); // 👈 renderiza los selectores con valor por defecto
+}
+
+    function cargarTabla() {
+        fetch('/api/rubro_arbol')
+            .then(res => res.json())
+            .then(data => {
+                const tabla = document.getElementById("tabla");
+                tabla.innerHTML = "";
+                function recorrer(menus, nivel = 0) {
+                    menus.forEach(menu => {
+                        tabla.innerHTML += `
+                        <tr>
+                            <td>${menu.emoji}</td>
+                            <td style="padding-left:${nivel * 30}px">${menu.nombre}</td>
+                            <td>${menu.ruta || ''}</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#agregarModal" onclick="prepararEdicion('${menu.ruta_jerarquia}','${menu.nombre}','${menu.emoji}','${menu.ruta || ""}')">✏️ Editar</button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="eliminar('${menu.ruta_jerarquia}')">🗑️ Eliminar</button>
+                            </td>
+                        </tr>
+                    `;
+                        if (menu.submenues && menu.submenues.length > 0) {
+                            recorrer(menu.submenues, nivel + 1);
+                        }
+                    });
+                }
+                recorrer(data);
+            });
+    }
+
+    
+</script>
+{% endblock %}

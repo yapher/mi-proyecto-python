@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo_HA_1.gif') }}">
+    <title>Empresa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <!-- CSS de Select2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.2.0-beta/noty.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.2.0-beta/themes/mint.min.css" />
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-gradient bg-dark border-bottom shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand nav-link " href="/">
+                <img src="{{ url_for('static', filename='logo_HA_1.gif') }}" alt="Logo" width="30" height="30"
+                    class="rounded">
+                Empresa
+            </a>
+            <button class="navbar-toggler nav-link" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
+                    {% for item in menu %}
+                    {% if item.roles is not defined or (roles | intersect(item.roles)) %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown" role="button"
+                            aria-expanded="false">
+                            {{ item.emoji }} {{ item.nombre }}
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% for sub in item.submenues %}
+                            {% if sub.roles is not defined or (roles | intersect(sub.roles)) %}
+                            {% if sub.submenues %}
+                            <li class="dropdown-submenu dropend">
+                                <a class="dropdown-item dropdown-toggle" href="#" role="button" aria-expanded="false">
+                                    {{ sub.emoji }} {{ sub.nombre }}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    {% for ssub in sub.submenues %}
+                                    {% if ssub.roles is not defined or (roles | intersect(ssub.roles)) %}
+                                    <li>
+                                        <a class="dropdown-item" href="{{ ssub.ruta or '#' }}">
+                                            {{ ssub.emoji }} {{ ssub.nombre }}
+                                        </a>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                            {% else %}
+                            <li>
+                                <a class="dropdown-item" href="{{ sub.ruta or '#' }}">
+                                    {{ sub.emoji }} {{ sub.nombre }}
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+
+                <form class="d-flex ms-auto me-3 bg-form" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar"
+                        id="menuSearch">
+                </form>
+            </div>
+        </div>
+    </nav>
+    <!-- Spinner de carga -->
+    <div id="loader" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+    <main class="container mt-4">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{'warning' if category=='warning' else 'success' if category=='success' else 'danger'}}"
+            role="alert">
+            {{ message }}
+        </div>
+        <script>
+            Swal.fire({
+                icon: "{{ 'success' if category == 'success' else 'info' }}",
+                title: "{{ message }}",
+                timer: 2500,
+                showConfirmButton: false
+            });
+        </script>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+       
+    </main>
+     
+    <!-- JS externos -->
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.2.0-beta/noty.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- JS de jQuery y Select2 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- html2canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- ECharts (si no está incluido) -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+     <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Chart.js Data Labels Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+
+{% block content %}{% endblock %}
+    <script>
+        // Manejo correcto de submenús anidados en Bootstrap 5 sin eliminar estilos
+        document.querySelectorAll('.dropdown-submenu > a').forEach(function (element) {
+            element.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const parentLi = this.parentElement;
+
+                // Cierra otros submenús abiertos en el mismo nivel
+                parentLi.parentElement.querySelectorAll('.dropdown-submenu.show').forEach(function (submenu) {
+                    if (submenu !== parentLi) {
+                        submenu.classList.remove('show');
+                    }
+                });
+
+                // Alterna la visibilidad del submenú actual
+                parentLi.classList.toggle('show');
+            });
+        });
+
+        // Cierra submenús al cerrar dropdown principal
+        document.querySelectorAll('.dropdown').forEach(function (dropdown) {
+            dropdown.addEventListener('hide.bs.dropdown', function () {
+                this.querySelectorAll('.dropdown-submenu').forEach(function (submenu) {
+                    submenu.classList.remove('show');
+                });
+            });
+        });
+    </script>
+
+    <script>
+        // Filtro de menú por búsqueda
+        document.getElementById("menuSearch").addEventListener("keyup", function () {
+            const filtro = this.value.toLowerCase();
+
+            document.querySelectorAll(".navbar-nav > .nav-item").forEach(item => {
+                let match = false;
+
+                // Revisa texto del primer nivel
+                const textoItem = item.querySelector(".nav-link")?.innerText.toLowerCase() || "";
+
+                // Revisa subniveles
+                item.querySelectorAll(".dropdown-item").forEach(sub => {
+                    const textoSub = sub.innerText.toLowerCase();
+                    const coincide = textoSub.includes(filtro);
+                    sub.parentElement.style.display = coincide ? "" : "none";
+                    if (coincide) match = true;
+                });
+
+                // Mostrar/ocultar ítem completo si hay match en cualquier nivel
+                item.style.display = textoItem.includes(filtro) || match ? "" : "none";
+            });
+        });
+    </script>
+    <script>
+        // Mostrar y ocultar loader
+        function mostrarLoader() {
+            const loader = document.getElementById("loader");
+            if (loader) loader.style.display = "flex";
+        }
+
+        function ocultarLoader() {
+            const loader = document.getElementById("loader");
+            if (loader) loader.style.display = "none";
+        }
+
+        // Loader general, ignorar formularios con clase .no-loader
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll("a[href]").forEach(link => {
+                link.addEventListener("click", function (e) {
+                    const href = link.getAttribute("href");
+                    if (
+                        href &&
+                        !href.startsWith("http") &&
+                        !href.startsWith("#") &&
+                        !href.startsWith("javascript") &&
+                        !link.target
+                    ) {
+                        mostrarLoader();
+                    }
+                });
+            });
+
+            document.querySelectorAll("form:not(.no-loader)").forEach(form => {
+                form.addEventListener("submit", () => {
+                    mostrarLoader();
+                });
+            });
+
+            // SweetAlert para formularios de eliminación
+            document.querySelectorAll('.form-eliminar').forEach(form => {
+                form.addEventListener('submit', e => {
+                    e.preventDefault(); // Prevenir envío inmediato
+
+                    Swal.fire({
+                        title: '¿Estás seguro?',
+                        text: "¡Esta acción no se puede deshacer!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Sí, eliminar',
+                        cancelButtonText: 'Cancelar',
+                        customClass: {
+                            popup: 'swal-custom-popup',
+                            title: 'swal-custom-title',
+                            confirmButton: 'btn btn-eliminar',   // Usa tu clase de botón rojo
+                            cancelButton: 'btn btn-outline-light'
+                        }
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            mostrarLoader();
+                            form.submit();
+                        }
+                    });
+                });
+            });
+
+        });
+    </script>
+
+</body>
+
+
+</html>

@@ -1,0 +1,11 @@
+
+<div class="mb-3">
+     <label for="estado1" class="form-label" style="color:#e5d64f;">Estado</label>
+    <select class="form-select select_estado" id="estado1" name="estado1"
+        style="background: #3e2d59; color: #e5d64f; border: 1px solid #88c999;">
+        <option value="">-- Todos los estados --</option>
+        {% for estado in estados %}
+        <option value="{{ estado.emoji }}" >{{ estado.nombre }} {{ estado.emoji }}</option>
+        {% endfor %}
+    </select>
+</div>

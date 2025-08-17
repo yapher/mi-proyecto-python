@@ -1,0 +1,108 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="mb-4">Cargar Procedimiento</h3>
+
+<form method="POST">
+    <!-- Controles globales -->
+    <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+        <!-- Checkbox maestro -->
+        <div class="form-check m-0">
+            <input class="form-check-input" type="checkbox" id="selectAll">
+            <label class="form-check-label fw-bold" for="selectAll">Seleccionar todo</label>
+        </div>
+
+        <!-- Botón expandir/colapsar -->
+        <button type="button" class="btn btn-sm btn-outline-secondary" id="toggleAll">Expandir todo</button>
+    </div>
+
+    {% macro render_items(items, nivel=0, padre='root') %}
+    <ul class="list-unstyled ps-{{ nivel * 3 }}">
+        {% for item in items %}
+        {% set id_unico = (padre ~ '_' ~ loop.index)|replace(' ', '_') %}
+        <li class="mb-2">
+            <div class="form-check d-flex align-items-center">
+                <input class="form-check-input me-2" type="checkbox" name="seleccion" value="{{ item.nombre }}" id="chk_{{ id_unico }}">
+                <label class="form-check-label me-2 nivel-texto-{{ nivel }}" for="chk_{{ id_unico }}">
+                    {{ item.nombre }}
+                </label>
+                {% if item.submenues %}
+                <button class="btn btn-sm toggle-btn nivel-boton-{{ nivel }}" type="button" data-bs-toggle="collapse" data-bs-target="#sub_{{ id_unico }}" aria-expanded="false" aria-controls="sub_{{ id_unico }}">
+                    ▼
+                </button>
+                {% endif %}
+            </div>
+            {% if item.submenues %}
+            <div class="collapse mt-2" id="sub_{{ id_unico }}">
+                {{ render_items(item.submenues, nivel + 1, id_unico) }}
+            </div>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endmacro %}
+
+    {{ render_items(data) }}
+
+    <button type="submit" class="btn btn-primary mt-4">Generar Archivo</button>
+</form>
+
+<!-- Scripts para seleccionar todo y expandir todo -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const selectAll = document.getElementById("selectAll");
+        const toggleAll = document.getElementById("toggleAll");
+        const checkboxes = document.querySelectorAll('input[type="checkbox"][name="seleccion"]');
+        const collapses = document.querySelectorAll('.collapse');
+
+        // Seleccionar/Deseleccionar todos los checkboxes
+        selectAll.addEventListener("change", function () {
+            checkboxes.forEach(cb => cb.checked = selectAll.checked);
+        });
+
+        // Expandir/Colapsar todo
+        let expanded = false;
+        toggleAll.addEventListener("click", function () {
+            collapses.forEach(c => {
+                const collapseInstance = bootstrap.Collapse.getOrCreateInstance(c);
+                expanded ? collapseInstance.hide() : collapseInstance.show();
+            });
+            toggleAll.textContent = expanded ? 'Expandir todo' : 'Colapsar todo';
+            expanded = !expanded;
+        });
+    });
+</script>
+
+<style>
+    .form-check-label {
+        font-weight: 500;
+    }
+
+    .form-check-input:checked {
+        background-color: #198754;
+        border-color: #198754;
+    }
+
+    .toggle-btn {
+        padding: 0.2rem 0.5rem;
+        font-size: 0.8rem;
+        line-height: 1;
+        margin-left: auto;
+        border: none;
+        background: transparent;
+    }
+
+    /* Colores por nivel (texto) */
+    .nivel-texto-0 { color: white; }
+    .nivel-texto-1 { color: #ffc107; }
+    .nivel-texto-2 { color: #198754; }
+    .nivel-texto-3,
+    .nivel-texto-4 { color: #6c757d; }
+
+    /* Colores por nivel (botón ▼) */
+    .nivel-boton-0 { color: white; }
+    .nivel-boton-1 { color: #ffc107; }
+    .nivel-boton-2 { color: #198754; }
+    .nivel-boton-3,
+    .nivel-boton-4 { color: #6c757d; }
+</style>
+{% endblock %}

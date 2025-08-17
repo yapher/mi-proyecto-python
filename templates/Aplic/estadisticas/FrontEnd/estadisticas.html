@@ -1,0 +1,271 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<h3 class="mb-4">📊 Evolución de Precios</h3>
+
+<div class="row mb-4">
+  <div class="col-md-6">
+    <label for="selectRubro" class="form-label">Seleccionar Rubro:</label>
+    <select id="selectRubro" class="form-select"></select>
+  </div>
+  <div class="col-md-6">
+    <label for="selectItem" class="form-label">Seleccionar Descripción:</label>
+    <select id="selectItem" class="form-select"></select>
+  </div>
+</div>
+
+<div id="graficoEvolucion" style="height: 400px; width: 100%; background: #fff; border-radius: 10px;"></div>
+
+<div id="graficoGastoMensual" style="width: 100%; max-width: 800px; height: 400px; margin-top: 50px;"></div>
+
+<script>
+  let dataRubros = {};
+  let dataItems = {};
+
+  async function cargarDatos() {
+    const res = await fetch('/api/estadisticas');
+    const datos = await res.json();
+
+    dataRubros = datos.rubros || {};
+    dataItems = datos.items || {};
+
+    llenarSelect('selectRubro', Object.keys(dataRubros));
+    llenarSelect('selectItem', Object.keys(dataItems));
+
+    // Mostrar el primero por defecto
+    if (Object.keys(dataRubros).length > 0) {
+      mostrarGrafico('Rubro', Object.keys(dataRubros)[0]);
+    }
+  }
+
+  function llenarSelect(id, opciones) {
+    const sel = document.getElementById(id);
+    sel.innerHTML = '';
+    opciones.forEach(op => {
+      const opt = document.createElement('option');
+      opt.value = op;
+      opt.textContent = op;
+      sel.appendChild(opt);
+    });
+  }
+
+  document.getElementById('selectRubro').addEventListener('change', () => {
+    const val = document.getElementById('selectRubro').value;
+    mostrarGrafico('Rubro', val);
+  });
+
+  document.getElementById('selectItem').addEventListener('change', () => {
+    const val = document.getElementById('selectItem').value;
+    mostrarGrafico('Item', val);
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+  cargarGraficoTotalMensual();
+});
+
+  function mostrarGrafico(tipo, clave) {
+  const chartDom = document.getElementById('graficoEvolucion');
+  const myChart = echarts.init(chartDom);
+  let datos = tipo === 'Rubro' ? dataRubros[clave] : dataItems[clave];
+
+  if (!datos) return;
+
+  const fechas = Object.keys(datos).sort();
+  const valores = fechas.map(f => datos[f]);
+
+  // Calcular % de variación
+  const variaciones = valores.map((v, i) => {
+    if (i === 0) return 0;
+    const prev = valores[i - 1];
+    return prev === 0 ? 0 : ((v - prev) / prev * 100).toFixed(2);
+  });
+
+  // Generar colores según la variación
+  const colores = variaciones.map(v => v >= 0 ? '#2ecc71' : '#e74c3c'); // verde o rojo
+
+  const option = {
+    title: {
+      text: `📈 Evolución mensual - ${tipo}: ${clave}`,
+      left: 'center'
+    },
+    tooltip: {
+      trigger: 'axis',
+      formatter: function (params) {
+        let idx = params[0].dataIndex;
+        let fecha = fechas[idx];
+        let valor = valores[idx];
+        let variacion = variaciones[idx];
+        let emoji = variacion > 0 ? '📈' : variacion < 0 ? '📉' : '➖';
+
+        return `
+          <strong>${fecha}</strong><br/>
+          💲 ${valor.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })}<br/>
+          ${emoji} Variación: ${variacion}%`;
+      }
+    },
+    xAxis: {
+      type: 'category',
+      data: fechas
+    },
+    yAxis: [
+      {
+        type: 'value',
+        name: 'Valor ($)'
+      },
+      {
+        type: 'value',
+        name: 'Variación %',
+        show: false
+      }
+    ],
+    series: [
+      {
+        name: 'Valor',
+        type: 'line',
+        data: valores,
+        smooth: true,
+        itemStyle: {
+          color: function (params) {
+            return colores[params.dataIndex];
+          }
+        },
+        lineStyle: {
+          width: 3
+        },
+        areaStyle: {
+          opacity: 0.3,
+          color: '#88c999'
+        },
+        markPoint: {
+          data: [
+            { type: 'max', name: 'Máximo' },
+            { type: 'min', name: 'Mínimo' }
+          ]
+        }
+      },
+      {
+        name: 'Variación',
+        type: 'bar',
+        yAxisIndex: 1,
+        data: variaciones.map(v => parseFloat(v)),
+        itemStyle: {
+          color: function (params) {
+            return colores[params.dataIndex];
+          }
+        },
+        barWidth: '40%',
+        label: {
+          show: false
+        },
+        tooltip: { show: false }
+      }
+    ]
+  };
+
+  myChart.setOption(option);
+}
+
+function cargarGraficoTotalMensual() {
+  fetch('/estadisticas/gasto_mensual')
+    .then(r => r.json())
+    .then(data => mostrarGraficoTotal(data));
+}
+
+function mostrarGraficoTotal(datos) {
+  const chartDom = document.getElementById('graficoGastoMensual');
+  const myChart = echarts.init(chartDom);
+
+  const fechas = Object.keys(datos);
+  const valores = fechas.map(f => datos[f]);
+
+  const variaciones = valores.map((v, i) => {
+    if (i === 0) return 0;
+    const prev = valores[i - 1];
+    return prev === 0 ? 0 : ((v - prev) / prev * 100).toFixed(2);
+  });
+
+  const colores = variaciones.map(v => v >= 0 ? '#2ecc71' : '#e74c3c');
+
+  const option = {
+    title: {
+      text: '💰 Gasto mensual total',
+      left: 'center'
+    },
+    tooltip: {
+      trigger: 'axis',
+      formatter: function (params) {
+        let idx = params[0].dataIndex;
+        let fecha = fechas[idx];
+        let valor = valores[idx];
+        let variacion = variaciones[idx];
+        let emoji = variacion > 0 ? '📈' : variacion < 0 ? '📉' : '➖';
+
+        return `
+          <strong>${fecha}</strong><br/>
+          Total: 💵 ${valor.toLocaleString('es-AR', { style: 'currency', currency: 'ARS' })}<br/>
+          ${emoji} Variación: ${variacion}%`;
+      }
+    },
+    xAxis: {
+      type: 'category',
+      data: fechas
+    },
+    yAxis: [
+      {
+        type: 'value',
+        name: 'Gasto ($)'
+      },
+      {
+        type: 'value',
+        name: 'Variación %',
+        show: false
+      }
+    ],
+    series: [
+      {
+        name: 'Total Gastado',
+        type: 'line',
+        data: valores,
+        smooth: true,
+        itemStyle: {
+          color: function (params) {
+            return colores[params.dataIndex];
+          }
+        },
+        lineStyle: {
+          width: 3
+        },
+        areaStyle: {
+          opacity: 0.3,
+          color: '#88c999'
+        },
+        markPoint: {
+          data: [
+            { type: 'max', name: 'Máximo' },
+            { type: 'min', name: 'Mínimo' }
+          ]
+        }
+      },
+      {
+        name: 'Variación',
+        type: 'bar',
+        yAxisIndex: 1,
+        data: variaciones.map(v => parseFloat(v)),
+        itemStyle: {
+          color: function (params) {
+            return colores[params.dataIndex];
+          }
+        },
+        barWidth: '40%',
+        tooltip: { show: false }
+      }
+    ]
+  };
+
+  myChart.setOption(option);
+}
+
+  cargarDatos();
+</script>
+
+{% endblock %}

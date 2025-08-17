@@ -1,0 +1,147 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h3 class="mb-4">
+        Lista de Repuestos
+        <span class="badge bg-secondary">{{ repuestos|length }}</span>
+
+        <!-- Badge de vencidos con link para filtrar -->
+        {% if cantidad_vencidos > 0 %}
+        <a href="{{ url_for('indexlista_repuestos.indexlista_repuestos', vencidos='1') }}" class="badge bg-danger ms-2"
+            title="Mostrar solo repuestos vencidos">
+            Vencidos {{ cantidad_vencidos }}
+        </a>
+        {% endif %}
+        {% if filtros.vencidos == '1' %}
+        <a href="{{ url_for('indexlista_repuestos.indexlista_repuestos') }}" class="badge bg-info ms-2"
+            title="Mostrar todos los repuestos">
+            Mostrar todos
+        </a>
+        {% endif %}
+    </h3>
+
+
+    <form method="get" class="row g-2 mb-4">
+        <div class="col-md-2">
+            <input type="text" name="nombre" placeholder="Nombre" value="{{ filtros.nombre }}" class="form-control">
+        </div>
+        <div class="col-md-2">
+            <input type="text" name="codigo" placeholder="Código" value="{{ filtros.codigo }}" class="form-control">
+        </div>
+        <!--<div class="col-md-2">
+            <select name="estado" class="form-select">
+                <option value="">-- Todos los estados --</option>
+                <option value="🟢" {% if filtros.estado=='🟢' %}selected{% endif %}>Disponible 🟢</option>
+                <option value="🟡" {% if filtros.estado=='🟡' %}selected{% endif %}>En espera 🟡</option>
+                <option value="🔴" {% if filtros.estado=='🔴' %}selected{% endif %}>No disponible 🔴</option>
+                <option value="🟠" {% if filtros.estado=='🟠' %}selected{% endif %}>sin codigo 🟠</option>
+                <option value="🟣" {% if filtros.estado=='🟣' %}selected{% endif %}>Descontinuado 🟣</option>
+                <option value="🔵" {% if filtros.estado=='🔵' %}selected{% endif %}>Actualizar codigo 🔵</option>
+            </select>
+        </div>-->
+        <div class="col-md-2">
+            <select name="estado" class="form-select">
+                <option value="">-- Todos los estados --</option>
+                {% for estado in estados %}
+                <option value="{{ estado.emoji }}" {% if filtros.estado==estado.emoji %}selected{% endif %}>
+                    {{ estado.nombre }} {{ estado.emoji }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-2">
+            <input type="date" name="fecha_alta" value="{{ filtros.fecha_alta }}" class="form-control">
+        </div>
+        <div class="col-md-2">
+            <input type="date" name="fecha_baja" value="{{ filtros.fecha_baja }}" class="form-control">
+        </div>
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+        </div>
+    </form>
+
+    {% if repuestos %}
+    <div class="d-flex gap-3 align-items-center mb-3 mt-3">
+        <form class="form-exportar-pdf no-loader" action="{{ url_for('indexlista_repuestos.indexlista_repuestos') }}"
+            method="get">
+            <!-- Filtros actuales -->
+            <input type="hidden" name="nombre" value="{{ filtros.nombre }}">
+            <input type="hidden" name="codigo" value="{{ filtros.codigo }}">
+            <input type="hidden" name="estado" value="{{ filtros.estado }}">
+            <input type="hidden" name="fecha_alta" value="{{ filtros.fecha_alta }}">
+            <input type="hidden" name="fecha_baja" value="{{ filtros.fecha_baja }}">
+            <input type="hidden" name="vencidos" value="{{ filtros.vencidos }}">
+            <input type="hidden" name="exportar_pdf" value="1">
+            <button type="submit" class="btn btn-outline-light">Exportar PDF</button>
+        </form>
+        <div>
+            <button type="button" class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#agregarModal">
+                ➕ Agregar nuevo repuesto
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive tabla-scroll">
+        <table class="table table-bordered table-hover table-striped table-dark align-middle w-100 mb-0">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>Imagen</th>
+                    <th>Nombre</th>
+                    <th>Código</th>
+                    <th>Cantidad</th>
+                    <th>Almacén</th>
+                    <th>Jerarquía</th>
+                    <th>Fecha Alta</th>
+                    <th>Fecha Baja</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in repuestos %}
+                <tr>
+                    <td class="text-center">
+                        {% include 'Aplic/estadosderepuestos/FrontEnd/component/imageRep.html' %}
+
+
+                    </td>
+                    <td>{{ r.nombre }}</td>
+                    <td class="text-center">{{ r.codigo }}</td>
+                    <td class="text-center">{{ r.cantidad }}</td>
+                    <td class="text-center">{{ r.equipo }}</td>
+                    <td>
+                        <ul class="mb-0">
+                            {% for ruta in r.ruta_jerarquia %}
+                            <li>{{ ruta }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td class="text-center">{{ r.fecha_creacion }}</td>
+                    <td class="text-center">{{ r.fecha_fin if r.fecha_fin else '-' }}</td>
+                    <td class="text-center">
+                        {% if r.estado == '🟢' %}
+                        <span class="text-success" title="Activo">{{ r.estado }}</span>
+                        {% elif r.estado == '🟡' %}
+                        <span class="text-warning" title="Pendiente">{{ r.estado }}</span>
+                        {% elif r.estado == '🔴' %}
+                        <span class="text-danger" title="Inactivo">{{ r.estado }}</span>
+                        {% else %}
+                        {{ r.estado }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% include 'Aplic/estadosderepuestos/FrontEnd/component/buttonEdit.html' %}
+                        {% include 'Aplic/estadosderepuestos/FrontEnd/component/buttonDelete.html' %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="alert alert-warning">No se encontraron repuestos con los filtros aplicados.</div>
+    {% endif %}
+</div>
+{% include "Aplic/estadosderepuestos/FrontEnd/component/details.html" %}
+{% set ubicaciones = ubicaciones %}
+{% include "Aplic/estadosderepuestos/FrontEnd/component/newRep.html" %}
+{% endblock %}

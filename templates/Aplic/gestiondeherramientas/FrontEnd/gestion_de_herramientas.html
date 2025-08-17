@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="mb-3">Gestión de Herramientas</h3>
+
+<div class="mb-3">
+    <select id="componentes" class="form-select d-inline w-auto" onchange="agregarComponente()">
+        <option value="motor">Motor</option>
+        <option value="pulsador">Pulsador</option>
+        <option value="lampara">Lámpara</option>
+        <option value="transformador">Transformador</option>
+    </select>
+   
+    <button class="btn btn-secondary" onclick="conectarSeleccionados()">Conectar</button>
+    <button class="btn btn-warning" onclick="cambiarEstado()">Cambiar estado</button>
+    <input id="nombreCroquis" placeholder="Nombre del croquis" class="form-control d-inline w-auto ms-2" />
+    <button class="btn btn-agregar" onclick="guardarCroquis()">Guardar</button>
+    <button class="btn btn-info btn-sm btn-editar" onclick="cargarCroquis()">Cargar</button>
+    <button class="btn btn-eliminar btn-sm" onclick="eliminarSeleccionado()">🗑 Eliminar</button>
+    <button class="btn btn-outline-light" onclick="exportarComoImagen()">📷 Exportar Imagen</button>
+</div>
+
+<canvas id="canvas" width="1200" height="700" style="border:1px solid #ccc;"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+<script src="{{ url_for('static', filename='js/croquis.js') }}"></script>
+{% endblock %}

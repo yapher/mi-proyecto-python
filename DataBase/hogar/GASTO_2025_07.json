@@ -1,0 +1,196 @@
+[
+    {
+        "id": 1750889756152,
+        "rubro": "Almacen",
+        "descripcion": "Soda",
+        "importe": 30000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890215667,
+        "rubro": "Servicios",
+        "descripcion": "Telefonia",
+        "importe": 45000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890263082,
+        "rubro": "Servicios",
+        "descripcion": "Netfix",
+        "importe": 15000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890295894,
+        "rubro": "Servicios",
+        "descripcion": "Disney",
+        "importe": 8000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890330608,
+        "rubro": "Servicios",
+        "descripcion": "Spotify",
+        "importe": 3500,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890402722,
+        "rubro": "Tarjetas de Credito",
+        "descripcion": "Visa Frances",
+        "importe": 25000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890445828,
+        "rubro": "Facultad",
+        "descripcion": "Alquiler",
+        "importe": 300000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890502735,
+        "rubro": "Forrajería",
+        "descripcion": "Comida Gatos",
+        "importe": 70000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890543712,
+        "rubro": "Forrajería",
+        "descripcion": "Comida Perra",
+        "importe": 60000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890571732,
+        "rubro": "Almacen",
+        "descripcion": "Carnicería",
+        "importe": 58333.33,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-10",
+        "pagado": true
+    },
+    {
+        "id": 1750890611311,
+        "rubro": "Automotor",
+        "descripcion": "Combustible",
+        "importe": 50000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890648870,
+        "rubro": "Verdulería",
+        "descripcion": "Bananas",
+        "importe": 30000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890713114,
+        "rubro": "Automotor",
+        "descripcion": "Seguros",
+        "importe": 80000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890776824,
+        "rubro": "Servicios",
+        "descripcion": "Internet",
+        "importe": 15000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890815388,
+        "rubro": "Servicios",
+        "descripcion": "Luz",
+        "importe": 80000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1750890848126,
+        "rubro": "Servicios",
+        "descripcion": "Gas",
+        "importe": 50000,
+        "tipo": "cuota",
+        "cuota_numero": 1,
+        "cuota_total": 6,
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    },
+    {
+        "id": 1751373608357,
+        "rubro": "Esparcimiento",
+        "descripcion": "Boxeo",
+        "importe": 20000,
+        "tipo": "único",
+        "vencimiento": "2025-07-25",
+        "pagado": true
+    },
+    {
+        "id": 1751384802482,
+        "rubro": "Automotor",
+        "descripcion": "Cuota 0Km",
+        "importe": 1300000,
+        "tipo": "único",
+        "vencimiento": "2025-07-23",
+        "pagado": true
+    }
+]

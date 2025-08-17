@@ -1,0 +1,145 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+<h3 class="mb-3">Pagos del Hogar</h3>
+
+<div class="mb-3 d-flex align-items-center">
+  <label for="filtroAnio" class="form-label mb-0 me-2 m-1">Año:</label>
+  <input type="number" id="filtroAnio" class="form-control rounded-pill text-center" placeholder="2025"
+    style="width: 80px; margin: 2px;">
+  <label for="filtroMes" class="form-label mb-0 me-2 m-1">Mes:</label>
+  <input type="number" id="filtroMes" class="form-control rounded-pill text-center" placeholder="6"
+    style="width: 70px; margin: 2px;" min="1" max="12">
+  <button class="btn btn-outline-info m-1" onclick="filtrarPorMes()">Filtrar por mes</button>
+  <button class="btn btn-outline-secondary m-1" onclick="cargarPagos()">Ver todos</button>
+
+  {% include "Aplic/pagos/FrontEnd/component/newPagos.html" %}
+  {% include "Aplic/pagos/FrontEnd/component/exportPDF.html" %}
+
+
+</div>
+
+</div>
+<div class="table-responsive tabla-scroll">
+  <table id="tablaPagos" class="table table-hover table-striped table-dark align-middle w-100 mb-0">
+    <thead class="sticky-header">
+      <tr>
+        <th>Rubro</th>
+        <th>Descripción</th>
+        <th>Importe</th>
+        <th>Tipo</th>
+        <th>Cuotas</th>
+        <th>Vencimiento</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+</div>
+
+
+
+
+{% include "Aplic/pagos/FrontEnd/component/graf.html" %}
+
+<script>
+  // Al iniciar la página, establecer año y mes actual
+  document.addEventListener('DOMContentLoaded', () => {
+    const hoy = new Date();
+    const anio = hoy.getFullYear();
+    const mes = hoy.getMonth() + 1; // enero = 0
+
+    document.getElementById('filtroAnio').value = anio;
+    document.getElementById('filtroMes').value = mes;
+
+    filtrarPorMes();
+  });
+
+  function cargarPagos() {
+    fetch('/pagos/listar')
+      .then(r => r.json())
+      .then(data => mostrarPagos(data));
+  }
+
+
+
+
+
+  function filtrarPorMes() {
+    const anio = document.getElementById('filtroAnio').value;
+    const mes = document.getElementById('filtroMes').value;
+    if (!anio || !mes) return alert("Completar año y mes");
+
+    fetch(`/pagos/mensuales/${anio}/${mes}`)
+      .then(r => r.json())
+      .then(data => {
+        mostrarPagos(data.pagos);
+        mostrarRubros(data.rubros, data.pagos);
+      });
+  }
+
+  function mostrarPagos(data) {
+  const tbody = document.querySelector("#tablaPagos tbody");
+  tbody.innerHTML = "";
+
+  data.forEach(p => {
+    const icono = p.pagado ? '✔️' : '❌';
+    const clase = p.pagado ? 'btn-success' : 'btn-warning';
+
+    // Mostrar tipo como "Cuota X de Y" o "Único"
+    let tipoTexto = "Único";
+    if (p.tipo === "cuota" && p.cuota_numero && p.cuota_total) {
+      tipoTexto = `Cuota ${p.cuota_numero} de ${p.cuota_total}`;
+    }
+
+    // Mostrar número de cuotas solo si existen
+    let cuotaTexto = p.tipo === "cuota" && p.cuota_total ? `${p.cuota_total}` : "-";
+
+    tbody.innerHTML += `
+      <tr>
+        <td>${p.rubro}</td>
+        <td>${p.descripcion || '-'}</td>
+        <td>$${p.importe.toFixed(2)}</td>
+        <td>${tipoTexto}</td>
+        <td>${cuotaTexto}</td>
+        <td>${p.vencimiento}</td>
+        <td>
+          <button class="btn btn-sm ${clase}" onclick='togglePagado(${p.id})'>${icono}</button>
+          <button class="btn btn-sm btn-outline-primary" onclick='editar(${JSON.stringify(p)})'>✏️ Editar</button>
+          <button class="btn btn-sm btn-outline-danger" onclick='eliminar(${parseInt(p.id)})'>🗑️ Eliminar</button>
+        </td>
+      </tr>`;
+  });
+}
+
+
+function toggleEstadoPago(id) {
+  fetch(`/pagos/toggle_estado/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then(res => res.json())
+    .then(data => {
+      filtrarPorMes();  // recarga la tabla con el estado actualizado
+    })
+    .catch(err => {
+      console.error("Error al cambiar estado:", err);
+      alert("No se pudo actualizar el estado del pago.");
+    });
+}
+
+function togglePagado(id) {
+  fetch(`/pagos/toggle_estado/${id}`, {
+    method: 'PATCH'
+  })
+    .then(res => res.json())
+    .then(data => {
+      filtrarPorMes();
+    });
+}
+
+
+</script>
+
+
+{% endblock %}

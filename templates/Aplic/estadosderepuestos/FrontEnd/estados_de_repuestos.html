@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- Cabezera de pagina -->
+<div class="d-flex align-items-center justify-content-between mb-4">
+  <img src="{{ url_for('static', filename='logo_HA_1.gif') }}" alt="Fábrica" style="height:80px; margin-right:12px;">
+  <h1 class="mb-0">Listado de Repuestos por línea</h1>
+</div>
+ 
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  {% for tab in tabs %}
+  <li class="nav-item" role="presentation">
+    <button class="nav-link {% if tab.sanitized_id == active_tab %}active{% endif %}" 
+            id="tab-{{ tab.sanitized_id }}" 
+            data-bs-toggle="tab" 
+            data-bs-target="#tab-pane-{{ tab.sanitized_id }}" 
+            type="button" role="tab" 
+            aria-controls="tab-pane-{{ tab.sanitized_id }}" 
+            aria-selected="{% if tab.sanitized_id == active_tab %}true{% else %}false{% endif %}">
+      {{ tab.title }}<span class="badge bg-primary">{{ tab.repuestos_filtrados|length }}</span>
+    
+    </button>
+  </li>
+  {% endfor %}
+</ul>
+
+<!-- Tab panes -->
+
+<div class="tab-content" id="myTabContent">
+  {% for tab in tabs %}
+  
+  <div class="tab-pane fade {% if tab.sanitized_id == active_tab %}show active{% endif %}" 
+       id="tab-pane-{{ tab.sanitized_id }}" 
+       role="tabpanel" 
+       aria-labelledby="tab-{{ tab.sanitized_id }}">
+       
+
+    {% set repuestos = tab.repuestos_filtrados %}
+    {% set active_tab = active_tab %}
+    {% include 'Aplic/estadosderepuestos/FrontEnd/component/tablaRepuestos.html' %}
+  </div>
+  {% endfor %}
+</div>
+
+
+{% include "Aplic/estadosderepuestos/FrontEnd/component/details.html" %}
+{% set tabs = tabs %}
+{% set ubicaciones = ubicaciones %}
+{% include "Aplic/estadosderepuestos/FrontEnd/component/newRep.html" %}
+
+{% endblock %}
+

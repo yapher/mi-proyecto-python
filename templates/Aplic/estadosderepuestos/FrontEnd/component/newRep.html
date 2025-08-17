@@ -1,0 +1,181 @@
+<!-- MODAL AGREGAR/EDITAR REPUESTO -->
+<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-form"
+      style="background-color: #4b376a; color: #fff; border-radius: 1rem; box-shadow: 0 8px 32px rgba(136,201,153,0.16);">
+      <form method="POST" action="{{ url_for('indexEstadoRep.agregar_repuesto') }}" enctype="multipart/form-data"
+        id="formAgregarRepuesto">
+        <div class="modal-header"
+          style="border-bottom: 2px solid #88c999; background: linear-gradient(to right, #2a1e3b, #3e2d59); border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+          <h5 class="modal-title" id="agregarModalLabel" style="color: #88c999; font-weight: 700;">Agregar Nuevo
+            Repuesto</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
+            style="filter: invert(1);"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="tab_activo" name="tab_activo">
+          <div class="mb-3">
+            <label class="form-label" style="color:#e5d64f;">Imagen actual</label><br>
+            <img id="imgPreview" style="max-width:100px;display:none;">
+            <span id="imgNombre" style="color:#e5d64f;"></span>
+          </div>
+          <div class="mb-3">
+            <label for="nombre" class="form-label" style="color:#e5d64f;">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required
+              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
+          </div>
+          <div class="mb-3">
+            <label for="codigo" class="form-label" style="color:#e5d64f;">Código</label>
+            <input type="text" class="form-control" id="codigo" name="codigo" required
+              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
+            <input type="hidden" id="codigo_original" name="codigo_original">
+          </div>
+          <div class="mb-3">
+            <label for="cantidad" class="form-label" style="color:#e5d64f;">Cantidad</label>
+            <input type="number" class="form-control" id="cantidad" name="cantidad" min="1" required
+              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
+          </div>
+          <div class="mb-3">
+            <label for="equipo" class="form-label" style="color:#e5d64f;">ALMACÉN</label>
+            <select class="form-select" id="equipo" name="equipo"
+              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
+              <option value="">-- Selecciona un equipo --</option>
+              {% for nombre in nombres_almacenes %}
+              <option value="{{ nombre }}">{{ nombre }}</option>
+              {% endfor %}
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="ubicacion" class="form-label" style="color:#e5d64f;">Ubicación Técnica</label>
+            <select class="form-select" id="ubicacion" name="ruta_jerarquia[]" multiple
+                style="width: 100%; background: #3e2d59; color: #fff; border: 1px solid #88c999;">
+                <option value="">-- Seleccionar ubicaciones técnica --</option>
+                {% for ubic in ubicaciones %}
+                <option value="{{ ubic }}">{{ ubic }}</option>
+                {% endfor %}
+            </select>
+          </div>
+          
+          <div class="mb-3">
+            <label for="imagen" class="form-label" style="color:#e5d64f;">Imagen (opcional)</label>
+            <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*"
+              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
+          </div>
+          <div class="mb-3">
+            <label for="fecha_creacion" class="form-label" style="color:#e5d64f;">Fecha de Creación</label>
+            <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" required
+              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
+          </div>
+          <div class="mb-3">
+            <label for="fecha_fin" class="form-label" style="color:#e5d64f;">Fecha Fin (opcional)</label>
+            <input type="date" class="form-control" id="fecha_fin" name="fecha_fin"
+              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
+          </div>
+          <div class="mb-3">
+            <label for="link" class="form-label" style="color:#e5d64f;">Link (opcional)</label>
+            <input type="url" class="form-control" id="link" name="link" placeholder="https://"
+              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
+          </div>
+        
+          <div class="mb-3">
+            <label for="estado" class="form-label" style="color:#e5d64f;">Estado</label>
+            <select class="form-select" id="estado" name="estado"
+              style="background: #3e2d59; color: #e5d64f; border: 1px solid #88c999;">
+              <option value="">-- Todos los estados --</option>
+              {% for estado in estados %}
+              <option value="{{ estado.emoji }}">{{ estado.nombre }} {{ estado.emoji }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer" style="border-top: 2px solid #88c999;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar Repuesto</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- JS para select2 -->
+<script>
+  $(document).ready(function () {
+    $('#ubicacion').select2({
+      placeholder: "Selecciona una o más ubicaciones técnicas",
+      allowClear: true,
+      width: 'resolve',
+      dropdownParent: $('#agregarModal')
+    });
+  });
+</script>
+
+<!-- JS para cargar datos en modal -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('[data-bs-target="#agregarModal"].btn-agregar').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const form = document.getElementById('formAgregarRepuesto');
+        form.reset();
+        $('#ubicacion').val(null).trigger('change');
+
+        document.getElementById('agregarModalLabel').textContent = "Agregar Nuevo Repuesto";
+        form.action = "{{ url_for('indexEstadoRep.agregar_repuesto') }}";
+        document.getElementById('codigo').readOnly = false;
+        document.getElementById('tab_activo').value = btn.getAttribute('data-sanitized_id') || '';
+
+        document.getElementById('imgPreview').style.display = 'none';
+        document.getElementById('imgNombre').textContent = '';
+        form.querySelector('button[type="submit"]').textContent = "Guardar Repuesto";
+      });
+    });
+
+    document.querySelectorAll('.btn-editar').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        const form = document.getElementById('formAgregarRepuesto');
+
+        document.getElementById('agregarModalLabel').textContent = "Editar Repuesto";
+        form.action = "{{ url_for('indexEstadoRep.editar_repuesto') }}";
+
+        document.getElementById('nombre').value = btn.getAttribute('data-nombre') || '';
+        document.getElementById('codigo').value = btn.getAttribute('data-codigo') || '';
+        document.getElementById('codigo_original').value = btn.getAttribute('data-codigo') || '';
+        document.getElementById('cantidad').value = btn.getAttribute('data-cantidad') || '';
+        document.getElementById('equipo').value = btn.getAttribute('data-equipo') || '';
+        document.getElementById('fecha_creacion').value = btn.getAttribute('data-fecha_creacion') || '';
+        document.getElementById('fecha_fin').value = btn.getAttribute('data-fecha_fin') || '';
+        document.getElementById('link').value = btn.getAttribute('data-link') || '';
+        document.getElementById('estado').value = btn.getAttribute('data-emojy') || '';
+        document.getElementById('tab_activo').value = btn.getAttribute('data-tab_activo') || '';
+
+        const rutasSeleccionadas = btn.getAttribute('data-ruta_jerarquia') || '[]';
+        let valoresSeleccionados = [];
+        try {
+          valoresSeleccionados = JSON.parse(rutasSeleccionadas);
+          if (!Array.isArray(valoresSeleccionados)) {
+            valoresSeleccionados = [valoresSeleccionados];
+          }
+        } catch {
+          if (rutasSeleccionadas && rutasSeleccionadas !== '[]') {
+            valoresSeleccionados = [rutasSeleccionadas];
+          }
+        }
+        $('#ubicacion').val(valoresSeleccionados).trigger('change');
+
+        const imagen = btn.getAttribute('data-imagen');
+        if (imagen && imagen !== "None") {
+          document.getElementById('imgPreview').src = '/static/uploads/Imagenes/' + imagen;
+          document.getElementById('imgPreview').style.display = 'block';
+          document.getElementById('imgNombre').textContent = imagen;
+        } else {
+          document.getElementById('imgPreview').style.display = 'none';
+          document.getElementById('imgNombre').textContent = '';
+        }
+
+        form.querySelector('button[type="submit"]').textContent = "Guardar Cambios";
+      });
+    });
+  });
+</script>

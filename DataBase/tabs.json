@@ -1,0 +1,37 @@
+[
+    {
+        "id": "EMBALAJE40",
+        "title": "EMBALAJE40 🤖",
+        "ruta_jerarquia": "SD-APR-EMPA"
+    },
+    {
+        "id": "AREAS DE SERVICIOS",
+        "title": "AREAS DE SERVICIOS 🏬",
+        "ruta_jerarquia": "SD-ASE"
+    },
+    {
+        "id": "HALLDEN",
+        "title": "HALLDEN 🏬",
+        "ruta_jerarquia": "SD-APR-HALD"
+    },
+    {
+        "id": "DELTA",
+        "title": "DELTA 🏬",
+        "ruta_jerarquia": "SD-APR-DELT"
+    },
+    {
+        "id": "LITTELL",
+        "title": "LITTELL 🏬",
+        "ruta_jerarquia": "SD-APR-LITE"
+    },
+    {
+        "id": "GRUA320",
+        "title": "GRUA320 🏬",
+        "ruta_jerarquia": "SD-APR-GRUA320"
+    },
+    {
+        "id": "GRUA321",
+        "title": "GRUA321 🏬",
+        "ruta_jerarquia": "SD-APR-GRUA321"
+    }
+]

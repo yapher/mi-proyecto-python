@@ -1,0 +1,13 @@
+[
+    {
+        "id": 1750890022526,
+        "rubro": "Automotor",
+        "descripcion": "Cuota 0Km",
+        "importe": 310000,
+        "tipo": "cuota",
+        "cuota_numero": 55,
+        "cuota_total": 71,
+        "vencimiento": "2030-01-23",
+        "pagado": false
+    }
+]

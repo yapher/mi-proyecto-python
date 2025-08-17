@@ -1,0 +1,237 @@
+<button class="btn btn-agregar m-1" data-bs-toggle="modal" data-bs-target="#agregarModal"
+    onclick="mostrarFormulario(null)">Agregar Pago</button>
+
+
+<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-form"
+            style="background-color: #4b376a; color: #fff; border-radius: 1rem; box-shadow: 0 8px 32px rgba(136,201,153,0.16);">
+            <div class="modal-header"
+                style="border-bottom: 2px solid #88c999; background: linear-gradient(to right, #2a1e3b, #3e2d59); border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                <h5 class="modal-title" id="agregarModalLabel" style="color: #88c999; font-weight: 700;">Agregar Nuevo
+                    Pago</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
+                    style="filter: invert(1);"></button>
+            </div>
+            <div class="modal-body">
+                <div class="bg-form mb-4">
+                    <form id="formulario">
+
+                        <!-- Selectores multinivel -->
+                        {% include "Aplic/crearrubros/FrontEnd/component/selectRubros.html" %}
+
+                        <input type="hidden" id="pagoId">
+
+                        <div class="mb-3 input-with-emoji">
+                            <span class="input-emoji">🔗</span>
+                            <input type="number" class="form-control ps-5" id="importe" placeholder="Importe">
+                        </div>
+                        <div class="mb-3 input-with-emoji">
+                            <span class="input-emoji">😀</span>
+                            <select class="form-control ps-5" id="tipo">
+                                <option value="único">Único</option>
+                                <option value="cuotas">Cuotas</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 input-with-emoji">
+                            <span class="input-emoji">😀</span>
+                            <input type="number" class="form-control ps-5" id="cuotas" placeholder="Cuotas">
+                        </div>
+                        <div class="mb-3 input-with-emoji">
+                            <span class="input-emoji">📅</span>
+                            <input type="date" class="form-control ps-5" id="vencimiento" placeholder="Vencimiento">
+                        </div>
+                        <div class="button-group">
+                            <button type="button" class="btn btn-agregar" onclick="guardarPago()">Guardar</button>
+                            <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal" onclick="cancelar()"
+                                style="display:none;">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function guardarPago() {
+    const id = document.getElementById('pagoId').value;
+    const texto = obtenerRutaPadre();
+
+    let categoria, subcategoria;
+
+    if (texto.includes(".")) {
+        [categoria, subcategoria] = texto.split(".");
+    } else {
+        categoria = texto;
+        subcategoria = null;
+    }
+
+    const tipo = document.getElementById('tipo').value;
+    const cuotas = parseInt(document.getElementById('cuotas').value) || 1;
+    const importeTotal = parseFloat(document.getElementById('importe').value);
+    const vencimiento = document.getElementById('vencimiento').value;
+
+    if (!categoria || !importeTotal || !vencimiento) {
+        return new Noty({
+            type: 'warning',
+            layout: 'topRight',
+            timeout: 3000,
+            theme: 'mint',
+            text: 'Complete los campos obligatorios'
+        }).show();
+    }
+
+    let pagos = [];
+
+    if (tipo === "cuotas") {
+        const importeCuota = parseFloat((importeTotal / cuotas).toFixed(2));
+        let fecha = new Date(vencimiento);
+
+        for (let i = 0; i < cuotas; i++) {
+            const pago = {
+                id: Date.now() + i,
+                rubro: categoria,
+                descripcion: subcategoria,
+                importe: importeCuota,
+                tipo: "cuota",
+                cuota_numero: i + 1,
+                cuota_total: cuotas,
+                vencimiento: fecha.toISOString().split('T')[0],
+                pagado: false
+            };
+            pagos.push(pago);
+
+            // Avanzar 1 mes
+            fecha.setMonth(fecha.getMonth() + 1);
+        }
+    } else {
+        pagos.push({
+            id: Date.now(),
+            rubro: categoria,
+            descripcion: subcategoria,
+            importe: importeTotal,
+            tipo: "único",
+            vencimiento: vencimiento,
+            pagado: false
+        });
+    }
+
+    fetch('/pagos/agregar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pagos)
+    })
+        .then(() => {
+            filtrarPorMes();
+            mostrarFormulario(null);
+            cerrarModal();
+        })
+        .catch(err => {
+            console.error('Error al guardar:', err);
+        });
+}
+
+
+    function editar(pago) {
+        abrirModal();
+        mostrarFormulario(pago);
+    }
+
+    function mostrarFormulario(p = null) {
+    if (p) {
+        document.getElementById('pagoId').value = p.id || '';
+        document.getElementById('importe').value = p.importe || '';
+        document.getElementById('tipo').value = p.tipo || 'único';
+        document.getElementById('cuotas').value = p.cuotas || '';
+        document.getElementById('vencimiento').value = p.vencimiento || '';
+        document.querySelector(".btn-cancelar").style.display = "inline";
+
+        // Combinar rubro y descripción para armar la ruta
+        let rutaCompleta = p.rubro;
+        if (p.descripcion) rutaCompleta += "." + p.descripcion;
+
+        // Mostrar los selectores de nivel con la ruta seleccionada
+        renderSelectoresNiveles(rutaCompleta);
+
+    } else {
+        document.getElementById('pagoId').value = '';
+        document.querySelectorAll('#formulario input, #formulario select').forEach(i => i.value = '');
+        
+        // Fecha actual
+        const hoy = new Date();
+        const yyyy = hoy.getFullYear();
+        const mm = String(hoy.getMonth() + 1).padStart(2, '0');
+        const dd = String(hoy.getDate()).padStart(2, '0');
+        const fechaActual = `${yyyy}-${mm}-${dd}`;
+        document.getElementById('vencimiento').value = fechaActual;
+
+        // Volver a mostrar el primer nivel del selector
+        renderSelectoresNiveles();
+
+        document.querySelector(".btn-cancelar").style.display = "none";
+    }
+}
+
+
+    function cancelar() {
+        mostrarFormulario(null);
+    }
+
+    function eliminar(id) {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Esta acción no se puede deshacer",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`/pagos/eliminar/${id}`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' }
+                })
+                    .then(response => {
+                        if (!response.ok) throw new Error("Error en la eliminación");
+                        return response.json();
+                    })
+                    .then(data => {
+                        Swal.fire('Eliminado', data.mensaje, 'success');
+                        filtrarPorMes();
+                    })
+                    .catch(() => {
+                        Swal.fire('Error', 'No se pudo eliminar el pago.', 'error');
+                    });
+            }
+        });
+    }
+
+    function obtenerRutaPadre() {
+        const selects = document.querySelectorAll('.nivel-select');
+        let ruta = '';
+        selects.forEach(sel => {
+            if (sel.value) ruta = sel.value;
+        });
+        return ruta;
+    }
+
+    function cerrarModal() {
+        const modalEl = document.getElementById('agregarModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+    }
+
+    function abrirModal() {
+        const modalEl = document.getElementById('agregarModal');
+        let modal = bootstrap.Modal.getInstance(modalEl);
+        if (!modal) {
+            modal = new bootstrap.Modal(modalEl);
+        }
+        modal.show();
+    }
+
+</script>

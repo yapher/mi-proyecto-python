@@ -1,0 +1,5707 @@
+[
+    {
+        "nombre": "SENSOR ULTRASONICO SALIDA  BIPOLAR S18UBAQ  (BANNER) mide el paquete",
+        "codigo": "71652676",
+        "link": "https://www.bannerengineering.com/mx/es/products/part.02712.html?srsltid=AfmBOootsFjjm3xu1n-LytKuxfA5FnEbszfQL8-JEwQlRlg7Mg-C8ekK",
+        "cantidad": 2,
+        "fecha_creacion": "2025-01-09",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Sensor_ultrasonico.jpeg",
+        "fecha_fin": "2025-12-05",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "SENSOR DET. FOTOELECT.  Q12AB6FF50 (BANNER) detecta los esquineros de cartón",
+        "codigo": "71646013",
+        "link": "https://www.bannerengineering.com/mx/es/products/part.72116.html?srsltid=AfmBOoqUWjM65MPIlNV-Ryd9R9pkNQOg9P0c0LcqzstDsR0qGi5Z_mvl",
+        "cantidad": 10,
+        "fecha_creacion": "2014-02-04",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Sensor_esquinero_carton.jpeg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR FOTOELECTRICO  QS18VP6LLPQ8 (BANNER) detecta ranura de tarimas",
+        "codigo": "71655338",
+        "link": "https://www.bannerengineering.com/mx/es/products/part.73246.html?srsltid=AfmBOorwPW3hmxtneR1sWJ9ZSITY7cmqWNLv0ja2iy8sfwUWUk95P6L3",
+        "cantidad": 6,
+        "fecha_creacion": "2015-04-29",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Sensor_detecta_ranura.jpeg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR DIFUSO RETROREFLECTIVO QS18VP6LV (BANNER) detecta posición de la calesita",
+        "codigo": "71642030",
+        "link": "https://www.bannerengineering.com/mx/es/products/part.61636.html?srsltid=AfmBOoqIJrl4eqWFJCUp3lVuxUi0Qbz8e1j9LhsP-cNpK-Ahvf6TT63w",
+        "cantidad": 3,
+        "fecha_creacion": "2014-01-03",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "sensor_pos_calesita.jpeg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR FOTOELECTRICO 50X50 S62-PA-2-C11-PN (DATALOGIC) detecta la altura de envoltura",
+        "codigo": "71652502",
+        "link": "https://apps.datalogic.com/e-catalog/ec-S62.aspx",
+        "cantidad": 1,
+        "fecha_creacion": "2015-01-30",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Sensor_altura_film.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR INDUCTIVO 10MM XS1N18PA349D (SCHNEIDER ELEC.) detecta altura de zunchadora y ticket",
+        "codigo": "71331978",
+        "link": "https://es.farnell.com/telemecanique-sensors/xs1n18pa349d/interruptor-de-proximidad-m18/dp/530359?srsltid=AfmBOop7s88VyoopIvpBP7AqAF_Z8qXNn4_lr1fN43zKn8_Oc1_daSGL",
+        "cantidad": 11,
+        "fecha_creacion": "2014-04-10",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Sensor_altura_zunchadora.png",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR INDUCTIVO XS618B1PAM12 (telemecanique) Fin de carrera home traslación zunchadora",
+        "codigo": "71580041",
+        "link": "https://www.telemecaniquesensors.com/es/es/product/reference/XS618B1PAM12",
+        "cantidad": 1,
+        "fecha_creacion": "2025-11-20",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Sennsor_inductivo_home_zunchadora.jpg",
+        "fecha_fin": "2026-12-11",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "RELE IZUMI AEA RU45 BOBINA 24VCC (IZUMI) freno de motor zunchadora/resistencia",
+        "codigo": "71349362",
+        "link": "https://electricidadlynch.com/productos/automatizacion/rele/izumi/",
+        "cantidad": 10,
+        "fecha_creacion": "2025-08-07",
+        "equipo": "GMP-PUERTA1-ESTANTE2",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Rele_24v_empaque.png",
+        "fecha_fin": "2026-03-05",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR MAGNETICO SMEO-4U-K-LED-24 (FESTO) sensores cilindros",
+        "codigo": "71646707",
+        "link": "https://www.festo.com/cl/es/a/36198/",
+        "cantidad": 2,
+        "fecha_creacion": "2019-04-09",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "sensor_cilindros.jpg",
+        "estado": "🟣",
+        "fecha_fin": ""
+    },
+    {
+        "nombre": "CONECTOR 90° P/DETECTOR  XZ-CP1241L10 (telemecanique) conector 90° sensores",
+        "codigo": "71329376",
+        "link": "https://www.tme.com/ar/es/details/xzcp1241l10/cables-para-sensores/telemecanique-sensors/",
+        "cantidad": 20,
+        "fecha_creacion": "2019-04-09",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "conector_90_sensores_4pines.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR INDUCTIVO  NI50U-CK40-AP6X2-H1141 (TURCK) medición de paquetes robot 2",
+        "codigo": "71646391",
+        "link": "https://www.turck.de/datasheet/_es/edb_1625837_esl_es.pdf",
+        "cantidad": 1,
+        "fecha_creacion": "2015-04-04",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Sensor_medicion_robot2.png",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CERRADURA ELÉCTRICA  440G-MT47044 (ROCKWELL) cerradura de seguridad cerramientos",
+        "codigo": "71641987",
+        "link": "https://www.rockwellautomation.com/es-ar/products/hardware/allen-bradley/safety-products/safety-sensors/safety-interlock-switches/guard-locking-switches/440g-mt-solenoid.html",
+        "cantidad": 2,
+        "fecha_creacion": "2014-04-09",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "440g-mt-guardlockingswitc.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CERRADURA ACTUADOR STANDARD  440G-A27011 (ROCKWELL)  accesorio cerradura traba sola",
+        "codigo": "71647086",
+        "link": "https://es.rs-online.com/web/p/actuadores-y-imanes-para-interruptores-de-seguridad-con-enclavamiento/3513874",
+        "cantidad": 20,
+        "fecha_creacion": "2019-04-18",
+        "equipo": "GMP-COFRE1-ESTANTE3",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "punta_cerradura.png",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR BARRERA E3JM-10M4-G-NN (OMRON) detección de presencia de paquetes",
+        "codigo": "71330524",
+        "link": "https://industrial.omron.es/es/products/E3JM-10M4-G-NN",
+        "cantidad": 4,
+        "fecha_creacion": "2024-04-30",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "E3JM-10M4-NN-US.jpg",
+        "fecha_fin": "2029-07-06",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "COMPENSADOR DE NIVEL LC16-M1835 ( PIAB )  amortiguadores gripper robot 1",
+        "codigo": "71642600",
+        "link": "https://www.piab.com/globalassets/productimages/0124954_datasheet_level_compensator_lc16_m1835__g1_8__male__stroke_35_en-gb.pdf?ref=A7D14FFAA5",
+        "cantidad": 10,
+        "fecha_creacion": "2014-01-15",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "compensador_nivel.png",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "VENTOSA VACIO B30-2.10.04AG (PIAB ) ventosa 30mm robot 1",
+        "codigo": "72113882",
+        "link": "https://www.piab.com/es-es/ventosas-y-sistemas-de-agarre-delicado/ventosas-redondas/ventosa-con-fuelle/0101103",
+        "cantidad": 10,
+        "fecha_creacion": "2014-02-17",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "ventosa_30mm.png",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "VENTOSA DE VACIO CHICA  B20.10.02AA (PIAB) toma esquineros de carton robot1",
+        "codigo": "71642134",
+        "link": "https://www.piab.com/globalassets/productimages/0101160_datasheet_suction_cup_b20_chloroprene__m5_female_en-us.pdf?ref=BC05D818B6",
+        "cantidad": 10,
+        "fecha_creacion": "2015-05-08",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "ventosa_chica.png",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "REGULADOR DE CAUDAL  grla-1/8-qs-8-d  (FESTO) reguladora de cilindros",
+        "codigo": "71643512",
+        "link": "https://www.festo.com/ar/es/a/193145/",
+        "cantidad": 10,
+        "fecha_creacion": "2015-04-03",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "reguladora_cilindros.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "Sensor magnético cilindros SMC redondo",
+        "codigo": "71642885",
+        "link": "https://www.smc.eu/es-ar/productos/d-m9n-m9p-m9b-detector-de-estado-solido-montaje-directo-salida-directa-a-cable-en-linea~137021~cfg",
+        "cantidad": 3,
+        "fecha_creacion": "2019-06-05",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Sensor_Cilindros_SMC.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "Sensor magnético cilindros SMC cuadrado",
+        "codigo": "71364484",
+        "link": "https://static.smc.eu/binaries/content/assets/smc_global/product-documentation/installationmaintenance-manuals/es/im_d-z_tf222-162es.pdf",
+        "cantidad": 2,
+        "fecha_creacion": "2021-02-04",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Sensor_Cilindros_SMC_Z7x-Z80l.jpg",
+        "estado": "🟢",
+        "fecha_fin": ""
+    },
+    {
+        "nombre": "Conecto hembra 4 pines para sensores",
+        "codigo": "71644068",
+        "link": "https://telemecaniquesensors.com/es/es/product/reference/XZCC12FDM40B",
+        "cantidad": 1,
+        "fecha_creacion": "2021-10-21",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "conecto_4_pines_hembra.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "Conector recto hembra 4 pines con cable",
+        "codigo": "78633071",
+        "link": "https://www.bannerengineering.com/mx/es/products/part.26850.html?srsltid=AfmBOorQfBWU7MJ6Xavv-4kcmvSety0tGaRYzRCxLmcr0IJKHBnm19VQ",
+        "cantidad": 10,
+        "fecha_creacion": "2025-10-09",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "conecto_4_pines_hembra_con_cable.jpg",
+        "fecha_fin": "2026-10-09",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "GUARDAMOTOR ALLEN BRADLEY 140M-C2E-B25   1.6 a 2.5 A",
+        "codigo": "71591031",
+        "link": "https://www.rockwellautomation.com/es-ar/products/hardware/allen-bradley/circuit-and-load-protection/circuit-breakers--circuit-protection/motor-circuit-protectors/140m-mcp.html",
+        "cantidad": 4,
+        "fecha_creacion": "2014-02-05",
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Contactor_140m-family-front1--large-312w255h.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "GUARDAMOTOR ALLEN BRADLEY 140M-C2E-B40   2,5 a 4 A",
+        "codigo": "71322594",
+        "link": "https://www.rockwellautomation.com/es-ar/products/hardware/allen-bradley/circuit-and-load-protection/circuit-breakers--circuit-protection/motor-circuit-protectors/140m-mcp.html",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Contactor_140m-family-front1--large-312w255h.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "GUARDAMOTOR ALLEN BRADLEY 140M-C2E-C10   6,3 a 10 A",
+        "codigo": "71640051",
+        "link": "https://www.rockwellautomation.com/es-ar/products/hardware/allen-bradley/circuit-and-load-protection/circuit-breakers--circuit-protection/motor-circuit-protectors/140m-mcp.html",
+        "cantidad": 1,
+        "fecha_creacion": "2025-12-10",
+        "equipo": "GMP-PUERTA1-ESTANTE2",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Contactor_140m-family-front1--large-312w255h.jpg",
+        "fecha_fin": "2026-12-10",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "RELE DE SEGURIDAD MONITOREO ENTRADAS Y SALIDAS, CONTACTOS 1 N.C; 3 N.O  ALLEN BRADLEY  440R-N23132",
+        "codigo": "71656902",
+        "link": "https://literature.rockwellautomation.com/idc/groups/literature/documents/um/440r-um015_-es-p.pdf",
+        "cantidad": 1,
+        "fecha_creacion": "2025-12-10",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Rele_Seguridad_empaque.jpg",
+        "fecha_fin": "2026-12-10",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "RELE BOBINA 24 VDC, CONTACTOS  1 N.C; 5 N.O,  6 POLOS, OMRON  G7SA-5A1B-24DC",
+        "codigo": "71642033",
+        "link": "https://cpi.com.ar/products/g7sa-5a1b-dc24",
+        "cantidad": 2,
+        "fecha_creacion": "2025-12-10",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "rele_g7sa-5a1b-dc24-omron-902319.jpg",
+        "fecha_fin": "2025-12-24",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "RELE BOBINA 24 VDC  4PDT, 4 POLOS, 7 A.  ALLEN BRADLEY  700HC24Z24",
+        "codigo": "71070251",
+        "link": "https://cl.rsdelivers.com/product/finder/553490240094/rele-finder-55-de-4-polos-4pdt-bobina-24v-dc-7a/2388165",
+        "cantidad": 4,
+        "fecha_creacion": "2020-01-30",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "rele_Y2388165-01.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "MODULO ENTRADA  ALLEN BRADLEY  1756-IB32",
+        "codigo": "71337207",
+        "link": "https://wartung-automation.com.ar/product/1756-ib32-allen-bradley-controllogix-modulo-plc-32-pt-12-24v-d-i/",
+        "cantidad": 2,
+        "fecha_creacion": "2020-07-02",
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Modulo_entrada.jpeg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO SALIDA  ALLEN BRADLEY  1756-OW16I",
+        "codigo": "71222167",
+        "link": "https://literature.rockwellautomation.com/idc/groups/literature/documents/um/1756-um058_-es-p.pdf",
+        "cantidad": 4,
+        "fecha_creacion": "2020-02-20",
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Modulo_salida.jpeg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "INTERRUPTOR 100A  ALLEN BRADLEY 194E-A100-1756",
+        "codigo": "71642025",
+        "link": "https://www.rockwellautomation.com/en-us/products/details.194E-A100-1756.html",
+        "cantidad": 1,
+        "fecha_creacion": "2019-02-21",
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "iterruptor_194E-A40-1756_1000x1000.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FUENTE ALIM. 24VDC, 10A POWER SUPPLY 24-28V DC, 240 W, 120/240V AC INPUT VOLTAGE  ALLEN BRADLEY  1606-XLE240EP",
+        "codigo": "71585105",
+        "link": "https://literature.rockwellautomation.com/idc/groups/literature/documents/sr/1606-sr025_-en-e.pdf",
+        "cantidad": 1,
+        "fecha_creacion": "2014-11-22",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "fuente_24_entrada_380.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "FUENTE PLC 19-32 VDC FUENTE DE ALIMENTACION (10 Amp @ 5V)  ALLEN BRADLEY 1756-PB72",
+        "codigo": "71337312",
+        "link": "https://wartung-automation.com.ar/product/1756-pa72-allen-bradley-fuente-de-alimentacion-estandar-controllogixvoltaje-de-entrada-de-85-a-265-v-ca-con-un-suministro-nominal-de-120-v-240-v-ca/",
+        "cantidad": 1,
+        "fecha_creacion": "2014-12-30",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "1756-PA72_fuente.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "PANEL VIEW PLUS 1500 PANELVIEW PLUS 6 TERMINAL, MOD 1500, PANTALLA TACTIL, COLOR  ALLEN BRADLEY 2711P-T15C4A8",
+        "codigo": "71639041",
+        "link": "https://configurator.rockwellautomation.com/api/Product/2711P-T15C4A8/cutsheet",
+        "cantidad": 1,
+        "fecha_creacion": "2020-10-22",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "panel_1500.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "PANEL VIEW PLUS 6 PANELVIEW PLUS 6 TERMINAL, MOD 600, PANTALLA TACTIL, COLOR  ALLEN BRADLEY 2711P-T6C20D8",
+        "codigo": "71639042",
+        "link": "https://literature.rockwellautomation.com/idc/groups/literature/documents/um/2711p-um006_-es-p.pdf",
+        "cantidad": 1,
+        "fecha_creacion": "2014-09-19",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "panel_1500.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "CONVERSOR SERIAL TCP-IP Y ENTRADAS - SALIDAS DIGITALES Exemys SSE232-1C4C-IA",
+        "codigo": "71580353",
+        "link": "https://exemys.com/beta/docs/english/SSE232_IA_DS_E.pdf",
+        "cantidad": 2,
+        "fecha_creacion": "2020-02-28",
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "conversor_MCV2-485.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "Modulo-CPU 1756-L72 c/procesador Control Logix 5572 de 4 Mbytes Memory 1756-L72",
+        "codigo": "71639343",
+        "link": "https://literature.rockwellautomation.com/idc/groups/literature/documents/um/1756-um001_-es-p.pdf",
+        "cantidad": 1,
+        "fecha_creacion": "2019-05-17",
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "cpu_83_130_4.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SWITCH ETHERNET 5 PUERTOS Hirschmann  SPIDER 5TX",
+        "codigo": "71364990",
+        "link": "https://www.controldcs.com/hirschmann-spider-5tx-5-ethernet-ports-rail-switch_p2294.html",
+        "cantidad": 1,
+        "fecha_creacion": "2014-02-26",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Switch_ethernet_5.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "Modulo-ETHERNET/IP TAP3 COPPER PORTS  ALLEN BRADLEY 1783-ETAP",
+        "codigo": "71638675",
+        "link": "https://www.stateelectric.com/products/allen-bradley-1783-etap",
+        "cantidad": 1,
+        "fecha_creacion": "2020-02-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "modulo_1756-EN2TR_1000x1000.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "MODULO ETHERNET ETHERNET 10-100M INTERFACE MODULE ALLEN BRADLEY 1756-EN2T",
+        "codigo": "71617155",
+        "link": "https://www.rockwellautomation.com/en-us/products/details.1756-EN2T.html",
+        "cantidad": 1,
+        "fecha_creacion": "2020-08-10",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "modulo_1756-EN2T_1000x1000.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "MODULO ETHERNET ETHERNET DUAL PORT 10-100M INTERFACE MODULE  ALLEN BRADLEY 1756-EN2TR",
+        "codigo": "71637854",
+        "link": "https://www.rockwellautomation.com/en-us/products/details.1756-EN2TR.html",
+        "cantidad": 1,
+        "fecha_creacion": "2014-11-07",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "modulo_1756-EN2TR_1000x1000.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "SWITCH ETHERNET STRATIX 6000 SWITCH, DE NIVEL DE ENTRADA GESTIONADO, 8 PUERTOS  ALLEN BRADLEY 1783-EMS08T",
+        "codigo": "71644193",
+        "link": "https://www.rockwellautomation.com/en-us/products/details.1783-EMS08T.html",
+        "cantidad": 1,
+        "fecha_creacion": "2020-07-09",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "switch_1783-EMS08T_ph.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ETHERNET/IP COMMUNICATION ADAPTOR - DUAL PORT  ALLEN BRADLEY 25-COMM-E2P",
+        "codigo": "71644024",
+        "link": "https://www.radwell.com/es-ES/Buy/ALLEN%20BRADLEY/ALLEN%20BRADLEY/25-COMM-E2P?srsltid=AfmBOooITLxOOOVVGQPyNQGSo4ugfVYJpVSjt4lID2e4tfi4E3tNRwT7",
+        "cantidad": 1,
+        "fecha_creacion": "2020-06-26",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "modulo_ethernet_Power_flex.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "conversor_EGW1-MB MODBUS TCP A MODBUS ASCII / RTU CONVERTIDOR  - Montage RIEL DIN",
+        "codigo": "71643924",
+        "link": "https://scigate.com.sg/images/stories/scigate/products/exemys/EGW1-MB-HT_UM_S.pdf",
+        "cantidad": 1,
+        "fecha_creacion": "2022-06-23",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "conversor_MCV2-485.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "LED VERDE  ALLEN BRADLEY  800F-N3G",
+        "codigo": "71643923",
+        "link": "https://www.rockwellautomation.com/en-us/products/details.800F-N3G.html",
+        "cantidad": 1,
+        "fecha_creacion": "2020-06-17",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "led_botonera_verde.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "LED ROJO  ALLEN BRADLEY  800F-N3R",
+        "codigo": "71614285",
+        "link": "https://www.rockwellautomation.com/en-us/products/details.800F-N3R.html",
+        "cantidad": 1,
+        "fecha_creacion": "2020-10-27",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "led_botonera_rojo.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "BALIZA ROJA  ALLEN BRADLEY  855E-24TL4",
+        "codigo": "71642002",
+        "link": "https://www.rockwellautomation.com/es-ar/products/hardware/allen-bradley/push-buttons-and-signaling-devices/visual-signaling-devices/855-control-tower-stack-lights.html",
+        "cantidad": 1,
+        "fecha_creacion": "2020-06-25",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "baliza_roja_855E-24TL4.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "BALIZA AMBAR  ALLEN BRADLEY   855E-24TL5",
+        "codigo": "71642001",
+        "link": "https://www.rockwellautomation.com/es-ar/products/hardware/allen-bradley/push-buttons-and-signaling-devices/visual-signaling-devices/855-control-tower-stack-lights.html",
+        "cantidad": 1,
+        "fecha_creacion": "2020-08-21",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "baliza_ambar.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "BALIZA VERDE  ALLEN BRADLEY  855E-24TL3",
+        "codigo": "71642003",
+        "link": "https://www.radwell.com/es-ES/Buy/ALLEN%20BRADLEY/ALLEN%20BRADLEY/855E-24TL3?srsltid=AfmBOoqDaq_RrPyDS8gydrKvVxwq8McpOtBM8i6zWg-FdpBZHa7Mu-zc",
+        "cantidad": 1,
+        "fecha_creacion": "2021-02-18",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "baliza_verde.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "PULSADOR CIEGO 800F PUSH BUTTON - METAL, FLUSH, BLACK  ALLEN BRADLEY 800FM-F2",
+        "codigo": "71642027",
+        "link": "https://es.rs-online.com/web/p/cabezales-para-pulsadores/5117793",
+        "cantidad": 1,
+        "fecha_creacion": "2020-03-18",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "pulsador_negro.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "PULSADOR LUMINOSO 800F MOMENTARY PUSH BUTTON - METAL, ILLUMINATED, FLUSH, YELLOW ALLEN BRADLEY 800FM-LF5",
+        "codigo": "71642028",
+        "link": "https://www.rockwellautomation.com/en-us/products/details.800FM-LF5.html",
+        "cantidad": 1,
+        "fecha_creacion": "2020-02-21",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "pulsador_verde.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "PULSADOR LUMINOSO 800F MOMENTARY PUSH BUTTON - METAL, ILLUMINATED, FLUSH, CLEAR ALLEN BRADLEY 800FM-LF7",
+        "codigo": "71642026",
+        "link": "https://www.stateelectric.com/products/allen-bradley-800fm-lf7",
+        "cantidad": 1,
+        "fecha_creacion": "2020-03-21",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "pulsador_verde.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "PARADA EMERGENCIA 800F ILLUMINATED MUSHROOM OPERATORS ALLEN BRADLEY 800FM-LMT44",
+        "codigo": "71621953",
+        "link": "https://www.stateelectric.com/products/allen-bradley-800fm-lmt44",
+        "cantidad": 1,
+        "fecha_creacion": "2021-03-04",
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "pulsador_de_emergencia.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CAJA 3 PULSADORES COLGANTE XACA2813",
+        "codigo": "71643212",
+        "link": "https://www.se.com/cl/es/product/XACA2813/caja-colgante-2-pulsadores-22mm-1-velocidad-paro-emergencia-30-mm-ncna-/",
+        "cantidad": 1,
+        "fecha_creacion": "2022-02-24",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "caja_pulsadores.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "FUSIBLE 5x20MM. 2A",
+        "codigo": "71351222",
+        "link": "https://es.rs-online.com/web/p/fusibles-de-cartucho/0563722",
+        "cantidad": 1,
+        "fecha_creacion": "2023-02-23",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "fusible-vidrio-5x20mm-2a.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "FUSIBLE 5x20MM. 0,25A",
+        "codigo": "71642034",
+        "link": "https://www.tme.com/ar/es/details/0218.250hxp/fusibles-5x20mm-retardados/littelfuse/",
+        "cantidad": 1,
+        "fecha_creacion": "2023-07-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "fusible-vidrio-5x20mm-0.25a.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "LAMPARA TUBO LED 600 MM",
+        "codigo": "71619765",
+        "link": "https://www.lacasadelaslamparas.com.ar/productos/tubo-led-luz-fria-60cm-9w-sica/",
+        "cantidad": 1,
+        "fecha_creacion": "2020-07-30",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "tubo_led_600mm.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "INTERRUPTOR FERROMAGNÉTICO 2x2A",
+        "codigo": "71322297",
+        "link": "https://dimater.com.ar/producto?id=53306&nombre=interruptor-termomagnetico-2x2a-610-ka-curva-c-abb",
+        "cantidad": 1,
+        "fecha_creacion": "2023-02-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "termica_bipolar.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "INTERRUPTOR FERROMAGNÉTICO 2x6A",
+        "codigo": "71322252",
+        "link": "https://dimater.com.ar/producto?id=53306&nombre=interruptor-termomagnetico-2x2a-610-ka-curva-c-abb",
+        "cantidad": 1,
+        "fecha_creacion": "2023-03-05",
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA",
+            "SD-ASE"
+        ],
+        "imagen": "termica_bipolar.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "INTERRUPTOR FERROMAGNÉTICO 2x10A",
+        "codigo": "71322302",
+        "link": "https://dimater.com.ar/producto?id=53306&nombre=interruptor-termomagnetico-2x2a-610-ka-curva-c-abb",
+        "cantidad": 1,
+        "fecha_creacion": "2023-10-20",
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "termica_bipolar.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "INTERRUPTOR FERROMAGNÉTICO 1x2A",
+        "codigo": "71326798",
+        "link": "https://www.google.com/search?q=INTERRUPTOR+FERROMAGN%C3%89TICO+2x2A&sca_esv=a53cd43173ba6200&rlz=1C1CHZN_enAR1123AR1125&sxsrf=AHTn8zpcCtzj2ucIkU9KD5IOV04dAPJ5lA%3A1746448723406&ei=U7EYaOjOGOyy5OUP7d3ByAE&ved=0ahUKEwioxJu-rIyNAxVsGbkGHe1uEBkQ4dUDCBA&uact=5&oq=INTERRUPTOR+FERROMAGN%C3%89TICO+2x2A&gs_lp=Egxnd3Mtd2l6LXNlcnAiIElOVEVSUlVQVE9SIEZFUlJPTUFHTsOJVElDTyAyeDJBMgUQIRigATIFECEYoAEyBRAhGKABMgUQIRigAUisCFAAWABwAHgBkAEAmAGNAaABjQGqAQMwLjG4AQPIAQD4AQL4AQGYAgGgApEBmAMAkgcDMC4xoAepA7IHAzAuMbgHkQE&sclient=gws-wiz-serp",
+        "cantidad": 1,
+        "fecha_creacion": "2023-03-30",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "termica_bipolar.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "INTERRUPTOR FERROMAGNÉTICO 1x6A",
+        "codigo": "71322250",
+        "link": "https://www.google.com/search?q=INTERRUPTOR+FERROMAGN%C3%89TICO+2x2A&sca_esv=a53cd43173ba6200&rlz=1C1CHZN_enAR1123AR1125&sxsrf=AHTn8zpcCtzj2ucIkU9KD5IOV04dAPJ5lA%3A1746448723406&ei=U7EYaOjOGOyy5OUP7d3ByAE&ved=0ahUKEwioxJu-rIyNAxVsGbkGHe1uEBkQ4dUDCBA&uact=5&oq=INTERRUPTOR+FERROMAGN%C3%89TICO+2x2A&gs_lp=Egxnd3Mtd2l6LXNlcnAiIElOVEVSUlVQVE9SIEZFUlJPTUFHTsOJVElDTyAyeDJBMgUQIRigATIFECEYoAEyBRAhGKABMgUQIRigAUisCFAAWABwAHgBkAEAmAGNAaABjQGqAQMwLjG4AQPIAQD4AQL4AQGYAgGgApEBmAMAkgcDMC4xoAepA7IHAzAuMbgHkQE&sclient=gws-wiz-serp",
+        "cantidad": 1,
+        "fecha_creacion": "2022-11-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "termica_bipolar.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "VENTILADOR AXIAL CON FILTRO RKL32800-1M  CAUDAL: 800 m3/hr; TENSION 220 VAC; DIAMETRO DE ASPA: 320 mm:",
+        "codigo": "71640205",
+        "link": "https://es.rs-online.com/web/p/ventiladores-con-filtro/7444624",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Ventilador_filtro.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "AIRE ACONDICIONADO, MARCA HOFFMAN, G521226G050 (UNO PARA CADA TABLERO)",
+        "codigo": "72109569",
+        "link": "https://www.newark.com/es/hoffman-enclosures-nvent/g521226g050/sealed-enclosure-stainless-steel/dp/29T4569",
+        "cantidad": 1,
+        "fecha_creacion": "2024-07-05",
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA",
+            "SD-APR-LITE"
+        ],
+        "imagen": "aire_acondicionado_gabinetes.jpeg",
+        "fecha_fin": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "PORTAFUSIBLES CONTACT-TYP UK5-HESILA 250 - SECCION D/CABLE: 4 mm2; CANTIDAD DE BORNES: 1; TENSION 600 V; CORR. 6,3 A TIPO CILINDRICO DE VIDRIO",
+        "codigo": "71641999",
+        "link": "https://www.phoenixcontact.com/es-es/productos/borne-para-fusible-uk-5-hesila-250-3004142",
+        "cantidad": 1,
+        "fecha_creacion": "2025-04-30",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "portafusible.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "TOMACORRIENTE '220VCA GABINETE",
+        "codigo": "71356125",
+        "link": "https://demasled.com.ar/productos/tomacorriente-de-aplicar-20a-220v/",
+        "cantidad": 1,
+        "fecha_creacion": "2023-03-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "toma_tablero.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "BORNE ZOLADA PORTAFUSIBLE  BKF-SI-520-LL024",
+        "codigo": "71590237",
+        "link": "https://www.zoloda.com.ar/productos/borne-portafusible-seccionable-para-fusible-de-5x20mm/",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "portafusible_ZOLODA-BKF-SI-520-3.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "BORNE ZOLADA DE PASO 1,5 'BKF-1.5",
+        "codigo": "71590243",
+        "link": "https://www.zoloda.com.ar/productos/borne-de-paso-a-resorte-para-conductor-de-15mm%C2%B2/",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "bornera_ZOLODA-BKF-1-5.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "BORNE ZOLADA DE PASO 2,5 'BKF-2,5",
+        "codigo": "71590232",
+        "link": "https://www.zoloda.com.ar/productos/borne-de-paso-a-resorte-para-conductor-de-25mm%C2%B2/",
+        "cantidad": 1,
+        "fecha_creacion": "2024-06-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "bornera_ZOLODA-BKF-1-5.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "MOTORREDUCTOR  SEW Modelo R57 DRS80S4  - POT. 0,75 KW - REL. 35,07.   (Transportadores)      Posicion Montaje M1",
+        "codigo": "71642795",
+        "link": "https://www.sew-eurodrive.com.ar/productos/motorreductores/motorreductores_con_proteccion_contra_explosiones/motorreductores_de_engranajes_cilindricos_redr/motorreductores_de_engranajes_cilindricos_redr.html",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-08",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "motoreductor.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "MOTORREDUCTOR  SEW Modelo R57 DRS80S4- POT  0,75 KW - REL. 69,23. (Transportador con Balanza)  Pos. Montaje M6",
+        "codigo": "71642796",
+        "link": "https://www.sew-eurodrive.com.ar/productos/motorreductores/motorreductores_con_proteccion_contra_explosiones/motorreductores_de_engranajes_cilindricos_redr/motorreductores_de_engranajes_cilindricos_redr.html",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-08",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "motoreductor.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "MOTORREDUCTOR  SEW Modelo K47 DRE80M4BE05  - POT. 0,75 KW - REL.  75,20  (Reemp Mesa Giratoria Acum. Materiales) Posicion Montaje M5B",
+        "codigo": "71642797",
+        "link": "https://www.tecnicaindustriale.es/rossi/?gad_source=1&gad_campaignid=20915984116&gbraid=0AAAAAD3K7sGVRvkNBb0mUQ12iu4s_Jtti&gclid=Cj0KCQjww-HABhCGARIsALLO6XxH-MArVXhuYsx1IeRsc0wmd2dwQcRVBlDkG0hLzg9nJiVUVeIrMSoaAj63EALw_wcB",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "motoreductor.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "MOTORREDUCTOR  SEW Modelo K67 DRS80S4  POT. 0,75 KW  REL. 123,54   (Mesa giratoria de materiales)                    Posicion Montaje M1A",
+        "codigo": "71642798",
+        "link": "https://www.tecnicaindustriale.es/rossi/?gad_source=1&gad_campaignid=20915984116&gbraid=0AAAAAD3K7sGVRvkNBb0mUQ12iu4s_Jtti&gclid=Cj0KCQjww-HABhCGARIsALLO6XxH-MArVXhuYsx1IeRsc0wmd2dwQcRVBlDkG0hLzg9nJiVUVeIrMSoaAj63EALw_wcB",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "motoreductor.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "MOTORREDUCTOR  SEW Modelo W30 DRS71S4BE05  - POT.  0,37 KW - REL. 27,50.   (Movimiento Transversal Zunchadora)          Posicion Montaje M5A",
+        "codigo": "71642803",
+        "link": "https://www.tecnicaindustriale.es/rossi/?gad_source=1&gad_campaignid=20915984116&gbraid=0AAAAAD3K7sGVRvkNBb0mUQ12iu4s_Jtti&gclid=Cj0KCQjww-HABhCGARIsALLO6XxH-MArVXhuYsx1IeRsc0wmd2dwQcRVBlDkG0hLzg9nJiVUVeIrMSoaAj63EALw_wcB",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "motoreductor.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "MOTORREDUCTOR  SEW Modelo WAF30 DRS71S4BE05 - POT. 0,37 KW - REL. 60 (Elevación de Puente de Zunchadora) Posicion Montaje M2A",
+        "codigo": "71642802",
+        "link": "https://www.tecnicaindustriale.es/rossi/?gad_source=1&gad_campaignid=20915984116&gbraid=0AAAAAD3K7sGVRvkNBb0mUQ12iu4s_Jtti&gclid=Cj0KCQjww-HABhCGARIsALLO6XxH-MArVXhuYsx1IeRsc0wmd2dwQcRVBlDkG0hLzg9nJiVUVeIrMSoaAj63EALw_wcB",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "motoreductor.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "DRIVE POWER FLEX 525  DRIVE 25B-D6P0N114, C/ETHERNET INCORPORADO/IP y SEGURIDAD, 480 VCA, 3 FASES, 3 HP, 2.2 Kw",
+        "codigo": "71693313",
+        "link": "https://www.rockwellautomation.com/es-ar/products/hardware/allen-bradley/vfd/low-voltage-ac-drive/compact-drive/25b-powerflex-525.html",
+        "cantidad": 1,
+        "fecha_creacion": "2025-12-12",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "powerflex525-right-1--large-312w255h.jpg",
+        "fecha_fin": "2026-12-12",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "CONTACTOR ALLEN BRADLEY TIPO CC, MODELO 100-C09EJ10  - 9A, BOBINA 24V DC ALLEN BRADLEY",
+        "codigo": "71688486",
+        "link": "https://es.rs-online.com/web/p/contactores/7768444",
+        "cantidad": 4,
+        "fecha_creacion": "2024-12-02",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "contactor.jpg",
+        "fecha_fin": "2025-12-02",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "DRIVE POWER FLEX 525  DRIVE 25B-D2P3N114, C/ETHERNET INCORPORADO/IP y SEGURIDAD, 480 VCA, 3 FASES, 1.0 HP, 0,75 Kw",
+        "codigo": "78642710",
+        "link": "https://es.rs-online.com/web/p/variadores-de-velocidad/8904317",
+        "cantidad": 2,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "drive_F8904317-01.jpg",
+        "fecha_fin": "2025-12-16",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "DRIVE POWER FLEX 525  DRIVE 25B-D1P4N114, C/ETHERNET INCORPORADO/IP y SEGURIDAD, 480 VCA, 3 FASES, 0.5 HP, 0.4 Kw",
+        "codigo": "71642650",
+        "link": "https://docs.rs-online.com/ebff/0900766b8143d261.pdf",
+        "cantidad": 3,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "drive_F8904317-01.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MOTOR SIEMENS 1LA7063-4AB10 -  POT 0,25 HP, 018 KW; FRAME 063M;  B3; 1500 RPM; 50 HZ; IP55; 230/400V. FRAME: ALUMINIO",
+        "codigo": "71642989",
+        "link": "https://motorescruzzolin.com.ar/catalogo/",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "motor_aluminio.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "MOTOR SIEMENS 1LA7073-4AB10 - POT 0,5 HP, 0,37 KW; FRAME 071M;  B3; 1500 RPM; 50 HZ; IP55; 230/400V. FRAME: ALUMINIO",
+        "codigo": "71642724",
+        "link": "https://motorescruzzolin.com.ar/catalogo/",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "motor_aluminio.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "MOTOR SIEMENS 1LA7083-4AA10-Z - POT 1 HP, 0,75 KW; FRAME 080M;  B3; 1500 RPM; 50 HZ; IP55; 230/400V. MAT. FRAME: ALUMINIO",
+        "codigo": "71642997",
+        "link": "https://motorescruzzolin.com.ar/catalogo/",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "motor_aluminio.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "MOTOR SIEMENS 1LA7063-2AA10 - POT 0,33 HP, 0,25 KW; FRAME 063M;  B3; 3000 RPM; 50 HZ; IP55; 230/400V. FRAME: ALUMINIO",
+        "codigo": "71642990",
+        "link": "https://motorescruzzolin.com.ar/catalogo/",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "motor_aluminio.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "ALAMBRE; DIAMETRO EXTERIOR: 0,8 mm; DE NIQUEL-CROMO 80% DE NIQUEL, 20% DE CROMO",
+        "codigo": "71312517",
+        "link": "https://electronicacaballero.com/hilo-nicrom-8020-08mm-rollo-5m-",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "alambre_resistensia.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ROBOT COMPLETO MODELO IRB 4600-60/2.05  N° DE SERIE ABB:  4600-101352",
+        "codigo": "71641573",
+        "link": "https://www.robots.com/industrial-robots/abb-irb-4600-60-2-05",
+        "cantidad": 2,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "robot_ABB-IRB-4600.jpg",
+        "fecha_fin": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "Battery pack  10,8 V - 17 A/H - LI-ION  MARCA ABB 3HAC168311",
+        "codigo": "71639048",
+        "link": "https://new.abb.com/products/es/3HAC16831-1/3hac16831-1",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "bateria_9IBA207771_400x400.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "Panel Board DSQC643 MARCA ABB  3HAC024488001",
+        "codigo": "71642421",
+        "link": "https://new.abb.com/products/es/3HAC024488-001/3hac024488-001",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "placa_robot_9IBA207617.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "CF 1GB w.Boot image MARCA ABB  3HAC025465011",
+        "codigo": "71639313",
+        "link": "https://new.abb.com/products/3HAC025465-011/3hac025465-011",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "memori_robot.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "System Power Supply DSQC 661 MARCA ABB 3HAC026253001",
+        "codigo": "71639353",
+        "link": "https://new.abb.com/products/es/3HAC026253-001/3hac026253-001",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "fuente_robot.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "Power distribution board DSQC 662 MARCA ABB 3HAC026254001",
+        "codigo": "71639352",
+        "link": "https://new.abb.com/products/es/3HAC026254-001/3hac026254-001",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "fuente_robot_9IBA207635.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "Flex_PEndant_SxTPU3 Complete MARCA ABB 3HAC028357001",
+        "codigo": "71639090",
+        "link": "https://new.abb.com/products/3HAC028357-001/3hac028357-001",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Flex_pendante.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "DSQC663 HV MDU Power unit MARCA ABB 3HAC029818001",
+        "codigo": "71639058",
+        "link": "https://new.abb.com/products/es/3HAC029818-001/3hac029818-001",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "placa_robot_ibr.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "DSQC668 Servo Computer MARCA ABB 3HAC029157001",
+        "codigo": "71639049",
+        "link": "https://new.abb.com/products/es/3HAC029157-001/3hac029157-001",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "placa_robot_ethernet.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "SMB-UNIT DSQC633A MARCA ABB 3HAC031851001",
+        "codigo": "71639089",
+        "link": "https://new.abb.com/products/es/3HAC031851-001/3hac031851-001",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "placa_ibr_robot_9IBA053862.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "COMPUTER UNIT  ABB 3HACO42766-001/04.  (Versión instalada es DSQC1000 - N°de Articulo 3HAC042766-001/04,  N° de Serie 966713#).",
+        "codigo": "71639091",
+        "link": "https://www.onlinecomponents.com/en/productdetail/abb/af63301172-48126824.html?gad_source=1&gad_campaignid=20476412547&gbraid=0AAAAADkP1yajJMbxA9nbwEiwu0e4kVO8D&gclid=Cj0KCQjww-HABhCGARIsALLO6Xz5DqTljcZtUXBnBLjroF3zDzxb6wh3aDTjYZ9rerjDueR_pqWv_9caAmdeEALw_wcB&gclsrc=aw.ds",
+        "cantidad": 1,
+        "fecha_creacion": "2025-05-05",
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "modulo_cpu.jpg",
+        "fecha_fin": "",
+        "estado": ""
+    },
+    {
+        "nombre": "PANTALLA MAGELIS TM GTU REFERENCIA HMIDT732",
+        "codigo": "72113640",
+        "cantidad": 1,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "magelis-pantalla-hmidt732.jpg",
+        "fecha_creacion": "2025-05-20",
+        "fecha_fin": "",
+        "link": "https://techniasrl.com.ar/tienda/pantallas-y-terminales-hmi/1325-magelis-gtu-pantalla-smart-15-24vcc-ip66-hmidt732-3606480687228.html",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "DRIVE G.E. TM-10 VT25U4450A  VARIADOR",
+        "codigo": "71257818",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "drive_littell_ge.jpg",
+        "fecha_creacion": "2025-05-20",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/es-ES/Buy/TMEIC%20GLOBAL/TMEIC%20GLOBAL/VT25U4450A?srsltid=AfmBOopYk2Ex9chh0nKOHKyL-V6bV3TfkbAve-PiPkI7_CmKQx3JRBhX",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTOR BALDOR  25HP,1750,FL1844C,DPG_FV  MODELO RPMACCUSTOMMOTOR 25HP",
+        "codigo": "71628654",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "MOTOR.jpg",
+        "fecha_creacion": "2025-05-20",
+        "fecha_fin": "",
+        "link": "https://tekmatic.com.ar/product/motores-electricos-trifasicos/motores-electricos-trifasicos?gad_source=1&gad_campaignid=22287959464&gbraid=0AAAAA-dlhx1FAB4Jxg3XpVJH-SyckC4Mi&gclid=Cj0KCQjw0LDBBhCnARIsAMpYlAqUpVkGGsFlCcpAGvs3ZSE89wfWeO19tGiRb_PubdmBKz4Gqr58KnMaAjq-EALw_wcB",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ACOPL. LINTERNA 31170-001/ ENCODER BEI",
+        "codigo": "71647416",
+        "cantidad": 3,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "lINTERNA_ENCODERS.jpg",
+        "fecha_creacion": "2025-05-20",
+        "fecha_fin": "",
+        "link": "https://www.mouser.com/ProductDetail/BEI-Sensors/31170-001?qs=YCa%2FAAYMW02JLebn0y2T8Q%3D%3D&srsltid=AfmBOorRjBuseQfNZn5NE7U7y41ijDqgVKtHAv1Bw_KrePPlwcjN-3Fl",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTOR-VENTILADOR CRAMACO D.064 -1,1 KW - 2850 RPM - F130-B5-IP44",
+        "codigo": "71634462",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "VENTILADOR_MOTORES.png",
+        "fecha_creacion": "2025-05-20",
+        "fecha_fin": "",
+        "link": "https://www.elektror.com/es/producto/d-e064/",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "FUSIBLE 70 A, 700 VOLT DIAM. x LARGO TOTAL O ANCHO (mm): 25x111; TAMAÑO CONSTRUCTIVO: NH",
+        "codigo": "71640494",
+        "cantidad": 3,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "FUSIBLE_NH_CILINDRICO.jpg",
+        "fecha_creacion": "2025-05-20",
+        "fecha_fin": "",
+        "link": "https://www.ebay.com/itm/135809700169?chn=ps&norover=1&mkevt=1&mkrid=21551-241447-2056-0&mkcid=2&itemid=135809700169&targetid=325425753764&device=c&mktype=pla&googleloc=1000062&poi=&campaignid=19731336673&mkgroupid=144734706365&rlsatarget=pla-325425753764&abcId=&merchantid=5378086593&gad_source=1&gad_campaignid=19731336673&gbraid=0AAAAAD_QDh8DXIixJo-nimqD3MvPH0mnP&gclid=Cj0KCQjwxdXBBhDEARIsAAUkP6gzpxJlZnmqdkQ2ZPM0RwXe3BQ8bi_xINWHnluKvY2RZItfUPmfve0aAgwKEALw_wcB",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTO-REDUCTOR ROSSI  MR V 50 UO3A 80B 4 220.380-50 B5/43,8 B8, Pos.3, AN2, i=32 MOTOR - G.E. MOD 5K46MN8069  HP:1   PH: 3  CODE",
+        "codigo": "71632138",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "MOTOR.jpg",
+        "fecha_creacion": "2025-05-20",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTOR BODINE ELECTRONIC CC42A5 HP 1/4 B5 TENSION ARM. 130V  CORR. ARMAD 1,8 A  2500RPM",
+        "codigo": "71333855",
+        "cantidad": 2,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "MOTOR.jpg",
+        "fecha_creacion": "2025-05-20",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTOR - BALDOR CAT N° M3607T - SPEC 36A001YA51H1- HP 1,5 KW:1,1 FRAME 182T - SERIE F999 CAJA DE CONEXIONES LADO DERECHO.",
+        "codigo": "71632393",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-05-20",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MODULO DIGITAL 24V I/O ABB 3HAC025917",
+        "codigo": "78675907",
+        "cantidad": 2,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Tarjeta_Entrada_salida.jpg",
+        "fecha_creacion": "2025-05-20",
+        "fecha_fin": "2026-04-16",
+        "link": "https://store.livhaven.com/balluff-bes03n5-inductance-sensor",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "ARANDELA AISLANTE P/BOB ROD MAGNETICO",
+        "codigo": "78629191",
+        "cantidad": 12,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2024-12-25",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "PERNO P/BOB ROD MAGNETICO",
+        "codigo": "78629078",
+        "cantidad": 12,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2024-12-25",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SOPORTE P/BOB ROD MAGNETICO",
+        "codigo": "78629077",
+        "cantidad": 12,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2024-12-25",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "BOBINA P/RODILLO MAGNETICOS",
+        "codigo": "78628406",
+        "cantidad": 12,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2024-12-25",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "TORNILLO EXAG M5X10 DIN 933 8.8",
+        "codigo": "71313112",
+        "cantidad": 50,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2024-12-25",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "TERMINAL COMPRES 10MM2 ACC-10-H2",
+        "codigo": "71312974",
+        "cantidad": 50,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2024-12-25",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "TUERCA AC CADMIADO R.METR. 5MM P.0,8",
+        "codigo": "71311949",
+        "cantidad": 50,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2024-12-25",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CABLE CONDUCTOR ULTRAFLEXIBLE 7X1,5MM2",
+        "codigo": "71586337",
+        "cantidad": 50,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2024-12-25",
+        "fecha_fin": "2025-12-11",
+        "link": "",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "FUENTE TENSION ROCKWELL 1606-XLE240E",
+        "codigo": "71627955",
+        "cantidad": 1,
+        "equipo": "GMP-PUERTA1-ESTANTE2",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "fuente_24_10_entrada_240.jpg",
+        "fecha_creacion": "2025-01-02",
+        "fecha_fin": "2025-12-05",
+        "link": "https://literature.rockwellautomation.com/idc/groups/literature/documents/sr/1606-sr022_-en-e.pdf",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "DET. IND. TURCK NI30U-M30-AP6X-H1141",
+        "codigo": "78646015",
+        "cantidad": 8,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "SENSOR_INDUC.jpg",
+        "fecha_creacion": "2025-05-21",
+        "fecha_fin": "",
+        "link": "https://www.turck.de/en/product/1646631",
+        "estado": "🟣"
+    },
+    {
+        "nombre": "LUMINARIAS ARTEFACTO ILUMINACION EMERGENCIA LED",
+        "codigo": "78642574",
+        "cantidad": 1,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-05-22",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "BASE SOLA P/COLUMNA LUMINOSA XVB-C21",
+        "codigo": "71702637",
+        "cantidad": 1,
+        "equipo": "GMP-COFRE1-ESTANTE3",
+        "ruta_jerarquia": [
+            "SD-APR-HALD",
+            "SD-APR-DELT"
+        ],
+        "imagen": "XVBC21A_front_views_369.jpg",
+        "fecha_creacion": "2025-05-22",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/XVBC21/base-con-tapa-p-columna-s-flash/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "BATERIA ROCKWELL 1756-BA1",
+        "codigo": "71279765",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA",
+            "SD-APR-DELT"
+        ],
+        "imagen": "bateria_9IBA207771_400x400.jpg",
+        "fecha_creacion": "2025-05-22",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "BLOQUE DE CONTACTO 1NA ZBE101",
+        "codigo": "71323230",
+        "cantidad": 4,
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA",
+            "SD-APR-HALD",
+            "SD-APR-DELT",
+            "SD-APR-LITE"
+        ],
+        "imagen": "CONTACTO_NA_SCHNEIDER.jpg",
+        "fecha_creacion": "2025-05-22",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "BLOQUE DE CONTACTO 1NC ZBE102",
+        "codigo": "71323231",
+        "cantidad": 2,
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA",
+            "SD-APR-HALD",
+            "SD-APR-DELT",
+            "SD-APR-LITE"
+        ],
+        "imagen": "CONTACTO_NC_SCHNEIDER.jpg",
+        "fecha_creacion": "2025-05-22",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/ZBE102/bloque-de-contacto-nc/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "BLOQUE TERMINAL ROCKWELL 1756-TBCH  36 pines",
+        "codigo": "71337205",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-DELT"
+        ],
+        "imagen": "BLOC_TERMINAL.jpg",
+        "fecha_creacion": "2025-05-22",
+        "fecha_fin": "",
+        "link": "https://www.ebay.com/itm/301604235869?norover=1&mkevt=1&mkrid=21551-220875-27835-0&mkcid=2&keyword=&crlp=435066188874_&MT_ID=&geo_id=&rlsatarget=dsa-19959388920&adpos=&device=c&loc=1000062&poi=&abcId=&cmpgn=1569302356&sitelnk=&gad_source=1&gad_campaignid=1569302356&gbraid=0AAAAAD_QDh8nWNAVJEKHaCXbGmuYdHqWF&gclid=Cj0KCQjwlrvBBhDnARIsAHEQgOSZ1W2HhIdhEQAAD5_Ng51qRUVGnDPK24kDyeWADj9EKm7VA02W5WAaAh5yEALw_wcB",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "BOBINA S/P 5415-22-1183 CLARK PB-43 ROD, MAG",
+        "codigo": "71395383",
+        "cantidad": 1,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "bobina-redonda-scaled.jpg",
+        "fecha_creacion": "2025-05-22",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "BOQUILLA DURALUMINIO R.BSP 1\"",
+        "codigo": "71312642",
+        "cantidad": 10,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "BOQUILLA_ALUMINIO.jpg",
+        "fecha_creacion": "2025-05-22",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "BOQUILLA DURALUMINIO R.BSP 3/4\"",
+        "codigo": "71312641",
+        "cantidad": 4,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "BOQUILLA_ALUMINIO.jpg",
+        "fecha_creacion": "2025-05-22",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "BORDE TAPESWITCH TS28 SALIDA RH X 1115",
+        "codigo": "71639222",
+        "cantidad": 2,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "GUARDA_PIE.jpg",
+        "fecha_creacion": "2025-05-22",
+        "fecha_fin": "",
+        "link": "https://www.tapeswitch.com/edges/ts48.html",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "BORNE BASE PLC PHOENIX PLC-BSP- 24DC/21",
+        "codigo": "71629363",
+        "cantidad": 10,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "TOPE_BORNERA.jpg",
+        "fecha_creacion": "2025-05-22",
+        "fecha_fin": "",
+        "link": "https://liesa.com.ar/8315",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "BORNE UT 4MM  PHOENIX  3044102",
+        "codigo": "71728626",
+        "cantidad": 10,
+        "equipo": "1",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "BORNERA.jpg",
+        "fecha_creacion": "2025-05-22",
+        "fecha_fin": "",
+        "link": "https://www.phoenixcontact.com/es-pc/productos/borne-de-paso-ut-4-3044102",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "RELE LOGO 12/24RC 8 ENT. 12/24VCC Y 4 SA",
+        "codigo": "71419031",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "LOGO_RELE.png",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://automaq.pe/producto/5877/plc-logo-12-24rce-12-24vdc-8di-4ai-de-0-10v-4do-rele-10a-",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO SFP PARA SWITCH MOXA IKS6726 (ENTRADA DE FIBRA)",
+        "codigo": "71623342",
+        "cantidad": 10,
+        "equipo": "GMP-PUERTA1-ESTANTE2",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "moxa-iks-6726a.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "2026-12-26",
+        "link": "https://www.moxa.com/en/products/industrial-network-infrastructure/ethernet-switches/rackmount-switches/iks-6726a-series",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "HMI SCHNEIDER MAGELIS HMIG3U BOX PREMIUM",
+        "codigo": "71641986",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "PROCESADOR_HMI.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/HMIG3U/gtu-premium-box/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO MODICON 140DRA8400",
+        "codigo": "71030229",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "MODULO_SALIDA_RELE.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/140DRA84000/qtm-mod-16-sd-rele-na-2a/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO OPTOACOPLADOR MODICON 140EHC20200",
+        "codigo": "71326623",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "MODULO_CONTADOR.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/140EHC20200/qtm-mod-contador-2-canales-500-khz/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO RELAY OUTPUT GE FANUC IC693MDL940",
+        "codigo": "71660416",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "MODULO_SALIDA_LITE.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://plcproducts.com/ge_fanuc/modules/relay/ic693mdl940",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR INDUCTIVO DETECTOR DE PROX. FESTO: SIEA-M18B-UI-S",
+        "codigo": "71644107",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-DELT"
+        ],
+        "imagen": "sensor_induc_vivel_delta.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.ias-components.com/es/p/538293?srsltid=AfmBOop4ZKLBPpb4-5MVLS2Q7cwhwcxxGTcqmr6AR5v9251WWLW78JXo",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "BATERIA ROCKWELL 1756-BA1",
+        "codigo": "71337426",
+        "cantidad": 3,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-DELT"
+        ],
+        "imagen": "BATERIA_1756-BA1.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.rockwellautomation.com/en-us/products/details.1756-BA1.html",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "TARJETA FENA-21 DE COMUNICACIÓN DRIVES",
+        "codigo": "71652977",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "tarjeta_fena_drive_880.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://us-es.rs-online.com/product/abb-drives/fena-21-kit/72480810/",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "BACK PLANE GE IC695CHS012",
+        "codigo": "71587764",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "BACKPLANE_IC695CHS012.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.acomee.com.mx/articulo.php?search=IC695CHS012&id=FANUC&pro=IC695CHS012&srsltid=AfmBOorcVqIZD-i_ANp9hgWNO6F_PPLo-_-6ZbYDjmIbUCrX7CoqHWXu",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SWITCH ETHERNET MOXA EDS-508A-MM-SC",
+        "codigo": "72066240",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "moxa-eds-508a-mm-sc-image.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.moxa.com/en/products/industrial-network-infrastructure/ethernet-switches/layer-2-managed-switches/eds-508a-series/eds-508a-mm-sc",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "PLACA GE DS200SIOB H1AZZ. TARJETA VME",
+        "codigo": "71363079",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO MULTIPLICADOR 3 CANALES SALIDA",
+        "codigo": "71593055",
+        "cantidad": 3,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "MULTIPLICADOR_3C.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://hubner.au/product/output-multipliers-htl-ttl/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "IRB 6700-102201-102202 175/3.05; MANUFACTURER: ABB INC.; PART NUMBER: 3HAC025544-003",
+        "codigo": "100",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "fan_ibr.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://new.abb.com/products/3HAC025544-003/3hac025544-003",
+        "estado": "🟠"
+    },
+    {
+        "nombre": "PLACA GE UCVHM06A CONT./2 ETHERNET",
+        "codigo": "71336618",
+        "cantidad": 3,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO 8 PORTS COBRE P/MOXA IKS",
+        "codigo": "72112340",
+        "cantidad": 4,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "MODULO_RJ45.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.provetel.com.ar/producto/modulo-de-cobre-rj45-sfp-10-100-1000m/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO MOXA IM-6700A-2MSC4TX",
+        "codigo": "72116682",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "IM-6700A-2MSC4TX-2.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://moxastore.express-inc.com/IM_6700A_2MSC4TX_p/im-6700a-2msc4tx.htm",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ET200SP SAFETY OUT 6ES7136-6DB00-0CA0(PLC DE SEGURIDAD)",
+        "codigo": "71655023",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "PLC_SEGURIDAD.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.plc-city.com/shop/es/industry-automation-i-o-systems-digital-i-o-module/sie-6es7136-6ba01-0ca0-nfs.html?gad_source=1&gad_campaignid=20940523845&gbraid=0AAAAAD8ie8LHpYOX1fuE1oWUnenZx6JuS&gclid=Cj0KCQjwucDBBhDxARIsANqFdr0h9XtONdBMHBBDaI7uABmSOCjRphliLj0p6u0f-0S8G0AE0r3o_hEaAnPaEALw_wcB",
+        "estado": "🟣"
+    },
+    {
+        "nombre": "SPLITTER GE AMI215ISBBG2A P/ INNOVATION",
+        "codigo": "71361476",
+        "cantidad": 5,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONVERSOR MOXA UPORT 1110 (RS-232/USB)",
+        "codigo": "72114797",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "moxa-uport-CONVERSOR.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://moxa.com/en/support/product-support/software-and-documentation?psid=114473",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "TCI GE VMIACC-BT10-164 (DIN)",
+        "codigo": "71638709",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "VMIC_VMIACC_BT10_196.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.artisantg.com/TestMeasurement/50404-2/Abaco-Systems-VMIC-VMIACC-BT10-196-Non-Latching-DIN-Rail-Transition-Module?srsltid=AfmBOop_6Kg2P9tYNd-jSMXGqyBZRrlCBAuJZKmbAFIns9sqiOEDnYoY",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "APC700 PAN + FUENTE ABB 61068171",
+        "codigo": "71326557",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "PANEL_CONTROL_DRIVE.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://es.amikonplc.com/abb-apc700pan-power-apc-control-panel_p3715.html",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "CPU IC200UDR001-AA VERSAMAX",
+        "codigo": "22222",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "GE_Fanuc_IC200UDR140_AA.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.artisantg.com/PLC/97639-2/GE-Fanuc-IC200UDR140-AA-VersaMax-Micro-Controller?utm_campaign=100713725&utm_source=google&utm_medium=cpc&utm_content=448948717615&utm_term=&adgroupid=4809294005&gad_source=1&gad_campaignid=100713725&gbraid=0AAAAADtw2MvDNqf7bv7sJF_CvmlAH327w&gclid=Cj0KCQjwucDBBhDxARIsANqFdr2v8kK--DeYusQpnyzzGMk304b_NvZJSzZSNHDMTJQUT_tRpPj2oIMaAh9PEALw_wcB",
+        "estado": "🟠"
+    },
+    {
+        "nombre": "FICHA DE 2P+T PERNOS CHATAS DE 10A 220V",
+        "codigo": "71349459",
+        "cantidad": 11,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "FICHA_MACHO.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "LAMPARA LED 13W REEMP E27 INCAND. 100W",
+        "codigo": "71646720",
+        "cantidad": 57,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "LAMPARA_7W.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.luxono.com.ar/MLA-679672948-lampara-led-sica-220v-13-w-a60-e27-luz-dia-13w-_JM?srsltid=AfmBOopmg3UZM9M8fDvKsNwRpca_e18lQunaFv4G7sVYIj1N8D4anqPR",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SIRENA EMAVE EMS 50-AM 70W 220VCA",
+        "codigo": "71364385",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "SIRENA_220.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "2026-12-17",
+        "link": "https://emave.com.ar/sirena-fundicion-de-aluminio/",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "LAMPARA FLUORESCEN.COMPACTA 11W",
+        "codigo": "71326296",
+        "cantidad": 50,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "LAMAPA_G23.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ARTEFACTO ILUMINACION EMERGENCIA LED",
+        "codigo": "71642574",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "LUZ_EMERGENCIA.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://magnani.com.ar/producto/artefacto-iluminacion-emergencia-led-24-18hs-aut/luminarias-de-emergencia-1",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "INTERRUPTOR TERMOMAG. TETRAPOLAR 10A",
+        "codigo": "71364836",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "TERMICA_TETRA.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/A9F73410/interruptor-termomagn%C3%A9tico-acti9-ic60n-4p-10a-curva-b/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "INTERRUPTOR BIPOLAR 4A 2 POLOS",
+        "codigo": "71322231",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "termica_bipolar.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "INTERRUPTOR AUTOMATICO TRIPOLAR 63A C60N",
+        "codigo": "71584678",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "TERMICO_TRI.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.se.com/es/es/product/M9F11363/multi-9-c60n-mcb-3p-63-a-c-curve-415-v-10-ka/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "INTERRUPTOR DIFERENC TETRAPOL 63A",
+        "codigo": "71377105",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "DISYUNTOR_TRIFASICO.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.electrocity.com.ar/interruptor-diferencial-disyuntor-tetrapolar-30ma-25-40-63a-schneider-easy9.html?srsltid=AfmBOoq7kWTIMlxN9mS7P1zRHG0Z2QEtcNA8wChr9A-GTnZXComnrlkN",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "GUARDAMOTOR GV2P14 6-10 A TELEMECANIQUE",
+        "codigo": "71585273",
+        "cantidad": 3,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "GV2P14.png",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.se.com/pe/es/product/GV2P14/guardamotor-termomagn%C3%A9tico-tesys-gv2-ac3-610a-100ka-3p3d-manija-rotativa/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "GUARDAMOTOR GV2-P06AE20, 1-1.6 A",
+        "codigo": "71634060",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "GV2P06.png",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.se.com/pe/es/product/GV2P06/guardamotor-termomagn%C3%A9tico-tesys-gv2-ac3-11-6a-100ka-3p3d-manija-rotativa/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "GUARDAMOTOR 0,25-0,40 A",
+        "codigo": "71639536",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "GV2ME03.png",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/GV2ME03/guardamotor-termomagn%C3%A9tico-tesys-deca-0-250-40a-pulsador/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "PULSADOR PARADA EMERGENCIA XB4-BS8445",
+        "codigo": "71332237",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-DELT",
+            "  SD-APR-HALD",
+            " SD-APR-LITE",
+            " SD-APR-EMPA"
+        ],
+        "imagen": "PARADA_EMER_XB4BS8445_DA19.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/XB4BS8445/par-emer-1-4-giro-trigger-1na+1nc/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "GUARDAMOTOR TERMIC.20-25 MAGNET.300",
+        "codigo": "71321776",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "GV_18_25.jpeg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://bombeo.co/producto/guardamotor-sirius-innovations-siemens-20-25-amp-220-440-vac-100176258-3rv2021-4da10/?srsltid=AfmBOorLBLXHnSpB4h_0YwW3Bd8lknKcH3ekzt6cU8fobUQFYaw4k_qK",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MANOPLA ROTATIVA ABB 1SDA054926R001",
+        "codigo": "71656384",
+        "cantidad": 4,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "MANOPLA_ABB.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://new.abb.com/products/pt/1SDA104853R1/rhe-xt6-f-p-stand-returned",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "GUARDAMOTOR RANGO TERMICO 4-6.3 A",
+        "codigo": "71332746",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "GV2ME103.png",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/GV2ME103/guardamotor-termomagn%C3%A9tico-tesys-deca-46-3a-pulsador/?range=684-tesys-deca-frame-2",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "GUARDAMOTOR 6.3-9A GV3P73+GVAE11",
+        "codigo": "71376632",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "GV2P14.png",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "GUARDAMOTOR ROCKWELL 140M-C2E-B63",
+        "codigo": "71020249",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "GV_140M-C2E-B25.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.rockwellautomation.com/en-us/products/details.140M-C2E-B63.html",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "GUARDAMOTOR 18-25A SIEMENS 3RV10214DA10",
+        "codigo": "777777",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "GV_18_25.jpeg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://grupocoinp.com/shop/product/3rv2021-4da10-guardamotor-magnetico-3p-reg-18-25a-100ka-240vac-t-s0-clase-10-5747#attr=",
+        "estado": "🟠"
+    },
+    {
+        "nombre": "CONECTOR A CABLEAR M12 DE 4 PINES - IFM",
+        "codigo": "71656390",
+        "cantidad": 10,
+        "equipo": "GMP-COFRE1-ESTANTE3",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "CONECTO_M12_MACHO_4P.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.automation24.es/conector-m12-ifm-electronic-evf567?srsltid=AfmBOopKGsVUeJFEcBrCiSCmHsLYVKTIP7WT18YEkipoPirskEvIZXd7",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CABLE 8 PIN EURO STYLE QD P/BANNER LT3P",
+        "codigo": "71364672",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "CONECTOR_CABLE_8P.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://us.rs-online.com/product/banner-engineering/qde-850d/70167773/?srsltid=AfmBOopMu66xfCoCGbZhaeo69KhOETZYdWqXbQiLrjHH41zRqP83Fekp",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SensOr_inductivo_Balluff-BES03N5",
+        "codigo": "1111111",
+        "cantidad": 12,
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "Balluff-BES03N5-Inductive-Sensor-41359.jpeg",
+        "fecha_creacion": "2025-05-25",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟠"
+    },
+    {
+        "nombre": "CABLE T/TPR 3X1,5 MM2 SECC.",
+        "codigo": "71337571",
+        "cantidad": 100,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "tpr.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CABLE CONDUCTOR FLEXIBLE 1KV AZUL 1X1,5",
+        "codigo": "71386388",
+        "cantidad": 50,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "CABLE_AZUL.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CABLE CONDUCTOR FLEXIBLE 1KV ROJO 1X1,5",
+        "codigo": "71386374",
+        "cantidad": 50,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "CABLE_ROJO.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CABLE CONDUCTOR FLEXIBLE 1KV BLANC.1X1,5",
+        "codigo": "71386384",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "CABLE_BLANCO.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CABLE CONDUCTOR FLEXIBLE 1KV CAST.1X1,5",
+        "codigo": "71386362",
+        "cantidad": 50,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "CABLE_CASTA.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CABLE CONDUCTOR POTENCIA 1,1KV 1X2,5MMM2 (NEGRO)",
+        "codigo": "71386311",
+        "cantidad": 50,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "CABLE_NEGRO.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CABLE CONDUCTOR FLEXIBLE 1KV CAST. 1X2,5",
+        "codigo": "71386363",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "CABLE_CASTA.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CONECTOR CABLEDO P/LASER SICK DME 2000",
+        "codigo": "71365637",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-DELT"
+        ],
+        "imagen": "SICK_CONECTOR.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.generationrobots.com/en/403313-sick-lidar-connection-cable-female-connector-open.html",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FUENTE ALIMENTACION +/-15VCC VICOR VI-PU",
+        "codigo": "71330295",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FUENTE ALIMENT.72W /24V ABLS1A24031",
+        "codigo": "71327209",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "FUENTE_24.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/ABLS1A24031/fuente-de-alimentaci%C3%B3n-regulada-100240-v-ca-24-v-31-a-monof%C3%A1sica-optimizada/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FUENTE ALIMENTACION S8VS-06024A",
+        "codigo": "71388011",
+        "cantidad": 2,
+        "equipo": "GMP-PUERTA1-ESTANTE2",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "FUENTE_24_2_5A_OMRON.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://ar.mouser.com/ProductDetail/Omron-Automation-and-Safety/S8VS-06024A?qs=VdXx1G%2FlZotmxm70We5xmQ%3D%3D",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FUENTE REGULABLE 85-240V/24VCC 5A 120W",
+        "codigo": "71585101",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "FUENTE_24_5A_SCHNEIDER.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/ABL8REM24050/fuente-regul-24vcc-5a-120w/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FUENTE ALIM ABL8WPS24200 380VAC/24V 20A",
+        "codigo": "71613997",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "FUENTE_380_24_20A_SCHEIDER.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/ABL8WPS24200/phaseo-fuente-trif-380500vca-24vcc-20a/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "FUENTE DE PODER 10W 100/240V 5VCC 2A",
+        "codigo": "71347318",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "FUENTE_5V.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://industrial.omron.es/es/products/S8VK-G01505",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONTACTOR 9 A ROCKWELL 100-C09EJ10",
+        "codigo": "71638407",
+        "cantidad": 14,
+        "equipo": "GMP-PUERTA1-ESTANTE2",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "contactor.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FINDER RELAY 55.34 250 V -BOBINA 24 VCC",
+        "codigo": "71647257",
+        "cantidad": 20,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "RELE_FINDER.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.tme.com/ar/es/details/55.34.9.024.004/reles-electromagn-industriales/finder/55-34-9-024-0040/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "RELE IZUMI AEA RY2S BOBINA 12VCC>",
+        "codigo": "71356194",
+        "cantidad": 10,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "RELE_12V.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://catalogo.aea.com.ar/producto/rele-2-inv-ry2s-u-12vcc/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "RELE TERMICO TRIPOLAR LR9-F5369 90-150A",
+        "codigo": "71326014",
+        "cantidad": 3,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "RELE_TERMICO_CONTACTOR.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LR9F5369/rele-term-p-cont-f-1na+1nc-90-150a/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONTACTOR TRIP. 17A BOB. 24VDC",
+        "codigo": "71355660",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "CONTACTO_AUXIIAR.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.ebay.com/itm/365584011044?itmmeta=01JW6EF8FKFPQT7EZCSBEC0YSK&hash=item551e814f24:g:2VUAAOSwGf9oGRE3&itmprp=enc%3AAQAKAAAA4MHg7L1Zz0LA5DYYmRTS30ntoJkhI%2F%2B89gFhyVTWfM1SweaA9mJ9z%2B64TzjABKvsBCBptkNnKuJZxurvtkM%2FI9zjaNKpFD%2BTDzRMiGZiFFymuaUT8hPYLGRrcyt6KaD8tKYgORqJZ5BJam6lhVIhhgZloRSB5AscLiSgi5wAwk1Ns3iX18v15NilZHqWezcOHtlLxXGkwo7Bd%2Flf1uKIhruik5mKN1EwnLzIYn8yu3MWnY44rnwYV8ae27U8sKgiDJSYCgyrJkBQSKhaL047%2B%2BE8SBj71SVceX311p7vsAOH%7Ctkp%3ABk9SR_KHvc7hZQ",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "BLOQUE CONTACTO TEMPORIZADO 0,1-30 LADR2",
+        "codigo": "71326461",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "LADR2.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LADR2/contacto-temporizador-tesys-deca-1no+nc-ajuste-130s/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONTACTOS AUXILIARES INSTANTANEOS",
+        "codigo": "71350520",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "LAD11.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LADN11/bloque-de-contacto-auxiliar-tesys-deca-1no+1nc-frontal/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONTACTOR TRIP. TELEMECANIQUE LC1F150F7",
+        "codigo": "71350506",
+        "cantidad": 5,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "contactor_LC1F150_369.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LC1F150F7/contactor-3p-150a-110vca-50-60hz/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ZOCALO P/ RELE MOD: 94.84.2 SMA",
+        "codigo": "71652268",
+        "cantidad": 20,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "BASE_RELE_FINDER.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.tme.com/ar/es/details/94.84.2/reles-electromagn-accesorios/finder/94-84-2sma/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "RELE TELEMECANIQUE CAD50BD",
+        "codigo": "71639172",
+        "cantidad": 13,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "CAD50BD.png",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/CAD50BD/contactor-aux-d-5na-24vcc/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONTACTOR TRIP. 9A BOB. 24VDC (LC1D09 BD)",
+        "codigo": "71326222",
+        "cantidad": 19,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "LC1D09BD.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LC1D09BD/contactor-tesys-deca-3p-9a-ac3-24v-dc-50-60hz/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONTACTOR-INVERSOR LC2-D09BD",
+        "codigo": "71623339",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "LC2D09BD_DOBLE.png",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LC2D09BD/inversores-9a-24vcc-c-encl-mec-s-term/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONTACTOR AUXILIAR TELEMECANIQUE CAD32F7",
+        "codigo": "71037139",
+        "cantidad": 2,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "CAD32F7.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/es/es/product/CAD32F7/contactor-auxiliar-tesys-cad323-3na+2nf-110vca/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONTACTOR TELEMECANIQUE LC1D80BD",
+        "codigo": "71644103",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "LC1D80BD.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LC1D80BD/contactor-tesys-deca-3p-80a-ac3-24v-dc-50-60hz/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONTACTOR 3RT1045-1AG20  (SE USA EN BANCO DE CAPACITORES )",
+        "codigo": "888888",
+        "cantidad": 4,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "3RT10451AG20.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://ar.wiautomation.com/siemens/variadores-motores-proteccion-de-circuitos/3RT10451AG20",
+        "estado": "🟠"
+    },
+    {
+        "nombre": "CONTACTOR TRIP. 18A BOB. 110VAC ( LC1D18F7)",
+        "codigo": "71377285",
+        "cantidad": 5,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "LC1D18F7.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LC1D18F7/contactor-tesys-deca-3p-18a-ac3-110v-ac-50-60hz/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONTACTOR TRIP. 9A ( LC1D09F7 )",
+        "codigo": "71055150",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "LC1D09F7.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LC1D09F7/contactor-tesys-deca-3p-9a-ac3-110v-ac-50-60hz/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONTACTOR TETRAP. 40A BOB. 24VDC     LP1D25004BD (LC1DT40BD)",
+        "codigo": "71333117",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "LC1DT40BD.png",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LC1DT40BD/contactor-tesys-deca-4p-40a-ac1-24v-dc-50-60hz/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONTACTOR TETR. LC1DT20B7 BOB. 24VCA (  LC1DT20B7 )",
+        "codigo": "71321364",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "LC1DT20B7.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.se.com/es/es/product/LC1DT20B7/contactor-tesys-d-4p4-na-ac1-440-v-20-a-24-v-ca-50-60-hz-bobina/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "RELE SOBRECARGA ROCKWELL 193-EC2-JG",
+        "codigo": "71336472",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "Allen-Bradley_Bulletin_193-EC5_E3_Plus_re.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.automation.com/en-us/products/product15/rockwell-automation-introduces-193-ec5-e3-plus-sol",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "REFLECTOR SICK PL80A #1003865 REFLECTIVO 84X84 MM (OJO DE GATO)",
+        "codigo": "71056989",
+        "cantidad": 10,
+        "equipo": "GMP-COFRE1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "REFLECTIVO.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.sick.com/mx/es/catalog/productos/accesorios/reflectores-y-optica/reflectores/pl80a/p/p243673",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "DETECTOR PROX.INDUC. XS6-18B1MAL2",
+        "codigo": "71322677",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "SENSOR_INDUCTIVO_XS618B1MAL2.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://wartung-automation.com.ar/product/xs618b1mal2-telemecanique-sensores-de-proximidad-inductivos-xs-sensor-inductivo-xs6-m18-l62mm-laton-sn8mm-24-240vac-dc-cable-2m/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR FESTO SME-8M-DS-24V-K0,3-M8D",
+        "codigo": "71641908",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "SENSOR_CILINDRO.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.festo.com/ar/es/a/543861/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR OMRON E3S-AT91",
+        "codigo": "71364728",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "E3S-AT91.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.mouser.mx/ProductDetail/Omron-Automation-and-Safety/E3S-AT91?qs=TwPrcXezm73h6rNcJpEwvg%3D%3D&srsltid=AfmBOoo3k8yneTku_phUMmqy8DqTuYcS7COZQfuRa8onWuecCZci_bUR",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FOTOCELULA OMRON(FIBRA OPTICA) E3X-NA11",
+        "codigo": "71350241",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "SENSOR_E3X-NA.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://industrial.omron.es/es/products/E3X-NA11-2M",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "DETECTOR DE PROXIMIDAD SICK DME 5000-114",
+        "codigo": "71367056",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-DELT"
+        ],
+        "imagen": "SENSOR_MED_5000_SICK.png",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.sick.com/media/pdf/6/06/106/dataSheet_DME5000-114_1025832_es.pdf",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "GENERADOR PULSO OMRON E6B2-CWZ6C 500PPR",
+        "codigo": "71332265",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "ENCODER_E6B2-CWZ6C-500PR-x.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://industrial.omron.es/es/products/E6B2-CWZ6C-500P-R-2M",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "PRESOSTATO ELECTRON.EDS 3448-5-0250-000",
+        "codigo": "71635875",
+        "cantidad": 3,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "presostato-eds-34-hydac.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://rodavigo.net/es/p/presostato-eds-3448-5-0250-000-ref-hydac-908166/130K908166",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SWITCH SQ-D PRESURE CLASS 9012 GAW-5",
+        "codigo": "71638017",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "PRESOSTATO.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://ar.wiautomation.com/schneider-electric/variadores-motores-proteccion-de-circuitos/9012GAW5?utm_source=google&utm_medium=cpc&utm_campaign=AR_pmax_full&gad_source=1&gad_campaignid=17336190888&gbraid=0AAAAAC2XDKCA5QKBGy2nLoE7zLokYc1Qv&gclid=Cj0KCQjwotDBBhCQARIsAG5pinOHbZaZmI3xBsNPLYUAXfYQLz_Ip03YQdByMCXnZ4xIOVGEuin6tQEaAqUTEALw_wcB",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MICROINTERRUPTOR NEUMANN MPR-2L",
+        "codigo": "71323525",
+        "cantidad": 6,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "MICRO_SWITCH_NEUMAN.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://articulo.mercadolibre.com.ar/MLA-1477899079-microinterruptor-neumann-mpr-2l-final-de-carrera-a-palanca-_JM",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR LASER BANNER LT3PIQ",
+        "codigo": "71334632",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "SENSOR_MFG_LT3PIQ_.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.digikey.com/en/products/detail/banner-engineering-corporation/LT3PIQ/18114447?gad_source=1&gad_campaignid=203759898&gbraid=0AAAAADrbLljHEznUyyzzhHotS_NqDqcyS&gclid=Cj0KCQjwotDBBhCQARIsAG5pinPgyW0csrV_UHBjLb4CtjTctRHv8SscKBMzYg1XyqLVxaSCbz_mt_MaAr0LEALw_wcB&gclsrc=aw.ds",
+        "estado": "🟣"
+    },
+    {
+        "nombre": "H25E-F45-SS-2048-15V/V -SM18-S",
+        "codigo": "71636813",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "ENCODERS_LITE.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://es.farnell.com/sensata-bei-sensors/h25e-f45-sb-2048-abzc-15v-v-sm/rotary-encoder-optical-incremental/dp/3819026?srsltid=AfmBOoqYIP2zb7su44bejDDOeYoHzFT82RIwL6KLjHEA5rnhww8kHUGi",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MICRO SWITCH MOD CB-132",
+        "codigo": "71322580",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "switch_PRESION.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://electrodorrego.mercadoshops.com.ar/MLA-1257384709-microinterruptor-cb-132-neumann-_JM",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "LIMIT SWITCH SQUARE D CLASE 9007 T/AW-36",
+        "codigo": "71631968",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "LIMITE_PULSO.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://telemecaniquesensors.com/us/es/product/reference/9007AW36",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "VACUOSTATO SMC ZSE30AF-01-F-L",
+        "codigo": "71642269",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "VACUOSTATO_SMC.png",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://cl.rs-online.com/product/smc-corporation/zse30af-01-f-l/70403471/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ELECTROV. 2/2 SMC VQ21A1-5G-C6-F",
+        "codigo": "71642051",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "VALVULA-SMC.png",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.smcpneumatics.com/VQ21A1-5G-C6-F.html",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR, PRESSURE, BARKSDALE, C9612-2",
+        "codigo": "71655260",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "PRESOSTATO_LITE.png",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.barksdale.com/products/pressure/mechanical-pressure-switches/series-c9612-c9622",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ENCODER BEI 924010028084 H25EF45SB2048",
+        "codigo": "71071028",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "ENCODERS_LITE.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.ebay.com/itm/116580102290",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FIBRA OPTICA E32-UTAT1-6F",
+        "codigo": "71627014",
+        "cantidad": 10,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "FIBRA_OPTICA.png",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://es.rs-online.com/web/p/sensores-de-fibra-optica/2155379",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ENCODER RHI 593 757512-02 ( LEINE & LINDE )",
+        "codigo": "5555555",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "ENCODERS_SACA_CHAPA.jpg",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://www.bidspotter.com/es-es/auction-catalogues/bscmacrev/catalogue-id-machin10-10019/lot-5809809f-2b1e-4548-8c4f-b29e00357061",
+        "estado": "🟠"
+    },
+    {
+        "nombre": "FIN DE CARRERA SQUARE D 9007C54B2",
+        "codigo": "71070321",
+        "cantidad": 6,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "LIMITE_APILADORES.png",
+        "fecha_creacion": "2025-05-26",
+        "fecha_fin": "",
+        "link": "https://es.rs-online.com/web/p/interruptores-final-de-carrera/8148056",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "HMI MAGELIS DISPLAY SMART 10.4”",
+        "codigo": "71642008",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "magelis-pantalla-hmidt732.jpg",
+        "fecha_creacion": "2025-05-20",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/HMIDT542/gtu-smart-display-touch-10-4/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "HMI MAGELIS DISPLAY SMART 12.1\"",
+        "codigo": "71642009",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "magelis-pantalla-hmidt732.jpg",
+        "fecha_creacion": "2025-05-27",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/HMIDT642/gtu-smart-display-touch-12-1/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CONTACTO ,CA. SQUARE D CLASE 9001 TIPO",
+        "codigo": "71076341",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "CONTACTO_9001KA1_DA19_369.jpg",
+        "fecha_creacion": "2025-05-27",
+        "fecha_fin": "",
+        "link": "https://www.se.com/co/es/product/9001KA1/bloque-de-contacto-para-bot%C3%B3n-de-control-%C3%B8-30mm-1-ca-terminales-protegidos/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "KNOB, PUSH/PULL, 30 MM, SQUARE D 9001R22",
+        "codigo": "71644131",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "PULSADOR_9001R22_DA19_369.jpg",
+        "fecha_creacion": "2025-05-27",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/9001R22/seta-30mm-para-illum-pb-rojo-41mm/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "ACOPL.FLEX. MINIA-BEI SENSORS-39057-001",
+        "codigo": "71647402",
+        "cantidad": 4,
+        "equipo": "GMP-COFRE2",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "ACOPLE_ENCODERS.jpg",
+        "fecha_creacion": "2025-05-27",
+        "fecha_fin": "",
+        "link": "https://www.comintec.com/download/cataloghi/ACOPLAMIENTOS-FLEXIBLES-ACOPLAMIENTOS-RIGIDOS.pdf",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "PULSADOR P/EMERGENCIA 9001 KR9P35LRR",
+        "codigo": "71642007",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "PARADA_EMERGENCIA_9001K_634.jpg",
+        "fecha_creacion": "2025-05-27",
+        "fecha_fin": "",
+        "link": "https://www.se.com/us/en/product/9001KR9P35LRR/illuminated-push-button-head-harmony-9001k-metal-mushroom-41mm-red-30mm-2-positions-pushpull-led-red-24-28v/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MODULO MULTIPLICADOR HUBNER OM3-3AI-T-3",
+        "codigo": "71640796",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "MULTIPLICADOR_HUMMER.jpg",
+        "fecha_creacion": "2025-05-27",
+        "fecha_fin": "",
+        "link": "https://hubner.au/product/output-multipliers-htl-ttl/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTOREDUCTOR ROSSI MR V 50 UO3A 63B",
+        "codigo": "71632170",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "MOTOR.jpg",
+        "fecha_creacion": "2025-05-27",
+        "fecha_fin": "",
+        "link": "https://rodavigo.net/es/p/reductor-rossi-mr-v-50-uo3a-200-19-i16/637MRV50UO3A20019I16",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INVERTER TM10 FRAME 125",
+        "codigo": "71624938",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "drive_littell_ge.jpg",
+        "fecha_creacion": "2025-05-27",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CONECTOR 90° P/DETECTOR XZ-CP1241L10",
+        "codigo": "71738503",
+        "cantidad": 6,
+        "equipo": "GMP-PUERTA1",
+        "ruta_jerarquia": [
+            "SD-APR-EMPA"
+        ],
+        "imagen": "conector_90_sensores_4pines.jpg",
+        "fecha_creacion": "2024-12-23",
+        "fecha_fin": "2030-07-18",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MOTOR BALDOR 60HP,1150,RL2578Z,DPG_FV",
+        "codigo": "71628655",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "motor_feeders.jpeg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.baldor.com/catalog/IDDRPM25606",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ENCODER,BEI#924-01005-1225",
+        "codigo": "71619832",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "encoder_feed.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.sensata.com/products/position-sensors-encoders/h25-series-incremental-encoder-01005-1225",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ACOPLAMIENTO LINTERNA P/ ENCODER BEI",
+        "codigo": "71633874",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "lINTERNA_ENCODERS.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "FUSE, BUSMAN LPJ15SP",
+        "codigo": "71638015",
+        "cantidad": 3,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "FUSIBLE_15_LITE.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://ar.mouser.com/ProductDetail/Bussmann-Eaton/LPJ-15SP?qs=bpnLQM2ZShx8eFEYEejHHg%3D%3D",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "LOAD-PAK 2 AMP, DC. PARTE N° 25763",
+        "codigo": "71644061",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "load_ampli.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.ebay.com/itm/273839183289",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "AMPLIFICADOR FIBRA OPTICA E3X-NA41 PNP",
+        "codigo": "71634392",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "SENSOR_E3X-NA.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://gama-me.com/productos/sensores/fibra-optica/amplificador-de-fibra-optica-omron-e3xna41-configuracion-de-ajustador-y-display-barra-pnp/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MOTOR ESPECIAL AMI100F3GEH P/TAKE AWAY",
+        "codigo": "71640587",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MODULO ENCODER GV210 SELECTOR Y SPLITTER",
+        "codigo": "71637083",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "spliter_encoders.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://wartung-automation.com.ar/product/gv210-leine-linde-motrona-encoder-splitter-or-cross-switcher-or-dual-level-converter-with-2-encoder-inputs-a-a-b-b-z-z-for-use-with-rs422-or-ttl-differential-signals/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "RELEVADOR AUXILIAR CROUZET 84137750",
+        "codigo": "71662513",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "relevador.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://ar.mouser.com/ProductDetail/Crydom/84137750?qs=WrllwUZn0BqBHcZYbPlEUg%3D%3D",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTOR MARATHON XR1 9VJ 215TTFS6026 FWL",
+        "codigo": "71628650",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "motor_marathon.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.bdrmotores.com/marcas-marathon.php",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "DRIVE ABB ACS550-01-015A-4",
+        "codigo": "71629953",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "drive_ABB_ACS550.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://new.abb.com/products/es/3AUA0000002412-D/acs550-01-015a-4",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "PANEL DE CONTROL ABB ACS-CP-A",
+        "codigo": "71629954",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "panel_drive_550.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://new.abb.com/products/es/64691473/acs-cp-a",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "TCI AISLADOR EXTRON P1817-0420 (0-10VDC)",
+        "codigo": "71634380",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [],
+        "imagen": null,
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "THREE PHASE LINE REATOR KLR16ATB",
+        "codigo": "71633664",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "trafo_reactor.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.precision-elec.com/shop/klr16atb-690v/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTOR MARATHON XR19VK182TTTS6026 EDL",
+        "codigo": "71628651",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "motor_marathon.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.precision.tech/cl/productos/motor-electrico-marathon-cooling-towers-motors-marathon-ctw?srsltid=AfmBOooo_eR0XivPFymDGhYSPPH211zWn1C5WjSCaaSiFuCpsiyd23AR",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "DRIVE ABB ACS550-01-06A9-4",
+        "codigo": "71629951",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "drive_ABB_ACS550.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://new.abb.com/products/es/3AUA0000002415-D/acs550-01-06a9-4",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FUSIBLE 600 V. 6A,",
+        "codigo": "71077503",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "FUSIBLE_NH_CILINDRICO.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "THREE PHASE LINE REATOR KLR4ATB",
+        "codigo": "71633665",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "trafo_reactor.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTOR BALDOR BM3614T SPEC 36A21-197-D",
+        "codigo": "71633653",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "moto_apilador.jpeg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.baldor.com/catalog/BM3614T",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FRENO STEARNS 1-056-041-00-DOF",
+        "codigo": "71365366",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "freno_apilador.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.electricmotorwholesale.com/STEARNS-105604100CPF.html?srsltid=AfmBOoonGCeWdaQg_ufMuZrj9eTyKXtR5OMvCy5bv9ssZwA11GJ85WTs",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SOPLADOR DE AIRE ROTRON SL2P90",
+        "codigo": "71594461",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTORREDUCTOR WINSMITH MODELO 4MCTD",
+        "codigo": "71629013",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.winsmith.com/wp-content/uploads/C-Line_Catalog-2.pdf",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTORRED BOSTON GEAR CAT N°F71020 B4H",
+        "codigo": "71629015",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.bostongear.com/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "DRIVE ABB ACS355-03E-05A6-4+L511+J400",
+        "codigo": "71629959",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "drive_guias.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://new.abb.com/products/es/3AUA0000058187/acs355-03e-05a6-4",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO ABB MREL-01 (3 DO RELAY; ACS355)",
+        "codigo": "71636850",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "mrel_drive.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://new.abb.com/products/es/3ABD0000031854/mrel-01",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "FUSIBLE AJT4 LPJ4SP",
+        "codigo": "71016182",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "fusible_AJT4.jpg",
+        "fecha_creacion": "2025-05-23",
+        "fecha_fin": "",
+        "link": "https://www.facersa.com/producto/ajt4-mersen-ferraz-shawmut-4amp-600volt/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "RESISTENCIA DE CERAMICA 220 OHM-10W",
+        "codigo": "71641571",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "resistencia_10w.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTO-REDUCTOR ROSSI AS07 STANDARFIT",
+        "codigo": "71633203",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "motoreductor.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://hvhindustrial.com/es/blog/Motorreductores-%20de-sinf%C3%ADn-Serie-AS-StandardFit-de-Rossi?srsltid=AfmBOoriQ8JN4-mTf_GschHoJt4KPi1hWam-bL7cvLL90ZxNCkv6BbtD",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SWITCH BORDE TAPESWITCH TS-46 SALIDA LH",
+        "codigo": "71641554",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "GUARDA_PIE.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.tapeswitch.com/edges/ts48.html",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "71288061",
+        "codigo": "71288061",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "CABLES_s_espiral_retractil.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://executone.com.mx/producto/cable-espiral-retractil/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "DETECTOR INDUC.TURCK BI25G47VP4XB2141",
+        "codigo": "71333319",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "sensor_apilador_lite.png",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://mx.rs-online.com/product/turck/bi25-g47-vp4x-b2141/70272005/?srsltid=AfmBOooxIMZ3M2ElC7Uv7MWBgDYkFCreaI8qR0pR-Q7sJS3gaIXrBa-k",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "DETECTOR PROXIMIDAD BI40 CP80 VP4X2",
+        "codigo": "71288120",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "BI40-CP80-VP4X2.jpg.png",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.turck.de/datasheet/_es/edb_15697_esl_es.pdf",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "POTENCIOMETRO SQUARE D: 9001K2105",
+        "codigo": "71640732",
+        "cantidad": 2,
+        "equipo": "GMP-COFRE1",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "potenciometro_1k.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/9001K2105/uspotenciometro-1k-ohm-2w-30m/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "POTENCIOMETRO SQUARE D: 9001K2108",
+        "codigo": "71640733",
+        "cantidad": 1,
+        "equipo": "GMP-COFRE1",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "potenciometro_1k.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/9001K2105/uspotenciometro-1k-ohm-2w-30m/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR DE FLUJO TURCK",
+        "codigo": "71633502",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "flujometro_led.png",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.turck.de/datasheet/_es/edb_6871004_esl_es.pdf",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "--  CABLE C/CONECT TURCK P-WKV 40-181-4M",
+        "codigo": "71646549",
+        "cantidad": 7,
+        "equipo": "GMP-COFRE1",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "conector_sensores.png",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.turck.us/en/product/0000003d00001a360002003a",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "DET. IND. TURCK NI30U-M30-AP6X-H1141",
+        "codigo": "71646015",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "SENSOR_INDUC.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.turck.de/en/product/1646631",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSORS MAGNETICO SGA-8016 C/SU ACTUADOR",
+        "codigo": "71631536",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.turck.de/datasheet/_es/edb_U2210_esl_es.pdf",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "LAMPARA ELECTR.TUBUL. BA15D   24 VCC  5 W",
+        "codigo": "71628456",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "PUENTE HOR. AISLADO P/ BORNERA 1,5 MM2",
+        "codigo": "71645003",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "puente_ZOLODA-JSSB-10-04-BKF-MA.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.zoloda.com.ar/productos/puente-de-10-elementos-para-borne-de-paso-a-resorte-para-conductor-de-15mm%C2%B2-color-marron/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FUSIBLE FERRAZ SHAWMUT 6,9URD31TTF0400",
+        "codigo": "71641700",
+        "cantidad": 3,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "fusible_nh.png",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://powerfuse.com/shop/69urd31ttf0400/#",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SENSOR REFLEC PEPPERL+FUCHS RLK315431115",
+        "codigo": "71646122",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "sensor_barrera.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.pepperl-fuchs.com/es/products-gp25581/29909",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "RIEL DE MONTAJE PERFORADO",
+        "codigo": "71647327",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "riel_perforado.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://distribuidoresdelsud.com.ar/montaje-riel-din/393201-riel-simetrico-35mm-perforado-1mt.html",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "GUARDAMOTOR C/PROTECCION TÉRMICA GV2M05",
+        "codigo": "71627106",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "GV2ME05.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/GV2ME05/guardamotor-termomagn%C3%A9tico-tesys-deca-0-631a-pulsador/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CONTACTOR TRIP. 50A BOB. 24VDC",
+        "codigo": "71333118",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "LC1D50ABD.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.se.com/co/es/product/LC1D50ABD/contactor-tesys-d-3p-ac3-440v-50a-bobina-24-vdc/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INTERRUPTOR AUTOMATICO LIMITADOR DE CORR (GV3-ME25 + GV3-A01)",
+        "codigo": "71027986",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "GV2ME103.png",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.se.com/uk/en/product/GV3ME25/motor-circuit-breaker-gv3me-16-25-a-screw-clamp-terminal-thermomagnetic/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "GUARDAMOTOR TELEMECANIQUE GV2 M07 / 1,6 - 2,5A  -  1,5 KW",
+        "codigo": "71627107",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "INTERRUPTOR TRIPOLAR 30A GE SELA36AT0030",
+        "codigo": "71241852",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "termomagnetica_SELA36AT0030_General_Electric.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://ar.wiautomation.com/general-electric/variadores-motores-proteccion-de-circuitos/otre/sela36at0030",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "UNIDAD DISPARO SRPE30A 15",
+        "codigo": "71625978",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "SRPE30A15.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://www.acomee.com.mx/articulo.php?search=SRPE30A15&id=GENERAL-ELECTRIC&srsltid=AfmBOoohVTFmToVY-02sURLypgTJhco4UBclM0KaZQpJ2j3N_0BtdsTX",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INTERRUPTOR TERMOMAG GE SELA36AT0060",
+        "codigo": "71586639",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "termomagnetica_SELA36AT0030_General_Electric.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "https://empower.abb.com/ecatalog/ec/EN_NA/p/SELA36AT0060",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "UNIDAD DISPARO SRPE60A 40",
+        "codigo": "71625982",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "SRPE30A15.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INT.TERMOM.G.E.SEHA24AT0060 2P 60A 480V",
+        "codigo": "71639573",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "termomagnetica_SELA36AT0030_General_Electric.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "UNIDAD DISPARO SRPE60A 60",
+        "codigo": "71625984",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "SRPE30A15.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INT.TERMOM.G.E.SEHA36AT0100 3P 100A 600V",
+        "codigo": "71639574",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "termomagnetica_SELA36AT0030_General_Electric.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "UNIDAD DISPARO SRPE100A 100",
+        "codigo": "71625988",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [],
+        "imagen": "SRPE30A15.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "UNIDAD DISPARO SRPE100A 70",
+        "codigo": "71625985",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "SRPE30A15.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INT. TERMOMAG. G.E. N°P  SFHA36AT0250 - 3P  250A  600V  C/U. DISP. MODELO SRPF250A125",
+        "codigo": "71639575",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "termomagnetica_SELA36AT0030_General_Electric.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "UNIDAD DISPARO SRPE250A125",
+        "codigo": "71640016",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "SRPE30A15.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INT.TERMOMAG.G.E. SGHA36AT0400-3P 600A",
+        "codigo": "71639576",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "termomagnetica_SELA36AT0030_General_Electric.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "UNIDAD DISPARO SRPE400A300",
+        "codigo": "71640009",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "SRPE30A15.jpg",
+        "fecha_creacion": "2025-05-30",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "GUARDAMOTOR 2,5 - 4 AMP",
+        "codigo": "71584916",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "GV2ME08.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/GV2ME08/guardamotor-termomagn%C3%A9tico-tesys-deca-2-54a-pulsador/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "BLOCK CONT.AUX.LA1-D11 TELEMECANIQUE",
+        "codigo": "71321377",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "bloque_auxiliar.jpeg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LADN11/bloque-de-contacto-auxiliar-tesys-deca-1no+1nc-frontal/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CONTACTOR TRIP. 12A BOB. 24VDC>",
+        "codigo": "71327075",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "LC1D123BD.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LC1D123BD/contactor-tesys-deca-3p-12a-ac3-24v-dc-50-60hz/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "GUARDAMOTOR TELEMECANIQUE GV2-ME06",
+        "codigo": "71283640",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [],
+        "imagen": "GV2ME06.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟣"
+    },
+    {
+        "nombre": "UNIDAD DISPARO SRPE30A 20",
+        "codigo": "71625979",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "SRPE30A15.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INT.TERMOM.G.E. SEHA24AT0030 2P 30A 480V",
+        "codigo": "71639572",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "temomagnetica_30A.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://breakerbroker.com/ge-seha24at0030-30a-480v-2p-65-25k-used/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CONTACTOR TELEMECANIQUE LC1 F115BD",
+        "codigo": "71627862",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "LC1F115.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LC1F115/contactor-3p-115a-sin-bobina/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "OF DELAY TIMER TELEMECANIQUE LA3-DR2  0,1 - 30 SEG  1 N.O - 1 N.C",
+        "codigo": "71639171",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "LADR2.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LADR2/contacto-temporizador-tesys-deca-1no+nc-ajuste-130s/",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "BLOQUE CONT AUX TEMP TELEMEC LA2-DT2 ON",
+        "codigo": "40015760",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "ladt2.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/mx/es/product/LADT2/tesys-d-bloque-de-contactos-temporizados-1-na-+-1-nc-conexi%C3%B3n-por-tornillo/",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "CONTACTOS AUXILIARE TELEMECANIQUE LADN22",
+        "codigo": "71222112",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "ladn22.jpeg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LADN22/bloque-de-contacto-auxiliar-tesys-deca-2no+2nc-frontal/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "TRM24D1X10 TIME DELAY TIMER 10 SEG ON",
+        "codigo": "71639182",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "trm24d1x10.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.littelfuse.com/products/relays-contactors-transformers/single-function-control-relays/time-delay-relays/delay-on-make/trm/trm24d1x10",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "TRM24D1X02 TIME DELAY TIMER 2 SEG ON",
+        "codigo": "71639183",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "delay.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/mx/es/product/RE48AML12MW/time-delay-relay-2-functions-0-02-s-300-h-24-240-v-ac-2-oc/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "TRM24D1X02 TIME DELAY TIMER 2 SEG ON",
+        "codigo": "71333145",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "delay.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/mx/es/product/RE48AML12MW/time-delay-relay-2-functions-0-02-s-300-h-24-240-v-ac-2-oc/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ZOCALO IZUMI AEA SY4S-05 P/RELE RY4S",
+        "codigo": "71349393",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "zocalo_rele.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://catalogo.aea.com.ar/producto/zocalo-sy4s-05/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "SSR, 120VAC/24VDC, 10A, IDEC, RSSDN-10A",
+        "codigo": "71639470",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "RSSDN-25A.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://us.idec.com/idec-us/en/USD/Relays-%26-Timers/Solid-State-Relays/RSS-Solid-State/p/RSSDN-10A",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ZOCALO IZUMI AEA SR2P-05 P/RELE RR2P",
+        "codigo": "71356199",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "zocalo_circular.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "2032-10-02",
+        "link": "https://catalogo.aea.com.ar/producto/zocalo-sr2p-05/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "FUSIBLE VIDRIO 5X20 MM 1 AMP 250 V. RAP.",
+        "codigo": "71040338",
+        "cantidad": 10,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "fusible-vidrio-5x20mm-0.25a.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CARTUCHO FUSIBLE VIDR.5X20 250V 5A",
+        "codigo": "71378118",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "fusible-vidrio-5x20mm-0.25a.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FUSIBLE DE VIDRIO 20X5MM,10A,250V",
+        "codigo": "71349694",
+        "cantidad": 10,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "fusible-vidrio-5x20mm-0.25a.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FUSIBILI RAPIDI 250V",
+        "codigo": "16327500",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "FUSIBLE_15_LITE.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "BORNE PORTAFUSIBLE UNIP. P/4 MM2 24V FUSIBLE: 5x25 mm C/INDIC. DE FUSION NEON DE 24 V",
+        "codigo": "71326217",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "ZOLODA-BKNP-520-LL060.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.zoloda.com.ar/productos/borne-portafusible-para-fusible-5x20mm-con-indicacion-luminosa-con-led-12-60v-ca-cc/",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "BORNE PORTAFUSIBLE WSI 6 C/LED 24V FUSIBLES  5x20 mm C/INDIC. DE FUSION NEON DE 24 V",
+        "codigo": "71331380",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "ZOLODA-BKF-SI-520-LL012.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "RELE TELEMECANIQUE CA3-DN31BD",
+        "codigo": "71639173",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "ca3dn31db.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/es-ES/Buy/SCHNEIDER%20ELECTRIC/TELEMECANIQUE/CA3DN31BD?srsltid=AfmBOoorb2wq2ZwEZuIECMl5le1ZqGB2Q1eNcFfVcx0qovSOU37vg-X2",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CONTACTO AUX. TELEMECANIQUE LA1-DN40",
+        "codigo": "71640938",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "LADN40.png",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LADN40/bloque-de-contacto-auxiliar-tesys-deca-4no-frontal/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "GUARDAMOTOR TELEMECANIQUE GV2ME20",
+        "codigo": "71649158",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "GV2ME20.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/GV2ME20/guardamotor-termomagn%C3%A9tico-tesys-deca-1318a-pulsador/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CONTACTOR TRIP. 32A BOB. 24VDC",
+        "codigo": "71333119",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "LC1D32BD.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LC1D32BD/contactor-tesys-deca-3p-32a-ac3-24v-dc-50-60hz/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "GUARDAMOTOR C/PROTECCION TÉRMICA GV2M10",
+        "codigo": "71627108",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-LITE"
+        ],
+        "imagen": "GV2ME10.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/GV2ME10/guardamotor-termomagn%C3%A9tico-tesys-deca-46-3a-pulsador/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INTERRUPTOR TERMOMAG. TRIPOLAR 125 A",
+        "codigo": "71323455",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "termico_trip_125.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/A9N18369/interruptor-termomagn%C3%A9tico-acti9-c120n-3p-125a-curva-c/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INTERRUPTOR AUTOM.TMAX 3 POLOS 100-250A",
+        "codigo": "71632064",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "termomagnetica_250A.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://dimater.com.ar/producto?id=38693&nombre=interruptor-tmax-xt4n-3p-in-250a-icu-36ka-l-si-abb",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INT.CAJA MOL 630A SCHNEIDER KITNS630EXS2",
+        "codigo": "71336952",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "termomagnetica_630A.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product-range/1001-compact-ns-630a/#products",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INTERRUPTOR TERMOMAG. TRIPOLAR 40 A",
+        "codigo": "71322277",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "termico_trip_40.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/pe/es/product/A9F94340/interruptor-termomagn%C3%A9tico-riel-acti-9-ic60l-3p-40-a-curva-c-15-ka-iec-608981-36-ka-iec-609472/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INTERRUPTOR 1200A SCHNEIDER KITMTZ212H1",
+        "codigo": "71322266",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "interruptor_1200A.jpg",
+        "fecha_creacion": "2025-06-09",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/47140/aparato-de-base-nt-1200-a-h1-3p-fijo/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INTERRUPTOR DE 1600A SCHNEIDER KITNW16H1",
+        "codigo": "71330489",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "interruptor_1600A.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/48043/int-aut-nw16h1-3x1600a-65ka-fijo-s-ud-/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INTERRUPTOR 3200A SCHNEIDER KITMTZ232H1",
+        "codigo": "71336957",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "interruptor_3200A.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/MTZ232H15X4PMF/interruptor-masterpact-mtz-2-32h1-66ka-415vac-4p-3200a-fijo-operado-manualmente-unidad-de-control-micrologic-5-0x/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INTERRUPTOR TERMOMAG. TRIPOLAR 80 A",
+        "codigo": "71313237",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "termico_trip_80.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.electromaqsrl.com.ar/MLA-704278055-llave-termica-termomagnetica-tripolar-weg-80-a-_JM",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INT.CAJA MOL 100A SCHNEIDER KITNS100EXS2",
+        "codigo": "71336956",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "kitInterruptor.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LV429289/kit-p-extrabilidad-plugin-nsx100250-3p/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INTERRUPTOR TERMOMAG. TRIPOLAR 500 A",
+        "codigo": "71332513",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "termomagnetica_500A.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/LV563305/interruptor-termomagn%C3%A9tico-easypact-cvs-36ka-tmd-3p-3d-500a/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INT.CAJA MOL 160A SCHNEIDER KITNS160EXS2",
+        "codigo": "71336955",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INTERRUPTOR TERMOMAG. TRIPOLAR 200 A",
+        "codigo": "71313234",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "termomagnetica_200A.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/EZC250H3200/interruptor-termomagn%C3%A9tico-easypact-ezc-3p-200a-tmd/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INT.CAJA MOL 400A SCHNEIDER KITNS400EXS2",
+        "codigo": "71336953",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "kitInterruptor.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CONTACTOR P/CAPACITOR 50KVAR 230VCA",
+        "codigo": "71628673",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "contactor_capacitor.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://wartung-automation.com.ar/product/3rt1647-1ap01-siemens-capacitor-contactor-ac-6-50-kvar-400-v-230-v-50-hz-3-pole-size-s3/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CONTACT AUXILIAR 3RH 1921-1FA40",
+        "codigo": "71640927",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "contacto_auxiliar_capacitor.png",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://es.rs-online.com/web/p/contactos-auxiliares/2464490",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "TRANSFORM.-REACTOR COD.B44066D1450S400",
+        "codigo": "71637071",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "reactor_trafo.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://docs.rs-online.com/9ae6/0900766b80b17cb9.pdf",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CAPACITOR TRIFASICO EPCOS MKK480-D-30-01",
+        "codigo": "71637436",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "capacitor_trifasico.png",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.tme.eu/Document/9f8da7c482e966d7c7c93b5d89421ca8/B25667C4417A365.pdf",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FUSIBLE DE FIJACION 125A 500 V",
+        "codigo": "71337943",
+        "cantidad": 3,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "fusible_hh_100A.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.pelba.com.ar/fusible-nh-500vca-120ka-125a-curva-gg-t00-3na38322409/p?srsltid=AfmBOorPbNR7TQ8MacN0jkiH5lC3EZPRHEssd4RhgnzIVmW80lHhaieW",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO CONTROLADOR FACTOR POT.BR6000-R12",
+        "codigo": "71637386",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "br6000_r12.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.tme.eu/es/details/b44066r6012e230/reguladores-de-potencia/epcos/br6000-r12/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "BATERIA YUASA 12V 7 A/H RECARGABLE",
+        "codigo": "71357112",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "bateria_yuasa.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://1shopmonsasrl.mercadoshops.com.ar/MLA-1198869891-bateria-yuasa-np-7-12-12v-7ah-tienda-oficial-yuasa-_JM",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "BANCO BATERÍAS EXTER.UPS DOBLE 2X32X7AH>",
+        "codigo": "71616135",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "eaton-9155-ups.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.itbuy.com.ar/MLA-2066158276-bateria-csb-12v-9ah-hr1234wf2-para-ups-eaton-apc-abb-_JM",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "BATERIA RECARGABLE 12V - 9AH>",
+        "codigo": "71636492",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "bateria_banco.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "TCI EATON X-SLOT PXGXUPS (SNMP/WEB Y MB)",
+        "codigo": "71634658",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "power-expert-ups-card.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.eaton.com/ar/es-mx/catalog/backup-power-ups-surge-it-power-distribution/eaton-power-xpert-gateway-ups-card.html",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "TCI EATON X-SLOT INDUSTRIAL RELAY CARD",
+        "codigo": "71634659",
+        "cantidad": 2,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "eaton-x-slot-industrial-relay-card.jpg",
+        "fecha_creacion": "2025-06-02",
+        "fecha_fin": "",
+        "link": "https://www.eaton.com/us/en-us/catalog/backup-power-ups-surge-it-power-distribution/eaton-x-slot-industrial-relay-card.html",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "INTERRUPTOR ROTATIVO TRIPOLAR  380 VAC 40 A  DIAMETRO DE PERILLA 62MM",
+        "codigo": "71326880",
+        "cantidad": 1,
+        "equipo": "",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "interruptor_rotativo_40A.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://www.se.com/ar/es/product/VCD2/interruptor-seccionador-paro-emerg-3p-40a-rojo-condable-para-puerta/",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "AMPERÍMETRO 20 A DIRECTO CC",
+        "codigo": "71631255",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "amperimetro_40A.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://elindar.mercadoshops.com.ar/MLA-651703531-amperimetro-analogico-hasta-20-amper-directo-96-x-96mm-_JM",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "VOLTÍMETRO 300 VCC",
+        "codigo": "71631607",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "VOLTIMETRO_300v.jpeg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://www.acotrone.com/shop/np96-v-300-np96-v-300-voltimetro-analogo-0-300vac-96-x-96mm-26920",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "VARILLA 3/4\" P/SOLDAR EN COLUMNA BURNDY",
+        "codigo": "72096824",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "varilla_soldar.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://soldanet.com/productos/?mpage=5&brand=Rmb&gad_source=1&gad_campaignid=1460949099&gbraid=0AAAAADoHHXTpNyvyDcPHeOSil5xPnlkY9&gclid=Cj0KCQjwuvrBBhDcARIsAKRrkjdx_-CjRxBOPcNdLG3ko-jQdJPWZkVIRJtMcHf7-gTmgJ4nCCBVf9AaAlDWEALw_wcB",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CONECTOR CABLE CABLE BURNDY YGHC29C29",
+        "codigo": "71585983",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "conector_burndy.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://www.acomee.com.mx/articulo.php?search=YGHC29C29&id=BURNDY&pro=&srsltid=AfmBOorqHHHq5Mu_9LOaSQ0gh69ooEisieLUbtM3Q7vA0Awo8eu2uZHW",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTOR AS.TR. 5HP 112M B5 1500",
+        "codigo": "71333293",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "motor_marathon.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://bombasonline.com.ar/producto/motor-trifasico-czerweny-5-5-hp-1500-rpm-1ai-112m-4-eficiencia-ie1-precio/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTOR HID. CHAR LYNN MOD.101-1027-009",
+        "codigo": "71222118",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "motor_hidraulico.png",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://www.vignola.cl/producto/motores-charlynn-serie-h-2/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTOR G.E DE CC 15HP MOD. 5CD504E106",
+        "codigo": "71622490",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "motor_marathon.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "ESCOB 38 X (2X9,5) 19 LONG 57 - EG 70",
+        "codigo": "71323830",
+        "cantidad": 10,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "carbon-terminales.png",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://carbosystem.com/escobillas-para-motores-electricos/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "DRIVE ABB DCS 502B-0075",
+        "codigo": "71588328",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "drive_continua_hallden.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://ikindustry.com.tr/abb-dcs502b0075-41-21p2000-dcs-500-thyristor-power-converter-en",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTOBOMBA HIDRAULICA HYDAC MFZP-2",
+        "codigo": "71361806",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "bomba_lubricacion.png",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://rodavigo.net/datos/articulos/130/bomba-circulacion-kfzp-hydac.pdf",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MOTOR DE CC CRAMACO TIPO G16-08 -15 KW",
+        "codigo": "71628291",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "MOTOR.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "ESCOBILLAS ESCOBILLA 25,4 X 12,7 LONG 44,5 -EG98B",
+        "codigo": "71323772",
+        "cantidad": 10,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "carbon-terminales.png",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "GENERADOR HUBNER TIPO FG4AK   1200 PPR",
+        "codigo": "71582168",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [],
+        "imagen": "encoder_humer.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/Buy/BAUMER%20ELECTRIC/HUBNER/FG-4S-1000G-90G-NG-DIV-L?srsltid=AfmBOoqs3df0-rUaCpkRWjEds5BlHGf_0tfliG5mmPgTLud7sbA0c9Hl",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "DRIVE ABB DCS 502B-0140",
+        "codigo": "71588329",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "drive_continua_hallden.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTOR G.E DE CC 75HP MOD. 5CD50524A",
+        "codigo": "71622480",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "MOTOR.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "GENERADOR PULSO OMRON E6B2-CWZ6C 600PPR",
+        "codigo": "71332266",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "ENCODER_E6B2-CWZ6C-500PR-x.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://ar.mouser.com/ProductDetail/Omron-Automation-and-Safety/E6B2-CWZ6C-600P-R-2M?qs=TwPrcXezm71cy82IbgHRbQ%3D%3D",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "DRIVE ABB DCS 502B-0520",
+        "codigo": "71588330",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "drive_continua_hallden.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "SENSOR FLUJO TURCK FCS-G1/2A4P-VRX/24VDC",
+        "codigo": "71634842",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://www.turck.de/datasheet/_es/edb_6870096_esl_es.pdf",
+        "estado": "🟣"
+    },
+    {
+        "nombre": "FLOW SWITCH P/MONTAJE CAÑERIA MOD.VHS32M",
+        "codigo": "71636299",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "flow_switch.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://heinowinter.com/en/1470/flow-switch-sika-vhs-32-m.html",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MOTORREDUCTOR PL.5415-12-1104 POS.1A26",
+        "codigo": "71397047",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "motoreductor.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTORREDUCTOR PL.5415-12-1104 POS.1A26",
+        "codigo": "71410681",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "motoreductor.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "DRIVE ABB ACS880-01-061A-3",
+        "codigo": "71642809",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "drive_880.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://new.abb.com/products/es/3ABD00032627-D/acs880-01-061a-3",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "FUSIBLE ULTRA RAPIDO NH DIN 00 AR-50A",
+        "codigo": "71640474",
+        "cantidad": 3,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "fusible_hh_100A.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MOTOR A.C. 15HP 160M B3 1500RPM",
+        "codigo": "71410665",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "MOTOR.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://www.weg.net/catalog/weg/MX/es/Motores-El%C3%A9ctricos/Motor-de-Inducc%C3%ADon---IEC/Uso-General-ODP-TEFC/Carcasa-de-Hierro-Gris/TEFC-W22-/W22-IE2-15-HP-4P-160M-3F-380-660-V-50-Hz-IC411---TEFC---B34R%28E%29/p/13045698",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MOTOR A.C. 10HP 132M B3 1500RPM",
+        "codigo": "71323369",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "MOTOR.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MOTOREDUCTOR ROSSI AS07 STANDARFIT",
+        "codigo": "71631621",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "MOTOR.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO C&S HLT-2051 EXITADOR DE IMANES",
+        "codigo": "71634377",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "BOBINA P/RODILLO MAGNETICOS",
+        "codigo": "71628406",
+        "cantidad": 1,
+        "equipo": "GMP-COFRE1",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "bobina-redonda-scaled.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "EJE SOPORTE P/BOB RODILLO MAGNETICO",
+        "codigo": "71629074",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "TUBO CAMISA DE RODILLO MAGNETICO",
+        "codigo": "71629075",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "TAPA PORTA RODAMIENTOS ROD MAGNETICO",
+        "codigo": "71629076",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "SOPORTE P/BOB ROD MAGNETICO",
+        "codigo": "71629077",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "PERNO P/BOB ROD MAGNETICO",
+        "codigo": "71629078",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "ARANDELA AISLANTE P/BOB ROD MAGNETICO",
+        "codigo": "71629191",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "MOTORREDUCTOR GUIAS SM CYCLO (guias tope largo y ancho)",
+        "codigo": "71628962",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "BOMBA CENTRIF. MONOBLOCK MARCA CZERWENY (torre de enfriamiento)",
+        "codigo": "71472000",
+        "cantidad": 1,
+        "equipo": "SALA BATERIAS",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "RACK STANDARD (12SLOT) PREMIUM MODICOM",
+        "codigo": "71587199",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "back_plane_modicon.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://www.se.com/us/en/product/TSXRKY12/non-extendable-rack-modicon-premium-for-single-rack-configuration-12-slots/",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CABLE ELECTRICO C/CONECTOR MODICON AS-P810-000",
+        "codigo": "71325640",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "PLC MODICON PC-E 984-785",
+        "codigo": "71037243",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "modulo_e984_785.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/es-ES/Buy/SCHNEIDER%20ELECTRIC/MODICON/PC-E984-785?srsltid=AfmBOoqdr2orxDxLFqiLFhVnthO6x8FwS-HK-8Edz5DYSTmyJ2e8cwmN",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "PROCESADOR ENT/SAL AS-S908-120",
+        "codigo": "71325650",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "AS_S908_120.jpg",
+        "fecha_creacion": "2025-06-03",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/es-ES/Buy/SCHNEIDER%20ELECTRIC/MODICON/AS-S908-120?srsltid=AfmBOooR3AdMtavYAcmHHHlwxiicPYBYvTKshjITB1NTYqtEH_OIbjFx",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO CONTADOR ALTA VELOC. MODICON AS-B883-001",
+        "codigo": "71325639",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "as_b883_001.jpg",
+        "fecha_creacion": "2025-06-09",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/es-ES/Buy/SCHNEIDER%20ELECTRIC/MODICON/AS-B883-001?srsltid=AfmBOopjF5rNvPmBX7PZvAfMdH6jKY4xbzumA17WO4pDPHWcodPsSluZ",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "MODULO SALIDA 115VCA MODICON AS-B804-116",
+        "codigo": "71050873",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "as_b804_116.jpg",
+        "fecha_creacion": "2025-06-09",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/es-ES/Buy/SCHNEIDER%20ELECTRIC/MODICON/AS-B804-116?srsltid=AfmBOor1LOdJ0H9u3pgz9HCqS2tZ0mLMG7CDCX2_Joo-cACGqSJbBZoQ",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO 115 VAC 32 IMPUTS AS-B 807-132",
+        "codigo": "71041954",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "AS_B807_132.JPG",
+        "fecha_creacion": "2025-06-09",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/es-ES/Buy/SCHNEIDER%20ELECTRIC/MODICON/AS-B807-132?srsltid=AfmBOooIylEgYDczBRGJf0RHdFJ91_V89k4IqMxIaedAyXKshh0Y9kvh",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO SALIDA 24V MODICON AS-B832-016",
+        "codigo": "71464530",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "AS_B832_016.jpg",
+        "fecha_creacion": "2025-06-09",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/es-ES/Buy/SCHNEIDER%20ELECTRIC/MODICON/AS-B832-016?srsltid=AfmBOorMwsEhXPDu6VPExaGQpzpH0PRmZwHsz-QFh7by40e8tSlNEO8C",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "TARJETA Y MODULO ELECTRONICO",
+        "codigo": "71030149",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "AS_B875_111.jpg",
+        "fecha_creacion": "2025-06-09",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/es-ES/Buy/SCHNEIDER%20ELECTRIC/MODICON/AS-B875-111?srsltid=AfmBOopkzrGpDKUaGVuzS5Y2DIERrLuxLklMzgOrgA4rWkXfsqFd2Dkz",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "ANALOG.OUT 4 CHANNELS AS-B872-200",
+        "codigo": "71050871",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "AS_B872_200.jpg",
+        "fecha_creacion": "2025-06-09",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/es-ES/Buy/SCHNEIDER%20ELECTRIC/MODICON/AS-B872-200?srsltid=AfmBOoph1MworgxeTl1SSv2p4NEe0GAq4Nbqco6l_kRbog3SxkDC-Eju",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO INDIV. 24V MODICON AS-B827-032",
+        "codigo": "71028421",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [],
+        "imagen": "AS_B827_032.jpg",
+        "fecha_creacion": "2025-06-09",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/es-ES/Buy/SCHNEIDER%20ELECTRIC/MODICON/AS-B827-032?srsltid=AfmBOooRYEDtwo6Xi6wyY5ArKcpAXaE1qu7L_P7ZxUz8kYaoJ0SAUZ-P",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO FUENTE ALIMENTACION 24V 2.5A",
+        "codigo": "71325649",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "S8VK-G06024.jpg",
+        "fecha_creacion": "2025-06-09",
+        "fecha_fin": "",
+        "link": "https://industrial.omron.es/es/products/S8VK-G06024",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO DE SALIDA AS-B814-108",
+        "codigo": "71325654",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "AS_B814_108.jpg",
+        "fecha_creacion": "2025-06-09",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/es-ES/Buy/SCHNEIDER%20ELECTRIC/MODICON/AS-B814-108?srsltid=AfmBOorRu1Z1Qb2MBWSoW_52z3FKxFtqHhBsGNdcWDpdIiJSYsVibIcI",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CABLE ELECTRICO C/CONECTOR 20 PINS  MODICON AS-8534 000",
+        "codigo": "71325637",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "AS_8534_000.jpg",
+        "fecha_creacion": "2025-06-10",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/es-ES/Buy/SCHNEIDER%20ELECTRIC/MODICON/AS-8534-000?srsltid=AfmBOoqmqIgvtynTVDo3kWeHX7roqvgYGx2qC1bXAcQ01WD1LSe8VPT6",
+        "estado": "🔵"
+    },
+    {
+        "nombre": "CONECTOR (40 PINS) MODICON AS-8535 000",
+        "codigo": "71325638",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "AS_8535_000.jpg",
+        "fecha_creacion": "2025-06-10",
+        "fecha_fin": "",
+        "link": "https://www.radwell.com/Buy/SCHNEIDER%20ELECTRIC/MODICON/AS-8535-000?srsltid=AfmBOoob6bfdeow2O-TemidgzAQG-OQ50GxoLcfdEhLwM5yZWYPoMo1u",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CONECTOR MB+ INTERMEDIO AS-MBKT085",
+        "codigo": "71325664",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "conector_intermedio_asmbkt085.jpg",
+        "fecha_creacion": "2025-06-10",
+        "fecha_fin": "",
+        "link": "https://www.b2esurplus.com/aeg-schneider-as-mbkt-085-mb-line-connector-kit-modbus-plus-female-d-sub-9-new/",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "CONECTOR MB+ FIN DE LÍNEA AS-MBKT185",
+        "codigo": "71325665",
+        "cantidad": 1,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [
+            "SD-APR-HALD"
+        ],
+        "imagen": "conector_intermedio_asmbkt085.jpg",
+        "fecha_creacion": "2025-06-10",
+        "fecha_fin": "",
+        "link": "https://www.ebay.com/itm/Modicon-ASMBKT185-MB-End-connector-w-120-ohm-Resistor-USED-AS-MBKT-185-/253361351304",
+        "estado": "🔴"
+    },
+    {
+        "nombre": "AAAA",
+        "codigo": "222222222",
+        "cantidad": 1,
+        "equipo": "GMP",
+        "ruta_jerarquia": [],
+        "imagen": null,
+        "fecha_creacion": "2025-06-21",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟣"
+    },
+    {
+        "nombre": "PATCHPANNEL RJ45 CAT 6 FURUKAWA",
+        "codigo": "78642870",
+        "cantidad": 10,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "imagen": "ADAPTADOR_TRILHO_DIN.jpg",
+        "fecha_creacion": "2025-12-18",
+        "fecha_fin": "2026-12-09",
+        "link": "https://www.furukawalatam.com/es/catalogo-de-productos-detalles/adaptador-para-riel-din-1p-con-tapa",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "INTERRUPTOR DIFERENCIAL TRIPOLAR 40 AMP.",
+        "codigo": "71356146",
+        "cantidad": 1,
+        "equipo": "GMP-COFRE1",
+        "ruta_jerarquia": [],
+        "imagen": "DISYUNTOR_TRIFASICO.jpg",
+        "fecha_creacion": "2025-08-04",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "CONTACTOR AUX. ROCKWELL 100-S, SER. B",
+        "codigo": "71284247",
+        "cantidad": 1,
+        "equipo": "GMP-PUERTA1-ESTANTE2",
+        "ruta_jerarquia": [],
+        "imagen": "CONTACTO_AUXIIAR_rockwell.jpg",
+        "fecha_creacion": "2025-08-04",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
+    },
+    {
+        "nombre": "MODULO MOXA IM-6700A-8TX",
+        "codigo": "72116686",
+        "cantidad": 4,
+        "equipo": "GMP-PUERTA1-ESTANTE2",
+        "ruta_jerarquia": [],
+        "imagen": null,
+        "fecha_creacion": "2025-08-15",
+        "fecha_fin": "2026-12-26",
+        "link": "",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "SWITCH MOXA MODULAR IKS-6726A",
+        "codigo": "72111837",
+        "cantidad": 3,
+        "equipo": "SALA_ELECTRICA",
+        "ruta_jerarquia": [],
+        "imagen": null,
+        "fecha_creacion": "2025-08-15",
+        "fecha_fin": "2026-12-26",
+        "link": "",
+        "estado": "🟡"
+    }
+]

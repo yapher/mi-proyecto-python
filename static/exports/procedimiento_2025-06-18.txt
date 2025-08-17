@@ -1,0 +1,47 @@
+<U>ELEMENTOS DE PROTECCION ESPECIFICA</>:
+
+NO ES NECESARIO.
+
+<U>TARJETAS DE SEGURIDAD</>
+
+NO ES NECESARIO.
+
+<U>ACONDICIONAMIENTO PREVIO</>:
+
+•  Verificar que en el área de trabajos no existan derrames de productos lubricante, de ser necesario, solicitar evacuación de los mismos al personal de limpieza industrial.
+•  Verificar que, en el área de trabajo, exista adecuada iluminación artificial.
+•  Tareas ejecutadas por prestaciones de Terceros, previo al inicio de las mismas se deberán gestionar las correspondientes habilitaciones de acceso a las áreas según el siguiente detalle. 
+    -  Solicitar habilitación al jefe de turno.
+    -  Tareas en áreas de líneas operativas, naves de almacenamiento, naves de proceso, sótanos de proceso, gestionar con Supervisor Operativo Responsable del área.
+    -  Hacer tarjeta de interferencia con equipo PG o Auto elevadores si es necesario.
+    -  Tareas en Salas eléctricas, Sótanos eléctricos, compartimientos de cables, gestionar con GMP Resp. Eléctrico de Línea.
+•  Confeccionar A.P.R. / Método seguro de Trabajo.
+
+<U>HERRAMIENTAS Y EQUIPOS ESPECIALES</>:
+
+NO ES NECESARIO.
+
+<U>PELIGRO DE LA TAREA</>
+
+R: Golpes por objetos o herramientas.
+AC:
+    1.  Guardar las herramientas de forma ordenada.
+    2.  Revisar el estado de conservación.
+    3.  Descartar las que se encuentran en malas condiciones.
+    4.  Utilizarlas para la finalidad que fueron diseñadas.
+    5.  Proteger filos o puntas al transportarlas.
+
+TAMBIÉN LOS RIESGOS DEL ÁREA.
+
+<U>IMPACTO DE MEDIO AMBIENTE</>
+    En primera instancia, los residuos son separados en sus puntos de generación, siendo dispuestos por el personal en los diferentes recipientes según el tipo de residuo:
+     •  residuos especiales (contenedor rojo).
+     •  residuos no especiales (contenedor amarillo).
+     •  residuos domésticos de comedor y oficinas (contenedor verde).
+     •  chatarra ferrosa (contenedor gris).
+     •  chatarra no ferrosa (contenedor marrón).
+
+<U>PROCEDIMIENTO DE LA TAREA</>:
+
+<U>CRITERIOS DE ACEPTACIÓN O RECHAZO</>
+    Después de terminada la tarea se debe comunicar al Supervisor de la contratista y al GMP.

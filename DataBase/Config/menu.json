@@ -1,0 +1,240 @@
+[
+    {
+        "nombre": "Archivo",
+        "emoji": "📁",
+        "ruta": "",
+        "roles": [],
+        "submenues": [
+            {
+                "nombre": "Administrador",
+                "emoji": "⚙️",
+                "ruta": "",
+                "roles": [
+                    "admin"
+                ],
+                "submenues": [
+                    {
+                        "nombre": "Gestor de Menu",
+                        "emoji": "🔄",
+                        "ruta": "/gestion_menu",
+                        "roles": [
+                            "admin",
+                            "editor"
+                        ],
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "Gestor de Aplicaciones",
+                        "emoji": "📝",
+                        "ruta": "/gestion_aplicaciones",
+                        "roles": [
+                            "admin",
+                            "editor"
+                        ],
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "Salir",
+                "emoji": "❌",
+                "ruta": "/logout",
+                "roles": [],
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "Plantas",
+        "emoji": "🏭",
+        "ruta": "",
+        "roles": [],
+        "submenues": [
+            {
+                "nombre": "Estructura",
+                "emoji": "🏗️",
+                "ruta": "",
+                "roles": [],
+                "submenues": [
+                    {
+                        "nombre": "Crear Ubicación Técnica",
+                        "emoji": "📍",
+                        "ruta": "/creaUbTec",
+                        "roles": [],
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "Crear Almacenes",
+                        "emoji": "🏛️",
+                        "ruta": "/crear_almacenes",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "Gestión de Repuestos",
+                "emoji": "📋​",
+                "ruta": "/inventario",
+                "roles": [],
+                "submenues": [
+                    {
+                        "nombre": "Administración de Repuestos",
+                        "emoji": "⚙️",
+                        "ruta": "/inventario",
+                        "roles": [
+                            "viewer"
+                        ],
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "Listado de Repuestos",
+                        "emoji": "📜",
+                        "ruta": "/lista_repuestos",
+                        "roles": [
+                            "viewer"
+                        ],
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "Crear listado de repuestos por linea",
+                        "emoji": "🏭",
+                        "ruta": "/crear-listado",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "Estado de Repuestos",
+                        "emoji": "📦​",
+                        "ruta": "/estadosRep",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "Graficos de Repuestos",
+                        "emoji": "📊",
+                        "ruta": "/graficos_repuestos",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "Gestión de OT",
+                "emoji": "📝",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "Creación de Procedimientos",
+                        "emoji": "📝",
+                        "ruta": "/crearProc",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "Carga de Procedimiento",
+                        "emoji": "📝",
+                        "ruta": "/cargar_procedimiento",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "Generar Procedimiento",
+                        "emoji": "📝",
+                        "ruta": "/generar_procedimiento",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "LISTAR OT",
+                        "emoji": "📊​",
+                        "ruta": "/listar_ot",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "Bajada de OT",
+                        "emoji": "🧾",
+                        "ruta": "/bajada_de_ot",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "Gestión de Bloqueos",
+                "emoji": "❌",
+                "ruta": "/gestion_de_bloqueos",
+                "submenues": []
+            },
+            {
+                "nombre": "Gestión de Herramientas",
+                "emoji": "⚙️",
+                "ruta": "/gestion_de_herramientas",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "APPS",
+        "emoji": "📻​",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "SPOTIFY",
+                "emoji": "🎵",
+                "ruta": "/spotify",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "PERSONAL",
+        "emoji": "🛡️",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "ADMINISTRACIÓN",
+                "emoji": "🧑‍💻",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "PAGOS",
+                        "emoji": "💰",
+                        "ruta": "/pagos",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "Crear Rubros",
+                        "emoji": "📚",
+                        "ruta": "/crear_rubros",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "Estadistica de  Gastos",
+                        "emoji": "📈",
+                        "ruta": "/estadisticas",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "TIEMPOS",
+                "emoji": "⌛",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "TAREAS",
+                        "emoji": "🧾",
+                        "ruta": "/agenda",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "PROYECTOS",
+                "emoji": "📚​",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "Detector de rostros",
+                        "emoji": "🩻",
+                        "ruta": "/detector_de_rostros",
+                        "submenues": []
+                    }
+                ]
+            }
+        ]
+    }
+]

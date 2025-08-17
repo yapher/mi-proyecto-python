@@ -1,0 +1,366 @@
+{% extends 'layout.html' %}
+{% block content %}
+<style>
+   html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #3e2d59;
+    }
+    .full-height {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .table-responsive {
+        flex: 1;
+        overflow-y: auto;
+    }
+  /* Estilo para eventos realizados */
+  .evento-realizado {
+    background-color: #6c757d !important; /* gris */
+    text-decoration: line-through;
+    color: #dcdcdc !important;
+  }
+
+  /* Ajustes mínimos para el checkbox dentro de la pill */
+  .evento-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    margin-top: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .evento-pill input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+  }
+  .evento-pill span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* >>> PRIORIDAD: colores (solo si NO está realizado; el gris con !important gana) */
+  .evento-pill.prio-alta  { background-color: #ff4d4d; color: #fff; }
+  .evento-pill.prio-media { background-color: #ffc107; color: #222; }
+  .evento-pill.prio-baja  { background-color: #28a745; color: #fff; }
+</style>
+
+
+<div class="container-fluid full-height py-3">
+    <h1 class="text-center mb-4">Agenda Mensual</h1>
+
+    <!-- Controles -->
+    <div class="d-flex flex-wrap gap-2 justify-content-between mb-3 controls-responsive">
+      <select id="mes" class="form-select w-auto">
+        {% for m in range(1,13) %}
+        <option value="{{m}}" {% if m == mes %}selected{% endif %}>{{m}}</option>
+        {% endfor %}
+      </select>
+      <select id="año" class="form-select w-auto">
+        {% for a in range(2020, 2031) %}
+        <option value="{{a}}" {% if a == año %}selected{% endif %}>{{a}}</option>
+        {% endfor %}
+      </select>
+      <button class="btn btn-agregar" onclick="abrirModal()">Agregar Evento</button>
+    </div>
+
+    <!-- Calendario -->
+    <table class="table table-bordered text-white">
+      <thead>
+        <tr>
+          <th>Lun</th><th>Mar</th><th>Mié</th><th>Jue</th><th>Vie</th><th>Sáb</th><th>Dom</th>
+        </tr>
+      </thead>
+      <tbody id="calendario"></tbody>
+    </table>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalEvento" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content bg-form">
+        <div class="modal-header">
+          <h5 class="modal-title">Evento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="eventoId" />
+          <div class="mb-3">
+            <label>Título</label>
+            <input type="text" id="titulo" class="form-control" placeholder="Ej: Reunión con equipo" required />
+          </div>
+          <div class="mb-3">
+            <label>Fecha</label>
+            <input type="date" id="fecha" class="form-control" required />
+          </div>
+          <div class="mb-3">
+            <label>Descripción</label>
+            <textarea id="descripcion" class="form-control" placeholder="Detalles opcionales del evento"></textarea>
+          </div>
+          <div class="mb-3">
+            <label>Email (para recordatorio)</label>
+            <input type="email" id="email" class="form-control" placeholder="usuario@dominio.com" required />
+            <div class="form-text">Se enviará un correo <strong>un día antes</strong> del evento a las 08:00 (hora AR).</div>
+          </div>
+
+          <!-- Checkbox realizado (nuevo) -->
+          <div class="form-check mt-2">
+            <input type="checkbox" class="form-check-input" id="realizado">
+            <label for="realizado" class="form-check-label">Evento realizado</label>
+          </div>
+
+          <!-- >>> PRIORIDAD: selector simple -->
+          <div class="mb-3 mt-3">
+            <label>Prioridad</label>
+            <select id="prioridad" class="form-select">
+              <option value="alta">Alta</option>
+              <option value="media" selected>Media</option>
+              <option value="baja">Baja</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-agregar" onclick="guardarEvento()">Guardar</button>
+          <button class="btn btn-eliminar" onclick="eliminarEvento()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+  <script>
+    // Prefijo del blueprint
+    const BASE = "/agenda";
+
+    let eventos = [];
+    const modal = new bootstrap.Modal(document.getElementById('modalEvento'));
+
+    function cargarEventos() {
+      fetch(`${BASE}/eventos`)
+        .then(res => res.json())
+        .then(data => { eventos = data; generarCalendario(); })
+        .catch(err => {
+          console.error("Error cargando eventos:", err);
+          eventos = [];
+          generarCalendario();
+        });
+    }
+
+    function clasePorDiaSemana(jsDay) {
+      const map = { 1: 'dia-lun', 2: 'dia-mar', 3: 'dia-mie', 4: 'dia-jue', 5: 'dia-vie', 6: 'dia-sab', 0: 'dia-dom' };
+      return map[jsDay] || 'dia-lun';
+    }
+
+    function etiquetaDia(jsDay) {
+      const map = { 1: 'Lunes', 2: 'Martes', 3: 'Miércoles', 4: 'Jueves', 5: 'Viernes', 6: 'Sábado', 0: 'Domingo' };
+      return map[jsDay] || '';
+    }
+
+    function generarCalendario() {
+      const mes = parseInt(document.getElementById("mes").value);
+      const año = parseInt(document.getElementById("año").value);
+
+      // NOTA: conservo la lógica original que tenías para primerDia/ultimoDia
+      const primerDia = new Date(año, mes - 1, 0);
+      const ultimoDia  = new Date(año, mes, 0);
+
+      const calendario = document.getElementById("calendario");
+      calendario.innerHTML = "";
+
+      let fila = document.createElement("tr");
+
+      // Placeholder inicial (mantengo la lógica original)
+      for (let i = 0; i < (primerDia.getDay() + 7) % 7; i++) {
+        const td = document.createElement("td");
+        td.classList.add('vacio');
+        fila.appendChild(td);
+      }
+
+      for (let d = 1; d <= ultimoDia.getDate(); d++) {
+        const fechaStr = `${año}-${String(mes).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const celda = document.createElement("td");
+
+        const jsDay = new Date(año, mes - 1, d).getDay(); // 0=Dom..6=Sáb
+        const claseDia = clasePorDiaSemana(jsDay);
+
+        const cont = document.createElement("div");
+        cont.className = `dia ${claseDia}`;
+        cont.title = `Agregar/editar eventos - ${fechaStr}`;
+        cont.onclick = () => abrirModal(fechaStr);
+
+        const labelSemana = document.createElement("div");
+        labelSemana.className = "semana-label";
+        labelSemana.textContent = etiquetaDia(jsDay);
+
+        const num = document.createElement("div");
+        num.className = "numero";
+        num.textContent = d;
+
+        cont.appendChild(labelSemana);
+        cont.appendChild(num);
+
+        // >>> PRIORIDAD: ordenar por prioridad (alta, media, baja)
+        const ordenPrio = { alta: 1, media: 2, baja: 3 };
+        const eventosDia = eventos
+          .filter(e => e.fecha === fechaStr)
+          .sort((a, b) => (ordenPrio[a?.prioridad] ?? 2) - (ordenPrio[b?.prioridad] ?? 2));
+
+        eventosDia.forEach(e => {
+          const pill = document.createElement("div");
+          pill.className = "evento-pill";
+          if (e.realizado) pill.classList.add("evento-realizado");
+
+          // >>> PRIORIDAD: color visual según prioridad (si no está realizado)
+          if (!e.realizado) {
+            if (e.prioridad === "alta") pill.classList.add("prio-alta");
+            else if (e.prioridad === "media") pill.classList.add("prio-media");
+            else if (e.prioridad === "baja") pill.classList.add("prio-baja");
+          }
+
+          // Checkbox para marcar realizado (evita que abra modal)
+          const chk = document.createElement("input");
+          chk.type = "checkbox";
+          chk.checked = !!e.realizado;
+          chk.onclick = (ev) => {
+            ev.stopPropagation();
+            toggleRealizado(e.id, chk.checked);
+          };
+
+          const span = document.createElement("span");
+          span.textContent = e.titulo;
+
+          // Click en la pill (excepto el checkbox) abre modal
+          pill.onclick = (ev) => { ev.stopPropagation(); abrirModal(e.fecha, e); };
+
+          pill.appendChild(chk);
+          pill.appendChild(span);
+          cont.appendChild(pill);
+        });
+
+        // Resaltar hoy
+        const hoy = new Date();
+        const esHoy = hoy.getFullYear() === año && (hoy.getMonth() + 1) === mes && hoy.getDate() === d;
+        if (esHoy) cont.classList.add('hoy');
+
+        celda.appendChild(cont);
+        fila.appendChild(celda);
+
+        if ((primerDia.getDay() + d) % 7 === 0 || d === ultimoDia.getDate()) {
+          calendario.appendChild(fila);
+          fila = document.createElement("tr");
+        }
+      }
+    }
+
+    function abrirModal(fecha = "", evento = null) {
+      document.getElementById("eventoId").value = evento?.id || "";
+      document.getElementById("titulo").value = evento?.titulo || "";
+      document.getElementById("fecha").value = fecha || evento?.fecha || "";
+      document.getElementById("descripcion").value = evento?.descripcion || "";
+      document.getElementById("email").value = evento?.email || "";
+      document.getElementById("realizado").checked = evento?.realizado || false;
+
+      // >>> PRIORIDAD: setear valor por defecto/actual
+      const selPrio = document.getElementById("prioridad");
+      if (selPrio) selPrio.value = evento?.prioridad || "media";
+
+      modal.show();
+    }
+
+    function validarEmail(valor) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(String(valor).toLowerCase());
+    }
+
+    function guardarEvento() {
+      const id = document.getElementById("eventoId").value;
+      const titulo = document.getElementById("titulo").value.trim();
+      const fecha = document.getElementById("fecha").value;
+      const descripcion = document.getElementById("descripcion").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const realizado = document.getElementById("realizado").checked;
+
+      // >>> PRIORIDAD: leer selección
+      const prioridad = (document.getElementById("prioridad")?.value) || "media";
+
+      if (!titulo || !fecha || !email) {
+        Swal.fire({ icon: 'warning', title: 'Campos requeridos', text: 'Título, fecha y email son obligatorios.' });
+        return;
+      }
+      if (!validarEmail(email)) {
+        Swal.fire({ icon: 'error', title: 'Email inválido', text: 'Por favor, ingresa un correo válido.' });
+        return;
+      }
+
+      // >>> PRIORIDAD: incluir en payload
+      const data = { titulo, fecha, descripcion, email, realizado, prioridad };
+      const url = id ? `${BASE}/evento/${id}` : `${BASE}/evento`;
+      const method = id ? "PUT" : "POST";
+
+      fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      }).then(res => {
+        if (!res.ok) throw new Error('Error al guardar');
+        modal.hide();
+        cargarEventos();
+        Swal.fire({ icon: 'success', title: 'Guardado', timer: 1200, showConfirmButton: false });
+      }).catch(() => {
+        Swal.fire({ icon: 'error', title: 'Ups', text: 'No se pudo guardar el evento.' });
+      });
+    }
+
+    function eliminarEvento() {
+      const id = document.getElementById("eventoId").value;
+      if (!id) { modal.hide(); return; }
+
+      Swal.fire({
+        title: '¿Eliminar evento?', text: 'Esta acción no se puede deshacer.',
+        icon: 'warning', showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar', cancelButtonText: 'Cancelar'
+      }).then(result => {
+        if (!result.isConfirmed) return;
+
+        fetch(`${BASE}/evento/${id}`, { method: "DELETE" })
+          .then(res => {
+            if (!res.ok) throw new Error('Error al eliminar');
+            modal.hide();
+            cargarEventos();
+            Swal.fire({ icon: 'success', title: 'Eliminado', timer: 1200, showConfirmButton: false });
+          })
+          .catch(() => {
+            Swal.fire({ icon: 'error', title: 'Ups', text: 'No se pudo eliminar el evento.' });
+          });
+      });
+    }
+
+    // Cambiar estado realizado desde la pill
+    function toggleRealizado(id, estado) {
+      fetch(`${BASE}/evento/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ realizado: estado })
+      }).then(res => {
+        if (!res.ok) throw new Error('Error al actualizar');
+        cargarEventos();
+      }).catch(err => {
+        console.error("Error toggleRealizado:", err);
+        Swal.fire({ icon: 'error', title: 'Ups', text: 'No se pudo actualizar el evento.' });
+        cargarEventos();
+      });
+    }
+
+    document.getElementById("mes").onchange = generarCalendario;
+    document.getElementById("año").onchange = generarCalendario;
+    cargarEventos();
+  </script>
+{% endblock %}

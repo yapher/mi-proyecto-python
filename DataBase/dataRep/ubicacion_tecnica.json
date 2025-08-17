@@ -1,0 +1,75 @@
+[
+    {
+        "nombre": "SD",
+        "emoji": "1",
+        "ruta": "PLANTA SIDERCROM (RAMALLO)",
+        "ruta_jerarquia": "SD",
+        "sububicaciones": [
+            {
+                "nombre": "APR",
+                "emoji": "1",
+                "ruta": "AREAS DE PRODUCTIVAS",
+                "ruta_jerarquia": "SD-APR",
+                "sububicaciones": [
+                    {
+                        "nombre": "EMPA",
+                        "emoji": "1",
+                        "ruta": "EMBALAJE40",
+                        "ruta_jerarquia": "SD-APR-EMPA",
+                        "sububicaciones": []
+                    },
+                    {
+                        "nombre": "HALD",
+                        "emoji": "🏬",
+                        "ruta": "HALLDEN",
+                        "ruta_jerarquia": "SD-APR-HALD",
+                        "sububicaciones": []
+                    },
+                    {
+                        "nombre": "DELT",
+                        "emoji": "🏬",
+                        "ruta": "DELTA",
+                        "ruta_jerarquia": "SD-APR-DELT",
+                        "sububicaciones": []
+                    },
+                    {
+                        "nombre": "LITE",
+                        "emoji": "🏬",
+                        "ruta": "LITTELL",
+                        "ruta_jerarquia": "SD-APR-LITE",
+                        "sububicaciones": []
+                    },
+                    {
+                        "nombre": "GRUA321",
+                        "emoji": "🏬",
+                        "ruta": "GRUA321",
+                        "ruta_jerarquia": "SD-APR-GRUA321",
+                        "sububicaciones": []
+                    },
+                    {
+                        "nombre": "GRUA320",
+                        "emoji": "🏬",
+                        "ruta": "GRUA320",
+                        "ruta_jerarquia": "SD-APR-GRUA320",
+                        "sububicaciones": []
+                    }
+                ]
+            },
+            {
+                "nombre": "ASE",
+                "emoji": "🏬",
+                "ruta": "AREAS DE SERVICIOS",
+                "ruta_jerarquia": "SD-ASE",
+                "sububicaciones": [
+                    {
+                        "nombre": "EDIF",
+                        "emoji": "🏛️",
+                        "ruta": "",
+                        "ruta_jerarquia": "SD-ASE-EDIF",
+                        "sububicaciones": []
+                    }
+                ]
+            }
+        ]
+    }
+]

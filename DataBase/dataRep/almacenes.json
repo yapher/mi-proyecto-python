@@ -1,0 +1,91 @@
+[
+    {
+        "nombre": "GMP",
+        "emoji": "​👑",
+        "ruta": "",
+        "ruta_jerarquia": "GMP",
+        "subcrear_almacenes": [
+            {
+                "nombre": "PUERTA1",
+                "emoji": "🚪",
+                "ruta": "",
+                "ruta_jerarquia": "GMP-PUERTA1",
+                "subcrear_almacenes": [
+                    {
+                        "nombre": "ESTANTE1",
+                        "emoji": "🪜",
+                        "ruta": "",
+                        "ruta_jerarquia": "GMP-PUERTA1-ESTANTE1",
+                        "subcrear_almacenes": []
+                    },
+                    {
+                        "nombre": "ESTANTE2",
+                        "emoji": "🪜",
+                        "ruta": "",
+                        "ruta_jerarquia": "GMP-PUERTA1-ESTANTE2",
+                        "subcrear_almacenes": []
+                    }
+                ]
+            },
+            {
+                "nombre": "COFRE1",
+                "emoji": "🗄️",
+                "ruta": "",
+                "ruta_jerarquia": "GMP-COFRE1",
+                "subcrear_almacenes": [
+                    {
+                        "nombre": "ESTANTE1",
+                        "emoji": "🪜",
+                        "ruta": "",
+                        "ruta_jerarquia": "GMP-COFRE1-ESTANTE1",
+                        "subcrear_almacenes": []
+                    },
+                    {
+                        "nombre": "ESTANTE3",
+                        "emoji": "🪜",
+                        "ruta": "",
+                        "ruta_jerarquia": "GMP-COFRE1-ESTANTE3",
+                        "subcrear_almacenes": []
+                    }
+                ]
+            },
+            {
+                "nombre": "COFRE2",
+                "emoji": "🗄️",
+                "ruta": "",
+                "ruta_jerarquia": "GMP-COFRE2",
+                "subcrear_almacenes": []
+            }
+        ]
+    },
+    {
+        "nombre": "SALA_ELECTRICA",
+        "emoji": "⚡",
+        "ruta": "",
+        "ruta_jerarquia": "SALA_ELECTRICA",
+        "subcrear_almacenes": [
+            {
+                "nombre": "JAULA",
+                "emoji": "🗑️",
+                "ruta": "",
+                "ruta_jerarquia": "SALA_ELECTRICA-JAULA",
+                "subcrear_almacenes": [
+                    {
+                        "nombre": "GABINETE1",
+                        "emoji": "🪤",
+                        "ruta": "",
+                        "ruta_jerarquia": "SALA_ELECTRICA-JAULA-GABINETE1",
+                        "subcrear_almacenes": []
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "nombre": "SALA BATERIAS",
+        "emoji": "🏤",
+        "ruta": "",
+        "ruta_jerarquia": "SALA BATERIAS",
+        "subcrear_almacenes": []
+    }
+]

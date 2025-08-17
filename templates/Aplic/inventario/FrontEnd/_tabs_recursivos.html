@@ -1,0 +1,46 @@
+{% macro render_tabs(almacenes, repuestos_por_equipo, nivel=0, padre_activo=True) %}
+    {% if almacenes %}
+        <ul class="nav nav-tabs mt-3" id="tabs-nivel-{{ nivel }}" role="tablist">
+        {% for almacen in almacenes %}
+            <li class="nav-item" role="presentation">
+                <button class="nav-link {% if loop.first and padre_activo %}active{% endif %}" 
+                        id="tab-{{ almacen.nombre|replace(' ', '_') }}-nivel-{{ nivel }}" 
+                        data-bs-toggle="tab" 
+                        data-bs-target="#tab-pane-{{ almacen.nombre|replace(' ', '_') }}-nivel-{{ nivel }}" 
+                        type="button" role="tab"
+                        aria-selected="{{ 'true' if loop.first and padre_activo else 'false' }}">
+                    {{ almacen.emoji }} {{ almacen.nombre }}
+                </button>
+            </li>
+        {% endfor %}
+        </ul>
+
+        <div class="tab-content border border-top-0 p-3" id="tabs-content-nivel-{{ nivel }}">
+            {% for almacen in almacenes %}
+            <div class="tab-pane fade {% if loop.first and padre_activo %}show active{% endif %} tab-pane-nivel-{{ nivel }}" 
+                 id="tab-pane-{{ almacen.nombre|replace(' ', '_') }}-nivel-{{ nivel }}" role="tabpanel">
+
+                <h5>{{ almacen.nombre }} <small class="text-muted">({{ almacen.ruta_jerarquia }})</small></h5>
+
+                {% set repuestos = repuestos_por_equipo.get(almacen.ruta_jerarquia, []) %}
+                {% if repuestos %}
+                    <ul class="list-group mb-3">
+                    {% for repuesto in repuestos %}
+                        <li class="list-group-item">
+                            <strong>Código:</strong> {{ repuesto.codigo }}<br>
+                            <strong>Nombre:</strong> {{ repuesto.nombre }}<br>
+                            <strong>Estado:</strong> {{ repuesto.estado }}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">No hay repuestos para este almacén.</p>
+                {% endif %}
+
+                {{ render_tabs(almacen.subcrear_almacenes, repuestos_por_equipo, nivel + 1, padre_activo=(loop.first and padre_activo)) }}
+
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endmacro %}

@@ -1,0 +1,880 @@
+/* Fondo general */
+body {
+    background-color: #3e2d59;
+    color: white;
+}
+
+
+
+/* Formulario */
+.bg-form {
+    background-color: #4b376a;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Tabs */
+.nav-tabs {
+    border-bottom: 2px solid #88c999;
+}
+
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    color: #fff;
+    background-color: transparent;
+    padding: 0.5rem 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: #88c999 #88c999 #3e2d59;
+    color: #88c999;
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(136, 201, 153, 0.3);
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #8e67c7;
+    color: #88c999;
+    border-color: #88c999 #88c999 #3e2d59;
+    font-weight: 600;
+    box-shadow: 0 2px 10px rgba(136, 201, 153, 0.4);
+    transform: scale(1.03);
+}
+
+/* Botones */
+.btn {
+    border-radius: 30px;
+    padding: 0.5rem 1.5rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.btn:active {
+    animation: pulse 0.2s ease-in-out;
+}
+
+.btn-primary {
+    background-color: #88c999;
+    color: #222;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #77b88b;
+    color: #111;
+    transform: scale(1.07);
+    box-shadow: 0 0 12px rgba(136, 201, 153, 0.4);
+}
+
+.btn-outline-light {
+    border: 2px solid #88c999;
+    color: #88c999;
+    background-color: transparent;
+}
+
+.btn-outline-light:hover {
+    background-color: #88c999;
+    color: #222;
+    transform: scale(1.07);
+    box-shadow: 0 0 12px rgba(136, 201, 153, 0.3);
+}
+
+.btn-outline-primary {
+    border: 2px solid #88c999;
+    color: #88c999;
+    background-color: transparent;
+}
+
+.btn-outline-primary:hover {
+    background-color: #88c999;
+    color: #222;
+    transform: scale(1.07);
+    box-shadow: 0 0 12px rgba(136, 201, 153, 0.3);
+}
+
+/* Botón editar */
+.btn-cancelar {
+    background-color: transparent;
+    border: 2px solid #dfece2;
+    color: #cfddd3;
+    border-radius: 30px;
+    padding: 0.4rem 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-cancelar:hover {
+    background-color: #c4cd95;
+    color: #222;
+    transform: scale(1.07);
+    box-shadow: 0 0 12px rgba(136, 201, 153, 0.4);
+}
+
+/* Botón editar */
+.btn-editar {
+    background-color: transparent;
+    border: 2px solid #88c999;
+    color: #88c999;
+    border-radius: 30px;
+    padding: 0.4rem 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-editar:hover {
+    background-color: #88c999;
+    color: #222;
+    transform: scale(1.07);
+    box-shadow: 0 0 12px rgba(136, 201, 153, 0.4);
+}
+
+/* Botón eliminar */
+.btn-eliminar {
+    background-color: transparent;
+    border: 2px solid #dc3545;
+    color: #dc3545;
+    border-radius: 30px;
+    padding: 0.4rem 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-eliminar:hover {
+    background-color: #dc3545;
+    color: #fff;
+    transform: scale(1.07);
+    box-shadow: 0 0 12px rgba(220, 53, 69, 0.3);
+}
+
+/* Botón agregar */
+.btn-agregar {
+    background-color: transparent;
+    border: 2px solid #de9440;
+    color: #e5d64f;
+    border-radius: 30px;
+    padding: 0.4rem 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-agregar:hover {
+    background-color: #e2b03d;
+    color: #fff;
+    transform: scale(1.07);
+    box-shadow: 0 0 12px rgba(112, 88, 9, 0.3);
+}
+
+/* Input con emoji */
+.input-with-emoji {
+    position: relative;
+}
+
+.input-emoji {
+    position: absolute;
+    left: 12px;
+    top: 70%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 1.3rem;
+    user-select: none;
+    line-height: 1;
+}
+
+.ps-5 {
+    padding-left: 2.5rem !important;
+}
+
+.image-container {
+     width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: left;  /* Centrado horizontal */
+    align-items: center;      /* Centrado vertical */
+    overflow: hidden;
+}
+
+.imageFactory {
+    padding: 20px;
+    width: 120%;
+    object-fit: cover; /* Para que llene sin deformarse */
+    display: block;
+    transform: translateY(-20%); /* Mueve la imagen hacia arriba */
+}
+
+.spinner {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(to right, #2a1e3b, #3e2d59);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+}
+
+.navbar .nav-link {
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: #ffffff !important;
+    position: relative;
+    z-index: 1;
+}
+
+.navbar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #88c999 !important;
+    transform: scale(1.07);
+    box-shadow: 0 0 10px rgba(136, 201, 153, 0.4);
+    z-index: 2;
+}
+
+.navbar .nav-link.active {
+    border-bottom: 2px solid #88c999;
+    font-weight: bold;
+    color: #88c999 !important;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand img {
+    filter: drop-shadow(0 0 4px white);
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover img {
+    transform: scale(1.1);
+}
+
+
+.tabla-scroll {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.sticky-header th {
+    position: sticky;
+    top: 0;
+    background-color: #212529;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .tabla-scroll {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .sticky-header th {
+        position: static;
+    }
+}
+
+/* Encabezado de tabla con estilo de navbar */
+.sticky-header th {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(to right, #2a1e3b, #3e2d59);
+    color: #fff;
+    z-index: 2;
+    padding: 0.75rem;
+    text-align: center;
+    border-bottom: 2px solid #88c999;
+    transition: all 0.3s ease;
+}
+
+.sticky-header th:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #88c999;
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(136, 201, 153, 0.4);
+}
+
+/* Responsivo para pantallas chicas */
+@media (max-width: 768px) {
+    .tabla-scroll {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .sticky-header th {
+        position: static;
+        background: #3e2d59;
+        color: white;
+    }
+}
+
+
+.swal-custom-popup {
+    background-color: #27372b !important;
+    color: #fff;
+    border-radius: 1rem !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+    padding: 1.5rem !important;
+    font-family: 'Inter', sans-serif;
+}
+
+.swal-custom-title {
+    font-weight: 600 !important;
+    font-size: 1.2rem !important;
+    text-align: center !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.swal-custom-confirm-button {
+    border-radius: 30px !important;
+    background-color: #88c999 !important;
+    color: #222 !important;
+    border: none !important;
+    padding: 0.5rem 1.5rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s ease !important;
+}
+
+.swal-custom-confirm-button:hover {
+    background-color: #77b88b !important;
+    color: #111 !important;
+    transform: scale(1.07) !important;
+    box-shadow: 0 0 12px rgba(136, 201, 153, 0.4) !important;
+}
+
+/* Submenú anidado en Bootstrap 5 */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -0.2rem;
+    margin-left: 0.1rem;
+    border-radius: 0.5rem;
+    background-color: #2a1e3b;
+    border: 1px solid #88c999;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    display: block;
+}
+
+.dropdown-submenu>.dropdown-item::after {
+    content: "▶";
+    float: right;
+    margin-right: -2.5rem;
+    color: #88c999;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #88c999;
+}
+
+/* Estilos para submenús anidados */
+.dropdown-menu {
+    background-color: #2a1e3b;
+    border: 1px solid #88c999;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+.dropdown-item {
+    color: #fff;
+    padding: 0.5rem 4.5rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    border-radius: 0.5rem;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #88c999;
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(136, 201, 153, 0.3);
+}
+
+
+/* Iconos y emojis bien alineados */
+.dropdown-item::before {
+    margin-right: 0.9rem;
+}
+
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.dropdown-submenu>.dropdown-menu {
+    animation: fadeSlideIn 0.3s ease forwards;
+    opacity: 0;
+    display: block;
+    /* necesario para forzar animación */
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-submenu:hover>.dropdown-menu {
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+
+/* Animación de entrada de filas */
+@keyframes fadeInRow {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ... (todo tu CSS anterior permanece igual) ... */
+
+/* Encabezado de tabla con estilo de navbar */
+.sticky-header th {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(to right, #2a1e3b, #3e2d59);
+    color: #fff;
+    z-index: 2;
+    padding: 0.75rem;
+    text-align: center;
+    border-bottom: 2px solid #88c999;
+    transition: all 0.3s ease;
+}
+.sticky-header th:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #88c999;
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(136, 201, 153, 0.4);
+}
+
+/* Responsivo para pantallas chicas */
+@media (max-width: 768px) {
+    .tabla-scroll {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .sticky-header th {
+        position: static;
+        background: #3e2d59;
+        color: white;
+    }
+}
+
+
+
+/* Paginación estilo igual a botón de navbar */
+.pagination .page-item .page-link {
+    background: linear-gradient(to bottom, #2c2c2c, #3c4e41);
+    color: #88c999;
+    border: none;
+    border-radius: 50px;
+    padding: 0.6rem 1.7rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.05),
+        0 4px 8px rgba(0, 0, 0, 0.4),
+        0 0 0 2px transparent,
+        0 4px 0 0 #88c999; /* glow inferior */
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.pagination .page-item .page-link:hover {
+    color: #101010;
+    background: #88c999;
+    transform: translateY(-1px) scale(1.03);
+    box-shadow:
+        0 6px 12px rgba(136, 201, 153, 0.3),
+        0 0 0 2px rgba(136, 201, 153, 0.5),
+        inset 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+.pagination .page-item.active .page-link {
+    background: #8e67c7;
+    color: #fff;
+    box-shadow:
+        0 6px 14px rgba(142, 103, 199, 0.45),
+        0 4px 0 0 #8e67c7;
+    transform: scale(1.05);
+}
+
+.pagination .page-item.disabled .page-link {
+    background: #1f1f1f;
+    color: #777;
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.pagination .page-item {
+    margin: 0 6px; /* separación horizontal entre botones */
+}
+
+.swal-custom-popup {
+  background-color: #27372b !important;
+  color: #fff;
+  border-radius: 1rem !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
+  padding: 1.5rem !important;
+  font-family: 'Inter', sans-serif;
+}
+
+.swal-custom-title {
+  font-weight: 600 !important;
+  font-size: 1.2rem !important;
+  text-align: center !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.swal-custom-confirm-button {
+  border-radius: 30px !important;
+  background-color: #88c999 !important;
+  color: #222 !important;
+  border: none !important;
+  padding: 0.5rem 1.5rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.5px !important;
+  transition: all 0.3s ease !important;
+}
+
+.swal-custom-confirm-button:hover {
+  background-color: #77b88b !important;
+  color: #111 !important;
+  transform: scale(1.07) !important;
+  box-shadow: 0 0 12px rgba(136, 201, 153, 0.4) !important;
+}
+
+
+/* Loader */
+#loader {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(255,255,255,0.7);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+.spinner {
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #3498db;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.modal-dialog {
+  max-width: 90vw;      /* Máximo ancho relativo a la ventana */
+  width: auto;          /* Ancho automático */
+  margin: 1.75rem auto; /* Margen vertical */
+}
+
+.modal-body {
+  white-space: normal;  /* Permite que el texto haga wrap */
+  word-wrap: break-word; /* Rompe palabras largas si es necesario */
+  overflow-wrap: break-word;
+  max-height: 70vh;     /* Máximo alto relativo a la ventana */
+  overflow-y: auto;     /* Scroll vertical solo si es necesario */
+}
+
+.noty_bar {
+        border-radius: 8px;
+        padding: 15px 20px;
+        margin: 10px;
+        color: white;
+        font-weight: bold;
+        font-family: sans-serif;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .noty_type__success {
+        background-color: #28a745;
+    }
+
+    .noty_type__error {
+        background-color: #dc3545;
+    }
+
+    .noty_type__warning {
+        background-color: #ffc107;
+        color: black;
+    }
+
+    .noty_type__info {
+        background-color: #17a2b8;
+    }
+
+    .noty_layout__topRight {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 9999;
+    }
+/* Popup fondo semitransparente */
+.popup-bg {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Popup modal centrado */
+.popup-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4b376a; /* usa un color acorde con bg-form para coherencia */
+    color: white;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 450px;
+    width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 0 15px rgba(136, 201, 153, 0.6);
+    z-index: 1000;
+    font-family: 'Inter', sans-serif;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Texto de descripción en la lista para que se note que es clickable */
+.descripcion-text {
+    color: #88c999;
+    text-decoration: underline;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+/* Lista de eventos scroll */
+.event-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-left: 0;
+    list-style: none;
+}
+
+.event-list li {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #88c999;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.event-info {
+    cursor: pointer;
+    flex: 1 1 auto;
+}
+
+/* Margen para botones dentro del popup */
+#popup .btn {
+    font-weight: 600;
+}
+
+/* Ajustes a botones que ya tienes definidos */
+
+ /* ====== Tabla base ====== */
+    table { width: 100%; border-collapse: collapse; }
+    thead th {
+      text-align: center;
+      font-weight: 700;
+      background: #0f172a; /* slate-900 */
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    td {
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid #e5e7eb;
+      padding: 0;
+      background: #ffffff;
+    }
+
+    /* Celdas vacías (leading/trailing) */
+    td.vacio {
+      background: repeating-linear-gradient(
+        45deg, #f8fafc, #f8fafc 8px, #f1f5f9 8px, #f1f5f9 16px
+      );
+    }
+
+    /* Contenedor visual del día */
+    .dia {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 6px;
+      border-radius: 12px;
+      margin: 6px;
+      padding: 8px;
+      cursor: pointer;
+      transition: transform 140ms ease, box-shadow 140ms ease, background-color 180ms ease, filter 180ms ease;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+      position: relative;
+      color: #0f172a !important; /* neutraliza .text-white del <table> */
+    }
+    .dia:hover {
+      transform: translateY(-2px) scale(1.015);
+      box-shadow: 0 10px 22px rgba(0,0,0,.15);
+      filter: saturate(1.03);
+    }
+
+    /* Etiquetas internas */
+    .numero { font-weight: 700; font-size: 1rem; line-height: 1; opacity: .9; user-select: none; }
+    .semana-label { display: none; font-size: .8rem; font-weight: 600; opacity: .8; }
+
+    /* Evento pill */
+    .evento-pill {
+      font-size: .8rem;
+      line-height: 1.1;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.5);
+      border: 1px solid rgba(255,255,255,.7);
+      backdrop-filter: blur(2px);
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      transition: transform 140ms ease, background-color 180ms ease, opacity 180ms ease;
+    }
+    .dia:hover .evento-pill { transform: translateX(2px); background: rgba(255,255,255,.65); }
+
+    /* Paletas por día (Lun–Dom) */
+    .dia-lun { background: linear-gradient(180deg, #e8f3ff, #cfe9ff); border: 1px solid #bfdcff; }
+    .dia-mar { background: linear-gradient(180deg, #e9fff3, #ccf7e4); border: 1px solid #b9ecd7; }
+    .dia-mie { background: linear-gradient(180deg, #fff5e6, #ffe8c7); border: 1px solid #ffdca9; }
+    .dia-jue { background: linear-gradient(180deg, #f5e9ff, #ead6ff); border: 1px solid #dcc2ff; }
+    .dia-vie { background: linear-gradient(180deg, #fff0f2, #ffd9df); border: 1px solid #ffc2cc; }
+    .dia-sab { background: linear-gradient(180deg, #eefcf5, #d6f7e8); border: 1px solid #c1ecd9; }
+    .dia-dom { background: linear-gradient(180deg, #f4f7ff, #e0e7ff); border: 1px solid #c7d2fe; }
+
+    /* Día actual destacado con “pulse” */
+    .hoy {
+      background: linear-gradient(135deg, #ffeb99, #ffd84d);
+      color: #000 !important;
+      font-weight: 800;
+      box-shadow: 0 0 12px rgba(255, 193, 7, 0.6);
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 12px rgba(255, 193, 7, 0.6); }
+      50% { transform: scale(1.05); box-shadow: 0 0 18px rgba(255, 193, 7, 0.8); }
+      100% { transform: scale(1); box-shadow: 0 0 12px rgba(255, 193, 7, 0.6); }
+    }
+
+    /* Evitar que .text-white del table afecte internamente */
+    .table.text-white .dia, .table.text-white .dia * { color: #0f172a !important; }
+
+    /* ====== Responsivo (grilla -> lista) ====== */
+    @media (max-width: 992px) {
+      .dia { min-height: 70px; padding: 6px; }
+      .numero { font-size: 0.95rem; }
+      .evento-pill { font-size: 0.75rem; }
+    }
+    @media (max-width: 576px) {
+      thead { display: none; }
+      table, tbody, tr, td { display: block; width: 100%; }
+      tr { margin-bottom: 10px; }
+      td { border: none; padding: 0; height: auto; }
+      td.vacio { display: none; }
+      .dia {
+        min-height: 64px;
+        margin: 8px 0;
+        padding: 10px;
+        align-items: flex-start;
+      }
+      .semana-label { display: inline-block; }
+      .numero { font-size: 1rem; }
+      .evento-pill { font-size: 0.8rem; padding: 3px 8px; }
+    }
+
+    /* Selector superior en columna en móviles */
+    @media (max-width: 768px) {
+      .controls-responsive > * { flex: 1 1 100%; margin-bottom: 8px; }
+    }
+
+
+    /* Fondo oscuro y texto blanco para el contenedor Select2 */
+.select2-container--default .select2-selection--multiple {
+  background-color: #3e2d59 !important;
+  color: #fff !important;
+  border: 1px solid #88c999 !important;
+  border-radius: 0.25rem;
+}
+
+/* Color del texto de los elementos seleccionados */
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #88c999 !important;
+  color: #1e1e1e !important;
+}
+
+/* Color del placeholder */
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+  color: #fff !important;
+}
+
+/* Color del texto dentro del dropdown */
+.select2-container--default .select2-results__option {
+  color: #fff !important;
+  background-color: #3e2d59;
+}
+
+/* Color de hover en opciones del dropdown */
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+  background-color: #88c999 !important;
+  color: #1e1e1e !important;
+}

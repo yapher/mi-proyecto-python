@@ -1,0 +1,8 @@
+<button type="button" class="btn btn-warning btn-sm btn-editar" data-bs-toggle="modal" data-bs-target="#agregarModal"
+    data-codigo="{{ r.codigo }}" data-nombre="{{ r.nombre }}" data-cantidad="{{ r.cantidad }}"
+    data-equipo="{{ r.equipo }}" data-ruta_jerarquia='{{ r.ruta_jerarquia  | tojson }}'
+    data-fecha_creacion="{{ r.fecha_creacion }}" data-fecha_fin="{{ r.fecha_fin|default('') }}"
+    data-link="{{ r.link|default('') }}" data-emojy="{{ r.estado }}" data-imagen="{{ r.imagen|default('') }}"
+    data-tab_activo="{{ active_tab }}">
+    ✏️ Editar
+</button>

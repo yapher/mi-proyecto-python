@@ -1,0 +1,9 @@
+{% if r.imagen %}
+<img src="{{ url_for('static', filename='uploads/Imagenes/' ~ r.imagen) }}" alt="{{ r.nombre }}" class="product-image"
+    style="max-width:80px;cursor:pointer;" alt="{{ r.nombre }}" class="product-image"
+    style="max-width:80px;cursor:pointer;" data-codigo="{{ r.codigo }}" data-nombre="{{ r.nombre }}"
+    data-link="{{ r.link }}" data-cantidad="{{ r.cantidad }}" data-fecha="{{ r.fecha_creacion }}"
+    data-equipo="{{ r.equipo }}" data-fechafin="{{ r.fecha_fin }}" data-ubicacion="{{ r.ruta_jerarquia }}"
+    data-imagen="{% if r.imagen %}{{ url_for('static', filename='uploads/Imagenes/' ~ r.imagen) }}{% endif %}"
+    data-emojy="{{ r.estado }}">
+{% else %} Sin imagen {% endif %}

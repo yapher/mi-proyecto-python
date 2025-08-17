@@ -1,0 +1,11 @@
+{% extends 'layout.html' %}
+{% from 'Aplic/inventario/FrontEnd/_tabs_recursivos.html' import render_tabs %}
+
+{% block content %}
+<h3>Inventario de Almacenes</h3>
+
+{{ render_tabs(almacenes, repuestos_por_equipo) }}
+
+
+
+{% endblock %}

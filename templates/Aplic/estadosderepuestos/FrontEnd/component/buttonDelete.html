@@ -1,0 +1,8 @@
+<form method="POST" action="{{ url_for('indexEstadoRep.eliminar_repuesto') }}" style="display:inline;"
+    onsubmit="return confirm('¿Seguro que deseas eliminar este repuesto?');">
+    <input type="hidden" name="codigo" value="{{ r.codigo }}">
+    
+    <button type="submit" class="btn btn-eliminar btn-sm" title="Eliminar">
+        🗑️ Eliminar
+    </button>
+</form>

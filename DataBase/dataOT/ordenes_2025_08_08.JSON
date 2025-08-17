@@ -1,0 +1,1242 @@
+[
+    {
+        "numero_orden": "PM14:37207236",
+        "descripcion": "Mejoras N1 - EMB40",
+        "inicio_extremo": "28/07/2025",
+        "fin_extremo": "28/07/2025",
+        "equipo_ut": "28/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002182737",
+        "descripcion": "PAT-CONTROL DE PAT PARARRAYOS",
+        "inicio_extremo": "31/07/2025",
+        "fin_extremo": "14/07/2025",
+        "equipo_ut": "14/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002262859",
+        "descripcion": "REVISION ELECTRICA GRUA BATERIAS",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "14/07/2025",
+        "equipo_ut": "14/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002270255",
+        "descripcion": "REcablear/Canalizar",
+        "inicio_extremo": "11/03/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "18/03/2025",
+        "descripcion_equipo": "CANTIDAD:2/2",
+        "estado": "2",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002386714",
+        "descripcion": "Canalizar cable 24v  resistencia",
+        "inicio_extremo": "11/03/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "18/03/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002407872",
+        "descripcion": "RP-CONTROL CERRADURAS  PUERTAS",
+        "inicio_extremo": "11/03/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "12/03/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002492328",
+        "descripcion": "RP-MANT. TIJERA CORTE FILM",
+        "inicio_extremo": "09/04/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "12/04/2025",
+        "descripcion_equipo": "CANTIDAD:3/3",
+        "estado": "3",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002492329",
+        "descripcion": "RP-MANT. TB EMBALAJE AUTOMÁTICO",
+        "inicio_extremo": "09/04/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "12/04/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002492340",
+        "descripcion": "RP-GAMB. MANT. VENTILADORES LITTELL",
+        "inicio_extremo": "27/03/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "30/03/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002492344",
+        "descripcion": "RP-MANT. ELÉCTRICO SENSORES LITTELL",
+        "inicio_extremo": "27/03/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "30/03/2025",
+        "descripcion_equipo": "CANTIDAD:4/4",
+        "estado": "4",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002492346",
+        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA LITTELL",
+        "inicio_extremo": "27/03/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "30/03/2025",
+        "descripcion_equipo": "CANTIDAD:4/4",
+        "estado": "4",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002519716",
+        "descripcion": "Normalizar puntos PAT",
+        "inicio_extremo": "29/10/2025",
+        "fin_extremo": "04/07/2025",
+        "equipo_ut": "04/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002575827",
+        "descripcion": "Cableado  sensor de diametro de bb",
+        "inicio_extremo": "21/04/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "21/04/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002577363",
+        "descripcion": "RP-MEGAR MOT.PRINCIP.DE ENTRADA",
+        "inicio_extremo": "21/04/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "21/04/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002577370",
+        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA LITTELL",
+        "inicio_extremo": "21/04/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "22/04/2025",
+        "descripcion_equipo": "CANTIDAD:4/4",
+        "estado": "4",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM14:2002648720",
+        "descripcion": "Mejoras N1 EMB40",
+        "inicio_extremo": "02/09/2025",
+        "fin_extremo": "04/07/2025",
+        "equipo_ut": "04/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002663427",
+        "descripcion": "REPARACION PAT SIDERCROM",
+        "inicio_extremo": "01/12/2025",
+        "fin_extremo": "29/07/2025",
+        "equipo_ut": "29/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002663429",
+        "descripcion": "REPARACION PAT SIDERCROM",
+        "inicio_extremo": "01/12/2025",
+        "fin_extremo": "29/07/2025",
+        "equipo_ut": "29/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002842764",
+        "descripcion": "REVISION GENERAL ELECTRONICA HALLDEN",
+        "inicio_extremo": "02/07/2025",
+        "fin_extremo": "02/07/2025",
+        "equipo_ut": "02/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002887487",
+        "descripcion": "REVISION ILUMINACION DELTA",
+        "inicio_extremo": "02/07/2025",
+        "fin_extremo": "02/07/2025",
+        "equipo_ut": "02/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002889697",
+        "descripcion": "Asistencia RP EMB40",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "18/07/2025",
+        "equipo_ut": "18/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002889721",
+        "descripcion": "Asistencia RP Littell",
+        "inicio_extremo": "16/07/2025",
+        "fin_extremo": "14/07/2025",
+        "equipo_ut": "14/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891099",
+        "descripcion": "RP-CONTROL CERRADURAS  PUERTAS",
+        "inicio_extremo": "22/07/2025",
+        "fin_extremo": "22/07/2025",
+        "equipo_ut": "22/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891100",
+        "descripcion": "RP- CONTROL DE SENSORES",
+        "inicio_extremo": "22/07/2025",
+        "fin_extremo": "22/07/2025",
+        "equipo_ut": "22/07/2025",
+        "descripcion_equipo": "CANTIDAD:4/4",
+        "estado": "4",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891101",
+        "descripcion": "RP-MANT. TIJERA CORTE FILM",
+        "inicio_extremo": "22/07/2025",
+        "fin_extremo": "22/07/2025",
+        "equipo_ut": "22/07/2025",
+        "descripcion_equipo": "CANTIDAD:3/3",
+        "estado": "3",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891102",
+        "descripcion": "RP-MANT. TB EMBALAJE AUTOMÁTICO",
+        "inicio_extremo": "22/07/2025",
+        "fin_extremo": "22/07/2025",
+        "equipo_ut": "22/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891109",
+        "descripcion": "RP-MANT. ELÉCTRICO HALLDEN",
+        "inicio_extremo": "02/07/2025",
+        "fin_extremo": "02/07/2025",
+        "equipo_ut": "02/07/2025",
+        "descripcion_equipo": "CANTIDAD:5/5",
+        "estado": "5",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891110",
+        "descripcion": "RP-REVISION TABLEROS HALLDEN",
+        "inicio_extremo": "02/07/2025",
+        "fin_extremo": "02/07/2025",
+        "equipo_ut": "02/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891112",
+        "descripcion": "RP-LIMPIEZA HALLDEN",
+        "inicio_extremo": "02/07/2025",
+        "fin_extremo": "02/07/2025",
+        "equipo_ut": "02/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891118",
+        "descripcion": "RP-GAMB. MANT. VENTILADORES LITTELL",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "24/07/2025",
+        "equipo_ut": "24/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891119",
+        "descripcion": "RP-GAMB-REV. MOTORES DE CC.",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "24/07/2025",
+        "equipo_ut": "24/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891120",
+        "descripcion": "RP-MANT. ELÉCTRICO SENSORES LITTELL",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "24/07/2025",
+        "equipo_ut": "24/07/2025",
+        "descripcion_equipo": "CANTIDAD:4/4",
+        "estado": "4",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891121",
+        "descripcion": "RP- LIMPIEZA LITTELL",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "24/07/2025",
+        "equipo_ut": "24/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002925372",
+        "descripcion": "INPEC. GRAL. ELECTRICA AREA SERVICIOS",
+        "inicio_extremo": "05/07/2025",
+        "fin_extremo": "04/07/2025",
+        "equipo_ut": "04/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002925374",
+        "descripcion": "REVISION GRAL. GRUA BATERIAS",
+        "inicio_extremo": "05/07/2025",
+        "fin_extremo": "04/07/2025",
+        "equipo_ut": "04/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002934466",
+        "descripcion": "INSP. SENSORES LITTELL",
+        "inicio_extremo": "02/07/2025",
+        "fin_extremo": "01/07/2025",
+        "equipo_ut": "01/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002938545",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "inicio_extremo": "03/07/2025",
+        "fin_extremo": "02/07/2025",
+        "equipo_ut": "02/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002943396",
+        "descripcion": "Asistencia RP Halden",
+        "inicio_extremo": "01/08/2025",
+        "fin_extremo": "28/07/2025",
+        "equipo_ut": "28/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002943402",
+        "descripcion": "Asistencia RP Littell",
+        "inicio_extremo": "01/08/2025",
+        "fin_extremo": "28/07/2025",
+        "equipo_ut": "28/07/2025",
+        "descripcion_equipo": "CANTIDAD:2/2",
+        "estado": "2",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002943407",
+        "descripcion": "Asistencia RP EMB40",
+        "inicio_extremo": "01/08/2025",
+        "fin_extremo": "28/07/2025",
+        "equipo_ut": "28/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002945506",
+        "descripcion": "LIMPIEZA DE SALA ELÉCTRICA",
+        "inicio_extremo": "10/07/2025",
+        "fin_extremo": "14/07/2025",
+        "equipo_ut": "14/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002946871",
+        "descripcion": "REVISION ILUMINACION HALLDEN",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "21/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002946872",
+        "descripcion": "REVISION SISTEMA ELEC. DELTA",
+        "inicio_extremo": "10/07/2025",
+        "fin_extremo": "07/07/2025",
+        "equipo_ut": "07/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002947942",
+        "descripcion": "Puesta en marcha med. diámetro",
+        "inicio_extremo": "29/07/2025",
+        "fin_extremo": "04/07/2025",
+        "equipo_ut": "04/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002960198",
+        "descripcion": "INSPECCION ELECT. APILADORES DE PRIMERA",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "15/07/2025",
+        "equipo_ut": "15/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002960199",
+        "descripcion": "INSPECCION ELECT. APILADORES DE RECHAZO",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "15/07/2025",
+        "equipo_ut": "15/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002963550",
+        "descripcion": "INSPECCION SENSORES HALLDEN",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "14/07/2025",
+        "equipo_ut": "14/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002967661",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "14/07/2025",
+        "equipo_ut": "14/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002975766",
+        "descripcion": "REVISION ILUMINACION DELTA",
+        "inicio_extremo": "16/07/2025",
+        "fin_extremo": "15/07/2025",
+        "equipo_ut": "15/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002984400",
+        "descripcion": "INSP. GRAL AREAS EXTERNAS.",
+        "inicio_extremo": "21/07/2025",
+        "fin_extremo": "16/07/2025",
+        "equipo_ut": "16/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002984401",
+        "descripcion": "REVISION ELECT. BAT Y ELEVADOR POTENCIA.",
+        "inicio_extremo": "21/07/2025",
+        "fin_extremo": "17/07/2025",
+        "equipo_ut": "17/07/2025",
+        "descripcion_equipo": "CANTIDAD:2/2",
+        "estado": "2",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002992544",
+        "descripcion": "INSP. SENSORES LITTELL",
+        "inicio_extremo": "16/07/2025",
+        "fin_extremo": "15/07/2025",
+        "equipo_ut": "15/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002996047",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "15/07/2025",
+        "equipo_ut": "15/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003012959",
+        "descripcion": "INPEC. GRAL. ELECTRICA AREA SERVICIOS",
+        "inicio_extremo": "26/07/2025",
+        "fin_extremo": "23/07/2025",
+        "equipo_ut": "23/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2003012962",
+        "descripcion": "REVISION ELECTRICA GRUA BATERIAS",
+        "inicio_extremo": "28/08/2025",
+        "fin_extremo": "29/07/2025",
+        "equipo_ut": "29/07/2025",
+        "descripcion_equipo": "CANTIDAD:2/2",
+        "estado": "2",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003020815",
+        "descripcion": "INSPECCION SENSORES HALLDEN",
+        "inicio_extremo": "23/07/2025",
+        "fin_extremo": "22/07/2025",
+        "equipo_ut": "22/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2003024702",
+        "descripcion": "LIMPIEZA DE SALA ELÉCTRICA",
+        "inicio_extremo": "01/08/2025",
+        "fin_extremo": "23/07/2025",
+        "equipo_ut": "23/07/2025",
+        "descripcion_equipo": "CANTIDAD:2/2",
+        "estado": "2",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003024707",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "23/07/2025",
+        "equipo_ut": "23/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003030693",
+        "descripcion": "Asistencia falla linea Littell",
+        "inicio_extremo": "22/08/2025",
+        "fin_extremo": "23/07/2025",
+        "equipo_ut": "23/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003043222",
+        "descripcion": "REVISION GRAL. GRUA BATERIAS",
+        "inicio_extremo": "02/08/2025",
+        "fin_extremo": "29/07/2025",
+        "equipo_ut": "29/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003052380",
+        "descripcion": "INSP. SENSORES LITTELL",
+        "inicio_extremo": "30/07/2025",
+        "fin_extremo": "30/07/2025",
+        "equipo_ut": "30/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003056710",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "inicio_extremo": "31/07/2025",
+        "fin_extremo": "30/07/2025",
+        "equipo_ut": "30/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM14:37207236",
+        "descripcion": "Mejoras N1 - EMB40",
+        "inicio_extremo": "28/07/2025",
+        "fin_extremo": "28/07/2025",
+        "equipo_ut": "28/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002182737",
+        "descripcion": "PAT-CONTROL DE PAT PARARRAYOS",
+        "inicio_extremo": "31/07/2025",
+        "fin_extremo": "14/07/2025",
+        "equipo_ut": "14/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002262859",
+        "descripcion": "REVISION ELECTRICA GRUA BATERIAS",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "14/07/2025",
+        "equipo_ut": "14/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002270255",
+        "descripcion": "REcablear/Canalizar",
+        "inicio_extremo": "11/03/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "18/03/2025",
+        "descripcion_equipo": "CANTIDAD:2/2",
+        "estado": "2",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002386714",
+        "descripcion": "Canalizar cable 24v  resistencia",
+        "inicio_extremo": "11/03/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "18/03/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002407872",
+        "descripcion": "RP-CONTROL CERRADURAS  PUERTAS",
+        "inicio_extremo": "11/03/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "12/03/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002492328",
+        "descripcion": "RP-MANT. TIJERA CORTE FILM",
+        "inicio_extremo": "09/04/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "12/04/2025",
+        "descripcion_equipo": "CANTIDAD:3/3",
+        "estado": "3",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002492329",
+        "descripcion": "RP-MANT. TB EMBALAJE AUTOMÁTICO",
+        "inicio_extremo": "09/04/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "12/04/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002492340",
+        "descripcion": "RP-GAMB. MANT. VENTILADORES LITTELL",
+        "inicio_extremo": "27/03/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "30/03/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002492344",
+        "descripcion": "RP-MANT. ELÉCTRICO SENSORES LITTELL",
+        "inicio_extremo": "27/03/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "30/03/2025",
+        "descripcion_equipo": "CANTIDAD:4/4",
+        "estado": "4",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002492346",
+        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA LITTELL",
+        "inicio_extremo": "27/03/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "30/03/2025",
+        "descripcion_equipo": "CANTIDAD:4/4",
+        "estado": "4",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002519716",
+        "descripcion": "Normalizar puntos PAT",
+        "inicio_extremo": "29/10/2025",
+        "fin_extremo": "04/07/2025",
+        "equipo_ut": "04/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002575827",
+        "descripcion": "Cableado  sensor de diametro de bb",
+        "inicio_extremo": "21/04/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "21/04/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002577363",
+        "descripcion": "RP-MEGAR MOT.PRINCIP.DE ENTRADA",
+        "inicio_extremo": "21/04/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "21/04/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002577370",
+        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA LITTELL",
+        "inicio_extremo": "21/04/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "22/04/2025",
+        "descripcion_equipo": "CANTIDAD:4/4",
+        "estado": "4",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM14:2002648720",
+        "descripcion": "Mejoras N1 EMB40",
+        "inicio_extremo": "02/09/2025",
+        "fin_extremo": "04/07/2025",
+        "equipo_ut": "04/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002663427",
+        "descripcion": "REPARACION PAT SIDERCROM",
+        "inicio_extremo": "01/12/2025",
+        "fin_extremo": "29/07/2025",
+        "equipo_ut": "29/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002663429",
+        "descripcion": "REPARACION PAT SIDERCROM",
+        "inicio_extremo": "01/12/2025",
+        "fin_extremo": "29/07/2025",
+        "equipo_ut": "29/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002842764",
+        "descripcion": "REVISION GENERAL ELECTRONICA HALLDEN",
+        "inicio_extremo": "02/07/2025",
+        "fin_extremo": "02/07/2025",
+        "equipo_ut": "02/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002887487",
+        "descripcion": "REVISION ILUMINACION DELTA",
+        "inicio_extremo": "02/07/2025",
+        "fin_extremo": "02/07/2025",
+        "equipo_ut": "02/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002889697",
+        "descripcion": "Asistencia RP EMB40",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "18/07/2025",
+        "equipo_ut": "18/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002889721",
+        "descripcion": "Asistencia RP Littell",
+        "inicio_extremo": "16/07/2025",
+        "fin_extremo": "14/07/2025",
+        "equipo_ut": "14/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891099",
+        "descripcion": "RP-CONTROL CERRADURAS  PUERTAS",
+        "inicio_extremo": "22/07/2025",
+        "fin_extremo": "22/07/2025",
+        "equipo_ut": "22/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891100",
+        "descripcion": "RP- CONTROL DE SENSORES",
+        "inicio_extremo": "22/07/2025",
+        "fin_extremo": "22/07/2025",
+        "equipo_ut": "22/07/2025",
+        "descripcion_equipo": "CANTIDAD:4/4",
+        "estado": "4",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891101",
+        "descripcion": "RP-MANT. TIJERA CORTE FILM",
+        "inicio_extremo": "22/07/2025",
+        "fin_extremo": "22/07/2025",
+        "equipo_ut": "22/07/2025",
+        "descripcion_equipo": "CANTIDAD:3/3",
+        "estado": "3",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891102",
+        "descripcion": "RP-MANT. TB EMBALAJE AUTOMÁTICO",
+        "inicio_extremo": "22/07/2025",
+        "fin_extremo": "22/07/2025",
+        "equipo_ut": "22/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891109",
+        "descripcion": "RP-MANT. ELÉCTRICO HALLDEN",
+        "inicio_extremo": "02/07/2025",
+        "fin_extremo": "02/07/2025",
+        "equipo_ut": "02/07/2025",
+        "descripcion_equipo": "CANTIDAD:5/5",
+        "estado": "5",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891110",
+        "descripcion": "RP-REVISION TABLEROS HALLDEN",
+        "inicio_extremo": "02/07/2025",
+        "fin_extremo": "02/07/2025",
+        "equipo_ut": "02/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891112",
+        "descripcion": "RP-LIMPIEZA HALLDEN",
+        "inicio_extremo": "02/07/2025",
+        "fin_extremo": "02/07/2025",
+        "equipo_ut": "02/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891118",
+        "descripcion": "RP-GAMB. MANT. VENTILADORES LITTELL",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "24/07/2025",
+        "equipo_ut": "24/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891119",
+        "descripcion": "RP-GAMB-REV. MOTORES DE CC.",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "24/07/2025",
+        "equipo_ut": "24/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891120",
+        "descripcion": "RP-MANT. ELÉCTRICO SENSORES LITTELL",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "24/07/2025",
+        "equipo_ut": "24/07/2025",
+        "descripcion_equipo": "CANTIDAD:4/4",
+        "estado": "4",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002891121",
+        "descripcion": "RP- LIMPIEZA LITTELL",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "24/07/2025",
+        "equipo_ut": "24/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002925372",
+        "descripcion": "INPEC. GRAL. ELECTRICA AREA SERVICIOS",
+        "inicio_extremo": "05/07/2025",
+        "fin_extremo": "04/07/2025",
+        "equipo_ut": "04/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002925374",
+        "descripcion": "REVISION GRAL. GRUA BATERIAS",
+        "inicio_extremo": "05/07/2025",
+        "fin_extremo": "04/07/2025",
+        "equipo_ut": "04/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002934466",
+        "descripcion": "INSP. SENSORES LITTELL",
+        "inicio_extremo": "02/07/2025",
+        "fin_extremo": "01/07/2025",
+        "equipo_ut": "01/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002938545",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "inicio_extremo": "03/07/2025",
+        "fin_extremo": "02/07/2025",
+        "equipo_ut": "02/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002943396",
+        "descripcion": "Asistencia RP Halden",
+        "inicio_extremo": "01/08/2025",
+        "fin_extremo": "28/07/2025",
+        "equipo_ut": "28/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002943402",
+        "descripcion": "Asistencia RP Littell",
+        "inicio_extremo": "01/08/2025",
+        "fin_extremo": "28/07/2025",
+        "equipo_ut": "28/07/2025",
+        "descripcion_equipo": "CANTIDAD:2/2",
+        "estado": "2",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002943407",
+        "descripcion": "Asistencia RP EMB40",
+        "inicio_extremo": "01/08/2025",
+        "fin_extremo": "28/07/2025",
+        "equipo_ut": "28/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2002945506",
+        "descripcion": "LIMPIEZA DE SALA ELÉCTRICA",
+        "inicio_extremo": "10/07/2025",
+        "fin_extremo": "14/07/2025",
+        "equipo_ut": "14/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002946871",
+        "descripcion": "REVISION ILUMINACION HALLDEN",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "21/07/2025",
+        "equipo_ut": "21/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002946872",
+        "descripcion": "REVISION SISTEMA ELEC. DELTA",
+        "inicio_extremo": "10/07/2025",
+        "fin_extremo": "07/07/2025",
+        "equipo_ut": "07/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002947942",
+        "descripcion": "Puesta en marcha med. diámetro",
+        "inicio_extremo": "29/07/2025",
+        "fin_extremo": "04/07/2025",
+        "equipo_ut": "04/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002960198",
+        "descripcion": "INSPECCION ELECT. APILADORES DE PRIMERA",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "15/07/2025",
+        "equipo_ut": "15/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002960199",
+        "descripcion": "INSPECCION ELECT. APILADORES DE RECHAZO",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "15/07/2025",
+        "equipo_ut": "15/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002963550",
+        "descripcion": "INSPECCION SENSORES HALLDEN",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "14/07/2025",
+        "equipo_ut": "14/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002967661",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "14/07/2025",
+        "equipo_ut": "14/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002975766",
+        "descripcion": "REVISION ILUMINACION DELTA",
+        "inicio_extremo": "16/07/2025",
+        "fin_extremo": "15/07/2025",
+        "equipo_ut": "15/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002984400",
+        "descripcion": "INSP. GRAL AREAS EXTERNAS.",
+        "inicio_extremo": "21/07/2025",
+        "fin_extremo": "16/07/2025",
+        "equipo_ut": "16/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002984401",
+        "descripcion": "REVISION ELECT. BAT Y ELEVADOR POTENCIA.",
+        "inicio_extremo": "21/07/2025",
+        "fin_extremo": "17/07/2025",
+        "equipo_ut": "17/07/2025",
+        "descripcion_equipo": "CANTIDAD:2/2",
+        "estado": "2",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002992544",
+        "descripcion": "INSP. SENSORES LITTELL",
+        "inicio_extremo": "16/07/2025",
+        "fin_extremo": "15/07/2025",
+        "equipo_ut": "15/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2002996047",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "15/07/2025",
+        "equipo_ut": "15/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003012959",
+        "descripcion": "INPEC. GRAL. ELECTRICA AREA SERVICIOS",
+        "inicio_extremo": "26/07/2025",
+        "fin_extremo": "23/07/2025",
+        "equipo_ut": "23/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2003012962",
+        "descripcion": "REVISION ELECTRICA GRUA BATERIAS",
+        "inicio_extremo": "28/08/2025",
+        "fin_extremo": "29/07/2025",
+        "equipo_ut": "29/07/2025",
+        "descripcion_equipo": "CANTIDAD:2/2",
+        "estado": "2",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003020815",
+        "descripcion": "INSPECCION SENSORES HALLDEN",
+        "inicio_extremo": "23/07/2025",
+        "fin_extremo": "22/07/2025",
+        "equipo_ut": "22/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2003024702",
+        "descripcion": "LIMPIEZA DE SALA ELÉCTRICA",
+        "inicio_extremo": "01/08/2025",
+        "fin_extremo": "23/07/2025",
+        "equipo_ut": "23/07/2025",
+        "descripcion_equipo": "CANTIDAD:2/2",
+        "estado": "2",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003024707",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "23/07/2025",
+        "equipo_ut": "23/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003030693",
+        "descripcion": "Asistencia falla linea Littell",
+        "inicio_extremo": "22/08/2025",
+        "fin_extremo": "23/07/2025",
+        "equipo_ut": "23/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003043222",
+        "descripcion": "REVISION GRAL. GRUA BATERIAS",
+        "inicio_extremo": "02/08/2025",
+        "fin_extremo": "29/07/2025",
+        "equipo_ut": "29/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003052380",
+        "descripcion": "INSP. SENSORES LITTELL",
+        "inicio_extremo": "30/07/2025",
+        "fin_extremo": "30/07/2025",
+        "equipo_ut": "30/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003056710",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "inicio_extremo": "31/07/2025",
+        "fin_extremo": "30/07/2025",
+        "equipo_ut": "30/07/2025",
+        "descripcion_equipo": "CANTIDAD:1/1",
+        "estado": "1",
+        "revision": ""
+    }
+]

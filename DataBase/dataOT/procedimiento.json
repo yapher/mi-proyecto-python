@@ -1,0 +1,564 @@
+[
+    {
+        "nombre": "<U>ELEMENTOS DE PROTECCION ESPECIFICA</>:",
+        "emoji": "a",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "\nAPORTE DE SOLDADURA MANUAL:",
+                "emoji": "aa",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "•  Careta para soldadora eléctrica.",
+                        "emoji": "aaa",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "•  Guantes de cuero.",
+                        "emoji": "aaa",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "•  Delantal de cuero.",
+                        "emoji": "aaa",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "•  Campera de cuero de descarne.",
+                        "emoji": "aaa",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "•  Polainas de cuero.",
+                        "emoji": "aaa",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "•  Mangas de cuero.",
+                        "emoji": "aaa",
+                        "ruta": "",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "\nUSO DE AMOLADORAS MANUALES:",
+                "emoji": "ab",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "•  Mascara Facial.",
+                        "emoji": "aac",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "•  Protector Auditivo.",
+                        "emoji": "aac",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "•  Delantal de Cuero.",
+                        "emoji": "aac",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "•  Guantes de Cuero",
+                        "emoji": "aac",
+                        "ruta": "",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "\nUSO DE JLG:",
+                "emoji": "ac",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "•  Protección anticaida (Cinturón de seguridad) ",
+                        "emoji": "aac",
+                        "ruta": "",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "\nNO ES NECESARIO.",
+                "emoji": "ad",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "\n<U>TARJETAS DE SEGURIDAD</>",
+        "emoji": "b",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "\nLAS QUE FIGURAN EN LA ORDEN.",
+                "emoji": "ba",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "\nRealizar bloqueo manual por personal de la guardia, verificar bloqueo efectivo.",
+                "emoji": "bb",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "\nNO ES NECESARIO.",
+                "emoji": "bc",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "\n<U>ACONDICIONAMIENTO PREVIO</>:\n",
+        "emoji": "c",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "•  Verificar que en el área de trabajos no existan derrames de productos lubricante, de ser necesario, solicitar evacuación de los mismos al personal de limpieza industrial.",
+                "emoji": "ca",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "•  Verificar bloqueos efectivos y confirmación de los mismos. En R.P./REX/ P.O. de líneas, gestionar con planillas Standard para prueba efectiva de equipos.",
+                "emoji": "cb",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "•  En tareas con uso de equipos de oxicorte o soldadura eléctrica, confeccionar permiso de trabajo en caliente. Previo al inicio de las mismas, se deberán verificar que no existan componentes o materiales inflamables en zona de proyección de chispas (plataformas, fosos, cámaras de cables, cámaras y gabinetes Elec., depósitos de combustibles o inflamables en Gral.), de ser necesario, se deberán adecuar las condiciones del área a fin de entornar riesgo potencial de incendio.",
+                "emoji": "cc",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "•  Verificar que, en el área de trabajo, exista adecuada iluminación artificial.",
+                "emoji": "cd",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "•  En tareas sobre plataformas o niveles superiores, previo al inicio de las mismas, verificar correcta disposición de las mismas y de las barandas perimetrales. No iniciar trabajos en niveles superiores si las estructuras no presentan condiciones óptimas de seguridad. Delimitar área de trabajo.",
+                "emoji": "ce",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "•  En tareas que implique apertura de cámaras, fosos, bach de acceso a niveles inferiores, previo a la apertura de los mismos, se deber vallar el área con cadenas, pinos y cinta de seguridad.",
+                "emoji": "cf",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "•  En tareas sobre redes o equipos sometidos a presión, previo al inicio de las mismas, verificar despresurización de los sistemas, de corresponder, efectuar apertura de válvulas de purga o alivio.",
+                "emoji": "cg",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "•  En tareas de obras Civiles, canalizaciones, ejecución de Perforaciones en Lozas y Pared, previo al inicio de las mismas, se deberán instalar las protecciones que correspondan a fin de evitar contacto con máquinas rotantes, cuadros hidráulicos/neumáticos, cuadros eléctricos. Se deberán verificar planos de redes y servicios que puedan ser afectados por las obras.",
+                "emoji": "ch",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "•  En tareas de obras Civiles, canalizaciones, ejecución de Perforaciones en Lozas y Pared, previo al inicio de las mismas se deberán acondicionar las áreas de trabajo, para evitar polución y proyección de mampostería a zonas de equipos operativos, material en proceso, material en Stock o equipos de mantenimiento, se deberán ejecutar cantoneras para la contención de los productos lubricantes y de refrigeración empleados en lubricación o refrigeración de herramientas cortantes.",
+                "emoji": "ci",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "•  Tareas ejecutadas por prestaciones de Terceros, previo al inicio de las mismas se deberán gestionar las correspondientes habilitaciones de acceso a las áreas según el siguiente detalle. \n    -  Solicitar habilitación al jefe de turno.\n    -  Tareas en áreas de líneas operativas, naves de almacenamiento, naves de proceso, sótanos de proceso, gestionar con Supervisor Operativo Responsable del área.\n    -  Hacer tarjeta de interferencia con equipo PG o Auto elevadores si es necesario.\n    -  Tareas en Salas eléctricas, Sótanos eléctricos, compartimientos de cables, gestionar con GMP Resp. Eléctrico de Línea.",
+                "emoji": "cj",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "•  Confeccionar A.P.R. / Método seguro de Trabajo.",
+                "emoji": "ck",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "En caso de utilización de equipos mobiles realizar check list",
+                "emoji": "cl",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "\n<U>HERRAMIENTAS Y EQUIPOS ESPECIALES</>:",
+        "emoji": "d",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "\n    APORTE DE SOLDADURA MANUAL:",
+                "emoji": "da",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "        Herramientas de Mano",
+                        "emoji": "daa",
+                        "ruta": "",
+                        "submenues": [
+                            {
+                                "nombre": "            a. Pinzas",
+                                "emoji": "daa",
+                                "ruta": "",
+                                "submenues": []
+                            },
+                            {
+                                "nombre": "            b. Llaves combinadas",
+                                "emoji": "daa",
+                                "ruta": "",
+                                "submenues": []
+                            },
+                            {
+                                "nombre": "            c. Martillo",
+                                "emoji": "daa",
+                                "ruta": "",
+                                "submenues": []
+                            },
+                            {
+                                "nombre": "            d. Corta hierro",
+                                "emoji": "daa",
+                                "ruta": "",
+                                "submenues": []
+                            },
+                            {
+                                "nombre": "            e. Buril",
+                                "emoji": "daa",
+                                "ruta": "",
+                                "submenues": []
+                            },
+                            {
+                                "nombre": "            f. Piqueta",
+                                "emoji": "daa",
+                                "ruta": "",
+                                "submenues": []
+                            },
+                            {
+                                "nombre": "            g. Cepillos de Cerdas de Acero",
+                                "emoji": "daa",
+                                "ruta": "",
+                                "submenues": [
+                                    {
+                                        "nombre": "\n            EQUIPOS:\n                a. Máquina de Soldar Fija\n                b. Máquina de Soldar Portátil (Para trabajo In Situ)",
+                                        "emoji": "daa",
+                                        "ruta": "",
+                                        "submenues": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "nombre": "\n    USO DE AMOLADORAS MANUALES:",
+                "emoji": "db",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "        Herramientas de Mano:",
+                        "emoji": "dba",
+                        "ruta": "",
+                        "submenues": [
+                            {
+                                "nombre": "            a. Llave de ajuste de discos (específica de la máquina).",
+                                "emoji": "dba",
+                                "ruta": "",
+                                "submenues": []
+                            },
+                            {
+                                "nombre": "            b. Morza para ajuste de piezas.\n        EQUIPOS:    a. Amoladora de Mano",
+                                "emoji": "dba",
+                                "ruta": "",
+                                "submenues": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "nombre": "\n    USO DE JLG:",
+                "emoji": "dc",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "        JLG",
+                        "emoji": "dca",
+                        "ruta": "",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "\nNO ES NECESARIO.",
+                "emoji": "bc",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "\n<U>PELIGRO DE LA TAREA</>",
+        "emoji": "e",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "\nR: Golpes por objetos o herramientas.",
+                "emoji": "ea",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "AC:",
+                "emoji": "ea",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "    1.  Guardar las herramientas de forma ordenada.",
+                        "emoji": "ea",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "    2.  Revisar el estado de conservación.",
+                        "emoji": "ea",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "    3.  Descartar las que se encuentran en malas condiciones.",
+                        "emoji": "ea",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "    4.  Utilizarlas para la finalidad que fueron diseñadas.",
+                        "emoji": "ea",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "    5.  Proteger filos o puntas al transportarlas.",
+                        "emoji": "ea",
+                        "ruta": "",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "\nR: Atrapamiento por o entre objetos.",
+                "emoji": "eb",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "AC:",
+                "emoji": "eb",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "    1.  Asegurá que las partes móviles estén protegidas mediante resguardos u otros dispositivos de seguridad.",
+                        "emoji": "eb",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "    2.  No uses ropa o pelo largo suelto, cadenas, anillos, ni pulseras.",
+                        "emoji": "eb",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "    3.  En caso de intervención sobre el equipo efectuá el bloqueo efectivo.",
+                        "emoji": "eb",
+                        "ruta": "",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "\nR: Proyección de fragmentos o partículas",
+                "emoji": "ec",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "AC:",
+                "emoji": "ec",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "    1. Delimitar la zona a trabajar o acordar la realización de la tarea de amolado con los otros operarios que se encuentren trabajando en la pieza o cerca de ella, a fin de evitar que las chispas desprendidas puedan causar lesiones o accidentes a terceros.",
+                        "emoji": "ec",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "    Norma de seguridad:\n    MOT-1TACE-001 Uso de amoladora manual\n    N3-NOS-2HISE-009 Habilitación de trabajo en Caliente",
+                        "emoji": "ec",
+                        "ruta": "",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "\nR: Arco eléctrico.",
+                "emoji": "ed",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "AC: Norma de seguridad: N3-NOS-2HISE-009 Habilitación de trabajo en Caliente.",
+                "emoji": "ed",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "\nR: caída de elementos.",
+                "emoji": "ee",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "AC:",
+                "emoji": "ee",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "    1. Deben colocarse señalizaciones en la parte inferior y acordonarse el área de trabajo para que no cruce personal por los puntos de operación.",
+                        "emoji": "ee",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "    2. La herramienta que use el personal que efectúe trabajos en altura, deberá estar asegurada para evitar su caída.",
+                        "emoji": "ee",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "    3. Se debe contar con un vigía para el control de la tarea.",
+                        "emoji": "ee",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "    4. Cuando se acordone un área para evitar el ingreso a la misma, se debe contemplar un paso peatonal seguro y al finalizar la tarea se deberá retirar el acordonamiento.",
+                        "emoji": "ee",
+                        "ruta": "",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "\nR: peligro de incendio.",
+                "emoji": "ef",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "AC:",
+                "emoji": "ef",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "    1. Las áreas de trabajo de corte o soldadura deben estar delimitadas por mamparas o lonas antiflama, y señalizadas con carteles de seguridad. Siempre que sea posible, deben retirarse todos los materiales inflamables o combustibles. De no ser posible evitar esto, dichos materiales deberán cubrirse con lonas resistentes al fuego.",
+                        "emoji": "ef",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "    2. En trabajos en los que exista alta probabilidad de explosión o incendio, los riesgos deberán ser analizados y habilitados por personal autorizado, asimismo los extintores de incendios deberán estar disponibles.",
+                        "emoji": "ef",
+                        "ruta": "",
+                        "submenues": []
+                    },
+                    {
+                        "nombre": "    3. Todos los tanques/tubos serán almacenados en posición vertical inmovilizados con cadenas o dispositivos sujetadores que eviten una caída. No deberán ser rodados sobre el cuerpo de éstos, solamente sobre su base.\n       Norma de seguridad: N3-NOS-2HISE-009 Habilitación de trabajo en Caliente.",
+                        "emoji": "ef",
+                        "ruta": "",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "\nR: Shock eléctrico",
+                "emoji": "eg",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "AC:",
+                "emoji": "eg",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "    1. Realizar bloqueo efectivo cumpliendo con la norma N3-NOS-0HISE-054",
+                        "emoji": "eg",
+                        "ruta": "",
+                        "submenues": []
+                    }
+                ]
+            },
+            {
+                "nombre": "\nTAMBIÉN LOS RIESGOS DEL ÁREA.",
+                "emoji": "eh",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "\n<U>IMPACTO DE MEDIO AMBIENTE</>",
+        "emoji": "f",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "    En primera instancia, los residuos son separados en sus puntos de generación, siendo dispuestos por el personal en los diferentes recipientes según el tipo de residuo:\n     •  residuos especiales (contenedor rojo).\n     •  residuos no especiales (contenedor amarillo).\n     •  residuos domésticos de comedor y oficinas (contenedor verde).\n     •  chatarra ferrosa (contenedor gris).\n     •  chatarra no ferrosa (contenedor marrón).",
+                "emoji": "fa",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "\n<U>PROCEDIMIENTO DE LA TAREA</>:",
+        "emoji": "g",
+        "ruta": "",
+        "submenues": []
+    },
+    {
+        "nombre": "\n<U>CRITERIOS DE ACEPTACIÓN O RECHAZO</>",
+        "emoji": "h",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "    Después de terminada la tarea se debe comunicar al Supervisor de la contratista y al GMP.",
+                "emoji": "ha",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    }
+]

@@ -1,0 +1,305 @@
+[
+    {
+        "nombre": "Almacen",
+        "emoji": "🏪​",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "Harina",
+                "emoji": "🍚",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Carnicería",
+                "emoji": "🥩",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Soda",
+                "emoji": "🍾",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "Verdulería",
+        "emoji": "🧺",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "Bananas",
+                "emoji": "🍌",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Manzanas",
+                "emoji": "🍎",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Uvas",
+                "emoji": "🍇",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Durazno",
+                "emoji": "🍑",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Mandarina",
+                "emoji": "🍊",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Limon",
+                "emoji": "🍋",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Pera",
+                "emoji": "🍐",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Ananá",
+                "emoji": "🍍​",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Frutilla",
+                "emoji": "🍓",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Guinda",
+                "emoji": "🍒​",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "Automotor",
+        "emoji": "🚗",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "Combustible",
+                "emoji": "⛽",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Seguros",
+                "emoji": "🛑",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Cuota 0Km",
+                "emoji": "🚙",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "Servicios",
+        "emoji": "🛐",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "Internet",
+                "emoji": "🛜",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Luz",
+                "emoji": "💡",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Gas",
+                "emoji": "♨️",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Telefonia",
+                "emoji": "📶​",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Netfix",
+                "emoji": "📺",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Disney",
+                "emoji": "📺​",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Spotify",
+                "emoji": "🎼​",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "Tarjetas de Credito",
+        "emoji": "💳",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "Visa Frances",
+                "emoji": "💳",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Mastercard Naranja",
+                "emoji": "💳",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Visa Santander",
+                "emoji": "💳",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "Creditos",
+        "emoji": "💸",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "Credito Argentino",
+                "emoji": "💴",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Mercado de pagos",
+                "emoji": "💵",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Waynimovil",
+                "emoji": "💶",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Ternium",
+                "emoji": "🏭",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "Facultad",
+        "emoji": "🏫",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "Alquiler",
+                "emoji": "🏤",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Comida",
+                "emoji": "🍽️",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Luz depto",
+                "emoji": "💡",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Gas Depto",
+                "emoji": "♨️",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Cable+Internet",
+                "emoji": "🌏",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Agua",
+                "emoji": "🌊​",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Impuestos",
+                "emoji": "🏦",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "Forrajería",
+        "emoji": "🏟️​",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "Comida Gatos",
+                "emoji": "🦊",
+                "ruta": "",
+                "submenues": []
+            },
+            {
+                "nombre": "Comida Perra",
+                "emoji": "🐶",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    },
+    {
+        "nombre": "Esparcimiento",
+        "emoji": "🌅​",
+        "ruta": "",
+        "submenues": [
+            {
+                "nombre": "Boxeo",
+                "emoji": "🥊",
+                "ruta": "",
+                "submenues": []
+            }
+        ]
+    }
+]

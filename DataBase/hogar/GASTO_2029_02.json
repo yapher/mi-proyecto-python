@@ -1,0 +1,24 @@
+[
+    {
+        "id": 1750889290662,
+        "rubro": "Creditos",
+        "descripcion": "Ternium",
+        "importe": 221000,
+        "tipo": "cuota",
+        "cuota_numero": 44,
+        "cuota_total": 48,
+        "vencimiento": "2029-02-25",
+        "pagado": false
+    },
+    {
+        "id": 1750890022515,
+        "rubro": "Automotor",
+        "descripcion": "Cuota 0Km",
+        "importe": 310000,
+        "tipo": "cuota",
+        "cuota_numero": 44,
+        "cuota_total": 71,
+        "vencimiento": "2029-02-23",
+        "pagado": false
+    }
+]

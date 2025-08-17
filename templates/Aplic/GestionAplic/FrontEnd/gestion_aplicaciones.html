@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="mb-3">Gestión de Aplicaciones</h3>
+<div class="bg-form">
+    <form id="formulario" onsubmit="return false;">
+        <div class="mb-3 input-with-emoji">
+            <span class="input-emoji">📛</span>
+            <input type="text" class="form-control ps-5" id="nombre" placeholder="Nombre de la aplicación" />
+        </div>
+
+        <button type="button" class="btn btn-agregar" id="btnAgregar" onclick="crear()" style="display:none;">
+            Agregar
+        </button>
+    </form>
+</div>
+
+<script>
+    const nombreInput = document.getElementById('nombre');
+    const btnAgregar = document.getElementById('btnAgregar');
+
+    nombreInput.addEventListener('input', () => {
+        btnAgregar.style.display = nombreInput.value.trim().length > 0 ? 'inline-block' : 'none';
+    });
+
+    async function crear() {
+        const nombre = nombreInput.value.trim();
+        if (!nombre) {
+            alert("Por favor, ingresa un nombre.");
+            return;
+        }
+
+        const response = await fetch('/crear_app', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nombre })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            alert(data.msg);
+            nombreInput.value = '';
+            btnAgregar.style.display = 'none';
+        } else {
+            alert("Error: " + data.msg);
+        }
+    }
+</script>
+
+{% endblock %}

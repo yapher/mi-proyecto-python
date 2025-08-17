@@ -1,0 +1,150 @@
+[
+    {
+        "rubro": "Automotor",
+        "descripcion": "Seguros",
+        "importe": 80000,
+        "tipo": "",
+        "cuotas": null,
+        "vencimiento": "2025-06-23",
+        "id": 1750711353,
+        "pagado": true
+    },
+    {
+        "rubro": "Automotor",
+        "descripcion": "Cuota 0Km",
+        "importe": 308000,
+        "tipo": "cuotas",
+        "cuotas": 8,
+        "vencimiento": "2025-06-23",
+        "id": 1750711512,
+        "pagado": true
+    },
+    {
+        "rubro": "Servicios",
+        "descripcion": "Internet",
+        "importe": 15000,
+        "tipo": "",
+        "cuotas": null,
+        "vencimiento": "2025-06-23",
+        "id": 1750712444,
+        "pagado": true
+    },
+    {
+        "rubro": "Servicios",
+        "descripcion": "Luz",
+        "importe": 100000,
+        "tipo": "",
+        "cuotas": null,
+        "vencimiento": "2025-06-23",
+        "id": 1750712474,
+        "pagado": true
+    },
+    {
+        "rubro": "Servicios",
+        "descripcion": "Gas",
+        "importe": 70000,
+        "tipo": "",
+        "cuotas": null,
+        "vencimiento": "2025-06-23",
+        "id": 1750712488,
+        "pagado": true
+    },
+    {
+        "rubro": "Servicios",
+        "descripcion": "Telefonia",
+        "importe": 80000,
+        "tipo": "",
+        "cuotas": null,
+        "vencimiento": "2025-06-23",
+        "id": 1750712517,
+        "pagado": true
+    },
+    {
+        "rubro": "Servicios",
+        "descripcion": "Netfix",
+        "importe": 15000,
+        "tipo": "",
+        "cuotas": null,
+        "vencimiento": "2025-06-23",
+        "id": 1750712545,
+        "pagado": true
+    },
+    {
+        "rubro": "Servicios",
+        "descripcion": "Disney",
+        "importe": 9000,
+        "tipo": "",
+        "cuotas": null,
+        "vencimiento": "2025-06-23",
+        "id": 1750712562,
+        "pagado": true
+    },
+    {
+        "rubro": "Servicios",
+        "descripcion": "Spotify",
+        "importe": 3500,
+        "tipo": "",
+        "cuotas": null,
+        "vencimiento": "2025-06-23",
+        "id": 1750712574,
+        "pagado": true
+    },
+    {
+        "rubro": "Tarjetas de Credito",
+        "descripcion": "Visa Frances",
+        "importe": 25000,
+        "tipo": "",
+        "cuotas": null,
+        "vencimiento": "2025-06-23",
+        "id": 1750712637,
+        "pagado": true
+    },
+    {
+        "rubro": "Tarjetas de Credito",
+        "descripcion": "Mastercard Naranja",
+        "importe": 700000,
+        "tipo": "",
+        "cuotas": null,
+        "vencimiento": "2025-06-23",
+        "id": 1750712655
+    },
+    {
+        "rubro": "Tarjetas de Credito",
+        "descripcion": "Visa Santander",
+        "importe": 300000,
+        "tipo": "",
+        "cuotas": null,
+        "vencimiento": "2025-06-23",
+        "id": 1750712716
+    },
+    {
+        "rubro": "Verdulería",
+        "descripcion": "Bananas",
+        "importe": 50000,
+        "tipo": "",
+        "cuotas": null,
+        "vencimiento": "2025-06-23",
+        "id": 1750712964,
+        "pagado": true
+    },
+    {
+        "rubro": "Almacen",
+        "descripcion": "Soda",
+        "importe": 30000,
+        "tipo": "",
+        "cuotas": null,
+        "vencimiento": "2025-06-23",
+        "id": 1750713348,
+        "pagado": true
+    },
+    {
+        "rubro": "Automotor",
+        "descripcion": "Combustible",
+        "importe": 80000,
+        "tipo": "único",
+        "cuotas": null,
+        "vencimiento": "2025-06-22",
+        "id": 1750643088,
+        "pagado": true
+    }
+]

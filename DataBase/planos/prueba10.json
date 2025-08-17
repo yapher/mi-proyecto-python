@@ -1,0 +1,186 @@
+{
+  "metadata": {
+    "fecha": "2025-06-07 17:05:15"
+  },
+  "componentes": [
+    {
+      "tipo": "Componente",
+      "x": 180,
+      "y": 105
+    },
+    {
+      "tipo": "Componente",
+      "x": 505,
+      "y": 25
+    },
+    {
+      "tipo": "Componente",
+      "x": 620,
+      "y": 211
+    },
+    {
+      "tipo": "Componente",
+      "x": 430,
+      "y": 118
+    },
+    {
+      "tipo": "Componente",
+      "x": 346,
+      "y": 100
+    },
+    {
+      "tipo": "Componente",
+      "x": 352,
+      "y": 26
+    },
+    {
+      "tipo": "Componente",
+      "x": 49,
+      "y": 107
+    },
+    {
+      "tipo": "Componente",
+      "x": 109,
+      "y": 28
+    },
+    {
+      "tipo": "Componente",
+      "x": 623,
+      "y": 29
+    },
+    {
+      "tipo": "Componente",
+      "x": 224,
+      "y": 192
+    },
+    {
+      "tipo": "Componente",
+      "x": 348,
+      "y": 202
+    },
+    {
+      "tipo": "Componente",
+      "x": 509,
+      "y": 132
+    },
+    {
+      "tipo": "Componente",
+      "x": -8,
+      "y": 195
+    },
+    {
+      "tipo": "Componente",
+      "x": 616,
+      "y": 113
+    },
+    {
+      "tipo": "Componente",
+      "x": 507,
+      "y": 209
+    },
+    {
+      "tipo": "Componente",
+      "x": 714,
+      "y": 172
+    },
+    {
+      "tipo": "Componente",
+      "x": 730,
+      "y": 86
+    }
+  ],
+  "conexiones": [
+    {
+      "from": 5,
+      "to": 3
+    },
+    {
+      "from": 5,
+      "to": 3
+    },
+    {
+      "from": 5,
+      "to": 1
+    },
+    {
+      "from": 5,
+      "to": 3
+    },
+    {
+      "from": 5,
+      "to": 3
+    },
+    {
+      "from": 3,
+      "to": 5
+    },
+    {
+      "from": 5,
+      "to": 3
+    },
+    {
+      "from": 3,
+      "to": 5
+    },
+    {
+      "from": 5,
+      "to": 3
+    },
+    {
+      "from": 3,
+      "to": 5
+    },
+    {
+      "from": 5,
+      "to": 4
+    },
+    {
+      "from": 4,
+      "to": 5
+    },
+    {
+      "from": 5,
+      "to": 1
+    },
+    {
+      "from": 1,
+      "to": 3
+    },
+    {
+      "from": 1,
+      "to": 3
+    },
+    {
+      "from": 5,
+      "to": 3
+    },
+    {
+      "from": 5,
+      "to": 3
+    },
+    {
+      "from": 5,
+      "to": 3
+    },
+    {
+      "from": 3,
+      "to": 1
+    },
+    {
+      "from": 1,
+      "to": 2
+    },
+    {
+      "from": 11,
+      "to": 14
+    },
+    {
+      "from": 13,
+      "to": 15
+    },
+    {
+      "from": 15,
+      "to": 16
+    }
+  ]
+}

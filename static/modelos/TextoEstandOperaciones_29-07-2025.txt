@@ -1,0 +1,85 @@
+<U>ELEMENTOS DE PROTECCION ESPECIFICA</>:
+
+  USO DE JLG
+    •  Protección anticaida (Cinturón de seguridad) 
+<U>TARJETAS DE SEGURIDAD</>
+    
+    NO ES NECESARIO.  ( EN CASO DE NECESITARLO LA GUARDIA REALIZARÁ BLOQUEO MANUAL)
+
+<U>ACONDICIONAMIENTO PREVIO</>:
+
+ • Verificar que el área de trabajo esté libre de derrames de productos lubricantes. En caso de detectarlos, solicitar su remoción al personal de limpieza industrial.
+ • Verificar que el área cuente con iluminación artificial suficiente y adecuada.
+ • En tareas sobre plataformas o niveles elevados, comprobar la correcta instalación de barandas perimetrales y condiciones estructurales seguras. No iniciar trabajos si no se cumplen los requisitos de seguridad. Delimitar el área de intervención.
+ • Para tareas realizadas por contratistas externos, gestionar las habilitaciones de acceso según corresponda:
+  - Solicitar autorización al jefe de turno.
+  - Coordinar con el Supervisor Operativo para tareas en líneas, naves o sótanos de proceso.
+  - Emitir tarjeta de interferencia si se utilizan equipos PG o autoelevadores.
+  - Coordinar con el GMP responsable para tareas en salas eléctricas, sótanos o ductos de cables.
+ • Confeccionar el A.P.R. (Análisis Preliminar de Riesgos) o el Método Seguro de Trabajo.
+ • Realizar el checklist correspondiente en caso de utilizar equipos móviles.
+ • Asegurar que la zona de trabajo esté libre de paquetes y equipos autoelevadores.
+ • Si se utiliza grúa pluma o JLG dentro de la nave, emitir tarjeta de interferencia o gestionar el bloqueo de grúas puente.
+
+<U>HERRAMIENTAS Y EQUIPOS ESPECIALES</>:
+    
+    EQUIPOS:
+       a. JLG
+
+<U>PELIGRO DE LA TAREA</>
+
+   R: Pisada sobre objetos
+   AC:
+     1.  Observar donde se pisa.
+     2.  Mantener orden y limpieza en el área.
+     3.  Asegurar la iluminación adecuada.
+     4.  Uso de calzado adecuado (EPPB).
+     5.  Señalizar los huecos existentes en el área y posteriormente corregirlos.
+
+   R: Golpes por objetos o herramientas
+   AC:
+     1.  Guardar las herramientas de forma ordenada.
+     2.  Revisar el estado de conservación.
+     3.  Descartar las que se encuentran en malas condiciones.
+     4.  Utilizarlas para la finalidad que fueron diseñadas.
+     5.  Proteger filos o puntas al transportarlas.
+
+   R: Atrapamiento por o entre objetos
+   AC:
+     1.  Asegurá que las partes móviles estén protegidas mediante resguardos u otros dispositivos de seguridad.
+     2.  No uses ropa o pelo largo suelto, cadenas, anillos, ni pulseras.
+     3.  En caso de intervención sobre el equipo efectuá el bloqueo efectivo.
+     4.  Durante la estadía en canasta de JLG, es necesario que no se saque las extremidades.
+
+   R: caída de elementos
+   AC:
+     1. Deben colocarse señalizaciones en la parte inferior y acordonarse el área de trabajo para que no cruce personal por los
+puntos de operación.
+     2. La herramienta que use el personal que efectúe trabajos en altura, deberá estar asegurada para evitar su caída.
+     3. Se debe contar con un vigía para el control de la tarea.
+     4. Cuando se acordone un área para evitar el ingreso a la misma, se debe contemplar un paso peatonal seguro y al finalizar la
+tarea se deberá retirar el acordonamiento.
+
+    R: Caída de persona a distinto nivel
+    AC:
+        1. Al momento de utilizar escaleras, tomarse del pasamanos respetando los 3 puntos de apoyo.
+        2. Si se usa equipos como JLG estar en todo momento amarrado a puntos fijos del canasto.
+      
+     TAMBIÉN LOS RIESGOS DEL ÁREA.
+
+<U>IMPACTO DE MEDIO AMBIENTE</>
+
+    En primera instancia, los residuos son separados en sus puntos de generación, siendo dispuestos por el personal en los diferentes recipientes según el tipo de residuo:
+
+     •  residuos especiales (contenedor rojo).
+     •  residuos no especiales (contenedor amarillo).
+     •  residuos domésticos de comedor y oficinas (contenedor verde).
+     •  chatarra ferrosa (contenedor gris).
+     •  chatarra no ferrosa (contenedor marrón).
+
+<U>PROCEDIMIENTO DE LA TAREA</>:
+
+1. verificar instalación de equipos de emergencia nave expedición
+<U>CRITERIOS DE ACEPTACIÓN O RECHAZO</>
+
+      • Después de terminada la tarea se debe comunicar al Supervisor de la contratista y al GMP.

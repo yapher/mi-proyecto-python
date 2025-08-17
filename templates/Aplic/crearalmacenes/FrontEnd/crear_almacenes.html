@@ -1,0 +1,260 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="mb-3">Crear Almacenes</h3>
+<div class="bg-form mb-4">
+    <form id="formulario">
+        <!-- Selectores multinivel -->
+         <label for="nivelesContainer" class="form-label">Crear Almacén</label>
+        <div id="nivelesContainer" class="mb-3"></div>
+
+        <!-- Nombre, emoji y ruta -->
+        <div class="mb-3 input-with-emoji">
+            <label for="nombre" class="form-label">NOMBRE DE ALMACÉN/PAÑOL</label>
+            <span class="input-emoji">📛</span>
+            <input type="text" class="form-control ps-5" id="nombre" placeholder="Nombre del ítem">
+        </div>
+
+        <div class="mb-3 input-with-emoji">
+            <label for="emoji" class="form-label">IMAGEN</label>
+            <span class="input-emoji">😀</span>
+            <input type="text" class="form-control ps-5" id="emoji" placeholder="Emoji">
+        </div>
+
+        <div class="mb-3 input-with-emoji">
+            <label for="ruta_crear_almaceneses" class="form-label">DESCRIPCIÓN</label>
+            <span class="input-emoji">🔗</span>
+            <input type="text" class="form-control ps-5" id="ruta_crear_almaceneses" placeholder="Ruta (opcional)">
+        </div>
+
+        <input type="hidden" id="ruta_original">
+        <div class="button-group">
+            <button type="button" class="btn btn-agregar" onclick="guardar()">Agregar</button>
+            <button type="button" class="btn btn-editar" onclick="editar()" style="display:none;">Guardar
+                cambios</button>
+            <button type="button" class="btn btn-cancelar" onclick="cancelar()" style="display:none;">Cancelar</button>
+        </div>
+    </form>
+</div>
+
+<div class="table-responsive tabla-scroll">
+    <table class="table table-hover table-striped table-dark align-middle w-100 mb-0">
+        <thead class="sticky-header">
+            <tr>
+                <th>IMAGEN</th>
+                <th>ALMACÉN / PAÑOL</th>
+                <th>DESCRIPCIÓN</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tabla">
+            <!-- Se llena dinámicamente -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    let arbolcrear_almaceneseses = [];
+
+    function cargarArbolcrear_almaceneseses(cb) {
+        fetch('/api/crear_almacenes_arbol')
+            .then(res => res.json())
+            .then(data => {
+                arbolcrear_almaceneseses = data;
+                if (cb) cb();
+            });
+    }
+
+    function renderSelectoresNiveles() {
+        const cont = document.getElementById('nivelesContainer');
+        cont.innerHTML = '';
+        let nivel = 0;
+        let actual = arbolcrear_almaceneseses;
+        let seguir = true;
+        while (seguir) {
+            const select = document.createElement('select');
+            select.className = 'form-control nivel-select mb-2';
+            select.setAttribute('data-nivel', nivel);
+            select.innerHTML = `<option value="" selected>Sin seleccionar</option>`;
+            actual.forEach(item => {
+                select.innerHTML += `<option value="${item.ruta_jerarquia}">${item.emoji} ${item.nombre}</option>`;
+            });
+            cont.appendChild(select);
+
+            select.onchange = function () {
+                let next = this.nextElementSibling;
+                while (next) {
+                    next.remove();
+                    next = this.nextElementSibling;
+                }
+                if (this.value) {
+                    const seleccionado = buscarNodoPorRuta(arbolcrear_almaceneseses, this.value);
+                    if (seleccionado && seleccionado.subcrear_almacenes && seleccionado.subcrear_almacenes.length > 0) {
+                        renderSubnivel(seleccionado.subcrear_almacenes, nivel + 1, this.value);
+                    }
+                }
+            };
+            seguir = false;
+        }
+    }
+
+    function renderSubnivel(subcrear_almacenes, nivel, rutaPadre) {
+        const cont = document.getElementById('nivelesContainer');
+        const select = document.createElement('select');
+        select.className = 'form-control nivel-select mb-2';
+        select.setAttribute('data-nivel', nivel);
+        select.innerHTML = `<option value="" selected>Sin seleccionar</option>`;
+        subcrear_almacenes.forEach(item => {
+            select.innerHTML += `<option value="${item.ruta_jerarquia}">${item.emoji} ${item.nombre}</option>`;
+        });
+        cont.appendChild(select);
+
+        select.onchange = function () {
+            let next = this.nextElementSibling;
+            while (next) {
+                next.remove();
+                next = this.nextElementSibling;
+            }
+            if (this.value) {
+                const seleccionado = buscarNodoPorRuta(arbolcrear_almaceneseses, this.value);
+                if (seleccionado && seleccionado.subcrear_almacenes && seleccionado.subcrear_almacenes.length > 0) {
+                    renderSubnivel(seleccionado.subcrear_almacenes, nivel + 1, this.value);
+                }
+            }
+        };
+    }
+
+    function buscarNodoPorRuta(arbol, ruta) {
+        const partes = ruta.split('.');
+        let actual = arbol;
+        for (let parte of partes) {
+            if (!parte) continue;
+            let encontrado = actual.find(item => item.nombre === parte);
+            if (!encontrado) return null;
+            actual = encontrado.subcrear_almacenes;
+            if (partes[partes.length - 1] === parte) return encontrado;
+        }
+        return null;
+    }
+
+    function obtenerRutaPadre() {
+        const selects = document.querySelectorAll('.nivel-select');
+        let ruta = '';
+        selects.forEach(sel => {
+            if (sel.value) ruta = sel.value;
+        });
+        return ruta;
+    }
+
+    function guardar() {
+        const nombre = document.getElementById("nombre").value.trim();
+        const emoji = document.getElementById("emoji").value.trim();
+        const ruta_crear_almaceneses = document.getElementById("ruta_crear_almaceneses").value.trim();
+        const ruta_padre = obtenerRutaPadre();
+
+        if (!nombre || !emoji) return alert("Complete todos los campos");
+
+        fetch('/api/crear_almacenes', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nombre, emoji, ruta: ruta_crear_almaceneses, ruta_padre })
+        }).then(res => res.json())
+            .then(res => {
+                alert(res.msg);
+                cargarTodo();
+                cancelar();
+            });
+    }
+
+    function editar() {
+        const nombre = document.getElementById("nombre").value.trim();
+        const emoji = document.getElementById("emoji").value.trim();
+        const ruta_crear_almaceneses = document.getElementById("ruta_crear_almaceneses").value.trim();
+        const ruta = document.getElementById("ruta_original").value;
+
+        if (!nombre || !emoji || !ruta) return alert("Complete todos los campos");
+
+        fetch('/api/crear_almacenes', {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nombre, emoji, ruta_crear_almaceneses, ruta })
+        }).then(res => res.json())
+            .then(res => {
+                alert(res.msg);
+                cargarTodo();
+                cancelar();
+            });
+    }
+
+    function eliminar(ruta) {
+        if (!confirm(`¿Está seguro de eliminar este ítem?`)) return;
+        fetch('/api/crear_almacenes', {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ruta })
+        }).then(res => res.json())
+            .then(res => {
+                alert(res.msg);
+                cargarTodo();
+                cancelar();
+            });
+    }
+
+    function prepararEdicion(ruta_jerarquia, nombre, emoji, ruta_crear_almaceneses) {
+        document.getElementById("nombre").value = nombre;
+        document.getElementById("emoji").value = emoji;
+        document.getElementById("ruta_crear_almaceneses").value = ruta_crear_almaceneses || "";
+        document.getElementById("ruta_original").value = ruta_jerarquia;
+        document.querySelector(".btn-agregar").style.display = "none";
+        document.querySelector(".btn-editar").style.display = "inline";
+        document.querySelector(".btn-cancelar").style.display = "inline";
+    }
+
+    function cancelar() {
+        document.getElementById("nombre").value = "";
+        document.getElementById("emoji").value = "";
+        document.getElementById("ruta_crear_almaceneses").value = "";
+        document.getElementById("ruta_original").value = "";
+        document.querySelector(".btn-agregar").style.display = "inline";
+        document.querySelector(".btn-editar").style.display = "none";
+        document.querySelector(".btn-cancelar").style.display = "none";
+    }
+
+    function cargarTabla() {
+        fetch('/api/crear_almacenes_arbol')
+            .then(res => res.json())
+            .then(data => {
+                const tabla = document.getElementById("tabla");
+                tabla.innerHTML = "";
+                function recorrer(crear_almaceneseses, nivel = 0) {
+                    crear_almaceneseses.forEach(crear_almaceneses => {
+                        tabla.innerHTML += `
+                        <tr>
+                            <td>${crear_almaceneses.emoji}</td>
+                            <td style="padding-left:${nivel * 30}px">${crear_almaceneses.nombre}</td>
+                            <td>${crear_almaceneses.ruta || ''}</td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary" onclick="prepararEdicion('${crear_almaceneses.ruta_jerarquia}','${crear_almaceneses.nombre}','${crear_almaceneses.emoji}','${crear_almaceneses.ruta || ""}')">Editar</button>
+                                <button class="btn btn-sm btn-outline-danger" onclick="eliminar('${crear_almaceneses.ruta_jerarquia}')">Eliminar</button>
+                            </td>
+                        </tr>
+                    `;
+                        if (crear_almaceneses.subcrear_almacenes && crear_almaceneses.subcrear_almacenes.length > 0) {
+                            recorrer(crear_almaceneses.subcrear_almacenes, nivel + 1);
+                        }
+                    });
+                }
+                recorrer(data);
+            });
+    }
+
+    function cargarTodo() {
+        cargarArbolcrear_almaceneseses(() => {
+            renderSelectoresNiveles();
+            cargarTabla();
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", cargarTodo);
+</script>
+{% endblock %}
+

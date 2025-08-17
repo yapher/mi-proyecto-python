@@ -1,0 +1,77 @@
+<!-- details.html -->
+<div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-dark text-white">
+      <div class="modal-header border-0">
+        <h5 class="modal-title" id="modalTitle"></h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center mb-3">
+          <img id="modalImage" src="" alt="" class="img-fluid rounded" style="max-height: 300px;">
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item bg-dark text-white"><strong> Código:</strong> <span id="modalCodigo"></span></li>
+          <li class="list-group-item bg-dark text-white"><strong> Link:</strong> <span id="modalLink"></span></li>
+          <li class="list-group-item bg-dark text-white"><strong> Cantidad:</strong> <span id="modalCantidad"></span></li>
+          <li class="list-group-item bg-dark text-white"><strong> Fecha Creación:</strong> <span id="modalFecha"></span></li>
+          <!-- Fecha Fin: solo visible si existe -->
+          <li class="list-group-item bg-dark text-white" id="modalFechaFinLi" style="display:none;">
+            <strong>Fecha Fin:</strong> <span id="modalFechaFin"></span>
+          </li>
+          <li class="list-group-item bg-dark text-white"><strong>Equipo:</strong> <span id="modalEquipo"></span></li>
+          <li class="list-group-item bg-dark text-white"><strong> Ubicación Técnica:</strong> <span id="modalUbicacion"></span></li>
+          <li class="list-group-item bg-dark text-white">
+            <strong>Estado:</strong> <span id="modalEmojy"></span>
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer border-0">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+  var myModal = new bootstrap.Modal(document.getElementById('productModal'));
+
+  document.body.addEventListener('click', function (e) {
+    if (e.target.classList.contains('product-image')) {
+      const img = e.target;
+      document.getElementById('modalTitle').textContent = img.dataset.nombre || '';
+      document.getElementById('modalImage').src = img.src;
+      document.getElementById('modalImage').alt = img.alt;
+      document.getElementById('modalCodigo').textContent = img.dataset.codigo || '';
+      document.getElementById('modalCantidad').textContent = img.dataset.cantidad || '';
+      document.getElementById('modalFecha').textContent = img.dataset.fecha || '';
+      document.getElementById('modalEquipo').textContent = img.dataset.equipo || '';
+      document.getElementById('modalUbicacion').textContent = img.dataset.ubicacion || '';
+      document.getElementById('modalEmojy').textContent = img.dataset.emojy || '';
+
+      const modalLinkSpan = document.getElementById('modalLink');
+      const linkUrl = img.dataset.link || '';
+      if (linkUrl) {
+        modalLinkSpan.innerHTML = `<a href="${linkUrl}" target="_blank" class="text-info text-decoration-none">${linkUrl}</a>`;
+      } else {
+        modalLinkSpan.textContent = '';
+      }
+
+      const fechaFin = img.dataset.fechafin || '';
+      const fechaFinLi = document.getElementById('modalFechaFinLi');
+      const fechaFinSpan = document.getElementById('modalFechaFin');
+      if (fechaFin) {
+        fechaFinSpan.textContent = fechaFin;
+        fechaFinLi.style.display = '';
+      } else {
+        fechaFinSpan.textContent = '';
+        fechaFinLi.style.display = 'none';
+      }
+
+      myModal.show();
+    }
+  });
+});
+
+</script>

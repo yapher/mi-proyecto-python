@@ -1,0 +1,182 @@
+
+<div>
+    <button type="button" class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#agregarModal">
+        ➕ Agregar nuevo rubro
+    </button>
+</div>
+
+<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-form"
+            style="background-color: #4b376a; color: #fff; border-radius: 1rem; box-shadow: 0 8px 32px rgba(136,201,153,0.16);">
+            <div class="modal-header"
+                style="border-bottom: 2px solid #88c999; background: linear-gradient(to right, #2a1e3b, #3e2d59); border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                <h5 class="modal-title" id="agregarModalLabel" style="color: #88c999; font-weight: 700;">Agregar Nuevo
+                    Rubro</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
+                    style="filter: invert(1);"></button>
+            </div>
+            <div class="modal-body">
+                <div class="bg-form mb-4">
+                    <form id="formulario">
+                        <!-- Selectores multinivel -->
+                       {% include "Aplic/crearrubros/FrontEnd/component/selectRubros.html" %}
+
+                        <!-- Nombre, emoji y ruta -->
+                        <div class="mb-3 input-with-emoji">
+                            <span class="input-emoji">📛</span>
+                            <input type="text" class="form-control ps-5" id="nombre" placeholder="Nombre del ítem">
+                        </div>
+                        <div class="mb-3 input-with-emoji">
+                            <span class="input-emoji">😀</span>
+                            <input type="text" class="form-control ps-5" id="emoji" placeholder="Emoji">
+                        </div>
+                        <div class="mb-3 input-with-emoji">
+                            <span class="input-emoji">🔗</span>
+                            <input type="text" class="form-control ps-5" id="ruta_menu" placeholder="Ruta (opcional)">
+                        </div>
+                        <input type="hidden" id="ruta_original">
+                        <div class="button-group">
+                            <button type="button" class="btn btn-agregar" onclick="guardar()">Agregar</button>
+                            <button type="button" class="btn btn-editar" onclick="editar()"
+                                style="display:none;">Guardar cambios</button>
+                            <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal" onclick="cancelar()"
+                                style="display:none;">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function guardar() {
+        const nombre = document.getElementById("nombre").value.trim();
+        const emoji = document.getElementById("emoji").value.trim();
+        const ruta_menu = document.getElementById("ruta_menu").value.trim();
+        const ruta_padre = obtenerRutaPadre();
+
+        if (!nombre || !emoji) return new Noty({
+            type: 'warning',
+            layout: 'topRight',
+            timeout: 3000,
+            theme: 'mint',
+            text: 'Complete los campos'
+        }).show();
+
+        fetch('/api/rubro', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nombre, emoji, ruta: ruta_menu, ruta_padre })
+        }).then(res => res.json())
+            .then(res => {
+                new Noty({
+                    type: res.type || 'success',
+                    layout: 'topRight',
+                    timeout: 3000,
+                    theme: 'mint',
+                    text: res.msg
+                }).show();
+                cargarTodo();
+                cancelar();
+                cerrarModal();
+            });
+    }
+
+    function editar() {
+        const nombre = document.getElementById("nombre").value.trim();
+        const emoji = document.getElementById("emoji").value.trim();
+        const ruta_menu = document.getElementById("ruta_menu").value.trim();
+        const ruta = document.getElementById("ruta_original").value;
+
+        if (!nombre || !emoji || !ruta) return new Noty({
+            type: 'warning',
+            layout: 'topRight',
+            timeout: 3000,
+            theme: 'mint',
+            text: 'Complete los campos'
+        }).show();
+
+        fetch('/api/rubro', {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ nombre, emoji, ruta_menu, ruta })
+        }).then(res => res.json())
+            .then(res => {
+                new Noty({
+                    type: res.type || 'success',
+                    text: res.msg,
+                    layout: 'topRight',
+                    timeout: 3000
+                }).show();
+                cargarTodo();
+                cancelar();
+                cerrarModal();
+            });
+    }
+
+    function eliminar(ruta) {
+        Swal.fire({
+            title: '¿Está seguro de eliminar este ítem?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                confirmButton: 'btn  btn-outline-danger',
+                cancelButton: 'btn  btn-outline-primary'
+            },
+            buttonsStyling: false,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch('/api/rubro', {
+                    method: "DELETE",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ ruta })
+                }).then(res => res.json())
+                    .then(res => {
+                        new Noty({
+                            type: res.type || 'success',
+                            text: res.msg,
+                            layout: 'topRight',
+                            timeout: 3000
+                        }).show();
+                        cargarTodo();
+                        cancelar();
+                        cerrarModal();
+                    });
+            }
+        });
+    }
+
+
+
+    function cancelar() {
+        document.getElementById("nombre").value = "";
+        document.getElementById("emoji").value = "";
+        document.getElementById("ruta_menu").value = "";
+        document.getElementById("ruta_original").value = "";
+        document.querySelector(".btn-agregar").style.display = "inline";
+        document.querySelector(".btn-editar").style.display = "none";
+        document.querySelector(".btn-cancelar").style.display = "none";
+        renderSelectoresNiveles();
+    }
+    function obtenerRutaPadre() {
+        const selects = document.querySelectorAll('.nivel-select');
+        let ruta = '';
+        selects.forEach(sel => {
+            if (sel.value) ruta = sel.value;
+        });
+        return ruta;
+    }
+
+   
+
+    function cerrarModal() {
+        const modalEl = document.getElementById('agregarModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+    }
+
+</script>

@@ -1,0 +1,8 @@
+[
+    {"emoji": "🟢", "nombre": "Disponible"},
+    {"emoji": "🟡", "nombre": "En espera"},
+    {"emoji": "🔴", "nombre": "No disponible"},
+    {"emoji": "🟠", "nombre": "Sin código"},
+    {"emoji": "🟣", "nombre": "Descontinuado"},
+    {"emoji": "🔵", "nombre": "Actualizar código"}
+]
