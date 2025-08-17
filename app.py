@@ -123,4 +123,6 @@ if __name__ == '__main__':
     scheduler.start()
     threading.Timer(1.0, abrir_navegador).start()
     os.makedirs('DataBase/Config', exist_ok=True)
-    app.run(debug=False)
+    #app.run(debug=False)
+    port = int(os.environ.get("PORT", 5000))  # Render asigna el puerto en la variable de entorno PORT
+    app.run(host="0.0.0.0", port=port, debug=False)
