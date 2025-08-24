@@ -1,0 +1,53 @@
+<!-- Modal -->
+<div class="modal fade" id="modalEvento" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content bg-form">
+            <div class="modal-header">
+                <h5 class="modal-title">Evento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="eventoId" />
+                <div class="mb-3">
+                    <label>Título</label>
+                    <input type="text" id="titulo" class="form-control" placeholder="Ej: Reunión con equipo" required />
+                </div>
+                <div class="mb-3">
+                    <label>Fecha</label>
+                    <input type="date" id="fecha" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label>Descripción</label>
+                    <textarea id="descripcion" class="form-control"
+                        placeholder="Detalles opcionales del evento"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label>Email (para recordatorio)</label>
+                    <input type="email" id="email" class="form-control" placeholder="usuario@dominio.com" required />
+                    <div class="form-text">Se enviará un correo <strong>un día antes</strong> del evento a las 08:00
+                        (hora AR).</div>
+                </div>
+
+                <!-- Checkbox realizado (nuevo) -->
+                <div class="form-check mt-2">
+                    <input type="checkbox" class="form-check-input" id="realizado">
+                    <label for="realizado" class="form-check-label">Evento realizado</label>
+                </div>
+
+                <!-- >>> PRIORIDAD: selector simple -->
+                <div class="mb-3 mt-3">
+                    <label>Prioridad</label>
+                    <select id="prioridad" class="form-select">
+                        <option value="alta">Alta</option>
+                        <option value="media" selected>Media</option>
+                        <option value="baja">Baja</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-agregar" onclick="guardarEvento()">Guardar</button>
+                <button class="btn btn-eliminar" onclick="eliminarEvento()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
