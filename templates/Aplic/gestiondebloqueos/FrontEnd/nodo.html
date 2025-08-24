@@ -1,0 +1,33 @@
+<div class="modal fade" id="nodoModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Nodo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3">
+          <label>Nombre</label>
+          <input type="text" id="modalNombre" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label>Descripción</label>
+          <textarea id="modalDescripcion" class="form-control" rows="2"></textarea>
+        </div>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" id="modalEstado">
+          <label class="form-check-label" for="modalEstado">Encendido (rojo)</label>
+        </div>
+        <div class="mb-3">
+          <label>Hijos</label>
+          <textarea id="modalHijos" class="form-control" rows="3" readonly></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnAgregarHijo" class="btn btn-success">Agregar Hijo</button>
+        <button type="button" id="btnGuardarModal" class="btn btn-primary">Guardar</button>
+        <button type="button" id="btnBorrarModal" class="btn btn-danger">Borrar</button>
+      </div>
+    </div>
+  </div>
+</div>

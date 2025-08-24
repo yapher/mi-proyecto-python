@@ -1,0 +1,104 @@
+{
+  "1": {
+    "id": "1",
+    "nombre": "m",
+    "estado": "apagado",
+    "padre": null,
+    "descripcion": "hhhhhh"
+  },
+  "2": {
+    "id": "2",
+    "nombre": "Línea Littell",
+    "estado": "apagado",
+    "padre": "1",
+    "descripcion": ""
+  },
+  "3": {
+    "id": "3",
+    "nombre": "SD_LITE_E000",
+    "estado": "apagado",
+    "padre": "2",
+    "descripcion": "INTERRUPTOR GENERAL EN SALA ELÉCTRICA"
+  },
+  "4": {
+    "id": "4",
+    "nombre": "A1",
+    "estado": "apagado",
+    "padre": "1",
+    "descripcion": ""
+  },
+  "5": {
+    "id": "5",
+    "nombre": "A",
+    "estado": "apagado",
+    "padre": "1",
+    "descripcion": ""
+  },
+  "6": {
+    "id": "6",
+    "nombre": "SD_LITE_E001",
+    "estado": "apagado",
+    "padre": "3",
+    "descripcion": "CORTAR INTERRUPTOR 1CB"
+  },
+  "7": {
+    "id": "7",
+    "nombre": "SD_LITE_E022",
+    "estado": "apagado",
+    "padre": "3",
+    "descripcion": "ABRIR INT.22CB  CONTROL GE/UNICO CPU"
+  },
+  "10": {
+    "id": "10",
+    "nombre": "SDPLITD10L070E",
+    "estado": "apagado",
+    "padre": "3",
+    "descripcion": ""
+  },
+  "11": {
+    "id": "11",
+    "nombre": "SD_LITE_EITM7",
+    "estado": "apagado",
+    "padre": "3",
+    "descripcion": ""
+  },
+  "12": {
+    "id": "12",
+    "nombre": "SD_LITE_EITM8",
+    "estado": "apagado",
+    "padre": "3",
+    "descripcion": ""
+  },
+  "13": {
+    "id": "13",
+    "nombre": "SD_LITE_EITM8-1",
+    "estado": "apagado",
+    "padre": "12",
+    "descripcion": "ABRIR INTERRUPTOR ITM8-1 ALIM. RACK-N1-R4"
+  },
+  "14": {
+    "id": "14",
+    "nombre": "SD_LITE_EITM8-2",
+    "estado": "apagado",
+    "padre": "12",
+    "descripcion": "CORTAR INTERRUPTOR PCS CABINA OPERADOR"
+  },
+  "15": {
+    "id": "15",
+    "nombre": "SD_LITE_EITM8-3",
+    "estado": "apagado",
+    "padre": "12",
+    "descripcion": "ABRIR INTERRUPTOR A. ACOND. MONITOR DMC"
+  },
+  "16": {
+    "id": "16",
+    "nombre": "SD_LITE_EITM7-1",
+    "estado": "apagado",
+    "padre": "11",
+    "descripcion": "ABRIR INTERRUPTOR MESA DE MEDICION"
+  }
+
+
+
+
+}

@@ -13,7 +13,6 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.2.0-beta/noty.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.2.0-beta/themes/mint.min.css" />
-    
 </head>
 
 <body>
@@ -71,10 +70,8 @@
                     {% endfor %}
                 </ul>
 
-                <form class="d-flex ms-auto me-3 bg-form" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar"
-                        id="menuSearch">
-                </form>
+
+                <span id="reloj-digital" class="text-white fs-5 ms-3" style="font-family: 'Inter', sans-serif;"></span>
             </div>
         </div>
     </nav>
@@ -101,12 +98,10 @@
         {% endfor %}
         {% endif %}
         {% endwith %}
-
-       
     </main>
-     
+
     <!-- JS externos -->
- 
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.2.0-beta/noty.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -119,13 +114,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- ECharts (si no está incluido) -->
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
-     <!-- Chart.js -->
+    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Chart.js Data Labels Plugin -->
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 
-{% block content %}{% endblock %}
+    {% block content %}{% endblock %}
     <script>
         // Manejo correcto de submenús anidados en Bootstrap 5 sin eliminar estilos
         document.querySelectorAll('.dropdown-submenu > a').forEach(function (element) {
@@ -242,11 +238,11 @@
                     });
                 });
             });
-
         });
     </script>
 
+    <!-- Incluimos el script del reloj digital aquí -->
+    <script src="{{ url_for('static', filename='js/reloj.js') }}"></script>
 </body>
-
 
 </html>
