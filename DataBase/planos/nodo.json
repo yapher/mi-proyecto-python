@@ -1,17 +1,17 @@
 {
   "1": {
     "id": "1",
-    "nombre": "m",
+    "nombre": "Sidercrom",
     "estado": "apagado",
     "padre": null,
-    "descripcion": "hhhhhh"
+    "descripcion": "planta"
   },
   "2": {
     "id": "2",
-    "nombre": "Línea Littell",
+    "nombre": "Littell",
     "estado": "apagado",
     "padre": "1",
-    "descripcion": ""
+    "descripcion": "Linea Littell"
   },
   "3": {
     "id": "3",
@@ -22,14 +22,14 @@
   },
   "4": {
     "id": "4",
-    "nombre": "A1",
+    "nombre": "Hallden",
     "estado": "apagado",
     "padre": "1",
     "descripcion": ""
   },
   "5": {
     "id": "5",
-    "nombre": "A",
+    "nombre": "Embalaje 40",
     "estado": "apagado",
     "padre": "1",
     "descripcion": ""
@@ -85,10 +85,10 @@
   },
   "15": {
     "id": "15",
-    "nombre": "SD_LITE_EITM8-3",
+    "nombre": "SDPEMTE01S0001E",
     "estado": "apagado",
-    "padre": "12",
-    "descripcion": "ABRIR INTERRUPTOR A. ACOND. MONITOR DMC"
+    "padre": "15",
+    "descripcion": ""
   },
   "16": {
     "id": "16",
@@ -96,9 +96,75 @@
     "estado": "apagado",
     "padre": "11",
     "descripcion": "ABRIR INTERRUPTOR MESA DE MEDICION"
+  },
+  "17": {
+    "id": "17",
+    "nombre": "SD-EMPA-000E",
+    "estado": "apagado",
+    "padre": "5",
+    "descripcion": ""
+  },
+  "18": {
+    "id": "18",
+    "nombre": "SDPEMTE01S0001E",
+    "estado": "apagado",
+    "padre": "17",
+    "descripcion": ""
+  },
+  "19": {
+    "id": "19",
+    "nombre": "SDPEMTE02S0001E",
+    "estado": "apagado",
+    "padre": "17",
+    "descripcion": ""
+  },
+  "20": {
+    "id": "20",
+    "nombre": "SDPEMBN01V0001N",
+    "estado": "apagado",
+    "padre": "5",
+    "descripcion": ""
+  },
+  "21": {
+    "id": "21",
+    "nombre": "SDPEMBN02V0002N",
+    "estado": "apagado",
+    "padre": "5",
+    "descripcion": ""
+  },
+  "22": {
+    "id": "22",
+    "nombre": "Delta",
+    "estado": "apagado",
+    "padre": "1",
+    "descripcion": ""
+  },
+  "23": {
+    "id": "23",
+    "nombre": "SDPHATD01S0001E",
+    "estado": "apagado",
+    "padre": "4",
+    "descripcion": "CCM1"
+  },
+  "24": {
+    "id": "24",
+    "nombre": "SDPHATD01S0002E",
+    "estado": "apagado",
+    "padre": "4",
+    "descripcion": "CCM2"
+  },
+  "25": {
+    "id": "25",
+    "nombre": "SDPHATD01S0003E",
+    "estado": "apagado",
+    "padre": "4",
+    "descripcion": "TDA HALLDEN"
+  },
+  "26": {
+    "id": "26",
+    "nombre": "SDPHATD10L0076E",
+    "estado": "apagado",
+    "padre": "4",
+    "descripcion": "TENSION UPS HALLDEN"
   }
-
-
-
-
 }

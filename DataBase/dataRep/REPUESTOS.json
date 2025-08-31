@@ -1073,7 +1073,8 @@
         "fecha_creacion": "2024-12-02",
         "equipo": "",
         "ruta_jerarquia": [
-            "SD-APR-EMPA"
+            "SD-APR-EMPA",
+            "SD-APR-LITE"
         ],
         "imagen": "contactor.jpg",
         "fecha_fin": "2025-12-02",
@@ -2622,7 +2623,8 @@
         "cantidad": 14,
         "equipo": "GMP-PUERTA1-ESTANTE2",
         "ruta_jerarquia": [
-            "SD-APR-EMPA"
+            "SD-APR-EMPA",
+            "SD-APR-LITE"
         ],
         "imagen": "contactor.jpg",
         "fecha_creacion": "2025-05-26",

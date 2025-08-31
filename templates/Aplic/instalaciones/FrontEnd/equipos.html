@@ -1,0 +1,55 @@
+<div class="modal fade" id="ubicacionModal" tabindex="-1" aria-labelledby="ubicacionModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-form">
+      <form id="formUbicacion" novalidate>
+        <div class="modal-header">
+          <h5 class="modal-title" id="ubicacionModalLabel">Detalles Ubicación</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="ruta_jerarquia" name="ruta_jerarquia">
+
+          <div class="mb-3 text-center">
+            <img id="modalImagen" src="" alt="Imagen Ubicación" style="max-width: 150px; max-height: 150px;">
+          </div>
+
+          <div class="mb-3">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="emoji">Emoji</label>
+            <input type="text" id="emoji" name="emoji" class="form-control" maxlength="3">
+          </div>
+
+          <div class="mb-3">
+            <label for="ruta">Ruta</label>
+            <input type="text" id="ruta" name="ruta" class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <label for="imagen">Imagen (URL)</label>
+            <input type="text" id="imagen" name="imagen" class="form-control" placeholder="https://...">
+          </div>
+
+          <div class="mb-3">
+            <label for="ruta_jerarquia_display">Ruta Jerarquía</label>
+            <input type="text" id="ruta_jerarquia_display" readonly class="form-control">
+          </div>
+
+          <div class="mb-3">
+            <button type="button" class="btn btn-success" id="btnAgregarHijo">Agregar sububicación</button>
+          </div>
+
+          <div id="sububicacionesContainer" style="max-height: 200px; overflow-y: auto;"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="btnBorrarUbicacion">Borrar Ubicación</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

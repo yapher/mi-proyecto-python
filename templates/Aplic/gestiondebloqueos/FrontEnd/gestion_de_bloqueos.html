@@ -1,225 +1,260 @@
 {% extends 'layout.html' %}
 {% block content %}
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.2.0/noty.min.css" />
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.2.0/noty.min.js"></script>
 
 <style>
-  body { font-family: sans-serif; }
-  .node circle { stroke: #333; stroke-width: 2px; cursor: pointer; }
-  .node text { font-size: 12px; }
-  line.cable { stroke-width: 3px; }
-  .node image { cursor: pointer; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: #1e1e2f;
+  }
+
+  #diagrama {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .node circle {
+    stroke: #fff;
+    stroke-width: 3px;
+    cursor: pointer;
+  }
+
+  .node text {
+    font-size: 18px;
+    fill: white;
+    font-weight: bold;
+    text-anchor: middle;
+    alignment-baseline: middle;
+    text-shadow: 1px 1px 2px black;
+  }
+
+  line.cable {
+    stroke-width: 3px;
+  }
+
+  .node image {
+    cursor: pointer;
+  }
 </style>
 
-<h2>Diagrama de Interruptores</h2>
-<svg id="diagrama" width="1000" height="640"></svg>
+<h2 style="color:white; text-align:center; padding:10px;">Diagrama de Interruptores</h2>
+<svg id="diagrama"></svg>
 
 <!-- Modal -->
 {% include 'Aplic/gestiondebloqueos/FrontEnd/nodo.html' %}
 
 <script>
-let interruptores = {{ interruptores | tojson }};
-let rootId = {{ root_id | tojson }};
-let selectedNodeId = null;
+  let interruptores = {{ interruptores | tojson }};
+  let rootId = {{ root_id | tojson }};
+  let selectedNodeId = null;
 
-// Crear mapa de hijos en frontend
-let childrenMap = {};
-Object.keys(interruptores).forEach(id => {
-    let padre = interruptores[id].padre;
-    if(padre){
-        if(!childrenMap[padre]) childrenMap[padre] = [];
-        childrenMap[padre].push(id);
-    }
-});
-
-// Función para propagar estado en serie (hijos)
-function propagarEstado(id, estado){
-    interruptores[id].estado = estado;
-    if(estado === 'apagado' && childrenMap[id]){
-        childrenMap[id].forEach(hijo => propagarEstado(hijo, estado));
-    }
-}
-
-const svg = d3.select("#diagrama");
-const width = +svg.attr("width");
-const height = +svg.attr("height");
-const treeLayout = d3.tree().size([height - 100, width - 200]);
-
-function buildNodesTree() {
-  const nodos = {};
+  // Crear mapa de hijos
+  let childrenMap = {};
   Object.keys(interruptores).forEach(id => {
-    nodos[id] = { ...interruptores[id], children: [] };
+    let padre = interruptores[id].padre;
+    if (padre) {
+      if (!childrenMap[padre]) childrenMap[padre] = [];
+      childrenMap[padre].push(id);
+    }
   });
-  const roots = Object.keys(interruptores).filter(id => interruptores[id].padre === null);
-  rootId = roots[0] || null;
-  if (!rootId) return null;
-  Object.values(nodos).forEach(n => { if(n.padre && nodos[n.padre]) nodos[n.padre].children.push(n); });
-  return d3.hierarchy(nodos[rootId]);
-}
 
-function render() {
-  svg.selectAll("*").remove();
-  const root = buildNodesTree();
-  if (!root) return;
+  function propagarEstado(id, estado) {
+    interruptores[id].estado = estado;
+    if (estado === 'apagado' && childrenMap[id]) {
+      childrenMap[id].forEach(hijo => propagarEstado(hijo, estado));
+    }
+  }
 
-  treeLayout(root);
+  const svg = d3.select("#diagrama");
 
-  // Líneas
-  svg.selectAll('line.cable')
-    .data(root.links())
-    .enter()
-    .append('line')
-    .attr('class', 'cable')
-    .attr('x1', d => d.source.y + 100)
-    .attr('y1', d => d.source.x + 50)
-    .attr('x2', d => d.target.y + 100)
-    .attr('y2', d => d.target.x + 50)
-    .attr('stroke', d => interruptores[d.target.data.id].estado === 'encendido' ? 'red' : 'green');
+  const treeLayout = d3.tree()
+    .nodeSize([90, 220])
+    .separation((a, b) => a.parent === b.parent ? 1 : 1.5);
 
-  // Nodos
-  const nodeGroup = svg.selectAll('g.node')
-    .data(root.descendants(), d => d.data.id)
-    .enter()
-    .append('g')
-    .attr('class', 'node')
-    .attr('transform', d => `translate(${d.y + 100},${d.x + 50})`);
+  function buildNodesTree() {
+    const nodos = {};
+    Object.keys(interruptores).forEach(id => {
+      nodos[id] = { ...interruptores[id], children: [] };
+    });
+    const roots = Object.keys(interruptores).filter(id => interruptores[id].padre === null);
+    rootId = roots[0] || null;
+    if (!rootId) return null;
+    Object.values(nodos).forEach(n => { if (n.padre && nodos[n.padre]) nodos[n.padre].children.push(n); });
+    return d3.hierarchy(nodos[rootId]);
+  }
 
-  nodeGroup.append('circle')
-    .attr('r', 20)
-    .attr('fill', d => d.data.estado === 'encendido' ? 'red' : 'green')
-    .style('cursor', 'pointer')
-    .on('click', (event, d) => abrirModal(d.data.id));
+  function render() {
+    svg.selectAll("*").remove();
+    const root = buildNodesTree();
+    if (!root) return;
 
-  nodeGroup.append('text')
-    .attr('y', -28)
-    .attr('text-anchor', 'middle')
-    .text(d => `${d.data.nombre} (ID:${d.data.id}${d.data.id === rootId ? ' · RAÍZ' : ''})`);
+    treeLayout(root);
 
-  nodeGroup.append("image")
-    .attr("xlink:href", d => d.data.estado === "encendido" 
-                            ? "/static/uploads/utils/encendido.png" 
-                            : "/static/uploads/utils/apagado.png")
-    .attr("x", -16)
-    .attr("y", 25)
-    .attr("width", 32)
-    .attr("height", 32)
-    .style("cursor", "pointer")
-    .on("click", (event, d) => {
-        event.stopPropagation(); 
+    // Ajustar viewBox dinámicamente
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+    root.each(d => {
+      if (d.x < x0) x0 = d.x;
+      if (d.x > x1) x1 = d.x;
+      if (d.y < y0) y0 = d.y;
+      if (d.y > y1) y1 = d.y;
+    });
+    svg.attr("viewBox", [y0 - 150, x0 - 100, (y1 - y0) + 300, (x1 - x0) + 200])
+      .attr("preserveAspectRatio", "xMidYMid meet");
+
+    // Cables
+    svg.selectAll('line.cable')
+      .data(root.links())
+      .enter()
+      .append('line')
+      .attr('class', 'cable')
+      .attr('x1', d => d.source.y + 100)
+      .attr('y1', d => d.source.x + 50)
+      .attr('x2', d => d.target.y + 100)
+      .attr('y2', d => d.target.x + 50)
+      .attr('stroke', d => interruptores[d.target.data.id].estado === 'encendido' ? 'red' : 'green');
+
+    // Nodos
+    const nodeGroup = svg.selectAll('g.node')
+      .data(root.descendants(), d => d.data.id)
+      .enter()
+      .append('g')
+      .attr('class', 'node')
+      .attr('transform', d => `translate(${d.y + 100},${d.x + 50})`);
+
+    nodeGroup.append('circle')
+      .attr('r', 35)
+      .attr('fill', d => d.data.estado === 'encendido' ? 'red' : 'green')
+      .on('click', (event, d) => abrirModal(d.data.id));
+
+    nodeGroup.append('text')
+      .text(d => d.data.nombre);
+
+    nodeGroup.append("image")
+      .attr("xlink:href", d => d.data.estado === "encendido"
+        ? "/static/uploads/utils/encendido.png"
+        : "/static/uploads/utils/apagado.png")
+      .attr("x", -16)
+      .attr("y", 25)
+      .attr("width", 32)
+      .attr("height", 32)
+      .on("click", (event, d) => {
+        event.stopPropagation();
         fetch(`/toggle_estado/${d.data.id}`, { method: "POST" })
           .then(r => r.json())
           .then(resp => {
-            if (!resp.success) { 
-              new Noty({text: resp.error, type:'error'}).show(); 
-              return; 
+            if (!resp.success) {
+              new Noty({ text: resp.error, type: 'error' }).show();
+              return;
             }
             propagarEstado(d.data.id, resp.estado);
             render();
           })
           .catch(err => {
-            new Noty({text: 'Error al cambiar estado', type:'error'}).show();
+            new Noty({ text: 'Error al cambiar estado', type: 'error' }).show();
             console.error(err);
           });
-    });
-}
+      });
+  }
 
-// Modal
-const nodoModal = new bootstrap.Modal(document.getElementById('nodoModal'));
-function abrirModal(id){
+  // Modal
+  const nodoModal = new bootstrap.Modal(document.getElementById('nodoModal'));
+  function abrirModal(id) {
     selectedNodeId = id;
     const nodo = interruptores[id];
     document.getElementById('modalNombre').value = nodo.nombre || '';
     document.getElementById('modalDescripcion').value = nodo.descripcion || '';
     document.getElementById('modalEstado').checked = nodo.estado === 'encendido';
-    const hijosLista = childrenMap[id] ? childrenMap[id].map(h => interruptores[h].nombre + ' (ID:' + h + ')').join('\n') : '';
+    const hijosLista = childrenMap[id] ? childrenMap[id].map(h => interruptores[h].nombre).join('\n') : '';
     document.getElementById('modalHijos').value = hijosLista;
     nodoModal.show();
-}
+  }
 
-// Guardar cambios
-document.getElementById('btnGuardarModal').addEventListener('click', () => {
-  if (!selectedNodeId) return;
-  const nombre = document.getElementById('modalNombre').value.trim();
-  const descripcion = document.getElementById('modalDescripcion').value.trim();
-  const estado = document.getElementById('modalEstado').checked ? 'encendido' : 'apagado';
+  // Guardar cambios
+  document.getElementById('btnGuardarModal').addEventListener('click', () => {
+    if (!selectedNodeId) return;
+    const nombre = document.getElementById('modalNombre').value.trim();
+    const descripcion = document.getElementById('modalDescripcion').value.trim();
+    const estado = document.getElementById('modalEstado').checked ? 'encendido' : 'apagado';
 
-  fetch(`/editar_interruptor/${selectedNodeId}`, {
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ nombre, estado, descripcion })
-  }).then(r => r.json()).then(resp => {
-    if(!resp.success) { new Noty({text: resp.error, type:'error'}).show(); return; }
-    interruptores[selectedNodeId] = resp.data;
-    render();
-    nodoModal.hide();
-    new Noty({text:'Nodo actualizado', type:'success'}).show();
-  }).catch(err => {
-    new Noty({text: 'Error al guardar', type:'error'}).show();
-    console.error(err);
-  });
-});
-
-// Borrar nodo
-document.getElementById('btnBorrarModal').addEventListener('click', () => {
-  if (!selectedNodeId) return;
-  fetch(`/borrar_interruptor/${selectedNodeId}`, { method:'POST' })
-    .then(r => r.json()).then(resp => {
-      if(!resp.success) { new Noty({text: resp.error, type:'error'}).show(); return; }
-      delete interruptores[selectedNodeId];
-      selectedNodeId = null;
+    fetch(`/editar_interruptor/${selectedNodeId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, estado, descripcion })
+    }).then(r => r.json()).then(resp => {
+      if (!resp.success) { new Noty({ text: resp.error, type: 'error' }).show(); return; }
+      interruptores[selectedNodeId] = resp.data;
       render();
       nodoModal.hide();
-      new Noty({text:'Nodo borrado', type:'success'}).show();
+      new Noty({ text: 'Nodo actualizado', type: 'success' }).show();
     }).catch(err => {
-      new Noty({text: 'Error al borrar', type:'error'}).show();
+      new Noty({ text: 'Error al guardar', type: 'error' }).show();
       console.error(err);
     });
-});
-
-// Agregar hijo
-document.getElementById('btnAgregarHijo').addEventListener('click', () => {
-  if(!selectedNodeId) return;
-  const nombre = document.getElementById('modalNombre').value.trim() || 'Nuevo Nodo';
-  const padre = selectedNodeId;
-
-  fetch('/agregar_interruptor', {
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({nombre, padre})
-  }).then(r => r.json()).then(resp => {
-    if(!resp.success) { new Noty({text: resp.error, type:'error'}).show(); return; }
-    interruptores[resp.id] = resp.data;
-    if(!childrenMap[padre]) childrenMap[padre] = [];
-    childrenMap[padre].push(resp.id);
-    render();
-    new Noty({text:'Hijo agregado', type:'success'}).show();
-  }).catch(err => {
-    new Noty({text: 'Error al agregar hijo', type:'error'}).show();
-    console.error(err);
   });
-});
 
-// Inicial
-if(Object.keys(interruptores).length === 0) {
-  fetch('/agregar_interruptor', {
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({nombre:'Nodo Raíz', padre:null})
-  }).then(r => r.json()).then(resp => {
-    interruptores[resp.id] = resp.data;
-    rootId = resp.id;
-    render();
-    abrirModal(resp.id);
-  }).catch(err => {
-    console.error('Error creando nodo raíz', err);
+  // Borrar nodo
+  document.getElementById('btnBorrarModal').addEventListener('click', () => {
+    if (!selectedNodeId) return;
+    fetch(`/borrar_interruptor/${selectedNodeId}`, { method: 'POST' })
+      .then(r => r.json()).then(resp => {
+        if (!resp.success) { new Noty({ text: resp.error, type: 'error' }).show(); return; }
+        delete interruptores[selectedNodeId];
+        selectedNodeId = null;
+        render();
+        nodoModal.hide();
+        new Noty({ text: 'Nodo borrado', type: 'success' }).show();
+      }).catch(err => {
+        new Noty({ text: 'Error al borrar', type: 'error' }).show();
+        console.error(err);
+      });
   });
-} else {
-  render();
-}
+
+  // Agregar hijo
+  document.getElementById('btnAgregarHijo').addEventListener('click', () => {
+    if (!selectedNodeId) return;
+    const nombre = document.getElementById('modalNombre').value.trim() || 'Nuevo Nodo';
+    const padre = selectedNodeId;
+
+    fetch('/agregar_interruptor', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, padre })
+    }).then(r => r.json()).then(resp => {
+      if (!resp.success) { new Noty({ text: resp.error, type: 'error' }).show(); return; }
+      interruptores[resp.id] = resp.data;
+      if (!childrenMap[padre]) childrenMap[padre] = [];
+      childrenMap[padre].push(resp.id);
+      render();
+      new Noty({ text: 'Hijo agregado', type: 'success' }).show();
+    }).catch(err => {
+      new Noty({ text: 'Error al agregar hijo', type: 'error' }).show();
+      console.error(err);
+    });
+  });
+
+  // Inicial
+  if (Object.keys(interruptores).length === 0) {
+    fetch('/agregar_interruptor', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre: 'Nodo Raíz', padre: null })
+    }).then(r => r.json()).then(resp => {
+      interruptores[resp.id] = resp.data;
+      rootId = resp.id;
+      render();
+      abrirModal(resp.id);
+    }).catch(err => {
+      console.error('Error creando nodo raíz', err);
+    });
+  } else {
+    render();
+  }
+
+  // Redibujar al cambiar tamaño de pantalla
+  window.addEventListener("resize", render);
 </script>
 {% endblock %}

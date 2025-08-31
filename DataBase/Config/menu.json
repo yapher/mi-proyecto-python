@@ -68,6 +68,12 @@
                         "emoji": "🏛️",
                         "ruta": "/crear_almacenes",
                         "submenues": []
+                    },
+                    {
+                        "nombre": "Instalaciones",
+                        "emoji": "🌏​",
+                        "ruta": "/instalaciones",
+                        "submenues": []
                     }
                 ]
             },

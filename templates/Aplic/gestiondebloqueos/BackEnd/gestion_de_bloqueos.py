@@ -78,10 +78,21 @@ def agregar_interruptor():
     data = request.json or {}
     nombre = data.get('nombre', 'Nuevo Nodo')
     padre = data.get('padre')
-    nuevo_id = str(len(interruptores) + 1)
-    interruptores[nuevo_id] = {'id': nuevo_id, 'nombre': nombre, 'estado': 'apagado', 'padre': padre, 'descripcion': ''}
+
+    # ✅ Generar ID único (evita conflictos al borrar nodos)
+    nuevo_id = str(max(map(int, interruptores.keys()), default=0) + 1)
+
+    interruptores[nuevo_id] = {
+        'id': nuevo_id,
+        'nombre': nombre,
+        'estado': 'apagado',
+        'padre': padre,
+        'descripcion': ''
+    }
+
     if padre:
         children_map[padre].append(nuevo_id)
+
     guardar_nodos()
     return jsonify({'success': True, 'id': nuevo_id, 'data': interruptores[nuevo_id]})
 
