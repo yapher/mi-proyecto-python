@@ -238,6 +238,12 @@
                         "emoji": "🩻",
                         "ruta": "/detector_de_rostros",
                         "submenues": []
+                    },
+                    {
+                        "nombre": "Trayectorias",
+                        "emoji": "✴️",
+                        "ruta": "/trayectoria",
+                        "submenues": []
                     }
                 ]
             }

@@ -69,43 +69,48 @@ def generar_json_ot():
         # Obtener último ID
         last_id = max((e.get("id", 0) for e in agenda), default=0)
 
-        # Guardar títulos ya existentes para evitar duplicados exactos
-        ordenes_existentes = {e.get("titulo") for e in agenda}
-
         nuevos_eventos = 0
-        for orden in ordenes:
-            if orden["numero_orden"] in ordenes_existentes:
-                continue  # Ya existe exactamente este número de orden
-            ordenes_existentes.add(orden["numero_orden"])
+        actualizaciones = 0
 
+        for orden in ordenes:
             try:
                 fecha_obj = datetime.strptime(orden["fin_extremo"], "%d/%m/%Y")
                 fecha_str = fecha_obj.strftime("%Y-%m-%d")
             except Exception:
                 fecha_str = datetime.today().strftime("%Y-%m-%d")
 
-            last_id += 1
-            evento = {
-                "id": last_id,
-                "titulo": orden["numero_orden"],
-                "fecha": fecha_str,
-                "descripcion": orden["descripcion"],
-                "email": "c.oherasimov@ternium.com.ar",
-                "realizado": False
-            }
-            agenda.append(evento)
-            nuevos_eventos += 1
+            # Buscar si ya existe este número de orden en la agenda
+            existente = next((e for e in agenda if e.get("titulo") == orden["numero_orden"]), None)
+
+            if existente:
+                # Si existe pero la fecha es distinta, actualizamos
+                if existente.get("fecha") != fecha_str:
+                    existente["fecha"] = fecha_str
+                    actualizaciones += 1
+                continue  # no duplicar
+            else:
+                # Si no existe, lo agregamos como nuevo
+                last_id += 1
+                evento = {
+                    "id": last_id,
+                    "titulo": orden["numero_orden"],
+                    "fecha": fecha_str,
+                    "descripcion": orden["descripcion"],
+                    "email": "c.oherasimov@ternium.com.ar",
+                    "realizado": False
+                }
+                agenda.append(evento)
+                nuevos_eventos += 1
 
         # Guardar agenda.json actualizado
         os.makedirs(os.path.dirname(AGENDA_PATH), exist_ok=True)
         with open(AGENDA_PATH, "w", encoding="utf-8") as f:
             json.dump(agenda, f, indent=4, ensure_ascii=False)
 
-        flash(f"Archivo generado correctamente y {nuevos_eventos} nuevos eventos agregados a agenda.json", "success")
+        flash(f"Archivo generado correctamente: {nuevos_eventos} nuevos eventos y {actualizaciones} fechas actualizadas en agenda.json", "success")
 
     except Exception as e:
         flash(f"Error al generar el archivo: {str(e)}", "danger")
 
-    #return render_template('Aplic/bajadadeot/FrontEnd/bajada_de_ot.html', nemu=nemu, roles=current_user.roles)
-# Redirección final a la lista de OT (GET), evitando re-envío del formulario
+    # Redirección final a la lista de OT (GET), evitando re-envío del formulario
     return redirect("/listar_ot", code=303)

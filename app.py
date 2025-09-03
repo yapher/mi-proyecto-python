@@ -39,6 +39,8 @@ from templates.Aplic.detectorderostros.BackEnd.detector_de_rostros import detect
 from templates.Aplic.listarot.BackEnd.listar_ot import listar_ot_bp
 from templates.Aplic.bajadadeot.BackEnd.bajada_de_ot import bajada_de_ot_bp
 from templates.Aplic.instalaciones.BackEnd.instalaciones import instalaciones_bp
+from templates.Aplic.trayectoria.BackEnd.trayectoria import trayectoria_bp
+
 
 app = Flask(__name__)
 app.secret_key = '221d18b67f2d4705a132d532b1d12ab2'  # Cambia esto por una clave segura
@@ -66,6 +68,9 @@ app.register_blueprint(detector_de_rostros_bp)
 app.register_blueprint(listar_ot_bp)
 app.register_blueprint(bajada_de_ot_bp)
 app.register_blueprint(instalaciones_bp)
+app.register_blueprint(trayectoria_bp)
+
+
 
 # ========= Config de correo =========
 # --- Si usas GMAIL con clave de aplicación ---

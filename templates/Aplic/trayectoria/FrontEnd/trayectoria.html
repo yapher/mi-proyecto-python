@@ -1,0 +1,114 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h3 class="mb-3">Trayectoria (RBF en 3D o 1D/2D)</h3>
+
+<form method="post" action="/trayectoria">
+    <label>Ingresa puntos (formato: x,y[,z][,f])</label><br>
+    <input type="text" name="points" size="80" placeholder="Ej: 0,0; 1,0; 0,1 o 0,0,0; 1,0,0; 0,1,0">
+    <button type="submit" class="btn btn-primary">Entrenar</button>
+</form>
+
+
+
+{% if error %}<p style="color:red">{{ error }}</p>{% endif %}
+
+{% if entrenado %}
+<hr>
+<h5>Modelo entrenado ✔</h5>
+
+<form id="predict-form">
+    <label>Ingresa coordenadas (ej: x,y[,z]):</label>
+    <input type="text" name="coords" id="coords" size="40">
+    <button type="button" onclick="predecir()" class="btn btn-success">Predecir</button>
+</form>
+<p id="resultado"></p>
+
+
+<button type="button" onclick="verEcuacion()" class="btn btn-warning">Ver ecuación paramétrica</button>
+<div id="ecuacion" style="background:#fff; color:#000; padding:15px; margin-top:10px; border:1px solid #ccc; border-radius:8px;"></div>
+
+<!-- MathJax -->
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<script>
+function verEcuacion(){
+    fetch("/trayectoria/model_param")
+    .then(r => r.json())
+    .then(d => {
+        const cont = document.getElementById("ecuacion");
+        if(d.error){
+            cont.innerHTML = "<b style='color:red'>"+d.error+"</b>";
+        } else {
+            // Mostramos en LaTeX
+            cont.innerHTML = `\\[ ${d.equation} \\]`;
+            MathJax.typesetPromise([cont]); // Renderiza
+        }
+    });
+}
+</script>
+
+
+
+
+<button type="button" onclick="graficar()" class="btn btn-info">Ver gráfico</button>
+<button type="button" onclick="verModelo()" class="btn btn-warning">Ver ecuación del modelo</button>
+<p id="modelo_eq"></p>
+
+<div id="grafico" style="width:100%; height:600px;"></div>
+
+
+
+
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script>
+function predecir(){
+    let formData = new FormData();
+    formData.append("coords", document.getElementById("coords").value);
+    fetch("/trayectoria/predict", { method: "POST", body: formData })
+    .then(r=>r.json())
+    .then(d=>{
+        if(d.error){ document.getElementById("resultado").innerHTML="<b style='color:red'>"+d.error+"</b>"; }
+        else{
+            let t_msg = d.t!==null ? " (t="+d.t.toFixed(2)+")":""; 
+            document.getElementById("resultado").innerHTML="Coords=["+d.coords+"] → f ≈ "+d.y_pred.toFixed(3)+t_msg;
+        }
+    });
+}
+
+function graficar(){
+    fetch("/trayectoria/plot")
+    .then(r=>r.json())
+    .then(d=>{
+        if(d.error){ document.getElementById("grafico").innerHTML="<b style='color:red'>"+d.error+"</b>"; return; }
+        let data_plot=[];
+        if(d.dim==1){
+            data_plot.push({x:d.px, y:d.py, mode:'markers', name:'Puntos'});
+            data_plot.push({x:d.x, y:d.y, mode:'lines', name:'Curva'});
+        } else if(d.dim==2){
+            data_plot.push({x:d.px, y:d.py, z:d.pz, mode:'markers', type:'scatter3d', name:'Puntos'});
+            data_plot.push({x:d.x[0], y:d.y.map(r=>r[0]), z:d.z, type:'surface', opacity:0.5, name:'Superficie'});
+            if(d.linea) data_plot.push({x:d.linea.x, y:d.linea.y, z:d.linea.z, mode:'lines', type:'scatter3d', line:{color:'red', width:4}, name:'Linea paramétrica'});
+        } else if(d.dim==3){
+            data_plot.push({x:d.px, y:d.py, z:d.pz, mode:'markers', marker:{size:5, color:d.pf, colorscale:'Viridis'}, type:'scatter3d', name:'Puntos'});
+            d.slices.forEach(s=>{ data_plot.push({x:s.x[0], y:s.y.map(r=>r[0]), z:s.f, type:'surface', opacity:0.5, name:'z='+s.z0}); });
+            if(d.linea) data_plot.push({x:d.linea.x, y:d.linea.y, z:d.linea.z, mode:'lines', type:'scatter3d', line:{color:'red', width:5}, name:'Linea paramétrica'});
+        }
+        Plotly.newPlot('grafico', data_plot);
+    });
+}
+
+function verModelo(){
+    fetch("/trayectoria/model")
+    .then(r=>r.json())
+    .then(d=>{
+        if(d.error){ document.getElementById("modelo_eq").innerHTML="<b style='color:red'>"+d.error+"</b>"; }
+        else{ document.getElementById("modelo_eq").innerHTML="<b>Ecuación del modelo RBF:</b> "+d.equation; }
+    });
+}
+</script>
+{% endif %}
+
+{% endblock %}

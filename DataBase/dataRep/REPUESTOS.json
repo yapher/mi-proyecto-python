@@ -3622,7 +3622,7 @@
         "fecha_creacion": "2025-05-30",
         "fecha_fin": "",
         "link": "",
-        "estado": "🔴"
+        "estado": "🟣"
     },
     {
         "nombre": "MOTORREDUCTOR WINSMITH MODELO 4MCTD",
@@ -4252,7 +4252,7 @@
     },
     {
         "nombre": "CONTACTOR TELEMECANIQUE LC1 F115BD",
-        "codigo": "71627862",
+        "codigo": "78627862",
         "cantidad": 1,
         "equipo": "SALA BATERIAS",
         "ruta_jerarquia": [
@@ -5703,6 +5703,36 @@
         "imagen": null,
         "fecha_creacion": "2025-08-15",
         "fecha_fin": "2026-12-26",
+        "link": "",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "MPLC IC695PSD140 FUENTE 24VDC (RX3I)",
+        "codigo": "71625145",
+        "cantidad": 2,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "",
+            "SD-APR-LITE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-09-02",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟡"
+    },
+    {
+        "nombre": "MODULO DE ENTRADA IC693MDL645 GE FANUC",
+        "codigo": "71071610",
+        "cantidad": 4,
+        "equipo": "GMP",
+        "ruta_jerarquia": [
+            "",
+            "SD-APR-LITE"
+        ],
+        "imagen": null,
+        "fecha_creacion": "2025-09-02",
+        "fecha_fin": "",
         "link": "",
         "estado": "🟡"
     }

@@ -137,7 +137,7 @@
     },
     {
         "titulo": "Corregir Bloqueos del plan Grúa 320",
-        "fecha": "2025-09-01",
+        "fecha": "2025-09-03",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "id": 20,
@@ -265,7 +265,8 @@
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "id": 35,
-        "realizado": true
+        "realizado": false,
+        "prioridad": "media"
     },
     {
         "titulo": "Comprar bomba de recirculación",
@@ -350,7 +351,7 @@
     {
         "id": 46,
         "titulo": "PM11:2002723270",
-        "fecha": "2025-08-17",
+        "fecha": "2025-08-15",
         "descripcion": "ctrl y ajuste int Compresor Nº3",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -629,7 +630,7 @@
     {
         "id": 79,
         "titulo": "PM11:2003102398",
-        "fecha": "2025-08-26",
+        "fecha": "2025-09-22",
         "descripcion": "FALLA DE COMUNICACIÓN NIVEL 1",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": true,
@@ -641,7 +642,7 @@
         "fecha": "2025-09-02",
         "descripcion": "Preventivo UPS Sidercrom Ramallo",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true
     },
     {
         "id": 81,
@@ -649,7 +650,7 @@
         "fecha": "2025-09-02",
         "descripcion": "Preventivo UPS Sidercrom",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true
     },
     {
         "id": 82,
@@ -1193,7 +1194,7 @@
     {
         "id": 149,
         "titulo": "PM11:2003131908",
-        "fecha": "2025-08-26",
+        "fecha": "2025-09-22",
         "descripcion": "NORMALIZAR GUARDA-PIE",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": true,
@@ -1202,7 +1203,7 @@
     {
         "id": 150,
         "titulo": "PM11:2003131997",
-        "fecha": "2025-08-26",
+        "fecha": "2025-09-22",
         "descripcion": "REPARAR AIRE TABLEROS LITTELL",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": true,
@@ -1392,8 +1393,8 @@
     },
     {
         "titulo": "RP Hallden",
-        "fecha": "2025-09-02",
-        "descripcion": "",
+        "fecha": "2025-09-18",
+        "descripcion": "no se realizo por paro sindical",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
         "prioridad": "media",
@@ -1404,7 +1405,7 @@
         "fecha": "2025-09-01",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media",
         "id": 173
     },
@@ -1446,8 +1447,8 @@
     },
     {
         "titulo": "RP Grúa 320",
-        "fecha": "2025-09-02",
-        "descripcion": "",
+        "fecha": "2025-09-18",
+        "descripcion": "no se realizo por paro sindical",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
         "prioridad": "media",
@@ -1490,10 +1491,11 @@
     {
         "id": 183,
         "titulo": "PM01:2003147214",
-        "fecha": "2025-09-01",
+        "fecha": "2025-10-01",
         "descripcion": "REVISION MOTORES COMPRESORES",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": false,
+        "prioridad": "media"
     },
     {
         "titulo": "hacer OT dia a día",
@@ -1550,134 +1552,6 @@
         "id": 189
     },
     {
-        "id": 190,
-        "titulo": "PM01:2003161932",
-        "fecha": "2025-08-27",
-        "descripcion": "RP-CONTROL CERRADURAS  PUERTAS",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 191,
-        "titulo": "PM01:2003161933",
-        "fecha": "2025-08-27",
-        "descripcion": "RP- CONTROL DE SENSORES",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 192,
-        "titulo": "PM01:2003161935",
-        "fecha": "2025-08-27",
-        "descripcion": "RP-MANT. TB EMBALAJE AUTOMÁTICO",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 193,
-        "titulo": "PM01:2003161934",
-        "fecha": "2025-08-27",
-        "descripcion": "RP-MANT. TIJERA CORTE FILM",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 194,
-        "titulo": "PM01:2003161944",
-        "fecha": "2025-08-27",
-        "descripcion": "RP-GAMB REVISION MOTORES CC HALLDEN",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 195,
-        "titulo": "PM01:2003161947",
-        "fecha": "2025-08-27",
-        "descripcion": "RP-GAMB. MANT. VENTILADORES LITTELL",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 196,
-        "titulo": "PM01:2003161943",
-        "fecha": "2025-08-27",
-        "descripcion": "RP-REVISION TABLEROS HALLDEN",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 197,
-        "titulo": "PM01:2003161945",
-        "fecha": "2025-08-27",
-        "descripcion": "RP-LIMPIEZA HALLDEN",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 198,
-        "titulo": "PM01:2003161948",
-        "fecha": "2025-08-27",
-        "descripcion": "RP-MANTENIMIENTO TABLEROS DE COMANDO",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 199,
-        "titulo": "PM01:2003161946",
-        "fecha": "2025-08-27",
-        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA HALLDEN",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 200,
-        "titulo": "PM01:2003161942",
-        "fecha": "2025-08-27",
-        "descripcion": "RP-MANT. ELÉCTRICO HALLDEN",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 201,
-        "titulo": "PM01:2003161949",
-        "fecha": "2025-08-27",
-        "descripcion": "RP-REV.MOTORES CA APIL. LITTELL",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 202,
-        "titulo": "PM01:2003161953",
-        "fecha": "2025-08-27",
-        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA LITTELL",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 203,
-        "titulo": "PM01:2003161951",
-        "fecha": "2025-08-27",
-        "descripcion": "RP-MANT. ELÉCTRICO SENSORES LITTELL",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 204,
-        "titulo": "PM01:2003161950",
-        "fecha": "2025-08-27",
-        "descripcion": "RP-GAMB-REV. MOTORES DE CC.",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
-        "id": 205,
-        "titulo": "PM01:2003161952",
-        "fecha": "2025-08-27",
-        "descripcion": "RP- LIMPIEZA LITTELL",
-        "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
-    },
-    {
         "id": 206,
         "titulo": "PM11:2003164214",
         "fecha": "2025-09-22",
@@ -1715,7 +1589,8 @@
         "fecha": "2025-09-01",
         "descripcion": "INSP. GRAL AREAS EXTERNAS.",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 211,
@@ -1735,7 +1610,7 @@
     },
     {
         "titulo": "Modificar OT 2002723270",
-        "fecha": "2025-09-01",
+        "fecha": "2025-09-05",
         "descripcion": "Realizar compra de repuesto y modificar ot para cambio de interruptor",
         "email": "cóherasimov@ternium.com.ar",
         "realizado": false,
@@ -1883,10 +1758,10 @@
     },
     {
         "titulo": "buscar interruptor para compresor 3",
-        "fecha": "2025-09-05",
-        "descripcion": "no hay comprar",
+        "fecha": "2025-09-02",
+        "descripcion": "no hay comprar, se compra rden 2003215047\nPM11: REP. COMPRESOR 3",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "alta",
         "id": 230
     },
@@ -1982,7 +1857,7 @@
     },
     {
         "titulo": "Ver repuesto no codificado",
-        "fecha": "2025-09-03",
+        "fecha": "2025-09-04",
         "descripcion": "CAMBIAR MOTOR CINTA 21   falta cargar el repuesto",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -1997,5 +1872,235 @@
         "realizado": false,
         "prioridad": "alta",
         "id": 243
+    },
+    {
+        "titulo": "Cambio de turno de 06 a 14",
+        "fecha": "2025-09-01",
+        "descripcion": "falla en vacio de robot 1",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "alta",
+        "id": 244
+    },
+    {
+        "id": 245,
+        "titulo": "PM02:2003202278",
+        "fecha": "2025-09-03",
+        "descripcion": "INSPECCION SENSORES HALLDEN",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true
+    },
+    {
+        "id": 246,
+        "titulo": "PM02:2003206080",
+        "fecha": "2025-09-04",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 247,
+        "titulo": "PM01:2003161942",
+        "fecha": "2025-09-02",
+        "descripcion": "RP-MANT. ELÉCTRICO HALLDEN se cierra por paro sindical",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media"
+    },
+    {
+        "id": 248,
+        "titulo": "PM01:2003161943",
+        "fecha": "2025-09-02",
+        "descripcion": "RP-REVISION TABLEROS HALLDEN se cierra por paro sindical",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media"
+    },
+    {
+        "id": 249,
+        "titulo": "PM01:2003161944",
+        "fecha": "2025-09-02",
+        "descripcion": "RP-GAMB REVISION MOTORES CC HALLDEN no se realiza por paro sindical",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media"
+    },
+    {
+        "id": 250,
+        "titulo": "PM01:2003161946",
+        "fecha": "2025-09-02",
+        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA HALLDEN paro sindical",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media"
+    },
+    {
+        "id": 251,
+        "titulo": "PM01:2003161945",
+        "fecha": "2025-09-02",
+        "descripcion": "RP-LIMPIEZA HALLDEN paro sindical",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media"
+    },
+    {
+        "id": 252,
+        "titulo": "PM01:2003161935",
+        "fecha": "2025-09-11",
+        "descripcion": "RP-MANT. TB EMBALAJE AUTOMÁTICO",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 253,
+        "titulo": "PM01:2003161932",
+        "fecha": "2025-09-11",
+        "descripcion": "RP-CONTROL CERRADURAS  PUERTAS",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 254,
+        "titulo": "PM01:2003161934",
+        "fecha": "2025-09-11",
+        "descripcion": "RP-MANT. TIJERA CORTE FILM",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 255,
+        "titulo": "PM01:2003161933",
+        "fecha": "2025-09-11",
+        "descripcion": "RP- CONTROL DE SENSORES",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 256,
+        "titulo": "PM01:2003161947",
+        "fecha": "2025-09-22",
+        "descripcion": "RP-GAMB. MANT. VENTILADORES LITTELL",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 257,
+        "titulo": "PM01:2003161948",
+        "fecha": "2025-09-22",
+        "descripcion": "RP-MANTENIMIENTO TABLEROS DE COMANDO",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 258,
+        "titulo": "PM01:2003161949",
+        "fecha": "2025-09-22",
+        "descripcion": "RP-REV.MOTORES CA APIL. LITTELL",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 259,
+        "titulo": "PM01:2003161950",
+        "fecha": "2025-09-22",
+        "descripcion": "RP-GAMB-REV. MOTORES DE CC.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 260,
+        "titulo": "PM01:2003161952",
+        "fecha": "2025-09-22",
+        "descripcion": "RP- LIMPIEZA LITTELL",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 261,
+        "titulo": "PM01:2003161951",
+        "fecha": "2025-09-22",
+        "descripcion": "RP-MANT. ELÉCTRICO SENSORES LITTELL",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 262,
+        "titulo": "PM01:2003161953",
+        "fecha": "2025-09-22",
+        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA LITTELL",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "titulo": "Falla de laterales",
+        "fecha": "2025-09-02",
+        "descripcion": "no toma laterales, se corrige 290, pero busca mucho",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media",
+        "id": 263
+    },
+    {
+        "titulo": "Codificar repuestos de Robot",
+        "fecha": "2025-09-03",
+        "descripcion": "fuente de robot",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 264
+    },
+    {
+        "titulo": "Repuesto de rex Littell",
+        "fecha": "2025-09-02",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media",
+        "id": 265
+    },
+    {
+        "titulo": "hacer M6 para drive robot 2",
+        "fecha": "2026-09-01",
+        "descripcion": "se realiza Aviso M6: 154969367 se vence 01.10.2026",
+        "email": "cóherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "alta",
+        "id": 266
+    },
+    {
+        "titulo": "motor  cinta 21 seguimiento",
+        "fecha": "2025-09-03",
+        "descripcion": "Orden 2003185156\nPM11: CAMBIAR MOTOR CINTA 21 se hace aviso: 154969591",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media",
+        "id": 267
+    },
+    {
+        "titulo": "responder correo Troglio mdw",
+        "fecha": "2025-09-03",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media",
+        "id": 268
+    },
+    {
+        "titulo": "se modifica trayectoria 320",
+        "fecha": "2025-09-03",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media",
+        "id": 269
+    },
+    {
+        "titulo": "Crear equipo controladora robot",
+        "fecha": "2025-09-03",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 270
     }
 ]
