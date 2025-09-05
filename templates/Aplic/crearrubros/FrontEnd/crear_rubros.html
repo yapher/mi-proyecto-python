@@ -1,4 +1,7 @@
 {% extends 'layout.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/crear_rubros.css') }}">
+{% endblock %}
 {% block content %}
 <h3 class="mb-3">Crear Rubros</h3>
 {% include "Aplic/crearrubros/FrontEnd/component/cudRubro.html" %}
@@ -46,7 +49,7 @@
                         tabla.innerHTML += `
                         <tr>
                             <td>${menu.emoji}</td>
-                            <td style="padding-left:${nivel * 30}px">${menu.nombre}</td>
+                            <td class="nivel-${nivel}">${menu.nombre}</td>
                             <td>${menu.ruta || ''}</td>
                             <td>
                                 <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#agregarModal" onclick="prepararEdicion('${menu.ruta_jerarquia}','${menu.nombre}','${menu.emoji}','${menu.ruta || ""}')">✏️ Editar</button>

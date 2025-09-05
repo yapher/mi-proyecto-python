@@ -137,7 +137,7 @@
     },
     {
         "titulo": "Corregir Bloqueos del plan Grúa 320",
-        "fecha": "2025-09-03",
+        "fecha": "2025-09-04",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "id": 20,
@@ -1896,7 +1896,7 @@
         "fecha": "2025-09-04",
         "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true
     },
     {
         "id": 247,
@@ -2042,7 +2042,7 @@
     },
     {
         "titulo": "Codificar repuestos de Robot",
-        "fecha": "2025-09-03",
+        "fecha": "2025-09-04",
         "descripcion": "fuente de robot",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -2096,11 +2096,116 @@
     },
     {
         "titulo": "Crear equipo controladora robot",
-        "fecha": "2025-09-03",
+        "fecha": "2025-09-04",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
         "prioridad": "media",
         "id": 270
+    },
+    {
+        "id": 271,
+        "titulo": "PM01:2003214000",
+        "fecha": "2025-09-08",
+        "descripcion": "REVISION MOTORES COMPRESORES",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 272,
+        "titulo": "PM02:2003223642",
+        "fecha": "2025-09-15",
+        "descripcion": "REVISION ELECT. BAT Y ELEVADOR POTENCIA.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 273,
+        "titulo": "PM01:2003217554",
+        "fecha": "2025-09-22",
+        "descripcion": "REALIZAR BACKUP PLC DE LINEA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 274,
+        "titulo": "PM01:2003217555",
+        "fecha": "2025-09-22",
+        "descripcion": "REALIZAR BACKUP ROBOT 1",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 275,
+        "titulo": "PM01:2003217556",
+        "fecha": "2025-09-22",
+        "descripcion": "REALIZAR BACKUP  ROBOT 2",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 276,
+        "titulo": "PM01:2003217598",
+        "fecha": "2025-09-18",
+        "descripcion": "RP-MANT. ELÉCTRICO HALLDEN",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 277,
+        "titulo": "PM01:2003217599",
+        "fecha": "2025-09-18",
+        "descripcion": "RP-GAMB REVISION MOTORES CC HALLDEN",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 278,
+        "titulo": "PM01:2003217600",
+        "fecha": "2025-09-18",
+        "descripcion": "RP-LIMPIEZA HALLDEN",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 279,
+        "titulo": "PM01:2003217601",
+        "fecha": "2025-09-18",
+        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA HALLDEN",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 280,
+        "titulo": "PM01:2003214001",
+        "fecha": "2025-10-11",
+        "descripcion": "LECTURA DE AISLACION MOTORES LINEA 2",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 281,
+        "titulo": "PM11:2003215047",
+        "fecha": "2026-12-02",
+        "descripcion": "REP. COMPRESOR 3",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 282,
+        "titulo": "PM11:2003215966",
+        "fecha": "2026-09-30",
+        "descripcion": "REP. LITTELL REX",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "titulo": "buscar plano de electroimanes Hallden",
+        "fecha": "2025-09-04",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 283
     }
 ]

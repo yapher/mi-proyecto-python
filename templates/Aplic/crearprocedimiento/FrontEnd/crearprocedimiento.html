@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}
-
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/crear_procedimiento.css') }}">
+{% endblock %}
 {% block content %}
 <h3 class="mb-3">Crear Procedimiento</h3>
 
@@ -24,8 +26,8 @@
         <input type="hidden" id="ruta_original">
         <div class="button-group">
             <button type="button" class="btn btn-agregar" onclick="guardar()">Agregar</button>
-            <button type="button" class="btn btn-editar" onclick="editar()" style="display:none;">Guardar cambios</button>
-            <button type="button" class="btn btn-cancelar" onclick="cancelar()" style="display:none;">Cancelar</button>
+            <button type="button" class="btn btn-editar" onclick="editar()">Guardar cambios</button>
+            <button type="button" class="btn btn-cancelar" onclick="cancelar()">Cancelar</button>
         </div>
     </form>
 </div>
@@ -215,8 +217,8 @@ function prepararEdicion(ruta_jerarquia, nombre, emoji, ruta_menu) {
     document.getElementById("ruta_menu").value = ruta_menu || "";
     document.getElementById("ruta_original").value = ruta_jerarquia;
     document.querySelector(".btn-agregar").style.display = "none";
-    document.querySelector(".btn-editar").style.display = "inline";
-    document.querySelector(".btn-cancelar").style.display = "inline";
+    document.querySelector(".btn-editar").classList.add("active");
+    document.querySelector(".btn-cancelar").classList.add("active");
 
     const rutaPadre = ruta_jerarquia.split('.').slice(0, -1).join('.');
     renderSelectoresNiveles(rutaPadre);
@@ -228,8 +230,8 @@ function cancelar() {
     document.getElementById("ruta_menu").value = "";
     document.getElementById("ruta_original").value = "";
     document.querySelector(".btn-agregar").style.display = "inline";
-    document.querySelector(".btn-editar").style.display = "none";
-    document.querySelector(".btn-cancelar").style.display = "none";
+    document.querySelector(".btn-editar").classList.remove("active");
+    document.querySelector(".btn-cancelar").classList.remove("active");
     renderSelectoresNiveles();
 }
 
@@ -244,7 +246,7 @@ function cargarTabla() {
                     tabla.innerHTML += `
                     <tr>
                         <td>${menu.emoji}</td>
-                        <td style="padding-left:${nivel * 30}px">${menu.nombre}</td>
+                        <td class="nivel-${nivel}">${menu.nombre}</td>
                         <td>${menu.ruta || ''}</td>
                         <td>
                             <button class="btn btn-sm btn-outline-primary"

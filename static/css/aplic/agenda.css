@@ -1,0 +1,173 @@
+/* Estilos específicos para la aplicación Agenda */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #3e2d59;
+}
+
+.full-height {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-responsive {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Estilo para eventos realizados */
+.evento-realizado {
+    background-color: #6c757d !important; /* gris */
+    text-decoration: line-through;
+    color: #dcdcdc !important;
+}
+
+/* Ajustes mínimos para el checkbox dentro de la pill */
+.evento-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    margin-top: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.evento-pill input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.evento-pill span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* PRIORIDAD: colores (solo si NO está realizado; el gris con !important gana) */
+.evento-pill.prio-alta  { 
+    background-color: #ff4d4d; 
+    color: #fff; 
+}
+
+.evento-pill.prio-media { 
+    background-color: #ffc107; 
+    color: #222; 
+}
+
+.evento-pill.prio-baja  { 
+    background-color: #28a745; 
+    color: #fff; 
+}
+
+/* Estilos para el calendario */
+.table {
+    background-color: transparent;
+}
+
+.table th {
+    background-color: #4b376a;
+    border-color: #88c999;
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+}
+
+.table td {
+    border-color: #88c999;
+    vertical-align: top;
+    padding: 8px;
+}
+
+.dia {
+    min-height: 80px;
+    padding: 8px;
+    border-radius: 8px;
+    background-color: #4b376a;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.dia:hover {
+    background-color: #5a4a7a;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.dia.hoy {
+    background-color: #88c999;
+    color: #222;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(136, 201, 153, 0.6);
+}
+
+.semana-label {
+    font-size: 0.75rem;
+    color: #ccc;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.numero {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.vacio {
+    background-color: transparent;
+    border: none;
+}
+
+/* Controles responsivos */
+.controls-responsive {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.controls-responsive .form-select {
+    min-width: 120px;
+}
+
+/* Botón agregar específico para agenda */
+.btn-agregar {
+    background-color: #88c999;
+    color: #222;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-agregar:hover {
+    background-color: #77b88b;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(136, 201, 153, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .dia {
+        min-height: 60px;
+        padding: 4px;
+    }
+    
+    .numero {
+        font-size: 1rem;
+    }
+    
+    .semana-label {
+        font-size: 0.65rem;
+    }
+    
+    .evento-pill {
+        padding: 2px 4px;
+        margin-top: 2px;
+    }
+}

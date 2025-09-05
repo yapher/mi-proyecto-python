@@ -1,58 +1,8 @@
 {% extends 'layout.html' %}
 {% block content %}
 
-<style>
-   html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-        background-color: #3e2d59;
-    }
-    .full-height {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .table-responsive {
-        flex: 1;
-        overflow-y: auto;
-    }
-  /* Estilo para eventos realizados */
-  .evento-realizado {
-    background-color: #6c757d !important; /* gris */
-    text-decoration: line-through;
-    color: #dcdcdc !important;
-  }
-
-  /* Ajustes mínimos para el checkbox dentro de la pill */
-  .evento-pill {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 6px;
-    margin-top: 6px;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  .evento-pill input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    margin: 0;
-    cursor: pointer;
-  }
-  .evento-pill span {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  /* >>> PRIORIDAD: colores (solo si NO está realizado; el gris con !important gana) */
-  .evento-pill.prio-alta  { background-color: #ff4d4d; color: #fff; }
-  .evento-pill.prio-media { background-color: #ffc107; color: #222; }
-  .evento-pill.prio-baja  { background-color: #28a745; color: #fff; }
-</style>
+<!-- Incluir estilos específicos de la aplicación -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/aplic/agenda.css') }}">
 
 
 <div class="container-fluid full-height py-3">

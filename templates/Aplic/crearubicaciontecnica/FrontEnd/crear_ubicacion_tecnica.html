@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}
-
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/crear_ubicacion_tecnica.css') }}">
+{% endblock %}
 {% block content %}
 <h3 class="mb-3">Ubicaciones Técnicas</h3>
 
@@ -31,9 +33,9 @@
         <input type="hidden" id="ruta_original">
         <div class="button-group">
             <button type="button" class="btn btn-agregar" onclick="guardar()">Agregar</button>
-            <button type="button" class="btn btn-editar" onclick="editar()" style="display:none;">Guardar
+            <button type="button" class="btn btn-editar" onclick="editar()">Guardar
                 cambios</button>
-            <button type="button" class="btn btn-cancelar" onclick="cancelar()" style="display:none;">Cancelar</button>
+            <button type="button" class="btn btn-cancelar" onclick="cancelar()">Cancelar</button>
         </div>
     </form>
 </div>
@@ -207,8 +209,8 @@
         document.getElementById("ruta_ubicacion").value = ruta_ubicacion || "";
         document.getElementById("ruta_original").value = ruta_jerarquia;
         document.querySelector(".btn-agregar").style.display = "none";
-        document.querySelector(".btn-editar").style.display = "inline";
-        document.querySelector(".btn-cancelar").style.display = "inline";
+        document.querySelector(".btn-editar").classList.add("active");
+        document.querySelector(".btn-cancelar").classList.add("active");
     }
 
     function cancelar() {
@@ -217,8 +219,8 @@
         document.getElementById("ruta_ubicacion").value = "";
         document.getElementById("ruta_original").value = "";
         document.querySelector(".btn-agregar").style.display = "inline";
-        document.querySelector(".btn-editar").style.display = "none";
-        document.querySelector(".btn-cancelar").style.display = "none";
+        document.querySelector(".btn-editar").classList.remove("active");
+        document.querySelector(".btn-cancelar").classList.remove("active");
     }
 
     function cargarTabla() {
@@ -232,7 +234,7 @@
                         tabla.innerHTML += `
                         <tr>
                             <td>${ubicacion.emoji}</td>
-                            <td style="padding-left:${nivel * 30}px">${ubicacion.nombre}</td>
+                            <td class="nivel-${nivel}">${ubicacion.nombre}</td>
                             <td>${ubicacion.ruta || ''}</td>
                             <td>
                                 <button class="btn btn-sm btn-outline-primary" onclick="prepararEdicion('${ubicacion.ruta_jerarquia}','${ubicacion.nombre}','${ubicacion.emoji}','${ubicacion.ruta || ""}')">Editar</button>

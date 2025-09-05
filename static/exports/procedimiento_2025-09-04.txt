@@ -1,0 +1,133 @@
+<U>ELEMENTOS DE PROTECCION ESPECIFICA</>:
+
+APORTE DE SOLDADURA MANUAL:
+•  Careta para soldadora eléctrica.
+•  Guantes de cuero.
+•  Delantal de cuero.
+•  Campera de cuero de descarne.
+•  Polainas de cuero.
+•  Mangas de cuero.
+
+USO DE AMOLADORAS MANUALES:
+•  Mascara Facial.
+•  Protector Auditivo.
+•  Delantal de Cuero.
+•  Guantes de Cuero
+
+USO DE JLG:
+•  Protección anticaida (Cinturón de seguridad) 
+
+NO ES NECESARIO.
+
+<U>TARJETAS DE SEGURIDAD</>
+
+LAS QUE FIGURAN EN LA ORDEN.
+
+Realizar bloqueo manual por personal de la guardia, verificar bloqueo efectivo.
+
+NO ES NECESARIO.
+
+<U>ACONDICIONAMIENTO PREVIO</>:
+
+•  Verificar que en el área de trabajos no existan derrames de productos lubricante, de ser necesario, solicitar evacuación de los mismos al personal de limpieza industrial.
+•  Verificar bloqueos efectivos y confirmación de los mismos. En R.P./REX/ P.O. de líneas, gestionar con planillas Standard para prueba efectiva de equipos.
+•  En tareas con uso de equipos de oxicorte o soldadura eléctrica, confeccionar permiso de trabajo en caliente. Previo al inicio de las mismas, se deberán verificar que no existan componentes o materiales inflamables en zona de proyección de chispas (plataformas, fosos, cámaras de cables, cámaras y gabinetes Elec., depósitos de combustibles o inflamables en Gral.), de ser necesario, se deberán adecuar las condiciones del área a fin de entornar riesgo potencial de incendio.
+•  Verificar que, en el área de trabajo, exista adecuada iluminación artificial.
+•  En tareas sobre plataformas o niveles superiores, previo al inicio de las mismas, verificar correcta disposición de las mismas y de las barandas perimetrales. No iniciar trabajos en niveles superiores si las estructuras no presentan condiciones óptimas de seguridad. Delimitar área de trabajo.
+•  En tareas que implique apertura de cámaras, fosos, bach de acceso a niveles inferiores, previo a la apertura de los mismos, se deber vallar el área con cadenas, pinos y cinta de seguridad.
+•  En tareas sobre redes o equipos sometidos a presión, previo al inicio de las mismas, verificar despresurización de los sistemas, de corresponder, efectuar apertura de válvulas de purga o alivio.
+•  En tareas de obras Civiles, canalizaciones, ejecución de Perforaciones en Lozas y Pared, previo al inicio de las mismas, se deberán instalar las protecciones que correspondan a fin de evitar contacto con máquinas rotantes, cuadros hidráulicos/neumáticos, cuadros eléctricos. Se deberán verificar planos de redes y servicios que puedan ser afectados por las obras.
+•  En tareas de obras Civiles, canalizaciones, ejecución de Perforaciones en Lozas y Pared, previo al inicio de las mismas se deberán acondicionar las áreas de trabajo, para evitar polución y proyección de mampostería a zonas de equipos operativos, material en proceso, material en Stock o equipos de mantenimiento, se deberán ejecutar cantoneras para la contención de los productos lubricantes y de refrigeración empleados en lubricación o refrigeración de herramientas cortantes.
+•  Tareas ejecutadas por prestaciones de Terceros, previo al inicio de las mismas se deberán gestionar las correspondientes habilitaciones de acceso a las áreas según el siguiente detalle. 
+    -  Solicitar habilitación al jefe de turno.
+    -  Tareas en áreas de líneas operativas, naves de almacenamiento, naves de proceso, sótanos de proceso, gestionar con Supervisor Operativo Responsable del área.
+    -  Hacer tarjeta de interferencia con equipo PG o Auto elevadores si es necesario.
+    -  Tareas en Salas eléctricas, Sótanos eléctricos, compartimientos de cables, gestionar con GMP Resp. Eléctrico de Línea.
+•  Confeccionar A.P.R. / Método seguro de Trabajo.
+En caso de utilización de equipos mobiles realizar check list
+
+<U>HERRAMIENTAS Y EQUIPOS ESPECIALES</>:
+
+    APORTE DE SOLDADURA MANUAL:
+        Herramientas de Mano
+            a. Pinzas
+            b. Llaves combinadas
+            c. Martillo
+            d. Corta hierro
+            e. Buril
+            f. Piqueta
+            g. Cepillos de Cerdas de Acero
+
+            EQUIPOS:
+                a. Máquina de Soldar Fija
+                b. Máquina de Soldar Portátil (Para trabajo In Situ)
+
+    USO DE AMOLADORAS MANUALES:
+        Herramientas de Mano:
+            a. Llave de ajuste de discos (específica de la máquina).
+            b. Morza para ajuste de piezas.
+        EQUIPOS:    a. Amoladora de Mano
+
+    USO DE JLG:
+        JLG
+
+NO ES NECESARIO.
+
+<U>PELIGRO DE LA TAREA</>
+
+R: Golpes por objetos o herramientas.
+AC:
+    1.  Guardar las herramientas de forma ordenada.
+    2.  Revisar el estado de conservación.
+    3.  Descartar las que se encuentran en malas condiciones.
+    4.  Utilizarlas para la finalidad que fueron diseñadas.
+    5.  Proteger filos o puntas al transportarlas.
+
+R: Atrapamiento por o entre objetos.
+AC:
+    1.  Asegurá que las partes móviles estén protegidas mediante resguardos u otros dispositivos de seguridad.
+    2.  No uses ropa o pelo largo suelto, cadenas, anillos, ni pulseras.
+    3.  En caso de intervención sobre el equipo efectuá el bloqueo efectivo.
+
+R: Proyección de fragmentos o partículas
+AC:
+    1. Delimitar la zona a trabajar o acordar la realización de la tarea de amolado con los otros operarios que se encuentren trabajando en la pieza o cerca de ella, a fin de evitar que las chispas desprendidas puedan causar lesiones o accidentes a terceros.
+    Norma de seguridad:
+    MOT-1TACE-001 Uso de amoladora manual
+    N3-NOS-2HISE-009 Habilitación de trabajo en Caliente
+
+R: Arco eléctrico.
+AC: Norma de seguridad: N3-NOS-2HISE-009 Habilitación de trabajo en Caliente.
+
+R: caída de elementos.
+AC:
+    1. Deben colocarse señalizaciones en la parte inferior y acordonarse el área de trabajo para que no cruce personal por los puntos de operación.
+    2. La herramienta que use el personal que efectúe trabajos en altura, deberá estar asegurada para evitar su caída.
+    3. Se debe contar con un vigía para el control de la tarea.
+    4. Cuando se acordone un área para evitar el ingreso a la misma, se debe contemplar un paso peatonal seguro y al finalizar la tarea se deberá retirar el acordonamiento.
+
+R: peligro de incendio.
+AC:
+    1. Las áreas de trabajo de corte o soldadura deben estar delimitadas por mamparas o lonas antiflama, y señalizadas con carteles de seguridad. Siempre que sea posible, deben retirarse todos los materiales inflamables o combustibles. De no ser posible evitar esto, dichos materiales deberán cubrirse con lonas resistentes al fuego.
+    2. En trabajos en los que exista alta probabilidad de explosión o incendio, los riesgos deberán ser analizados y habilitados por personal autorizado, asimismo los extintores de incendios deberán estar disponibles.
+    3. Todos los tanques/tubos serán almacenados en posición vertical inmovilizados con cadenas o dispositivos sujetadores que eviten una caída. No deberán ser rodados sobre el cuerpo de éstos, solamente sobre su base.
+       Norma de seguridad: N3-NOS-2HISE-009 Habilitación de trabajo en Caliente.
+
+R: Shock eléctrico
+AC:
+    1. Realizar bloqueo efectivo cumpliendo con la norma N3-NOS-0HISE-054
+
+TAMBIÉN LOS RIESGOS DEL ÁREA.
+
+<U>IMPACTO DE MEDIO AMBIENTE</>
+    En primera instancia, los residuos son separados en sus puntos de generación, siendo dispuestos por el personal en los diferentes recipientes según el tipo de residuo:
+     •  residuos especiales (contenedor rojo).
+     •  residuos no especiales (contenedor amarillo).
+     •  residuos domésticos de comedor y oficinas (contenedor verde).
+     •  chatarra ferrosa (contenedor gris).
+     •  chatarra no ferrosa (contenedor marrón).
+
+<U>PROCEDIMIENTO DE LA TAREA</>:
+
+<U>CRITERIOS DE ACEPTACIÓN O RECHAZO</>
+    Después de terminada la tarea se debe comunicar al Supervisor de la contratista y al GMP.

@@ -1,5 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
+
+<!-- Incluir estilos específicos de la aplicación -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/aplic/gestiondeherramientas.css') }}">
+
+<div class="gestion-herramientas-container">
 <h3 class="mb-3">Gestión de Herramientas</h3>
 
 <div class="mb-3">
@@ -23,4 +28,5 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
 <script src="{{ url_for('static', filename='js/croquis.js') }}"></script>
+</div>
 {% endblock %}

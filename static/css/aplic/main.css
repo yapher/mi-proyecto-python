@@ -1,0 +1,256 @@
+/* Archivo principal de estilos para todas las aplicaciones */
+
+/* Importar estilos de cada aplicación */
+@import url('agenda.css');
+@import url('tareas.css');
+@import url('inventario.css');
+@import url('gestiondeherramientas.css');
+
+/* Estilos comunes para todas las aplicaciones */
+.app-container {
+    min-height: 100vh;
+    background-color: #3e2d59;
+    color: #fff;
+}
+
+.app-header {
+    background-color: #4b376a;
+    padding: 20px;
+    border-bottom: 3px solid #88c999;
+    margin-bottom: 30px;
+}
+
+.app-header h1, .app-header h2, .app-header h3 {
+    color: #88c999;
+    margin: 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Contenedores de formularios comunes */
+.app-form-container {
+    background-color: #4b376a;
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid #88c999;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* Tablas comunes */
+.app-table {
+    background-color: transparent;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.app-table th {
+    background-color: #4b376a;
+    color: #88c999;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #88c999;
+    font-weight: 600;
+}
+
+.app-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #5a4a7a;
+    color: #fff;
+}
+
+.app-table tr:hover {
+    background-color: #5a4a7a;
+    transition: background-color 0.3s ease;
+}
+
+/* Cards comunes */
+.app-card {
+    background-color: #4b376a;
+    border: 2px solid #88c999;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.app-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    border-color: #77b88b;
+}
+
+/* Botones comunes para aplicaciones */
+.app-btn {
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.app-btn:hover {
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+.app-btn-primary {
+    background-color: #88c999;
+    color: #222;
+}
+
+.app-btn-primary:hover {
+    background-color: #77b88b;
+    color: #111;
+    box-shadow: 0 4px 15px rgba(136, 201, 153, 0.4);
+}
+
+.app-btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.app-btn-secondary:hover {
+    background-color: #5a6268;
+    box-shadow: 0 4px 15px rgba(108, 117, 125, 0.4);
+}
+
+.app-btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.app-btn-danger:hover {
+    background-color: #c82333;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
+}
+
+.app-btn-warning {
+    background-color: #ffc107;
+    color: #222;
+}
+
+.app-btn-warning:hover {
+    background-color: #e0a800;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.4);
+}
+
+/* Formularios comunes */
+.app-form-group {
+    margin-bottom: 20px;
+}
+
+.app-form-label {
+    display: block;
+    color: #88c999;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.app-form-control {
+    width: 100%;
+    padding: 12px 15px;
+    background-color: #5a4a7a;
+    border: 2px solid #88c999;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.app-form-control:focus {
+    outline: none;
+    border-color: #77b88b;
+    box-shadow: 0 0 15px rgba(136, 201, 153, 0.3);
+    background-color: #6b5a8a;
+}
+
+.app-form-control::placeholder {
+    color: #ccc;
+}
+
+/* Alertas comunes */
+.app-alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid;
+}
+
+.app-alert-success {
+    background-color: rgba(40, 167, 69, 0.2);
+    border-color: #28a745;
+    color: #88c999;
+}
+
+.app-alert-error {
+    background-color: rgba(220, 53, 69, 0.2);
+    border-color: #dc3545;
+    color: #ff6b6b;
+}
+
+.app-alert-warning {
+    background-color: rgba(255, 193, 7, 0.2);
+    border-color: #ffc107;
+    color: #ffd700;
+}
+
+.app-alert-info {
+    background-color: rgba(23, 162, 184, 0.2);
+    border-color: #17a2b8;
+    color: #7dd3fc;
+}
+
+/* Loading spinner común */
+.app-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #88c999;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive común */
+@media (max-width: 768px) {
+    .app-container {
+        padding: 15px;
+    }
+    
+    .app-header {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .app-form-container {
+        padding: 20px;
+    }
+    
+    .app-card {
+        padding: 15px;
+    }
+    
+    .app-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    .app-table {
+        font-size: 0.9rem;
+    }
+    
+    .app-table th,
+    .app-table td {
+        padding: 8px 10px;
+    }
+}

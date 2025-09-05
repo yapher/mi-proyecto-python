@@ -1,5 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
+
+<!-- Incluir estilos específicos de la aplicación -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/aplic/tareas.css') }}">
+
+<div class="tareas-container">
 <h3 class="mb-3">tareas</h3>
 
 <form action="/agregar" method="POST" class="bg-form" style="margin-bottom: 20px;">
@@ -90,4 +95,5 @@
 
     });
 </script>
+</div>
 {% endblock %}

@@ -1,48 +1,13 @@
 {% extends 'layout.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/detector_de_rostros.css') }}">
+{% endblock %}
 {% block content %}
 
-<style>
-    .canvas-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 80vh;
-        width: 100%;
-        padding: 10px;
-    }
-
-    .titulo-simulacion {
-        margin-bottom: 20px;
-        text-align: center;
-        font-weight: bold;
-        color: #00ffaa;
-        text-shadow: 0 0 8px rgba(0, 255, 200, 0.6);
-    }
-
-    canvas {
-        border-radius: 12px;
-        box-shadow: 0 0 15px rgba(0, 255, 200, 0.4);
-        max-width: 100%;
-        height: auto;
-        background-color: black;
-    }
-
-    @media (max-width: 768px) {
-        .canvas-container {
-            height: auto;
-        }
-
-        canvas {
-            width: 100%;
-            height: auto;
-        }
-    }
-</style>
 
 <div class="canvas-container">
     <h3 class="titulo-simulacion">Simulación de Detección Facial</h3>
-    <div id="fpsCounter" style="color: #00ffaa; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px;"></div>
+    <div id="fpsCounter" class="fps-counter"></div>
 
     <canvas id="outputCanvas"></canvas>
 </div>

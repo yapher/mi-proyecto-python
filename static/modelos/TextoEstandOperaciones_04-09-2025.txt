@@ -1,0 +1,176 @@
+<U>ELEMENTOS DE PROTECCION ESPECIFICA</>:
+   APORTE DE SOLDADURA MANUAL:
+     •  Careta para soldadora eléctrica
+     •  Guantes de cuero
+     •  Delantal de cuero
+     •  Campera de cuero de descarne
+     •  Polainas de cuero
+     •  Mangas de cuero
+
+  USO DE AMOLADORAS MANUALES:
+    •  Mascara Facial
+    •  Protector Auditivo
+    •  Delantal de Cuero
+    •  Guantes de Cuero
+
+  USO DE JLG
+    •  Protección anticaida (Cinturón de seguridad) 
+
+  NO ES NECESARIO.
+
+<U>TARJETAS DE SEGURIDAD</>
+    
+   LAS QUE FIGURAN EN LA ORDEN.
+
+   Realizar bloqueo manual por personal de la guardia, verificar bloqueo efectivo.
+
+    NO ES NECESARIO.  ( EN CASO DE NECESITARLO LA GUARDIA REALIZARÁ BLOQUEO MANUAL)
+
+<U>ACONDICIONAMIENTO PREVIO</>:
+
+ • Verificar que el área de trabajo esté libre de derrames de productos lubricantes. En caso de detectarlos, solicitar su remoción al personal de limpieza industrial.
+ • Confirmar la efectividad de los bloqueos de seguridad.
+ Para tareas en R.P./REX/P.O. de líneas, gestionar las planillas estándar correspondientes 
+para la validación operativa de los equipos.
+ • Para trabajos que involucren oxicorte o soldadura eléctrica, emitir el permiso de trabajo en caliente. 
+Antes de comenzar, asegurar que no haya materiales inflamables en la zona de proyección de chispas (plataformas, fosos, cámaras de cables, gabinetes eléctricos, depósitos de combustibles, etc.). 
+Si es necesario, adecuar el entorno para mitigar riesgos de incendio.
+ • Verificar que el área cuente con iluminación artificial suficiente y adecuada.
+ • En tareas sobre plataformas o niveles elevados, comprobar la correcta instalación de barandas perimetrales y condiciones estructurales seguras. 
+No iniciar trabajos si no se cumplen los requisitos de seguridad. 
+Delimitar el área de intervención.
+ • Para aperturas de cámaras, fosos o accesos a niveles inferiores, 
+señalizar y vallar el perímetro con cadenas, 
+conos y cintas de seguridad antes de iniciar.
+ • En trabajos sobre redes o equipos presurizados, verificar la despresurización del sistema. 
+Si corresponde, abrir válvulas de purga o alivio.
+ • En obras civiles (canalizaciones, perforaciones en losas o paredes), 
+instalar protecciones para evitar contacto con equipos rotantes, tableros eléctricos o hidráulicos. 
+Verificar planos de redes y servicios afectados.
+ • Acondicionar las áreas de trabajo en obras civiles para evitar polución y proyección de escombros hacia zonas operativas o de almacenamiento.
+ Implementar cantoneras para contener lubricantes y refrigerantes utilizados en herramientas de corte.
+ • Para tareas realizadas por contratistas externos, gestionar las habilitaciones de acceso según corresponda:
+  - Solicitar autorización al jefe de turno.
+  - Coordinar con el Supervisor Operativo para tareas en líneas, naves o sótanos de proceso.
+  - Emitir tarjeta de interferencia si se utilizan equipos PG o autoelevadores.
+  - Coordinar con el GMP responsable para tareas en salas eléctricas, sótanos o ductos de cables.
+ • Confeccionar el A.P.R. (Análisis Preliminar de Riesgos) o el Método Seguro de Trabajo.
+ • Realizar el checklist correspondiente en caso de utilizar equipos móviles.
+ • Asegurar que la zona de trabajo esté libre de paquetes y equipos autoelevadores.
+ • Si se utiliza grúa pluma o JLG dentro de la nave, emitir tarjeta de interferencia o gestionar el bloqueo de grúas puente.
+
+<U>HERRAMIENTAS Y EQUIPOS ESPECIALES</>:
+   APORTE DE SOLDADURA MANUAL:
+     Herramientas de Mano
+      a. Pinzas
+      b. Llaves combinadas
+      c. Martillo
+      d. Corta hierro
+      e. Buril
+      f. Piqueta
+      g. Cepillos de Cerdas de Acero
+
+    EQUIPOS:
+      a. Máquina de Soldar Fija
+      b. Máquina de Soldar Portátil (Para trabajo In Situ)
+
+    USO DE AMOLADORAS MANUALES:
+
+      Herramientas de Mano:
+       a. Llave de ajuste de discos (específica de la máquina)
+       b. Morza para ajuste de piezas.
+
+    EQUIPOS:
+       a. Amoladora de Mano
+    
+    EQUIPOS:
+       a. JLG
+
+   NO ES NECESARIO.
+
+<U>PELIGRO DE LA TAREA</>
+
+   R: Pisada sobre objetos
+   AC:
+     1.  Observar donde se pisa.
+     2.  Mantener orden y limpieza en el área.
+     3.  Asegurar la iluminación adecuada.
+     4.  Uso de calzado adecuado (EPPB).
+     5.  Señalizar los huecos existentes en el área y posteriormente corregirlos.
+
+   R: Golpes por objetos o herramientas
+   AC:
+     1.  Guardar las herramientas de forma ordenada.
+     2.  Revisar el estado de conservación.
+     3.  Descartar las que se encuentran en malas condiciones.
+     4.  Utilizarlas para la finalidad que fueron diseñadas.
+     5.  Proteger filos o puntas al transportarlas.
+
+   R: Atrapamiento por o entre objetos
+   AC:
+     1.  Asegurá que las partes móviles estén protegidas mediante resguardos u otros dispositivos de seguridad.
+     2.  No uses ropa o pelo largo suelto, cadenas, anillos, ni pulseras.
+     3.  En caso de intervención sobre el equipo efectuá el bloqueo efectivo.
+     4.  Durante la estadía en canasta de JLG, es necesario que no se saque las extremidades.
+
+   
+   R: Proyección de fragmentos o partículas
+   AC:
+     1. Delimitar la zona a trabajar o acordar la realización de la tarea de amolado con los otros operarios que se encuentren
+trabajando en la pieza o cerca de ella, a fin de evitar que las chispas desprendidas puedan causar lesiones o accidentes a terceros.
+
+       Norma de seguridad:
+                           MOT-1TACE-001 Uso de amoladora manual
+                           N3-NOS-2HISE-009 Habilitación de trabajo en Caliente
+   R: Arco eléctrico
+   AC:
+        Norma de seguridad: N3-NOS-2HISE-009 Habilitación de trabajo en Caliente.
+
+   R: caída de elementos
+   AC:
+     1. Deben colocarse señalizaciones en la parte inferior y acordonarse el área de trabajo para que no cruce personal por los
+puntos de operación.
+     2. La herramienta que use el personal que efectúe trabajos en altura, deberá estar asegurada para evitar su caída.
+     3. Se debe contar con un vigía para el control de la tarea.
+     4. Cuando se acordone un área para evitar el ingreso a la misma, se debe contemplar un paso peatonal seguro y al finalizar la
+tarea se deberá retirar el acordonamiento.
+
+    R: Caída de persona a distinto nivel
+    AC:
+        1. Al momento de utilizar escaleras, tomarse del pasamanos respetando los 3 puntos de apoyo.
+        2. Si se usa equipos como JLG estar en todo momento amarrado a puntos fijos del canasto.
+      
+
+  R: peligro de incendio
+  AC:
+    1. Las áreas de trabajo de corte o soldadura deben estar delimitadas por mamparas o lonas antiflama, y señalizadas con carteles
+de seguridad. Siempre que sea posible, deben retirarse todos los materiales inflamables o combustibles. De no ser posible evitar
+esto, dichos materiales deberán cubrirse con lonas resistentes al fuego.
+    2. En trabajos en los que exista alta probabilidad de explosión o incendio, los riesgos deberán ser analizados y habilitados por
+personal autorizado, asimismo los extintores de incendios deberán estar disponibles.
+    3. Todos los tanques/tubos serán almacenados en posición vertical inmovilizados con cadenas o dispositivos sujetadores que
+eviten una caída. No deberán ser rodados sobre el cuerpo de éstos, solamente sobre su base.
+
+       Norma de seguridad: N3-NOS-2HISE-009 Habilitación de trabajo en Caliente.
+
+   R: Shock eléctrico
+   AC:
+     1. Realizar bloqueo efectivo cumpliendo con la norma N3-NOS-0HISE-054
+
+     TAMBIÉN LOS RIESGOS DEL ÁREA.
+
+<U>IMPACTO DE MEDIO AMBIENTE</>
+
+    En primera instancia, los residuos son separados en sus puntos de generación, siendo dispuestos por el personal en los diferentes recipientes según el tipo de residuo:
+
+     •  residuos especiales (contenedor rojo).
+     •  residuos no especiales (contenedor amarillo).
+     •  residuos domésticos de comedor y oficinas (contenedor verde).
+     •  chatarra ferrosa (contenedor gris).
+     •  chatarra no ferrosa (contenedor marrón).
+
+<U>PROCEDIMIENTO DE LA TAREA</>:
+
+<U>CRITERIOS DE ACEPTACIÓN O RECHAZO</>
+
+      • Después de terminada la tarea se debe comunicar al Supervisor de la contratista y al GMP.

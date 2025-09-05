@@ -1,0 +1,94 @@
+/* Estilos para el componente Detector de Rostros */
+
+/* Contenedor principal del canvas */
+.canvas-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    width: 100%;
+    padding: 10px;
+}
+
+/* Título de la simulación */
+.titulo-simulacion {
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+    color: #00ffaa;
+    text-shadow: 0 0 8px rgba(0, 255, 200, 0.6);
+}
+
+/* Estilos del canvas */
+canvas {
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 255, 200, 0.4);
+    max-width: 100%;
+    height: auto;
+    background-color: black;
+}
+
+/* Contador de FPS */
+.fps-counter {
+    color: #00ffaa;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+/* Botón de captura */
+.capture-button {
+    margin-bottom: 1rem;
+}
+
+/* Video oculto */
+.video-hidden {
+    display: none;
+}
+
+/* Responsive design para dispositivos móviles */
+@media (max-width: 768px) {
+    .canvas-container {
+        height: auto;
+    }
+
+    canvas {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Estilos adicionales para mejorar la experiencia */
+.detector-container {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.detector-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.detector-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.detector-canvas-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.detector-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 10;
+}

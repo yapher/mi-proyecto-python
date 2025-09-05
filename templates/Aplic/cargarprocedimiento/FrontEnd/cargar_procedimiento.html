@@ -1,21 +1,28 @@
 {% extends 'layout.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/cargar_procedimiento.css') }}">
+{% endblock %}
 {% block content %}
-<h3 class="mb-4">Cargar Procedimiento</h3>
+<div class="cargar-procedimiento-container">
+    <div class="cargar-procedimiento-header">
+        <h3 class="mb-4">Cargar Procedimiento</h3>
+    </div>
 
-<form method="POST">
-    <!-- Controles globales -->
-    <div class="d-flex flex-wrap align-items-center gap-3 mb-3">
+    <form method="POST">
+        <!-- Controles globales -->
+        <div class="cargar-procedimiento-controls d-flex flex-wrap align-items-center gap-3">
         <!-- Checkbox maestro -->
         <div class="form-check m-0">
             <input class="form-check-input" type="checkbox" id="selectAll">
             <label class="form-check-label fw-bold" for="selectAll">Seleccionar todo</label>
         </div>
 
-        <!-- Botón expandir/colapsar -->
-        <button type="button" class="btn btn-sm btn-outline-secondary" id="toggleAll">Expandir todo</button>
-    </div>
+            <!-- Botón expandir/colapsar -->
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="toggleAll">Expandir todo</button>
+        </div>
 
-    {% macro render_items(items, nivel=0, padre='root') %}
+        <div class="cargar-procedimiento-list">
+            {% macro render_items(items, nivel=0, padre='root') %}
     <ul class="list-unstyled ps-{{ nivel * 3 }}">
         {% for item in items %}
         {% set id_unico = (padre ~ '_' ~ loop.index)|replace(' ', '_') %}
@@ -41,10 +48,14 @@
     </ul>
     {% endmacro %}
 
-    {{ render_items(data) }}
+            {{ render_items(data) }}
+        </div>
 
-    <button type="submit" class="btn btn-primary mt-4">Generar Archivo</button>
-</form>
+        <div class="cargar-procedimiento-submit">
+            <button type="submit" class="btn btn-primary">Generar Archivo</button>
+        </div>
+    </form>
+</div>
 
 <!-- Scripts para seleccionar todo y expandir todo -->
 <script>
@@ -72,37 +83,4 @@
     });
 </script>
 
-<style>
-    .form-check-label {
-        font-weight: 500;
-    }
-
-    .form-check-input:checked {
-        background-color: #198754;
-        border-color: #198754;
-    }
-
-    .toggle-btn {
-        padding: 0.2rem 0.5rem;
-        font-size: 0.8rem;
-        line-height: 1;
-        margin-left: auto;
-        border: none;
-        background: transparent;
-    }
-
-    /* Colores por nivel (texto) */
-    .nivel-texto-0 { color: white; }
-    .nivel-texto-1 { color: #ffc107; }
-    .nivel-texto-2 { color: #198754; }
-    .nivel-texto-3,
-    .nivel-texto-4 { color: #6c757d; }
-
-    /* Colores por nivel (botón ▼) */
-    .nivel-boton-0 { color: white; }
-    .nivel-boton-1 { color: #ffc107; }
-    .nivel-boton-2 { color: #198754; }
-    .nivel-boton-3,
-    .nivel-boton-4 { color: #6c757d; }
-</style>
 {% endblock %}

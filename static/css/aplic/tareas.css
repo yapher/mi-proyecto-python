@@ -1,0 +1,138 @@
+/* Estilos específicos para la aplicación Tareas */
+
+/* Contenedor principal */
+.tareas-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Lista de eventos */
+.event-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.event-list li {
+    background-color: #4b376a;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #88c999;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.event-list li:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    border-left-color: #77b88b;
+}
+
+.event-info {
+    flex: 1;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.event-info:hover {
+    background-color: #5a4a7a;
+}
+
+.event-info strong {
+    color: #88c999;
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.descripcion-text {
+    color: #ccc;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Botones específicos para tareas */
+.btn-eliminar {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    margin-left: 15px;
+}
+
+.btn-eliminar:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+.btn-editar {
+    background-color: #88c999;
+    color: #222;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-editar:hover {
+    background-color: #77b88b;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(136, 201, 153, 0.4);
+}
+
+.btn-cancelar {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.btn-cancelar:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+}
+
+/* Modal específico para tareas */
+.modal-content.bg-form {
+    background-color: #4b376a;
+    border: 2px solid #88c999;
+}
+
+.modal-header {
+    border-bottom: 1px solid #88c999;
+}
+
+.modal-footer {
+    border-top: 1px solid #88c999;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .event-list li {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .btn-eliminar {
+        margin-left: 0;
+        margin-top: 10px;
+        align-self: flex-end;
+    }
+    
+    .event-info {
+        margin-bottom: 10px;
+    }
+}

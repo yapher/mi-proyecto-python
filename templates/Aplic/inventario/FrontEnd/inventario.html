@@ -2,10 +2,14 @@
 {% from 'Aplic/inventario/FrontEnd/_tabs_recursivos.html' import render_tabs %}
 
 {% block content %}
+
+<!-- Incluir estilos específicos de la aplicación -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/aplic/inventario.css') }}">
+
+<div class="inventario-container">
 <h3>Inventario de Almacenes</h3>
 
 {{ render_tabs(almacenes, repuestos_por_equipo) }}
-
-
+</div>
 
 {% endblock %}

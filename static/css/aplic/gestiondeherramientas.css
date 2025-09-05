@@ -1,0 +1,206 @@
+/* Estilos específicos para la aplicación Gestión de Herramientas */
+
+/* Contenedor principal */
+.gestion-herramientas-container {
+    padding: 20px;
+    background-color: #3e2d59;
+    min-height: 100vh;
+}
+
+.gestion-herramientas-container h3 {
+    color: #88c999;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Controles superiores */
+.controles-superiores {
+    background-color: #4b376a;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #88c999;
+}
+
+/* Select de componentes */
+#componentes {
+    background-color: #5a4a7a;
+    border: 2px solid #88c999;
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-right: 10px;
+}
+
+#componentes:focus {
+    border-color: #77b88b;
+    box-shadow: 0 0 10px rgba(136, 201, 153, 0.3);
+    outline: none;
+}
+
+#componentes option {
+    background-color: #5a4a7a;
+    color: #fff;
+}
+
+/* Input de nombre del croquis */
+#nombreCroquis {
+    background-color: #5a4a7a;
+    border: 2px solid #88c999;
+    color: #fff;
+    border-radius: 8px;
+    padding: 8px 12px;
+    min-width: 200px;
+}
+
+#nombreCroquis:focus {
+    border-color: #77b88b;
+    box-shadow: 0 0 10px rgba(136, 201, 153, 0.3);
+    outline: none;
+}
+
+#nombreCroquis::placeholder {
+    color: #ccc;
+}
+
+/* Botones específicos para gestión de herramientas */
+.btn-secondary {
+    background-color: #6c757d;
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-right: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.4);
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border: none;
+    color: #222;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-right: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border: none;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 15px;
+    margin-right: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.4);
+}
+
+.btn-eliminar {
+    background-color: #dc3545;
+    border: none;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 15px;
+    margin-right: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-eliminar:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+
+/* Canvas */
+#canvas {
+    background-color: #4b376a;
+    border: 3px solid #88c999 !important;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    display: block;
+    margin: 0 auto;
+    cursor: crosshair;
+}
+
+#canvas:hover {
+    border-color: #77b88b !important;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.4);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    #canvas {
+        width: 100% !important;
+        height: 500px !important;
+    }
+    
+    .controles-superiores {
+        padding: 15px;
+    }
+    
+    #nombreCroquis {
+        min-width: 150px;
+        margin-top: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .gestion-herramientas-container {
+        padding: 15px;
+    }
+    
+    .controles-superiores {
+        text-align: center;
+    }
+    
+    .btn, #componentes, #nombreCroquis {
+        margin-bottom: 10px;
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    #canvas {
+        height: 400px !important;
+    }
+}
+
+/* Estilos para elementos del canvas (si se necesitan) */
+.canvas-element {
+    transition: all 0.2s ease;
+}
+
+.canvas-element:hover {
+    transform: scale(1.05);
+}
+
+/* Tooltip personalizado para el canvas */
+.canvas-tooltip {
+    position: absolute;
+    background-color: #4b376a;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #88c999;
+    font-size: 0.9rem;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
