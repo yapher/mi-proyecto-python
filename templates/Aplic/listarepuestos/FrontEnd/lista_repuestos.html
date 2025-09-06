@@ -1,7 +1,11 @@
 {% extends 'layout.html' %}
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/listarepuestos.css') }}">
+{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
+<div class="container-fluid mt-4 px-0">
     <h3 class="mb-4">
         Lista de Repuestos
         <span class="badge bg-secondary">{{ repuestos|length }}</span>
@@ -81,9 +85,11 @@
             </button>
         </div>
     </div>
-    <div class="table-responsive tabla-scroll">
-        <table class="table table-bordered table-hover table-striped table-dark align-middle w-100 mb-0">
-            <thead class="table-dark text-center">
+    <div class="tabla-scroll w-100">
+        <table
+            class="table table-responsive table-bordered table-hover table-striped table-dark align-middle w-100 mb-0"
+            style="width:100vw;max-width:100vw;">
+            <thead class="table-dark text-center sticky-header">
                 <tr>
                     <th>Imagen</th>
                     <th>Nombre</th>
@@ -91,46 +97,33 @@
                     <th>Cantidad</th>
                     <th>Almacén</th>
                     <th>Jerarquía</th>
-                    <th>Fecha Alta</th>
-                    <th>Fecha Baja</th>
                     <th>Estado</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {% for r in repuestos %}
                 <tr>
-                    <td class="text-center">
+                    <td class="text-center" data-label="Imagen">
                         {% include 'Aplic/estadosderepuestos/FrontEnd/component/imageRep.html' %}
-
-
                     </td>
-                    <td>{{ r.nombre }}</td>
-                    <td class="text-center">{{ r.codigo }}</td>
-                    <td class="text-center">{{ r.cantidad }}</td>
-                    <td class="text-center">{{ r.equipo }}</td>
-                    <td>
+                    <td data-label="Nombre">{{ r.nombre }}</td>
+                    <td class="text-center" data-label="Código">{{ r.codigo }}</td>
+                    <td class="text-center" data-label="Cantidad">{{ r.cantidad }}</td>
+                    <td class="text-center" data-label="Almacén">{{ r.equipo }}</td>
+                    <td data-label="Jerarquía">
                         <ul class="mb-0">
                             {% for ruta in r.ruta_jerarquia %}
                             <li>{{ ruta }}</li>
                             {% endfor %}
                         </ul>
                     </td>
-                    <td class="text-center">{{ r.fecha_creacion }}</td>
-                    <td class="text-center">{{ r.fecha_fin if r.fecha_fin else '-' }}</td>
-                    <td class="text-center">
-                        {% if r.estado == '🟢' %}
-                        <span class="text-success" title="Activo">{{ r.estado }}</span>
-                        {% elif r.estado == '🟡' %}
-                        <span class="text-warning" title="Pendiente">{{ r.estado }}</span>
-                        {% elif r.estado == '🔴' %}
-                        <span class="text-danger" title="Inactivo">{{ r.estado }}</span>
-                        {% else %}
-                        {{ r.estado }}
-                        {% endif %}
-                    </td>
+                    <td>{{ r.estado }}</td>
                     <td>
-                        {% include 'Aplic/estadosderepuestos/FrontEnd/component/buttonEdit.html' %}
-                        {% include 'Aplic/estadosderepuestos/FrontEnd/component/buttonDelete.html' %}
+                        <div class="d-flex flex-row gap-2 justify-content-center">
+                            {% include 'Aplic/estadosderepuestos/FrontEnd/component/buttonEdit.html' %}
+                            {% include 'Aplic/estadosderepuestos/FrontEnd/component/buttonDelete.html' %}
+                        </div>
                     </td>
                 </tr>
                 {% endfor %}

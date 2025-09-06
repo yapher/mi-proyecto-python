@@ -1,0 +1,38 @@
+/* Estilos responsivos exclusivos para la tabla de Listado de Repuestos */
+
+@media (max-width: 576px) {
+  .tabla-scroll table,
+  .tabla-scroll thead,
+  .tabla-scroll tbody,
+  .tabla-scroll tr,
+  .tabla-scroll th,
+  .tabla-scroll td {
+    display: block !important;
+    width: 100% !important;
+  }
+  .tabla-scroll thead {
+    display: none !important;
+  }
+  .tabla-scroll tr {
+    margin-bottom: 15px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08) !important;
+    border-radius: 8px !important;
+    background: #212529 !important;
+    padding: 8px 0 !important;
+  }
+  .tabla-scroll td {
+    border: none !important;
+    padding: 8px 12px !important;
+    text-align: left !important;
+    position: relative !important;
+    background: #2a1e3b !important;
+    color: #fff !important;
+  }
+  .tabla-scroll td:before {
+    content: attr(data-label) !important;
+    font-weight: bold !important;
+    color: #88c999 !important;
+    display: block !important;
+    margin-bottom: 4px !important;
+  }
+}

@@ -57,8 +57,10 @@
           </td>
           <td>{{ r.estado }}</td>
           <td>
-            {% include 'Aplic/estadosderepuestos/FrontEnd/component/buttonEdit.html' %}
-            {% include 'Aplic/estadosderepuestos/FrontEnd/component/buttonDelete.html' %}
+            <div class="d-flex flex-row gap-2 justify-content-center">
+              {% include 'Aplic/estadosderepuestos/FrontEnd/component/buttonEdit.html' %}
+              {% include 'Aplic/estadosderepuestos/FrontEnd/component/buttonDelete.html' %}
+            </div>
           </td>
         </tr>
         {% endfor %}
