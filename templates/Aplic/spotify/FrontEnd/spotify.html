@@ -36,29 +36,8 @@
     </a>
 {% endif %}
 
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const playBtn = document.getElementById('btnPlay');
-    const pauseBtn = document.getElementById('btnPause');
-    const nextBtn = document.getElementById('btnNext');
+{% endblock %}
 
-    playBtn?.addEventListener('click', async () => {
-        const res = await fetch('/spotify/play', {method: 'POST'});
-        if (res.ok) alert('Reproducción iniciada');
-        else alert('Error al iniciar reproducción');
-    });
-
-    pauseBtn?.addEventListener('click', async () => {
-        const res = await fetch('/spotify/pause', {method: 'POST'});
-        if (res.ok) alert('Reproducción pausada');
-        else alert('Error al pausar reproducción');
-    });
-
-    nextBtn?.addEventListener('click', async () => {
-        const res = await fetch('/spotify/next', {method: 'POST'});
-        if (res.ok) alert('Siguiente canción');
-        else alert('Error al pasar a la siguiente canción');
-    });
-});
-</script>
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/apps/spotify.js') }}"></script>
 {% endblock %}

@@ -1,0 +1,118 @@
+// exportPDF.js
+
+async function exportarResumenPDF() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const anio = document.getElementById('filtroAnio').value;
+    const mes = document.getElementById('filtroMes').value;
+
+    // Fecha actual
+    const hoy = new Date();
+    const fechaActual = hoy.toLocaleDateString('es-AR');
+
+    // Encabezado
+    doc.setFontSize(16);
+    doc.text(`Resumen de Gastos - ${anio}-${mes}`, 15, 20);
+
+    doc.setFontSize(10);
+    doc.text(`Exportado: ${fechaActual}`, 160, 20, { align: 'right' });
+
+    // Totales por Rubro
+    const resumenDiv = document.getElementById('desgloseRubros');
+    const filas = resumenDiv.querySelectorAll('table tbody tr');
+
+    if (!filas.length) {
+        alert("No hay datos de resumen para exportar.");
+        return;
+    }
+
+    doc.setFontSize(12);
+    doc.text("Totales por Rubro:", 15, 30);
+    let y = 40;
+    let totalGeneral = 0;
+
+    filas.forEach(fila => {
+        const celdas = fila.querySelectorAll("td");
+        const rubro = celdas[0].textContent.trim();
+        const totalTexto = celdas[1].textContent.trim();
+        const total = parseFloat(totalTexto.replace(/\./g, '').replace(',', '.').replace('$', '')) || 0;
+        totalGeneral += total;
+
+        doc.text(`• ${rubro}: ${totalTexto}`, 15, y);
+        y += 8;
+    });
+
+    // Total General
+    y += 5;
+    doc.setFontSize(12);
+    const totalFormateado = totalGeneral.toLocaleString('es-AR', {
+        style: 'currency',
+        currency: 'ARS'
+    });
+    doc.text(`💰 Total General: ${totalFormateado}`, 15, y);
+    y += 10;
+
+    // Pagos individuales
+    const pagosTabla = document.querySelector('#tablaPagos tbody');
+    const pagosFilas = pagosTabla.querySelectorAll("tr");
+    if (pagosFilas.length > 0) {
+        doc.setFontSize(12);
+        doc.text("Pagos individuales:", 15, y);
+        y += 8;
+        doc.setFontSize(10);
+
+        pagosFilas.forEach(fila => {
+            const columnas = fila.querySelectorAll("td");
+            const datos = Array.from(columnas).slice(0, 6).map(td => td.textContent.trim());
+            const linea = `• ${datos.join(" | ")}`;
+
+            if (y > 270) {
+                agregarFooter(doc);
+                doc.addPage();
+                y = 20;
+            }
+
+            doc.text(linea, 15, y);
+            y += 6;
+        });
+    }
+
+    // Gráfico
+    const graficoDiv = document.getElementById("graficoRubros");
+    const graficoCanvas = graficoDiv.querySelector("canvas");
+    if (graficoCanvas) {
+        const img = await html2canvas(graficoDiv);
+        const imgData = img.toDataURL("image/png");
+
+        if (y > 180) {
+            agregarFooter(doc);
+            doc.addPage();
+            y = 20;
+        } else {
+            y += 10;
+        }
+
+        doc.setFontSize(12);
+        doc.text("Gráfico de distribución:", 15, y);
+        y += 5;
+        doc.addImage(imgData, "PNG", 15, y, 180, 90);
+        y += 100;
+    }
+
+    // Pie de página (firma / logo / fecha)
+    agregarFooter(doc);
+
+    doc.save(`Resumen_Gastos_${anio}_${mes}.pdf`);
+}
+
+function agregarFooter(doc) {
+    const pageHeight = doc.internal.pageSize.height || doc.internal.pageSize.getHeight();
+    const fecha = new Date().toLocaleDateString('es-AR');
+    doc.setFontSize(8);
+    doc.setTextColor(150);
+    doc.text(`Generado automáticamente el ${fecha}`, 15, pageHeight - 10);
+    doc.text("Sistema de Gestión de Gastos", 150, pageHeight - 10, { align: 'right' });
+
+    // Si tenés un logo:
+    // doc.addImage('logo_base64.png', 'PNG', 15, pageHeight - 18, 20, 10);
+}

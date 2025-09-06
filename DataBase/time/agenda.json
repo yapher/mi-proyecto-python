@@ -137,7 +137,7 @@
     },
     {
         "titulo": "Corregir Bloqueos del plan Grúa 320",
-        "fecha": "2025-09-04",
+        "fecha": "2025-09-08",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "id": 20,
@@ -1610,7 +1610,7 @@
     },
     {
         "titulo": "Modificar OT 2002723270",
-        "fecha": "2025-09-05",
+        "fecha": "2025-09-08",
         "descripcion": "Realizar compra de repuesto y modificar ot para cambio de interruptor",
         "email": "cóherasimov@ternium.com.ar",
         "realizado": false,
@@ -1673,7 +1673,7 @@
     },
     {
         "titulo": "Modificar plan de REX Littell",
-        "fecha": "2025-09-05",
+        "fecha": "2025-09-08",
         "descripcion": "Agregar gardia de arranque 36Hs",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -1837,7 +1837,7 @@
         "fecha": "2025-09-06",
         "descripcion": "INPEC. GRAL. ELECTRICA AREA SERVICIOS",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true
     },
     {
         "id": 240,
@@ -1860,7 +1860,7 @@
         "fecha": "2025-09-04",
         "descripcion": "CAMBIAR MOTOR CINTA 21   falta cargar el repuesto",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "alta",
         "id": 242
     },
@@ -2042,7 +2042,7 @@
     },
     {
         "titulo": "Codificar repuestos de Robot",
-        "fecha": "2025-09-04",
+        "fecha": "2025-09-08",
         "descripcion": "fuente de robot",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -2096,7 +2096,7 @@
     },
     {
         "titulo": "Crear equipo controladora robot",
-        "fecha": "2025-09-04",
+        "fecha": "2025-09-08",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -2201,11 +2201,20 @@
     },
     {
         "titulo": "buscar plano de electroimanes Hallden",
-        "fecha": "2025-09-04",
+        "fecha": "2025-09-08",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
         "prioridad": "media",
         "id": 283
+    },
+    {
+        "titulo": "extras de 08 a 12",
+        "fecha": "2025-09-06",
+        "descripcion": "Por pedido de Micaela se trabaja con las mediciones del robot 1",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 284
     }
 ]

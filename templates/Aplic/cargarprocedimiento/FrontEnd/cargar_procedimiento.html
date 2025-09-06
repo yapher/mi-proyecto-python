@@ -57,30 +57,8 @@
     </form>
 </div>
 
-<!-- Scripts para seleccionar todo y expandir todo -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const selectAll = document.getElementById("selectAll");
-        const toggleAll = document.getElementById("toggleAll");
-        const checkboxes = document.querySelectorAll('input[type="checkbox"][name="seleccion"]');
-        const collapses = document.querySelectorAll('.collapse');
+{% endblock %}
 
-        // Seleccionar/Deseleccionar todos los checkboxes
-        selectAll.addEventListener("change", function () {
-            checkboxes.forEach(cb => cb.checked = selectAll.checked);
-        });
-
-        // Expandir/Colapsar todo
-        let expanded = false;
-        toggleAll.addEventListener("click", function () {
-            collapses.forEach(c => {
-                const collapseInstance = bootstrap.Collapse.getOrCreateInstance(c);
-                expanded ? collapseInstance.hide() : collapseInstance.show();
-            });
-            toggleAll.textContent = expanded ? 'Expandir todo' : 'Colapsar todo';
-            expanded = !expanded;
-        });
-    });
-</script>
-
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/apps/cargar_procedimiento.js') }}"></script>
 {% endblock %}

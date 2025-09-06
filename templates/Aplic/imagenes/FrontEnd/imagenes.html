@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+{% block head %}
+<link rel="stylesheet" href="{ url_for('static', filename='css/apps/imagenes.css') }">
+{% endblock %}
+{% block content %}
+<div class="imagenes-container">
+    <div class="imagenes-header">
+        <h3 class="mb-3">Imagenes</h3>
+    </div>
+    <!-- Contenido de la aplicación -->
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{ url_for('static', filename='js/apps/imagenes.js') }"></script>
+{% endblock %}

@@ -1,0 +1,216 @@
+// gestion_de_bloqueos.js
+
+let interruptores = window.interruptores;
+let rootId = window.rootId;
+let selectedNodeId = null;
+
+// Crear mapa de hijos
+let childrenMap = {};
+Object.keys(interruptores).forEach(id => {
+  let padre = interruptores[id].padre;
+  if (padre) {
+    if (!childrenMap[padre]) childrenMap[padre] = [];
+    childrenMap[padre].push(id);
+  }
+});
+
+function propagarEstado(id, estado) {
+  interruptores[id].estado = estado;
+  if (estado === 'apagado' && childrenMap[id]) {
+    childrenMap[id].forEach(hijo => propagarEstado(hijo, estado));
+  }
+}
+
+const svg = d3.select("#diagrama");
+
+const treeLayout = d3.tree()
+  .nodeSize([90, 220])
+  .separation((a, b) => a.parent === b.parent ? 1 : 1.5);
+
+function buildNodesTree() {
+  const nodos = {};
+  Object.keys(interruptores).forEach(id => {
+    nodos[id] = { ...interruptores[id], children: [] };
+  });
+  const roots = Object.keys(interruptores).filter(id => interruptores[id].padre === null);
+  rootId = roots[0] || null;
+  if (!rootId) return null;
+  Object.values(nodos).forEach(n => { if (n.padre && nodos[n.padre]) nodos[n.padre].children.push(n); });
+  return d3.hierarchy(nodos[rootId]);
+}
+
+function render() {
+  svg.selectAll("*").remove();
+  const root = buildNodesTree();
+  if (!root) return;
+
+  treeLayout(root);
+
+  // Ajustar viewBox dinámicamente
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+  root.each(d => {
+    if (d.x < x0) x0 = d.x;
+    if (d.x > x1) x1 = d.x;
+    if (d.y < y0) y0 = d.y;
+    if (d.y > y1) y1 = d.y;
+  });
+  svg.attr("viewBox", [y0 - 150, x0 - 100, (y1 - y0) + 300, (x1 - x0) + 200])
+    .attr("preserveAspectRatio", "xMidYMid meet");
+
+  // Cables
+  svg.selectAll('line.cable')
+    .data(root.links())
+    .enter()
+    .append('line')
+    .attr('class', 'cable')
+    .attr('x1', d => d.source.y + 100)
+    .attr('y1', d => d.source.x + 50)
+    .attr('x2', d => d.target.y + 100)
+    .attr('y2', d => d.target.x + 50)
+    .attr('stroke', d => interruptores[d.target.data.id].estado === 'encendido' ? 'red' : 'green');
+
+  // Nodos
+  const nodeGroup = svg.selectAll('g.node')
+    .data(root.descendants(), d => d.data.id)
+    .enter()
+    .append('g')
+    .attr('class', 'node')
+    .attr('transform', d => `translate(${d.y + 100},${d.x + 50})`);
+
+  nodeGroup.append('circle')
+    .attr('r', 35)
+    .attr('fill', d => d.data.estado === 'encendido' ? 'red' : 'green')
+    .on('click', (event, d) => abrirModal(d.data.id));
+
+  nodeGroup.append('text')
+    .text(d => d.data.nombre);
+
+  nodeGroup.append("image")
+    .attr("xlink:href", d => d.data.estado === "encendido"
+      ? "/static/uploads/utils/encendido.png"
+      : "/static/uploads/utils/apagado.png")
+    .attr("x", -16)
+    .attr("y", 25)
+    .attr("width", 32)
+    .attr("height", 32)
+    .on("click", (event, d) => {
+      event.stopPropagation();
+      fetch(`/toggle_estado/${d.data.id}`, { method: "POST" })
+        .then(r => r.json())
+        .then(resp => {
+          if (!resp.success) {
+            new Noty({ text: resp.error, type: 'error' }).show();
+            return;
+          }
+          propagarEstado(d.data.id, resp.estado);
+          render();
+        })
+        .catch(err => {
+          new Noty({ text: 'Error al cambiar estado', type: 'error' }).show();
+          console.error(err);
+        });
+    });
+}
+
+// Modal
+const nodoModal = new bootstrap.Modal(document.getElementById('nodoModal'));
+function abrirModal(id) {
+  selectedNodeId = id;
+  const nodo = interruptores[id];
+  document.getElementById('modalNombre').value = nodo.nombre || '';
+  document.getElementById('modalDescripcion').value = nodo.descripcion || '';
+  document.getElementById('modalEstado').checked = nodo.estado === 'encendido';
+  const hijosLista = childrenMap[id] ? childrenMap[id].map(h => interruptores[h].nombre).join('\n') : '';
+  document.getElementById('modalHijos').value = hijosLista;
+  nodoModal.show();
+}
+
+// Guardar cambios
+if (document.getElementById('btnGuardarModal')) {
+  document.getElementById('btnGuardarModal').addEventListener('click', () => {
+    if (!selectedNodeId) return;
+    const nombre = document.getElementById('modalNombre').value.trim();
+    const descripcion = document.getElementById('modalDescripcion').value.trim();
+    const estado = document.getElementById('modalEstado').checked ? 'encendido' : 'apagado';
+
+    fetch(`/editar_interruptor/${selectedNodeId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, estado, descripcion })
+    }).then(r => r.json()).then(resp => {
+      if (!resp.success) { new Noty({ text: resp.error, type: 'error' }).show(); return; }
+      interruptores[selectedNodeId] = resp.data;
+      render();
+      nodoModal.hide();
+      new Noty({ text: 'Nodo actualizado', type: 'success' }).show();
+    }).catch(err => {
+      new Noty({ text: 'Error al guardar', type: 'error' }).show();
+      console.error(err);
+    });
+  });
+}
+
+// Borrar nodo
+if (document.getElementById('btnBorrarModal')) {
+  document.getElementById('btnBorrarModal').addEventListener('click', () => {
+    if (!selectedNodeId) return;
+    fetch(`/borrar_interruptor/${selectedNodeId}`, { method: 'POST' })
+      .then(r => r.json()).then(resp => {
+        if (!resp.success) { new Noty({ text: resp.error, type: 'error' }).show(); return; }
+        delete interruptores[selectedNodeId];
+        selectedNodeId = null;
+        render();
+        nodoModal.hide();
+        new Noty({ text: 'Nodo borrado', type: 'success' }).show();
+      }).catch(err => {
+        new Noty({ text: 'Error al borrar', type: 'error' }).show();
+        console.error(err);
+      });
+  });
+}
+
+// Agregar hijo
+if (document.getElementById('btnAgregarHijo')) {
+  document.getElementById('btnAgregarHijo').addEventListener('click', () => {
+    if (!selectedNodeId) return;
+    const nombre = document.getElementById('modalNombre').value.trim() || 'Nuevo Nodo';
+    const padre = selectedNodeId;
+
+    fetch('/agregar_interruptor', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, padre })
+    }).then(r => r.json()).then(resp => {
+      if (!resp.success) { new Noty({ text: resp.error, type: 'error' }).show(); return; }
+      interruptores[resp.id] = resp.data;
+      if (!childrenMap[padre]) childrenMap[padre] = [];
+      childrenMap[padre].push(resp.id);
+      render();
+      new Noty({ text: 'Hijo agregado', type: 'success' }).show();
+    }).catch(err => {
+      new Noty({ text: 'Error al agregar hijo', type: 'error' }).show();
+      console.error(err);
+    });
+  });
+}
+
+// Inicial
+if (Object.keys(interruptores).length === 0) {
+  fetch('/agregar_interruptor', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ nombre: 'Nodo Raíz', padre: null })
+  }).then(r => r.json()).then(resp => {
+    interruptores[resp.id] = resp.data;
+    rootId = resp.id;
+    render();
+    abrirModal(resp.id);
+  }).catch(err => {
+    console.error('Error creando nodo raíz', err);
+  });
+} else {
+  render();
+}
+
+// Redibujar al cambiar tamaño de pantalla
+window.addEventListener("resize", render);

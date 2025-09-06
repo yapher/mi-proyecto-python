@@ -1,0 +1,47 @@
+/* Estilos para el componente planos */
+
+/* Contenedor principal */
+.planos-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Header de la aplicación */
+.planos-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.planos-header h3 {
+    color: #343a40;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos para formularios */
+.planos-form {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Estilos para tablas */
+.planos-tabla {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .planos-container {
+        padding: 0.5rem;
+    }
+    
+    .planos-form {
+        padding: 1rem;
+    }
+}

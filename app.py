@@ -40,6 +40,7 @@ from templates.Aplic.listarot.BackEnd.listar_ot import listar_ot_bp
 from templates.Aplic.bajadadeot.BackEnd.bajada_de_ot import bajada_de_ot_bp
 from templates.Aplic.instalaciones.BackEnd.instalaciones import instalaciones_bp
 from templates.Aplic.trayectoria.BackEnd.trayectoria import trayectoria_bp
+from templates.Aplic.planos.BackEnd.planos import planos_bp
 
 
 app = Flask(__name__)
@@ -69,6 +70,7 @@ app.register_blueprint(listar_ot_bp)
 app.register_blueprint(bajada_de_ot_bp)
 app.register_blueprint(instalaciones_bp)
 app.register_blueprint(trayectoria_bp)
+app.register_blueprint(planos_bp)
 
 
 

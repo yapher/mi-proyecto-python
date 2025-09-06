@@ -57,53 +57,6 @@
     line-height: 1.4;
 }
 
-/* Botones específicos para tareas */
-.btn-eliminar {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-    margin-left: 15px;
-}
-
-.btn-eliminar:hover {
-    background-color: #c82333;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
-}
-
-.btn-editar {
-    background-color: #88c999;
-    color: #222;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-editar:hover {
-    background-color: #77b88b;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(136, 201, 153, 0.4);
-}
-
-.btn-cancelar {
-    background-color: #6c757d;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-}
-
-.btn-cancelar:hover {
-    background-color: #5a6268;
-    transform: scale(1.05);
-}
 
 /* Modal específico para tareas */
 .modal-content.bg-form {

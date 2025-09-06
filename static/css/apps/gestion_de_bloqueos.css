@@ -1,0 +1,24 @@
+#diagrama {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.node circle {
+  stroke: #fff;
+  stroke-width: 3px;
+  cursor: pointer;
+}
+.node text {
+  font-size: 18px;
+  fill: white;
+  font-weight: bold;
+  text-anchor: middle;
+  alignment-baseline: middle;
+  text-shadow: 1px 1px 2px black;
+}
+line.cable {
+  stroke-width: 3px;
+}
+.node image {
+  cursor: pointer;
+}

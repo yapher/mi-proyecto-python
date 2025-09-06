@@ -1,0 +1,112 @@
+/* Estilos para el componente Gestión de Aplicaciones */
+
+/* Botón de agregar oculto por defecto */
+.btn-agregar {
+    display: none !important;
+}
+
+/* Botón de agregar visible cuando está activo */
+.btn-agregar.active {
+    display: inline-block !important;
+}
+
+/* Estilos para el formulario */
+.gestion-aplicaciones-form {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.gestion-aplicaciones-form .form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos para el contenedor principal */
+.gestion-aplicaciones-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.gestion-aplicaciones-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.gestion-aplicaciones-header h3 {
+    color: #343a40;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos para el input con emoji */
+.input-with-emoji {
+    position: relative;
+}
+
+.input-emoji {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    z-index: 10;
+    pointer-events: none;
+}
+
+/* Estilos para el botón de crear aplicación */
+.btn-crear-app {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    border: none;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-crear-app:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+}
+
+.btn-crear-app:active {
+    transform: translateY(0);
+}
+
+/* Animación para el botón cuando aparece */
+.btn-agregar {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .gestion-aplicaciones-container {
+        padding: 0.5rem;
+    }
+    
+    .gestion-aplicaciones-form {
+        padding: 1rem;
+    }
+    
+    .btn-crear-app {
+        width: 100%;
+        padding: 1rem;
+    }
+}

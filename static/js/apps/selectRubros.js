@@ -1,0 +1,132 @@
+let arbolMenus = [];
+
+function cargarArbolMenus(cb) {
+    fetch('/api/rubro_arbol')
+        .then(res => res.json())
+        .then(data => {
+            arbolMenus = data;
+            if (cb) cb();
+        });
+}
+
+function buscarNodoPorRuta(data, ruta) {
+    if (!ruta) return data;
+    const partes = ruta.split('.');
+    let nodo = data;
+    for (const parte of partes) {
+        if (Array.isArray(nodo)) {
+            nodo = nodo.find(item => item.nombre === parte);
+        } else if (nodo.submenues) {
+            nodo = nodo.submenues.find(item => item.nombre === parte);
+        } else {
+            return null;
+        }
+        if (!nodo) return null;
+    }
+    return nodo;
+}
+
+function crearSelect(opciones, nivel, valorSeleccionado = "") {
+    const select = document.createElement('select');
+    select.className = 'form-control nivel-select mb-2';
+    select.setAttribute('data-nivel', nivel);
+    select.innerHTML = `<option value="">Sin seleccionar</option>`;
+
+    opciones.forEach(item => {
+        const seleccionado = item.ruta_jerarquia === valorSeleccionado ? 'selected' : '';
+        select.innerHTML += `<option value="${item.ruta_jerarquia}" ${seleccionado}>${item.emoji} ${item.nombre}</option>`;
+    });
+
+    select.onchange = function () {
+        // 🔴 Limpia niveles hijos
+        let next = this.nextElementSibling;
+        while (next) {
+            next.remove();
+            next = this.nextElementSibling;
+        }
+
+        if (this.value) {
+            const seleccionado = buscarNodoPorRuta(arbolMenus, this.value);
+            if (seleccionado && seleccionado.submenues && seleccionado.submenues.length > 0) {
+                // 🔥 CREA Y AGREGA el nuevo select hijo
+                const nuevoSelect = crearSelect(seleccionado.submenues, nivel + 1);
+                document.getElementById('nivelesContainer').appendChild(nuevoSelect);
+            }
+        }
+    };
+
+    return select;
+}
+
+function renderSelectoresNiveles(valorPorDefecto = "") {
+    const cont = document.getElementById('nivelesContainer');
+    cont.innerHTML = '';
+
+    if (!valorPorDefecto) {
+        const select = crearSelect(arbolMenus, 0); // Primer nivel
+        cont.appendChild(select);
+        return;
+    }
+
+    // 🔁 Si hay valor por defecto, expandir jerarquía
+    const partes = valorPorDefecto.split('.');
+    let actual = arbolMenus;
+    let rutaAcumulada = "";
+
+    partes.forEach((parte, nivel) => {
+        const rutaActual = rutaAcumulada + (nivel > 0 ? '.' : '') + parte;
+        const select = crearSelect(actual, nivel, rutaActual);
+        cont.appendChild(select);
+
+        const nodo = actual.find(item => item.nombre === parte);
+        if (nodo && nodo.submenues) {
+            actual = nodo.submenues;
+            rutaAcumulada = nodo.ruta_jerarquia;
+        } else {
+            actual = [];
+        }
+    });
+}
+
+function renderSubnivel(submenues, nivel, rutaPadre) {
+    const cont = document.getElementById('nivelesContainer');
+    const select = document.createElement('select');
+    select.className = 'form-control nivel-select mb-2';
+    select.setAttribute('data-nivel', nivel);
+    select.innerHTML = `<option value="" selected>Sin seleccionar</option>`;
+    submenues.forEach(item => {
+        select.innerHTML += `<option value="${item.ruta_jerarquia}">${item.emoji} ${item.nombre}</option>`;
+    });
+    cont.appendChild(select);
+
+    select.onchange = function () {
+        let next = this.nextElementSibling;
+        while (next) {
+            next.remove();
+            next = this.nextElementSibling;
+        }
+        if (this.value) {
+            const seleccionado = buscarNodoPorRuta(arbolMenus, this.value);
+            if (seleccionado && seleccionado.submenues && seleccionado.submenues.length > 0) {
+                renderSubnivel(seleccionado.submenues, nivel + 1, this.value);
+            }
+        }
+    };
+}
+
+function obtenerRutaPadreDesdeJerarquia(rutaJerarquia) {
+    const partes = rutaJerarquia.split('.');
+    partes.pop(); // Eliminar el último nivel (el nodo actual)
+    return partes.join('.');
+}
+
+function cargarTodo() {
+    cargarArbolMenus(() => {
+        //renderSelectoresNiveles();
+        //renderSelectoresNiveles(valorPorDefecto = "Almacen")
+        renderSelectoresNiveles("Almacen");
+        cargarTabla();
+    });
+}
+
+document.addEventListener("DOMContentLoaded", cargarTodo);

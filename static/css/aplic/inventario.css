@@ -12,38 +12,6 @@
     font-weight: 600;
 }
 
-/* Tabs recursivos */
-.nav-tabs {
-    border-bottom: 2px solid #88c999;
-    margin-bottom: 0;
-}
-
-.nav-tabs .nav-link {
-    border: 1px solid transparent;
-    border-top-left-radius: 0.5rem;
-    border-top-right-radius: 0.5rem;
-    color: #fff;
-    background-color: transparent;
-    padding: 0.5rem 1.2rem;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-}
-
-.nav-tabs .nav-link:hover {
-    border-color: #88c999 #88c999 #3e2d59;
-    color: #88c999;
-    transform: scale(1.02);
-    box-shadow: 0 2px 8px rgba(136, 201, 153, 0.3);
-}
-
-.nav-tabs .nav-link.active {
-    background-color: #8e67c7;
-    color: #88c999;
-    border-color: #88c999 #88c999 #3e2d59;
-    font-weight: 600;
-    box-shadow: 0 2px 10px rgba(136, 201, 153, 0.4);
-    transform: scale(1.01);
-}
 
 /* Contenido de tabs */
 .tab-content {

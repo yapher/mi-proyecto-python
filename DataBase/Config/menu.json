@@ -74,6 +74,12 @@
                         "emoji": "🌏​",
                         "ruta": "/instalaciones",
                         "submenues": []
+                    },
+                    {
+                        "nombre": "Planos",
+                        "emoji": "🗞️​",
+                        "ruta": "/planos",
+                        "submenues": []
                     }
                 ]
             },

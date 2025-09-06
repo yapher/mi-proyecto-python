@@ -1,8 +1,8 @@
 {% extends 'layout.html' %}
-{% block content %}
-
-<!-- Incluir estilos específicos de la aplicación -->
+{% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/aplic/tareas.css') }}">
+{% endblock %}
+{% block content %}
 
 <div class="tareas-container">
 <h3 class="mb-3">tareas</h3>
@@ -62,38 +62,10 @@
     </div>
 </div>
 
-<script>
-    // Asegúrate que Bootstrap JS está cargado antes de este script
-    document.addEventListener('DOMContentLoaded', function () {
-        // Obtener el modal de Bootstrap
-        var popupModalEl = document.getElementById('popup');
-        var popupModal = new bootstrap.Modal(popupModalEl, { keyboard: false });
-
-        const form = document.getElementById('edit-form');
-
-        document.querySelectorAll('.event-info').forEach(function (div) {
-            div.addEventListener('click', function () {
-                const id = this.getAttribute('data-id');
-                const titulo = this.getAttribute('data-titulo');
-                const fecha = this.getAttribute('data-fecha');
-                const descripcion = this.getAttribute('data-descripcion');
-
-                document.getElementById('edit-id').value = id;
-                document.getElementById('edit-titulo').value = titulo;
-                document.getElementById('edit-fecha').value = fecha;
-                document.getElementById('edit-descripcion').value = descripcion;
-
-                form.action = '/editar/' + id;
-
-                // Mostrar el modal usando Bootstrap API
-                popupModal.show();
-            });
-        });
-
-        // El boton cancelar y el botón cerrar ya manejan el cierre por data-bs-dismiss="modal"
-        // No hace falta un listener extra para cerrar el modal
-
-    });
-</script>
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/apps/tareas.js') }}"></script>
 {% endblock %}
