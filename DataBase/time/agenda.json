@@ -1797,7 +1797,7 @@
         "fecha": "2025-09-08",
         "descripcion": "REALIZAR BACKUP CONVERTER",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true
     },
     {
         "id": 235,
@@ -1805,7 +1805,7 @@
         "fecha": "2025-09-08",
         "descripcion": "REALIZAR BACKUP PLC DE SERVICIOS",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true
     },
     {
         "id": 236,
@@ -1813,7 +1813,7 @@
         "fecha": "2025-09-08",
         "descripcion": "REALIZAR BACKUP PLC INVERTER DEBOBINADOR",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true
     },
     {
         "id": 237,
@@ -1821,7 +1821,7 @@
         "fecha": "2025-09-08",
         "descripcion": "REALIZAR BACKUP PLC INVERTER NIVELADOR",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true
     },
     {
         "id": 238,
@@ -1829,7 +1829,7 @@
         "fecha": "2025-09-08",
         "descripcion": "REALIZAR BACKUP PLC INVERTER RECORTADORA",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true
     },
     {
         "id": 239,
@@ -2045,7 +2045,7 @@
         "fecha": "2025-09-08",
         "descripcion": "fuente de robot",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media",
         "id": 264
     },
@@ -2099,7 +2099,7 @@
         "fecha": "2025-09-08",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media",
         "id": 270
     },
@@ -2109,7 +2109,8 @@
         "fecha": "2025-09-08",
         "descripcion": "REVISION MOTORES COMPRESORES",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 272,
@@ -2216,5 +2217,32 @@
         "realizado": false,
         "prioridad": "media",
         "id": 284
+    },
+    {
+        "titulo": "crear ot para rp Hallden",
+        "fecha": "2025-09-09",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 285
+    },
+    {
+        "titulo": "ver repuesto de rodillo de agarre",
+        "fecha": "2025-09-09",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 286
+    },
+    {
+        "titulo": "ver las hora que no figuran",
+        "fecha": "2025-09-09",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 287
     }
 ]

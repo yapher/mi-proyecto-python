@@ -8,6 +8,9 @@ $(document).ready(function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
+    const agregarUrl = document.getElementById('formAgregarRepuesto').getAttribute('action');
+    const editarUrl = document.getElementById('editar-repuesto-url').value;
+
     document.querySelectorAll('[data-bs-target="#agregarModal"].btn-agregar').forEach(function (btn) {
         btn.addEventListener('click', function () {
             const form = document.getElementById('formAgregarRepuesto');
@@ -15,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
             $('#ubicacion').val(null).trigger('change');
 
             document.getElementById('agregarModalLabel').textContent = "Agregar Nuevo Repuesto";
-            form.action = "{{ url_for('indexEstadoRep.agregar_repuesto') }}";
+            form.action = agregarUrl;
             document.getElementById('codigo').readOnly = false;
             document.getElementById('tab_activo').value = btn.getAttribute('data-sanitized_id') || '';
 
@@ -30,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('formAgregarRepuesto');
 
             document.getElementById('agregarModalLabel').textContent = "Editar Repuesto";
-            form.action = "{{ url_for('indexEstadoRep.editar_repuesto') }}";
+            form.action = editarUrl;
 
             document.getElementById('nombre').value = btn.getAttribute('data-nombre') || '';
             document.getElementById('codigo').value = btn.getAttribute('data-codigo') || '';

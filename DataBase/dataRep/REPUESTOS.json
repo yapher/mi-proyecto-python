@@ -1504,25 +1504,25 @@
         "nombre": "SOPORTE P/BOB ROD MAGNETICO",
         "codigo": "78629077",
         "cantidad": 12,
-        "equipo": "1",
+        "equipo": "SALA BATERIAS",
         "ruta_jerarquia": [
             "SD-APR-HALD"
         ],
-        "imagen": null,
+        "imagen": "Bobina_rod_magnetico.jpeg",
         "fecha_creacion": "2024-12-25",
         "fecha_fin": "",
         "link": "",
-        "estado": "🟡"
+        "estado": "🟢"
     },
     {
         "nombre": "BOBINA P/RODILLO MAGNETICOS",
         "codigo": "78628406",
         "cantidad": 12,
-        "equipo": "1",
+        "equipo": "GMP-COFRE2",
         "ruta_jerarquia": [
             "SD-APR-HALD"
         ],
-        "imagen": null,
+        "imagen": "Bobina_rod_magnetico.jpeg",
         "fecha_creacion": "2024-12-25",
         "fecha_fin": "",
         "link": "",
