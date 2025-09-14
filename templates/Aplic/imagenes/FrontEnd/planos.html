@@ -1,0 +1,65 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container-fluid mt-4 px-0">
+    <h2 class="mb-4">Gestión de Planos PDF</h2>
+
+    <!-- Partial que incluye botón + modal -->
+    {% include 'Aplic/imagenes/FrontEnd/_modal_agregar_plano.html' %}
+
+    <!-- Buscador -->
+    <div class="mb-3">
+        <input type="text" class="form-control" id="buscarPlano" placeholder="🔍 Buscar en todos los campos...">
+    </div>
+
+    <!-- Tabla de Planos -->
+    <div class="table-responsive tabla-scroll">
+        <table class="table table-bordered table-hover table-striped table-dark align-middle w-100 table-fixed">
+            <thead class="sticky-header">
+                <tr>
+                    <th style="width:5%"></th>
+                    <th style="width:25%">Línea</th>
+                    <th style="width:25%">Descripción</th>
+                    <th style="width:25%">Archivo</th>
+                    <th style="width:20%">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% import 'Aplic/imagenes/FrontEnd/_macros.html' as macros %}
+                {% set agrupados = {} %}
+                {% for plano in planos %}
+                    {% set _ = agrupados.setdefault(plano.nombre_linea, []).append(plano) %}
+                {% endfor %}
+
+                {% if agrupados %}
+                    {% for linea, planos_linea in agrupados.items() %}
+                        {{ macros.fila_principal(linea, loop.index) }}
+                        <tr class="collapse" id="collapse{{ loop.index }}">
+                            <td colspan="5" class="p-0">
+                                <table class="table table-dark mb-0 table-fixed">
+                                    <tbody>
+                                        {% for plano in planos_linea %}
+                                            {{ macros.fila_plano(plano, loop.index, loop.index0) }}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center">No hay planos cargados.</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script>
+console.log('RUTAS servidor:', {{ rutas| tojson | safe }});
+</script>
+<script src="{{ url_for('static', filename='js/apps/select.js') }}"></script>
+<script src="{{ url_for('static', filename='js/apps/busqueda.js') }}"></script>
+<script src="{{ url_for('static', filename='js/apps/planos.js') }}"></script>
+{% endblock %}

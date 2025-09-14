@@ -91,7 +91,7 @@ def ubicacion_tecnica_json():
 # ---------- API editar / borrar / agregar ----------
 @instalaciones_bp.route('/api/editar_ubicacion', methods=['PUT'])
 @login_required_json
-@roles_required('editor')
+@roles_required('viewer')
 def editar_ubicacion():
     data = cargar_ubicaciones()
     modificado = request.get_json()
@@ -119,7 +119,7 @@ def editar_ubicacion():
 
 @instalaciones_bp.route('/api/borrar_ubicacion', methods=['DELETE'])
 @login_required_json
-@roles_required('editor')
+@roles_required('viewer')
 def borrar_ubicacion():
     data = cargar_ubicaciones()
     ruta_jerarquia = request.json.get('ruta_jerarquia') if request.json else None
@@ -132,7 +132,7 @@ def borrar_ubicacion():
 
 @instalaciones_bp.route('/api/agregar_sububicacion', methods=['POST'])
 @login_required_json
-@roles_required('editor')
+@roles_required('viewer')
 def agregar_sububicacion():
     data = cargar_ubicaciones()
     if not request.json:

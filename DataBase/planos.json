@@ -1,0 +1,86 @@
+[
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Rodillo magnético",
+    "archivo": "SD.APR.HALD.CO73-LDT10001.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Rodillo magnético mecánico ",
+    "archivo": "SD.APR.HALD.GRAL-ART-5614-12-0051_01_MecanicaRodillo.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano  5414-23-0045 Potencial Constante  Hoja 1/13",
+    "archivo": "Tablero_control.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Alimentación potencial constante Drive's motores principales   Hoja 2/13",
+    "archivo": "5414-23-0045-H002_Alimentacion_Drive_DC.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Circuito de control Imanes   Hoja 3/13",
+    "archivo": "5414-23-0045-H003_Imanes_cinta_1.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Control freno dinamicos motores principales    Hoja  4/13",
+    "archivo": "5414-23-0045-H004_freno_dinamicos.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Placa de montaje drive Hoja 5/13",
+    "archivo": "5414-23-0045-H005_Tablero_Drives.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Esquema de borneras  hoja  6/13",
+    "archivo": "5414-23-0045-H006_borneras.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Rectificador 250Vcc Marca JBC   Hoja 7/13",
+    "archivo": "5414-23-0045-H007_puente_rectificador.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Etapas de drive ABB  Hoja  8/13",
+    "archivo": "5414-23-0045-H008_drive_ABB_DC.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "EMBALAJE40",
+    "descripcion": "Plano general embalaje 40",
+    "archivo": "Sidercrom - 0820_Planos Electricos 20151118.pdf",
+    "carpeta": "EMBALAJE40"
+  },
+  {
+    "nombre_linea": "EMBALAJE40",
+    "descripcion": "Croquis eléctrico de conexionado de pistas",
+    "archivo": "CroquisPistasEnvolvedora.pdf",
+    "carpeta": "EMBALAJE40"
+  },
+  {
+    "nombre_linea": "EMBALAJE40",
+    "descripcion": "Pines de conexión de fichas  de robot 1 y 2",
+    "archivo": "PinesConesxionesManguerasRobots 1.pdf",
+    "carpeta": "EMBALAJE40"
+  },
+  {
+    "nombre_linea": "LITTELL",
+    "descripcion": "Plano general",
+    "archivo": "SiderCrom -- Littell.pdf",
+    "carpeta": "LITTELL"
+  }
+]

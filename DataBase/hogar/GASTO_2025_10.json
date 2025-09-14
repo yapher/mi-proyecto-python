@@ -110,17 +110,6 @@
         "pagado": false
     },
     {
-        "id": 1750890543715,
-        "rubro": "Forrajería",
-        "descripcion": "Comida Perra",
-        "importe": 60000,
-        "tipo": "cuota",
-        "cuota_numero": 4,
-        "cuota_total": 6,
-        "vencimiento": "2025-10-23",
-        "pagado": false
-    },
-    {
         "id": 1750890571735,
         "rubro": "Almacen",
         "descripcion": "Carnicería",
@@ -154,17 +143,6 @@
         "pagado": false
     },
     {
-        "id": 1750890713117,
-        "rubro": "Automotor",
-        "descripcion": "Seguros",
-        "importe": 80000,
-        "tipo": "cuota",
-        "cuota_numero": 4,
-        "cuota_total": 6,
-        "vencimiento": "2025-10-23",
-        "pagado": false
-    },
-    {
         "id": 1750890776827,
         "rubro": "Servicios",
         "descripcion": "Internet",
@@ -187,25 +165,36 @@
         "pagado": false
     },
     {
+        "id": 1750891169092,
+        "rubro": "Esparcimiento",
+        "descripcion": "",
+        "importe": 35000,
+        "tipo": "",
+        "cuota_numero": 4,
+        "cuota_total": 6,
+        "vencimiento": "2025-10-25",
+        "pagado": false
+    },
+    {
         "id": 1750890848129,
         "rubro": "Servicios",
-        "descripcion": "Gas",
-        "importe": 50000,
-        "tipo": "cuota",
+        "descripcion": "",
+        "importe": 100000,
+        "tipo": "",
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-23",
         "pagado": false
     },
     {
-        "id": 1750891169092,
-        "rubro": "Esparcimiento",
-        "descripcion": "Boxeo",
-        "importe": 40000,
-        "tipo": "cuota",
+        "id": 1750890713117,
+        "rubro": "Automotor",
+        "descripcion": "",
+        "importe": 90000,
+        "tipo": "",
         "cuota_numero": 4,
         "cuota_total": 6,
-        "vencimiento": "2025-10-25",
+        "vencimiento": "2025-10-23",
         "pagado": false
     }
 ]

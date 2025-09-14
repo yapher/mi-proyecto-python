@@ -38,6 +38,7 @@ def listar_eventos():
 
 @agenda_bp.route('/evento', methods=['POST'])
 @login_required
+@roles_required('viewer')
 def crear_evento():
     data = request.json
     agregar_evento(data)
@@ -46,6 +47,7 @@ def crear_evento():
 
 @agenda_bp.route('/evento/<int:evento_id>', methods=['PUT'])
 @login_required
+@roles_required('viewer')
 def actualizar_evento(evento_id):
     data = request.json
     editar_evento(evento_id, data)
@@ -54,6 +56,7 @@ def actualizar_evento(evento_id):
 
 @agenda_bp.route('/evento/<int:evento_id>', methods=['DELETE'])
 @login_required
+@roles_required('viewer')
 def borrar_evento(evento_id):
     eliminar_evento(evento_id)
     return jsonify({"status": "ok"})

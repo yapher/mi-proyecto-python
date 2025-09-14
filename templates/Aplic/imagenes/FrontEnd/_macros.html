@@ -1,0 +1,71 @@
+{% macro fila_principal(linea, index) %}
+<tr class="table-primary">
+    <td class="text-center">
+        <button class="btn btn-sm btn-toggle" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapse{{ index }}" aria-expanded="false"
+            aria-controls="collapse{{ index }}">
+            <i class="bi bi-caret-right-fill"></i>
+        </button>
+    </td>
+    <td colspan="4"><strong>{{ linea }}</strong></td>
+</tr>
+{% endmacro %}
+
+{% macro fila_plano(plano, loop_index, loop_index0) %}
+<tr>
+    <td style="width:5%"></td>
+    <td style="width:25%">{{ plano.descripcion }}</td>
+    <td style="width:25%">{{ plano.archivo }}</td>
+    <td style="width:45%">
+        <div class="d-flex flex-row gap-2 justify-content-center align-items-center flex-nowrap w-100">
+            <a href="{{ url_for('static', filename='uploads/planos/' ~ plano.carpeta ~ '/' ~ plano.archivo) }}"
+                target="_blank" class="btn btn-outline-info btn-sm d-flex align-items-center gap-1" title="Ver PDF">
+                <i class="bi bi-file-earmark-pdf"></i> <span class="d-none d-md-inline">PDF</span>
+            </a>
+            <button type="button" class="btn btn-warning btn-sm d-flex align-items-center gap-1" title="Editar"
+                data-bs-toggle="modal"
+                data-bs-target="#modalEditar{{ loop_index }}_{{ loop_index0 }}_{{ plano.archivo | replace(' ', '_') }}">
+                <i class="bi bi-pencil-square"></i> <span class="d-none d-md-inline">Editar</span>
+            </button>
+            <form method="POST"
+                action="{{ url_for('indeximagenes.eliminar_plano', nombre_linea=plano.nombre_linea, archivo=plano.archivo) }}"
+                style="display:inline;" class="form-eliminar-plano">
+                <button type="button" class="btn btn-danger btn-sm d-flex align-items-center gap-1 btn-eliminar-plano"
+                    title="Eliminar">
+                    <i class="bi bi-trash"></i> <span class="d-none d-md-inline">Eliminar</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Modal editar -->
+        <div class="modal fade"
+            id="modalEditar{{ loop_index }}_{{ loop_index0 }}_{{ plano.archivo | replace(' ', '_') }}"
+            tabindex="-1"
+            aria-labelledby="modalEditarLabel{{ loop_index }}_{{ loop_index0 }}_{{ plano.archivo | replace(' ', '_') }}"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content bg-form">
+                    <form method="POST"
+                        action="{{ url_for('indeximagenes.editar_plano', nombre_linea=plano.nombre_linea, archivo=plano.archivo) }}">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Editar descripción</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="descripcion" class="form-label">Descripción</label>
+                                <input type="text" name="descripcion" value="{{ plano.descripcion }}"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-warning btn-editar-plano">Guardar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </td>
+</tr>
+{% endmacro %}

@@ -137,7 +137,7 @@
     },
     {
         "titulo": "Corregir Bloqueos del plan Grúa 320",
-        "fecha": "2025-09-08",
+        "fecha": "2025-09-12",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "id": 20,
@@ -1414,7 +1414,7 @@
         "fecha": "2025-09-11",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media",
         "id": 174
     },
@@ -1610,7 +1610,7 @@
     },
     {
         "titulo": "Modificar OT 2002723270",
-        "fecha": "2025-09-08",
+        "fecha": "2025-09-12",
         "descripcion": "Realizar compra de repuesto y modificar ot para cambio de interruptor",
         "email": "cóherasimov@ternium.com.ar",
         "realizado": false,
@@ -1673,7 +1673,7 @@
     },
     {
         "titulo": "Modificar plan de REX Littell",
-        "fecha": "2025-09-08",
+        "fecha": "2025-09-12",
         "descripcion": "Agregar gardia de arranque 36Hs",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -1721,7 +1721,7 @@
         "fecha": "2025-09-10",
         "descripcion": "REVISION ILUMINACION DELTA",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true
     },
     {
         "id": 226,
@@ -1729,7 +1729,8 @@
         "fecha": "2025-09-11",
         "descripcion": "REVISION SISTEMA ELEC. DELTA",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 227,
@@ -1845,7 +1846,8 @@
         "fecha": "2025-09-11",
         "descripcion": "INSPECCION ELECT. APILADORES DE RECHAZO",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 241,
@@ -1853,7 +1855,8 @@
         "fecha": "2025-09-11",
         "descripcion": "INSPECCION ELECT. APILADORES DE PRIMERA",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "titulo": "Ver repuesto no codificado",
@@ -1949,7 +1952,8 @@
         "fecha": "2025-09-11",
         "descripcion": "RP-MANT. TB EMBALAJE AUTOMÁTICO",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 253,
@@ -1957,7 +1961,8 @@
         "fecha": "2025-09-11",
         "descripcion": "RP-CONTROL CERRADURAS  PUERTAS",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 254,
@@ -1965,7 +1970,8 @@
         "fecha": "2025-09-11",
         "descripcion": "RP-MANT. TIJERA CORTE FILM",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 255,
@@ -1973,7 +1979,8 @@
         "fecha": "2025-09-11",
         "descripcion": "RP- CONTROL DE SENSORES",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 256,
@@ -2202,10 +2209,10 @@
     },
     {
         "titulo": "buscar plano de electroimanes Hallden",
-        "fecha": "2025-09-08",
+        "fecha": "2025-09-09",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media",
         "id": 283
     },
@@ -2223,16 +2230,16 @@
         "fecha": "2025-09-09",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media",
         "id": 285
     },
     {
-        "titulo": "ver repuesto de rodillo de agarre",
+        "titulo": "ver repuesto de rodillo de magnético",
         "fecha": "2025-09-09",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media",
         "id": 286
     },
@@ -2241,8 +2248,150 @@
         "fecha": "2025-09-09",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media",
         "id": 287
+    },
+    {
+        "id": 288,
+        "titulo": "PM02:2003232626",
+        "fecha": "2025-09-10",
+        "descripcion": "INSP. SENSORES LITTELL",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media"
+    },
+    {
+        "id": 289,
+        "titulo": "PM02:2003236376",
+        "fecha": "2025-09-11",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media"
+    },
+    {
+        "id": 290,
+        "titulo": "PM11:2003242899",
+        "fecha": "2025-09-18",
+        "descripcion": "RP- RELEVAR BOBINAS IMANES",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 291,
+        "titulo": "PM02:2003244336",
+        "fecha": "2025-09-24",
+        "descripcion": "REVISION ILUMINACION DELTA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "titulo": "viene fede",
+        "fecha": "2025-09-12",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "alta",
+        "id": 292
+    },
+    {
+        "titulo": "pasar palnos a pdf y cargarlo en el sistema",
+        "fecha": "2025-09-12",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 293
+    },
+    {
+        "id": 294,
+        "titulo": "PM11:2003245907",
+        "fecha": "2025-09-11",
+        "descripcion": "CONTROL ESCOBILLAS ENVOLVEDORA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media"
+    },
+    {
+        "titulo": "preparar materiales para RP",
+        "fecha": "2025-09-10",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media",
+        "id": 295
+    },
+    {
+        "titulo": "CAMBIO DE TURNO DE 12 A 20",
+        "fecha": "2025-09-10",
+        "descripcion": "Funeral de Rancho",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "alta",
+        "id": 296
+    },
+    {
+        "titulo": "pasar codigos de candados",
+        "fecha": "2025-09-10",
+        "descripcion": "a locardi",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media",
+        "id": 297
+    },
+    {
+        "titulo": "enviar correo para solucionar alimentación compresores",
+        "fecha": "2025-09-10",
+        "descripcion": "ORDEN 2002723270",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media",
+        "id": 298
+    },
+    {
+        "titulo": "REALIZAR COMPRA CONTACTO AUXILIAR 71321377",
+        "fecha": "2025-09-16",
+        "descripcion": "TIENE CONTACTO NO Y NC QUE ES PARA LOS CONTACTORES DE LA ZUNCHADORA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 299
+    },
+    {
+        "id": 300,
+        "titulo": "PM11:2003253636",
+        "fecha": "2025-09-12",
+        "descripcion": "APILADOR 2 MOTOR DE SOPLADOR SOBRECARGA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media"
+    },
+    {
+        "titulo": "seguimiento de soplador",
+        "fecha": "2025-09-12",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 301
+    },
+    {
+        "titulo": "Croquis escobillas envolvedora",
+        "fecha": "2025-09-10",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media",
+        "id": 302
+    },
+    {
+        "titulo": "lista de conexion sensor robot2",
+        "fecha": "2025-09-10",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media",
+        "id": 303
     }
 ]

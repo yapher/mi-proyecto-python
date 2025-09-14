@@ -30,7 +30,7 @@
         "cuota_numero": 3,
         "cuota_total": 6,
         "vencimiento": "2025-09-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890263084,
@@ -85,7 +85,7 @@
         "cuota_numero": 3,
         "cuota_total": 6,
         "vencimiento": "2025-09-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890502737,
@@ -151,7 +151,7 @@
         "cuota_numero": 3,
         "cuota_total": 6,
         "vencimiento": "2025-09-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890776826,
@@ -162,7 +162,7 @@
         "cuota_numero": 3,
         "cuota_total": 6,
         "vencimiento": "2025-09-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890815390,
@@ -173,28 +173,28 @@
         "cuota_numero": 3,
         "cuota_total": 6,
         "vencimiento": "2025-09-23",
-        "pagado": false
-    },
-    {
-        "id": 1750890848128,
-        "rubro": "Servicios",
-        "descripcion": "Gas",
-        "importe": 50000,
-        "tipo": "cuota",
-        "cuota_numero": 3,
-        "cuota_total": 6,
-        "vencimiento": "2025-09-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750891169091,
         "rubro": "Esparcimiento",
-        "descripcion": "Boxeo",
-        "importe": 40000,
-        "tipo": "cuota",
+        "descripcion": "",
+        "importe": 25000,
+        "tipo": "",
         "cuota_numero": 3,
         "cuota_total": 6,
         "vencimiento": "2025-09-25",
         "pagado": true
+    },
+    {
+        "id": 1750890713117,
+        "rubro": "Automotor",
+        "descripcion": "",
+        "importe": 310000,
+        "tipo": "único",
+        "cuota_numero": 4,
+        "cuota_total": 6,
+        "vencimiento": "2025-09-09",
+        "pagado": false
     }
 ]

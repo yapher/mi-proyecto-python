@@ -2,89 +2,93 @@
 <div id="nivelesContainer" class="mb-3"></div>
 
 <script>
-    let arbolMenus = [];
+let arbolMenus = [];
 
-    function cargarArbolMenus(cb) {
-        fetch('/api/rubro_arbol')
-            .then(res => res.json())
-            .then(data => {
-                arbolMenus = data;
-                if (cb) cb();
-            });
-    }
-
-    function buscarNodoPorRuta(data, ruta) {
-        if (!ruta) return data;
-        const partes = ruta.split('.');
-        let nodo = data;
-        for (const parte of partes) {
-            if (Array.isArray(nodo)) {
-                nodo = nodo.find(item => item.nombre === parte);
-            } else if (nodo.submenues) {
-                nodo = nodo.submenues.find(item => item.nombre === parte);
-            } else {
-                return null;
-            }
-            if (!nodo) return null;
-        }
-        return nodo;
-    }
-
-    function crearSelect(opciones, nivel, valorSeleccionado = "") {
-        const select = document.createElement('select');
-        select.className = 'form-control nivel-select mb-2';
-        select.setAttribute('data-nivel', nivel);
-        select.innerHTML = `<option value="">Sin seleccionar</option>`;
-
-        opciones.forEach(item => {
-            const seleccionado = item.ruta_jerarquia === valorSeleccionado ? 'selected' : '';
-            select.innerHTML += `<option value="${item.ruta_jerarquia}" ${seleccionado}>${item.emoji} ${item.nombre}</option>`;
+function cargarArbolMenus(cb) {
+    fetch('/api/rubro_arbol')
+        .then(res => res.json())
+        .then(data => {
+            arbolMenus = data;
+            if (cb) cb();
         });
+}
 
-        select.onchange = function () {
-            // 🔴 Limpia niveles hijos
-            let next = this.nextElementSibling;
-            while (next) {
-                next.remove();
-                next = this.nextElementSibling;
-            }
-
-            if (this.value) {
-                const seleccionado = buscarNodoPorRuta(arbolMenus, this.value);
-                if (seleccionado && seleccionado.submenues && seleccionado.submenues.length > 0) {
-                    // 🔥 CREA Y AGREGA el nuevo select hijo
-                    const nuevoSelect = crearSelect(seleccionado.submenues, nivel + 1);
-                    document.getElementById('nivelesContainer').appendChild(nuevoSelect);
-                }
-            }
-        };
-
-        return select;
+function buscarNodoPorRuta(data, ruta) {
+    if (!ruta) return data;
+    const partes = ruta.split('.');
+    let nodo = data;
+    for (const parte of partes) {
+        if (Array.isArray(nodo)) {
+            nodo = nodo.find(item => item.nombre === parte);
+        } else if (nodo.submenues) {
+            nodo = nodo.submenues.find(item => item.nombre === parte);
+        } else {
+            return null;
+        }
+        if (!nodo) return null;
     }
+    return nodo;
+}
 
+function crearSelect(opciones, nivel, valorSeleccionado = "") {
+    const select = document.createElement('select');
+    select.className = 'form-control nivel-select mb-2';
+    select.setAttribute('data-nivel', nivel);
+    select.innerHTML = `<option value="">Sin seleccionar</option>`;
 
+    opciones.forEach(item => {
+        const seleccionado = item.ruta_jerarquia === valorSeleccionado ? 'selected' : '';
+        select.innerHTML += `<option value="${item.ruta_jerarquia}" ${seleccionado}>${item.emoji} ${item.nombre}</option>`;
+    });
 
-    function renderSelectoresNiveles(valorPorDefecto = "") {
-        const cont = document.getElementById('nivelesContainer');
-        cont.innerHTML = '';
-
-        if (!valorPorDefecto) {
-            const select = crearSelect(arbolMenus, 0); // Primer nivel
-            cont.appendChild(select);
-            return;
+    select.onchange = function () {
+        // 🔴 Limpia niveles hijos
+        let next = this.nextElementSibling;
+        while (next) {
+            next.remove();
+            next = this.nextElementSibling;
         }
 
-        // 🔁 Si hay valor por defecto, expandir jerarquía
-        const partes = valorPorDefecto.split('.');
-        let actual = arbolMenus;
-        let rutaAcumulada = "";
+        if (this.value) {
+            const seleccionado = buscarNodoPorRuta(arbolMenus, this.value);
+            if (seleccionado && seleccionado.submenues && seleccionado.submenues.length > 0) {
+                // 🔥 CREA Y AGREGA el nuevo select hijo
+                const nuevoSelect = crearSelect(seleccionado.submenues, nivel + 1);
+                document.getElementById('nivelesContainer').appendChild(nuevoSelect);
+            }
+        }
+    };
 
-        partes.forEach((parte, nivel) => {
-            const rutaActual = rutaAcumulada + (nivel > 0 ? '.' : '') + parte;
-            const select = crearSelect(actual, nivel, rutaActual);
-            cont.appendChild(select);
+    return select;
+}
 
-            const nodo = actual.find(item => item.nombre === parte);
-            if (nodo && nodo.submenues) {
-                actual = nodo.submenues;
-            <script src="/static/js/apps/selectRubros.js"></script>
+function renderSelectoresNiveles(valorPorDefecto = "") {
+    const cont = document.getElementById('nivelesContainer');
+    cont.innerHTML = '';
+
+    if (!valorPorDefecto) {
+        const select = crearSelect(arbolMenus, 0); // Primer nivel
+        cont.appendChild(select);
+        return;
+    }
+
+    // 🔁 Si hay valor por defecto, expandir jerarquía
+    const partes = valorPorDefecto.split('.');
+    let actual = arbolMenus;
+    let rutaAcumulada = "";
+
+    partes.forEach((parte, nivel) => {
+        const rutaActual = rutaAcumulada + (nivel > 0 ? '.' : '') + parte;
+        const select = crearSelect(actual, nivel, rutaActual);
+        cont.appendChild(select);
+
+        const nodo = actual.find(item => item.nombre === parte);
+        if (nodo && nodo.submenues) {
+            actual = nodo.submenues;
+        }
+        rutaAcumulada = rutaActual;
+    });
+}
+</script>
+
+<script src="/static/js/apps/selectRubros.js"></script>

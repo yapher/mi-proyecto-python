@@ -2037,7 +2037,7 @@
         "cuota_numero": 3,
         "cuota_total": 6,
         "vencimiento": "2025-09-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890215670,
@@ -2356,7 +2356,7 @@
         "cuota_numero": 3,
         "cuota_total": 6,
         "vencimiento": "2025-09-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890445831,
@@ -2467,17 +2467,6 @@
         "cuota_total": 6,
         "vencimiento": "2025-09-23",
         "pagado": true
-    },
-    {
-        "id": 1750890543715,
-        "rubro": "Forrajería",
-        "descripcion": "Comida Perra",
-        "importe": 60000,
-        "tipo": "cuota",
-        "cuota_numero": 4,
-        "cuota_total": 6,
-        "vencimiento": "2025-10-23",
-        "pagado": false
     },
     {
         "id": 1750890543716,
@@ -2719,17 +2708,17 @@
         "cuota_numero": 3,
         "cuota_total": 6,
         "vencimiento": "2025-09-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890713117,
         "rubro": "Automotor",
-        "descripcion": "Seguros",
-        "importe": 80000,
-        "tipo": "cuota",
+        "descripcion": "",
+        "importe": 310000,
+        "tipo": "único",
         "cuota_numero": 4,
         "cuota_total": 6,
-        "vencimiento": "2025-10-23",
+        "vencimiento": "2025-09-09",
         "pagado": false
     },
     {
@@ -2785,7 +2774,7 @@
         "cuota_numero": 3,
         "cuota_total": 6,
         "vencimiento": "2025-09-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890776827,
@@ -2851,7 +2840,7 @@
         "cuota_numero": 3,
         "cuota_total": 6,
         "vencimiento": "2025-09-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890815391,
@@ -2898,22 +2887,11 @@
         "pagado": true
     },
     {
-        "id": 1750890848128,
-        "rubro": "Servicios",
-        "descripcion": "Gas",
-        "importe": 50000,
-        "tipo": "cuota",
-        "cuota_numero": 3,
-        "cuota_total": 6,
-        "vencimiento": "2025-09-23",
-        "pagado": false
-    },
-    {
         "id": 1750890848129,
         "rubro": "Servicios",
-        "descripcion": "Gas",
-        "importe": 50000,
-        "tipo": "cuota",
+        "descripcion": "",
+        "importe": 100000,
+        "tipo": "",
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-23",
@@ -2955,9 +2933,9 @@
     {
         "id": 1750891169091,
         "rubro": "Esparcimiento",
-        "descripcion": "Boxeo",
-        "importe": 40000,
-        "tipo": "cuota",
+        "descripcion": "",
+        "importe": 25000,
+        "tipo": "",
         "cuota_numero": 3,
         "cuota_total": 6,
         "vencimiento": "2025-09-25",
@@ -2966,9 +2944,9 @@
     {
         "id": 1750891169092,
         "rubro": "Esparcimiento",
-        "descripcion": "Boxeo",
-        "importe": 40000,
-        "tipo": "cuota",
+        "descripcion": "",
+        "importe": 35000,
+        "tipo": "",
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-25",

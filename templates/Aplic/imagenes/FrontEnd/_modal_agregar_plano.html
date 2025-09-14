@@ -1,0 +1,92 @@
+<!-- Modal + Botón para agregar plano -->
+<div class="mb-3 text-end">
+     <button type="button" class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#modalAgregarPlano">
+      ➕ Agregar Plano
+    </button>
+</div>
+
+<!-- MODAL AGREGAR PLANO -->
+<div class="modal fade" id="modalAgregarPlano" tabindex="-1" aria-labelledby="modalAgregarPlanoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content bg-form"
+      style="background-color: #4b376a; color: #fff; border-radius: 1rem; box-shadow: 0 8px 32px rgba(136,201,153,0.16);">
+      
+      <form method="POST" action="{{ url_for('indeximagenes.agregar_plano') }}" enctype="multipart/form-data" id="formAgregarPlano">
+        
+        <div class="modal-header"
+          style="border-bottom: 2px solid #88c999; background: linear-gradient(to right, #2a1e3b, #3e2d59); border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+          <h5 class="modal-title" id="modalAgregarPlanoLabel" style="color: #88c999; font-weight: 700;">
+            Agregar Nuevo Plano
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" style="filter: invert(1);"></button>
+        </div>
+
+        <div class="modal-body">
+            <div class="row g-3">
+
+                <!-- Nombre de línea -->
+                <div class="col-md-6">
+                    <label for="nombre_linea" class="form-label" style="color:#e5d64f;">Nombre de la línea</label>
+                    <select class="form-select" id="nombre_linea" name="nombre_linea" required
+                        style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
+                        <option value="" disabled selected>Seleccione una ubicación</option>
+                    </select>
+                    <div id="rutas-empty" class="alert alert-warning mt-2 d-none">
+                        No se encontraron ubicaciones. Consultá al administrador.
+                    </div>
+                </div>
+
+                <!-- Descripción -->
+                <div class="col-md-6">
+                    <label for="descripcion" class="form-label" style="color:#e5d64f;">Descripción</label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" required
+                        style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
+                </div>
+
+                <!-- Archivo PDF -->
+                <div class="col-12">
+                    <label for="archivo" class="form-label" style="color:#e5d64f;">Archivo PDF</label>
+                    <input type="file" class="form-control" id="archivo" name="archivo" accept="application/pdf" required
+                        style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
+                </div>
+
+            </div>
+        </div>
+
+        <div class="modal-footer" style="border-top: 2px solid #88c999;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary btn-agregar-plano">Agregar Plano</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+// Rutas servidor pasadas desde Flask
+const rutas = {{ rutas|tojson|safe }};
+
+// Cuando se abre el modal, cargamos las rutas en el select
+const modal = document.getElementById('modalAgregarPlano');
+modal.addEventListener('show.bs.modal', function () {
+    const select = document.getElementById('nombre_linea');
+    if (!select) return;
+
+    // Limpiamos opciones existentes (excepto la placeholder)
+    select.querySelectorAll('option:not([disabled])').forEach(o => o.remove());
+
+    if (Array.isArray(rutas) && rutas.length) {
+        rutas.forEach(r => {
+            const opt = document.createElement('option');
+            opt.value = r;
+            opt.textContent = r;
+            select.appendChild(opt);
+        });
+        document.getElementById('rutas-empty')?.classList.add('d-none');
+    } else {
+        document.getElementById('rutas-empty')?.classList.remove('d-none');
+        console.warn('No se encontraron rutas en el servidor.');
+    }
+});
+</script>

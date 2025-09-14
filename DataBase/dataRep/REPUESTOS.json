@@ -1475,12 +1475,12 @@
     {
         "nombre": "ARANDELA AISLANTE P/BOB ROD MAGNETICO",
         "codigo": "78629191",
-        "cantidad": 12,
-        "equipo": "1",
+        "cantidad": 8,
+        "equipo": "GMP-COFRE2",
         "ruta_jerarquia": [
             "SD-APR-HALD"
         ],
-        "imagen": null,
+        "imagen": "arandela_aislante.jpeg",
         "fecha_creacion": "2024-12-25",
         "fecha_fin": "",
         "link": "",
@@ -1508,7 +1508,7 @@
         "ruta_jerarquia": [
             "SD-APR-HALD"
         ],
-        "imagen": "Bobina_rod_magnetico.jpeg",
+        "imagen": "soporte_bobina.jpeg",
         "fecha_creacion": "2024-12-25",
         "fecha_fin": "",
         "link": "",
@@ -4183,11 +4183,12 @@
         "estado": "🔴"
     },
     {
-        "nombre": "BLOCK CONT.AUX.LA1-D11 TELEMECANIQUE",
+        "nombre": "BLOCK CONT.AUX.LA1-D11 TELEMECANIQUE (LADN11)",
         "codigo": "71321377",
         "cantidad": 1,
-        "equipo": "SALA BATERIAS",
+        "equipo": "GMP-PUERTA1-ESTANTE2",
         "ruta_jerarquia": [
+            "SD-APR-EMPA",
             "SD-APR-LITE"
         ],
         "imagen": "bloque_auxiliar.jpeg",
@@ -5735,5 +5736,20 @@
         "fecha_fin": "",
         "link": "",
         "estado": "🟡"
+    },
+    {
+        "nombre": "TOMACORRIENTE EXT 250V 16A STECK S-2116  (EXTERIOR CON TAPA DE PLASTICO)",
+        "codigo": "71314744",
+        "cantidad": 2,
+        "equipo": "GMP-COFRE2",
+        "ruta_jerarquia": [
+            "",
+            "SD-ASE"
+        ],
+        "imagen": "toma_externo.jpg",
+        "fecha_creacion": "2025-09-10",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢"
     }
 ]

@@ -40,8 +40,7 @@ from templates.Aplic.listarot.BackEnd.listar_ot import listar_ot_bp
 from templates.Aplic.bajadadeot.BackEnd.bajada_de_ot import bajada_de_ot_bp
 from templates.Aplic.instalaciones.BackEnd.instalaciones import instalaciones_bp
 from templates.Aplic.trayectoria.BackEnd.trayectoria import trayectoria_bp
-from templates.Aplic.planos.BackEnd.planos import planos_bp
-
+from templates.Aplic.imagenes.BackEnd.imagenes import planos_bp
 
 app = Flask(__name__)
 app.secret_key = '221d18b67f2d4705a132d532b1d12ab2'  # Cambia esto por una clave segura

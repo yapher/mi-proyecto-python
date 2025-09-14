@@ -1,15 +1,15 @@
 <button class="btn btn-agregar m-1" data-bs-toggle="modal" data-bs-target="#agregarModal"
     onclick="mostrarFormulario(null)">Agregar Pago</button>
 
-
 <div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content bg-form"
             style="background-color: #4b376a; color: #fff; border-radius: 1rem; box-shadow: 0 8px 32px rgba(136,201,153,0.16);">
             <div class="modal-header"
                 style="border-bottom: 2px solid #88c999; background: linear-gradient(to right, #2a1e3b, #3e2d59); border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
-                <h5 class="modal-title" id="agregarModalLabel" style="color: #88c999; font-weight: 700;">Agregar Nuevo
-                    Pago</h5>
+                <h5 class="modal-title" id="agregarModalLabel" style="color: #88c999; font-weight: 700;">
+                    Agregar Nuevo Pago
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
                     style="filter: invert(1);"></button>
             </div>
@@ -22,25 +22,40 @@
 
                         <input type="hidden" id="pagoId">
 
+                        <!-- Descripción -->
                         <div class="mb-3 input-with-emoji">
-                            <span class="input-emoji">🔗</span>
+                            <span class="input-emoji">📝</span>
+                            <input type="text" class="form-control ps-5" id="descripcion" placeholder="Descripción">
+                        </div>
+
+                        <!-- Importe -->
+                        <div class="mb-3 input-with-emoji">
+                            <span class="input-emoji">💲</span>
                             <input type="number" class="form-control ps-5" id="importe" placeholder="Importe">
                         </div>
+
+                        <!-- Tipo -->
                         <div class="mb-3 input-with-emoji">
-                            <span class="input-emoji">😀</span>
+                            <span class="input-emoji">📌</span>
                             <select class="form-control ps-5" id="tipo">
                                 <option value="único">Único</option>
                                 <option value="cuotas">Cuotas</option>
                             </select>
                         </div>
+
+                        <!-- Cuotas -->
                         <div class="mb-3 input-with-emoji">
-                            <span class="input-emoji">😀</span>
+                            <span class="input-emoji">#️⃣</span>
                             <input type="number" class="form-control ps-5" id="cuotas" placeholder="Cuotas">
                         </div>
+
+                        <!-- Vencimiento -->
                         <div class="mb-3 input-with-emoji">
                             <span class="input-emoji">📅</span>
                             <input type="date" class="form-control ps-5" id="vencimiento" placeholder="Vencimiento">
                         </div>
+
+                        <!-- Botones -->
                         <div class="button-group">
                             <button type="button" class="btn btn-agregar" onclick="guardarPago()">Guardar</button>
                             <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal" onclick="cancelar()"
@@ -52,6 +67,5 @@
         </div>
     </div>
 </div>
-
 
 <script src="/static/js/apps/newPagos.js"></script>
