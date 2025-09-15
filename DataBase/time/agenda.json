@@ -1423,7 +1423,7 @@
         "fecha": "2025-09-15",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media",
         "id": 175
     },
@@ -2125,7 +2125,8 @@
         "fecha": "2025-09-15",
         "descripcion": "REVISION ELECT. BAT Y ELEVADOR POTENCIA.",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 273,
@@ -2393,5 +2394,57 @@
         "realizado": true,
         "prioridad": "media",
         "id": 303
+    },
+    {
+        "titulo": "Buscar plano de Hallden 2114",
+        "fecha": "2025-09-15",
+        "descripcion": "Es el Drop 2 de la linea Hallden",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "alta",
+        "id": 304
+    },
+    {
+        "titulo": "imprimir Jaz",
+        "fecha": "2025-09-15",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media",
+        "id": 305
+    },
+    {
+        "titulo": "ver sensores de barrera lazo Hallden",
+        "fecha": "2025-09-16",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "alta",
+        "id": 306
+    },
+    {
+        "id": 307,
+        "titulo": "PM02:2003261123",
+        "fecha": "2025-09-17",
+        "descripcion": "INSPECCION SENSORES HALLDEN",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true
+    },
+    {
+        "id": 308,
+        "titulo": "PM02:2003264781",
+        "fecha": "2025-09-18",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "titulo": "ENVIAR CORREO Y PONER REVISION DE REPUESTOS",
+        "fecha": "2025-09-16",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 309
     }
 ]

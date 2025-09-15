@@ -1,0 +1,2022 @@
+[
+    {
+        "numero_orden": "PM11:37089090",
+        "descripcion": "Rep. Falla sensor barrera",
+        "inicio_extremo": "30/04/2024",
+        "fin_extremo": "01/01/2027",
+        "equipo_ut": "159018299",
+        "descripcion_equipo": "ROBOT 2",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001273759",
+        "descripcion": "REP. CONTACTORES ZUNCHADORA",
+        "inicio_extremo": "02/12/2024",
+        "fin_extremo": "02/12/2025",
+        "equipo_ut": "159018302",
+        "descripcion_equipo": "TABLERO DE POTENCIA",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001143625",
+        "descripcion": "REP. ROD, MAGNÉTICO 2",
+        "inicio_extremo": "25/12/2024",
+        "fin_extremo": "20/08/2026",
+        "equipo_ut": "159011160",
+        "descripcion_equipo": "RODILLO ELECTROMAGNETICO PORTON 2",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001565720",
+        "descripcion": "REP. CABLE 7X1,5 CONTROL HALLDEN",
+        "inicio_extremo": "26/12/2024",
+        "fin_extremo": "11/12/2025",
+        "equipo_ut": "2445",
+        "descripcion_equipo": "HALLDEN-TABLEROS ELECTRICOS",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001817273",
+        "descripcion": "REP. CONTACTORES EMBALAJE 40",
+        "inicio_extremo": "27/12/2024",
+        "fin_extremo": "19/12/2025",
+        "equipo_ut": "159018302",
+        "descripcion_equipo": "TABLERO DE POTENCIA",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001216253",
+        "descripcion": "PROVISIÓN - REP. CONTACTORES ZUNCHADORA",
+        "inicio_extremo": "28/12/2024",
+        "fin_extremo": "17/10/2025",
+        "equipo_ut": "159018292",
+        "descripcion_equipo": "EMPAQUE - EMBALAJE AUTOMATIZADO",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001640490",
+        "descripcion": "REP. S18UBAQ SENSOR ULTRASONICO",
+        "inicio_extremo": "09/01/2025",
+        "fin_extremo": "05/12/2025",
+        "equipo_ut": "159018296",
+        "descripcion_equipo": "ROBOT 1",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002119846",
+        "descripcion": "REP. UNIDAD E/S ROBOT 1",
+        "inicio_extremo": "16/05/2025",
+        "fin_extremo": "16/04/2026",
+        "equipo_ut": "159018296",
+        "descripcion_equipo": "ROBOT 1",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002120237",
+        "descripcion": "REP. SENSOR DE MEDICIÓN ROBOT 2",
+        "inicio_extremo": "20/06/2025",
+        "fin_extremo": "20/02/2026",
+        "equipo_ut": "159018299",
+        "descripcion_equipo": "ROBOT 2",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001620272",
+        "descripcion": "REP.  DRIVE TRANSPORTADOR EMPAQUE",
+        "inicio_extremo": "27/06/2025",
+        "fin_extremo": "18/12/2025",
+        "equipo_ut": "159019642",
+        "descripcion_equipo": "ESTACION 1 - TR ENTRADA 1 - MOTOR",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003008254",
+        "descripcion": "Control de repuestos Littell",
+        "inicio_extremo": "16/07/2025",
+        "fin_extremo": "12/12/2025",
+        "equipo_ut": "2431",
+        "descripcion_equipo": "SIDERCROM-AREAS EXTERNAS",
+        "estado": "LIBERADA",
+        "revision": "4SSSID"
+    },
+    {
+        "numero_orden": "PM11:2003008932",
+        "descripcion": "CAMBIAR FUNTE 24V EN PILETA EFLUENTES",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "13/12/2025",
+        "equipo_ut": "68613",
+        "descripcion_equipo": "BOMBA RECIRCULACION",
+        "estado": "LIBERADA",
+        "revision": "4SSSID"
+    },
+    {
+        "numero_orden": "PM11:2003039321",
+        "descripcion": "Actualizar alarmas zunchadora",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "26/12/2025",
+        "equipo_ut": "159018299",
+        "descripcion_equipo": "ROBOT 2",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002723270",
+        "descripcion": "ctrl y ajuste int Compresor Nº3",
+        "inicio_extremo": "15/08/2025",
+        "fin_extremo": "15/08/2025",
+        "equipo_ut": "2411",
+        "descripcion_equipo": "AIRE COMPRIMIDO-SIST. ELECTRICO",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003127318",
+        "descripcion": "NORM. LUMINARIAS PERIMETRAL EXTERNAS",
+        "inicio_extremo": "18/08/2025",
+        "fin_extremo": "08/11/2025",
+        "equipo_ut": "2431",
+        "descripcion_equipo": "SIDERCROM-AREAS EXTERNAS",
+        "estado": "LIBERADA",
+        "revision": "4SSSID"
+    },
+    {
+        "numero_orden": "PM11:2003159905",
+        "descripcion": "Rel. de PCs nivel 1 Sidercrom",
+        "inicio_extremo": "21/08/2025",
+        "fin_extremo": "25/12/2025",
+        "equipo_ut": "SD-APR",
+        "descripcion_equipo": "PLANTA SIDERCROM AREAS PRODUCTIVAS",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003164245",
+        "descripcion": "Asistencia RP Hallden",
+        "inicio_extremo": "21/08/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57064",
+        "descripcion_equipo": "Línea Hallden",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003164214",
+        "descripcion": "Asistencia RP EMB40",
+        "inicio_extremo": "21/08/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "159018292",
+        "descripcion_equipo": "EMPAQUE - EMBALAJE AUTOMATIZADO",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003164241",
+        "descripcion": "Asistencia RP Littell",
+        "inicio_extremo": "21/08/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003035140",
+        "descripcion": "INSTALAR REPLICA DE SIRENA EN OFICINA",
+        "inicio_extremo": "22/08/2025",
+        "fin_extremo": "12/12/2025",
+        "equipo_ut": "50074",
+        "descripcion_equipo": "EDIFICIO-GALPON 1-TABLERO DE ILUMINACION",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM01:2003147214",
+        "descripcion": "REVISION MOTORES COMPRESORES",
+        "inicio_extremo": "26/08/2025",
+        "fin_extremo": "01/10/2025",
+        "equipo_ut": "SD-ASE-AIRE",
+        "descripcion_equipo": "AIRE COMPRIMIDO DE PLANTA",
+        "estado": "LIBERADA",
+        "revision": "4SSSID"
+    },
+    {
+        "numero_orden": "PM02:2003184270",
+        "descripcion": "REVISION ILUMINACION HALLDEN",
+        "inicio_extremo": "15/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "SD-APR-HALD",
+        "descripcion_equipo": "LINEA DE CORTE HALLDEN",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003261123",
+        "descripcion": "INSPECCION SENSORES HALLDEN",
+        "inicio_extremo": "15/09/2025",
+        "fin_extremo": "17/09/2025",
+        "equipo_ut": "SD-APR-HALD",
+        "descripcion_equipo": "LINEA DE CORTE HALLDEN",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2003217556",
+        "descripcion": "REALIZAR BACKUP  ROBOT 2",
+        "inicio_extremo": "16/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "159018299",
+        "descripcion_equipo": "ROBOT 2",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2003217555",
+        "descripcion": "REALIZAR BACKUP ROBOT 1",
+        "inicio_extremo": "16/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "159018296",
+        "descripcion_equipo": "ROBOT 1",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2003217554",
+        "descripcion": "REALIZAR BACKUP PLC DE LINEA",
+        "inicio_extremo": "16/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "159036523",
+        "descripcion_equipo": "PLC ROCKWELL CONTROL LINEA",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003264781",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "inicio_extremo": "16/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "159018292",
+        "descripcion_equipo": "EMPAQUE - EMBALAJE AUTOMATIZADO",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2003217601",
+        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA HALLDEN",
+        "inicio_extremo": "18/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "57064",
+        "descripcion_equipo": "Línea Hallden",
+        "estado": "LIBERADA",
+        "revision": "DRHA1S25"
+    },
+    {
+        "numero_orden": "PM01:2003217600",
+        "descripcion": "RP-LIMPIEZA HALLDEN",
+        "inicio_extremo": "18/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "57064",
+        "descripcion_equipo": "Línea Hallden",
+        "estado": "LIBERADA",
+        "revision": "DRHA1S25"
+    },
+    {
+        "numero_orden": "PM01:2003217599",
+        "descripcion": "RP-GAMB REVISION MOTORES CC HALLDEN",
+        "inicio_extremo": "18/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "57064",
+        "descripcion_equipo": "Línea Hallden",
+        "estado": "LIBERADA",
+        "revision": "DRHA1S25"
+    },
+    {
+        "numero_orden": "PM01:2003217598",
+        "descripcion": "RP-MANT. ELÉCTRICO HALLDEN",
+        "inicio_extremo": "18/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "2444",
+        "descripcion_equipo": "HALLDEN-DETECTORES DE DEFECTOS.",
+        "estado": "LIBERADA",
+        "revision": "DRHA1S25"
+    },
+    {
+        "numero_orden": "PM11:2002726770",
+        "descripcion": "REP. SENSOR  MED. ROBOT 1",
+        "inicio_extremo": "18/09/2025",
+        "fin_extremo": "11/06/2026",
+        "equipo_ut": "159018296",
+        "descripcion_equipo": "ROBOT 1",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003242899",
+        "descripcion": "RP- RELEVAR BOBINAS IMANES",
+        "inicio_extremo": "18/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "2445",
+        "descripcion_equipo": "HALLDEN-TABLEROS ELECTRICOS",
+        "estado": "LIBERADA",
+        "revision": "DRHA1S25"
+    },
+    {
+        "numero_orden": "PM11:2002726628",
+        "descripcion": "REP. SENSORES BARRERAS EMBALAJE40",
+        "inicio_extremo": "19/09/2025",
+        "fin_extremo": "15/05/2026",
+        "equipo_ut": "159018301",
+        "descripcion_equipo": "TABLERO DE CONTROL",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM01:2003161953",
+        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA LITTELL",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM01:2003161951",
+        "descripcion": "RP-MANT. ELÉCTRICO SENSORES LITTELL",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM01:2003161952",
+        "descripcion": "RP- LIMPIEZA LITTELL",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM01:2003161950",
+        "descripcion": "RP-GAMB-REV. MOTORES DE CC.",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM01:2003161949",
+        "descripcion": "RP-REV.MOTORES CA APIL. LITTELL",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM01:2003161948",
+        "descripcion": "RP-MANTENIMIENTO TABLEROS DE COMANDO",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM01:2003161947",
+        "descripcion": "RP-GAMB. MANT. VENTILADORES LITTELL",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM02:2003244336",
+        "descripcion": "REVISION ILUMINACION DELTA",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "24/09/2025",
+        "equipo_ut": "SD-APR-DELT",
+        "descripcion_equipo": "LINEA DE CORTE DELTA",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003131908",
+        "descripcion": "NORMALIZAR GUARDA-PIE",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "159039425",
+        "descripcion_equipo": "SISTEMA GUARDA PIE",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM11:2003131997",
+        "descripcion": "REPARAR AIRE TABLEROS LITTELL",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "33795",
+        "descripcion_equipo": "TABLEROS DE CONTROL GENERAL Y PLC",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM11:2003102398",
+        "descripcion": "FALLA DE COMUNICACIÓN NIVEL 1",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM01:2003214001",
+        "descripcion": "LECTURA DE AISLACION MOTORES LINEA 2",
+        "inicio_extremo": "06/10/2025",
+        "fin_extremo": "11/10/2025",
+        "equipo_ut": "SD-APR-EMPA",
+        "descripcion_equipo": "LINEAS DE EMPAQUE",
+        "estado": "LIBERADA",
+        "revision": "4SSSID"
+    },
+    {
+        "numero_orden": "PM11:2002759781",
+        "descripcion": "REP. CONECTOR M12 SENSORES",
+        "inicio_extremo": "09/10/2025",
+        "fin_extremo": "09/10/2026",
+        "equipo_ut": "159018296",
+        "descripcion_equipo": "ROBOT 1",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM02:2003107797",
+        "descripcion": "Insp. Rodillo Elec-Magnetico Porton 2",
+        "inicio_extremo": "17/10/2025",
+        "fin_extremo": "22/10/2025",
+        "equipo_ut": "159011160",
+        "descripcion_equipo": "RODILLO ELECTROMAGNETICO PORTON 2",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003107796",
+        "descripcion": "Insp. Rodillo Elec-Magnetico Porton 1",
+        "inicio_extremo": "17/10/2025",
+        "fin_extremo": "22/10/2025",
+        "equipo_ut": "159011159",
+        "descripcion_equipo": "RODILLO ELECTROMAGNETICO PORTON 1",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002469996",
+        "descripcion": "Cambio de zunchadora",
+        "inicio_extremo": "18/10/2025",
+        "fin_extremo": "19/10/2026",
+        "equipo_ut": "159019628",
+        "descripcion_equipo": "ESTACION 5 - ZUNCHADORA",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002576069",
+        "descripcion": "REP. encoder takeway",
+        "inicio_extremo": "22/10/2025",
+        "fin_extremo": "10/10/2026",
+        "equipo_ut": "6698",
+        "descripcion_equipo": "LITTELL-TIJERA",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002469987",
+        "descripcion": "REP. Zunchadora",
+        "inicio_extremo": "24/10/2025",
+        "fin_extremo": "17/07/2026",
+        "equipo_ut": "SD-APR-EMPA",
+        "descripcion_equipo": "LINEAS DE EMPAQUE",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:37029295",
+        "descripcion": "Cambio CPU EMB40",
+        "inicio_extremo": "26/10/2025",
+        "fin_extremo": "26/12/2026",
+        "equipo_ut": "2562",
+        "descripcion_equipo": "HALLDEN-PLC DE LINEA",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM01:2002719953",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.PRINC.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41645",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.PRINC.API2-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719952",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.SECUN.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41648",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.SECUN.API1-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719950",
+        "descripcion": "REX MANT GRAL DRIVER AC MOTOR CAB DE COR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41637",
+        "descripcion_equipo": "DRIVER AC MOTOR CABEZAL DE CORTE-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719951",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.PRINC.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41644",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.PRINC.API1-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719949",
+        "descripcion": "REX MANT GRAL DRIVER AC MOTOR ALIMENTADO",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41636",
+        "descripcion_equipo": "DRIVER AC MOTOR ALIMENTADOR - LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719948",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT NIVELADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41635",
+        "descripcion_equipo": "DRIVER AC MOTOR NIVELADOR - LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719947",
+        "descripcion": "REX MANT TABLEROS DEBOBINADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "6714",
+        "descripcion_equipo": "LITTELL-DEBOB.- SISTEMA ELECTRICO",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719946",
+        "descripcion": "REX MANT DRIVE AC MOT DEBOBINADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41634",
+        "descripcion_equipo": "DRIVER AC MOTOR DEBOBINADOR - LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719961",
+        "descripcion": "REX MANT GRAL TABLEROS DE CONT GENERAL Y",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "33795",
+        "descripcion_equipo": "TABLEROS DE CONTROL GENERAL Y PLC",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719960",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TOPES FIN.AP",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41653",
+        "descripcion_equipo": "DRIVER AC MOTORES TOPES FIN.API.-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719959",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT  GUIAS LAT.A",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41652",
+        "descripcion_equipo": "DRIVE AC MOTORES GUIAS LAT.API.-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719958",
+        "descripcion": "REX MANT DRIVER AC MOT TRANS.SECUN.API4",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41651",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.SECUN.API4-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719957",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.PRINC.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41647",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.PRINC.API4-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719956",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.SECUN.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41650",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.SECUN.API3-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719955",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.PRINC.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41646",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.PRINC.API3-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719954",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.SECUN.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41649",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.SECUN.API2-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003105472",
+        "descripcion": "REX- MANTENIMIENTO REDES NIVEL 1",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "33795",
+        "descripcion_equipo": "TABLEROS DE CONTROL GENERAL Y PLC",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003105161",
+        "descripcion": "REX- MANT. MOTORES CLASIFICADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "24393",
+        "descripcion_equipo": "LITTELL-CLASIFICADOR",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003104988",
+        "descripcion": "REX- USO DE GRÚA PLUMA",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003104589",
+        "descripcion": "REX- MANTENIMIENTO MOTOR SACA CHAPAS",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "159019316",
+        "descripcion_equipo": "MOTOR RODILLO SACA CHAPA",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003102302",
+        "descripcion": "REX- MANTENIMIENTO MOTOR ALIMENTADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "6803",
+        "descripcion_equipo": "LITTELL-TIJERA - MOTOR ALIMENTADOR",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003102260",
+        "descripcion": "REX- MANTENIMIENTO MOTOR NIVELADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "6727",
+        "descripcion_equipo": "LITTELL-NIVELADOR - MOTOR ACCIONAMIENTO",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003102098",
+        "descripcion": "REX- MANTENIMIENTO MOTOR DEBOBINADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "6782",
+        "descripcion_equipo": "LITTELL-DEBOB.-MOTOR PRINCIPAL",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003102020",
+        "descripcion": "REX- NORMALIZAR BOTONERAS DE CONTROL",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "33795",
+        "descripcion_equipo": "TABLEROS DE CONTROL GENERAL Y PLC",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003101922",
+        "descripcion": "REX-CAMBIO DE CONTACTORES MESAS",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "6769",
+        "descripcion_equipo": "LITTELL-API3-SISTEMA ELECTRICO",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003102381",
+        "descripcion": "REX- MANTENIMIENTO MOTOR TIJERA",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "6804",
+        "descripcion_equipo": "LITTELL-CABEZ.-MOTOR CABEZAL CORTE",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003105594",
+        "descripcion": "REX-MANT. SISTEMA DE SEGURIDAD",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "159039425",
+        "descripcion_equipo": "SISTEMA GUARDA PIE",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2001497372",
+        "descripcion": "REP. SENSORES LAZO DELTA",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "11/12/2026",
+        "equipo_ut": "2467",
+        "descripcion_equipo": "DELTA- SIST. ELECTRICO",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002008637",
+        "descripcion": "REP. Varios",
+        "inicio_extremo": "28/10/2025",
+        "fin_extremo": "30/10/2026",
+        "equipo_ut": "159018301",
+        "descripcion_equipo": "TABLERO DE CONTROL",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002490126",
+        "descripcion": "REP.Sensor induct,",
+        "inicio_extremo": "30/10/2025",
+        "fin_extremo": "31/10/2026",
+        "equipo_ut": "6780",
+        "descripcion_equipo": "LITTELL-API4-SISTEMA ELECTRICO",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001952564",
+        "descripcion": "REP. Fuente 24v 2.5a",
+        "inicio_extremo": "31/10/2025",
+        "fin_extremo": "30/10/2026",
+        "equipo_ut": "159018294",
+        "descripcion_equipo": "ESTACION 2 - MEDICION Y DESCARTE",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003160932",
+        "descripcion": "REP. LIMITE ENVOLVEDORA",
+        "inicio_extremo": "07/11/2025",
+        "fin_extremo": "13/11/2026",
+        "equipo_ut": "159019659",
+        "descripcion_equipo": "ENVOLVEDORA - MOV VERTICAL - REDUCTOR",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003127421",
+        "descripcion": "REP. SIRENA 220V",
+        "inicio_extremo": "14/11/2025",
+        "fin_extremo": "17/12/2026",
+        "equipo_ut": "50074",
+        "descripcion_equipo": "EDIFICIO-GALPON 1-TABLERO DE ILUMINACION",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003123187",
+        "descripcion": "REP. BOMBA REC. CENTRAL",
+        "inicio_extremo": "20/11/2025",
+        "fin_extremo": "10/12/2026",
+        "equipo_ut": "SD-APR-HALD",
+        "descripcion_equipo": "LINEA DE CORTE HALLDEN",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003034853",
+        "descripcion": "REP. SENSOR TRASLACIÓN DE PUENTE",
+        "inicio_extremo": "20/11/2025",
+        "fin_extremo": "11/11/2026",
+        "equipo_ut": "159018299",
+        "descripcion_equipo": "ROBOT 2",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003077017",
+        "descripcion": "REP.  INSTALACIÓN DE EMERGENCIA",
+        "inicio_extremo": "05/12/2025",
+        "fin_extremo": "05/12/2026",
+        "equipo_ut": "2445",
+        "descripcion_equipo": "HALLDEN-TABLEROS ELECTRICOS",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002759966",
+        "descripcion": "REP. GUARDA-MOTOR EMBALAJE 40",
+        "inicio_extremo": "10/12/2025",
+        "fin_extremo": "10/12/2026",
+        "equipo_ut": "159018302",
+        "descripcion_equipo": "TABLERO DE POTENCIA",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002759818",
+        "descripcion": "REP. RELÉ SEGURIDAD EMBALAJE 40",
+        "inicio_extremo": "10/12/2025",
+        "fin_extremo": "10/12/2026",
+        "equipo_ut": "159018301",
+        "descripcion_equipo": "TABLERO DE CONTROL",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002726591",
+        "descripcion": "REP. DRIVE MORTORES CAMAS EMBALAJE 40",
+        "inicio_extremo": "12/12/2025",
+        "fin_extremo": "12/12/2026",
+        "equipo_ut": "159018302",
+        "descripcion_equipo": "TABLERO DE POTENCIA",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002759109",
+        "descripcion": "REP. MICRO RELÉ CONTROL EMBALAJE 40",
+        "inicio_extremo": "18/12/2025",
+        "fin_extremo": "24/12/2026",
+        "equipo_ut": "159018301",
+        "descripcion_equipo": "TABLERO DE CONTROL",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003076765",
+        "descripcion": "REP. EQUIPOS DE EMERGENCIAS",
+        "inicio_extremo": "18/12/2025",
+        "fin_extremo": "10/12/2026",
+        "equipo_ut": "50075",
+        "descripcion_equipo": "EDIFICIO-GALPON 2-TABLERO DE ILUMINACION",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003160429",
+        "descripcion": "REP.  SENSOR MED. DIAM. LITTELL",
+        "inicio_extremo": "19/12/2025",
+        "fin_extremo": "26/12/2026",
+        "equipo_ut": "6714",
+        "descripcion_equipo": "LITTELL-DEBOB.- SISTEMA ELECTRICO",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003138863",
+        "descripcion": "Falla de switch nivel 1",
+        "inicio_extremo": "26/12/2025",
+        "fin_extremo": "26/12/2026",
+        "equipo_ut": "43042",
+        "descripcion_equipo": "LITTELL - PLC GE",
+        "estado": "ABIERTA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003215047",
+        "descripcion": "REP. COMPRESOR 3",
+        "inicio_extremo": "06/01/2026",
+        "fin_extremo": "02/12/2026",
+        "equipo_ut": "2410",
+        "descripcion_equipo": "ELECTROCOMPRESOR NRO 3 (SULLAIR)",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003122595",
+        "descripcion": "REP. BOMBA DE RECIRCULACIÓN",
+        "inicio_extremo": "10/01/2026",
+        "fin_extremo": "04/12/2026",
+        "equipo_ut": "2542",
+        "descripcion_equipo": "HALLDEN-HIDRAULICO-BOMBA DE RECIRC.",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001532530",
+        "descripcion": "Rep. control debobinador Hallden",
+        "inicio_extremo": "26/02/2026",
+        "fin_extremo": "04/10/2026",
+        "equipo_ut": "2760",
+        "descripcion_equipo": "HALLDEN-DEBOBINADOR-MOTOR DE ACCION.",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003215966",
+        "descripcion": "REP. LITTELL REX",
+        "inicio_extremo": "05/03/2026",
+        "fin_extremo": "30/09/2026",
+        "equipo_ut": "33795",
+        "descripcion_equipo": "TABLEROS DE CONTROL GENERAL Y PLC",
+        "estado": "ABIERTA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003185156",
+        "descripcion": "CAMBIAR MOTOR CINTA 21",
+        "inicio_extremo": "13/03/2026",
+        "fin_extremo": "18/12/2026",
+        "equipo_ut": "56205",
+        "descripcion_equipo": "LITTELL-CINTAS 21",
+        "estado": "ABIERTA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:37089090",
+        "descripcion": "Rep. Falla sensor barrera",
+        "inicio_extremo": "30/04/2024",
+        "fin_extremo": "01/01/2027",
+        "equipo_ut": "159018299",
+        "descripcion_equipo": "ROBOT 2",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001273759",
+        "descripcion": "REP. CONTACTORES ZUNCHADORA",
+        "inicio_extremo": "02/12/2024",
+        "fin_extremo": "02/12/2025",
+        "equipo_ut": "159018302",
+        "descripcion_equipo": "TABLERO DE POTENCIA",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001143625",
+        "descripcion": "REP. ROD, MAGNÉTICO 2",
+        "inicio_extremo": "25/12/2024",
+        "fin_extremo": "20/08/2026",
+        "equipo_ut": "159011160",
+        "descripcion_equipo": "RODILLO ELECTROMAGNETICO PORTON 2",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001565720",
+        "descripcion": "REP. CABLE 7X1,5 CONTROL HALLDEN",
+        "inicio_extremo": "26/12/2024",
+        "fin_extremo": "11/12/2025",
+        "equipo_ut": "2445",
+        "descripcion_equipo": "HALLDEN-TABLEROS ELECTRICOS",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001817273",
+        "descripcion": "REP. CONTACTORES EMBALAJE 40",
+        "inicio_extremo": "27/12/2024",
+        "fin_extremo": "19/12/2025",
+        "equipo_ut": "159018302",
+        "descripcion_equipo": "TABLERO DE POTENCIA",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001216253",
+        "descripcion": "PROVISIÓN - REP. CONTACTORES ZUNCHADORA",
+        "inicio_extremo": "28/12/2024",
+        "fin_extremo": "17/10/2025",
+        "equipo_ut": "159018292",
+        "descripcion_equipo": "EMPAQUE - EMBALAJE AUTOMATIZADO",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001640490",
+        "descripcion": "REP. S18UBAQ SENSOR ULTRASONICO",
+        "inicio_extremo": "09/01/2025",
+        "fin_extremo": "05/12/2025",
+        "equipo_ut": "159018296",
+        "descripcion_equipo": "ROBOT 1",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002119846",
+        "descripcion": "REP. UNIDAD E/S ROBOT 1",
+        "inicio_extremo": "16/05/2025",
+        "fin_extremo": "16/04/2026",
+        "equipo_ut": "159018296",
+        "descripcion_equipo": "ROBOT 1",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002120237",
+        "descripcion": "REP. SENSOR DE MEDICIÓN ROBOT 2",
+        "inicio_extremo": "20/06/2025",
+        "fin_extremo": "20/02/2026",
+        "equipo_ut": "159018299",
+        "descripcion_equipo": "ROBOT 2",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001620272",
+        "descripcion": "REP.  DRIVE TRANSPORTADOR EMPAQUE",
+        "inicio_extremo": "27/06/2025",
+        "fin_extremo": "18/12/2025",
+        "equipo_ut": "159019642",
+        "descripcion_equipo": "ESTACION 1 - TR ENTRADA 1 - MOTOR",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003008254",
+        "descripcion": "Control de repuestos Littell",
+        "inicio_extremo": "16/07/2025",
+        "fin_extremo": "12/12/2025",
+        "equipo_ut": "2431",
+        "descripcion_equipo": "SIDERCROM-AREAS EXTERNAS",
+        "estado": "LIBERADA",
+        "revision": "4SSSID"
+    },
+    {
+        "numero_orden": "PM11:2003008932",
+        "descripcion": "CAMBIAR FUNTE 24V EN PILETA EFLUENTES",
+        "inicio_extremo": "17/07/2025",
+        "fin_extremo": "13/12/2025",
+        "equipo_ut": "68613",
+        "descripcion_equipo": "BOMBA RECIRCULACION",
+        "estado": "LIBERADA",
+        "revision": "4SSSID"
+    },
+    {
+        "numero_orden": "PM11:2003039321",
+        "descripcion": "Actualizar alarmas zunchadora",
+        "inicio_extremo": "24/07/2025",
+        "fin_extremo": "26/12/2025",
+        "equipo_ut": "159018299",
+        "descripcion_equipo": "ROBOT 2",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003127318",
+        "descripcion": "NORM. LUMINARIAS PERIMETRAL EXTERNAS",
+        "inicio_extremo": "18/08/2025",
+        "fin_extremo": "08/11/2025",
+        "equipo_ut": "2431",
+        "descripcion_equipo": "SIDERCROM-AREAS EXTERNAS",
+        "estado": "LIBERADA",
+        "revision": "4SSSID"
+    },
+    {
+        "numero_orden": "PM11:2003159905",
+        "descripcion": "Rel. de PCs nivel 1 Sidercrom",
+        "inicio_extremo": "21/08/2025",
+        "fin_extremo": "25/12/2025",
+        "equipo_ut": "SD-APR",
+        "descripcion_equipo": "PLANTA SIDERCROM AREAS PRODUCTIVAS",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003035140",
+        "descripcion": "INSTALAR REPLICA DE SIRENA EN OFICINA",
+        "inicio_extremo": "22/08/2025",
+        "fin_extremo": "12/12/2025",
+        "equipo_ut": "50074",
+        "descripcion_equipo": "EDIFICIO-GALPON 1-TABLERO DE ILUMINACION",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM01:2003147214",
+        "descripcion": "REVISION MOTORES COMPRESORES",
+        "inicio_extremo": "26/08/2025",
+        "fin_extremo": "01/10/2025",
+        "equipo_ut": "SD-ASE-AIRE",
+        "descripcion_equipo": "AIRE COMPRIMIDO DE PLANTA",
+        "estado": "LIBERADA",
+        "revision": "4SSSID"
+    },
+    {
+        "numero_orden": "PM11:2002726770",
+        "descripcion": "REP. SENSOR  MED. ROBOT 1",
+        "inicio_extremo": "18/09/2025",
+        "fin_extremo": "11/06/2026",
+        "equipo_ut": "159018296",
+        "descripcion_equipo": "ROBOT 1",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002726628",
+        "descripcion": "REP. SENSORES BARRERAS EMBALAJE40",
+        "inicio_extremo": "19/09/2025",
+        "fin_extremo": "15/05/2026",
+        "equipo_ut": "159018301",
+        "descripcion_equipo": "TABLERO DE CONTROL",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM01:2003214001",
+        "descripcion": "LECTURA DE AISLACION MOTORES LINEA 2",
+        "inicio_extremo": "06/10/2025",
+        "fin_extremo": "11/10/2025",
+        "equipo_ut": "SD-APR-EMPA",
+        "descripcion_equipo": "LINEAS DE EMPAQUE",
+        "estado": "LIBERADA",
+        "revision": "4SSSID"
+    },
+    {
+        "numero_orden": "PM11:2002759781",
+        "descripcion": "REP. CONECTOR M12 SENSORES",
+        "inicio_extremo": "09/10/2025",
+        "fin_extremo": "09/10/2026",
+        "equipo_ut": "159018296",
+        "descripcion_equipo": "ROBOT 1",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM02:2003107797",
+        "descripcion": "Insp. Rodillo Elec-Magnetico Porton 2",
+        "inicio_extremo": "17/10/2025",
+        "fin_extremo": "22/10/2025",
+        "equipo_ut": "159011160",
+        "descripcion_equipo": "RODILLO ELECTROMAGNETICO PORTON 2",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003107796",
+        "descripcion": "Insp. Rodillo Elec-Magnetico Porton 1",
+        "inicio_extremo": "17/10/2025",
+        "fin_extremo": "22/10/2025",
+        "equipo_ut": "159011159",
+        "descripcion_equipo": "RODILLO ELECTROMAGNETICO PORTON 1",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2002469996",
+        "descripcion": "Cambio de zunchadora",
+        "inicio_extremo": "18/10/2025",
+        "fin_extremo": "19/10/2026",
+        "equipo_ut": "159019628",
+        "descripcion_equipo": "ESTACION 5 - ZUNCHADORA",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002576069",
+        "descripcion": "REP. encoder takeway",
+        "inicio_extremo": "22/10/2025",
+        "fin_extremo": "10/10/2026",
+        "equipo_ut": "6698",
+        "descripcion_equipo": "LITTELL-TIJERA",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002469987",
+        "descripcion": "REP. Zunchadora",
+        "inicio_extremo": "24/10/2025",
+        "fin_extremo": "17/07/2026",
+        "equipo_ut": "SD-APR-EMPA",
+        "descripcion_equipo": "LINEAS DE EMPAQUE",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:37029295",
+        "descripcion": "Cambio CPU EMB40",
+        "inicio_extremo": "26/10/2025",
+        "fin_extremo": "26/12/2026",
+        "equipo_ut": "2562",
+        "descripcion_equipo": "HALLDEN-PLC DE LINEA",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM01:2002719953",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.PRINC.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41645",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.PRINC.API2-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719952",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.SECUN.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41648",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.SECUN.API1-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719950",
+        "descripcion": "REX MANT GRAL DRIVER AC MOTOR CAB DE COR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41637",
+        "descripcion_equipo": "DRIVER AC MOTOR CABEZAL DE CORTE-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719951",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.PRINC.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41644",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.PRINC.API1-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719949",
+        "descripcion": "REX MANT GRAL DRIVER AC MOTOR ALIMENTADO",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41636",
+        "descripcion_equipo": "DRIVER AC MOTOR ALIMENTADOR - LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719948",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT NIVELADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41635",
+        "descripcion_equipo": "DRIVER AC MOTOR NIVELADOR - LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719947",
+        "descripcion": "REX MANT TABLEROS DEBOBINADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "6714",
+        "descripcion_equipo": "LITTELL-DEBOB.- SISTEMA ELECTRICO",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719946",
+        "descripcion": "REX MANT DRIVE AC MOT DEBOBINADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41634",
+        "descripcion_equipo": "DRIVER AC MOTOR DEBOBINADOR - LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719961",
+        "descripcion": "REX MANT GRAL TABLEROS DE CONT GENERAL Y",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "33795",
+        "descripcion_equipo": "TABLEROS DE CONTROL GENERAL Y PLC",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719960",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TOPES FIN.AP",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41653",
+        "descripcion_equipo": "DRIVER AC MOTORES TOPES FIN.API.-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719959",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT  GUIAS LAT.A",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41652",
+        "descripcion_equipo": "DRIVE AC MOTORES GUIAS LAT.API.-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719958",
+        "descripcion": "REX MANT DRIVER AC MOT TRANS.SECUN.API4",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41651",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.SECUN.API4-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719957",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.PRINC.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41647",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.PRINC.API4-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719956",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.SECUN.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41650",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.SECUN.API3-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719955",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.PRINC.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41646",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.PRINC.API3-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM01:2002719954",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.SECUN.",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "41649",
+        "descripcion_equipo": "DRIVER AC MOTOR TRANS.SECUN.API2-LITTELL",
+        "estado": "LIBERADA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003105472",
+        "descripcion": "REX- MANTENIMIENTO REDES NIVEL 1",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "33795",
+        "descripcion_equipo": "TABLEROS DE CONTROL GENERAL Y PLC",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003105161",
+        "descripcion": "REX- MANT. MOTORES CLASIFICADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "24393",
+        "descripcion_equipo": "LITTELL-CLASIFICADOR",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003104988",
+        "descripcion": "REX- USO DE GRÚA PLUMA",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003104589",
+        "descripcion": "REX- MANTENIMIENTO MOTOR SACA CHAPAS",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "159019316",
+        "descripcion_equipo": "MOTOR RODILLO SACA CHAPA",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003102302",
+        "descripcion": "REX- MANTENIMIENTO MOTOR ALIMENTADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "6803",
+        "descripcion_equipo": "LITTELL-TIJERA - MOTOR ALIMENTADOR",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003102260",
+        "descripcion": "REX- MANTENIMIENTO MOTOR NIVELADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "6727",
+        "descripcion_equipo": "LITTELL-NIVELADOR - MOTOR ACCIONAMIENTO",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003102098",
+        "descripcion": "REX- MANTENIMIENTO MOTOR DEBOBINADOR",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "6782",
+        "descripcion_equipo": "LITTELL-DEBOB.-MOTOR PRINCIPAL",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003102020",
+        "descripcion": "REX- NORMALIZAR BOTONERAS DE CONTROL",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "33795",
+        "descripcion_equipo": "TABLEROS DE CONTROL GENERAL Y PLC",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003101922",
+        "descripcion": "REX-CAMBIO DE CONTACTORES MESAS",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "6769",
+        "descripcion_equipo": "LITTELL-API3-SISTEMA ELECTRICO",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003102381",
+        "descripcion": "REX- MANTENIMIENTO MOTOR TIJERA",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "6804",
+        "descripcion_equipo": "LITTELL-CABEZ.-MOTOR CABEZAL CORTE",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2003105594",
+        "descripcion": "REX-MANT. SISTEMA DE SEGURIDAD",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "06/11/2025",
+        "equipo_ut": "159039425",
+        "descripcion_equipo": "SISTEMA GUARDA PIE",
+        "estado": "ABIERTA",
+        "revision": "DXLI1O25"
+    },
+    {
+        "numero_orden": "PM11:2001497372",
+        "descripcion": "REP. SENSORES LAZO DELTA",
+        "inicio_extremo": "27/10/2025",
+        "fin_extremo": "11/12/2026",
+        "equipo_ut": "2467",
+        "descripcion_equipo": "DELTA- SIST. ELECTRICO",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002008637",
+        "descripcion": "REP. Varios",
+        "inicio_extremo": "28/10/2025",
+        "fin_extremo": "30/10/2026",
+        "equipo_ut": "159018301",
+        "descripcion_equipo": "TABLERO DE CONTROL",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002490126",
+        "descripcion": "REP.Sensor induct,",
+        "inicio_extremo": "30/10/2025",
+        "fin_extremo": "31/10/2026",
+        "equipo_ut": "6780",
+        "descripcion_equipo": "LITTELL-API4-SISTEMA ELECTRICO",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001952564",
+        "descripcion": "REP. Fuente 24v 2.5a",
+        "inicio_extremo": "31/10/2025",
+        "fin_extremo": "30/10/2026",
+        "equipo_ut": "159018294",
+        "descripcion_equipo": "ESTACION 2 - MEDICION Y DESCARTE",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003160932",
+        "descripcion": "REP. LIMITE ENVOLVEDORA",
+        "inicio_extremo": "07/11/2025",
+        "fin_extremo": "13/11/2026",
+        "equipo_ut": "159019659",
+        "descripcion_equipo": "ENVOLVEDORA - MOV VERTICAL - REDUCTOR",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003127421",
+        "descripcion": "REP. SIRENA 220V",
+        "inicio_extremo": "14/11/2025",
+        "fin_extremo": "17/12/2026",
+        "equipo_ut": "50074",
+        "descripcion_equipo": "EDIFICIO-GALPON 1-TABLERO DE ILUMINACION",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003123187",
+        "descripcion": "REP. BOMBA REC. CENTRAL",
+        "inicio_extremo": "20/11/2025",
+        "fin_extremo": "10/12/2026",
+        "equipo_ut": "SD-APR-HALD",
+        "descripcion_equipo": "LINEA DE CORTE HALLDEN",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003034853",
+        "descripcion": "REP. SENSOR TRASLACIÓN DE PUENTE",
+        "inicio_extremo": "20/11/2025",
+        "fin_extremo": "11/11/2026",
+        "equipo_ut": "159018299",
+        "descripcion_equipo": "ROBOT 2",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003077017",
+        "descripcion": "REP.  INSTALACIÓN DE EMERGENCIA",
+        "inicio_extremo": "05/12/2025",
+        "fin_extremo": "05/12/2026",
+        "equipo_ut": "2445",
+        "descripcion_equipo": "HALLDEN-TABLEROS ELECTRICOS",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002759966",
+        "descripcion": "REP. GUARDA-MOTOR EMBALAJE 40",
+        "inicio_extremo": "10/12/2025",
+        "fin_extremo": "10/12/2026",
+        "equipo_ut": "159018302",
+        "descripcion_equipo": "TABLERO DE POTENCIA",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002759818",
+        "descripcion": "REP. RELÉ SEGURIDAD EMBALAJE 40",
+        "inicio_extremo": "10/12/2025",
+        "fin_extremo": "10/12/2026",
+        "equipo_ut": "159018301",
+        "descripcion_equipo": "TABLERO DE CONTROL",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002726591",
+        "descripcion": "REP. DRIVE MORTORES CAMAS EMBALAJE 40",
+        "inicio_extremo": "12/12/2025",
+        "fin_extremo": "12/12/2026",
+        "equipo_ut": "159018302",
+        "descripcion_equipo": "TABLERO DE POTENCIA",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2002759109",
+        "descripcion": "REP. MICRO RELÉ CONTROL EMBALAJE 40",
+        "inicio_extremo": "18/12/2025",
+        "fin_extremo": "24/12/2026",
+        "equipo_ut": "159018301",
+        "descripcion_equipo": "TABLERO DE CONTROL",
+        "estado": "ABIERTA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003076765",
+        "descripcion": "REP. EQUIPOS DE EMERGENCIAS",
+        "inicio_extremo": "18/12/2025",
+        "fin_extremo": "10/12/2026",
+        "equipo_ut": "50075",
+        "descripcion_equipo": "EDIFICIO-GALPON 2-TABLERO DE ILUMINACION",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003160429",
+        "descripcion": "REP.  SENSOR MED. DIAM. LITTELL",
+        "inicio_extremo": "19/12/2025",
+        "fin_extremo": "26/12/2026",
+        "equipo_ut": "6714",
+        "descripcion_equipo": "LITTELL-DEBOB.- SISTEMA ELECTRICO",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003138863",
+        "descripcion": "Falla de switch nivel 1",
+        "inicio_extremo": "26/12/2025",
+        "fin_extremo": "26/12/2026",
+        "equipo_ut": "43042",
+        "descripcion_equipo": "LITTELL - PLC GE",
+        "estado": "ABIERTA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003215047",
+        "descripcion": "REP. COMPRESOR 3",
+        "inicio_extremo": "06/01/2026",
+        "fin_extremo": "02/12/2026",
+        "equipo_ut": "2410",
+        "descripcion_equipo": "ELECTROCOMPRESOR NRO 3 (SULLAIR)",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003122595",
+        "descripcion": "REP. BOMBA DE RECIRCULACIÓN",
+        "inicio_extremo": "10/01/2026",
+        "fin_extremo": "04/12/2026",
+        "equipo_ut": "2542",
+        "descripcion_equipo": "HALLDEN-HIDRAULICO-BOMBA DE RECIRC.",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2001532530",
+        "descripcion": "Rep. control debobinador Hallden",
+        "inicio_extremo": "26/02/2026",
+        "fin_extremo": "04/10/2026",
+        "equipo_ut": "2760",
+        "descripcion_equipo": "HALLDEN-DEBOBINADOR-MOTOR DE ACCION.",
+        "estado": "LIBERADA",
+        "revision": "4SIDEREP"
+    },
+    {
+        "numero_orden": "PM11:2003215966",
+        "descripcion": "REP. LITTELL REX",
+        "inicio_extremo": "05/03/2026",
+        "fin_extremo": "30/09/2026",
+        "equipo_ut": "33795",
+        "descripcion_equipo": "TABLEROS DE CONTROL GENERAL Y PLC",
+        "estado": "ABIERTA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003185156",
+        "descripcion": "CAMBIAR MOTOR CINTA 21",
+        "inicio_extremo": "13/03/2026",
+        "fin_extremo": "18/12/2026",
+        "equipo_ut": "56205",
+        "descripcion_equipo": "LITTELL-CINTAS 21",
+        "estado": "ABIERTA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003244336",
+        "descripcion": "REVISION ILUMINACION DELTA",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "24/09/2025",
+        "equipo_ut": "SD-APR-DELT",
+        "descripcion_equipo": "LINEA DE CORTE DELTA",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003164245",
+        "descripcion": "Asistencia RP Hallden",
+        "inicio_extremo": "21/08/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57064",
+        "descripcion_equipo": "Línea Hallden",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003164214",
+        "descripcion": "Asistencia RP EMB40",
+        "inicio_extremo": "21/08/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "159018292",
+        "descripcion_equipo": "EMPAQUE - EMBALAJE AUTOMATIZADO",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM11:2003164241",
+        "descripcion": "Asistencia RP Littell",
+        "inicio_extremo": "21/08/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003184270",
+        "descripcion": "REVISION ILUMINACION HALLDEN",
+        "inicio_extremo": "15/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "SD-APR-HALD",
+        "descripcion_equipo": "LINEA DE CORTE HALLDEN",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003261123",
+        "descripcion": "INSPECCION SENSORES HALLDEN",
+        "inicio_extremo": "15/09/2025",
+        "fin_extremo": "17/09/2025",
+        "equipo_ut": "SD-APR-HALD",
+        "descripcion_equipo": "LINEA DE CORTE HALLDEN",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2003217556",
+        "descripcion": "REALIZAR BACKUP  ROBOT 2",
+        "inicio_extremo": "16/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "159018299",
+        "descripcion_equipo": "ROBOT 2",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2003217555",
+        "descripcion": "REALIZAR BACKUP ROBOT 1",
+        "inicio_extremo": "16/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "159018296",
+        "descripcion_equipo": "ROBOT 1",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2003217554",
+        "descripcion": "REALIZAR BACKUP PLC DE LINEA",
+        "inicio_extremo": "16/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "159036523",
+        "descripcion_equipo": "PLC ROCKWELL CONTROL LINEA",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM02:2003264781",
+        "descripcion": "INSPECCIÓN ELECT. CINCO SENTIDOS",
+        "inicio_extremo": "16/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "159018292",
+        "descripcion_equipo": "EMPAQUE - EMBALAJE AUTOMATIZADO",
+        "estado": "LIBERADA",
+        "revision": ""
+    },
+    {
+        "numero_orden": "PM01:2003217601",
+        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA HALLDEN",
+        "inicio_extremo": "18/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "57064",
+        "descripcion_equipo": "Línea Hallden",
+        "estado": "LIBERADA",
+        "revision": "DRHA1S25"
+    },
+    {
+        "numero_orden": "PM01:2003217600",
+        "descripcion": "RP-LIMPIEZA HALLDEN",
+        "inicio_extremo": "18/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "57064",
+        "descripcion_equipo": "Línea Hallden",
+        "estado": "LIBERADA",
+        "revision": "DRHA1S25"
+    },
+    {
+        "numero_orden": "PM01:2003217599",
+        "descripcion": "RP-GAMB REVISION MOTORES CC HALLDEN",
+        "inicio_extremo": "18/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "57064",
+        "descripcion_equipo": "Línea Hallden",
+        "estado": "LIBERADA",
+        "revision": "DRHA1S25"
+    },
+    {
+        "numero_orden": "PM01:2003217598",
+        "descripcion": "RP-MANT. ELÉCTRICO HALLDEN",
+        "inicio_extremo": "18/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "2444",
+        "descripcion_equipo": "HALLDEN-DETECTORES DE DEFECTOS.",
+        "estado": "LIBERADA",
+        "revision": "DRHA1S25"
+    },
+    {
+        "numero_orden": "PM11:2003242899",
+        "descripcion": "RP- RELEVAR BOBINAS IMANES",
+        "inicio_extremo": "18/09/2025",
+        "fin_extremo": "18/09/2025",
+        "equipo_ut": "2445",
+        "descripcion_equipo": "HALLDEN-TABLEROS ELECTRICOS",
+        "estado": "LIBERADA",
+        "revision": "DRHA1S25"
+    },
+    {
+        "numero_orden": "PM01:2003161953",
+        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA LITTELL",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM01:2003161951",
+        "descripcion": "RP-MANT. ELÉCTRICO SENSORES LITTELL",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM01:2003161952",
+        "descripcion": "RP- LIMPIEZA LITTELL",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM01:2003161950",
+        "descripcion": "RP-GAMB-REV. MOTORES DE CC.",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM01:2003161949",
+        "descripcion": "RP-REV.MOTORES CA APIL. LITTELL",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM01:2003161948",
+        "descripcion": "RP-MANTENIMIENTO TABLEROS DE COMANDO",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM01:2003161947",
+        "descripcion": "RP-GAMB. MANT. VENTILADORES LITTELL",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM11:2003131908",
+        "descripcion": "NORMALIZAR GUARDA-PIE",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "159039425",
+        "descripcion_equipo": "SISTEMA GUARDA PIE",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM11:2003131997",
+        "descripcion": "REPARAR AIRE TABLEROS LITTELL",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "33795",
+        "descripcion_equipo": "TABLEROS DE CONTROL GENERAL Y PLC",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM11:2003102398",
+        "descripcion": "FALLA DE COMUNICACIÓN NIVEL 1",
+        "inicio_extremo": "22/09/2025",
+        "fin_extremo": "22/09/2025",
+        "equipo_ut": "57066",
+        "descripcion_equipo": "Linea Littell",
+        "estado": "LIBERADA",
+        "revision": "DRLI1S25"
+    },
+    {
+        "numero_orden": "PM11:2002723270",
+        "descripcion": "ctrl y ajuste int Compresor Nº3",
+        "inicio_extremo": "15/08/2025",
+        "fin_extremo": "15/08/2025",
+        "equipo_ut": "2411",
+        "descripcion_equipo": "AIRE COMPRIMIDO-SIST. ELECTRICO",
+        "estado": "LIBERADA",
+        "revision": ""
+    }
+]

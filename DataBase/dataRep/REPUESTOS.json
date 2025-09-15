@@ -182,14 +182,15 @@
         "estado": "🟢"
     },
     {
-        "nombre": "SENSOR BARRERA E3JM-10M4-G-NN (OMRON) detección de presencia de paquetes",
+        "nombre": "SENSOR BARRERA E3JM-10M4-G-NN (OMRON) detección de presencia de paquetes  y lazo de Hallden",
         "codigo": "71330524",
         "link": "https://industrial.omron.es/es/products/E3JM-10M4-G-NN",
         "cantidad": 4,
         "fecha_creacion": "2024-04-30",
         "equipo": "GMP-PUERTA1-ESTANTE1",
         "ruta_jerarquia": [
-            "SD-APR-EMPA"
+            "SD-APR-EMPA",
+            "SD-APR-HALD"
         ],
         "imagen": "E3JM-10M4-NN-US.jpg",
         "fecha_fin": "2029-07-06",
@@ -2941,10 +2942,10 @@
         "estado": "🟢"
     },
     {
-        "nombre": "SENSOR OMRON E3S-AT91",
+        "nombre": "SENSOR OMRON E3S-AT91  (contador de hojas)",
         "codigo": "71364728",
-        "cantidad": 1,
-        "equipo": "GMP",
+        "cantidad": 6,
+        "equipo": "GMP-PUERTA1-ESTANTE2",
         "ruta_jerarquia": [
             "SD-APR-HALD"
         ],

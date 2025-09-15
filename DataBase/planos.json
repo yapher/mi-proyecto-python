@@ -82,5 +82,461 @@
     "descripcion": "Plano general",
     "archivo": "SiderCrom -- Littell.pdf",
     "carpeta": "LITTELL"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Funcional tarjeta de control A   Hoja  9/13",
+    "archivo": "5414-23-0045-H009_Etapa_control.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Funcional tarjeta de control B Hoja 10/13",
+    "archivo": "5414-23-0045-H010_Etapa_control_2.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Funcional tarjeta de control  Hoja 11/13",
+    "archivo": "5414-23-0045-H011_Etapa_control_3.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Lista de materiales tarjeta de control A Hoja 12/13",
+    "archivo": "5414-23-0045-H012_lista_materiales.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Lista de materiales tarjeta de control B Hoja 13/13",
+    "archivo": "5414-23-0045-H013_lista_materiales_b.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "plano diposición de bobinas en el rodillo",
+    "archivo": "SD.APR.HALD.CO73-MCO10001_00_FisicaBobinas.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Rodillo magnético mecánico 2",
+    "archivo": "SD.APR.HALD.CO73-MDT10002_00_MecanicaRodillo.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Drop constructivo 1 y 3  Pag. 1 de 10",
+    "archivo": "SD.APR.DELT.GRAL-ART-5614-22-0001_H001_05.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Drop gabinete PLC 5 ex. 1 y 3 Pag. 2 de 10",
+    "archivo": "SD.APR.DELT.GRAL-ART-5614-22-0001_H002_04.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Drop gabinete PLC 5  vista de frente  Pag. 3 de 10",
+    "archivo": "SD.APR.DELT.GRAL-ART-5614-22-0001_H003_04.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Drop gabinete PLC 5 vista de frente  parte 2 Pag. 4 de 10",
+    "archivo": "SD.APR.DELT.GRAL-ART-5614-22-0001_H004_04_Drop_5_Bornera_105.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Drop 3 vista de frente  Pag. 5 de 10",
+    "archivo": "SD.APR.DELT.GRAL-ART-5614-22-0001_H005_05_Drop_3_vista_frente.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Drop 3 vista de frente  parte 2  Pag. 6 de 10",
+    "archivo": "SD.APR.DELT.GRAL-ART-5614-22-0001_H006_05_Drop_3_borneras.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Drop 5 vista de frente   Pag. 7 de 10",
+    "archivo": "SD.APR.DELT.GRAL-ART-5614-22-0001_H007_04_Drop_5_borneras.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Drop 3 vista de frente Pag. 8 de 10",
+    "archivo": "SD.APR.DELT.GRAL-ART-5614-22-0001_H008_05_Drop_3_vista_frente.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Conformación de cada bloque de borneras  Pag. 9 de 10",
+    "archivo": "SD.APR.DELT.GRAL-ART-5614-22-0001_H009_02_borneras.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Listado de leyendas  Pag. 10 de 10",
+    "archivo": "SD.APR.DELT.GRAL-ART-5614-22-0001_H010_02_descripcion_drop_1_3.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Borneras  X105   X106   X107",
+    "archivo": "SD.APR.DELT.GRAL-ART-5614-22-0001_H011_03_Borneras_x105_106_107.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano  5614-23-0018  pag.  01/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H001_09.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A01  pag.  02/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA01_09_Modulos.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A02  pag.  03/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA02_06_Backplane_Drop_1.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A03  pag.  04/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA03_05_Backplane_Drop_2.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A04  pag.  05/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA04_05_Backplane_Drop_3.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A05  pag.  06/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA05_09_Backplane_2_Drop_3.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A06  pag.  07/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA06_05_Backplane_Drop_4.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A07  pag.  08/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA07_05_Backplane_2_Drop_4.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A08  pag.  09/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA08_06_Alimentacion_Drop_1.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A09  pag.  10/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA09_05_Alimentacion_Drop_2.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A10  pag.  11/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA10_05_Alimentacion_Drop_3.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A11  pag.  12/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA11_05_Alimentacion_Drop_3_b.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A12  pag.  13/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA12_05_Alimentacion_Drop_4.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A13  pag.  14/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA13_06_parada_emergencias.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. A14  pag.  15/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_HA14_06_Backplane_Drop_5.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 105A  pag. 16/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H105A_08_Drop_1_Mod_105_A.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 105B  pag. 17/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H105B_06_Drop_1_Mod_105_B.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 106A  pag. 18/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H106A_06_Drop_1_Mod_106_A.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 106B  pag. 19/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H106B_06_Drop_1_Mod_105_B.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 107  pag. 20/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H107_06_Drop_1_Mod_107.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 114  pag. 21/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H114_07_Drop_1_Mod_114_A.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 116  pag. 22/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H116_07_Drop_1_Mod_116.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 117  pag. 23/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H117_07_Drop_1_Mod_117_A.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 118  pag. 24/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H118_07_Drop_1_Mod_118.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 1110  pag. 25/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H1110_07_Drop_4_2_Mod_1110.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 214  pag. 26/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H214_05_Drop_2_Mod_214.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 215  pag. 27/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H215_05_Drop_2_Mod_215.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 216  pag. 28/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H216_05_Drop_2_Mod_216.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 217  pag. 29/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H217_05_Drop_2_Mod_217.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 218   pag. 30/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H218_05_Drop_2_Mod_218.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 219  pag. 31/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H219_05_Drop_2_Mod_219.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 314    pag. 33/55    (Entrada de sensores lazo)",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H314_05_Drop_3_Mod_314.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 315  pag. 34/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H315_05_Drop_3_Mod_315.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 316   pag. 35/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H316_05_Drop_3_Mod_316.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 317   pag. 36/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H317_05_Drop_3_Mod_317.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 318  pag. 37/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H318_05_Drop_3_Mod_318.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 319  pag. 38/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H319_05_Drop_3_Mod_319.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 3111  pag. 39/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H3111_10.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 323  pag. 40/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H323_09_Drop_3_Mod_323.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 324  pag. 41/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H324_09_Drop_3_Mod_324.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 325  pag. 42/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H325_09_Drop_3_Mod_325.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 326  pag. 43/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H326_09_Drop_3_Mod_326.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 328  pag. 44/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H328_09_Drop_3_Mod_328.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 329  pag. 45/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H329_09_Drop_3_Mod_329.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 3210   pag. 46/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H3210_09_Drop_4_2_Mod_3210.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 3212   pag. 47/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H3212_09_Drop_4_2_Mod_3212.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 3213  pag. 48/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H3213_09_Drop_4_2_Mod_3213.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 414   pag. 49/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H414_05_Drop_4_Mod_414.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 415 pag. 50/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H415_05_Drop_4_Mod_415.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 417  pag. 51/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H417_05_Drop_4_Mod_417.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 418   pag. 52/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H418_05_Drop_4_Mod_418.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 419   pag. 53/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H419_05_Drop_4_Mod_419.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 423   pag. 54/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H423_05_Drop_4_Mod_423.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 424 pag. 55/55",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H424_05_Drop_4_Mod_424.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 425   pag. 56/56",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H425_05_Drop_4_Mod_425.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 426  pag. 57/57",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H426_05_Drop_4_Mod_426.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 427  pag. 58/58",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H427_05_Drop_4_Mod_427.pdf",
+    "carpeta": "HALLDEN"
+  },
+  {
+    "nombre_linea": "HALLDEN",
+    "descripcion": "Plano 5614-23-0018 pag. 428 pag. 59/59",
+    "archivo": "SD.APR.DELT.GRAL-5614-23-0018_H428_05_Drop_4_Mod_428.pdf",
+    "carpeta": "HALLDEN"
   }
 ]
