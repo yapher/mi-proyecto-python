@@ -22,17 +22,17 @@
                 target="_blank" class="btn btn-outline-info btn-sm d-flex align-items-center gap-1" title="Ver PDF">
                 <i class="bi bi-file-earmark-pdf"></i> <span class="d-none d-md-inline">PDF</span>
             </a>
-            <button type="button" class="btn btn-warning btn-sm d-flex align-items-center gap-1" title="Editar"
+            <button type="button" class="btn btn-warning btn-sm btn-editar d-flex align-items-center gap-1" title="Editar"
                 data-bs-toggle="modal"
                 data-bs-target="#modalEditar{{ loop_index }}_{{ loop_index0 }}_{{ plano.archivo | replace(' ', '_') }}">
-                <i class="bi bi-pencil-square"></i> <span class="d-none d-md-inline">Editar</span>
+                ✏️ Editar
             </button>
             <form method="POST"
                 action="{{ url_for('indeximagenes.eliminar_plano', nombre_linea=plano.nombre_linea, archivo=plano.archivo) }}"
                 style="display:inline;" class="form-eliminar-plano">
-                <button type="button" class="btn btn-danger btn-sm d-flex align-items-center gap-1 btn-eliminar-plano"
+                <button type="button" class="btn btn-eliminar btn-sm d-flex align-items-center gap-1 btn-eliminar-plano"
                     title="Eliminar">
-                    <i class="bi bi-trash"></i> <span class="d-none d-md-inline">Eliminar</span>
+                    🗑️ Eliminar
                 </button>
             </form>
         </div>

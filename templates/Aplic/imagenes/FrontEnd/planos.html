@@ -17,7 +17,6 @@
             <thead class="sticky-header">
                 <tr>
                     <th style="width:5%"></th>
-                   
                     <th style="width:25%">Descripción</th>
                     <th style="width:25%">Archivo</th>
                     <th style="width:45%">Acciones</th>
@@ -27,38 +26,34 @@
                 {% import 'Aplic/imagenes/FrontEnd/_macros.html' as macros %}
                 {% set agrupados = {} %}
                 {% for plano in planos %}
-                    {% set _ = agrupados.setdefault(plano.nombre_linea, []).append(plano) %}
+                {% set _ = agrupados.setdefault(plano.nombre_linea, []).append(plano) %}
                 {% endfor %}
 
                 {% if agrupados %}
-                    {% for linea, planos_linea in agrupados.items() %}
-                        {{ macros.fila_principal(linea, loop.index) }}
-                        <tr class="collapse" id="collapse{{ loop.index }}">
-                            <td colspan="5" class="p-0">
-                                <table class="table table-dark mb-0 table-fixed">
-                                    <tbody>
-                                        {% for plano in planos_linea %}
-                                            {{ macros.fila_plano(plano, loop.index, loop.index0) }}
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            </td>
-                        </tr>
-                    {% endfor %}
+                {% for linea, planos_linea in agrupados.items() %}
+                {{ macros.fila_principal(linea, loop.index) }}
+                <tr class="collapse" id="collapse{{ loop.index }}">
+                    <td colspan="5" class="p-0">
+                        <table class="table table-dark mb-0 table-fixed">
+                            <tbody>
+                                {% for plano in planos_linea %}
+                                {{ macros.fila_plano(plano, loop.index, loop.index0) }}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                {% endfor %}
                 {% else %}
-                    <tr>
-                        <td colspan="5" class="text-center">No hay planos cargados.</td>
-                    </tr>
+                <tr>
+                    <td colspan="5" class="text-center">No hay planos cargados.</td>
+                </tr>
                 {% endif %}
             </tbody>
         </table>
     </div>
 </div>
 
-<!-- Scripts -->
-<script>
-console.log('RUTAS servidor:', {{ rutas| tojson | safe }});
-</script>
 <script src="{{ url_for('static', filename='js/apps/select.js') }}"></script>
 <script src="{{ url_for('static', filename='js/apps/busqueda.js') }}"></script>
 <script src="{{ url_for('static', filename='js/apps/planos.js') }}"></script>
