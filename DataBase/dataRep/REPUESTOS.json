@@ -185,7 +185,7 @@
         "nombre": "SENSOR BARRERA E3JM-10M4-G-NN (OMRON) detección de presencia de paquetes  y lazo de Hallden",
         "codigo": "71330524",
         "link": "https://industrial.omron.es/es/products/E3JM-10M4-G-NN",
-        "cantidad": 4,
+        "cantidad": 2,
         "fecha_creacion": "2024-04-30",
         "equipo": "GMP-PUERTA1-ESTANTE1",
         "ruta_jerarquia": [
@@ -896,7 +896,7 @@
         ],
         "imagen": "aire_acondicionado_gabinetes.jpeg",
         "fecha_fin": "",
-        "estado": "🔴"
+        "estado": "🟢"
     },
     {
         "nombre": "PORTAFUSIBLES CONTACT-TYP UK5-HESILA 250 - SECCION D/CABLE: 4 mm2; CANTIDAD DE BORNES: 1; TENSION 600 V; CORR. 6,3 A TIPO CILINDRICO DE VIDRIO",
@@ -2425,7 +2425,7 @@
     {
         "nombre": "CABLE T/TPR 3X1,5 MM2 SECC.",
         "codigo": "71337571",
-        "cantidad": 100,
+        "cantidad": 300,
         "equipo": "GMP",
         "ruta_jerarquia": [
             "SD-ASE"
@@ -2986,16 +2986,16 @@
     {
         "nombre": "GENERADOR PULSO OMRON E6B2-CWZ6C 500PPR",
         "codigo": "71332265",
-        "cantidad": 1,
+        "cantidad": 2,
         "equipo": "GMP",
         "ruta_jerarquia": [
             "SD-APR-HALD"
         ],
         "imagen": "ENCODER_E6B2-CWZ6C-500PR-x.jpg",
         "fecha_creacion": "2025-05-26",
-        "fecha_fin": "",
+        "fecha_fin": "2027-01-01",
         "link": "https://industrial.omron.es/es/products/E6B2-CWZ6C-500P-R-2M",
-        "estado": "🟢"
+        "estado": "🟡"
     },
     {
         "nombre": "PRESOSTATO ELECTRON.EDS 3448-5-0250-000",
@@ -3794,7 +3794,7 @@
         "estado": "🟢"
     },
     {
-        "nombre": "POTENCIOMETRO SQUARE D: 9001K2108",
+        "nombre": "POTENCIOMETRO SQUARE D: 9001K2108 (velocidad de linea, pulpito)",
         "codigo": "71640733",
         "cantidad": 1,
         "equipo": "GMP-COFRE1",
@@ -3803,9 +3803,9 @@
         ],
         "imagen": "potenciometro_1k.jpg",
         "fecha_creacion": "2025-05-30",
-        "fecha_fin": "",
+        "fecha_fin": "2026-12-31",
         "link": "https://www.se.com/ar/es/product/9001K2105/uspotenciometro-1k-ohm-2w-30m/",
-        "estado": "🟢"
+        "estado": "🟡"
     },
     {
         "nombre": "SENSOR DE FLUJO TURCK",
@@ -4185,8 +4185,8 @@
     },
     {
         "nombre": "BLOCK CONT.AUX.LA1-D11 TELEMECANIQUE (LADN11)",
-        "codigo": "71321377",
-        "cantidad": 1,
+        "codigo": "71695088",
+        "cantidad": 5,
         "equipo": "GMP-PUERTA1-ESTANTE2",
         "ruta_jerarquia": [
             "SD-APR-EMPA",
@@ -4194,9 +4194,9 @@
         ],
         "imagen": "bloque_auxiliar.jpeg",
         "fecha_creacion": "2025-06-02",
-        "fecha_fin": "",
+        "fecha_fin": "2026-12-01",
         "link": "https://www.se.com/ar/es/product/LADN11/bloque-de-contacto-auxiliar-tesys-deca-1no+1nc-frontal/",
-        "estado": "🔴"
+        "estado": "🟡"
     },
     {
         "nombre": "CONTACTOR TRIP. 12A BOB. 24VDC>",
@@ -5752,5 +5752,20 @@
         "fecha_fin": "",
         "link": "",
         "estado": "🟢"
+    },
+    {
+        "nombre": "BOBINA OPER.11754375 P/CONT.TM301/401\t(bobinas contactores Vcc Hallden)",
+        "codigo": "71321621",
+        "cantidad": 3,
+        "equipo": "GMP-COFRE2",
+        "ruta_jerarquia": [
+            "",
+            "SD-APR-HALD"
+        ],
+        "imagen": "bobina-redonda-scaled.jpg",
+        "fecha_creacion": "2025-09-17",
+        "fecha_fin": "2027-01-01",
+        "link": "",
+        "estado": "🟡"
     }
 ]
