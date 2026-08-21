@@ -3407,7 +3407,7 @@
         "cuota_numero": 9,
         "cuota_total": 12,
         "vencimiento": "2026-08-06",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1754478692093,
@@ -3418,7 +3418,7 @@
         "cuota_numero": 8,
         "cuota_total": 12,
         "vencimiento": "2026-08-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1754478692094,
@@ -3429,7 +3429,7 @@
         "cuota_numero": 8,
         "cuota_total": 12,
         "vencimiento": "2026-08-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1754478692096,
@@ -3440,7 +3440,7 @@
         "cuota_numero": 8,
         "cuota_total": 12,
         "vencimiento": "2026-08-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1754478692097,
@@ -3451,7 +3451,7 @@
         "cuota_numero": 8,
         "cuota_total": 12,
         "vencimiento": "2026-08-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1754478692098,
@@ -3462,7 +3462,7 @@
         "cuota_numero": 8,
         "cuota_total": 12,
         "vencimiento": "2026-08-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1754478692099,
@@ -3473,7 +3473,7 @@
         "cuota_numero": 8,
         "cuota_total": 12,
         "vencimiento": "2026-08-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1754478692100,

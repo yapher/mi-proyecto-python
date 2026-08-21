@@ -67,3 +67,7 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+# export proyecto
+exportar_proyecto.py
+Proyecto_Completo.txt
