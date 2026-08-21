@@ -6,6 +6,7 @@ from login import roles_required
 from flask import Blueprint, jsonify, request, render_template
 import json, os
 from datetime import datetime
+from calendar import monthrange
 
 pagos_bp = Blueprint('indexpagos', __name__)
 
@@ -189,3 +190,62 @@ def toggle_estado_pago(id):
             print("Error al actualizar en archivo mensual:", e)
 
     return jsonify({"msg": "Estado actualizado correctamente"})
+
+@pagos_bp.route('/pagos/clonar_mes', methods=['POST'])
+@login_required
+def clonar_mes():
+    data = request.json
+    try:
+        anio_origen = int(data['anio_origen'])
+        mes_origen = int(data['mes_origen'])
+        anio_destino = int(data['anio_destino'])
+        mes_destino = int(data['mes_destino'])
+    except (KeyError, ValueError, TypeError):
+        return jsonify({"error": "Parámetros inválidos"}), 400
+
+    archivo_origen = f"{GASTOSMES}/GASTO_{anio_origen}_{mes_origen:02}.json"
+    if not os.path.exists(archivo_origen):
+        return jsonify({"error": "No hay gastos en el mes de origen"}), 404
+
+    with open(archivo_origen, 'r', encoding='utf-8') as f:
+        pagos_origen = json.load(f)
+
+    if not pagos_origen:
+        return jsonify({"error": "No hay gastos en el mes de origen"}), 404
+
+    ultimo_dia_destino = monthrange(anio_destino, mes_destino)[1]
+
+    pagos_clonados = []
+    for i, p in enumerate(pagos_origen):
+        nuevo = dict(p)
+        nuevo['id'] = int(datetime.now().timestamp() * 1000) + i
+
+        try:
+            dia_original = datetime.strptime(p['vencimiento'], "%Y-%m-%d").day
+        except (KeyError, ValueError):
+            dia_original = 1
+        dia_final = min(dia_original, ultimo_dia_destino)
+        nuevo['vencimiento'] = f"{anio_destino}-{mes_destino:02}-{dia_final:02}"
+        nuevo['pagado'] = False
+
+        pagos_clonados.append(nuevo)
+
+    archivo_destino = f"{GASTOSMES}/GASTO_{anio_destino}_{mes_destino:02}.json"
+    if os.path.exists(archivo_destino):
+        with open(archivo_destino, 'r', encoding='utf-8') as f:
+            data_destino = json.load(f)
+    else:
+        data_destino = []
+
+    data_destino.extend(pagos_clonados)
+    with open(archivo_destino, 'w', encoding='utf-8') as f:
+        json.dump(data_destino, f, indent=4, ensure_ascii=False)
+
+    data_general = leer_gastos()
+    data_general.extend(pagos_clonados)
+    guardar_gastos(data_general)
+
+    return jsonify({
+        "mensaje": f"{len(pagos_clonados)} pagos clonados correctamente",
+        "cantidad": len(pagos_clonados)
+    })

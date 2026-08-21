@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/estadistica_de_paradas.css') }}">
+
+<div class="estadistica_de_paradas-container">
+    <div class="estadistica_de_paradas-header">
+        <h1 class="mb-3">Estadística de Paradas</h1>
+        
+        <div class="controles">
+            <div class="file-upload-container">
+                <label for="archivoInput" class="btn-cargar">
+                    📁 Cargar Archivo
+                </label>
+                <input type="file" id="archivoInput" accept=".txt" style="display: none;">
+                <span id="nombreArchivo" class="nombre-archivo"></span>
+            </div>
+            
+            <div class="filtro-fechas">
+                <label for="fechaInicio">Desde:</label>
+                <input type="date" id="fechaInicio" class="input-fecha">
+                
+                <label for="fechaFin">Hasta:</label>
+                <input type="date" id="fechaFin" class="input-fecha">
+                
+                <button id="btnFiltrarFechas" class="btn-filtrar">Filtrar</button>
+                <button id="btnLimpiarFechas" class="btn-limpiar">Limpiar</button>
+            </div>
+            
+            <label for="columnaSelect">Agrupar por:</label>
+            <select id="columnaSelect">
+                {% for col in columnas %}
+                <option value="{{ col.key }}">{{ col.nombre }}</option>
+                {% endfor %}
+            </select>
+            
+            <button id="exportarPdf" class="btn-exportar">Exportar a PDF</button>
+        </div>
+    </div>
+    
+    <div id="grafico" class="chart-container">
+        <div id="graficoTorta" class="chart-box"></div>
+        <div id="graficoBarras" class="chart-box"></div>
+    </div>
+</div>
+
+<script>
+    window.datos_iniciales = {{ datos_iniciales | safe }};
+    window.rango_fechas = {{ rango_fechas | safe }};
+</script>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/apps/estadistica_de_paradas.js') }}"></script>
+{% endblock %}

@@ -12,6 +12,7 @@
     style="width: 70px; margin: 2px;" min="1" max="12">
   <button class="btn btn-outline-info m-1" onclick="filtrarPorMes()">Filtrar por mes</button>
   <button class="btn btn-outline-secondary m-1" onclick="cargarPagos()">Ver todos</button>
+  <button class="btn btn-outline-warning m-1" onclick="abrirModalClonar()">📋 Clonar mes</button>
 
   {% include "Aplic/pagos/FrontEnd/component/newPagos.html" %}
   {% include "Aplic/pagos/FrontEnd/component/exportPDF.html" %}
@@ -43,4 +44,30 @@
 {% include "Aplic/pagos/FrontEnd/component/graf.html" %}
 
 <script src="{{ url_for('static', filename='js/apps/pagos.js') }}"></script>
+
+<div class="modal fade" id="clonarModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color:#4b376a; color:#fff; border-radius:1rem;">
+      <div class="modal-header" style="border-bottom:2px solid #88c999;">
+        <h5 class="modal-title" style="color:#88c999;">Clonar pagos a otro mes</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" style="filter:invert(1);"></button>
+      </div>
+      <div class="modal-body">
+        <p>Se copiarán los pagos del mes filtrado (<strong id="mesOrigenTexto"></strong>) al mes destino, marcados como no pagados.</p>
+        <div class="mb-3">
+          <label class="form-label">Año destino</label>
+          <input type="number" id="clonarAnioDestino" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Mes destino</label>
+          <input type="number" id="clonarMesDestino" class="form-control" min="1" max="12">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-primary" onclick="clonarMes()">Clonar</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

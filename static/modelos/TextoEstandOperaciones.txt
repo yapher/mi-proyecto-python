@@ -48,33 +48,6 @@
  • Si se utiliza grúa pluma o JLG dentro de la nave, emitir tarjeta de interferencia o gestionar el bloqueo de grúas puente.
 
 <U>HERRAMIENTAS Y EQUIPOS ESPECIALES</>:
-   APORTE DE SOLDADURA MANUAL:
-     Herramientas de Mano
-      a. Pinzas
-      b. Llaves combinadas
-      c. Martillo
-      d. Corta hierro
-      e. Buril
-      f. Piqueta
-      g. Cepillos de Cerdas de Acero
-
-    EQUIPOS:
-      a. Máquina de Soldar Fija
-      b. Máquina de Soldar Portátil (Para trabajo In Situ)
-
-    USO DE AMOLADORAS MANUALES:
-
-      Herramientas de Mano:
-       a. Llave de ajuste de discos (específica de la máquina)
-       b. Morza para ajuste de piezas.
-
-    EQUIPOS:
-       a. Amoladora de Mano
-    
-    EQUIPOS:
-       a. JLG
-
-   NO ES NECESARIO.
 
 <U>PELIGRO DE LA TAREA</>
 
@@ -159,6 +132,11 @@ eviten una caída. No deberán ser rodados sobre el cuerpo de éstos, solamente sob
 
 <U>PROCEDIMIENTO DE LA TAREA</>:
 
-<U>CRITERIOS DE ACEPTACIÓN O RECHAZO</>
+   
+## ? **Cierre del procedimiento**
+- Retirar herramientas y dejar sistema en estado operativo.
+- Informar al supervisor sobre hallazgos críticos.
+- Programar correcciones si se detectaron fallas.
+
 
       • Después de terminada la tarea se debe comunicar al Supervisor de la contratista y al GMP.

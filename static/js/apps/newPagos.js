@@ -1,63 +1,5 @@
 let pagoEnEdicion = null;
 
-// Función para renderizar selectores de rubros multinivel
-function renderSelectoresNiveles(seleccion = '') {
-    const contenedor = document.getElementById('contenedor-rubros');
-    if (!contenedor) return;
-
-    contenedor.innerHTML = ''; // Limpiar selects anteriores
-
-    // Traer los rubros desde el backend
-    fetch('/rubros/listar')
-        .then(res => res.json())
-        .then(rubros => {
-            // Crear primer select
-            const primerSelect = document.createElement('select');
-            primerSelect.className = 'form-control ps-5 nivel-select';
-            primerSelect.innerHTML = '<option value="">Seleccione Rubro</option>';
-            rubros.forEach(r => {
-                primerSelect.innerHTML += `<option value="${r.nombre}">${r.nombre}</option>`;
-            });
-            contenedor.appendChild(primerSelect);
-
-            // Si hay selección previa, preseleccionarla
-            if (seleccion) {
-                const niveles = seleccion.split('.');
-                primerSelect.value = niveles[0] || '';
-            }
-
-            // Detectar cambio y mostrar subcategorías si existen
-            primerSelect.addEventListener('change', () => {
-                // Eliminar selects siguientes
-                while (primerSelect.nextSibling) {
-                    contenedor.removeChild(primerSelect.nextSibling);
-                }
-
-                const rubroSeleccionado = rubros.find(r => r.nombre === primerSelect.value);
-                if (rubroSeleccionado && rubroSeleccionado.subcategorias && rubroSeleccionado.subcategorias.length) {
-                    const subSelect = document.createElement('select');
-                    subSelect.className = 'form-control ps-5 nivel-select mt-2';
-                    subSelect.innerHTML = '<option value="">Seleccione Subcategoría</option>';
-                    rubroSeleccionado.subcategorias.forEach(s => {
-                        subSelect.innerHTML += `<option value="${s}">${s}</option>`;
-                    });
-                    contenedor.appendChild(subSelect);
-
-                    // Preseleccionar subcategoría si hay
-                    if (seleccion) {
-                        const niveles = seleccion.split('.');
-                        subSelect.value = niveles[1] || '';
-                    }
-
-                    // Si hay más niveles, se puede iterar recursivamente
-                }
-            });
-
-            // Disparar evento change para precargar subcategorías si se editó
-            if (seleccion) primerSelect.dispatchEvent(new Event('change'));
-        })
-        .catch(err => console.error('Error al cargar rubros:', err));
-}
 
 // ------------------------ Funciones existentes ------------------------
 
@@ -225,3 +167,12 @@ function obtenerRutaPadre() {
     selects.forEach(sel => { if (sel.value) ruta = sel.value; });
     return ruta;
 }
+
+// Inicializar el árbol de menús y renderizar los selectores al cargar la página
+window.addEventListener('DOMContentLoaded', () => {
+    console.log('Inicializando carga de rubros...'); // Log para depuración
+    cargarArbolMenus(() => {
+        console.log('Rubros cargados, renderizando selectores...'); // Log para depuración
+        renderSelectoresNiveles();
+    });
+});

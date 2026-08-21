@@ -187,6 +187,12 @@
                 "emoji": "💳",
                 "ruta": "",
                 "submenues": []
+            },
+            {
+                "nombre": "Naranja X",
+                "emoji": "1",
+                "ruta": "",
+                "submenues": []
             }
         ]
     },

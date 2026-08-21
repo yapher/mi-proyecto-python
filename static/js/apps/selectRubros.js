@@ -125,7 +125,7 @@ function cargarTodo() {
         //renderSelectoresNiveles();
         //renderSelectoresNiveles(valorPorDefecto = "Almacen")
         renderSelectoresNiveles("Almacen");
-        cargarTabla();
+        //cargarTabla(); // Comentado porque no está definido
     });
 }
 

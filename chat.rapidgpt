@@ -1,0 +1,15 @@
+{
+    "uuid": "0a45279e-aae4-4c92-8fe1-fbcfeba729a3",
+    "/templates\\Aplic\\pagos\\FrontEnd\\component\\newPagos.html": {
+        "/templates\\Aplic\\pagos\\FrontEnd\\component\\newPagos.html+General": [
+            {
+                "role": "user",
+                "username": "User",
+                "content": "no me estari funcionando bien el codigo de pagos, no puedo crear uno nuevo, y el ultimo item no me deja seleccionar que realce el pago, podes verificar el problema?",
+                "date": "10/6/2025, 10:21:42 PM",
+                "delay": 0,
+                "metadata": {}
+            }
+        ]
+    }
+}

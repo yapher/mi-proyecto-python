@@ -1,24 +1,110 @@
 [
     {
-        "id": 1750889290632,
+        "id": 1754478692090,
         "rubro": "Creditos",
-        "descripcion": "Ternium",
-        "importe": 221000,
+        "descripcion": "Naranja",
+        "importe": 79928,
         "tipo": "cuota",
-        "cuota_numero": 14,
-        "cuota_total": 48,
+        "cuota_numero": 8,
+        "cuota_total": 24,
         "vencimiento": "2026-08-25",
         "pagado": false
     },
     {
-        "id": 1750890022485,
-        "rubro": "Automotor",
-        "descripcion": "Cuota 0Km",
-        "importe": 310000,
+        "id": 1754478692092,
+        "rubro": "Tarjetas de Credito",
+        "descripcion": "Mercado libre",
+        "importe": 72000,
         "tipo": "cuota",
-        "cuota_numero": 14,
-        "cuota_total": 71,
+        "cuota_numero": 9,
+        "cuota_total": 12,
+        "vencimiento": "2026-08-06",
+        "pagado": false
+    },
+    {
+        "id": 1754478692093,
+        "rubro": "Facultad",
+        "descripcion": "Alquiler",
+        "importe": 700000,
+        "tipo": "cuota",
+        "cuota_numero": 8,
+        "cuota_total": 12,
         "vencimiento": "2026-08-23",
+        "pagado": false
+    },
+    {
+        "id": 1754478692094,
+        "rubro": "Servicios",
+        "descripcion": "Telefonia",
+        "importe": 45000,
+        "tipo": "cuota",
+        "cuota_numero": 8,
+        "cuota_total": 12,
+        "vencimiento": "2026-08-23",
+        "pagado": false
+    },
+    {
+        "id": 1754478692096,
+        "rubro": "Servicios",
+        "descripcion": "Gas",
+        "importe": 70000,
+        "tipo": "cuota",
+        "cuota_numero": 8,
+        "cuota_total": 12,
+        "vencimiento": "2026-08-23",
+        "pagado": false
+    },
+    {
+        "id": 1754478692097,
+        "rubro": "Servicios",
+        "descripcion": "Internet",
+        "importe": 31000,
+        "tipo": "cuota",
+        "cuota_numero": 8,
+        "cuota_total": 12,
+        "vencimiento": "2026-08-23",
+        "pagado": false
+    },
+    {
+        "id": 1754478692098,
+        "rubro": "Almacen",
+        "descripcion": "Supermercado",
+        "importe": 350000,
+        "tipo": "cuota",
+        "cuota_numero": 8,
+        "cuota_total": 12,
+        "vencimiento": "2026-08-23",
+        "pagado": false
+    },
+    {
+        "id": 1754478692099,
+        "rubro": "Automotor",
+        "descripcion": "Combustible Sandero",
+        "importe": 150000,
+        "tipo": "cuota",
+        "cuota_numero": 8,
+        "cuota_total": 12,
+        "vencimiento": "2026-08-23",
+        "pagado": false
+    },
+    {
+        "id": 1754478692100,
+        "rubro": "Automotor",
+        "descripcion": "Seguros",
+        "importe": 88000,
+        "tipo": "cuota",
+        "cuota_numero": 8,
+        "cuota_total": 12,
+        "vencimiento": "2026-08-23",
+        "pagado": false
+    },
+    {
+        "id": 1785020575071,
+        "rubro": "Creditos",
+        "descripcion": "Waynimovil",
+        "importe": 785000,
+        "tipo": "único",
+        "vencimiento": "2026-08-01",
         "pagado": false
     }
 ]

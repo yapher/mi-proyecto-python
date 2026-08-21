@@ -18,7 +18,10 @@
                     <form id="formulario">
 
                         <!-- Selectores multinivel -->
-                        {% include "Aplic/crearrubros/FrontEnd/component/selectRubros.html" %}
+                       {% include "Aplic/crearrubros/FrontEnd/component/selectRubros.html" %}
+
+                        <!-- Contenedor para los selectores multinivel -->
+                        <div id="nivelesContainer" class="mb-3"></div>
 
                         <input type="hidden" id="pagoId">
 
@@ -69,3 +72,4 @@
 </div>
 
 <script src="/static/js/apps/newPagos.js"></script>
+

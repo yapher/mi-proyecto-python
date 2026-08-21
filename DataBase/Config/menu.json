@@ -80,6 +80,12 @@
                         "emoji": "🗞️​",
                         "ruta": "/planos",
                         "submenues": []
+                    },
+                    {
+                        "nombre": "Modelos 3D",
+                        "emoji": "🕋​",
+                        "ruta": "/modelos_3d",
+                        "submenues": []
                     }
                 ]
             },
@@ -175,6 +181,19 @@
                 "emoji": "⚙️",
                 "ruta": "/gestion_de_herramientas",
                 "submenues": []
+            },
+            {
+                "nombre": "Gestión de Avisos",
+                "emoji": "🪧",
+                "ruta": "",
+                "submenues": [
+                    {
+                        "nombre": "Estadistica de paradas",
+                        "emoji": "📊​",
+                        "ruta": "/estadistica_de_paradas",
+                        "submenues": []
+                    }
+                ]
             }
         ]
     },

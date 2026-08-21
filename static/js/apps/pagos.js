@@ -111,3 +111,108 @@ function togglePagado(id) {
             filtrarPorMes();
         });
 }
+
+/**
+ * Abre el modal de edición precargado con los datos del pago
+ * @param {Object} p - Objeto del pago a editar
+ */
+function editar(p) {
+    mostrarFormulario(p);
+    abrirModal();
+}
+
+/**
+ * Elimina un pago
+ * @param {number} id - ID del pago
+ */
+function eliminar(id) {
+    if (!confirm("¿Seguro que querés eliminar este pago?")) return;
+
+    fetch(`/pagos/eliminar/${id}`, {
+        method: 'DELETE'
+    })
+        .then(res => {
+            if (!res.ok) throw new Error('HTTP error');
+            return res.json();
+        })
+        .then(() => {
+            filtrarPorMes();
+            new Noty({
+                type: 'success',
+                layout: 'topRight',
+                timeout: 2500,
+                theme: 'mint',
+                text: 'Pago eliminado'
+            }).show();
+        })
+        .catch(err => {
+            console.error("Error al eliminar pago:", err);
+            alert("No se pudo eliminar el pago.");
+        });
+}
+
+/**
+ * Abre el modal de clonado, sugiriendo el mes siguiente al filtrado
+ */
+function abrirModalClonar() {
+    const anio = document.getElementById('filtroAnio').value;
+    const mes = document.getElementById('filtroMes').value;
+
+    if (!anio || !mes) return alert("Primero filtrá un mes para clonar");
+
+    document.getElementById('mesOrigenTexto').textContent = `${mes}/${anio}`;
+
+    let mesDestino = parseInt(mes) + 1;
+    let anioDestino = parseInt(anio);
+    if (mesDestino > 12) { mesDestino = 1; anioDestino++; }
+
+    document.getElementById('clonarAnioDestino').value = anioDestino;
+    document.getElementById('clonarMesDestino').value = mesDestino;
+
+    new bootstrap.Modal(document.getElementById('clonarModal')).show();
+}
+
+/**
+ * Envía la solicitud de clonado al backend
+ */
+function clonarMes() {
+    const anioOrigen = document.getElementById('filtroAnio').value;
+    const mesOrigen = document.getElementById('filtroMes').value;
+    const anioDestino = document.getElementById('clonarAnioDestino').value;
+    const mesDestino = document.getElementById('clonarMesDestino').value;
+
+    if (!anioDestino || !mesDestino) return alert('Completar año y mes destino');
+
+    fetch('/pagos/clonar_mes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            anio_origen: anioOrigen,
+            mes_origen: mesOrigen,
+            anio_destino: anioDestino,
+            mes_destino: mesDestino
+        })
+    })
+    .then(res => res.json().then(data => ({ ok: res.ok, data })))
+    .then(({ ok, data }) => {
+        if (!ok) throw new Error(data.error || 'Error al clonar');
+
+        bootstrap.Modal.getInstance(document.getElementById('clonarModal')).hide();
+        new Noty({
+            type: 'success',
+            layout: 'topRight',
+            timeout: 3000,
+            theme: 'mint',
+            text: data.mensaje
+        }).show();
+
+        if (parseInt(anioDestino) === parseInt(document.getElementById('filtroAnio').value) &&
+            parseInt(mesDestino) === parseInt(document.getElementById('filtroMes').value)) {
+            filtrarPorMes();
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert(err.message);
+    });
+}

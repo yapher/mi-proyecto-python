@@ -41,6 +41,8 @@ from templates.Aplic.bajadadeot.BackEnd.bajada_de_ot import bajada_de_ot_bp
 from templates.Aplic.instalaciones.BackEnd.instalaciones import instalaciones_bp
 from templates.Aplic.trayectoria.BackEnd.trayectoria import trayectoria_bp
 from templates.Aplic.imagenes.BackEnd.imagenes import planos_bp
+from templates.Aplic.modelos3d.BackEnd.modelos_3d import modelos_3d_bp
+from templates.Aplic.estadisticadeparadas.BackEnd.estadistica_de_paradas import estadistica_de_paradas_bp
 
 app = Flask(__name__)
 app.secret_key = '221d18b67f2d4705a132d532b1d12ab2'  # Cambia esto por una clave segura
@@ -70,8 +72,8 @@ app.register_blueprint(bajada_de_ot_bp)
 app.register_blueprint(instalaciones_bp)
 app.register_blueprint(trayectoria_bp)
 app.register_blueprint(planos_bp)
-
-
+app.register_blueprint(modelos_3d_bp)
+app.register_blueprint(estadistica_de_paradas_bp)
 
 # ========= Config de correo =========
 # --- Si usas GMAIL con clave de aplicación ---

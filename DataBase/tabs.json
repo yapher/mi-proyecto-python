@@ -33,5 +33,10 @@
         "id": "GRUA321",
         "title": "GRUA321 🏬",
         "ruta_jerarquia": "SD-APR-GRUA321"
+    },
+    {
+        "id": "EMBALAJE MANUAL",
+        "title": "EMBALAJE MANUAL 🏬",
+        "ruta_jerarquia": "SD-APR-EMPAM"
     }
 ]

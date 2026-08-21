@@ -8,7 +8,7 @@
         "cuota_numero": 4,
         "cuota_total": 48,
         "vencimiento": "2025-10-25",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750889756155,
@@ -30,7 +30,7 @@
         "cuota_numero": 4,
         "cuota_total": 71,
         "vencimiento": "2025-10-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890215670,
@@ -52,7 +52,7 @@
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890295897,
@@ -63,7 +63,7 @@
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890330611,
@@ -74,7 +74,7 @@
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890402725,
@@ -96,7 +96,7 @@
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890502738,
@@ -107,7 +107,7 @@
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890571735,
@@ -118,7 +118,7 @@
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-10",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890611314,
@@ -140,7 +140,7 @@
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890776827,
@@ -151,7 +151,7 @@
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890815391,
@@ -162,7 +162,7 @@
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750891169092,
@@ -173,7 +173,7 @@
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-25",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890848129,
@@ -184,7 +184,7 @@
         "cuota_numero": 4,
         "cuota_total": 6,
         "vencimiento": "2025-10-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1750890713117,

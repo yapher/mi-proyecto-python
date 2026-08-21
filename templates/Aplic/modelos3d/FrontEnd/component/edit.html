@@ -1,0 +1,32 @@
+<div class="modal fade" id="sensorMenu" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-form"
+            style="background-color: #4b376a; color: #fff; border-radius: 1rem; box-shadow: 0 8px 32px rgba(136,201,153,0.16);">
+            <div class="modal-header"
+                style="border-bottom: 2px solid #88c999; background: linear-gradient(to right, #2a1e3b, #3e2d59); border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                <h5 class="modal-title">Opciones del Sensor</h5>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
+                    style="filter: invert(1);"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex flex-row gap-2 mb-3">
+                    <button type="button" class="btn btn-warning btn-sm btn-editar" onclick="renombrarSensor()">✏️
+                        Renombrar</button>
+                    <button type="button" class="btn btn-eliminar btn-sm" onclick="eliminarSensor()">🗑️
+                        Eliminar</button>
+                </div>
+
+                <div class="mb-3">
+                    🎨 Color: <input type="color" id="colorPicker" onchange="cambiarColorDesdePicker()">
+                </div>
+                <div class="mb-3" onclick="cambiarForma()">🔷 Forma</div>
+                <div class="mb-3">
+                    📏 Tamaño: <input type="number" id="sizeInput" min="0.1" max="5" step="0.1"
+                        onchange="cambiarTamañoSensor()">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
