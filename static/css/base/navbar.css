@@ -1,0 +1,47 @@
+/* ============================================
+   NAVBAR
+   Estilos de la barra de navegación principal.
+   ============================================ */
+
+/* Fondo y sombra del navbar */
+.navbar {
+    background: linear-gradient(to right, #2a1e3b, #3e2d59);
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
+}
+
+/* Enlaces del navbar */
+.navbar .nav-link {
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: #ffffff !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* Hover en enlaces */
+.navbar .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #88c999 !important;
+    transform: scale(1.07);
+    box-shadow: 0 0 10px rgba(136, 201, 153, 0.4);
+    z-index: 2;
+}
+
+/* Enlace activo */
+.navbar .nav-link.active {
+    border-bottom: 2px solid #88c999;
+    font-weight: bold;
+    color: #88c999 !important;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Logo / marca */
+.navbar-brand img {
+    filter: drop-shadow(0 0 4px white);
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover img {
+    transform: scale(1.1);
+}

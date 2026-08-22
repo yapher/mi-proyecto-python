@@ -1,0 +1,111 @@
+/* ============================================
+   ALERTAS Y NOTIFICACIONES
+   Estilos para SweetAlert2, Noty y popups.
+   ============================================ */
+
+/* ====== SweetAlert2 personalizado ====== */
+.swal-custom-popup {
+    background-color: #27372b !important;
+    color: #fff;
+    border-radius: 1rem !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
+    padding: 1.5rem !important;
+    font-family: 'Inter', sans-serif;
+}
+
+.swal-custom-title {
+    font-weight: 600 !important;
+    font-size: 1.2rem !important;
+    text-align: center !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.swal-custom-confirm-button {
+    border-radius: 30px !important;
+    background-color: #88c999 !important;
+    color: #222 !important;
+    border: none !important;
+    padding: 0.5rem 1.5rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.5px !important;
+    transition: all 0.3s ease !important;
+}
+
+.swal-custom-confirm-button:hover {
+    background-color: #77b88b !important;
+    color: #111 !important;
+    transform: scale(1.07) !important;
+    box-shadow: 0 0 12px rgba(136, 201, 153, 0.4) !important;
+}
+
+/* ====== Notificaciones Noty ====== */
+.noty_bar {
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 10px;
+    color: white;
+    font-weight: bold;
+    font-family: sans-serif;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.noty_type__success {
+    background-color: #28a745;
+}
+
+.noty_type__error {
+    background-color: #dc3545;
+}
+
+.noty_type__warning {
+    background-color: #ffc107;
+    color: black;
+}
+
+.noty_type__info {
+    background-color: #17a2b8;
+}
+
+.noty_layout__topRight {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+/* ====== Popups personalizados ====== */
+/* Fondo semitransparente */
+.popup-bg {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Modal centrado */
+.popup-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #4b376a;
+    color: white;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 450px;
+    width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 0 15px rgba(136, 201, 153, 0.6);
+    z-index: 1000;
+    font-family: 'Inter', sans-serif;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Botones dentro del popup */
+#popup .btn {
+    font-weight: 600;
+}

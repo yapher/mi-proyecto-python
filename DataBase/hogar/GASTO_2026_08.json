@@ -106,5 +106,14 @@
         "tipo": "único",
         "vencimiento": "2026-08-01",
         "pagado": false
+    },
+    {
+        "id": 1787365982778,
+        "rubro": "Almacen",
+        "descripcion": "Harina",
+        "importe": 3000,
+        "tipo": "único",
+        "vencimiento": "2026-08-21",
+        "pagado": false
     }
 ]

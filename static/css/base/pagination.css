@@ -1,0 +1,60 @@
+/* ============================================
+   PAGINACIÓN
+   Estilos para los controles de paginación
+   (Anterior, números, Siguiente).
+   ============================================ */
+
+/* Enlace de página base */
+.pagination .page-item .page-link {
+    background: linear-gradient(to bottom, #2c2c2c, #3c4e41);
+    color: #88c999;
+    border: none;
+    border-radius: 50px;
+    padding: 0.6rem 1.7rem;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    text-align: center;
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,0.05),
+        0 4px 8px rgba(0, 0, 0, 0.4),
+        0 0 0 2px transparent,
+        0 4px 0 0 #88c999;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+/* Hover en enlace de página */
+.pagination .page-item .page-link:hover {
+    color: #101010;
+    background: #88c999;
+    transform: translateY(-1px) scale(1.03);
+    box-shadow:
+        0 6px 12px rgba(136, 201, 153, 0.3),
+        0 0 0 2px rgba(136, 201, 153, 0.5),
+        inset 0 0 0 1px rgba(255,255,255,0.1);
+}
+
+/* Página activa */
+.pagination .page-item.active .page-link {
+    background: #8e67c7;
+    color: #fff;
+    box-shadow:
+        0 6px 14px rgba(142, 103, 199, 0.45),
+        0 4px 0 0 #8e67c7;
+    transform: scale(1.05);
+}
+
+/* Página deshabilitada */
+.pagination .page-item.disabled .page-link {
+    background: #1f1f1f;
+    color: #777;
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* Separación horizontal entre botones */
+.pagination .page-item {
+    margin: 0 6px;
+}

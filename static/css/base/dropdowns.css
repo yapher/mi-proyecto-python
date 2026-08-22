@@ -1,0 +1,101 @@
+/* ============================================
+   DROPDOWNS Y SUBMENÚS
+   Estilos para menús desplegables y submenús
+   anidados (Bootstrap 5).
+   ============================================ */
+
+/* Menú desplegable base */
+.dropdown-menu {
+    background-color: #2a1e3b;
+    border: 1px solid #88c999;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0;
+}
+
+/* Item del dropdown */
+.dropdown-item {
+    color: #fff;
+    padding: 0.5rem 4.5rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    border-radius: 0.5rem;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #88c999;
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(136, 201, 153, 0.3);
+}
+
+/* Iconos y emojis bien alineados */
+.dropdown-item::before {
+    margin-right: 0.9rem;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #88c999;
+}
+
+/* ============================================
+   SUBMENÚ ANIDADO (Bootstrap 5)
+   ============================================ */
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -0.2rem;
+    margin-left: 0.1rem;
+    border-radius: 0.5rem;
+    background-color: #2a1e3b;
+    border: 1px solid #88c999;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    animation: fadeSlideIn 0.3s ease forwards;
+    opacity: 0;
+    display: block;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Flecha indicadora de submenú */
+.dropdown-submenu > .dropdown-item::after {
+    content: "▶";
+    float: right;
+    margin-right: -2.5rem;
+    color: #88c999;
+}
+
+/* ============================================
+   ANIMACIONES DE DROPDOWNS
+   ============================================ */
+@keyframes fadeSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animación de entrada de filas (usada en tablas dinámicas) */
+@keyframes fadeInRow {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

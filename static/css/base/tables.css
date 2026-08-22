@@ -1,0 +1,172 @@
+/* ============================================
+   TABLAS
+   Estilos de tablas generales y calendario.
+   ============================================ */
+
+/* ====== Tabla scroll y header sticky ====== */
+.tabla-scroll {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.sticky-header th {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(to right, #2a1e3b, #3e2d59);
+    color: #fff;
+    z-index: 2;
+    padding: 0.75rem;
+    text-align: center;
+    border-bottom: 2px solid #88c999;
+    transition: all 0.3s ease;
+}
+
+.sticky-header th:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #88c999;
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(136, 201, 153, 0.4);
+}
+
+/* ====== Tabla base (calendario) ====== */
+table { width: 100%; border-collapse: collapse; }
+
+thead th {
+    text-align: center;
+    font-weight: 700;
+    background: #0f172a;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+td {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #e5e7eb;
+    padding: 0;
+    background: #ffffff;
+}
+
+/* Celdas vacías (leading/trailing) */
+td.vacio {
+    background: repeating-linear-gradient(
+        45deg, #f8fafc, #f8fafc 8px, #f1f5f9 8px, #f1f5f9 16px
+    );
+}
+
+/* ====== Contenedor visual del día ====== */
+.dia {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 6px;
+    border-radius: 12px;
+    margin: 6px;
+    padding: 8px;
+    cursor: pointer;
+    transition: transform 140ms ease, box-shadow 140ms ease, background-color 180ms ease, filter 180ms ease;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.35);
+    position: relative;
+    color: #0f172a !important;
+}
+
+.dia:hover {
+    transform: translateY(-2px) scale(1.015);
+    box-shadow: 0 10px 22px rgba(0,0,0,.15);
+    filter: saturate(1.03);
+}
+
+/* Etiquetas internas */
+.numero { font-weight: 700; font-size: 1rem; line-height: 1; opacity: .9; user-select: none; }
+.semana-label { display: none; font-size: .8rem; font-weight: 600; opacity: .8; }
+
+/* ====== Evento pill ====== */
+.evento-pill {
+    font-size: .8rem;
+    line-height: 1.1;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.5);
+    border: 1px solid rgba(255,255,255,.7);
+    backdrop-filter: blur(2px);
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: transform 140ms ease, background-color 180ms ease, opacity 180ms ease;
+}
+
+.dia:hover .evento-pill { transform: translateX(2px); background: rgba(255,255,255,.65); }
+
+/* ====== Paletas por día (Lun–Dom) ====== */
+.dia-lun { background: linear-gradient(180deg, #e8f3ff, #cfe9ff); border: 1px solid #bfdcff; }
+.dia-mar { background: linear-gradient(180deg, #e9fff3, #ccf7e4); border: 1px solid #b9ecd7; }
+.dia-mie { background: linear-gradient(180deg, #fff5e6, #ffe8c7); border: 1px solid #ffdca9; }
+.dia-jue { background: linear-gradient(180deg, #f5e9ff, #ead6ff); border: 1px solid #dcc2ff; }
+.dia-vie { background: linear-gradient(180deg, #fff0f2, #ffd9df); border: 1px solid #ffc2cc; }
+.dia-sab { background: linear-gradient(180deg, #eefcf5, #d6f7e8); border: 1px solid #c1ecd9; }
+.dia-dom { background: linear-gradient(180deg, #f4f7ff, #e0e7ff); border: 1px solid #c7d2fe; }
+
+/* ====== Día actual destacado ====== */
+.hoy {
+    background: linear-gradient(135deg, #ffeb99, #ffd84d);
+    color: #000 !important;
+    font-weight: 800;
+    box-shadow: 0 0 12px rgba(255, 193, 7, 0.6);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 12px rgba(255, 193, 7, 0.6); }
+    50% { transform: scale(1.05); box-shadow: 0 0 18px rgba(255, 193, 7, 0.8); }
+    100% { transform: scale(1); box-shadow: 0 0 12px rgba(255, 193, 7, 0.6); }
+}
+
+/* Evitar que .text-white del table afecte internamente */
+.table.text-white .dia, .table.text-white .dia * { color: #0f172a !important; }
+
+/* ====== Responsivo: grilla → lista ====== */
+@media (max-width: 992px) {
+    .dia { min-height: 70px; padding: 6px; }
+    .numero { font-size: 0.95rem; }
+    .evento-pill { font-size: 0.75rem; }
+}
+
+@media (max-width: 576px) {
+    thead { display: none; }
+    table, tbody, tr, td { display: block; width: 100%; }
+    tr { margin-bottom: 10px; }
+    td { border: none; padding: 0; height: auto; }
+    td.vacio { display: none; }
+    .dia {
+        min-height: 64px;
+        margin: 8px 0;
+        padding: 10px;
+        align-items: flex-start;
+    }
+    .semana-label { display: inline-block; }
+    .numero { font-size: 1rem; }
+    .evento-pill { font-size: 0.8rem; padding: 3px 8px; }
+}
+
+/* Responsivo para pantallas chicas */
+@media (max-width: 768px) {
+    .tabla-scroll {
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .sticky-header th {
+        position: static;
+        background: #3e2d59;
+        color: white;
+    }
+}

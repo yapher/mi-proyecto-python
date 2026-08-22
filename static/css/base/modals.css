@@ -1,0 +1,29 @@
+/* ============================================
+   MODALES
+   Estilos para modales Bootstrap y fondos
+   de formulario reutilizables.
+   ============================================ */
+
+/* Fondo de formulario (usado en modales y formularios) */
+.bg-form {
+    background-color: #4b376a;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+/* Diálogo del modal */
+.modal-dialog {
+    max-width: 90vw;
+    width: auto;
+    margin: 1.75rem auto;
+}
+
+/* Cuerpo del modal */
+.modal-body {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+

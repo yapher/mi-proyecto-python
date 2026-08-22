@@ -1,7 +1,14 @@
-/* ============================================
-   ESTILOS ESPECÍFICOS: Gestión de Menú
-   Todo lo compartido está en css/base/components.css
-   ============================================ */
+/* ==========================================
+   BOTONES EDITAR/CANCELAR (patrón CRUD)
+   Repetido en: gestion_menu, crear_almacenes,
+   crear_procedimiento
+   ========================================== */
+.btn-editar,
+.btn-cancelar {
+    display: none !important;
+}
 
-/* Actualmente no hay estilos exclusivos de esta app.
-   Si en el futuro se necesitan, agregarlos aquí. */
+.btn-editar.active,
+.btn-cancelar.active {
+    display: inline-block !important;
+}
