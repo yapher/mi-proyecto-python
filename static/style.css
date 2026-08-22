@@ -9,11 +9,13 @@
 @import url('css/base/modals.css');
 @import url('css/base/alerts.css');
 @import url('css/base/loaders.css');
+@import url('css/base/mobile.css');
 
 /* Fondo general */
 body {
     background-color: #3e2d59;
     color: white;
+    overflow-x: hidden;
 }
 
 /* Input con emoji */
@@ -107,7 +109,3 @@ body {
     cursor: pointer;
     flex: 1 1 auto;
 }
-
-
-
-

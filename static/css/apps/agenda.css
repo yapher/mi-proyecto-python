@@ -1,10 +1,8 @@
 /* Estilos específicos para la aplicación Agenda */
 
-/* Reglas duplicadas eliminadas: html, body, .table-responsive, .semana-label, .table, .table th, .table td - ahora centralizadas en style.css */
-
 /* Estilo para eventos realizados */
 .evento-realizado {
-    background-color: #6c757d !important; /* gris */
+    background-color: #6c757d !important;
     text-decoration: line-through;
     color: #dcdcdc !important;
 }
@@ -35,24 +33,26 @@
 }
 
 /* PRIORIDAD: colores (solo si NO está realizado; el gris con !important gana) */
-.evento-pill.prio-alta  { 
-    background-color: #ff4d4d; 
-    color: #fff; 
+.evento-pill.prio-alta {
+    background-color: #ff4d4d;
+    color: #fff;
 }
 
-.evento-pill.prio-media { 
-    background-color: #ffc107; 
-    color: #222; 
+.evento-pill.prio-media {
+    background-color: #ffc107;
+    color: #222;
 }
 
-.evento-pill.prio-baja  { 
-    background-color: #28a745; 
-    color: #fff; 
+.evento-pill.prio-baja {
+    background-color: #28a745;
+    color: #fff;
 }
 
 /* Estilos para el calendario */
 .table {
     background-color: transparent;
+    width: 100% !important;
+    table-layout: fixed; /* Celdas de ancho uniforme */
 }
 
 .table th {
@@ -61,28 +61,32 @@
     color: #fff;
     text-align: center;
     font-weight: 600;
+    padding: 8px 4px;
 }
 
 .table td {
     border-color: #88c999;
     vertical-align: top;
-    padding: 8px;
+    padding: 4px;
+    width: 14.28%; /* 100% / 7 días */
 }
 
 .dia {
     min-height: 80px;
-    padding: 8px;
+    padding: 6px;
     border-radius: 8px;
     background-color: #4b376a;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
+    word-wrap: break-word;
+    overflow: hidden;
 }
 
 .dia:hover {
     background-color: #5a4a7a;
     transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .dia.hoy {
@@ -91,8 +95,6 @@
     font-weight: bold;
     box-shadow: 0 0 15px rgba(136, 201, 153, 0.6);
 }
-
-/* ...estilos exclusivos de agenda... */
 
 .numero {
     font-size: 1.2rem;
@@ -113,11 +115,98 @@
 }
 
 .controls-responsive .form-select {
-    min-width: 120px;
+    min-width: 100px;
+    flex: 1;
 }
 
+/* ============================================
+   AGENDA - MOBILE (< 768px)
+   ============================================ */
+@media (max-width: 767.98px) {
+    /* Contenedor principal sin padding excesivo */
+    .container-fluid.full-height {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
 
-/* Responsive */
-@media (max-width: 768px) {
-    /* ...estilos exclusivos de agenda... */
+    /* Título más compacto */
+    h1.text-center {
+        font-size: 1.5rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    /* Controles en columna para mejor uso del espacio */
+    .controls-responsive {
+        flex-direction: column !important;
+        align-items: stretch !important;
+    }
+
+    .controls-responsive .form-select {
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+
+    .controls-responsive .btn {
+        width: 100% !important;
+    }
+
+    /* Calendario: celdas más chicas pero legibles */
+    .table th {
+        font-size: 0.75rem;
+        padding: 6px 2px;
+    }
+
+    .table td {
+        padding: 2px;
+    }
+
+    .dia {
+        min-height: 60px;
+        padding: 4px;
+        font-size: 0.85rem;
+    }
+
+    .numero {
+        font-size: 1rem;
+        margin-bottom: 4px;
+    }
+
+    /* Pills de eventos más chicos */
+    .evento-pill {
+        font-size: 0.7rem;
+        padding: 2px 4px;
+        margin-top: 3px;
+    }
+
+    .evento-pill input[type="checkbox"] {
+        width: 12px;
+        height: 12px;
+    }
+
+    .evento-pill span {
+        max-width: 100%;
+    }
+}
+
+/* ============================================
+   AGENDA - MOBILE MUY CHICO (< 480px)
+   ============================================ */
+@media (max-width: 479.98px) {
+    .dia {
+        min-height: 50px;
+        padding: 3px;
+    }
+
+    .numero {
+        font-size: 0.9rem;
+    }
+
+    .evento-pill {
+        font-size: 0.65rem;
+        padding: 1px 3px;
+    }
+
+    .table th {
+        font-size: 0.7rem;
+    }
 }

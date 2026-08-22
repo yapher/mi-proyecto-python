@@ -1,0 +1,351 @@
+/* ================================================================
+   MOBILE.CSS — Estilos responsive + corrección de ancho global
+   ================================================================ */
+
+/* ================================================================
+   ANCHO GLOBAL DE APPS (SIN media query - aplica SIEMPRE)
+   Quita el max-width fijo de 1200px de los contenedores de apps
+   para que ocupen el 100% del <main> tanto en desktop como mobile
+   ================================================================ */
+.rubros-container,
+.almacenes-container,
+.ubicacion-container,
+.procedimiento-container,
+.planos-container,
+.imagenes-container,
+.gestion-menu-container,
+.gestion-aplicaciones-container,
+.cargar-procedimiento-container,
+.inventario-container,
+.pagos-container,
+.crear-rubros-container,
+.estadisticas-container,
+.tareas-container,
+.graficos-repuestos-container,
+.lista-repuestos-container,
+.bajada-ot-container,
+.instalaciones-container,
+.trayectoria-container,
+.modelos-3d-container,
+.estadistica-paradas-container,
+.crear-listado-container,
+.crear-almacenes-container,
+.gestion-herramientas-container,
+.crear-procedimiento-container,
+.gestion-de-bloqueos-container,
+.agenda-container,
+.spotify-container,
+.detect-orderostros-container,
+.verificacion-facial-container,
+.estados-repuestos-container,
+.graficos-pagos-container {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+/* ================================================================
+   NAVBAR Y MENÚ - MOBILE (< 992px)
+   ================================================================ */
+@media (max-width: 991.98px) {
+
+    /* Navbar más compacto */
+    .navbar {
+        padding-top: 0.4rem;
+        padding-bottom: 0.4rem;
+    }
+
+    .navbar-brand {
+        font-size: 1rem;
+    }
+
+    .navbar-brand img {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    /* Menú desplegable scrollable */
+    .navbar-collapse {
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        padding: 0.5rem 0;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Items del navbar más espaciados y táctiles */
+    .navbar-nav {
+        gap: 0 !important;
+        width: 100%;
+    }
+
+    .navbar-nav .nav-item {
+        width: 100%;
+        border-bottom: 1px solid rgba(136, 201, 153, 0.15);
+    }
+
+    .navbar-nav .nav-item:last-child {
+        border-bottom: none;
+    }
+
+    .navbar-nav .nav-link {
+        padding: 0.85rem 1rem !important;
+        font-size: 1rem;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    /* ================================================================
+       DROPDOWNS EN MOBILE (conversión a acordeón)
+       ================================================================ */
+    .dropdown-menu {
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        float: none !important;
+        background-color: rgba(42, 30, 59, 0.6) !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: none;
+    }
+
+    .dropdown-menu.show {
+        display: block !important;
+    }
+
+    .dropdown-menu-level-1 {
+        padding-left: 0.5rem !important;
+    }
+
+    .dropdown-menu-level-2 {
+        padding-left: 1rem !important;
+        background-color: rgba(30, 20, 45, 0.6) !important;
+    }
+
+    /* Items del dropdown más grandes para touch */
+    .dropdown-item {
+        padding: 0.75rem 1rem !important;
+        font-size: 0.95rem;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        border-radius: 0 !important;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+        transform: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Flechas de submenús */
+    .submenu-arrow {
+        display: none !important;
+    }
+
+    .submenu-arrow-mobile {
+        margin-left: auto;
+        transition: transform 0.3s ease;
+        font-size: 0.85rem;
+    }
+
+    .dropdown-submenu.show .submenu-arrow-mobile,
+    .dropdown-submenu[aria-expanded="true"] .submenu-arrow-mobile {
+        transform: rotate(180deg);
+    }
+
+    /* Submenús anidados: en mobile NO se abren hacia el costado */
+    .dropdown-submenu {
+        position: relative !important;
+    }
+
+    .dropdown-submenu > .dropdown-menu {
+        top: auto !important;
+        left: auto !important;
+        margin: 0 !important;
+    }
+
+    .dropdown-divider {
+        display: none;
+    }
+}
+
+/* ================================================================
+   DESKTOP (>= 992px) — Ocultar flecha mobile
+   ================================================================ */
+@media (min-width: 992px) {
+    .submenu-arrow-mobile {
+        display: none !important;
+    }
+
+    .navbar-nav .nav-link {
+        min-height: auto;
+    }
+}
+
+/* ================================================================
+   CONTENIDO PRINCIPAL - MOBILE (< 576px)
+   ================================================================ */
+@media (max-width: 575.98px) {
+    /* Headers de app más compactos en mobile */
+    .rubros-header,
+    .almacenes-header,
+    .ubicacion-header,
+    .procedimiento-header,
+    .planos-header,
+    .imagenes-header,
+    .gestion-menu-header,
+    .gestion-aplicaciones-header {
+        margin-bottom: 1rem !important;
+    }
+
+    /* Títulos más chicos */
+    h1 {
+        font-size: clamp(1.4rem, 5vw, 2rem) !important;
+    }
+
+    h2 {
+        font-size: clamp(1.2rem, 4.5vw, 1.7rem) !important;
+    }
+
+    h3 {
+        font-size: clamp(1.1rem, 4vw, 1.4rem) !important;
+    }
+}
+
+/* ================================================================
+   TABLAS - scroll horizontal en mobile
+   ================================================================ */
+@media (max-width: 767.98px) {
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        max-width: 100%;
+    }
+
+    /* Modales ocupan casi toda la pantalla */
+    .modal-dialog {
+        margin: 0.5rem !important;
+        max-width: calc(100vw - 1rem) !important;
+    }
+
+    .modal-content {
+        border-radius: 0.5rem;
+    }
+
+    /* Inputs más grandes para touch (evita zoom iOS) */
+    .form-control,
+    .form-select {
+        min-height: 44px;
+        font-size: 16px;
+    }
+
+    /* Botones ocupan todo el ancho en formularios mobile */
+    .bg-form .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* ================================================================
+   NOTIFICACIONES NOTY - MOBILE
+   ================================================================ */
+@media (max-width: 575.98px) {
+    .noty_layout__topRight {
+        top: 70px !important;
+        right: 10px !important;
+        left: 10px !important;
+        max-width: calc(100vw - 20px);
+    }
+
+    .noty_bar {
+        margin-bottom: 8px !important;
+    }
+}
+
+/* ================================================================
+   SELECT2 - MOBILE
+   ================================================================ */
+@media (max-width: 767.98px) {
+    .select2-container {
+        width: 100% !important;
+    }
+
+    .select2-dropdown {
+        z-index: 10000;
+        max-width: calc(100vw - 20px);
+    }
+
+    .select2-search__field {
+        font-size: 16px !important;
+        min-height: 44px;
+    }
+
+    .select2-results__option {
+        min-height: 44px;
+        padding: 10px 12px !important;
+    }
+}
+
+/* ================================================================
+   UTILIDADES TOUCH
+   ================================================================ */
+.btn,
+.dropdown-item,
+.nav-link {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+/* Evita zoom en iOS cuando font-size < 16px */
+@media (max-width: 767.98px) {
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="url"],
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+}
+
+/* ================================================================
+   CANVAS / CROQUIS - MOBILE
+   ================================================================ */
+@media (max-width: 767.98px) {
+    #canvas {
+        max-width: 100%;
+        height: auto !important;
+    }
+
+    .canvas-container {
+        width: 100% !important;
+        overflow-x: auto;
+    }
+}
+
+/* ================================================================
+   RENDIMIENTO TOUCH
+   ================================================================ */
+@media (hover: none) and (pointer: coarse) {
+    .btn:hover,
+    .dropdown-item:hover,
+    .nav-link:hover {
+        transform: none !important;
+    }
+
+    .btn-sm {
+        padding: 0.4rem 0.8rem;
+        min-height: 40px;
+    }
+}
