@@ -1,63 +1,18 @@
-/* Estilos para el componente Gestión de Aplicaciones */
+/* ============================================
+   ESTILOS ESPECÍFICOS: Gestión de Aplicaciones
+   Todo lo compartido está en css/base/components.css
+   ============================================ */
 
-/* Botón de agregar oculto por defecto */
+/* Botón de agregar oculto por defecto (lógica específica de esta app) */
 .btn-agregar {
     display: none !important;
 }
 
-/* Botón de agregar visible cuando está activo */
 .btn-agregar.active {
     display: inline-block !important;
 }
 
-/* Estilos para el formulario */
-.gestion-aplicaciones-form {
-    background-color: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 0.5rem;
-    margin-bottom: 2rem;
-}
-
-.gestion-aplicaciones-form .form-label {
-    font-weight: 600;
-    color: #495057;
-    margin-bottom: 0.5rem;
-}
-
-/* Estilos para el contenedor principal */
-.gestion-aplicaciones-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-}
-
-.gestion-aplicaciones-header {
-    margin-bottom: 2rem;
-    text-align: center;
-}
-
-.gestion-aplicaciones-header h3 {
-    color: #343a40;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-}
-
-/* Estilos para el input con emoji */
-.input-with-emoji {
-    position: relative;
-}
-
-.input-emoji {
-    position: absolute;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.2rem;
-    z-index: 10;
-    pointer-events: none;
-}
-
-/* Estilos para el botón de crear aplicación */
+/* Botón de crear aplicación (gradiente azul único) */
 .btn-crear-app {
     background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
     border: none;
@@ -95,16 +50,8 @@
     }
 }
 
-/* Responsive design */
+/* Responsive específico */
 @media (max-width: 768px) {
-    .gestion-aplicaciones-container {
-        padding: 0.5rem;
-    }
-    
-    .gestion-aplicaciones-form {
-        padding: 1rem;
-    }
-    
     .btn-crear-app {
         width: 100%;
         padding: 1rem;

@@ -1,0 +1,47 @@
+/* ============================================
+   VARIABLES CSS GLOBALES
+   Fundación del sistema de diseño.
+   Este archivo solo DEFINE variables, no cambia
+   ningún estilo existente.
+   ============================================ */
+
+:root {
+    /* ==========================================
+       COLORES DE MARCA (los 7 que se repiten)
+       ========================================== */
+
+    /* Fondo general del body (violeta oscuro) */
+    --color-fondo: #3e2d59;
+
+    /* Fondo de cards, tablas y contenedores (violeta medio) */
+    --color-superficie: #4b376a;
+
+    /* Fondo al pasar el mouse / hover (violeta claro) */
+    --color-hover: #5a4a7a;
+
+    /* Verde principal: botones, acentos, bordes */
+    --color-primario: #88c999;
+
+    /* Verde oscuro: estado hover del primario */
+    --color-primario-hover: #77b88b;
+
+    /* Violeta muy oscuro: gradientes de navbar y headers */
+    --color-gradiente: #2a1e3b;
+
+    /* Amarillo: labels de formularios */
+    --color-label: #e5d64f;
+
+    /* ==========================================
+       COLORES DE ESTADO
+       ========================================== */
+    --color-exito: #28a745;
+    --color-alerta: #ffc107;
+    --color-peligro: #dc3545;
+    --color-info: #17a2b8;
+
+    /* ==========================================
+       TEXTO
+       ========================================== */
+    --color-texto: #ffffff;
+    --color-texto-suave: #b8b8b8;
+}

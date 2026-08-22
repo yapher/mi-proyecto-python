@@ -1,0 +1,399 @@
+/* ============================================
+   COMPONENTES REUTILIZABLES
+   Patrones que se repiten en múltiples apps.
+   Usa variables de variables.css.
+   ============================================ */
+
+/* ==========================================
+   CONTENEDOR PRINCIPAL (light theme)
+   Usado en: rubros, almacenes, procedimiento,
+   planos, imagenes, gestion_menu, gestion_aplicaciones,
+   crear_ubicacion_tecnica
+   ========================================== */
+.rubros-container,
+.almacenes-container,
+.ubicacion-container,
+.procedimiento-container,
+.planos-container,
+.imagenes-container,
+.gestion-menu-container,
+.gestion-aplicaciones-container,
+.cargar-procedimiento-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* ==========================================
+   HEADER DE APP (light theme)
+   ========================================== */
+.rubros-header,
+.almacenes-header,
+.ubicacion-header,
+.procedimiento-header,
+.planos-header,
+.imagenes-header,
+.gestion-menu-header,
+.gestion-aplicaciones-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.rubros-header h3,
+.almacenes-header h3,
+.ubicacion-header h3,
+.procedimiento-header h3,
+.planos-header h3,
+.imagenes-header h3,
+.gestion-menu-header h3,
+.gestion-aplicaciones-header h3 {
+    color: #343a40;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+/* ==========================================
+   FORMULARIO (light theme)
+   ========================================== */
+.rubros-form,
+.almacenes-form,
+.ubicacion-form,
+.procedimiento-form,
+.planos-form,
+.imagenes-form {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+/* ==========================================
+   TABLA (light theme)
+   ========================================== */
+.rubros-tabla,
+.almacenes-tabla,
+.ubicacion-tabla,
+.procedimiento-tabla,
+.planos-tabla,
+.imagenes-tabla,
+.gestion-menu-tabla {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.rubros-tabla thead,
+.almacenes-tabla thead,
+.ubicacion-tabla thead,
+.procedimiento-tabla thead,
+.planos-tabla thead,
+.imagenes-tabla thead,
+.gestion-menu-tabla thead {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.rubros-tabla tbody tr:hover,
+.almacenes-tabla tbody tr:hover,
+.ubicacion-tabla tbody tr:hover,
+.procedimiento-tabla tbody tr:hover,
+.planos-tabla tbody tr:hover,
+.imagenes-tabla tbody tr:hover,
+.gestion-menu-tabla tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* ==========================================
+   BOTÓN DE ACCIÓN (light theme)
+   ========================================== */
+.btn-accion {
+    margin: 0 0.25rem;
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+    transition: all 0.15s ease-in-out;
+}
+
+.btn-accion:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+/* ==========================================
+   SELECTOR DE NIVEL (light theme)
+   ========================================== */
+.nivel-select {
+    border: 2px solid #dee2e6;
+    border-radius: 0.375rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.nivel-select:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* ==========================================
+   INPUT CON EMOJI (light theme)
+   ========================================== */
+.input-with-emoji {
+    position: relative;
+}
+
+.input-emoji {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 1.3rem;
+    user-select: none;
+    line-height: 1;
+}
+
+/* ==========================================
+   TEMA OSCURO: Contenedor de app
+   Usado en: agenda, tareas, inventario,
+   gestiondeherramientas
+   ========================================== */
+.app-container {
+    min-height: 100vh;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+.app-header {
+    background-color: var(--color-superficie);
+    padding: 20px;
+    border-bottom: 3px solid var(--color-primario);
+    margin-bottom: 30px;
+}
+
+.app-header h1,
+.app-header h2,
+.app-header h3 {
+    color: var(--color-primario);
+    margin: 0;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* ==========================================
+   TEMA OSCURO: Formulario
+   ========================================== */
+.app-form-container {
+    background-color: var(--color-superficie);
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid var(--color-primario);
+    margin-bottom: 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================================
+   TEMA OSCURO: Tabla
+   ========================================== */
+.app-table {
+    background-color: transparent;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.app-table th {
+    background-color: var(--color-superficie);
+    color: var(--color-primario);
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-primario);
+}
+
+.app-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(136, 201, 153, 0.2);
+    color: var(--color-texto);
+}
+
+.app-table tbody tr:hover {
+    background-color: var(--color-hover);
+}
+
+/* ==========================================
+   TEMA OSCURO: Botones
+   ========================================== */
+.app-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.app-btn-primary {
+    background-color: var(--color-primario);
+    color: var(--color-fondo);
+}
+
+.app-btn-primary:hover {
+    background-color: var(--color-primario-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(136, 201, 153, 0.4);
+}
+
+.app-btn-danger {
+    background-color: var(--color-peligro);
+    color: #fff;
+}
+
+.app-btn-danger:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   TEMA OSCURO: Modal
+   ========================================== */
+.modal-content.bg-form {
+    background-color: var(--color-superficie);
+    border: 2px solid var(--color-primario);
+}
+
+.modal-content.bg-form .modal-header {
+    border-bottom: 1px solid var(--color-primario);
+}
+
+.modal-content.bg-form .modal-footer {
+    border-top: 1px solid var(--color-primario);
+}
+
+/* ==========================================
+   TEMA OSCURO: Loading spinner
+   ========================================== */
+.app-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--color-primario);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ==========================================
+   RESPONSIVE COMÚN (light theme)
+   ========================================== */
+@media (max-width: 768px) {
+    /* Niveles con indentación reducida en mobile */
+    .nivel-1 { padding-left: 20px; }
+    .nivel-2 { padding-left: 40px; }
+    .nivel-3 { padding-left: 60px; }
+    .nivel-4 { padding-left: 80px; }
+    .nivel-5 { padding-left: 100px; }
+    .rubros-container,
+    .almacenes-container,
+    .ubicacion-container,
+    .procedimiento-container,
+    .planos-container,
+    .imagenes-container,
+    .gestion-menu-container,
+    .gestion-aplicaciones-container {
+        padding: 0.5rem;
+    }
+
+    .rubros-form,
+    .almacenes-form,
+    .ubicacion-form,
+    .procedimiento-form,
+    .planos-form,
+    .imagenes-form {
+        padding: 1rem;
+    }
+}
+
+/* ==========================================
+   RESPONSIVE COMÚN (dark theme)
+   ========================================== */
+@media (max-width: 768px) {
+    .app-container {
+        padding: 15px;
+    }
+
+    .app-header {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .app-form-container {
+        padding: 20px;
+    }
+
+    .app-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .app-table {
+        font-size: 0.9rem;
+    }
+
+    .app-table th,
+    .app-table td {
+        padding: 8px 10px;
+    }
+}
+
+/* ==========================================
+   TABLA JERÁRQUICA (light theme)
+   Repetido en: rubros, almacenes, ubicacion,
+   procedimiento, gestion_menu, gestion_aplicaciones
+   ========================================== */
+.tabla-hierarquica td {
+    transition: padding-left 0.3s ease;
+}
+
+/* Niveles de indentación para la jerarquía */
+.nivel-0 { padding-left: 0px; }
+.nivel-1 { padding-left: 30px; }
+.nivel-2 { padding-left: 60px; }
+.nivel-3 { padding-left: 90px; }
+.nivel-4 { padding-left: 120px; }
+.nivel-5 { padding-left: 150px; }
+
+/* ==========================================
+   LABELS DE FORMULARIO (light theme)
+   ========================================== */
+.rubros-form .form-label,
+.almacenes-form .form-label,
+.ubicacion-form .form-label,
+.procedimiento-form .form-label,
+.gestion-menu-form .form-label,
+.gestion-aplicaciones-form .form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+/* ==========================================
+   BOTONES EDITAR/CANCELAR (patrón CRUD)
+   Repetido en: gestion_menu, crear_almacenes,
+   crear_procedimiento
+   ========================================== */
+.btn-editar,
+.btn-cancelar {
+    display: none !important;
+}
+
+.btn-editar.active,
+.btn-cancelar.active {
+    display: inline-block !important;
+}
