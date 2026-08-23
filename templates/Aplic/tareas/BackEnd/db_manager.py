@@ -1,33 +1,26 @@
 import json
 import os
+from db_json import JsonStore
 
 DB_PATH = "DataBase/time/dataTask.json"
+_store = JsonStore(DB_PATH)
+
 
 def cargar_eventos():
-    if not os.path.exists(DB_PATH):
-        return []
-    with open(DB_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+    return _store.cargar()
+
 
 def guardar_eventos(eventos):
-    with open(DB_PATH, "w", encoding="utf-8") as f:
-        json.dump(eventos, f, indent=4, ensure_ascii=False)
+    _store.guardar(eventos)
+
 
 def agregar_evento(evento):
-    eventos = cargar_eventos()
-    evento["id"] = max([e["id"] for e in eventos], default=0) + 1
-    eventos.append(evento)
-    guardar_eventos(eventos)
+    return _store.agregar(evento)
+
 
 def editar_evento(evento_id, nuevos_datos):
-    eventos = cargar_eventos()
-    for evento in eventos:
-        if evento["id"] == evento_id:
-            evento.update(nuevos_datos)
-            break
-    guardar_eventos(eventos)
+    _store.editar(evento_id, nuevos_datos)
+
 
 def eliminar_evento(evento_id):
-    eventos = cargar_eventos()
-    eventos = [e for e in eventos if e["id"] != evento_id]
-    guardar_eventos(eventos)
+    _store.eliminar(evento_id)

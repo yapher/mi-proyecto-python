@@ -1,388 +1,260 @@
-from pathlib import Path
-import base64
+#!/usr/bin/env python3
+"""
+exportar_proyecto.py
 
-# ==========================================================
-# CONFIGURACIÓN GENERAL
-# ==========================================================
+Genera un archivo "Proyecto_Completo.txt" que contiene:
+  1. La estructura completa de directorios y archivos del proyecto.
+  2. El contenido completo de cada archivo de código encontrado.
 
-# Carpeta del proyecto
-RAIZ = Path(__file__).resolve().parent
+Uso:
+    python exportar_proyecto.py
+    python exportar_proyecto.py --raiz "C:/ruta/a/mi/proyecto"
+    python exportar_proyecto.py --salida "MiExport.txt"
+    python exportar_proyecto.py --extensiones .py .txt .json .md
+"""
 
-# Archivo de salida
-SALIDA = RAIZ / "Proyecto_Completo.txt"
-SALIDA_RESOLUTA = SALIDA.resolve()
+import os
+import argparse
+from datetime import datetime
 
-# Si está en True, los archivos binarios se exportan como base64.
-# Atención: puede generar un archivo enorme si hay .xlsx, .pkl, .zip, imágenes, etc.
-INCLUIR_BINARIOS_BASE64 = False
+# ---------------------------------------------------------------------------
+# Configuración por defecto
+# ---------------------------------------------------------------------------
 
-# Carpetas a ignorar
-IGNORAR_CARPETAS = {
-    ".git",
-    ".venv",
-    "venv",
-    "env",
-    "__pycache__",
-    ".idea",
-    ".vscode",
-    "node_modules",
-    "dist",
-    "build",
-    "instance",
-    ".pytest_cache",
-    ".mypy_cache",
-    ".ruff_cache",
-    ".eggs",
-    "site-packages",
+# Carpetas que se ignoran siempre (entornos virtuales, control de versiones, etc.)
+CARPETAS_EXCLUIDAS = {
+    "__pycache__", ".git", ".svn", ".hg", ".idea", ".vscode",
+    "venv", "env", ".venv", ".env", "node_modules",
+    "build", "dist", "*.egg-info", ".mypy_cache", ".pytest_cache",
+    ".tox", "site-packages",
 }
 
-# Archivos a ignorar
-IGNORAR_ARCHIVOS = {
-    ".DS_Store",
-    "Thumbs.db",
-    "desktop.ini",
-    "Proyecto_Completo.txt",
-    "exportar_proyecto_output.txt",
+# Extensiones de archivo que se incluyen por defecto (código y texto plano)
+EXTENSIONES_POR_DEFECTO = {
+    ".py", ".txt", ".md", ".json", ".yaml", ".yml",
+    ".cfg", ".ini", ".toml", ".html", ".css", ".js",
 }
 
-# Extensiones que se consideran texto / código
-EXTENSIONES_TEXTO = {
-    ".py",
-    ".html",
-    ".css",
-    ".js",
-    ".jsx",
-    ".ts",
-    ".tsx",
-    ".json",
-    ".txt",
-    ".md",
-    ".rst",
-    ".yml",
-    ".yaml",
-    ".toml",
-    ".ini",
-    ".cfg",
-    ".conf",
-    ".env",
-    ".csv",
-    ".tsv",
-    ".sql",
-    ".xml",
-    ".bat",
-    ".sh",
-    ".ps1",
-    ".gitignore",
-    ".dockerignore",
-    ".dockerfile",
-    ".log",
-    ".svg",
-    ".example",
-    ".sample",
-    ".properties",
-}
+# Archivos concretos que se excluyen aunque coincidan con la extensión
+ARCHIVOS_EXCLUIDOS = {"Proyecto_Completo.txt", "exportar_proyecto.py"}
 
-# Archivos especiales que pueden no tener extensión clara
-ARCHIVOS_TEXTO_ESPECIALES = {
-    ".gitignore",
-    ".dockerignore",
-    ".env",
-    ".env.example",
-    ".flaskenv",
-    ".editorconfig",
-    "Procfile",
-    "Dockerfile",
-    "Makefile",
-    "LICENSE",
-    "runtime.txt",
-    "requirements.txt",
-}
-
-# Extensiones binarias comunes
-EXTENSIONES_BINARIAS = {
-    ".png",
-    ".jpg",
-    ".jpeg",
-    ".gif",
-    ".ico",
-    ".webp",
-    ".bmp",
-    ".pdf",
-    ".xlsx",
-    ".xls",
-    ".doc",
-    ".docx",
-    ".pkl",
-    ".joblib",
-    ".zip",
-    ".gz",
-    ".tar",
-    ".7z",
-    ".rar",
-    ".sqlite",
-    ".sqlite3",
-    ".pyc",
-    ".pyo",
-    ".pyd",
-    ".woff",
-    ".woff2",
-    ".ttf",
-    ".otf",
-    ".eot",
-    ".mp4",
-    ".mp3",
-    ".avi",
-    ".mov",
-}
+# Codificaciones a probar, en orden, al leer un archivo de texto.
+# utf-8-sig maneja BOM de UTF-8; utf-16 cubre archivos generados en Windows/PowerShell.
+CODIFICACIONES = ["utf-8-sig", "utf-8", "utf-16", "cp1252", "latin-1"]
 
 
-# ==========================================================
-# FUNCIONES AUXILIARES
-# ==========================================================
+def generar_arbol(raiz, extensiones):
+    """Genera una representación en texto tipo 'árbol' de la estructura del proyecto."""
+    lineas = []
+    raiz = os.path.abspath(raiz)
+    nombre_raiz = os.path.basename(raiz.rstrip(os.sep)) or raiz
+    lineas.append(f"{nombre_raiz}/")
 
-def debe_ignorarse(ruta: Path) -> bool:
-    """
-    Determina si una carpeta o archivo debe ignorarse.
-    """
-    try:
-        if ruta.resolve() == SALIDA_RESOLUTA:
-            return True
-    except OSError:
-        pass
-
-    try:
-        rel = ruta.relative_to(RAIZ)
-    except ValueError:
-        return True
-
-    partes = rel.parts
-
-    if ruta.is_dir():
-        # Ignorar carpetas prohibidas en cualquier nivel.
-        if any(parte in IGNORAR_CARPETAS for parte in partes):
-            return True
-    else:
-        # Ignorar archivos dentro de carpetas prohibidas.
-        if any(parte in IGNORAR_CARPETAS for parte in partes[:-1]):
-            return True
-
-    if ruta.name in IGNORAR_ARCHIVOS:
-        return True
-
-    return False
-
-
-def parece_binaria(ruta: Path) -> bool:
-    """
-    Intenta detectar si un archivo es binario.
-    Si tiene BOM de texto, lo considera texto.
-    """
-    if ruta.suffix.lower() in EXTENSIONES_BINARIAS:
-        return True
-
-    try:
-        with ruta.open("rb") as fh:
-            chunk = fh.read(8192)
-    except OSError:
-        return True
-
-    # BOM comunes de texto.
-    if chunk.startswith((b"\xef\xbb\xbf", b"\xff\xfe", b"\xfe\xff")):
-        return False
-
-    # Muchos binarios tienen bytes nulos.
-    if b"\x00" in chunk:
-        return True
-
-    return False
-
-
-def es_texto(ruta: Path) -> bool:
-    """
-    Determina si un archivo se debe exportar como texto.
-    """
-    suffix = ruta.suffix.lower()
-
-    if suffix in EXTENSIONES_TEXTO:
-        return True
-
-    if ruta.name in ARCHIVOS_TEXTO_ESPECIALES:
-        return True
-
-    # Cualquier archivo .env* se considera texto.
-    if ruta.name.startswith(".env"):
-        return True
-
-    if parece_binaria(ruta):
-        return False
-
-    return True
-
-
-def leer_texto(ruta: Path) -> str:
-    """
-    Lee un archivo probando varias codificaciones.
-    Esto ayuda con archivos UTF-8, UTF-8 BOM, UTF-16, Latin-1, etc.
-    """
-    raw = ruta.read_bytes()
-
-    if not raw:
-        return ""
-
-    # UTF-8 con BOM
-    if raw.startswith(b"\xef\xbb\xbf"):
-        return raw.decode("utf-8-sig", errors="replace")
-
-    # UTF-16 LE / BE
-    if raw.startswith((b"\xff\xfe", b"\xfe\xff")):
-        return raw.decode("utf-16", errors="replace")
-
-    encodings = [
-        "utf-8",
-        "utf-16",
-        "cp1252",
-        "latin-1",
-    ]
-
-    for enc in encodings:
+    def recorrer(carpeta, prefijo=""):
         try:
-            return raw.decode(enc)
-        except (UnicodeDecodeError, UnicodeError):
-            pass
+            entradas = sorted(os.listdir(carpeta))
+        except PermissionError:
+            return
 
-    return raw.decode("latin-1", errors="replace")
+        # Filtrar carpetas excluidas y archivos ocultos
+        entradas_validas = []
+        for entrada in entradas:
+            ruta_completa = os.path.join(carpeta, entrada)
+            if os.path.isdir(ruta_completa):
+                if entrada in CARPETAS_EXCLUIDAS or entrada.startswith("."):
+                    continue
+                entradas_validas.append((entrada, True))
+            else:
+                if entrada in ARCHIVOS_EXCLUIDOS:
+                    continue
+                _, ext = os.path.splitext(entrada)
+                if extensiones and ext.lower() not in extensiones:
+                    continue
+                entradas_validas.append((entrada, False))
+
+        for i, (entrada, es_dir) in enumerate(entradas_validas):
+            es_ultimo = i == len(entradas_validas) - 1
+            conector = "└── " if es_ultimo else "├── "
+            ruta_completa = os.path.join(carpeta, entrada)
+
+            if es_dir:
+                lineas.append(f"{prefijo}{conector}{entrada}/")
+                extension_prefijo = "    " if es_ultimo else "│   "
+                recorrer(ruta_completa, prefijo + extension_prefijo)
+            else:
+                lineas.append(f"{prefijo}{conector}{entrada}")
+
+    recorrer(raiz)
+    return "\n".join(lineas)
 
 
-def escribir_seccion(archivo, ruta_relativa: str, contenido: str = "", nota: str = None):
+def recolectar_archivos(raiz, extensiones):
+    """Recorre el proyecto y devuelve la lista de rutas de archivos a exportar."""
+    archivos_encontrados = []
+    for carpeta_actual, subcarpetas, archivos in os.walk(raiz):
+        # Modificar subcarpetas in-place para que os.walk no entre en ellas
+        subcarpetas[:] = [
+            d for d in subcarpetas
+            if d not in CARPETAS_EXCLUIDAS and not d.startswith(".")
+        ]
+
+        for archivo in sorted(archivos):
+            if archivo in ARCHIVOS_EXCLUIDOS:
+                continue
+            _, ext = os.path.splitext(archivo)
+            if extensiones and ext.lower() not in extensiones:
+                continue
+            ruta_completa = os.path.join(carpeta_actual, archivo)
+            archivos_encontrados.append(ruta_completa)
+
+    return archivos_encontrados
+
+
+def leer_contenido(ruta_archivo):
     """
-    Escribe una sección de archivo dentro del export.
+    Lee el contenido de un archivo de texto probando varias codificaciones.
+    Nunca lanza una excepción: en el peor de los casos devuelve el contenido
+    decodificado reemplazando los caracteres inválidos, junto con un aviso.
     """
-    archivo.write("\n")
-    archivo.write("=" * 80 + "\n")
-    archivo.write(ruta_relativa + "\n")
-    archivo.write("=" * 80 + "\n\n")
+    ultimo_error = None
 
-    if nota:
-        archivo.write(nota + "\n\n")
+    for codificacion in CODIFICACIONES:
+        try:
+            with open(ruta_archivo, "r", encoding=codificacion) as f:
+                contenido = f.read()
+            # Si el archivo era binario o venía en una codificación de 16 bits
+            # mal detectada, pueden colarse bytes nulos que rompen la copia
+            # del .txt final. Los quitamos.
+            if "\x00" in contenido:
+                contenido = contenido.replace("\x00", "")
+            return contenido
+        except (UnicodeDecodeError, LookupError) as e:
+            ultimo_error = e
+            continue
+        except (PermissionError, OSError) as e:
+            # Error de acceso al archivo: no tiene sentido probar otras
+            # codificaciones, directamente lo reportamos.
+            return f"[No se pudo leer el archivo (error de acceso): {e}]"
 
-    if contenido:
-        archivo.write(contenido)
-        if not contenido.endswith("\n"):
-            archivo.write("\n")
-
-
-def dibujar_arbol(carpeta: Path, archivo, prefijo: str = "") -> None:
-    """
-    Dibuja el árbol del proyecto.
-    """
+    # Si ninguna codificación funcionó "limpiamente", como último recurso
+    # leemos en binario y reemplazamos los bytes problemáticos, para no
+    # perder el archivo completo de la exportación.
     try:
-        elementos = sorted(
-            carpeta.iterdir(),
-            key=lambda x: (x.is_file(), x.name.lower())
+        with open(ruta_archivo, "rb") as f:
+            datos = f.read()
+        contenido = datos.decode("utf-8", errors="replace").replace("\x00", "")
+        return (
+            f"[Aviso: no se detectó la codificación exacta del archivo "
+            f"(último error: {ultimo_error}). Se muestra con caracteres "
+            f"inválidos reemplazados por '�']\n\n{contenido}"
         )
-    except OSError:
-        return
-
-    elementos = [
-        e for e in elementos
-        if not debe_ignorarse(e)
-    ]
-
-    for i, elemento in enumerate(elementos):
-        ultimo = i == len(elementos) - 1
-        rama = "└── " if ultimo else "├── "
-
-        archivo.write(prefijo + rama + elemento.name + "\n")
-
-        if elemento.is_dir():
-            extension = "    " if ultimo else "│   "
-            dibujar_arbol(elemento, archivo, prefijo + extension)
+    except Exception as e:
+        return f"[No se pudo leer el archivo: {e}]"
 
 
-def obtener_archivos():
-    """
-    Obtiene todos los archivos válidos del proyecto.
-    """
-    archivos = []
+def exportar_proyecto(raiz, salida, extensiones, archivos_especificos=None):
+    raiz = os.path.abspath(raiz)
+    extensiones = {e.lower() if e.startswith(".") else f".{e.lower()}" for e in extensiones}
 
-    for f in RAIZ.rglob("*"):
-        if f.is_file() and not debe_ignorarse(f):
-            archivos.append(f)
+    print(f"Analizando proyecto en: {raiz}")
+    arbol = generar_arbol(raiz, extensiones)
 
-    return sorted(
-        archivos,
-        key=lambda p: p.relative_to(RAIZ).as_posix().lower()
-    )
+    if archivos_especificos:
+        # Modo selectivo: se ignoran los filtros de extensión/exclusión y se
+        # exporta exactamente la lista de rutas relativas que pidió el usuario.
+        archivos = []
+        faltantes = []
+        for ruta_relativa in archivos_especificos:
+            # Normalizamos separadores: aceptamos tanto "/" como "\" sin
+            # importar el sistema operativo desde el que se escribió la ruta.
+            ruta_normalizada = ruta_relativa.replace("\\", os.sep).replace("/", os.sep)
+            ruta_absoluta = os.path.join(raiz, ruta_normalizada)
+            if os.path.isfile(ruta_absoluta):
+                archivos.append(ruta_absoluta)
+            else:
+                faltantes.append(ruta_relativa)
+        if faltantes:
+            print("⚠️  No se encontraron estos archivos (revisá la ruta o el --raiz):")
+            for f in faltantes:
+                print(f"    - {f}")
+    else:
+        archivos = recolectar_archivos(raiz, extensiones)
 
+    print(f"Se encontraron {len(archivos)} archivo(s) para exportar.")
 
-# ==========================================================
-# EXPORTACIÓN PRINCIPAL
-# ==========================================================
+    with open(salida, "w", encoding="utf-8") as f_salida:
+        # Encabezado
+        f_salida.write("=" * 80 + "\n")
+        f_salida.write("EXPORTACIÓN COMPLETA DEL PROYECTO\n")
+        f_salida.write(f"Ruta del proyecto: {raiz}\n")
+        f_salida.write(f"Fecha de generación: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f_salida.write("=" * 80 + "\n\n")
+
+        # Estructura de directorios
+        f_salida.write("ESTRUCTURA DEL PROYECTO\n")
+        f_salida.write("-" * 80 + "\n")
+        f_salida.write(arbol + "\n\n")
+
+        # Contenido de cada archivo
+        f_salida.write("=" * 80 + "\n")
+        f_salida.write("CONTENIDO DE LOS ARCHIVOS\n")
+        f_salida.write("=" * 80 + "\n\n")
+
+        for ruta_archivo in archivos:
+            ruta_relativa = os.path.relpath(ruta_archivo, raiz)
+
+            f_salida.write("-" * 80 + "\n")
+            f_salida.write(f"ARCHIVO: {ruta_relativa}\n")
+            f_salida.write("-" * 80 + "\n")
+
+            # Si un archivo puntual falla por cualquier motivo no controlado,
+            # no queremos que se corte toda la exportación: lo anotamos y
+            # seguimos con el resto.
+            try:
+                contenido = leer_contenido(ruta_archivo)
+            except Exception as e:
+                contenido = f"[ERROR inesperado al procesar este archivo: {e}]"
+
+            f_salida.write(contenido)
+            if not contenido.endswith("\n"):
+                f_salida.write("\n")
+            f_salida.write("\n")
+
+    print(f"✅ Exportación completada: {os.path.abspath(salida)}")
+
 
 def main():
-    exportados = 0
-    binarios_omitidos = 0
-    errores = 0
+    parser = argparse.ArgumentParser(
+        description="Exporta la estructura y el código completo de un proyecto Python a un único .txt"
+    )
+    parser.add_argument(
+        "--raiz", "-r",
+        default=".",
+        help="Ruta raíz del proyecto a exportar (por defecto: directorio actual)."
+    )
+    parser.add_argument(
+        "--salida", "-o",
+        default="Proyecto_Completo.txt",
+        help="Nombre del archivo de salida (por defecto: Proyecto_Completo.txt)."
+    )
+    parser.add_argument(
+        "--extensiones", "-e",
+        nargs="*",
+        default=sorted(EXTENSIONES_POR_DEFECTO),
+        help="Lista de extensiones a incluir, ej: .py .txt .json (por defecto incluye varias comunes)."
+    )
+    parser.add_argument(
+        "--archivos", "-a",
+        nargs="*",
+        default=None,
+        help=(
+            "Lista exacta de rutas relativas a exportar (ignora --extensiones y las "
+            "exclusiones por carpeta/tipo). Ej: --archivos templates/layout.html static/js/apps/agenda.js"
+        )
+    )
 
-    with SALIDA.open("w", encoding="utf-8", newline="\n") as archivo:
-
-        archivo.write("=" * 80 + "\n")
-        archivo.write("ARBOL DEL PROYECTO\n")
-        archivo.write("=" * 80 + "\n\n")
-
-        archivo.write(RAIZ.name + "\n")
-        dibujar_arbol(RAIZ, archivo)
-
-        archivo.write("\n\n")
-        archivo.write("=" * 80 + "\n")
-        archivo.write("CONTENIDO DE LOS ARCHIVOS\n")
-        archivo.write("=" * 80 + "\n\n")
-
-        for f in obtener_archivos():
-
-            rel = f.relative_to(RAIZ).as_posix()
-
-            try:
-                if es_texto(f):
-                    contenido = leer_texto(f)
-                    escribir_seccion(archivo, rel, contenido=contenido)
-                    exportados += 1
-
-                elif INCLUIR_BINARIOS_BASE64:
-                    b64 = base64.encodebytes(f.read_bytes()).decode("ascii")
-                    contenido = "<<BASE64>>\n" + b64 + "<<FIN_BASE64>>\n"
-                    nota = (
-                        f"Archivo binario exportado como base64 "
-                        f"({f.suffix.lower() or 'sin extensión'}). "
-                        "Para restaurarlo, decodificar el bloque entre "
-                        "<<BASE64>> y <<FIN_BASE64>>."
-                    )
-                    escribir_seccion(archivo, rel, contenido=contenido, nota=nota)
-                    exportados += 1
-
-                else:
-                    nota = (
-                        f"<<ARCHIVO BINARIO OMITIDO: "
-                        f"{f.suffix.lower() or 'sin extensión'}>>\n"
-                        "Si necesitás incluirlo en el export, poné: "
-                        "INCLUIR_BINARIOS_BASE64 = True"
-                    )
-                    escribir_seccion(archivo, rel, contenido="", nota=nota)
-                    binarios_omitidos += 1
-
-            except Exception as e:
-                escribir_seccion(
-                    archivo,
-                    rel,
-                    contenido="",
-                    nota=f"<<ERROR AL LEER: {e}>>"
-                )
-                errores += 1
-
-    print(f"Archivo generado: {SALIDA}")
-    print(f"Archivos de texto exportados: {exportados}")
-    print(f"Archivos binarios omitidos: {binarios_omitidos}")
-    print(f"Errores: {errores}")
+    args = parser.parse_args()
+    exportar_proyecto(args.raiz, args.salida, args.extensiones, args.archivos)
 
 
 if __name__ == "__main__":

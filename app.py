@@ -94,10 +94,9 @@ scheduler.add_job(job_func, 'cron', hour=12, minute=30)
 
 @app.context_processor
 def inject_menu():
-    menu = cargar_menu()
-    # Podés ajustar los roles según el usuario logueado
-    roles = ['admin', 'editor', 'viewer']
-    return dict(menu=menu, roles=roles)
+    if current_user.is_authenticated:
+        return dict(menu=cargar_menu(), roles=current_user.roles)
+    return dict(menu=[], roles=[])
 
 # Rutas protegidas con roles y paso de roles a la plantilla
 @app.route('/')

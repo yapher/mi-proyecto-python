@@ -3,52 +3,40 @@ import os
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from flask_mail import Message
+from db_json import JsonStore
 
 DB_PATH = "DataBase/time/agenda.json"
+_store = JsonStore(DB_PATH)
+
 
 def cargar_eventos():
-    if not os.path.exists(DB_PATH):
-        return []
-    with open(DB_PATH, "r", encoding="utf-8") as f:
-        return json.load(f)
+    return _store.cargar()
+
 
 def guardar_eventos(eventos):
-    with open(DB_PATH, "w", encoding="utf-8") as f:
-        json.dump(eventos, f, indent=4, ensure_ascii=False)
+    _store.guardar(eventos)
+
 
 def agregar_evento(evento):
-    eventos = cargar_eventos()
-    evento["id"] = max([e["id"] for e in eventos], default=0) + 1
-    evento["realizado"] = evento.get("realizado", False)  # nuevo campo
-    eventos.append(evento)
-    guardar_eventos(eventos)
+    # Mantiene el comportamiento original: asegura campo 'realizado'
+    return _store.agregar(evento, defaults={"realizado": False})
+
 
 def editar_evento(evento_id, nuevos_datos):
-    eventos = cargar_eventos()
-    for evento in eventos:
-        if evento["id"] == evento_id:
-            evento.update(nuevos_datos)
-            if "realizado" not in evento:
-                evento["realizado"] = False
-            break
-    guardar_eventos(eventos)
+    # Mantiene el comportamiento original: asegura 'realizado' si falta
+    _store.editar(evento_id, nuevos_datos, ensure_fields={"realizado": False})
+
 
 def eliminar_evento(evento_id):
-    eventos = cargar_eventos()
-    eventos = [e for e in eventos if e["id"] != evento_id]
-    guardar_eventos(eventos)
+    _store.eliminar(evento_id)
+
 
 # =========================
 # Job para recordatorios
 # =========================
 def enviar_recordatorios(app, mail, cargar_eventos_func=cargar_eventos):
-    """
-    Debe ser llamado por APScheduler pasando `app` y `mail`.
-    Ejecuta dentro de app.app_context() para que Flask-Mail tenga contexto.
-    """
-    # Zona horaria del usuario (AR)
+    """Envía recordatorios por email para eventos del día siguiente."""
     tz = ZoneInfo("America/Argentina/Buenos_Aires")
-
     with app.app_context():
         try:
             eventos = cargar_eventos_func()
@@ -63,28 +51,25 @@ def enviar_recordatorios(app, mail, cargar_eventos_func=cargar_eventos):
             try:
                 fecha_evento = datetime.strptime(evento["fecha"], "%Y-%m-%d").date()
             except Exception:
-                # Salta eventos con fecha inválida
                 continue
 
-            if fecha_evento == manana:
-                email_destino = evento.get("email", app.config.get("MAIL_DEFAULT_SENDER"))
-                titulo = evento.get("titulo", "Evento")
-                descripcion = evento.get("descripcion", "")
-
-                # IMPORTANTE: setear sender explícito evita que Flask-Mail busque default_sender fuera de contexto
-                msg = Message(
-                    subject=f"⏰ Recordatorio: {titulo} es mañana",
-                    recipients=[email_destino],
-                    sender=app.config.get("MAIL_DEFAULT_SENDER"),
-                    body=(
-                        "Hola!\n\n"
-                        f"Te recordamos que mañana ({fecha_evento.strftime('%d/%m/%Y')}) tienes el evento:\n\n"
-                        f"{titulo}\n{descripcion}\n\n"
-                        "— Agenda"
-                    ),
-                )
+            if fecha_evento == manana and not evento.get("realizado", False):
+                email_destino = evento.get("email")
+                if not email_destino:
+                    continue
 
                 try:
+                    msg = Message(
+                        subject=f"Recordatorio: {evento.get('titulo', 'Evento')}",
+                        recipients=[email_destino],
+                        body=(
+                            f"Hola,\n\n"
+                            f"Te recordamos que mañana ({fecha_evento}) tenés:\n\n"
+                            f"Título: {evento.get('titulo', '')}\n"
+                            f"Descripción: {evento.get('descripcion', '')}\n\n"
+                            f"Saludos."
+                        ),
+                    )
                     mail.send(msg)
                     print(f"[OK] Recordatorio enviado a {email_destino}")
                 except Exception as e:
