@@ -1,7 +1,7 @@
 ================================================================================
 EXPORTACIÓN COMPLETA DEL PROYECTO
 Ruta del proyecto: C:\Empresa
-Fecha de generación: 2026-08-23 18:45:17
+Fecha de generación: 2026-08-23 19:40:01
 ================================================================================
 
 ESTRUCTURA DEL PROYECTO
@@ -17,13 +17,21 @@ Empresa/
 ├── README.md
 ├── app.py
 ├── arbol_bp.py
+├── auth/
+│   ├── __init__.py
+│   └── login.py
 ├── core/
 │   ├── __init__.py
+│   ├── arbol_bp.py
+│   ├── auth/
 │   ├── blueprint_registry.py
+│   ├── db_json.py
+│   ├── menu.py
 │   └── scheduler.py
 ├── db_json.py
 ├── login.py
 ├── menu.py
+├── pytest.ini
 ├── requirements.txt
 ├── static/
 │   ├── css/
@@ -313,21 +321,22 @@ Empresa/
 │   ├── index.html
 │   ├── layout.html
 │   └── login.html
-└── tests/
-    ├── conftest.py
-    ├── test_agenda.py
-    ├── test_bloqueos.py
-    ├── test_crear_rubros.py
-    ├── test_db_json.py
-    ├── test_estados_repuestos.py
-    ├── test_instalaciones.py
-    ├── test_inventario.py
-    ├── test_listar_ot.py
-    ├── test_modelos_3d.py
-    ├── test_pagos.py
-    ├── test_pagos_clonar.py
-    ├── test_rutas_basicas.py
-    └── test_tareas.py
+├── tests/
+│   ├── conftest.py
+│   ├── test_agenda.py
+│   ├── test_bloqueos.py
+│   ├── test_crear_rubros.py
+│   ├── test_db_json.py
+│   ├── test_estados_repuestos.py
+│   ├── test_instalaciones.py
+│   ├── test_inventario.py
+│   ├── test_listar_ot.py
+│   ├── test_modelos_3d.py
+│   ├── test_pagos.py
+│   ├── test_pagos_clonar.py
+│   ├── test_rutas_basicas.py
+│   └── test_tareas.py
+└── wsgi.py
 
 ================================================================================
 CONTENIDO DE LOS ARCHIVOS
@@ -366,7 +375,6 @@ Empresa/
 --------------------------------------------------------------------------------
 ARCHIVO: app.py
 --------------------------------------------------------------------------------
-# app.py
 """
 Aplicación principal.
 - Auto-registro de blueprints (no hay que tocar este archivo al agregar apps)
@@ -376,14 +384,12 @@ from flask import Flask, render_template, redirect, url_for
 import os
 import threading
 import webbrowser
-
 from flask_login import login_required, current_user
 from flask_mail import Mail
 
-from menu import cargar_menu
-from login import init_routes_login, roles_required
-
-# Módulos centrales
+# Importar desde las nuevas ubicaciones
+from core.menu import cargar_menu
+from auth.login import init_routes_login, roles_required
 from core.blueprint_registry import auto_register_blueprints
 from core.scheduler import setup_scheduler
 
@@ -433,7 +439,6 @@ def inject_menu():
         return dict(menu=cargar_menu(), roles=current_user.roles)
     return dict(menu=[], roles=[])
 
-
 # ============================================================
 # Rutas principales
 # ============================================================
@@ -446,7 +451,6 @@ def index():
         roles=current_user.roles,
     )
 
-
 @app.route("/gestion_menu")
 @login_required
 @roles_required("admin", "editor")
@@ -456,7 +460,6 @@ def gestion_menu():
         menu=cargar_menu(),
         roles=current_user.roles,
     )
-
 
 @app.route("/gestion_aplicaciones")
 @login_required
@@ -468,7 +471,6 @@ def gestion_aplicaciones():
         roles=current_user.roles,
     )
 
-
 # ============================================================
 # Manejo de errores
 # ============================================================
@@ -476,11 +478,9 @@ def gestion_aplicaciones():
 def forbidden(e):
     return render_template("403.html"), 403
 
-
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("403.html"), 404  # o crea un 404.html
-
+    return render_template("403.html"), 404
 
 # ============================================================
 # Arranque
@@ -488,15 +488,14 @@ def not_found(e):
 def _abrir_navegador():
     webbrowser.open("http://127.0.0.1:5000")
 
-
 if __name__ == "__main__":
     os.makedirs("DataBase/Config", exist_ok=True)
-
+    
     # Iniciar scheduler solo si no estamos en modo reload de Flask
     if not os.environ.get("WERKZEUG_RUN_MAIN"):
         scheduler.start()
         threading.Timer(1.0, _abrir_navegador).start()
-
+    
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
 
@@ -504,22 +503,345 @@ if __name__ == "__main__":
 ARCHIVO: arbol_bp.py
 --------------------------------------------------------------------------------
 """
-Módulo genérico: CRUD de árboles jerárquicos en JSON.
+COMPATIBILIDAD: Este archivo re-exporta desde core.arbol_bp
+Migración: usar directamente `from core.arbol_bp import crear_blueprint_arbol`
+"""
+from core.arbol_bp import crear_blueprint_arbol
 
+__all__ = ['crear_blueprint_arbol']
+
+--------------------------------------------------------------------------------
+ARCHIVO: db_json.py
+--------------------------------------------------------------------------------
+"""
+COMPATIBILIDAD: Este archivo re-exporta desde core.db_json
+Migración: usar directamente `from core.db_json import JsonStore`
+"""
+from core.db_json import JsonStore
+
+__all__ = ['JsonStore']
+
+--------------------------------------------------------------------------------
+ARCHIVO: login.py
+--------------------------------------------------------------------------------
+"""
+COMPATIBILIDAD: Este archivo re-exporta desde auth.login
+Migración: usar directamente `from auth.login import ...`
+"""
+from auth.login import (
+    User,
+    cargar_usuarios,
+    init_routes_login,
+    roles_required,
+    comparar_rostros,
+    USERS_PATH
+)
+
+__all__ = [
+    'User',
+    'cargar_usuarios',
+    'init_routes_login',
+    'roles_required',
+    'comparar_rostros',
+    'USERS_PATH'
+]
+
+--------------------------------------------------------------------------------
+ARCHIVO: menu.py
+--------------------------------------------------------------------------------
+"""
+COMPATIBILIDAD: Este archivo re-exporta desde core.menu
+Migración: usar directamente `from core.menu import cargar_menu, guardar_menu`
+"""
+from core.menu import cargar_menu, guardar_menu, MENU_PATH
+
+__all__ = ['cargar_menu', 'guardar_menu', 'MENU_PATH']
+
+--------------------------------------------------------------------------------
+ARCHIVO: pytest.ini
+--------------------------------------------------------------------------------
+[pytest]
+filterwarnings =
+    # Ignorar advertencias de deprecación de Werkzeug y AST (Python 3.13+)
+    ignore::DeprecationWarning:werkzeug
+    ignore::DeprecationWarning:ast
+    # Ignorar advertencias de dependencias del módulo requests
+    ignore::Warning:requests
+
+--------------------------------------------------------------------------------
+ARCHIVO: requirements.txt
+--------------------------------------------------------------------------------
+# =====================================================
+# requirements.txt - Proyecto Empresa (Flask) - DEPURADO
+# =====================================================
+
+# --- Núcleo Flask (versiones originales del proyecto) ---
+Flask==2.0.2
+Werkzeug==2.0.2
+Jinja2==3.1.6
+MarkupSafe==3.0.2
+itsdangerous==2.2.0
+click==8.1.8
+blinker==1.9.0
+colorama==0.4.6
+
+# --- Autenticación y email ---
+Flask-Login==0.6.3
+Flask-Mail==0.10.0
+
+# --- Tareas programadas (recordatorios agenda) ---
+APScheduler==3.11.0
+pytz==2025.2
+tzlocal==5.3.1
+tzdata==2025.2
+
+# --- Análisis de datos / cálculos ---
+pandas==2.2.3
+numpy==2.2.5
+scipy==1.15.3
+
+# --- Visión / login facial ---
+opencv-python==4.12.0.88
+
+# --- Exportación PDF ---
+reportlab==4.4.0
+
+# --- HTTP / parseo HTML (Spotify, bajada OT) ---
+requests==2.32.3
+beautifulsoup4==4.13.4
+soupsieve==2.7
+certifi==2025.1.31
+charset-normalizer==3.4.1
+idna==3.10
+urllib3==2.4.0
+
+# --- Producción (lo usa tu Procfile) ---
+gunicorn==23.0.0
+
+--------------------------------------------------------------------------------
+ARCHIVO: wsgi.py
+--------------------------------------------------------------------------------
+# wsgi.py
+"""
+Punto de entrada para servidores WSGI (gunicorn, uwsgi).
+Uso: gunicorn wsgi:app
+"""
+from app import app
+
+if __name__ == "__main__":
+    app.run()
+
+--------------------------------------------------------------------------------
+ARCHIVO: auth\__init__.py
+--------------------------------------------------------------------------------
+"""
+Módulo de autenticación y autorización.
+Contiene login, gestión de usuarios y decoradores de roles.
+"""
+from .login import (
+    User,
+    cargar_usuarios,
+    init_routes_login,
+    roles_required,
+    comparar_rostros,
+    USERS_PATH
+)
+
+__all__ = [
+    'User',
+    'cargar_usuarios',
+    'init_routes_login',
+    'roles_required',
+    'comparar_rostros',
+    'USERS_PATH'
+]
+
+--------------------------------------------------------------------------------
+ARCHIVO: auth\login.py
+--------------------------------------------------------------------------------
+"""
+Módulo de autenticación: login por credenciales y reconocimiento facial.
+"""
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask import request, redirect, url_for, render_template, abort, flash
+from datetime import datetime
+import os
+import json
+from functools import wraps
+import cv2
+import numpy as np
+
+USERS_PATH = 'users.json'
+
+
+def cargar_usuarios():
+    """Carga la lista de usuarios desde el archivo JSON."""
+    if os.path.exists(USERS_PATH):
+        with open(USERS_PATH, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return []
+
+
+usuarios = cargar_usuarios()
+usuarios_dict = {u['username']: u for u in usuarios}
+
+
+class User(UserMixin):
+    """Modelo de usuario para Flask-Login."""
+    def __init__(self, id, username, roles):
+        self.id = id
+        self.username = username
+        self.roles = roles
+
+    def has_role(self, role):
+        return role in self.roles
+
+
+def roles_required(*roles):
+    """Decorador para requerir roles específicos."""
+    def decorator(f):
+        @wraps(f)
+        def wrapped(*args, **kwargs):
+            if not current_user.is_authenticated:
+                return redirect(url_for('login'))
+            if not any(current_user.has_role(role) for role in roles):
+                return abort(403)
+            return f(*args, **kwargs)
+        return wrapped
+    return decorator
+
+
+def comparar_rostros(rostro1, rostro2):
+    """Compara dos imágenes de rostros y retorna similitud."""
+    rostro1_gray = cv2.cvtColor(rostro1, cv2.COLOR_BGR2GRAY)
+    rostro2_gray = cv2.cvtColor(rostro2, cv2.COLOR_BGR2GRAY)
+    rostro1_gray = cv2.resize(rostro1_gray, (150, 150))
+    rostro2_gray = cv2.resize(rostro2_gray, (150, 150))
+    rostro1_gray = cv2.equalizeHist(rostro1_gray)
+    rostro2_gray = cv2.equalizeHist(rostro2_gray)
+    resultado = cv2.matchTemplate(rostro1_gray, rostro2_gray, cv2.TM_CCOEFF_NORMED)
+    _, max_val, _, _ = cv2.minMaxLoc(resultado)
+    return max_val
+
+
+def init_routes_login(app):
+    """Inicializa las rutas de login y Flask-Login."""
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+    login_manager.login_view = 'login'
+
+    @app.route('/logout')
+    @login_required
+    def logout():
+        logout_user()
+        return redirect(url_for('login'))
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        for u in usuarios:
+            if u['id'] == user_id:
+                return User(u['id'], u['username'], u['roles'])
+        return None
+
+    @app.template_filter('intersect')
+    def intersect_filter(user_roles, item_roles):
+        if not item_roles:
+            return True
+        return bool(set(user_roles) & set(item_roles))
+
+    @app.route('/login', methods=['GET', 'POST'])
+    def login():
+        error = None
+        if request.method == 'POST':
+            username = request.form.get('username')
+            password = request.form.get('password')
+            user_data = usuarios_dict.get(username)
+            if user_data and user_data['password'] == password:
+                user = User(user_data['id'], user_data['username'], user_data['roles'])
+                login_user(user)
+                return redirect(request.args.get('next') or url_for('index'))
+            else:
+                flash("Usuario o contraseña incorrectos. Puede intentar con reconocimiento facial.")
+                return render_template('login.html', error=error, current_year=datetime.now().year)
+        return render_template('login.html', error=error, current_year=datetime.now().year)
+
+    @app.route('/login_rostro', methods=['POST'])
+    def login_rostro():
+        debug_info = []
+        if 'rostro' not in request.files:
+            flash("No se envió imagen del rostro.")
+            return redirect(url_for('login'))
+
+        file = request.files['rostro']
+        in_memory_file = file.read()
+        npimg = np.frombuffer(in_memory_file, np.uint8)
+        rostro_capturado = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
+
+        if rostro_capturado is None:
+            flash("Error al procesar la imagen del rostro.")
+            return redirect(url_for('login'))
+
+        debug_info.append("Imagen recibida y decodificada correctamente.")
+
+        for username, user_data in usuarios_dict.items():
+            ruta_rostro = f"static/rostros/{username}.png"
+            if not os.path.exists(ruta_rostro):
+                debug_info.append(f"Imagen de referencia no encontrada para usuario '{username}'.")
+                continue
+
+            rostro_guardado = cv2.imread(ruta_rostro)
+            if rostro_guardado is None:
+                debug_info.append(f"No se pudo leer la imagen de referencia para usuario '{username}'.")
+                continue
+
+            similitud = comparar_rostros(rostro_capturado, rostro_guardado)
+            debug_info.append(f"Similitud con usuario '{username}': {similitud:.3f}")
+
+            if similitud > 0.4:
+                user = User(user_data['id'], user_data['username'], user_data['roles'])
+                login_user(user)
+                debug_info.append(f"¡Login exitoso con usuario '{username}'!")
+                return redirect(request.args.get('next') or url_for('index'))
+
+        flash("Rostro no coincide con ningún usuario.")
+        return redirect(url_for('login'))
+
+--------------------------------------------------------------------------------
+ARCHIVO: core\__init__.py
+--------------------------------------------------------------------------------
+"""
+Módulos centrales reutilizables del proyecto.
+Contiene funcionalidad compartida por múltiples aplicaciones.
+"""
+from .db_json import JsonStore
+from .arbol_bp import crear_blueprint_arbol
+from .menu import cargar_menu, guardar_menu
+
+__all__ = [
+    'JsonStore',
+    'crear_blueprint_arbol',
+    'cargar_menu',
+    'guardar_menu'
+]
+
+--------------------------------------------------------------------------------
+ARCHIVO: core\arbol_bp.py
+--------------------------------------------------------------------------------
+"""
+Módulo genérico: CRUD de árboles jerárquicos en JSON.
 Reutilizado por: crear_almacenes y crear_ubicacion_tecnica.
 (crear_rubros usa lógica diferente y NO usa este módulo.)
 
 Uso:
-    from arbol_bp import crear_blueprint_arbol
+    from core.arbol_bp import crear_blueprint_arbol
     bp = crear_blueprint_arbol(nombre_bp=..., data_file=..., ...)
 """
 import json
 import os
-
 from flask import Blueprint, jsonify, request, render_template
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 
 
 # =========================================================
@@ -589,7 +911,6 @@ def crear_blueprint_arbol(
     msg_agregar='Ubicación agregada correctamente',
 ):
     """Crea un blueprint con vista + API (GET arbol, POST, PUT, DELETE).
-
     Mantiene las mismas URLs y comportamiento que los blueprints originales.
     """
     bp = Blueprint(nombre_bp, __name__)
@@ -695,286 +1016,6 @@ def crear_blueprint_arbol(
     return bp
 
 --------------------------------------------------------------------------------
-ARCHIVO: db_json.py
---------------------------------------------------------------------------------
-"""
-Módulo genérico reutilizable para CRUD sobre archivos JSON
-que contienen una lista de objetos con campo 'id'.
-
-Uso:
-    from db_json import JsonStore
-    store = JsonStore("DataBase/time/dataTask.json")
-    store.cargar() / store.guardar() / store.agregar() / store.editar() / store.eliminar()
-"""
-import json
-import os
-
-
-class JsonStore:
-    def __init__(self, db_path):
-        self.db_path = db_path
-
-    def cargar(self):
-        """Retorna la lista de items. Si no existe el archivo o está corrupto, retorna []."""
-        if not os.path.exists(self.db_path):
-            return []
-        try:
-            with open(self.db_path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-                return data if isinstance(data, list) else []
-        except (json.JSONDecodeError, OSError):
-            return []
-
-    def guardar(self, items):
-        """Persiste la lista completa. Crea el directorio si no existe."""
-        directorio = os.path.dirname(self.db_path)
-        if directorio:
-            os.makedirs(directorio, exist_ok=True)
-        with open(self.db_path, "w", encoding="utf-8") as f:
-            json.dump(items, f, indent=4, ensure_ascii=False)
-
-    def agregar(self, item, defaults=None):
-        """Agrega un item con ID autoincremental. 'defaults' setea campos si faltan."""
-        items = self.cargar()
-        item["id"] = max([e.get("id", 0) for e in items], default=0) + 1
-        if defaults:
-            for clave, valor in defaults.items():
-                item.setdefault(clave, valor)
-        items.append(item)
-        self.guardar(items)
-        return item
-
-    def editar(self, item_id, nuevos_datos, ensure_fields=None):
-        """Actualiza los campos de un item. 'ensure_fields' setea campos si faltan tras el update."""
-        items = self.cargar()
-        for item in items:
-            if item.get("id") == item_id:
-                item.update(nuevos_datos)
-                if ensure_fields:
-                    for clave, valor in ensure_fields.items():
-                        item.setdefault(clave, valor)
-                break
-        self.guardar(items)
-
-    def eliminar(self, item_id):
-        """Elimina un item por ID."""
-        items = self.cargar()
-        items = [e for e in items if e.get("id") != item_id]
-        self.guardar(items)
-
---------------------------------------------------------------------------------
-ARCHIVO: login.py
---------------------------------------------------------------------------------
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from flask import request, redirect, url_for, render_template, abort, flash
-from datetime import datetime
-import os
-import json
-from functools import wraps
-import cv2
-import numpy as np
-
-USERS_PATH = 'users.json'
-
-def cargar_usuarios():
-    if os.path.exists(USERS_PATH):
-        with open(USERS_PATH, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    return []
-
-usuarios = cargar_usuarios()
-usuarios_dict = {u['username']: u for u in usuarios}
-
-class User(UserMixin):
-    def __init__(self, id, username, roles):
-        self.id = id
-        self.username = username
-        self.roles = roles
-
-    def has_role(self, role):
-        return role in self.roles
-
-def roles_required(*roles):
-    def decorator(f):
-        @wraps(f)
-        def wrapped(*args, **kwargs):
-            if not current_user.is_authenticated:
-                return redirect(url_for('login'))
-            if not any(current_user.has_role(role) for role in roles):
-                return abort(403)
-            return f(*args, **kwargs)
-        return wrapped
-    return decorator
-
-def comparar_rostros(rostro1, rostro2):
-    rostro1_gray = cv2.cvtColor(rostro1, cv2.COLOR_BGR2GRAY)
-    rostro2_gray = cv2.cvtColor(rostro2, cv2.COLOR_BGR2GRAY)
-    rostro1_gray = cv2.resize(rostro1_gray, (150, 150))
-    rostro2_gray = cv2.resize(rostro2_gray, (150, 150))
-    rostro1_gray = cv2.equalizeHist(rostro1_gray)
-    rostro2_gray = cv2.equalizeHist(rostro2_gray)
-    resultado = cv2.matchTemplate(rostro1_gray, rostro2_gray, cv2.TM_CCOEFF_NORMED)
-    _, max_val, _, _ = cv2.minMaxLoc(resultado)
-    return max_val
-
-def init_routes_login(app):
-    login_manager = LoginManager()
-    login_manager.init_app(app)
-    login_manager.login_view = 'login'
-
-    @app.route('/logout')
-    @login_required
-    def logout():
-      logout_user()
-      return redirect(url_for('login'))
-
-    @login_manager.user_loader
-    def load_user(user_id):
-        for u in usuarios:
-            if u['id'] == user_id:
-                return User(u['id'], u['username'], u['roles'])
-        return None
-
-    @app.template_filter('intersect')
-    def intersect_filter(user_roles, item_roles):
-        if not item_roles:
-            return True
-        return bool(set(user_roles) & set(item_roles))
-
-    @app.route('/login', methods=['GET', 'POST'])
-    def login():
-        error = None
-        if request.method == 'POST':
-            username = request.form.get('username')
-            password = request.form.get('password')
-            user_data = usuarios_dict.get(username)
-            if user_data and user_data['password'] == password:
-                user = User(user_data['id'], user_data['username'], user_data['roles'])
-                login_user(user)
-                return redirect(request.args.get('next') or url_for('index'))
-            else:
-                # Si falla el login por password, mostrar mensaje e intentar login por rostro
-                flash("Usuario o contraseña incorrectos. Puede intentar con reconocimiento facial.")
-                return render_template('login.html', error=error, current_year=datetime.now().year)
-        return render_template('login.html', error=error, current_year=datetime.now().year)
-
-    @app.route('/login_rostro', methods=['POST'])
-    def login_rostro():
-        debug_info = []
-        if 'rostro' not in request.files:
-            flash("No se envió imagen del rostro.")
-            return redirect(url_for('login'))
-
-        file = request.files['rostro']
-        in_memory_file = file.read()
-        npimg = np.frombuffer(in_memory_file, np.uint8)
-        rostro_capturado = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
-
-        if rostro_capturado is None:
-            flash("Error al procesar la imagen del rostro.")
-            return redirect(url_for('login'))
-
-        debug_info.append("Imagen recibida y decodificada correctamente.")
-
-        for username, user_data in usuarios_dict.items():
-            ruta_rostro = f"static/rostros/{username}.png"
-            if not os.path.exists(ruta_rostro):
-                debug_info.append(f"Imagen de referencia no encontrada para usuario '{username}'.")
-                continue
-
-            rostro_guardado = cv2.imread(ruta_rostro)
-            if rostro_guardado is None:
-                debug_info.append(f"No se pudo leer la imagen de referencia para usuario '{username}'.")
-                continue
-
-            similitud = comparar_rostros(rostro_capturado, rostro_guardado)
-            debug_info.append(f"Similitud con usuario '{username}': {similitud:.3f}")
-
-            if similitud > 0.4:
-                user = User(user_data['id'], user_data['username'], user_data['roles'])
-                login_user(user)
-                debug_info.append(f"¡Login exitoso con usuario '{username}'!")
-                return redirect(request.args.get('next') or url_for('index'))
-
-        flash("Rostro no coincide con ningún usuario.")
-        return redirect(url_for('login'))
-
---------------------------------------------------------------------------------
-ARCHIVO: menu.py
---------------------------------------------------------------------------------
-import os, json, re, threading, webbrowser
-
-
-# Funciones de menú
-MENU_PATH = 'DataBase/Config/menu.json'
-
-def cargar_menu():
-    if os.path.exists(MENU_PATH):
-        with open(MENU_PATH, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    return []
-    
-def guardar_menu(menu):
-    with open(MENU_PATH, 'w', encoding='utf-8') as f:
-        json.dump(menu, f, ensure_ascii=False, indent=4)
-
---------------------------------------------------------------------------------
-ARCHIVO: requirements.txt
---------------------------------------------------------------------------------
-# =====================================================
-# requirements.txt - Proyecto Empresa (Flask) - DEPURADO
-# =====================================================
-
-# --- Núcleo Flask (versiones originales del proyecto) ---
-Flask==2.0.2
-Werkzeug==2.0.2
-Jinja2==3.1.6
-MarkupSafe==3.0.2
-itsdangerous==2.2.0
-click==8.1.8
-blinker==1.9.0
-colorama==0.4.6
-
-# --- Autenticación y email ---
-Flask-Login==0.6.3
-Flask-Mail==0.10.0
-
-# --- Tareas programadas (recordatorios agenda) ---
-APScheduler==3.11.0
-pytz==2025.2
-tzlocal==5.3.1
-tzdata==2025.2
-
-# --- Análisis de datos / cálculos ---
-pandas==2.2.3
-numpy==2.2.5
-scipy==1.15.3
-
-# --- Visión / login facial ---
-opencv-python==4.12.0.88
-
-# --- Exportación PDF ---
-reportlab==4.4.0
-
-# --- HTTP / parseo HTML (Spotify, bajada OT) ---
-requests==2.32.3
-beautifulsoup4==4.13.4
-soupsieve==2.7
-certifi==2025.1.31
-charset-normalizer==3.4.1
-idna==3.10
-urllib3==2.4.0
-
-# --- Producción (lo usa tu Procfile) ---
-gunicorn==23.0.0
-
---------------------------------------------------------------------------------
-ARCHIVO: core\__init__.py
---------------------------------------------------------------------------------
-# core/__init__.py
-"""Módulos centrales reutilizables del proyecto."""
-
---------------------------------------------------------------------------------
 ARCHIVO: core\blueprint_registry.py
 --------------------------------------------------------------------------------
 # core/blueprint_registry.py
@@ -1055,6 +1096,100 @@ def auto_register_blueprints(app, base_dir="templates/Aplic"):
                 print(f"  ✗ {path}: {err}")
 
     return registered, errors
+
+--------------------------------------------------------------------------------
+ARCHIVO: core\db_json.py
+--------------------------------------------------------------------------------
+"""
+Módulo genérico reutilizable para CRUD sobre archivos JSON
+que contienen una lista de objetos con campo 'id'.
+
+Uso:
+    from core.db_json import JsonStore
+    store = JsonStore("DataBase/time/dataTask.json")
+    store.cargar() / store.guardar() / store.agregar() / store.editar() / store.eliminar()
+"""
+import json
+import os
+
+
+class JsonStore:
+    def __init__(self, db_path):
+        self.db_path = db_path
+
+    def cargar(self):
+        """Retorna la lista de items. Si no existe el archivo o está corrupto, retorna []."""
+        if not os.path.exists(self.db_path):
+            return []
+        try:
+            with open(self.db_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                return data if isinstance(data, list) else []
+        except (json.JSONDecodeError, OSError):
+            return []
+
+    def guardar(self, items):
+        """Persiste la lista completa. Crea el directorio si no existe."""
+        directorio = os.path.dirname(self.db_path)
+        if directorio:
+            os.makedirs(directorio, exist_ok=True)
+        with open(self.db_path, "w", encoding="utf-8") as f:
+            json.dump(items, f, indent=4, ensure_ascii=False)
+
+    def agregar(self, item, defaults=None):
+        """Agrega un item con ID autoincremental. 'defaults' setea campos si faltan."""
+        items = self.cargar()
+        item["id"] = max([e.get("id", 0) for e in items], default=0) + 1
+        if defaults:
+            for clave, valor in defaults.items():
+                item.setdefault(clave, valor)
+        items.append(item)
+        self.guardar(items)
+        return item
+
+    def editar(self, item_id, nuevos_datos, ensure_fields=None):
+        """Actualiza los campos de un item. 'ensure_fields' setea campos si faltan tras el update."""
+        items = self.cargar()
+        for item in items:
+            if item.get("id") == item_id:
+                item.update(nuevos_datos)
+                if ensure_fields:
+                    for clave, valor in ensure_fields.items():
+                        item.setdefault(clave, valor)
+                break
+        self.guardar(items)
+
+    def eliminar(self, item_id):
+        """Elimina un item por ID."""
+        items = self.cargar()
+        items = [e for e in items if e.get("id") != item_id]
+        self.guardar(items)
+
+--------------------------------------------------------------------------------
+ARCHIVO: core\menu.py
+--------------------------------------------------------------------------------
+"""
+Gestión del menú de navegación.
+Carga y guarda la estructura del menú desde/hacia JSON.
+"""
+import os
+import json
+
+MENU_PATH = 'DataBase/Config/menu.json'
+
+
+def cargar_menu():
+    """Carga el menú desde el archivo JSON."""
+    if os.path.exists(MENU_PATH):
+        with open(MENU_PATH, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return []
+
+
+def guardar_menu(menu):
+    """Guarda el menú en el archivo JSON."""
+    with open(MENU_PATH, 'w', encoding='utf-8') as f:
+        json.dump(menu, f, ensure_ascii=False, indent=4)
 
 --------------------------------------------------------------------------------
 ARCHIVO: core\scheduler.py
@@ -3148,9 +3283,9 @@ ARCHIVO: static\css\base\alerts.css
 ARCHIVO: static\css\base\arbol_crud.css
 --------------------------------------------------------------------------------
 /* ============================================
-   ARBOL CRUD - Estilos genéricos reutilizables
-   Aplica a: almacenes, ubicaciones, procedimiento, menú, rubros
-   ============================================ */
+ARBOL CRUD - Estilos genéricos reutilizables
+Aplica a: almacenes, ubicaciones, procedimiento, menú, rubros
+============================================ */
 
 /* Selectores multinivel */
 .nivel-select {
@@ -3178,13 +3313,14 @@ ARCHIVO: static\css\base\arbol_crud.css
 .nivel-4 { padding-left: 90px !important; }
 .nivel-5 { padding-left: 110px !important; }
 
-/* Botones editar/cancelar (ocultos por defecto) */
-.btn-editar,
-.btn-cancelar {
+/* Botones editar/cancelar de árboles jerárquicos (ocultos por defecto) */
+/* Scoped to #formulario to avoid hiding edit buttons in tables (like repuestos) */
+#formulario .btn-editar,
+#formulario .btn-cancelar {
     display: none !important;
 }
-.btn-editar.active,
-.btn-cancelar.active {
+#formulario .btn-editar.active,
+#formulario .btn-cancelar.active {
     display: inline-block !important;
 }
 
@@ -12777,8 +12913,8 @@ ARCHIVO: templates\Aplic\agenda\BackEnd\agenda.py
 --------------------------------------------------------------------------------
 from flask import Blueprint, jsonify, request, render_template, current_app
 from flask_login import login_required, current_user
-from login import roles_required
-from menu import cargar_menu
+from auth.login import roles_required
+from core.menu import cargar_menu
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
@@ -12846,7 +12982,7 @@ import os
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from flask_mail import Message
-from db_json import JsonStore
+from core.db_json import JsonStore
 
 DB_PATH = "DataBase/time/agenda.json"
 _store = JsonStore(DB_PATH)
@@ -13026,8 +13162,8 @@ ARCHIVO: templates\Aplic\agenda\FrontEnd\evento.html
 ARCHIVO: templates\Aplic\bajadadeot\BackEnd\bajada_de_ot.py
 --------------------------------------------------------------------------------
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, render_template, flash, redirect, url_for
 import json, os
 from bs4 import BeautifulSoup
@@ -13170,8 +13306,8 @@ ARCHIVO: templates\Aplic\cargarprocedimiento\BackEnd\cargar_procedimiento.py
 # Archivo backend generado automáticamente
 
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash, current_app
 import json, re, os
 from datetime import datetime
@@ -13294,7 +13430,7 @@ ARCHIVO: templates\Aplic\crearalmacenes\BackEnd\crear_almacenes.py
 
 Usa el módulo genérico arbol_bp para el CRUD jerárquico.
 """
-from arbol_bp import crear_blueprint_arbol
+from core.arbol_bp import crear_blueprint_arbol
 
 crear_almacenes_bp = crear_blueprint_arbol(
     nombre_bp='indexcrear_almacenes',
@@ -13471,8 +13607,8 @@ ARCHIVO: templates\Aplic\crearlistadoderepuestoporlinea\FrontEnd\crear_listado_d
 ARCHIVO: templates\Aplic\crearprocedimiento\BackEnd\crearprocedimiento.py
 --------------------------------------------------------------------------------
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash, current_app
 import json, re, os
 
@@ -13771,8 +13907,8 @@ ARCHIVO: templates\Aplic\crearrubros\BackEnd\crear_rubros.py
 --------------------------------------------------------------------------------
 # Archivo backend generado automáticamente
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash, current_app
 import json, re, os
 
@@ -14189,7 +14325,7 @@ ARCHIVO: templates\Aplic\crearubicaciontecnica\BackEnd\crear_ubicacion_tecnica.p
 
 Usa el módulo genérico arbol_bp para el CRUD jerárquico.
 """
-from arbol_bp import crear_blueprint_arbol
+from core.arbol_bp import crear_blueprint_arbol
 
 ubicacion_bp = crear_blueprint_arbol(
     nombre_bp='ubicacion',
@@ -14277,8 +14413,8 @@ ARCHIVO: templates\Aplic\detectorderostros\BackEnd\detector_de_rostros.py
 # Archivo backend generado automáticamente
 
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash, current_app
 import json, re, os
 
@@ -14358,8 +14494,8 @@ ARCHIVO: templates\Aplic\estadisticadeparadas\BackEnd\estadistica_de_paradas.py
 # Archivo backend generado automáticamente
 
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash, current_app, session
 import json, re, os
 from collections import Counter
@@ -14888,8 +15024,8 @@ ARCHIVO: templates\Aplic\estadisticas\BackEnd\estadisticas.py
 # Archivo backend generado automáticamente
 
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash, current_app
 import json, re, os
 from glob import glob
@@ -14997,8 +15133,8 @@ ARCHIVO: templates\Aplic\estadisticas\FrontEnd\estadisticas.html
 ARCHIVO: templates\Aplic\estadosderepuestos\BackEnd\estados_de_repuestos.py
 --------------------------------------------------------------------------------
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash, current_app
 import json, re, os
 from werkzeug.utils import secure_filename
@@ -15846,8 +15982,8 @@ ARCHIVO: templates\Aplic\generarprocedimiento\BackEnd\generar_procedimiento.py
 # Archivo backend generado automáticamente
 
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash, current_app
 import json, re, os
 from datetime import datetime
@@ -15926,7 +16062,7 @@ ARCHIVO: templates\Aplic\GestionAplic\BackEnd\backMenu.py
 --------------------------------------------------------------------------------
 from flask import Blueprint, request, jsonify, current_app
 import os, json, unicodedata, re
-from menu import cargar_menu, guardar_menu
+from core.menu import cargar_menu, guardar_menu
 
 menu_api = Blueprint('menu_api', __name__)
 
@@ -16544,8 +16680,8 @@ ARCHIVO: templates\Aplic\gestiondebloqueos\FrontEnd\nodo.html
 ARCHIVO: templates\Aplic\gestiondeherramientas\BackEnd\gestion_de_herramientas.py
 --------------------------------------------------------------------------------
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template, abort, current_app
 from datetime import datetime
 import json, os, re
@@ -16625,8 +16761,8 @@ ARCHIVO: templates\Aplic\gestiondeherramientas\FrontEnd\gestion_de_herramientas.
 ARCHIVO: templates\Aplic\graficosrepuestos\BackEnd\graficos_repuestos.py
 --------------------------------------------------------------------------------
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template
 import json, os
 from collections import Counter
@@ -16736,8 +16872,8 @@ ARCHIVO: templates\Aplic\imagenes\BackEnd\imagenes.py
 --------------------------------------------------------------------------------
 # Redirigir /imagenes a /planos
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash, current_app
 import json, re, os
 
@@ -17162,8 +17298,8 @@ ARCHIVO: templates\Aplic\instalaciones\BackEnd\instalaciones.py
 --------------------------------------------------------------------------------
 from flask import Blueprint, jsonify, render_template, request
 from flask_login import current_user
-from login import roles_required
-from menu import cargar_menu
+from core.menu import cargar_menu
+from auth.login import roles_required
 import json, os
 from functools import wraps
 
@@ -17398,8 +17534,8 @@ ARCHIVO: templates\Aplic\instalaciones\FrontEnd\instalaciones.html
 ARCHIVO: templates\Aplic\inventario\BackEnd\inventario.py
 --------------------------------------------------------------------------------
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, render_template
 import json
 from collections import defaultdict
@@ -17536,8 +17672,8 @@ ARCHIVO: templates\Aplic\listarepuestos\BackEnd\lista_repuestos.py
 --------------------------------------------------------------------------------
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
-from login import roles_required
-from menu import cargar_menu
+from core.menu import cargar_menu
+from auth.login import roles_required
 import json, os
 from datetime import datetime
 from templates.Aplic.estadosderepuestos.BackEnd.export_pdf import exportar_pdf_reportlab
@@ -17804,8 +17940,8 @@ ARCHIVO: templates\Aplic\listarot\BackEnd\listar_ot.py
 # Archivo backend generado automáticamente
 
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, request, render_template, send_file
 import json, re, os
 import pandas as pd
@@ -18121,8 +18257,8 @@ ARCHIVO: templates\Aplic\modelos3d\BackEnd\modelos_3d.py
 # Aplic/modelos3d/BackEnd/modelos_3d.py
 
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template, current_app, send_from_directory
 import json, os
 
@@ -18290,8 +18426,8 @@ ARCHIVO: templates\Aplic\pagos\BackEnd\pagos.py
 --------------------------------------------------------------------------------
 # pagos.py
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template
 import json, os
 from datetime import datetime
@@ -18718,8 +18854,8 @@ ARCHIVO: templates\Aplic\spotify\BackEnd\spotify.py
 --------------------------------------------------------------------------------
 from flask_login import login_required, current_user
 from flask import Blueprint, render_template, redirect, request, session, url_for, jsonify
-from login import roles_required
-from menu import cargar_menu
+from core.menu import cargar_menu
+from auth.login import roles_required
 import requests
 import base64
 import time
@@ -18935,7 +19071,7 @@ ARCHIVO: templates\Aplic\tareas\BackEnd\db_manager.py
 --------------------------------------------------------------------------------
 import json
 import os
-from db_json import JsonStore
+from core.db_json import JsonStore
 
 DB_PATH = "DataBase/time/dataTask.json"
 _store = JsonStore(DB_PATH)
@@ -18966,8 +19102,8 @@ ARCHIVO: templates\Aplic\tareas\BackEnd\tareas.py
 # Archivo backend generado automáticamente
 
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash, current_app
 from templates.Aplic.tareas.BackEnd.db_manager import cargar_eventos, agregar_evento, editar_evento, eliminar_evento
 
@@ -19168,8 +19304,8 @@ class RBFRegressor:
 ARCHIVO: templates\Aplic\trayectoria\BackEnd\trayectoria.py
 --------------------------------------------------------------------------------
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template
 import numpy as np
 from templates.Aplic.trayectoria.BackEnd.rbf_model import RBFRegressor

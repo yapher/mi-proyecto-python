@@ -1,4 +1,4 @@
 @echo off
-cd /d "C:\Users\yapher\OneDrive - Ternium\Empresa"
+cd /d "C:\Empresa"
 python app.py
 pause

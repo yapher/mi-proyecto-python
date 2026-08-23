@@ -1,19 +1,18 @@
 """
 Tests del módulo genérico db_json.JsonStore.
-
 Son autocontenidos: usan 'tmp_path' (fixture nativo de pytest),
 por lo que NO tocan los JSON reales de DataBase/.
-
 Ejecutar con:  pytest tests/test_db_json.py -v
 """
 import json
 import sys
 from pathlib import Path
 
-# Asegura que la raíz del proyecto esté en el path para importar db_json
+# Asegura que la raíz del proyecto esté en el path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from db_json import JsonStore
+# ✅ Import actualizado: ahora desde core.db_json (no desde la raíz)
+from core.db_json import JsonStore
 
 
 # =========================================================
