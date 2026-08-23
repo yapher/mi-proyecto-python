@@ -31,9 +31,14 @@ CARPETAS_EXCLUIDAS = {
 
 # Extensiones de archivo que se incluyen por defecto (código y texto plano)
 EXTENSIONES_POR_DEFECTO = {
-    ".py", ".txt", ".md", ".json", ".yaml", ".yml",
+    ".py", ".txt", ".md", ".yaml", ".yml",
     ".cfg", ".ini", ".toml", ".html", ".css", ".js",
 }
+
+# Extensiones que NUNCA se exportan, aunque el usuario las pida explícitamente
+# con --extensiones o --archivos (ej: bases de datos, archivos de config con
+# datos sensibles, etc.)
+EXTENSIONES_EXCLUIDAS_SIEMPRE = {".json"}
 
 # Archivos concretos que se excluyen aunque coincidan con la extensión
 ARCHIVOS_EXCLUIDOS = {"Proyecto_Completo.txt", "exportar_proyecto.py"}
@@ -68,7 +73,10 @@ def generar_arbol(raiz, extensiones):
                 if entrada in ARCHIVOS_EXCLUIDOS:
                     continue
                 _, ext = os.path.splitext(entrada)
-                if extensiones and ext.lower() not in extensiones:
+                ext = ext.lower()
+                if ext in EXTENSIONES_EXCLUIDAS_SIEMPRE:
+                    continue
+                if extensiones and ext not in extensiones:
                     continue
                 entradas_validas.append((entrada, False))
 
@@ -102,7 +110,10 @@ def recolectar_archivos(raiz, extensiones):
             if archivo in ARCHIVOS_EXCLUIDOS:
                 continue
             _, ext = os.path.splitext(archivo)
-            if extensiones and ext.lower() not in extensiones:
+            ext = ext.lower()
+            if ext in EXTENSIONES_EXCLUIDAS_SIEMPRE:
+                continue
+            if extensiones and ext not in extensiones:
                 continue
             ruta_completa = os.path.join(carpeta_actual, archivo)
             archivos_encontrados.append(ruta_completa)
@@ -156,23 +167,42 @@ def exportar_proyecto(raiz, salida, extensiones, archivos_especificos=None):
     raiz = os.path.abspath(raiz)
     extensiones = {e.lower() if e.startswith(".") else f".{e.lower()}" for e in extensiones}
 
+    # Aunque el usuario pida .json explícitamente por --extensiones, la
+    # sacamos igual: es una exclusión dura para no exportar bases de datos.
+    if extensiones & EXTENSIONES_EXCLUIDAS_SIEMPRE:
+        print(
+            "⚠️  Se ignoran estas extensiones porque están excluidas siempre "
+            f"(ej. bases de datos): {sorted(extensiones & EXTENSIONES_EXCLUIDAS_SIEMPRE)}"
+        )
+        extensiones -= EXTENSIONES_EXCLUIDAS_SIEMPRE
+
     print(f"Analizando proyecto en: {raiz}")
     arbol = generar_arbol(raiz, extensiones)
 
     if archivos_especificos:
         # Modo selectivo: se ignoran los filtros de extensión/exclusión y se
-        # exporta exactamente la lista de rutas relativas que pidió el usuario.
+        # exporta exactamente la lista de rutas relativas que pidió el usuario,
+        # salvo que sean .json (exclusión dura, igual se respeta).
         archivos = []
         faltantes = []
+        omitidos_json = []
         for ruta_relativa in archivos_especificos:
             # Normalizamos separadores: aceptamos tanto "/" como "\" sin
             # importar el sistema operativo desde el que se escribió la ruta.
             ruta_normalizada = ruta_relativa.replace("\\", os.sep).replace("/", os.sep)
+            _, ext = os.path.splitext(ruta_normalizada)
+            if ext.lower() in EXTENSIONES_EXCLUIDAS_SIEMPRE:
+                omitidos_json.append(ruta_relativa)
+                continue
             ruta_absoluta = os.path.join(raiz, ruta_normalizada)
             if os.path.isfile(ruta_absoluta):
                 archivos.append(ruta_absoluta)
             else:
                 faltantes.append(ruta_relativa)
+        if omitidos_json:
+            print("⚠️  Se omiten estos archivos .json (excluidos siempre):")
+            for f in omitidos_json:
+                print(f"    - {f}")
         if faltantes:
             print("⚠️  No se encontraron estos archivos (revisá la ruta o el --raiz):")
             for f in faltantes:
@@ -241,7 +271,7 @@ def main():
         "--extensiones", "-e",
         nargs="*",
         default=sorted(EXTENSIONES_POR_DEFECTO),
-        help="Lista de extensiones a incluir, ej: .py .txt .json (por defecto incluye varias comunes)."
+        help="Lista de extensiones a incluir, ej: .py .txt .md (por defecto incluye varias comunes; .json queda excluido siempre)."
     )
     parser.add_argument(
         "--archivos", "-a",
@@ -249,7 +279,8 @@ def main():
         default=None,
         help=(
             "Lista exacta de rutas relativas a exportar (ignora --extensiones y las "
-            "exclusiones por carpeta/tipo). Ej: --archivos templates/layout.html static/js/apps/agenda.js"
+            "exclusiones por carpeta/tipo, salvo .json que siempre se excluye). "
+            "Ej: --archivos templates/layout.html static/js/apps/agenda.js"
         )
     )
 
