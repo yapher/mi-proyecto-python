@@ -1,11 +1,4 @@
 {
-  "1": {
-    "id": "1",
-    "nombre": "Sidercrom",
-    "estado": "apagado",
-    "padre": null,
-    "descripcion": "planta"
-  },
   "2": {
     "id": "2",
     "nombre": "Littell",
@@ -166,5 +159,75 @@
     "estado": "apagado",
     "padre": "4",
     "descripcion": "TENSION UPS HALLDEN"
+  },
+  "27": {
+    "id": "27",
+    "nombre": "Interruptor de prueba",
+    "estado": "apagado",
+    "padre": null,
+    "descripcion": ""
+  },
+  "28": {
+    "id": "28",
+    "nombre": "Nuevo Nodo",
+    "estado": "apagado",
+    "padre": null,
+    "descripcion": ""
+  },
+  "29": {
+    "id": "29",
+    "nombre": "Interruptor para toggle",
+    "estado": "apagado",
+    "padre": null,
+    "descripcion": ""
+  },
+  "30": {
+    "id": "30",
+    "nombre": "Test",
+    "estado": "apagado",
+    "padre": null,
+    "descripcion": ""
+  },
+  "31": {
+    "id": "31",
+    "nombre": "Interruptor flujo completo TEST",
+    "estado": "apagado",
+    "padre": null,
+    "descripcion": ""
+  },
+  "32": {
+    "id": "32",
+    "nombre": "Interruptor de prueba",
+    "estado": "apagado",
+    "padre": null,
+    "descripcion": ""
+  },
+  "33": {
+    "id": "33",
+    "nombre": "Nuevo Nodo",
+    "estado": "apagado",
+    "padre": null,
+    "descripcion": ""
+  },
+  "34": {
+    "id": "34",
+    "nombre": "Interruptor para toggle",
+    "estado": "apagado",
+    "padre": null,
+    "descripcion": ""
+  },
+  "35": {
+    "id": "35",
+    "nombre": "Test",
+    "estado": "apagado",
+    "padre": null,
+    "descripcion": ""
+  },
+  "36": {
+    "id": "36",
+    "nombre": "Interruptor flujo completo TEST",
+    "estado": "apagado",
+    "padre": null,
+    "descripcion": ""
   }
 }

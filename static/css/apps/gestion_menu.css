@@ -1,14 +1,52 @@
 /* ==========================================
-   BOTONES EDITAR/CANCELAR (patrón CRUD)
-   Repetido en: gestion_menu, crear_almacenes,
-   crear_procedimiento
-   ========================================== */
-.btn-editar,
-.btn-cancelar {
+BOTONES EDITAR/CANCELAR (patrón CRUD específico de Gestión de Menú)
+========================================== */
+.btn-editar-menu,
+.btn-cancelar-menu {
     display: none !important;
 }
-
-.btn-editar.active,
-.btn-cancelar.active {
+.btn-editar-menu.active,
+.btn-cancelar-menu.active {
     display: inline-block !important;
+}
+
+/* Botón de crear aplicación (gradiente azul único) */
+.btn-crear-app {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    border: none;
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+.btn-crear-app:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
+    background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+}
+.btn-crear-app:active {
+    transform: translateY(0);
+}
+/* Animación para el botón cuando aparece */
+.btn-agregar {
+    animation: fadeInUp 0.3s ease-out;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Responsive específico */
+@media (max-width: 768px) {
+    .btn-crear-app {
+        width: 100%;
+        padding: 1rem;
+    }
 }

@@ -1,5 +1,4 @@
 # Archivo backend generado automáticamente
-
 from flask_login import login_required, current_user
 from menu import cargar_menu
 from login import roles_required
@@ -7,10 +6,7 @@ from flask import Blueprint, jsonify, request, render_template, redirect, url_fo
 import json, re, os
 
 crear_rubros_bp = Blueprint('indexcrear_rubros', __name__)
-
-
 RUBRO_PATH = 'DataBase/hogar/rubro.json'
-
 
 @crear_rubros_bp.route('/crear_rubros')
 @login_required
@@ -22,7 +18,6 @@ def indexcrear_rubros():
 ###################
 #  CRUD DE RUBROS #
 ###################
-
 # obtiene lista de datos del archivo json rubros carga la tabla
 @crear_rubros_bp.route("/api/rubro_arbol", methods=["GET"])
 @login_required
@@ -41,6 +36,7 @@ def obtener_arbol_menu():
             }
             resultado.append(nodo)
         return resultado
+    
     data = cargar_rubro()
     return jsonify(construir_arbol(data))
 
@@ -54,21 +50,22 @@ def crear_menu():
     emoji = datos.get("emoji")
     ruta_menu = datos.get("ruta", "")
     ruta_padre = datos.get("ruta_padre", "")
+    
     if not nombre or not emoji:
         return jsonify({"msg": "Faltan datos","type": "error" }), 400
-
+        
     data = cargar_rubro()
     padre = buscar_nodo_por_ruta(data, ruta_padre)
     if padre is None:
         return jsonify({"msg": "Ruta padre inválida","type": "error"}), 400
-
+        
     nuevo_menu = {
         "nombre": nombre,
         "emoji": emoji,
         "ruta": ruta_menu,
         "submenues": []
     }
-
+    
     if isinstance(padre, list):
         if any(item["nombre"] == nombre for item in padre):
             return jsonify({"msg": "El menú ya existe","type": "info"}), 400
@@ -79,7 +76,7 @@ def crear_menu():
         padre.setdefault("submenues", []).append(nuevo_menu)
     else:
         return jsonify({"msg": "Error inesperado","type": "error"}), 400
-
+        
     guardar_rubro(data)
     return jsonify({"msg": "Rubro creado correctamente"})
 
@@ -93,28 +90,30 @@ def editar_menu():
     nombre = datos.get("nombre")
     emoji = datos.get("emoji")
     ruta_menu = datos.get("ruta_menu", "")
-
+    
     if not ruta_jerarquia or not nombre or not emoji:
         return jsonify({"msg": "Faltan datos","type": "error"}), 400
-
+        
     data = cargar_rubro()
     partes = ruta_jerarquia.split('.')
     padre_ruta = '.'.join(partes[:-1])
     padre = buscar_nodo_por_ruta(data, padre_ruta)
+    
     if padre is None:
         return jsonify({"msg": "Ruta inválida","type": "error"}), 400
-
+        
     if isinstance(padre, list):
         nodo = next((item for item in padre if item["nombre"] == partes[-1]), None)
     else:
         nodo = next((item for item in padre.get("submenues", []) if item["nombre"] == partes[-1]), None)
-
+        
     if nodo is None:
         return jsonify({"msg": "Ítem no encontrado","type": "error"}), 404
-
+        
     nodo["nombre"] = nombre
     nodo["emoji"] = emoji
     nodo["ruta"] = ruta_menu
+    
     guardar_rubro(data)
     return jsonify({"msg": "Rubro actualizado correctamente"})
 
@@ -127,22 +126,29 @@ def eliminar_menu():
     ruta = datos.get("ruta")
     if not ruta:
         return jsonify({"msg": "Ruta requerida","type": "error"}), 400
-
+        
     data = cargar_rubro()
     partes = ruta.split('.')
     padre_ruta = '.'.join(partes[:-1])
     padre = buscar_nodo_por_ruta(data, padre_ruta)
+    
     if padre is None:
         return jsonify({"msg": "Ruta inválida","type": "error"}), 400
-
+        
+    nombre_a_eliminar = partes[-1]
     if isinstance(padre, list):
-        padre[:] = [item for item in padre if item["nombre"] != partes[-1]]
+        inicial_len = len(padre)
+        padre[:] = [item for item in padre if item["nombre"] != nombre_a_eliminar]
+        if len(padre) == inicial_len:
+            return jsonify({"msg": "Ítem no encontrado","type": "error"}), 404
     else:
-        padre["submenues"] = [item for item in padre.get("submenues", []) if item["nombre"] != partes[-1]]
-
+        inicial_len = len(padre.get("submenues", []))
+        padre["submenues"] = [item for item in padre.get("submenues", []) if item["nombre"] != nombre_a_eliminar]
+        if len(padre["submenues"]) == inicial_len:
+            return jsonify({"msg": "Ítem no encontrado","type": "error"}), 404
+            
     guardar_rubro(data)
     return jsonify({"msg": "Rubro eliminado correctamente"})
-
 
 ######################
 # funciones de flask #
@@ -152,11 +158,10 @@ def cargar_rubro():
         with open(RUBRO_PATH, 'r', encoding='utf-8') as f:
             return json.load(f)
     return []
-    
+
 def guardar_rubro(rubro):
     with open(RUBRO_PATH, 'w', encoding='utf-8') as f:
         json.dump(rubro, f, ensure_ascii=False, indent=4)
-
 
 def buscar_nodo_por_ruta(data, ruta):
     if not ruta:

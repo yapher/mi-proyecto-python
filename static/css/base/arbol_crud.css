@@ -1,0 +1,77 @@
+/* ============================================
+ARBOL CRUD - Estilos genéricos reutilizables
+Aplica a: almacenes, ubicaciones, procedimiento, menú, rubros
+============================================ */
+
+/* Selectores multinivel */
+.nivel-select {
+    border: 2px solid #dee2e6;
+    border-radius: 0.375rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    background-color: #fff;
+    color: #212529;
+}
+.nivel-select:focus {
+    border-color: #86b7fe;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Indentación jerárquica en tablas */
+.tabla-hierarquica td,
+#tabla td {
+    transition: padding-left 0.3s ease;
+}
+.nivel-0 { padding-left: 10px !important; }
+.nivel-1 { padding-left: 30px !important; }
+.nivel-2 { padding-left: 50px !important; }
+.nivel-3 { padding-left: 70px !important; }
+.nivel-4 { padding-left: 90px !important; }
+.nivel-5 { padding-left: 110px !important; }
+
+/* Botones editar/cancelar de árboles jerárquicos (ocultos por defecto) */
+/* Scoped to #formulario to avoid hiding edit buttons in tables (like repuestos) */
+#formulario .btn-editar,
+#formulario .btn-cancelar {
+    display: none !important;
+}
+#formulario .btn-editar.active,
+#formulario .btn-cancelar.active {
+    display: inline-block !important;
+}
+
+/* Input con emoji */
+.input-with-emoji {
+    position: relative;
+}
+.input-emoji {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 1.3rem;
+    user-select: none;
+    line-height: 1;
+}
+.input-with-emoji .form-control {
+    padding-left: 2.8rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nivel-1 { padding-left: 15px !important; }
+    .nivel-2 { padding-left: 30px !important; }
+    .nivel-3 { padding-left: 45px !important; }
+    .nivel-4 { padding-left: 60px !important; }
+    .nivel-5 { padding-left: 75px !important; }
+
+    #tabla td {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.3rem !important;
+    }
+    #tabla .btn {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+    }
+}

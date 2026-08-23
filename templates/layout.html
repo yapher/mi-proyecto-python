@@ -26,6 +26,8 @@
 
     <!-- CSS específico para mobile -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/mobile.css') }}">
+    <!-- CSS genérico de árboles jerárquicos (reutilizado por varias apps) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/arbol_crud.css') }}">
 </head>
 
 <body>
@@ -137,6 +139,8 @@
     <!-- Scripts del layout -->
     <script src="/static/js/apps/layout_scripts.js"></script>
     <script src="{{ url_for('static', filename='js/reloj.js') }}"></script>
+    <!-- Módulo JS genérico para árboles jerárquicos -->
+    <script src="{{ url_for('static', filename='js/apps/arbol_crud.js') }}"></script>
 
     {% block scripts %}{% endblock %}
 </body>

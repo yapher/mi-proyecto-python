@@ -1,5 +1,4 @@
 """Tests del módulo Agenda - CRUD completo + Mobile.
-
 Cubre:
 - Página principal (200, auth)
 - Listado de eventos (JSON)
@@ -11,10 +10,8 @@ Cubre:
 import pytest
 from datetime import datetime
 
-
 class TestAgendaPagina:
     """Tests de la página principal de agenda."""
-
     def test_pagina_agenda_responde_200(self, auth_client):
         """GET /agenda/ debe responder 200 con HTML."""
         r = auth_client.get('/agenda/')
@@ -49,10 +46,8 @@ class TestAgendaPagina:
         assert b'viewport' in r.data.lower()
         assert b'width=device-width' in r.data
 
-
 class TestAgendaEventos:
     """Tests del endpoint de listado de eventos."""
-
     def test_listar_eventos_devuelve_json(self, auth_client):
         """GET /agenda/eventos debe devolver JSON."""
         r = auth_client.get('/agenda/eventos')
@@ -68,10 +63,8 @@ class TestAgendaEventos:
         data = r.get_json()
         assert isinstance(data, list)
 
-
 class TestAgendaCRUD:
     """Tests de Crear / Leer / Actualizar / Eliminar."""
-
     def test_crear_evento_minimo(self, auth_client):
         """POST /agenda/evento con datos mínimos crea el evento."""
         payload = {
@@ -84,7 +77,6 @@ class TestAgendaCRUD:
         }
         r = auth_client.post('/agenda/evento', json=payload)
         assert r.status_code in (200, 201)
-
         # Verificar que existe
         r2 = auth_client.get('/agenda/eventos')
         eventos = r2.get_json()
@@ -114,19 +106,16 @@ class TestAgendaCRUD:
             'fecha': '2026-08-24'
         })
         assert r.status_code in (200, 201)
-
         # Obtener ID
         eventos = auth_client.get('/agenda/eventos').get_json()
         evento = next((e for e in eventos if e.get('titulo') == 'Original'), None)
         assert evento is not None
         evento_id = evento['id']
-
         # Editar
         r = auth_client.put(f'/agenda/evento/{evento_id}', json={
             'titulo': 'Editado TEST'
         })
         assert r.status_code == 200
-
         # Verificar
         eventos = auth_client.get('/agenda/eventos').get_json()
         actualizado = next((e for e in eventos if e.get('id') == evento_id), None)
@@ -142,18 +131,15 @@ class TestAgendaCRUD:
             'realizado': False
         })
         assert r.status_code in (200, 201)
-
         eventos = auth_client.get('/agenda/eventos').get_json()
         evento = next((e for e in eventos if e.get('titulo') == 'Toggle TEST'), None)
         assert evento is not None
         evento_id = evento['id']
-
         # Marcar como realizado
         r = auth_client.put(f'/agenda/evento/{evento_id}', json={
             'realizado': True
         })
         assert r.status_code == 200
-
         eventos = auth_client.get('/agenda/eventos').get_json()
         actualizado = next((e for e in eventos if e.get('id') == evento_id), None)
         assert actualizado.get('realizado') is True
@@ -166,16 +152,13 @@ class TestAgendaCRUD:
             'fecha': '2026-08-26'
         })
         assert r.status_code in (200, 201)
-
         eventos = auth_client.get('/agenda/eventos').get_json()
         evento = next((e for e in eventos if e.get('titulo') == 'A eliminar'), None)
         assert evento is not None
         evento_id = evento['id']
-
         # Eliminar
         r = auth_client.delete(f'/agenda/evento/{evento_id}')
         assert r.status_code == 200
-
         # Verificar que ya no existe
         eventos = auth_client.get('/agenda/eventos').get_json()
         assert not any(e.get('id') == evento_id for e in eventos)
@@ -185,10 +168,8 @@ class TestAgendaCRUD:
         r = auth_client.delete('/agenda/evento/999999')
         assert r.status_code in (200, 404)
 
-
 class TestAgendaMobile:
     """Tests específicos de comportamiento mobile."""
-
     def test_css_contiene_media_queries(self, auth_client):
         """El CSS debe incluir media queries para responsive."""
         r = auth_client.get('/agenda/')
@@ -213,8 +194,13 @@ class TestAgendaMobile:
         assert r_js.status_code == 200
         js = r_js.data.decode('utf-8')
         assert 'window.abrirModal' in js or 'abrirModal' in js
-        assert 'window.guardarEvento' in js or 'guardarEvento' in js
-        assert 'window.eliminarEvento' in js or 'eliminarEvento' in js
+        
+        # guardarEvento y eliminarEvento están en evento.js
+        r_js_evento = auth_client.get('/static/js/apps/evento.js')
+        assert r_js_evento.status_code == 200
+        js_evento = r_js_evento.data.decode('utf-8')
+        assert 'guardarEvento' in js_evento
+        assert 'eliminarEvento' in js_evento
 
     def test_html_controles_responsive(self, auth_client):
         """El HTML debe usar la clase controls-responsive."""
@@ -226,10 +212,8 @@ class TestAgendaMobile:
         r = auth_client.get('/agenda/')
         assert b'table-responsive' in r.data
 
-
 class TestAgendaSeguridad:
     """Tests de seguridad y auth."""
-
     def test_crear_evento_sin_auth(self, client):
         """POST /agenda/evento sin auth debe fallar."""
         r = client.post('/agenda/evento', json={

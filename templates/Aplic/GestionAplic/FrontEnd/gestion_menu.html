@@ -4,12 +4,10 @@
 {% endblock %}
 {% block content %}
 <h3 class="mb-3">Gestión de Menú</h3>
-
 <div class="bg-form mb-4">
     <form id="formulario">
         <!-- Selectores multinivel -->
         <div id="nivelesContainer" class="mb-3"></div>
-
         <!-- Nombre, emoji y ruta -->
         <div class="mb-3 input-with-emoji">
             <span class="input-emoji">📛</span>
@@ -26,8 +24,8 @@
         <input type="hidden" id="ruta_original">
         <div class="button-group">
             <button type="button" class="btn btn-agregar" onclick="guardar()">Agregar</button>
-            <button type="button" class="btn btn-editar" onclick="editar()">Guardar cambios</button>
-            <button type="button" class="btn btn-cancelar" onclick="cancelar()">Cancelar</button>
+            <button type="button" class="btn btn-editar-menu" onclick="editar()">Guardar cambios</button>
+            <button type="button" class="btn btn-cancelar-menu" onclick="cancelar()">Cancelar</button>
         </div>
     </form>
 </div>
@@ -47,7 +45,6 @@
     </table>
 </div>
 {% endblock %}
-
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/apps/gestion_menu.js') }}"></script>
 {% endblock %}
