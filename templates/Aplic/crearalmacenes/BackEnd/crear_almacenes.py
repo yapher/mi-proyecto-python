@@ -2,7 +2,7 @@
 
 Usa el módulo genérico arbol_bp para el CRUD jerárquico.
 """
-from arbol_bp import crear_blueprint_arbol
+from core.arbol_bp import crear_blueprint_arbol
 
 crear_almacenes_bp = crear_blueprint_arbol(
     nombre_bp='indexcrear_almacenes',

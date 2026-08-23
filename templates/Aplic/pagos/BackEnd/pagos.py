@@ -1,7 +1,7 @@
 # pagos.py
 from flask_login import login_required, current_user
-from menu import cargar_menu
-from login import roles_required
+from core.menu import cargar_menu
+from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template
 import json, os
 from datetime import datetime

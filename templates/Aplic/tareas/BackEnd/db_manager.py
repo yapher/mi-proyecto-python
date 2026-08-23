@@ -1,6 +1,6 @@
 import json
 import os
-from db_json import JsonStore
+from core.db_json import JsonStore
 
 DB_PATH = "DataBase/time/dataTask.json"
 _store = JsonStore(DB_PATH)

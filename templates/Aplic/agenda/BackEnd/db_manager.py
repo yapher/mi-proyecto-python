@@ -3,7 +3,7 @@ import os
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from flask_mail import Message
-from db_json import JsonStore
+from core.db_json import JsonStore
 
 DB_PATH = "DataBase/time/agenda.json"
 _store = JsonStore(DB_PATH)

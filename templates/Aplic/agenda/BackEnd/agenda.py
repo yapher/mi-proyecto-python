@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request, render_template, current_app
 from flask_login import login_required, current_user
-from login import roles_required
-from menu import cargar_menu
+from auth.login import roles_required
+from core.menu import cargar_menu
 from datetime import datetime
 from zoneinfo import ZoneInfo
 

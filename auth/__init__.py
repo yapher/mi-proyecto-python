@@ -1,8 +1,8 @@
 """
-COMPATIBILIDAD: Este archivo re-exporta desde auth.login
-Migración: usar directamente `from auth.login import ...`
+Módulo de autenticación y autorización.
+Contiene login, gestión de usuarios y decoradores de roles.
 """
-from auth.login import (
+from .login import (
     User,
     cargar_usuarios,
     init_routes_login,

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, render_template, request
 from flask_login import current_user
-from login import roles_required
-from menu import cargar_menu
+from core.menu import cargar_menu
+from auth.login import roles_required
 import json, os
 from functools import wraps
 

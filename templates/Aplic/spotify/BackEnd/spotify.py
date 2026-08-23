@@ -1,7 +1,7 @@
 from flask_login import login_required, current_user
 from flask import Blueprint, render_template, redirect, request, session, url_for, jsonify
-from login import roles_required
-from menu import cargar_menu
+from core.menu import cargar_menu
+from auth.login import roles_required
 import requests
 import base64
 import time

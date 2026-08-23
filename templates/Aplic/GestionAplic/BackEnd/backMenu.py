@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, current_app
 import os, json, unicodedata, re
-from menu import cargar_menu, guardar_menu
+from core.menu import cargar_menu, guardar_menu
 
 menu_api = Blueprint('menu_api', __name__)
 

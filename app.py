@@ -1,4 +1,3 @@
-# app.py
 """
 Aplicación principal.
 - Auto-registro de blueprints (no hay que tocar este archivo al agregar apps)
@@ -8,14 +7,12 @@ from flask import Flask, render_template, redirect, url_for
 import os
 import threading
 import webbrowser
-
 from flask_login import login_required, current_user
 from flask_mail import Mail
 
-from menu import cargar_menu
-from login import init_routes_login, roles_required
-
-# Módulos centrales
+# Importar desde las nuevas ubicaciones
+from core.menu import cargar_menu
+from auth.login import init_routes_login, roles_required
 from core.blueprint_registry import auto_register_blueprints
 from core.scheduler import setup_scheduler
 
@@ -65,7 +62,6 @@ def inject_menu():
         return dict(menu=cargar_menu(), roles=current_user.roles)
     return dict(menu=[], roles=[])
 
-
 # ============================================================
 # Rutas principales
 # ============================================================
@@ -78,7 +74,6 @@ def index():
         roles=current_user.roles,
     )
 
-
 @app.route("/gestion_menu")
 @login_required
 @roles_required("admin", "editor")
@@ -88,7 +83,6 @@ def gestion_menu():
         menu=cargar_menu(),
         roles=current_user.roles,
     )
-
 
 @app.route("/gestion_aplicaciones")
 @login_required
@@ -100,7 +94,6 @@ def gestion_aplicaciones():
         roles=current_user.roles,
     )
 
-
 # ============================================================
 # Manejo de errores
 # ============================================================
@@ -108,11 +101,9 @@ def gestion_aplicaciones():
 def forbidden(e):
     return render_template("403.html"), 403
 
-
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("403.html"), 404  # o crea un 404.html
-
+    return render_template("403.html"), 404
 
 # ============================================================
 # Arranque
@@ -120,14 +111,13 @@ def not_found(e):
 def _abrir_navegador():
     webbrowser.open("http://127.0.0.1:5000")
 
-
 if __name__ == "__main__":
     os.makedirs("DataBase/Config", exist_ok=True)
-
+    
     # Iniciar scheduler solo si no estamos en modo reload de Flask
     if not os.environ.get("WERKZEUG_RUN_MAIN"):
         scheduler.start()
         threading.Timer(1.0, _abrir_navegador).start()
-
+    
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
