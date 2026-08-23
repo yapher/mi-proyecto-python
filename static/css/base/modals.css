@@ -27,3 +27,92 @@
     overflow-y: auto;
 }
 
+/* ============================================
+MODALES
+Estilos para modales Bootstrap y fondos
+de formulario reutilizables.
+============================================ */
+/* Fondo de formulario (usado en modales y formularios) */
+.bg-form {
+    background-color: #4b376a;
+    padding: 20px;
+    border-radius: 8px;
+}
+/* Diálogo del modal */
+.modal-dialog {
+    max-width: 90vw;
+    width: auto;
+    margin: 1.75rem auto;
+}
+/* Cuerpo del modal */
+.modal-body {
+    white-space: normal;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* ============================================
+MODALES UNIFICADOS (Estilo "Agregar Nuevo Pago")
+============================================ */
+.modal-custom-dark .modal-dialog {
+    max-width: 800px;
+}
+
+.modal-custom-dark .modal-content {
+    background-color: #4b376a !important;
+    color: #fff !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 8px 32px rgba(136, 201, 153, 0.16) !important;
+    border: none !important;
+}
+
+.modal-custom-dark .modal-header {
+    border-bottom: 2px solid #88c999 !important;
+    background: linear-gradient(to right, #2a1e3b, #3e2d59) !important;
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+    padding: 1rem 1.5rem !important;
+}
+
+.modal-custom-dark .modal-title {
+    color: #88c999 !important;
+    font-weight: 700 !important;
+}
+
+.modal-custom-dark .btn-close {
+    filter: invert(1) !important;
+}
+
+.modal-custom-dark .modal-footer {
+    border-top: 2px solid #88c999 !important;
+    padding: 1rem 1.5rem !important;
+}
+
+/* Inputs y Labels dentro del modal custom */
+.modal-custom-dark .form-control,
+.modal-custom-dark .form-select {
+    background-color: #3e2d59 !important;
+    color: #fff !important;
+    border: 1px solid #88c999 !important;
+}
+
+.modal-custom-dark .form-control:focus,
+.modal-custom-dark .form-select:focus {
+    background-color: #3e2d59 !important;
+    color: #fff !important;
+    border-color: #88c999 !important;
+    box-shadow: 0 0 0 0.25rem rgba(136, 201, 153, 0.25) !important;
+}
+
+.modal-custom-dark .form-label {
+    color: #e5d64f !important;
+    font-weight: 500;
+}
+
+/* Ajuste para el contenedor de formulario interno si existe */
+.modal-custom-dark .bg-form {
+    background-color: transparent !important;
+    padding: 0 !important;
+}

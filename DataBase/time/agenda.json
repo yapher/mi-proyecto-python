@@ -11257,20 +11257,6 @@
         "realizado": false
     },
     {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1461
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1462,
-        "realizado": false
-    },
-    {
         "titulo": "Sin fecha",
         "id": 1463,
         "realizado": false
@@ -11288,20 +11274,6 @@
         "id": 1465
     },
     {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1466
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1467,
-        "realizado": false
-    },
-    {
         "titulo": "Sin fecha",
         "id": 1468,
         "realizado": false
@@ -11317,20 +11289,6 @@
         "realizado": false,
         "titulo": "Toggle TEST",
         "id": 1470
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1471
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1472,
-        "realizado": false
     },
     {
         "titulo": "Sin fecha",

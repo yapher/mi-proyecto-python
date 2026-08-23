@@ -36,15 +36,15 @@
                 </button>
             </form>
         </div>
-
-        <!-- Modal editar -->
-        <div class="modal fade"
+        
+        <!-- Modal editar UNIFICADO -->
+        <div class="modal fade modal-custom-dark"
             id="modalEditar{{ loop_index }}_{{ loop_index0 }}_{{ plano.archivo | replace(' ', '_') }}"
             tabindex="-1"
             aria-labelledby="modalEditarLabel{{ loop_index }}_{{ loop_index0 }}_{{ plano.archivo | replace(' ', '_') }}"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content bg-form">
+                <div class="modal-content">
                     <form method="POST"
                         action="{{ url_for('indeximagenes.editar_plano', nombre_linea=plano.nombre_linea, archivo=plano.archivo) }}">
                         <div class="modal-header">
@@ -54,13 +54,12 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="descripcion" class="form-label">Descripción</label>
-                                <input type="text" name="descripcion" value="{{ plano.descripcion }}"
-                                    class="form-control">
+                                <input type="text" name="descripcion" value="{{ plano.descripcion }}" class="form-control">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-warning btn-editar-plano">Guardar</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-agregar">Guardar</button>
                         </div>
                     </form>
                 </div>
