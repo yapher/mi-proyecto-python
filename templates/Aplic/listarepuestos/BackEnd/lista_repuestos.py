@@ -5,10 +5,9 @@ from auth.login import roles_required
 import json, os
 from datetime import datetime
 from templates.Aplic.estadosderepuestos.BackEnd.export_pdf import exportar_pdf_reportlab
-
 # ✅ IMPORTACIÓN DIRECTA DESDE HELPERS (más limpio y modular)
 from templates.Aplic.estadosderepuestos.BackEnd.helpers import (
-    cargar_tabs, cargar_almacenes, obtener_nombres_almacenes, 
+    cargar_tabs, cargar_almacenes, obtener_nombres_almacenes,
     cargar_estados, cargar_ubicaciones
 )
 
@@ -33,10 +32,10 @@ def filtrar_repuestos(repuestos, filtros):
                     esta_vencido = True
             except ValueError:
                 pass
-        
+                
         if mostrar_vencidos and not esta_vencido:
             continue
-        
+            
         # Filtros
         if filtros.get('nombre') and filtros['nombre'].lower() not in rep.get('nombre', '').lower():
             cumple = False
@@ -44,7 +43,7 @@ def filtrar_repuestos(repuestos, filtros):
             cumple = False
         if filtros.get('estado') and filtros['estado'] != rep.get('estado', ''):
             cumple = False
-        
+            
         if filtros.get('fecha_alta'):
             try:
                 fecha_alta = datetime.strptime(filtros['fecha_alta'], '%Y-%m-%d')
@@ -53,7 +52,7 @@ def filtrar_repuestos(repuestos, filtros):
                     cumple = False
             except:
                 pass
-        
+                
         if filtros.get('fecha_baja'):
             try:
                 fecha_baja = datetime.strptime(filtros['fecha_baja'], '%Y-%m-%d')
@@ -63,10 +62,10 @@ def filtrar_repuestos(repuestos, filtros):
             except:
                 if rep.get('fecha_fin'):
                     cumple = False
-        
+                    
         if cumple:
             resultado.append(rep)
-    
+            
     return resultado
 
 @lista_repuestos_bp.route('/lista_repuestos')
@@ -94,7 +93,7 @@ def indexlista_repuestos():
     else:
         with open(PATHREPUESTOS, 'r', encoding='utf-8') as f:
             repuestos = json.load(f)
-    
+            
     hoy = datetime.today().date()
     cantidad_vencidos = 0
     for rep in repuestos:
@@ -105,13 +104,13 @@ def indexlista_repuestos():
                     cantidad_vencidos += 1
         except:
             pass
-    
+            
     repuestos_filtrados = filtrar_repuestos(repuestos, filtros)
     
     # Si se solicita exportar a PDF
     if request.args.get('exportar_pdf') == '1':
         return exportar_pdf_reportlab(repuestos_filtrados)
-    
+        
     return render_template(
         'Aplic/listarepuestos/FrontEnd/lista_repuestos.html',
         nemu=nemu,
@@ -122,5 +121,6 @@ def indexlista_repuestos():
         tabs=tabs,
         nombres_almacenes=nombres_almacenes,
         estados=estados,
-        ubicaciones=ubicaciones
+        ubicaciones=ubicaciones,
+        hoy_str=hoy.strftime('%Y-%m-%d')  # ✅ Agregado para evaluación en Jinja
     )

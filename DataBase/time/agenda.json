@@ -4098,7 +4098,7 @@
         "fecha": "2027-01-01",
         "descripcion": "REP. MOTOR ARRASTRA ZUNCHO",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true
     },
     {
         "titulo": "Bajada de OT repuesto REX Littell",
@@ -8570,7 +8570,7 @@
         "fecha": "2027-10-08",
         "descripcion": "REP. MOTOR ELEVADOR PUENTE ZUNCHADO",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true
     },
     {
         "id": 1131,
@@ -11020,15 +11020,17 @@
         "fecha": "2026-08-24",
         "descripcion": "RP-MANT. ELÉCTRICO SENSORES LITTELL",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1409,
         "titulo": "PM01:2004690976",
-        "fecha": "2026-08-26",
+        "fecha": "2026-08-24",
         "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA LITTELL",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1410,
@@ -11036,7 +11038,8 @@
         "fecha": "2026-08-24",
         "descripcion": "RP-MEGAR MOTORES DE VENTILADORES",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1411,
@@ -11044,7 +11047,8 @@
         "fecha": "2026-08-24",
         "descripcion": "RP-MEGAR MOTORES REC.LAT. LITTELL",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1412,
@@ -11052,7 +11056,8 @@
         "fecha": "2026-08-24",
         "descripcion": "RP-MEGAR MOT.PRINCIP.DE ENTRADA",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1413,
@@ -11060,7 +11065,8 @@
         "fecha": "2026-08-24",
         "descripcion": "RP-GAMB-REV. MOTORES DE CC.",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1414,
@@ -11068,7 +11074,8 @@
         "fecha": "2026-08-24",
         "descripcion": "RP-GAMB. MANT. VENTILADORES LITTELL",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1415,
@@ -11123,7 +11130,7 @@
         "fecha": "2026-08-25",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "baja",
         "id": 1421
     },
@@ -11213,7 +11220,7 @@
         "fecha": "2026-08-24",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "alta",
         "id": 1431
     },
@@ -11262,63 +11269,13 @@
         "realizado": false
     },
     {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1464,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": true,
-        "titulo": "Toggle TEST",
-        "id": 1465
-    },
-    {
         "titulo": "Sin fecha",
         "id": 1468,
         "realizado": false
     },
     {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1469,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1470
-    },
-    {
         "titulo": "Sin fecha",
         "id": 1473,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1474,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1475
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1476
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1477,
         "realizado": false
     },
     {
@@ -11327,60 +11284,8 @@
         "realizado": false
     },
     {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1479,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1480
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1481
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1482,
-        "realizado": false
-    },
-    {
         "titulo": "Sin fecha",
         "id": 1483,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1484,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1485
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1486
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1487,
         "realizado": false
     },
     {
@@ -11389,60 +11294,8 @@
         "realizado": false
     },
     {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1489,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1490
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1491
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1492,
-        "realizado": false
-    },
-    {
         "titulo": "Sin fecha",
         "id": 1493,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1494,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1495
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1496
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1497,
         "realizado": false
     },
     {
@@ -11451,60 +11304,8 @@
         "realizado": false
     },
     {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1499,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1500
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1501
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1502,
-        "realizado": false
-    },
-    {
         "titulo": "Sin fecha",
         "id": 1503,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1504,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1505
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1506
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1507,
         "realizado": false
     },
     {
@@ -11513,60 +11314,8 @@
         "realizado": false
     },
     {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1509,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1510
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1511
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1512,
-        "realizado": false
-    },
-    {
         "titulo": "Sin fecha",
         "id": 1513,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1514,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1515
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1516
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1517,
         "realizado": false
     },
     {
@@ -11575,60 +11324,8 @@
         "realizado": false
     },
     {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1519,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1520
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1521
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1522,
-        "realizado": false
-    },
-    {
         "titulo": "Sin fecha",
         "id": 1523,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1524,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1525
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1526
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1527,
         "realizado": false
     },
     {
@@ -11637,60 +11334,8 @@
         "realizado": false
     },
     {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1529,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1530
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1531
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1532,
-        "realizado": false
-    },
-    {
         "titulo": "Sin fecha",
         "id": 1533,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1534,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": false,
-        "titulo": "Toggle TEST",
-        "id": 1535
-    },
-    {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1536
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1537,
         "realizado": false
     },
     {
@@ -11699,15 +11344,219 @@
         "realizado": false
     },
     {
+        "id": 1539,
+        "titulo": "PM02:2004877526",
+        "fecha": "2026-08-27",
+        "descripcion": "INSPECCIÓN ELÉC. APIL 3. LITE",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1540,
+        "titulo": "PM02:2004877525",
+        "fecha": "2026-08-27",
+        "descripcion": "INSPECCIÓN ELÉC. APIL 2. LITE",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1541,
+        "titulo": "PM02:2004877527",
+        "fecha": "2026-08-27",
+        "descripcion": "INSPECCIÓN ELÉC. APIL 4. LITE",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1542,
+        "titulo": "PM02:2004877528",
+        "fecha": "2026-08-27",
+        "descripcion": "INSPECCIÓN ELÉC. TB. LITE",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1543,
+        "titulo": "PM02:2004877521",
+        "fecha": "2026-08-27",
+        "descripcion": "INSPECCIÓN ELÉC. NIV. LITE",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1544,
+        "titulo": "PM02:2004877523",
+        "fecha": "2026-08-27",
+        "descripcion": "INSPECCIÓN ELÉC. TIJERA. LITE",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1545,
+        "titulo": "PM02:2004877520",
+        "fecha": "2026-08-27",
+        "descripcion": "INSPECCIÓN ELÉC. REF. LITE",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1546,
+        "titulo": "PM02:2004877524",
+        "fecha": "2026-08-27",
+        "descripcion": "INSPECCIÓN ELÉC. APIL 1. LITE",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1547,
+        "titulo": "PM02:2004877522",
+        "fecha": "2026-08-27",
+        "descripcion": "INSPECCIÓN ELÉC. FEEDER. LITE",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1548,
+        "titulo": "PM02:2004877519",
+        "fecha": "2026-08-27",
+        "descripcion": "INSPECCIÓN ELÉC. DEBO. LITE",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1549,
+        "titulo": "PM01:2004872864",
+        "fecha": "2026-09-14",
+        "descripcion": "RP-MANT. TB EMBALAJE AUTOMÁTICO",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1550,
+        "titulo": "PM01:2004872861",
+        "fecha": "2026-09-14",
+        "descripcion": "RP-CONTROL CERRADURAS  PUERTAS",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1551,
+        "titulo": "PM01:2004872863",
+        "fecha": "2026-09-14",
+        "descripcion": "RP-MANT. TIJERA CORTE FILM",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1552,
+        "titulo": "PM01:2004872862",
+        "fecha": "2026-09-14",
+        "descripcion": "RP- CONTROL DE SENSORES",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1553,
+        "titulo": "PM01:2004872878",
+        "fecha": "2026-09-21",
+        "descripcion": "RP-MANT. ELÉCTRICO SENSORES LITTELL",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1554,
+        "titulo": "PM01:2004872880",
+        "fecha": "2026-09-21",
+        "descripcion": "RP- GUARDIA DE ARRANQUE LÍNEA LITTELL",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1555,
+        "titulo": "PM01:2004872875",
+        "fecha": "2026-09-21",
+        "descripcion": "RP-MANTENIMIENTO TABLEROS DE COMANDO",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1556,
+        "titulo": "PM01:2004872876",
+        "fecha": "2026-09-21",
+        "descripcion": "RP-REV.MOTORES CA APIL. LITTELL",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1557,
+        "titulo": "PM01:2004872874",
+        "fecha": "2026-09-21",
+        "descripcion": "RP-GAMB. MANT. VENTILADORES LITTELL",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1558,
+        "titulo": "PM01:2004872877",
+        "fecha": "2026-09-21",
+        "descripcion": "RP-GAMB-REV. MOTORES DE CC.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1559,
+        "titulo": "PM01:2004872871",
+        "fecha": "2026-09-22",
+        "descripcion": "RP-MANT-SENSORES-ENCODERS DELTA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1560,
+        "titulo": "PM01:2004872872",
+        "fecha": "2026-09-22",
+        "descripcion": "RP-REVISION TABLEROS DELTA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "titulo": "Hacer Ot de Rex Littell",
+        "fecha": "2026-08-25",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "alta",
+        "id": 1561
+    },
+    {
+        "descripcion": "Descripción test",
+        "email": "test@test.com",
+        "fecha": "2026-08-23",
+        "prioridad": "media",
+        "realizado": false,
+        "titulo": "Evento TEST",
+        "id": 1562
+    },
+    {
+        "fecha": "2026-08-23",
+        "id": 1563,
+        "realizado": false
+    },
+    {
+        "titulo": "Sin fecha",
+        "id": 1564,
+        "realizado": false
+    },
+    {
         "fecha": "2026-08-24",
         "titulo": "Editado TEST",
-        "id": 1539,
+        "id": 1565,
         "realizado": false
     },
     {
         "fecha": "2026-08-25",
-        "realizado": false,
+        "realizado": true,
         "titulo": "Toggle TEST",
-        "id": 1540
+        "id": 1566
     }
 ]

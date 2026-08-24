@@ -214,5 +214,17 @@
         "fecha": "2026-08-22",
         "descripcion": "Test de flujo",
         "id": 37
+    },
+    {
+        "titulo": "Tarea de prueba",
+        "fecha": "2026-08-22",
+        "descripcion": "Descripción de prueba",
+        "id": 38
+    },
+    {
+        "titulo": "Tarea flujo completo",
+        "fecha": "2026-08-22",
+        "descripcion": "Test de flujo",
+        "id": 39
     }
 ]

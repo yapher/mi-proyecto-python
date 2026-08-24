@@ -426,7 +426,7 @@
         "link": "https://www.rockwellautomation.com/en-us/products/details.194E-A100-1756.html",
         "cantidad": 1,
         "fecha_creacion": "2019-02-21",
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1",
         "ruta_jerarquia": [
             "SD-APR-EMPA"
         ],
@@ -834,7 +834,7 @@
         "link": "https://dimater.com.ar/producto?id=53306&nombre=interruptor-termomagnetico-2x2a-610-ka-curva-c-abb",
         "cantidad": 1,
         "fecha_creacion": "2023-10-20",
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1",
         "ruta_jerarquia": [
             "SD-APR-EMPA"
         ],
@@ -1045,13 +1045,13 @@
         "link": "https://www.tecnicaindustriale.es/rossi/?gad_source=1&gad_campaignid=20915984116&gbraid=0AAAAAD3K7sGVRvkNBb0mUQ12iu4s_Jtti&gclid=Cj0KCQjww-HABhCGARIsALLO6XxH-MArVXhuYsx1IeRsc0wmd2dwQcRVBlDkG0hLzg9nJiVUVeIrMSoaAj63EALw_wcB",
         "cantidad": 1,
         "fecha_creacion": "2025-05-05",
-        "equipo": "SALA BATERIAS",
+        "equipo": "SALA_ELECTRICA-JAULA",
         "ruta_jerarquia": [
             "SD-APR-EMPA"
         ],
         "imagen": "motoreductor.jpg",
         "fecha_fin": "2027-10-08",
-        "estado": "🟡"
+        "estado": "🟢"
     },
     {
         "nombre": "DRIVE POWER FLEX 525  DRIVE 25B-D6P0N114, C/ETHERNET INCORPORADO/IP y SEGURIDAD, 480 VCA, 3 FASES, 3 HP, 2.2 Kw",
@@ -1083,7 +1083,7 @@
         "estado": "🟢"
     },
     {
-        "nombre": "DRIVE POWER FLEX 525  DRIVE 25B-D2P3N114, C/ETHERNET INCORPORADO/IP y SEGURIDAD, 480 VCA, 3 FASES, 1.0 HP, 0,75 Kw",
+        "nombre": "DRIVE POWER FLEX 525  DRIVE 25B-D2P3N114, C/ETHERNET INCORPORADO/IP y SEGURIDAD, 480 VCA, 3 FASES, 1.0 HP, 0,75 Kw/ se manda nuevamente correo 24/08/2026",
         "codigo": "78642710",
         "link": "https://es.rs-online.com/web/p/variadores-de-velocidad/8904317",
         "cantidad": 2,
@@ -1448,7 +1448,7 @@
         "estado": "🟢"
     },
     {
-        "nombre": "MODULO DIGITAL 24V I/O ABB 3HAC025917",
+        "nombre": "MODULO DIGITAL 24V I/O ABB 3HAC025917       se manda correo nuevamente 24/08/2026",
         "codigo": "78675907",
         "cantidad": 2,
         "equipo": "SALA_ELECTRICA-SD_DRIVE-ESTANTE 1",
@@ -1781,7 +1781,7 @@
         "nombre": "RELE LOGO 12/24RC 8 ENT. 12/24VCC Y 4 SA",
         "codigo": "71419031",
         "cantidad": 2,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -1866,7 +1866,7 @@
         "nombre": "SENSOR INDUCTIVO DETECTOR DE PROX. FESTO: SIEA-M18B-UI-S",
         "codigo": "71644107",
         "cantidad": 2,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [
             "SD-APR-DELT"
         ],
@@ -1880,7 +1880,7 @@
         "nombre": "BATERIA ROCKWELL 1756-BA1",
         "codigo": "71337426",
         "cantidad": 3,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [
             "SD-APR-DELT"
         ],
@@ -1908,7 +1908,7 @@
         "nombre": "SWITCH ETHERNET MOXA EDS-508A-MM-SC",
         "codigo": "72066240",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE 3",
         "ruta_jerarquia": [
             "SD-APR-EMPA"
         ],
@@ -1936,7 +1936,7 @@
         "nombre": "MODULO MULTIPLICADOR 3 CANALES SALIDA",
         "codigo": "71593055",
         "cantidad": 4,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -1978,7 +1978,7 @@
         "nombre": "MODULO 8 PORTS COBRE P/MOXA IKS",
         "codigo": "72112340",
         "cantidad": 4,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1-ESTANTE3",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -1992,7 +1992,7 @@
         "nombre": "MODULO MOXA IM-6700A-2MSC4TX",
         "codigo": "72116682",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE 3",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2034,7 +2034,7 @@
         "nombre": "CONVERSOR MOXA UPORT 1110 (RS-232/USB)",
         "codigo": "72114797",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE 3",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2090,7 +2090,7 @@
         "nombre": "FICHA DE 2P+T PERNOS CHATAS DE 10A 220V",
         "codigo": "71349459",
         "cantidad": 11,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE2",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2118,7 +2118,7 @@
         "nombre": "SIRENA EMAVE EMS 50-AM 70W 220VCA",
         "codigo": "71364385",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "SALA_ELECTRICA-JAULA",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2146,7 +2146,7 @@
         "nombre": "ARTEFACTO ILUMINACION EMERGENCIA LED",
         "codigo": "71642574",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "SALA_ELECTRICA-JAULA",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2174,7 +2174,7 @@
         "nombre": "INTERRUPTOR BIPOLAR 4A 2 POLOS",
         "codigo": "71322231",
         "cantidad": 2,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2244,7 +2244,7 @@
         "nombre": "GUARDAMOTOR 0,25-0,40 A",
         "codigo": "71639536",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1-ESTANTE3",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2258,12 +2258,9 @@
         "nombre": "PULSADOR PARADA EMERGENCIA XB4-BS8445",
         "codigo": "71332237",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE1",
         "ruta_jerarquia": [
-            "SD-APR-DELT",
-            "  SD-APR-HALD",
-            " SD-APR-LITE",
-            " SD-APR-EMPA"
+            "SD-APR-DELT"
         ],
         "imagen": "PARADA_EMER_XB4BS8445_DA19.jpg",
         "fecha_creacion": "2025-05-23",
@@ -2289,7 +2286,7 @@
         "nombre": "MANOPLA ROTATIVA ABB 1SDA054926R001",
         "codigo": "71656384",
         "cantidad": 4,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE2",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2303,7 +2300,7 @@
         "nombre": "GUARDAMOTOR RANGO TERMICO 4-6.3 A",
         "codigo": "71332746",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1-ESTANTE3",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2373,7 +2370,7 @@
         "nombre": "CABLE 8 PIN EURO STYLE QD P/BANNER LT3P",
         "codigo": "71364672",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2401,7 +2398,7 @@
         "nombre": "CABLE T/TPR 3X1,5 MM2 SECC.",
         "codigo": "71337571",
         "cantidad": 300,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE2",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2415,7 +2412,7 @@
         "nombre": "CABLE CONDUCTOR FLEXIBLE 1KV AZUL 1X1,5",
         "codigo": "71386388",
         "cantidad": 50,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2429,7 +2426,7 @@
         "nombre": "CABLE CONDUCTOR FLEXIBLE 1KV ROJO 1X1,5",
         "codigo": "71386374",
         "cantidad": 50,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2443,7 +2440,7 @@
         "nombre": "CABLE CONDUCTOR FLEXIBLE 1KV BLANC.1X1,5",
         "codigo": "71386384",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2457,7 +2454,7 @@
         "nombre": "CABLE CONDUCTOR FLEXIBLE 1KV CAST.1X1,5",
         "codigo": "71386362",
         "cantidad": 50,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2471,7 +2468,7 @@
         "nombre": "CABLE CONDUCTOR POTENCIA 1,1KV 1X2,5MMM2 (NEGRO)",
         "codigo": "71386311",
         "cantidad": 50,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2485,7 +2482,7 @@
         "nombre": "CABLE CONDUCTOR FLEXIBLE 1KV CAST. 1X2,5",
         "codigo": "71386363",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2499,7 +2496,7 @@
         "nombre": "CONECTOR CABLEDO P/LASER SICK DME 2000",
         "codigo": "71365637",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [
             "SD-APR-DELT"
         ],
@@ -2513,7 +2510,7 @@
         "nombre": "FUENTE ALIMENTACION +/-15VCC VICOR VI-PU",
         "codigo": "71330295",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE2",
         "ruta_jerarquia": [
             "SD-APR-HALD"
         ],
@@ -2527,7 +2524,7 @@
         "nombre": "FUENTE ALIMENT.72W /24V ABLS1A24031",
         "codigo": "71327209",
         "cantidad": 2,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE2",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2555,7 +2552,7 @@
         "nombre": "FUENTE REGULABLE 85-240V/24VCC 5A 120W",
         "codigo": "71585101",
         "cantidad": 2,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE2",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2583,7 +2580,7 @@
         "nombre": "FUENTE DE PODER 10W 100/240V 5VCC 2A",
         "codigo": "71347318",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE2",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2597,7 +2594,7 @@
         "nombre": "FINDER RELAY 55.34 250 V -BOBINA 24 VCC",
         "codigo": "71647257",
         "cantidad": 20,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1-ESTANTE3",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2625,7 +2622,7 @@
         "nombre": "RELE TERMICO TRIPOLAR LR9-F5369 90-150A",
         "codigo": "71326014",
         "cantidad": 3,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1-ESTANTE3",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2639,7 +2636,7 @@
         "nombre": "CONTACTOR TRIP. 17A BOB. 24VDC",
         "codigo": "71355660",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1-ESTANTE3",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2667,7 +2664,7 @@
         "nombre": "CONTACTOS AUXILIARES INSTANTANEOS",
         "codigo": "71350520",
         "cantidad": 2,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1-ESTANTE3",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2681,7 +2678,7 @@
         "nombre": "CONTACTOR TRIP. TELEMECANIQUE LC1F150F7",
         "codigo": "71350506",
         "cantidad": 5,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1-ESTANTE3",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2891,7 +2888,7 @@
         "nombre": "SENSOR FESTO SME-8M-DS-24V-K0,3-M8D",
         "codigo": "71641908",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE2",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2933,7 +2930,7 @@
         "nombre": "DETECTOR DE PROXIMIDAD SICK DME 5000-114",
         "codigo": "71367056",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE 3",
         "ruta_jerarquia": [
             "SD-APR-DELT"
         ],
@@ -2961,7 +2958,7 @@
         "nombre": "PRESOSTATO ELECTRON.EDS 3448-5-0250-000",
         "codigo": "71635875",
         "cantidad": 3,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE 3",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -2975,7 +2972,7 @@
         "nombre": "SWITCH SQ-D PRESURE CLASS 9012 GAW-5",
         "codigo": "71638017",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -3003,7 +3000,7 @@
         "nombre": "SENSOR LASER BANNER LT3PIQ",
         "codigo": "71334632",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE2",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -3031,7 +3028,7 @@
         "nombre": "MICRO SWITCH MOD CB-132",
         "codigo": "71322580",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -3045,7 +3042,7 @@
         "nombre": "LIMIT SWITCH SQUARE D CLASE 9007 T/AW-36",
         "codigo": "71631968",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -3059,7 +3056,7 @@
         "nombre": "VACUOSTATO SMC ZSE30AF-01-F-L",
         "codigo": "71642269",
         "cantidad": 2,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE2",
         "ruta_jerarquia": [
             "SD-APR-EMPA"
         ],
@@ -3073,7 +3070,7 @@
         "nombre": "ELECTROV. 2/2 SMC VQ21A1-5G-C6-F",
         "codigo": "71642051",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE2",
         "ruta_jerarquia": [
             "SD-APR-EMPA"
         ],
@@ -3087,7 +3084,7 @@
         "nombre": "SENSOR, PRESSURE, BARKSDALE, C9612-2",
         "codigo": "71655260",
         "cantidad": 2,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -3143,7 +3140,7 @@
         "nombre": "FIN DE CARRERA SQUARE D 9007C54B2",
         "codigo": "71070321",
         "cantidad": 6,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -3185,7 +3182,7 @@
         "nombre": "KNOB, PUSH/PULL, 30 MM, SQUARE D 9001R22",
         "codigo": "71644131",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -3213,7 +3210,7 @@
         "nombre": "PULSADOR P/EMERGENCIA 9001 KR9P35LRR",
         "codigo": "71642007",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -3632,7 +3629,7 @@
         "nombre": "RESISTENCIA DE CERAMICA 220 OHM-10W",
         "codigo": "71641571",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE2-ESTANTE 2",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -3744,7 +3741,7 @@
         "nombre": "SENSOR DE FLUJO TURCK",
         "codigo": "71633502",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE 3",
         "ruta_jerarquia": [
             "SD-APR-HALD"
         ],
@@ -3786,7 +3783,7 @@
         "nombre": "SENSORS MAGNETICO SGA-8016 C/SU ACTUADOR",
         "codigo": "71631536",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -3814,7 +3811,7 @@
         "nombre": "PUENTE HOR. AISLADO P/ BORNERA 1,5 MM2",
         "codigo": "71645003",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1-ESTANTE1",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -3842,7 +3839,7 @@
         "nombre": "SENSOR REFLEC PEPPERL+FUCHS RLK315431115",
         "codigo": "71646122",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE2",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -3870,7 +3867,7 @@
         "nombre": "GUARDAMOTOR C/PROTECCION TÉRMICA GV2M05",
         "codigo": "71627106",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1-ESTANTE3",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -4259,7 +4256,7 @@
         "nombre": "TRM24D1X02 TIME DELAY TIMER 2 SEG ON",
         "codigo": "71639183",
         "cantidad": 2,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1-ESTANTE1",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -4287,7 +4284,7 @@
         "nombre": "ZOCALO IZUMI AEA SY4S-05 P/RELE RY4S",
         "codigo": "71349393",
         "cantidad": 2,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE1",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -4301,7 +4298,7 @@
         "nombre": "SSR, 120VAC/24VDC, 10A, IDEC, RSSDN-10A",
         "codigo": "71639470",
         "cantidad": 1,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE2",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -4329,7 +4326,7 @@
         "nombre": "FUSIBLE VIDRIO 5X20 MM 1 AMP 250 V. RAP.",
         "codigo": "71040338",
         "cantidad": 10,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE2",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -4343,7 +4340,7 @@
         "nombre": "CARTUCHO FUSIBLE VIDR.5X20 250V 5A",
         "codigo": "71378118",
         "cantidad": 2,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE2",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -4357,7 +4354,7 @@
         "nombre": "FUSIBLE DE VIDRIO 20X5MM,10A,250V",
         "codigo": "71349694",
         "cantidad": 10,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE2",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],
@@ -5002,7 +4999,7 @@
         "nombre": "GENERADOR HUBNER TIPO FG4AK   1200 PPR",
         "codigo": "71582168",
         "cantidad": 2,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [],
         "imagen": "encoder_humer.jpg",
         "fecha_creacion": "2025-06-03",
@@ -5569,22 +5566,10 @@
         "estado": "🔴"
     },
     {
-        "nombre": "AAAA",
-        "codigo": "222222222",
-        "cantidad": 1,
-        "equipo": "GMP",
-        "ruta_jerarquia": [],
-        "imagen": null,
-        "fecha_creacion": "2025-06-21",
-        "fecha_fin": "",
-        "link": "",
-        "estado": "🟣"
-    },
-    {
         "nombre": "PATCHPANNEL RJ45 CAT 6 FURUKAWA",
         "codigo": "78642870",
         "cantidad": 10,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA1-ESTANTE 3",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -5660,7 +5645,7 @@
         "nombre": "MODULO DE ENTRADA IC693MDL645 GE FANUC",
         "codigo": "71071610",
         "cantidad": 4,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [
             "",
             "SD-APR-LITE"
@@ -5813,10 +5798,10 @@
         "estado": "🟢"
     },
     {
-        "nombre": "PAÑO LIM. LIVIANA WYPALL X-75 CJ 6 ROLLO",
+        "nombre": "PAÑO LIM. LIVIANA WYPALL X-75 CJ 6 ROLLO  se manda un correo 24/08/2026",
         "codigo": "72128173",
         "cantidad": 6,
-        "equipo": "GMP",
+        "equipo": "GMP-COFRE2",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
@@ -5942,7 +5927,7 @@
         "nombre": "Sensor Flow Turck Fsc-G 1 / 2 A4 Ap8x  (flujometros tijera)",
         "codigo": "71327819",
         "cantidad": 3,
-        "equipo": "GMP",
+        "equipo": "GMP-PUERTA 2",
         "ruta_jerarquia": [
             "SD-APR-HALD"
         ],
@@ -7300,20 +7285,6 @@
         "estado": "🟢"
     },
     {
-        "nombre": "RKM 40-2M TURCK (CABLE SENSOR APILADOR LITTELL)",
-        "codigo": "56457445",
-        "cantidad": 2,
-        "equipo": "GMP-PUERTA 2-ESTANTE 2",
-        "ruta_jerarquia": [
-            "SD-APR-LITE"
-        ],
-        "imagen": "CABLE_SENSOR.jpeg",
-        "fecha_creacion": "2026-06-05",
-        "fecha_fin": "",
-        "link": "",
-        "estado": "🟠"
-    },
-    {
         "nombre": "SENSOR INDUCTIVO BESM18MI-PSC80B-S04G (SENSOR PUENTE)",
         "codigo": "71642029",
         "cantidad": 2,
@@ -7835,7 +7806,7 @@
         "nombre": "1066470 Sick - VFS60A-BHPJ00S01  (ENCODER SACA CHAPAS NUEVO)",
         "codigo": "547746745666",
         "cantidad": 1,
-        "equipo": "CARPINTERIA",
+        "equipo": "GMP-PUERTA 2-ESTANTE 1",
         "ruta_jerarquia": [
             "SD-APR-LITE"
         ],

@@ -1,0 +1,132 @@
+/* ============================================
+ESTILOS ESPECÍFICOS: Lista de Repuestos
+Solo: wrapper + cabecera fija + área de contenido
+Los cards están en css/base/cards.css (reutilizables)
+============================================ */
+
+/* Wrapper principal: ocupa todo el ancho disponible */
+.lista-repuestos-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+}
+
+/* ============================================
+CABECERA FIJA (position: fixed)
+============================================ */
+.repuestos-fixed-header {
+    position: fixed !important;
+    top: 56px !important; /* Debajo del navbar de Bootstrap (56px) */
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 1020 !important; /* Por encima de las cards */
+    background: linear-gradient(to bottom, #3e2d59 0%, #3e2d59 90%, rgba(62, 45, 89, 0.98) 100%) !important;
+    border-bottom: 2px solid rgba(136, 201, 153, 0.4) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+.repuestos-fixed-header-inner {
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0.75rem 1rem !important;
+    box-sizing: border-box !important;
+}
+
+.repuestos-fixed-header h3 {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    font-size: 1.3rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.repuestos-fixed-header .badge {
+    font-size: 0.8rem !important;
+    padding: 0.3rem 0.6rem !important;
+    vertical-align: middle !important;
+}
+
+/* Inputs dentro del header fijo */
+.repuestos-fixed-header .form-control,
+.repuestos-fixed-header .form-select {
+    background-color: rgba(75, 55, 106, 0.9) !important;
+    border: 1px solid rgba(136, 201, 153, 0.3) !important;
+    color: #ffffff !important;
+    font-size: 0.9rem !important;
+    min-height: 38px !important;
+}
+
+.repuestos-fixed-header .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.repuestos-fixed-header .form-control:focus,
+.repuestos-fixed-header .form-select:focus {
+    background-color: rgba(75, 55, 106, 1) !important;
+    border-color: #88c999 !important;
+    box-shadow: 0 0 0 0.2rem rgba(136, 201, 153, 0.25) !important;
+    color: #ffffff !important;
+}
+
+/* Botones dentro del header */
+.repuestos-fixed-header .btn {
+    font-size: 0.9rem !important;
+    padding: 0.4rem 0.8rem !important;
+    min-height: 38px !important;
+}
+
+/* ============================================
+ÁREA DE CONTENIDO (con padding-top para compensar)
+============================================ */
+.repuestos-content-area {
+    padding-top: 280px !important; /* Espacio para la cabecera fija */
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-bottom: 2rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    min-height: calc(100vh - 56px) !important;
+}
+
+/* ============================================
+RESPONSIVE - CABECERA Y ÁREA
+============================================ */
+
+/* Tablet y pantallas medianas */
+@media (max-width: 992px) {
+    .repuestos-content-area {
+        padding-top: 320px !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .repuestos-fixed-header {
+        top: 56px !important;
+    }
+    
+    .repuestos-fixed-header-inner {
+        padding: 0.5rem 0.75rem !important;
+    }
+    
+    .repuestos-fixed-header h3 {
+        font-size: 1.1rem !important;
+    }
+    
+    .repuestos-content-area {
+        padding-top: 420px !important; /* Más espacio en mobile porque los filtros se apilan */
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+}
+
+/* Mobile muy chico */
+@media (max-width: 480px) {
+    .repuestos-content-area {
+        padding-top: 480px !important;
+    }
+}
