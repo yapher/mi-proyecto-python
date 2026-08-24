@@ -1,7 +1,7 @@
 ================================================================================
 EXPORTACIÓN COMPLETA DEL PROYECTO
 Ruta del proyecto: C:\Empresa
-Fecha de generación: 2026-08-23 19:40:01
+Fecha de generación: 2026-08-23 21:05:02
 ================================================================================
 
 ESTRUCTURA DEL PROYECTO
@@ -16,21 +16,16 @@ Empresa/
 │   └── time/
 ├── README.md
 ├── app.py
-├── arbol_bp.py
 ├── auth/
 │   ├── __init__.py
 │   └── login.py
 ├── core/
 │   ├── __init__.py
 │   ├── arbol_bp.py
-│   ├── auth/
 │   ├── blueprint_registry.py
 │   ├── db_json.py
 │   ├── menu.py
 │   └── scheduler.py
-├── db_json.py
-├── login.py
-├── menu.py
 ├── pytest.ini
 ├── requirements.txt
 ├── static/
@@ -105,6 +100,7 @@ Empresa/
 │   │   │   ├── layout_scripts.js
 │   │   │   ├── listar_ot.js
 │   │   │   ├── login_facial.js
+│   │   │   ├── modal_animations.js
 │   │   │   ├── modelos_3d.js
 │   │   │   ├── newPagos.js
 │   │   │   ├── newRep.js
@@ -340,6 +336,7 @@ Empresa/
 
 ================================================================================
 CONTENIDO DE LOS ARCHIVOS
+(No se incluye el contenido de archivos de test)
 ================================================================================
 
 --------------------------------------------------------------------------------
@@ -498,64 +495,6 @@ if __name__ == "__main__":
     
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)
-
---------------------------------------------------------------------------------
-ARCHIVO: arbol_bp.py
---------------------------------------------------------------------------------
-"""
-COMPATIBILIDAD: Este archivo re-exporta desde core.arbol_bp
-Migración: usar directamente `from core.arbol_bp import crear_blueprint_arbol`
-"""
-from core.arbol_bp import crear_blueprint_arbol
-
-__all__ = ['crear_blueprint_arbol']
-
---------------------------------------------------------------------------------
-ARCHIVO: db_json.py
---------------------------------------------------------------------------------
-"""
-COMPATIBILIDAD: Este archivo re-exporta desde core.db_json
-Migración: usar directamente `from core.db_json import JsonStore`
-"""
-from core.db_json import JsonStore
-
-__all__ = ['JsonStore']
-
---------------------------------------------------------------------------------
-ARCHIVO: login.py
---------------------------------------------------------------------------------
-"""
-COMPATIBILIDAD: Este archivo re-exporta desde auth.login
-Migración: usar directamente `from auth.login import ...`
-"""
-from auth.login import (
-    User,
-    cargar_usuarios,
-    init_routes_login,
-    roles_required,
-    comparar_rostros,
-    USERS_PATH
-)
-
-__all__ = [
-    'User',
-    'cargar_usuarios',
-    'init_routes_login',
-    'roles_required',
-    'comparar_rostros',
-    'USERS_PATH'
-]
-
---------------------------------------------------------------------------------
-ARCHIVO: menu.py
---------------------------------------------------------------------------------
-"""
-COMPATIBILIDAD: Este archivo re-exporta desde core.menu
-Migración: usar directamente `from core.menu import cargar_menu, guardar_menu`
-"""
-from core.menu import cargar_menu, guardar_menu, MENU_PATH
-
-__all__ = ['cargar_menu', 'guardar_menu', 'MENU_PATH']
 
 --------------------------------------------------------------------------------
 ARCHIVO: pytest.ini
@@ -4369,10 +4308,9 @@ ARCHIVO: static\css\base\mobile.css
 ARCHIVO: static\css\base\modals.css
 --------------------------------------------------------------------------------
 /* ============================================
-   MODALES
-   Estilos para modales Bootstrap y fondos
-   de formulario reutilizables.
-   ============================================ */
+MODALES
+Estilos para modales Bootstrap con transparencia sutil
+============================================ */
 
 /* Fondo de formulario (usado en modales y formularios) */
 .bg-form {
@@ -4397,6 +4335,143 @@ ARCHIVO: static\css\base\modals.css
     overflow-y: auto;
 }
 
+/* ============================================
+TRANSICIÓN DE APERTURA/CIERRE CON ORIGEN
+============================================ */
+
+/* Estado inicial: invisible y escalado desde el punto de origen */
+.modal.fade .modal-dialog {
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Estado final: visible y tamaño completo */
+.modal.show .modal-dialog {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ============================================
+FONDO DEL MODAL (BACKDROP) - MÁS TRANSPARENTE
+============================================ */
+
+/* Backdrop con transparencia sutil */
+.modal-backdrop {
+    background-color: rgba(15, 10, 25, 0.6) !important;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.modal-backdrop.show {
+    opacity: 1 !important;
+}
+
+/* ============================================
+CONTENIDO DEL MODAL - GLASSMORPHISM SUTIL
+============================================ */
+
+.modal-content {
+    background: rgba(75, 55, 106, 0.95) !important;
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    border: 1px solid rgba(136, 201, 153, 0.2) !important;
+    border-radius: 1rem !important;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset !important;
+    color: #fff !important;
+}
+
+/* Header del modal */
+.modal-header {
+    background: linear-gradient(
+        135deg,
+        rgba(42, 30, 59, 0.8) 0%,
+        rgba(62, 45, 89, 0.6) 100%
+    ) !important;
+    border-bottom: 1px solid rgba(136, 201, 153, 0.2) !important;
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+}
+
+.modal-title {
+    color: #88c999 !important;
+    font-weight: 700 !important;
+}
+
+/* Footer del modal */
+.modal-footer {
+    background: rgba(42, 30, 59, 0.4) !important;
+    border-top: 1px solid rgba(136, 201, 153, 0.2) !important;
+}
+
+/* Botón cerrar */
+.modal-header .btn-close {
+    filter: invert(1) brightness(1.2) !important;
+    opacity: 0.7;
+    transition: all 0.25s ease;
+}
+
+.modal-header .btn-close:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+/* ============================================
+INPUTS DENTRO DEL MODAL
+============================================ */
+
+.modal .form-control,
+.modal .form-select {
+    background: rgba(62, 45, 89, 0.6) !important;
+    color: #fff !important;
+    border: 1px solid rgba(136, 201, 153, 0.3) !important;
+    transition: all 0.25s ease;
+}
+
+.modal .form-control:focus,
+.modal .form-select:focus {
+    background: rgba(62, 45, 89, 0.8) !important;
+    border-color: #88c999 !important;
+    box-shadow: 0 0 0 3px rgba(136, 201, 153, 0.15) !important;
+}
+
+.modal .form-label {
+    color: #e5d64f !important;
+    font-weight: 500;
+}
+
+/* ============================================
+ANIMACIÓN DE APERTURA DESDE PUNTO ESPECÍFICO
+============================================ */
+
+/* Cuando el modal tiene la clase 'modal-origin-click', 
+   usamos transform-origin dinámico desde JS */
+.modal.modal-origin-click .modal-dialog {
+    transform-origin: var(--modal-origin-x, 50%) var(--modal-origin-y, 50%);
+}
+
+/* ============================================
+RESPONSIVE
+============================================ */
+
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 0.5rem !important;
+        max-width: calc(100vw - 1rem) !important;
+    }
+    
+    .modal-content {
+        border-radius: 0.5rem !important;
+    }
+    
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1rem !important;
+    }
+}
 
 --------------------------------------------------------------------------------
 ARCHIVO: static\css\base\navbar.css
@@ -9549,6 +9624,56 @@ document.getElementById('captureBtn').addEventListener('click', () => {
 });
 
 --------------------------------------------------------------------------------
+ARCHIVO: static\js\apps\modal_animations.js
+--------------------------------------------------------------------------------
+/**
+ * modal_animations.js
+ * ===================
+ * Captura la posición del click que abre un modal
+ * y aplica una animación de apertura/cierre desde ese punto.
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Capturar clicks en elementos que abren modales
+    document.addEventListener('click', function(e) {
+        const target = e.target.closest('[data-bs-toggle="modal"]');
+        
+        if (target) {
+            const modalSelector = target.getAttribute('data-bs-target');
+            
+            if (modalSelector) {
+                const modal = document.querySelector(modalSelector);
+                
+                if (modal) {
+                    // Calcular posición del click relativa a la ventana
+                    const clickX = e.clientX;
+                    const clickY = e.clientY;
+                    
+                    // Convertir a porcentajes para transform-origin
+                    const percentX = (clickX / window.innerWidth) * 100;
+                    const percentY = (clickY / window.innerHeight) * 100;
+                    
+                    // Aplicar como variables CSS al modal
+                    modal.style.setProperty('--modal-origin-x', `${percentX}%`);
+                    modal.style.setProperty('--modal-origin-y', `${percentY}%`);
+                    
+                    // Agregar clase para activar la animación con origen
+                    modal.classList.add('modal-origin-click');
+                }
+            }
+        }
+    });
+    
+    // Limpiar la clase cuando el modal se cierra
+    document.addEventListener('hidden.bs.modal', function(e) {
+        const modal = e.target;
+        if (modal) {
+            modal.classList.remove('modal-origin-click');
+        }
+    });
+});
+
+--------------------------------------------------------------------------------
 ARCHIVO: static\js\apps\modelos_3d.js
 --------------------------------------------------------------------------------
 // static/js/apps/modelos_3d.js - Versión completa con Bootstrap Modal integrado (sin romper funcionalidades)
@@ -12799,6 +12924,8 @@ ARCHIVO: templates\layout.html
     <script src="{{ url_for('static', filename='js/reloj.js') }}"></script>
     <!-- Módulo JS genérico para árboles jerárquicos -->
     <script src="{{ url_for('static', filename='js/apps/arbol_crud.js') }}"></script>
+    <!-- Animaciones de modales con origen de click -->
+    <script src="{{ url_for('static', filename='js/apps/modal_animations.js') }}"></script>
 
     {% block scripts %}{% endblock %}
 </body>
@@ -13101,61 +13228,54 @@ ARCHIVO: templates\Aplic\agenda\FrontEnd\agenda.html
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\agenda\FrontEnd\evento.html
 --------------------------------------------------------------------------------
-<!-- Modal -->
-<div class="modal fade" id="modalEvento" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content bg-form">
-            <div class="modal-header">
-                <h5 class="modal-title">Evento</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+<!-- Modal UNIFICADO (Estilo Pagos) -->
+<div class="modal fade" id="modalEvento" tabindex="-1" aria-labelledby="modalEventoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="background-color: #4b376a; color: #fff; border-radius: 1rem; box-shadow: 0 8px 32px rgba(136,201,153,0.16);">
+            <div class="modal-header" style="border-bottom: 2px solid #88c999; background: linear-gradient(to right, #2a1e3b, #3e2d59); border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
+                <h5 class="modal-title" id="modalEventoLabel" style="color: #88c999; font-weight: 700;">Evento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" style="filter: invert(1);"></button>
             </div>
             <div class="modal-body">
                 <input type="hidden" id="eventoId" />
                 <div class="mb-3">
-                    <label>Título</label>
-                    <input type="text" id="titulo" class="form-control" placeholder="Ej: Reunión con equipo" required />
+                    <label class="form-label" style="color: #e5d64f;">Título</label>
+                    <input type="text" id="titulo" class="form-control" placeholder="Ej: Reunión con equipo" required style="background: #3e2d59; color: #fff; border: 1px solid #88c999;" />
                 </div>
                 <div class="mb-3">
-                    <label>Fecha</label>
-                    <input type="date" id="fecha" class="form-control" required />
+                    <label class="form-label" style="color: #e5d64f;">Fecha</label>
+                    <input type="date" id="fecha" class="form-control" required style="background: #3e2d59; color: #fff; border: 1px solid #88c999;" />
                 </div>
                 <div class="mb-3">
-                    <label>Descripción</label>
-                    <textarea id="descripcion" class="form-control"
-                        placeholder="Detalles opcionales del evento"></textarea>
+                    <label class="form-label" style="color: #e5d64f;">Descripción</label>
+                    <textarea id="descripcion" class="form-control" placeholder="Detalles opcionales del evento" style="background: #3e2d59; color: #fff; border: 1px solid #88c999;"></textarea>
                 </div>
                 <div class="mb-3">
-                    <label>Email (para recordatorio)</label>
-                    <input type="email" id="email" class="form-control" placeholder="usuario@dominio.com" required list="lista-emails" />
+                    <label class="form-label" style="color: #e5d64f;">Email (para recordatorio)</label>
+                    <input type="email" id="email" class="form-control" placeholder="usuario@dominio.com" required list="lista-emails" style="background: #3e2d59; color: #fff; border: 1px solid #88c999;" />
                     <datalist id="lista-emails"></datalist>
-                    <div class="form-text">Se enviará un correo <strong>un día antes</strong> del evento a las 08:00
-                        (hora AR).</div>
+                    <div class="form-text" style="color: #ccc;">Se enviará un correo <strong>un día antes</strong> del evento a las 08:00 (hora AR).</div>
                 </div>
-
-                <!-- Checkbox realizado (nuevo) -->
                 <div class="form-check mt-2">
                     <input type="checkbox" class="form-check-input" id="realizado">
-                    <label for="realizado" class="form-check-label">Evento realizado</label>
+                    <label for="realizado" class="form-check-label" style="color: #fff;">Evento realizado</label>
                 </div>
-
-                <!-- >>> PRIORIDAD: selector simple -->
                 <div class="mb-3 mt-3">
-                    <label>Prioridad</label>
-                    <select id="prioridad" class="form-select">
+                    <label class="form-label" style="color: #e5d64f;">Prioridad</label>
+                    <select id="prioridad" class="form-select" style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
                         <option value="alta">Alta</option>
                         <option value="media" selected>Media</option>
                         <option value="baja">Baja</option>
                     </select>
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer" style="border-top: 2px solid #88c999;">
                 <button class="btn btn-agregar" onclick="guardarEvento()">Guardar</button>
                 <button class="btn btn-eliminar" onclick="eliminarEvento()">Eliminar</button>
             </div>
         </div>
     </div>
 </div>
-
 <script src="/static/js/apps/evento.js"></script>
 
 --------------------------------------------------------------------------------
@@ -15775,108 +15895,97 @@ ARCHIVO: templates\Aplic\estadosderepuestos\FrontEnd\component\imageRep.html
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\estadosderepuestos\FrontEnd\component\newRep.html
 --------------------------------------------------------------------------------
-<!-- MODAL AGREGAR/EDITAR REPUESTO -->
-<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content bg-form"
-      style="background-color: #4b376a; color: #fff; border-radius: 1rem; box-shadow: 0 8px 32px rgba(136,201,153,0.16);">
-      <form method="POST" action="{{ url_for('indexEstadoRep.agregar_repuesto') }}" enctype="multipart/form-data"
-        id="formAgregarRepuesto">
-        <div class="modal-header"
-          style="border-bottom: 2px solid #88c999; background: linear-gradient(to right, #2a1e3b, #3e2d59); border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
-          <h5 class="modal-title" id="agregarModalLabel" style="color: #88c999; font-weight: 700;">Agregar Nuevo
-            Repuesto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
-            style="filter: invert(1);"></button>
+<div class="modal fade modal-custom-dark" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form method="POST" action="{{ url_for('indexEstadoRep.agregar_repuesto') }}" enctype="multipart/form-data" id="formAgregarRepuesto">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="agregarModalLabel">Agregar Nuevo Repuesto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="tab_activo" name="tab_activo">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Imagen actual</label><br>
+                        <img id="imgPreview" style="max-width:100px;display:none;">
+                        <span id="imgNombre" style="color:#e5d64f;"></span>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="codigo" class="form-label">Código</label>
+                        <input type="text" class="form-control" id="codigo" name="codigo" required>
+                        <input type="hidden" id="codigo_original" name="codigo_original">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="cantidad" class="form-label">Cantidad</label>
+                        <input type="number" class="form-control" id="cantidad" name="cantidad" min="1" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="equipo" class="form-label">ALMACÉN</label>
+                        <select class="form-select" id="equipo" name="equipo">
+                            <option value="">-- Selecciona un equipo --</option>
+                            {% for nombre in nombres_almacenes %}
+                            <option value="{{ nombre }}">{{ nombre }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="ubicacion" class="form-label">Ubicación Técnica</label>
+                        <select class="form-select" id="ubicacion" name="ruta_jerarquia[]" multiple style="width: 100%;">
+                            <option value="">-- Seleccionar ubicaciones técnica --</option>
+                            {% for ubic in ubicaciones %}
+                            <option value="{{ ubic }}">{{ ubic }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Imagen (opcional)</label>
+                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="fecha_creacion" class="form-label">Fecha de Creación</label>
+                        <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="fecha_fin" class="form-label">Fecha Fin (opcional)</label>
+                        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="link" class="form-label">Link (opcional)</label>
+                        <input type="url" class="form-control" id="link" name="link" placeholder="https://">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado" name="estado">
+                            <option value="">-- Todos los estados --</option>
+                            {% for estado in estados %}
+                            <option value="{{ estado.emoji }}">{{ estado.nombre }} {{ estado.emoji }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar Repuesto</button>
+                </div>
+            </form>
         </div>
-        <div class="modal-body">
-          <input type="hidden" id="tab_activo" name="tab_activo">
-          <div class="mb-3">
-            <label class="form-label" style="color:#e5d64f;">Imagen actual</label><br>
-            <img id="imgPreview" style="max-width:100px;display:none;">
-            <span id="imgNombre" style="color:#e5d64f;"></span>
-          </div>
-          <div class="mb-3">
-            <label for="nombre" class="form-label" style="color:#e5d64f;">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required
-              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
-          </div>
-          <div class="mb-3">
-            <label for="codigo" class="form-label" style="color:#e5d64f;">Código</label>
-            <input type="text" class="form-control" id="codigo" name="codigo" required
-              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
-            <input type="hidden" id="codigo_original" name="codigo_original">
-          </div>
-          <div class="mb-3">
-            <label for="cantidad" class="form-label" style="color:#e5d64f;">Cantidad</label>
-            <input type="number" class="form-control" id="cantidad" name="cantidad" min="1" required
-              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
-          </div>
-          <div class="mb-3">
-            <label for="equipo" class="form-label" style="color:#e5d64f;">ALMACÉN</label>
-            <select class="form-select" id="equipo" name="equipo"
-              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
-              <option value="">-- Selecciona un equipo --</option>
-              {% for nombre in nombres_almacenes %}
-              <option value="{{ nombre }}">{{ nombre }}</option>
-              {% endfor %}
-            </select>
-          </div>
-
-          <div class="mb-3">
-            <label for="ubicacion" class="form-label" style="color:#e5d64f;">Ubicación Técnica</label>
-            <select class="form-select" id="ubicacion" name="ruta_jerarquia[]" multiple
-                style="width: 100%; background: #3e2d59; color: #fff; border: 1px solid #88c999;">
-                <option value="">-- Seleccionar ubicaciones técnica --</option>
-                {% for ubic in ubicaciones %}
-                <option value="{{ ubic }}">{{ ubic }}</option>
-                {% endfor %}
-            </select>
-          </div>
-          
-          <div class="mb-3">
-            <label for="imagen" class="form-label" style="color:#e5d64f;">Imagen (opcional)</label>
-            <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*"
-              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
-          </div>
-          <div class="mb-3">
-            <label for="fecha_creacion" class="form-label" style="color:#e5d64f;">Fecha de Creación</label>
-            <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" required
-              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
-          </div>
-          <div class="mb-3">
-            <label for="fecha_fin" class="form-label" style="color:#e5d64f;">Fecha Fin (opcional)</label>
-            <input type="date" class="form-control" id="fecha_fin" name="fecha_fin"
-              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
-          </div>
-          <div class="mb-3">
-            <label for="link" class="form-label" style="color:#e5d64f;">Link (opcional)</label>
-            <input type="url" class="form-control" id="link" name="link" placeholder="https://"
-              style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
-          </div>
-        
-          <div class="mb-3">
-            <label for="estado" class="form-label" style="color:#e5d64f;">Estado</label>
-            <select class="form-select" id="estado" name="estado"
-              style="background: #3e2d59; color: #e5d64f; border: 1px solid #88c999;">
-              <option value="">-- Todos los estados --</option>
-              {% for estado in estados %}
-              <option value="{{ estado.emoji }}">{{ estado.nombre }} {{ estado.emoji }}</option>
-              {% endfor %}
-            </select>
-          </div>
-        </div>
-        <div class="modal-footer" style="border-top: 2px solid #88c999;">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Guardar Repuesto</button>
-        </div>
-      </form>
     </div>
-  </div>
 </div>
-
-
-
 <input type="hidden" id="editar-repuesto-url" value="{{ url_for('indexEstadoRep.editar_repuesto') }}">
 <script src="/static/js/apps/newRep.js"></script>
 
@@ -17099,15 +17208,15 @@ ARCHIVO: templates\Aplic\imagenes\FrontEnd\_macros.html
                 </button>
             </form>
         </div>
-
-        <!-- Modal editar -->
-        <div class="modal fade"
+        
+        <!-- Modal editar UNIFICADO -->
+        <div class="modal fade modal-custom-dark"
             id="modalEditar{{ loop_index }}_{{ loop_index0 }}_{{ plano.archivo | replace(' ', '_') }}"
             tabindex="-1"
             aria-labelledby="modalEditarLabel{{ loop_index }}_{{ loop_index0 }}_{{ plano.archivo | replace(' ', '_') }}"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered">
-                <div class="modal-content bg-form">
+                <div class="modal-content">
                     <form method="POST"
                         action="{{ url_for('indeximagenes.editar_plano', nombre_linea=plano.nombre_linea, archivo=plano.archivo) }}">
                         <div class="modal-header">
@@ -17117,13 +17226,12 @@ ARCHIVO: templates\Aplic\imagenes\FrontEnd\_macros.html
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="descripcion" class="form-label">Descripción</label>
-                                <input type="text" name="descripcion" value="{{ plano.descripcion }}"
-                                    class="form-control">
+                                <input type="text" name="descripcion" value="{{ plano.descripcion }}" class="form-control">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-warning btn-editar-plano">Guardar</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-agregar">Guardar</button>
                         </div>
                     </form>
                 </div>
@@ -17136,84 +17244,57 @@ ARCHIVO: templates\Aplic\imagenes\FrontEnd\_macros.html
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\imagenes\FrontEnd\_modal_agregar_plano.html
 --------------------------------------------------------------------------------
-<!-- Modal + Botón para agregar plano -->
 <div class="mb-3 text-end">
-     <button type="button" class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#modalAgregarPlano">
-      ➕ Agregar Plano
+    <button type="button" class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#modalAgregarPlano">
+        ➕ Agregar Plano
     </button>
 </div>
 
-<!-- MODAL AGREGAR PLANO -->
-<div class="modal fade" id="modalAgregarPlano" tabindex="-1" aria-labelledby="modalAgregarPlanoLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content bg-form"
-      style="background-color: #4b376a; color: #fff; border-radius: 1rem; box-shadow: 0 8px 32px rgba(136,201,153,0.16);">
-      
-      <form method="POST" action="{{ url_for('indeximagenes.agregar_plano') }}" enctype="multipart/form-data" id="formAgregarPlano">
-        
-        <div class="modal-header"
-          style="border-bottom: 2px solid #88c999; background: linear-gradient(to right, #2a1e3b, #3e2d59); border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
-          <h5 class="modal-title" id="modalAgregarPlanoLabel" style="color: #88c999; font-weight: 700;">
-            Agregar Nuevo Plano
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" style="filter: invert(1);"></button>
-        </div>
-
-        <div class="modal-body">
-            <div class="row g-3">
-
-                <!-- Nombre de línea -->
-                <div class="col-md-6">
-                    <label for="nombre_linea" class="form-label" style="color:#e5d64f;">Nombre de la línea</label>
-                    <select class="form-select" id="nombre_linea" name="nombre_linea" required
-                        style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
-                        <option value="" disabled selected>Seleccione una ubicación</option>
-                    </select>
-                    <div id="rutas-empty" class="alert alert-warning mt-2 d-none">
-                        No se encontraron ubicaciones. Consultá al administrador.
+<div class="modal fade modal-custom-dark" id="modalAgregarPlano" tabindex="-1" aria-labelledby="modalAgregarPlanoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form method="POST" action="{{ url_for('indeximagenes.agregar_plano') }}" enctype="multipart/form-data" id="formAgregarPlano">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAgregarPlanoLabel">Agregar Nuevo Plano</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="nombre_linea" class="form-label">Nombre de la línea</label>
+                            <select class="form-select" id="nombre_linea" name="nombre_linea" required>
+                                <option value="" disabled selected>Seleccione una ubicación</option>
+                            </select>
+                            <div id="rutas-empty" class="alert alert-warning mt-2 d-none">
+                                No se encontraron ubicaciones. Consultá al administrador.
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                        </div>
+                        <div class="col-12">
+                            <label for="archivo" class="form-label">Archivo PDF</label>
+                            <input type="file" class="form-control" id="archivo" name="archivo" accept="application/pdf" required>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Descripción -->
-                <div class="col-md-6">
-                    <label for="descripcion" class="form-label" style="color:#e5d64f;">Descripción</label>
-                    <input type="text" class="form-control" id="descripcion" name="descripcion" required
-                        style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-agregar">Agregar Plano</button>
                 </div>
-
-                <!-- Archivo PDF -->
-                <div class="col-12">
-                    <label for="archivo" class="form-label" style="color:#e5d64f;">Archivo PDF</label>
-                    <input type="file" class="form-control" id="archivo" name="archivo" accept="application/pdf" required
-                        style="background: #3e2d59; color: #fff; border: 1px solid #88c999;">
-                </div>
-
-            </div>
+            </form>
         </div>
-
-        <div class="modal-footer" style="border-top: 2px solid #88c999;">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary btn-agregar-plano">Agregar Plano</button>
-        </div>
-
-      </form>
     </div>
-  </div>
 </div>
 
 <script>
-// Rutas servidor pasadas desde Flask
 const rutas = {{ rutas|tojson|safe }};
-
-// Cuando se abre el modal, cargamos las rutas en el select
 const modal = document.getElementById('modalAgregarPlano');
 modal.addEventListener('show.bs.modal', function () {
     const select = document.getElementById('nombre_linea');
     if (!select) return;
-
-    // Limpiamos opciones existentes (excepto la placeholder)
     select.querySelectorAll('option:not([disabled])').forEach(o => o.remove());
-
     if (Array.isArray(rutas) && rutas.length) {
         rutas.forEach(r => {
             const opt = document.createElement('option');
@@ -17224,7 +17305,6 @@ modal.addEventListener('show.bs.modal', function () {
         document.getElementById('rutas-empty')?.classList.add('d-none');
     } else {
         document.getElementById('rutas-empty')?.classList.remove('d-none');
-        console.warn('No se encontraron rutas en el servidor.');
     }
 });
 </script>
@@ -17453,60 +17533,52 @@ def agregar_sububicacion():
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\instalaciones\FrontEnd\equipos.html
 --------------------------------------------------------------------------------
-<div class="modal fade" id="ubicacionModal" tabindex="-1" aria-labelledby="ubicacionModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content bg-form">
-      <form id="formUbicacion" novalidate>
-        <div class="modal-header">
-          <h5 class="modal-title" id="ubicacionModalLabel">Detalles Ubicación</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+<div class="modal fade modal-custom-dark" id="ubicacionModal" tabindex="-1" aria-labelledby="ubicacionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form id="formUbicacion" novalidate>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ubicacionModalLabel">Detalles Ubicación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="ruta_jerarquia" name="ruta_jerarquia">
+                    <div class="mb-3 text-center">
+                        <img id="modalImagen" src="" alt="Imagen Ubicación" style="max-width: 150px; max-height: 150px;">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="emoji" class="form-label">Emoji</label>
+                        <input type="text" id="emoji" name="emoji" class="form-control" maxlength="3">
+                    </div>
+                    <div class="mb-3">
+                        <label for="ruta" class="form-label">Ruta</label>
+                        <input type="text" id="ruta" name="ruta" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Imagen (URL)</label>
+                        <input type="text" id="imagen" name="imagen" class="form-control" placeholder="https://...">
+                    </div>
+                    <div class="mb-3">
+                        <label for="ruta_jerarquia_display" class="form-label">Ruta Jerarquía</label>
+                        <input type="text" id="ruta_jerarquia_display" readonly class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <button type="button" class="btn btn-success" id="btnAgregarHijo">Agregar sububicación</button>
+                    </div>
+                    <div id="sububicacionesContainer" style="max-height: 200px; overflow-y: auto;"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" id="btnBorrarUbicacion">Borrar Ubicación</button>
+                    <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-agregar">Guardar Cambios</button>
+                </div>
+            </form>
         </div>
-        <div class="modal-body">
-          <input type="hidden" id="ruta_jerarquia" name="ruta_jerarquia">
-
-          <div class="mb-3 text-center">
-            <img id="modalImagen" src="" alt="Imagen Ubicación" style="max-width: 150px; max-height: 150px;">
-          </div>
-
-          <div class="mb-3">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" class="form-control" required>
-          </div>
-
-          <div class="mb-3">
-            <label for="emoji">Emoji</label>
-            <input type="text" id="emoji" name="emoji" class="form-control" maxlength="3">
-          </div>
-
-          <div class="mb-3">
-            <label for="ruta">Ruta</label>
-            <input type="text" id="ruta" name="ruta" class="form-control">
-          </div>
-
-          <div class="mb-3">
-            <label for="imagen">Imagen (URL)</label>
-            <input type="text" id="imagen" name="imagen" class="form-control" placeholder="https://...">
-          </div>
-
-          <div class="mb-3">
-            <label for="ruta_jerarquia_display">Ruta Jerarquía</label>
-            <input type="text" id="ruta_jerarquia_display" readonly class="form-control">
-          </div>
-
-          <div class="mb-3">
-            <button type="button" class="btn btn-success" id="btnAgregarHijo">Agregar sububicación</button>
-          </div>
-
-          <div id="sububicacionesContainer" style="max-height: 200px; overflow-y: auto;"></div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="btnBorrarUbicacion">Borrar Ubicación</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-        </div>
-      </form>
     </div>
-  </div>
 </div>
 
 --------------------------------------------------------------------------------
@@ -18388,37 +18460,35 @@ ARCHIVO: templates\Aplic\modelos3d\FrontEnd\modelos_3d.html
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\modelos3d\FrontEnd\component\edit.html
 --------------------------------------------------------------------------------
-<div class="modal fade" id="sensorMenu" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+<div class="modal fade modal-custom-dark" id="sensorMenu" tabindex="-1" aria-labelledby="sensorMenuLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content bg-form"
-            style="background-color: #4b376a; color: #fff; border-radius: 1rem; box-shadow: 0 8px 32px rgba(136,201,153,0.16);">
-            <div class="modal-header"
-                style="border-bottom: 2px solid #88c999; background: linear-gradient(to right, #2a1e3b, #3e2d59); border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
-                <h5 class="modal-title">Opciones del Sensor</h5>
-
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
-                    style="filter: invert(1);"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="sensorMenuLabel">Opciones del Sensor</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
                 <div class="d-flex flex-row gap-2 mb-3">
-                    <button type="button" class="btn btn-warning btn-sm btn-editar" onclick="renombrarSensor()">✏️
-                        Renombrar</button>
-                    <button type="button" class="btn btn-eliminar btn-sm" onclick="eliminarSensor()">🗑️
-                        Eliminar</button>
+                    <button type="button" class="btn btn-warning btn-sm btn-editar" onclick="renombrarSensor()">✏️ Renombrar</button>
+                    <button type="button" class="btn btn-eliminar btn-sm" onclick="eliminarSensor()">🗑️ Eliminar</button>
                 </div>
-
                 <div class="mb-3">
-                    🎨 Color: <input type="color" id="colorPicker" onchange="cambiarColorDesdePicker()">
+                    <label class="form-label">🎨 Color</label>
+                    <input type="color" id="colorPicker" class="form-control form-control-color" onchange="cambiarColorDesdePicker()">
                 </div>
-                <div class="mb-3" onclick="cambiarForma()">🔷 Forma</div>
+                <div class="mb-3" onclick="cambiarForma()" style="cursor: pointer; padding: 0.375rem 0.75rem; border: 1px solid #88c999; border-radius: 0.25rem; background-color: #3e2d59; color: #fff;">
+                    🔷 Cambiar Forma
+                </div>
                 <div class="mb-3">
-                    📏 Tamaño: <input type="number" id="sizeInput" min="0.1" max="5" step="0.1"
-                        onchange="cambiarTamañoSensor()">
+                    <label class="form-label">📏 Tamaño</label>
+                    <input type="number" id="sizeInput" class="form-control" min="0.1" max="5" step="0.1" onchange="cambiarTamañoSensor()">
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
-</div>
 </div>
 
 --------------------------------------------------------------------------------
@@ -18773,81 +18843,64 @@ ARCHIVO: templates\Aplic\pagos\FrontEnd\component\graf.html
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\pagos\FrontEnd\component\newPagos.html
 --------------------------------------------------------------------------------
-<button class="btn btn-agregar m-1" data-bs-toggle="modal" data-bs-target="#agregarModal"
-    onclick="mostrarFormulario(null)">Agregar Pago</button>
+<button class="btn btn-agregar m-1" data-bs-toggle="modal" data-bs-target="#agregarModal" onclick="mostrarFormulario(null)">Agregar Pago</button>
 
-<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+<div class="modal fade modal-custom-dark" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content bg-form"
-            style="background-color: #4b376a; color: #fff; border-radius: 1rem; box-shadow: 0 8px 32px rgba(136,201,153,0.16);">
-            <div class="modal-header"
-                style="border-bottom: 2px solid #88c999; background: linear-gradient(to right, #2a1e3b, #3e2d59); border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
-                <h5 class="modal-title" id="agregarModalLabel" style="color: #88c999; font-weight: 700;">
-                    Agregar Nuevo Pago
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
-                    style="filter: invert(1);"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="agregarModalLabel">Agregar Nuevo Pago</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <div class="bg-form mb-4">
-                    <form id="formulario">
-
-                        <!-- Selectores multinivel -->
-                       {% include "Aplic/crearrubros/FrontEnd/component/selectRubros.html" %}
-
-                        <!-- Contenedor para los selectores multinivel -->
-                        <div id="nivelesContainer" class="mb-3"></div>
-
-                        <input type="hidden" id="pagoId">
-
-                        <!-- Descripción -->
-                        <div class="mb-3 input-with-emoji">
-                            <span class="input-emoji">📝</span>
-                            <input type="text" class="form-control ps-5" id="descripcion" placeholder="Descripción">
-                        </div>
-
-                        <!-- Importe -->
-                        <div class="mb-3 input-with-emoji">
-                            <span class="input-emoji">💲</span>
-                            <input type="number" class="form-control ps-5" id="importe" placeholder="Importe">
-                        </div>
-
-                        <!-- Tipo -->
-                        <div class="mb-3 input-with-emoji">
-                            <span class="input-emoji">📌</span>
-                            <select class="form-control ps-5" id="tipo">
-                                <option value="único">Único</option>
-                                <option value="cuotas">Cuotas</option>
-                            </select>
-                        </div>
-
-                        <!-- Cuotas -->
-                        <div class="mb-3 input-with-emoji">
-                            <span class="input-emoji">#️⃣</span>
-                            <input type="number" class="form-control ps-5" id="cuotas" placeholder="Cuotas">
-                        </div>
-
-                        <!-- Vencimiento -->
-                        <div class="mb-3 input-with-emoji">
-                            <span class="input-emoji">📅</span>
-                            <input type="date" class="form-control ps-5" id="vencimiento" placeholder="Vencimiento">
-                        </div>
-
-                        <!-- Botones -->
-                        <div class="button-group">
-                            <button type="button" class="btn btn-agregar" onclick="guardarPago()">Guardar</button>
-                            <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal" onclick="cancelar()"
-                                style="display:none;">Cancelar</button>
-                        </div>
-                    </form>
-                </div>
+                <form id="formulario">
+                    {% include "Aplic/crearrubros/FrontEnd/component/selectRubros.html" %}
+                    <div id="nivelesContainer" class="mb-3"></div>
+                    <input type="hidden" id="pagoId">
+                    
+                    <div class="mb-3 input-with-emoji">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <span class="input-emoji">📝</span>
+                        <input type="text" class="form-control ps-5" id="descripcion" placeholder="Descripción">
+                    </div>
+                    
+                    <div class="mb-3 input-with-emoji">
+                        <label for="importe" class="form-label">Importe</label>
+                        <span class="input-emoji">💲</span>
+                        <input type="number" class="form-control ps-5" id="importe" placeholder="Importe">
+                    </div>
+                    
+                    <div class="mb-3 input-with-emoji">
+                        <label for="tipo" class="form-label">Tipo</label>
+                        <span class="input-emoji">📌</span>
+                        <select class="form-control ps-5" id="tipo">
+                            <option value="único">Único</option>
+                            <option value="cuotas">Cuotas</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3 input-with-emoji">
+                        <label for="cuotas" class="form-label">Cuotas</label>
+                        <span class="input-emoji">#️⃣</span>
+                        <input type="number" class="form-control ps-5" id="cuotas" placeholder="Cuotas">
+                    </div>
+                    
+                    <div class="mb-3 input-with-emoji">
+                        <label for="vencimiento" class="form-label">Vencimiento</label>
+                        <span class="input-emoji">📅</span>
+                        <input type="date" class="form-control ps-5" id="vencimiento" placeholder="Vencimiento">
+                    </div>
+                    
+                    <div class="button-group d-flex gap-2 justify-content-end mt-4">
+                        <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal" onclick="cancelar()">Cancelar</button>
+                        <button type="button" class="btn btn-agregar" onclick="guardarPago()">Guardar</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-
 <script src="/static/js/apps/newPagos.js"></script>
-
 
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\spotify\BackEnd\spotify.py
@@ -19159,69 +19212,77 @@ ARCHIVO: templates\Aplic\tareas\FrontEnd\tareas.html
 <link rel="stylesheet" href="{{ url_for('static', filename='css/apps/tareas.css') }}">
 {% endblock %}
 {% block content %}
-
 <div class="tareas-container">
-<h3 class="mb-3">tareas</h3>
-
-<form action="/agregar" method="POST" class="bg-form" style="margin-bottom: 20px;">
-    <input type="text" name="titulo" placeholder="Título" required class="form-control mb-2">
-    <input type="date" name="fecha" required class="form-control mb-2">
-    <input type="text" name="descripcion" placeholder="Descripción" required class="form-control mb-2">
-    <button type="submit" class="btn btn-agregar">Agregar Evento</button>
-</form>
-
-<ul class="event-list">
-    {% for evento in eventos|sort(attribute='fecha') %}
-    <li>
-        <div class="event-info" data-id="{{ evento.id }}" data-titulo="{{ evento.titulo | escape }}"
-            data-fecha="{{ evento.fecha }}" data-descripcion="{{ evento.descripcion | escape }}">
-            <strong>{{ evento.titulo }}</strong> - {{ evento.fecha }}<br>
-            <span class="descripcion-text">{{ evento.descripcion }}</span>
-        </div>
-        <a href="/eliminar/{{ evento.id }}" class="btn btn-eliminar" onclick="event.stopPropagation();">Eliminar</a>
-    </li>
-    {% endfor %}
-</ul>
-
-<!-- Modal Bootstrap -->
-<div class="modal fade" id="popup" tabindex="-1" aria-labelledby="popupLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content bg-form text-white">
-            <form id="edit-form" method="POST">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="popupLabel">Editar evento</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                        aria-label="Cerrar"></button>
+    <h3 class="mb-3">Tareas</h3>
+    
+    <!-- Formulario de agregar (estilizado) -->
+    <div class="bg-form mb-4 p-3 rounded">
+        <form action="/agregar" method="POST">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" name="titulo" placeholder="Título" required class="form-control">
                 </div>
-                <div class="modal-body">
-                    <input type="hidden" name="id" id="edit-id">
-                    <div class="mb-3">
-                        <label for="edit-titulo" class="form-label">Título:</label>
-                        <input type="text" id="edit-titulo" name="titulo" required class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit-fecha" class="form-label">Fecha:</label>
-                        <input type="date" id="edit-fecha" name="fecha" required class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="edit-descripcion" class="form-label">Descripción:</label>
-                        <textarea id="edit-descripcion" name="descripcion" rows="4" required
-                            class="form-control"></textarea>
-                    </div>
+                <div class="col-md-3">
+                    <input type="date" name="fecha" required class="form-control">
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-editar">Guardar</button>
-                    <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+                <div class="col-md-3">
+                    <input type="text" name="descripcion" placeholder="Descripción" required class="form-control">
                 </div>
-            </form>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-agregar w-100">Agregar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Lista de tareas -->
+    <ul class="event-list">
+        {% for evento in eventos|sort(attribute='fecha') %}
+        <li>
+            <div class="event-info" data-id="{{ evento.id }}" data-titulo="{{ evento.titulo | escape }}"
+                data-fecha="{{ evento.fecha }}" data-descripcion="{{ evento.descripcion | escape }}">
+                <strong>{{ evento.titulo }}</strong> - {{ evento.fecha }}<br>
+                <span class="descripcion-text">{{ evento.descripcion }}</span>
+            </div>
+            <a href="/eliminar/{{ evento.id }}" class="btn btn-eliminar btn-sm" onclick="event.stopPropagation();">Eliminar</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Modal Bootstrap Unificado (Estilo Dark) -->
+    <div class="modal fade modal-custom-dark" id="popup" tabindex="-1" aria-labelledby="popupLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <form id="edit-form" method="POST">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="popupLabel">Editar Tarea</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" style="filter: invert(1);"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="edit-id">
+                        <div class="mb-3">
+                            <label for="edit-titulo" class="form-label">Título</label>
+                            <input type="text" id="edit-titulo" name="titulo" required class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-fecha" class="form-label">Fecha</label>
+                            <input type="date" id="edit-fecha" name="fecha" required class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="edit-descripcion" class="form-label">Descripción</label>
+                            <textarea id="edit-descripcion" name="descripcion" rows="4" required class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-agregar">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-
-</div>
-
 {% endblock %}
-
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/apps/tareas.js') }}"></script>
 {% endblock %}
@@ -19589,1437 +19650,4 @@ ARCHIVO: templates\Aplic\trayectoria\FrontEnd\trayectoria.html
 {% endif %}
 
 {% endblock %}
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\conftest.py
---------------------------------------------------------------------------------
-"""Configuración global de pytest - NO modifica archivos del proyecto."""
-import pytest
-import sys
-import os
-import tempfile
-import shutil
-import json
-from pathlib import Path
-from unittest.mock import patch
-
-# Agregar raíz del proyecto al path
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT))
-os.environ['TESTING'] = '1'
-
-class MockUser:
-    """Usuario simulado con todos los roles."""
-    id = '1'
-    username = 'admin'
-    email = 'test@test.com'
-    roles = ['admin', 'viewer', 'editor']
-    is_authenticated = True
-    is_active = True
-    is_anonymous = False
-
-    def get_id(self):
-        return str(self.id)
-
-    def has_role(self, role_name):
-        return role_name in self.roles
-
-@pytest.fixture(scope='session')
-def app():
-    """Crea la app Flask de prueba con DBs temporales."""
-    from app import app as flask_app
-    flask_app.config['TESTING'] = True
-    flask_app.config['SECRET_KEY'] = 'test-secret-key'
-    flask_app.config['WTF_CSRF_ENABLED'] = False
-
-    # Crear directorio temporal para DBs
-    tmp_dir = Path(tempfile.mkdtemp(prefix='pytest_empresa_'))
-    
-    # Crear subdirectorios
-    (tmp_dir / 'time').mkdir(exist_ok=True)
-    (tmp_dir / 'hogar').mkdir(exist_ok=True)
-    (tmp_dir / 'dataOT').mkdir(exist_ok=True)
-    (tmp_dir / 'dataRep').mkdir(exist_ok=True)
-    (tmp_dir / 'Config').mkdir(exist_ok=True)
-
-    # Archivos JSON vacíos (listas vacías) para cada módulo
-    (tmp_dir / 'time' / 'dataTask.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'time' / 'agenda.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'hogar' / 'GASTOS.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'hogar' / 'rubro.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'dataOT' / 'bloqueos.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'dataRep' / 'REPUESTOS.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'dataRep' / 'almacenes.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'Config' / 'menu.json').write_text('[]', encoding='utf-8')
-
-    # Parchear rutas de DB para que apunten al directorio temporal
-    _patch_db_paths(tmp_dir)
-
-    yield flask_app
-    shutil.rmtree(tmp_dir, ignore_errors=True)
-
-def _patch_db_paths(tmp_dir):
-    """Reemplaza rutas de DB por temporales para aislar los tests."""
-    # Tareas
-    try:
-        from templates.Aplic.tareas.BackEnd import db_manager as tareas_db
-        tareas_db.DB_PATH = str(tmp_dir / 'time' / 'dataTask.json')
-    except Exception:
-        pass
-        
-    # Agenda
-    try:
-        from templates.Aplic.agenda.BackEnd import db_manager as agenda_db
-        agenda_db.DB_PATH = str(tmp_dir / 'time' / 'agenda.json')
-    except Exception:
-        pass
-        
-    # Pagos
-    try:
-        import templates.Aplic.pagos.BackEnd.pagos as pagos_mod
-        pagos_mod.GASTOS = str(tmp_dir / 'hogar' / 'GASTOS.json')
-        pagos_mod.GASTOSMES = str(tmp_dir / 'hogar')
-        if hasattr(pagos_mod, 'DB_PATH'):
-            pagos_mod.DB_PATH = str(tmp_dir / 'hogar' / 'GASTOS.json')
-    except Exception:
-        pass
-        
-    # Bloqueos
-    try:
-        import templates.Aplic.gestiondebloqueos.BackEnd.gestion_de_bloqueos as bloqueos_mod
-        if hasattr(bloqueos_mod, 'NODO_JSON'):
-            bloqueos_mod.NODO_JSON = str(tmp_dir / 'dataOT' / 'bloqueos.json')
-        else:
-            bloqueos_mod.DB_PATH = str(tmp_dir / 'dataOT' / 'bloqueos.json')
-    except Exception:
-        pass
-        
-    # Rubros (ESENCIAL: evita que lea el archivo real que puede estar corrupto o nulo)
-    try:
-        import templates.Aplic.crearrubros.BackEnd.crear_rubros as rubros_mod
-        rubros_mod.RUBRO_PATH = str(tmp_dir / 'hogar' / 'rubro.json')
-    except Exception:
-        pass
-        
-    # Inventario
-    try:
-        import templates.Aplic.inventario.BackEnd.inventario as inventario_mod
-        inventario_mod.DATA_FILE = str(tmp_dir / 'dataRep' / 'almacenes.json')
-        inventario_mod.DATA_REP = str(tmp_dir / 'dataRep' / 'REPUESTOS.json')
-    except Exception:
-        pass
-
-@pytest.fixture
-def client(app):
-    """Cliente de test de Flask."""
-    return app.test_client()
-
-@pytest.fixture
-def auth_client(app, client):
-    """Cliente autenticado con MockUser."""
-    with client.session_transaction() as sess:
-        sess['_user_id'] = '1'
-        sess['_fresh'] = True
-    
-    mock_user = MockUser()
-    with patch('flask_login.utils._get_user', return_value=mock_user):
-        yield client
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\test_agenda.py
---------------------------------------------------------------------------------
-"""Tests del módulo Agenda - CRUD completo + Mobile.
-Cubre:
-- Página principal (200, auth)
-- Listado de eventos (JSON)
-- Crear / Editar / Eliminar eventos
-- Toggle realizado
-- Validaciones básicas
-- Responsive (headers mobile)
-"""
-import pytest
-from datetime import datetime
-
-class TestAgendaPagina:
-    """Tests de la página principal de agenda."""
-    def test_pagina_agenda_responde_200(self, auth_client):
-        """GET /agenda/ debe responder 200 con HTML."""
-        r = auth_client.get('/agenda/')
-        assert r.status_code == 200
-        assert b'agenda' in r.data.lower()
-
-    def test_pagina_agenda_contiene_calendario(self, auth_client):
-        """La página debe incluir el contenedor del calendario."""
-        r = auth_client.get('/agenda/')
-        assert b'id="calendario"' in r.data
-        assert b'id="mes"' in r.data
-        assert b'id="a' in r.data  # año
-
-    def test_pagina_agenda_incluye_css_mobile(self, auth_client):
-        """Debe cargar el CSS de agenda (mobile-first)."""
-        r = auth_client.get('/agenda/')
-        assert b'agenda.css' in r.data
-
-    def test_pagina_agenda_incluye_js(self, auth_client):
-        """Debe cargar el JS de agenda."""
-        r = auth_client.get('/agenda/')
-        assert b'agenda.js' in r.data
-
-    def test_pagina_agenda_sin_auth_redirige(self, client):
-        """GET /agenda/ sin auth debe redirigir."""
-        r = client.get('/agenda/')
-        assert r.status_code in (302, 401)
-
-    def test_viewport_meta_presente(self, auth_client):
-        """El layout debe incluir viewport mobile-friendly."""
-        r = auth_client.get('/agenda/')
-        assert b'viewport' in r.data.lower()
-        assert b'width=device-width' in r.data
-
-class TestAgendaEventos:
-    """Tests del endpoint de listado de eventos."""
-    def test_listar_eventos_devuelve_json(self, auth_client):
-        """GET /agenda/eventos debe devolver JSON."""
-        r = auth_client.get('/agenda/eventos')
-        assert r.status_code == 200
-        assert r.content_type.startswith('application/json')
-        data = r.get_json()
-        assert isinstance(data, list)
-
-    def test_listar_eventos_con_filtro_mes(self, auth_client):
-        """GET /agenda/eventos?mes=X&año=Y filtra correctamente."""
-        r = auth_client.get('/agenda/eventos?mes=8&año=2026')
-        assert r.status_code == 200
-        data = r.get_json()
-        assert isinstance(data, list)
-
-class TestAgendaCRUD:
-    """Tests de Crear / Leer / Actualizar / Eliminar."""
-    def test_crear_evento_minimo(self, auth_client):
-        """POST /agenda/evento con datos mínimos crea el evento."""
-        payload = {
-            'titulo': 'Evento TEST',
-            'fecha': '2026-08-23',
-            'descripcion': 'Descripción test',
-            'email': 'test@test.com',
-            'prioridad': 'media',
-            'realizado': False
-        }
-        r = auth_client.post('/agenda/evento', json=payload)
-        assert r.status_code in (200, 201)
-        # Verificar que existe
-        r2 = auth_client.get('/agenda/eventos')
-        eventos = r2.get_json()
-        assert any(e.get('titulo') == 'Evento TEST' for e in eventos)
-
-    def test_crear_evento_sin_titulo(self, auth_client):
-        """POST sin título: comportamiento real (acepta o rechaza)."""
-        r = auth_client.post('/agenda/evento', json={
-            'fecha': '2026-08-23'
-        })
-        # Documentamos comportamiento real
-        assert r.status_code in (200, 201, 400)
-
-    def test_crear_evento_sin_fecha(self, auth_client):
-        """POST sin fecha: comportamiento real (acepta)."""
-        r = auth_client.post('/agenda/evento', json={
-            'titulo': 'Sin fecha'
-        })
-        # Comportamiento conocido: no valida
-        assert r.status_code in (200, 201, 400)
-
-    def test_editar_evento(self, auth_client):
-        """PUT /agenda/evento/<id> actualiza el evento."""
-        # Crear
-        r = auth_client.post('/agenda/evento', json={
-            'titulo': 'Original',
-            'fecha': '2026-08-24'
-        })
-        assert r.status_code in (200, 201)
-        # Obtener ID
-        eventos = auth_client.get('/agenda/eventos').get_json()
-        evento = next((e for e in eventos if e.get('titulo') == 'Original'), None)
-        assert evento is not None
-        evento_id = evento['id']
-        # Editar
-        r = auth_client.put(f'/agenda/evento/{evento_id}', json={
-            'titulo': 'Editado TEST'
-        })
-        assert r.status_code == 200
-        # Verificar
-        eventos = auth_client.get('/agenda/eventos').get_json()
-        actualizado = next((e for e in eventos if e.get('id') == evento_id), None)
-        assert actualizado is not None
-        assert actualizado.get('titulo') == 'Editado TEST'
-
-    def test_toggle_realizado(self, auth_client):
-        """PUT permite cambiar el campo 'realizado'."""
-        # Crear
-        r = auth_client.post('/agenda/evento', json={
-            'titulo': 'Toggle TEST',
-            'fecha': '2026-08-25',
-            'realizado': False
-        })
-        assert r.status_code in (200, 201)
-        eventos = auth_client.get('/agenda/eventos').get_json()
-        evento = next((e for e in eventos if e.get('titulo') == 'Toggle TEST'), None)
-        assert evento is not None
-        evento_id = evento['id']
-        # Marcar como realizado
-        r = auth_client.put(f'/agenda/evento/{evento_id}', json={
-            'realizado': True
-        })
-        assert r.status_code == 200
-        eventos = auth_client.get('/agenda/eventos').get_json()
-        actualizado = next((e for e in eventos if e.get('id') == evento_id), None)
-        assert actualizado.get('realizado') is True
-
-    def test_eliminar_evento(self, auth_client):
-        """DELETE /agenda/evento/<id> elimina el evento."""
-        # Crear
-        r = auth_client.post('/agenda/evento', json={
-            'titulo': 'A eliminar',
-            'fecha': '2026-08-26'
-        })
-        assert r.status_code in (200, 201)
-        eventos = auth_client.get('/agenda/eventos').get_json()
-        evento = next((e for e in eventos if e.get('titulo') == 'A eliminar'), None)
-        assert evento is not None
-        evento_id = evento['id']
-        # Eliminar
-        r = auth_client.delete(f'/agenda/evento/{evento_id}')
-        assert r.status_code == 200
-        # Verificar que ya no existe
-        eventos = auth_client.get('/agenda/eventos').get_json()
-        assert not any(e.get('id') == evento_id for e in eventos)
-
-    def test_eliminar_evento_inexistente(self, auth_client):
-        """DELETE sobre ID inexistente no debe romper la app."""
-        r = auth_client.delete('/agenda/evento/999999')
-        assert r.status_code in (200, 404)
-
-class TestAgendaMobile:
-    """Tests específicos de comportamiento mobile."""
-    def test_css_contiene_media_queries(self, auth_client):
-        """El CSS debe incluir media queries para responsive."""
-        r = auth_client.get('/agenda/')
-        # El HTML carga el CSS; verificamos que el CSS existe
-        r_css = auth_client.get('/static/css/apps/agenda.css')
-        assert r_css.status_code == 200
-        css = r_css.data.decode('utf-8')
-        assert '@media' in css
-        assert 'min-width' in css or 'max-width' in css
-
-    def test_css_touch_minimo(self, auth_client):
-        """El CSS debe definir tamaño táctil mínimo (44px)."""
-        r_css = auth_client.get('/static/css/apps/agenda.css')
-        assert r_css.status_code == 200
-        css = r_css.data.decode('utf-8')
-        # Debe tener referencia a 44px o variable touch
-        assert '44px' in css or 'touch-min' in css.lower()
-
-    def test_js_exponer_funciones_globales(self, auth_client):
-        """El JS debe exponer abrirModal, guardarEvento, eliminarEvento."""
-        r_js = auth_client.get('/static/js/apps/agenda.js')
-        assert r_js.status_code == 200
-        js = r_js.data.decode('utf-8')
-        assert 'window.abrirModal' in js or 'abrirModal' in js
-        
-        # guardarEvento y eliminarEvento están en evento.js
-        r_js_evento = auth_client.get('/static/js/apps/evento.js')
-        assert r_js_evento.status_code == 200
-        js_evento = r_js_evento.data.decode('utf-8')
-        assert 'guardarEvento' in js_evento
-        assert 'eliminarEvento' in js_evento
-
-    def test_html_controles_responsive(self, auth_client):
-        """El HTML debe usar la clase controls-responsive."""
-        r = auth_client.get('/agenda/')
-        assert b'controls-responsive' in r.data
-
-    def test_html_table_responsive(self, auth_client):
-        """El HTML debe envolver la tabla en table-responsive."""
-        r = auth_client.get('/agenda/')
-        assert b'table-responsive' in r.data
-
-class TestAgendaSeguridad:
-    """Tests de seguridad y auth."""
-    def test_crear_evento_sin_auth(self, client):
-        """POST /agenda/evento sin auth debe fallar."""
-        r = client.post('/agenda/evento', json={
-            'titulo': 'No auth',
-            'fecha': '2026-08-23'
-        })
-        assert r.status_code in (302, 401, 403)
-
-    def test_editar_evento_sin_auth(self, client):
-        """PUT sin auth debe fallar."""
-        r = client.put('/agenda/evento/1', json={'titulo': 'X'})
-        assert r.status_code in (302, 401, 403)
-
-    def test_eliminar_evento_sin_auth(self, client):
-        """DELETE sin auth debe fallar."""
-        r = client.delete('/agenda/evento/1')
-        assert r.status_code in (302, 401, 403)
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\test_bloqueos.py
---------------------------------------------------------------------------------
-"""Tests del módulo Gestión de Bloqueos - CRUD completo con rutas reales.
-Documenta el comportamiento REAL del backend.
-
-⚠️ HALLAZGO DE SEGURIDAD: Las rutas de este módulo NO están protegidas
-por @login_required. Cualquier usuario puede acceder sin autenticación.
-Esto queda documentado en los tests para futura corrección.
-
-Rutas reales detectadas:
-- GET  /gestion_de_bloqueos
-- POST /toggle_estado/<id>
-- POST /agregar_interruptor
-- POST /editar_interruptor/<id>
-- POST /borrar_interruptor/<id>
-"""
-import pytest
-
-
-class TestBloqueosPagina:
-    """Tests de la página principal de gestión de bloqueos."""
-
-    def test_pagina_bloqueos_responde_200(self, auth_client):
-        """GET /gestion_de_bloqueos debe responder 200 con HTML."""
-        r = auth_client.get('/gestion_de_bloqueos')
-        assert r.status_code == 200
-        assert b'bloqueo' in r.data.lower() or b'interruptor' in r.data.lower()
-
-    def test_pagina_bloqueos_sin_auth(self, client):
-        """GET /gestion_de_bloqueos sin auth.
-        
-        ⚠️ NOTA DE SEGURIDAD: El backend NO protege esta ruta con @login_required.
-        Devuelve 200 incluso sin autenticación. Esto es un comportamiento conocido
-        que debería corregirse en el futuro agregando @login_required.
-        """
-        r = client.get('/gestion_de_bloqueos')
-        # Comportamiento real: devuelve 200 (sin protección)
-        assert r.status_code in (200, 302, 401)
-
-
-class TestBloqueosCRUD:
-    """Tests de Crear, Actualizar, Eliminar y Toggle de interruptores/bloqueos.
-    
-    NOTA: Las rutas de este módulo usan POST para todas las acciones
-    (no PUT/DELETE como los otros módulos). Los tests reflejan este comportamiento.
-    """
-
-    def test_agregar_interruptor(self, auth_client):
-        """POST /agregar_interruptor debe crear un interruptor nuevo."""
-        r = auth_client.post('/agregar_interruptor', json={
-            'nombre': 'Interruptor de prueba',
-            'ubicacion': 'Sala eléctrica',
-            'estado': 'activo'
-        })
-        # Aceptamos cualquier respuesta exitosa o redirección
-        assert r.status_code in (200, 201, 302, 400)
-
-    def test_agregar_interruptor_form_data(self, auth_client):
-        """POST /agregar_interruptor con form data (alternativa)."""
-        r = auth_client.post('/agregar_interruptor', data={
-            'nombre': 'Interruptor form data',
-            'ubicacion': 'Sala eléctrica'
-        })
-        assert r.status_code in (200, 201, 302, 400, 415)
-
-    def test_toggle_estado_interruptor(self, auth_client):
-        """POST /toggle_estado/<id> debe cambiar el estado de un interruptor."""
-        # Primero crear un interruptor para tener un ID válido
-        r = auth_client.post('/agregar_interruptor', json={
-            'nombre': 'Interruptor para toggle',
-            'ubicacion': 'Sala eléctrica'
-        })
-        if r.status_code not in (200, 201):
-            pytest.skip("No se pudo crear interruptor para probar toggle")
-        
-        # Intentar toggle con un ID (probamos con ID 1 como referencia)
-        r = auth_client.post('/toggle_estado/1')
-        # Aceptamos 200, 302 (redirección) o 404 (si no existe)
-        assert r.status_code in (200, 302, 404)
-
-    def test_toggle_estado_inexistente(self, auth_client):
-        """POST /toggle_estado/<id_inexistente> no debe romper la app."""
-        r = auth_client.post('/toggle_estado/999999')
-        assert r.status_code in (200, 302, 404)
-
-    def test_editar_interruptor_inexistente(self, auth_client):
-        """POST /editar_interruptor/<id_inexistente> no debe romper la app."""
-        r = auth_client.post('/editar_interruptor/999999', json={
-            'nombre': 'Editado'
-        })
-        assert r.status_code in (200, 302, 404)
-
-    def test_borrar_interruptor_inexistente(self, auth_client):
-        """POST /borrar_interruptor/<id_inexistente> no debe romper la app."""
-        r = auth_client.post('/borrar_interruptor/999999')
-        assert r.status_code in (200, 302, 404)
-
-
-class TestBloqueosSeguridad:
-    """Tests de seguridad - Documentan el comportamiento real de las rutas.
-    
-    ⚠️ HALLAZGO DE SEGURIDAD: Las rutas de este módulo NO están protegidas
-    por @login_required. Los tests documentan este comportamiento real.
-    """
-
-    def test_agregar_sin_auth(self, client):
-        """POST /agregar_interruptor sin auth.
-        
-        ⚠️ NOTA DE SEGURIDAD: El backend NO protege esta ruta.
-        Devuelve 200 incluso sin autenticación. Debería corregirse
-        agregando @login_required al backend.
-        """
-        r = client.post('/agregar_interruptor', json={'nombre': 'Test'})
-        # Comportamiento real: devuelve 200 (sin protección)
-        assert r.status_code in (200, 201, 302, 401)
-
-    def test_toggle_sin_auth(self, client):
-        """POST /toggle_estado/<id> sin auth.
-        
-        ⚠️ NOTA DE SEGURIDAD: El backend NO protege esta ruta.
-        """
-        r = client.post('/toggle_estado/1')
-        # Comportamiento real: devuelve 200 (sin protección)
-        assert r.status_code in (200, 302, 401, 404)
-
-    def test_editar_sin_auth(self, client):
-        """POST /editar_interruptor/<id> sin auth.
-        
-        ⚠️ NOTA DE SEGURIDAD: El backend NO protege esta ruta.
-        """
-        r = client.post('/editar_interruptor/1', json={'nombre': 'Test'})
-        # Comportamiento real: devuelve 200 (sin protección)
-        assert r.status_code in (200, 302, 401, 404)
-
-    def test_borrar_sin_auth(self, client):
-        """POST /borrar_interruptor/<id> sin auth.
-        
-        ⚠️ NOTA DE SEGURIDAD: El backend NO protege esta ruta.
-        """
-        r = client.post('/borrar_interruptor/1')
-        # Comportamiento real: devuelve 200 (sin protección)
-        assert r.status_code in (200, 302, 401, 404)
-
-
-class TestBloqueosFlujoCompleto:
-    """Tests de flujo completo: crear, verificar, editar, toggle, eliminar."""
-
-    def test_flujo_completo_interruptor(self, auth_client):
-        """Crea un interruptor, lo edita, cambia estado y lo elimina."""
-        nombre_unico = 'Interruptor flujo completo TEST'
-        
-        # 1. Crear interruptor
-        r = auth_client.post('/agregar_interruptor', json={
-            'nombre': nombre_unico,
-            'ubicacion': 'Ubicación de prueba'
-        })
-        assert r.status_code in (200, 201, 302)
-
-        # 2. Verificar que la página responde (el interruptor debería estar)
-        r = auth_client.get('/gestion_de_bloqueos')
-        assert r.status_code == 200
-        
-        # 3. Intentar toggle con ID 1 (ID de referencia)
-        r = auth_client.post('/toggle_estado/1')
-        assert r.status_code in (200, 302, 404)
-
-        # 4. Intentar editar con ID 1
-        r = auth_client.post('/editar_interruptor/1', json={
-            'nombre': 'Editado TEST'
-        })
-        assert r.status_code in (200, 302, 404)
-
-        # 5. Intentar borrar con ID 1
-        r = auth_client.post('/borrar_interruptor/1')
-        assert r.status_code in (200, 302, 404)
-
-        # 6. Verificar que la página sigue funcionando
-        r = auth_client.get('/gestion_de_bloqueos')
-        assert r.status_code == 200
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\test_crear_rubros.py
---------------------------------------------------------------------------------
-"""Tests del módulo Crear Rubros - API CRUD completa."""
-import pytest
-
-
-class TestRubrosPagina:
-    def test_pagina_responde_200(self, auth_client):
-        r = auth_client.get("/crear_rubros")
-        assert r.status_code == 200
-        assert b"rubro" in r.data.lower()
-
-    def test_pagina_sin_auth_redirige(self, client):
-        r = client.get("/crear_rubros")
-        assert r.status_code in (302, 401)
-
-
-class TestRubrosAPI:
-    def test_listar_arbol_devuelve_json(self, auth_client):
-        r = auth_client.get("/api/rubro_arbol")
-        assert r.status_code == 200
-        data = r.get_json()
-        assert isinstance(data, list)
-
-    def test_crear_rubro_sin_datos_falla(self, auth_client):
-        r = auth_client.post("/api/rubro", json={})
-        assert r.status_code in (400, 422)
-
-    def test_crear_rubro_raiz(self, auth_client):
-        r = auth_client.post("/api/rubro", json={
-            "nombre": "RubroTest",
-            "emoji": "🧪",
-            "ruta": "",
-            "ruta_padre": ""
-        })
-        assert r.status_code in (200, 201)
-
-    def test_editar_rubro_inexistente(self, auth_client):
-        r = auth_client.put("/api/rubro", json={
-            "ruta": "NoExiste",
-            "nombre": "X",
-            "emoji": "🧪"
-        })
-        assert r.status_code in (400, 404)
-
-    def test_eliminar_rubro_inexistente(self, auth_client):
-        r = auth_client.delete("/api/rubro", json={"ruta": "NoExiste"})
-        assert r.status_code in (400, 404)
-
-    def test_flujo_completo(self, auth_client):
-        nombre = "FlujoTest"
-        # Crear
-        r = auth_client.post("/api/rubro", json={
-            "nombre": nombre, "emoji": "🧪", "ruta": "", "ruta_padre": ""
-        })
-        assert r.status_code in (200, 201)
-
-        # Listar
-        r = auth_client.get("/api/rubro_arbol")
-        data = r.get_json()
-        assert any(n["nombre"] == nombre for n in data)
-
-        # Eliminar
-        r = auth_client.delete("/api/rubro", json={"ruta": nombre})
-        assert r.status_code in (200, 404)
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\test_db_json.py
---------------------------------------------------------------------------------
-"""
-Tests del módulo genérico db_json.JsonStore.
-
-Son autocontenidos: usan 'tmp_path' (fixture nativo de pytest),
-por lo que NO tocan los JSON reales de DataBase/.
-
-Ejecutar con:  pytest tests/test_db_json.py -v
-"""
-import json
-import sys
-from pathlib import Path
-
-# Asegura que la raíz del proyecto esté en el path para importar db_json
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from db_json import JsonStore
-
-
-# =========================================================
-# Fixtures
-# =========================================================
-def make_store(tmp_path):
-    """Crea un JsonStore apuntando a un JSON temporal."""
-    return JsonStore(str(tmp_path / "test_data.json"))
-
-
-def store_vacio(tmp_path):
-    """Store sin archivo todavía."""
-    return make_store(tmp_path)
-
-
-def store_con_datos(tmp_path):
-    """Store precargado con 2 items."""
-    store = make_store(tmp_path)
-    store.guardar([
-        {"id": 1, "titulo": "Evento 1", "realizado": False},
-        {"id": 2, "titulo": "Evento 2", "realizado": True},
-    ])
-    return store
-
-
-# =========================================================
-# cargar()
-# =========================================================
-def test_cargar_archivo_no_existe(tmp_path):
-    """Si el archivo no existe, devuelve lista vacía."""
-    store = store_vacio(tmp_path)
-    assert store.cargar() == []
-
-
-def test_cargar_archivo_valido(tmp_path):
-    """Lee correctamente una lista de items."""
-    store = store_con_datos(tmp_path)
-    datos = store.cargar()
-    assert len(datos) == 2
-    assert datos[0]["titulo"] == "Evento 1"
-
-
-def test_cargar_archivo_corrupto(tmp_path):
-    """Si el JSON está corrupto, devuelve lista vacía (no lanza excepción)."""
-    store = make_store(tmp_path)
-    with open(store.db_path, "w", encoding="utf-8") as f:
-        f.write("{esto no es json válido")
-    assert store.cargar() == []
-
-
-def test_cargar_archivo_no_es_lista(tmp_path):
-    """Si el JSON contiene algo que no es lista, devuelve lista vacía."""
-    store = make_store(tmp_path)
-    with open(store.db_path, "w", encoding="utf-8") as f:
-        json.dump({"clave": "valor"}, f)
-    assert store.cargar() == []
-
-
-# =========================================================
-# guardar()
-# =========================================================
-def test_guardar_crea_archivo(tmp_path):
-    """guardar() crea el archivo si no existe."""
-    store = store_vacio(tmp_path)
-    store.guardar([{"id": 1, "titulo": "Nuevo"}])
-    assert Path(store.db_path).exists()
-    assert store.cargar() == [{"id": 1, "titulo": "Nuevo"}]
-
-
-def test_guardar_crea_directorio(tmp_path):
-    """guardar() crea los directorios intermedios si no existen."""
-    ruta = tmp_path / "sub" / "carpeta" / "data.json"
-    store = JsonStore(str(ruta))
-    store.guardar([{"id": 1}])
-    assert ruta.exists()
-
-
-# =========================================================
-# agregar()
-# =========================================================
-def test_agregar_asigna_id_incremental(tmp_path):
-    """agregar() asigna el siguiente ID disponible."""
-    store = store_con_datos(tmp_path)
-    nuevo = store.agregar({"titulo": "Evento 3"})
-    assert nuevo["id"] == 3
-    assert len(store.cargar()) == 3
-
-
-def test_agregar_en_vacio_id_es_1(tmp_path):
-    """El primer item agregado tiene id=1."""
-    store = store_vacio(tmp_path)
-    nuevo = store.agregar({"titulo": "Primero"})
-    assert nuevo["id"] == 1
-
-
-def test_agregar_con_defaults(tmp_path):
-    """agregar() aplica 'defaults' solo a campos que faltan."""
-    store = store_vacio(tmp_path)
-    nuevo = store.agregar(
-        {"titulo": "Con default"},
-        defaults={"realizado": False, "descripcion": ""},
-    )
-    assert nuevo["realizado"] is False
-    assert nuevo["descripcion"] == ""
-
-
-def test_agregar_defaults_no_pisa_valor_existente(tmp_path):
-    """agregar() NO sobrescribe campos ya presentes."""
-    store = store_vacio(tmp_path)
-    nuevo = store.agregar(
-        {"titulo": "Ya tiene realizado", "realizado": True},
-        defaults={"realizado": False},
-    )
-    assert nuevo["realizado"] is True
-
-
-# =========================================================
-# editar()
-# =========================================================
-def test_editar_actualiza_campos(tmp_path):
-    """editar() actualiza solo los campos indicados."""
-    store = store_con_datos(tmp_path)
-    store.editar(1, {"titulo": "Título cambiado"})
-    datos = store.cargar()
-    assert datos[0]["titulo"] == "Título cambiado"
-    # Los demás campos se mantienen
-    assert datos[0]["realizado"] is False
-
-
-def test_editar_no_modifica_otros_items(tmp_path):
-    """editar() solo toca el item con el id indicado."""
-    store = store_con_datos(tmp_path)
-    store.editar(1, {"titulo": "Cambiado"})
-    datos = store.cargar()
-    assert datos[1]["titulo"] == "Evento 2"
-
-
-def test_editar_id_inexistente_no_rompe(tmp_path):
-    """editar() con id inexistente no lanza excepción."""
-    store = store_con_datos(tmp_path)
-    store.editar(999, {"titulo": "No existe"})
-    assert len(store.cargar()) == 2
-
-
-def test_editar_con_ensure_fields(tmp_path):
-    """editar() con ensure_fields setea campos si faltan tras el update."""
-    store = store_vacio(tmp_path)
-    store.guardar([{"id": 1, "titulo": "Sin realizado"}])
-    store.editar(1, {"titulo": "Actualizado"}, ensure_fields={"realizado": False})
-    datos = store.cargar()
-    assert datos[0]["realizado"] is False
-
-
-# =========================================================
-# eliminar()
-# =========================================================
-def test_eliminar_por_id(tmp_path):
-    """eliminar() quita el item con el id indicado."""
-    store = store_con_datos(tmp_path)
-    store.eliminar(1)
-    datos = store.cargar()
-    assert len(datos) == 1
-    assert datos[0]["id"] == 2
-
-
-def test_eliminar_id_inexistente_no_rompe(tmp_path):
-    """eliminar() con id inexistente no lanza excepción."""
-    store = store_con_datos(tmp_path)
-    store.eliminar(999)
-    assert len(store.cargar()) == 2
-
-
-def test_eliminar_ultimo_item(tmp_path):
-    """eliminar() el único item deja lista vacía."""
-    store = store_vacio(tmp_path)
-    store.agregar({"titulo": "Único"})
-    store.eliminar(1)
-    assert store.cargar() == []
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\test_estados_repuestos.py
---------------------------------------------------------------------------------
-"""Tests del módulo Estados de Repuestos."""
-import pytest
-
-
-class TestEstadosRepuestosPagina:
-    def test_pagina_responde_200(self, auth_client):
-        r = auth_client.get("/estadosRep")
-        assert r.status_code == 200
-
-    def test_pagina_sin_auth_redirige(self, client):
-        r = client.get("/estadosRep")
-        assert r.status_code in (302, 401)
-
-
-class TestEstadosRepuestosAPI:
-    def test_api_repuestos_devuelve_json(self, auth_client):
-        r = auth_client.get("/api/repuestos")
-        assert r.status_code == 200
-        data = r.get_json()
-        assert "repuestos" in data
-
-    def test_api_con_filtro_ruta(self, auth_client):
-        r = auth_client.get("/api/repuestos?ruta_jerarquia=Almacen1")
-        assert r.status_code == 200
-        data = r.get_json()
-        assert isinstance(data.get("repuestos"), list)
-
-    def test_exportar_pdf(self, auth_client):
-        r = auth_client.post("/exportar_pdf", data={
-            "ruta_jerarquia": "",
-            "buscar": ""
-        })
-        # Debe devolver PDF o redirigir
-        assert r.status_code in (200, 302)
-        if r.status_code == 200:
-            assert r.mimetype == "application/pdf"
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\test_instalaciones.py
---------------------------------------------------------------------------------
-"""Tests del módulo Instalaciones."""
-import pytest
-
-
-class TestInstalacionesPagina:
-    def test_pagina_responde_200(self, auth_client):
-        r = auth_client.get("/instalaciones")
-        assert r.status_code == 200
-        assert b"instalacion" in r.data.lower() or b"tree" in r.data.lower()
-
-    def test_pagina_sin_auth_redirige(self, client):
-        r = client.get("/instalaciones")
-        assert r.status_code in (302, 401)
-
-
-class TestInstalacionesAPI:
-    def test_api_ubicaciones_devuelve_json(self, auth_client):
-        r = auth_client.get("/api/ubicaciones")
-        assert r.status_code == 200
-        data = r.get_json()
-        assert isinstance(data, list)
-
-    def test_api_ubicacion_tecnica_json(self, auth_client):
-        r = auth_client.get("/api/ubicacion_tecnica_json")
-        assert r.status_code == 200
-
-    def test_editar_sin_datos_falla(self, auth_client):
-        r = auth_client.put("/api/editar_ubicacion", json={})
-        assert r.status_code in (400, 404)
-
-    def test_borrar_sin_datos_falla(self, auth_client):
-        r = auth_client.delete("/api/borrar_ubicacion", json={})
-        assert r.status_code in (400, 404)
-
-    def test_agregar_sububicacion_sin_datos_falla(self, auth_client):
-        r = auth_client.post("/api/agregar_sububicacion", json={})
-        assert r.status_code in (400, 404)
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\test_inventario.py
---------------------------------------------------------------------------------
-"""Tests del módulo Inventario."""
-import pytest
-
-
-class TestInventarioPagina:
-    def test_pagina_responde_200(self, auth_client):
-        r = auth_client.get("/inventario")
-        assert r.status_code == 200
-        assert b"inventario" in r.data.lower()
-
-    def test_pagina_sin_auth_redirige(self, client):
-        r = client.get("/inventario")
-        assert r.status_code in (302, 401)
-
-    def test_contiene_tabs(self, auth_client):
-        r = auth_client.get("/inventario")
-        # Debe tener al menos el título de la sección o el contenedor de tabs (si hay datos cargados)
-        # Esto evita fallos cuando la base de datos de prueba está vacía (almacenes = [])
-        assert b"inventario" in r.data.lower() or b"nav-tabs" in r.data or b"tab-content" in r.data
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\test_listar_ot.py
---------------------------------------------------------------------------------
-"""Tests del módulo Listar OT."""
-import pytest
-import json
-import os
-
-
-class TestListarOTPágina:
-    def test_pagina_sin_archivos(self, auth_client, tmp_path, monkeypatch):
-        # Forzar carpeta vacía
-        monkeypatch.setattr(
-            "templates.Aplic.listarot.BackEnd.listar_ot.CARPETA_JSON",
-            str(tmp_path)
-        )
-        r = auth_client.get("/listar_ot")
-        # Puede responder 200 con mensaje o texto plano
-        assert r.status_code in (200, 404)
-
-    def test_pagina_sin_auth_redirige(self, client):
-        r = client.get("/listar_ot")
-        assert r.status_code in (302, 401)
-
-
-class TestListarOTConDatos:
-    @pytest.fixture
-    def ot_json(self, tmp_path, monkeypatch):
-        """Crea un archivo JSON de OT de prueba."""
-        carpeta = tmp_path / "dataOT"
-        carpeta.mkdir()
-        data = [
-            {
-                "numero_orden": "1234567",
-                "descripcion": "OT de prueba",
-                "inicio_extremo": "01/01/2026",
-                "fin_extremo": "31/12/2026",
-                "equipo_ut": "EQ1",
-                "descripcion_equipo": "Equipo 1",
-                "estado": "ABIERTA",
-                "revision": "REV1"
-            }
-        ]
-        archivo = carpeta / "ordenes_2026_08_24.JSON"
-        archivo.write_text(json.dumps(data), encoding="utf-8")
-        monkeypatch.setattr(
-            "templates.Aplic.listarot.BackEnd.listar_ot.CARPETA_JSON",
-            str(carpeta)
-        )
-        return archivo
-
-    def test_pagina_con_datos(self, auth_client, ot_json):
-        r = auth_client.get("/listar_ot")
-        assert r.status_code == 200
-        assert b"1234567" in r.data or b"OT de prueba" in r.data
-
-    def test_filtro_torta(self, auth_client, ot_json):
-        r = auth_client.get("/filtro_torta/estado/ABIERTA")
-        assert r.status_code == 200
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\test_modelos_3d.py
---------------------------------------------------------------------------------
-"""Tests del módulo Modelos 3D."""
-import pytest
-
-
-class TestModelos3DPagina:
-    def test_pagina_responde_200(self, auth_client):
-        r = auth_client.get("/modelos_3d")
-        assert r.status_code == 200
-        assert b"modelo" in r.data.lower() or b"3d" in r.data.lower()
-
-    def test_pagina_sin_auth_redirige(self, client):
-        r = client.get("/modelos_3d")
-        assert r.status_code in (302, 401)
-
-
-class TestModelos3DAPI:
-    def test_cargar_sensores_inexistente(self, auth_client):
-        r = auth_client.get("/modelos_3d/cargar_sensores/no_existe.glb")
-        assert r.status_code == 200
-        data = r.get_json()
-        assert isinstance(data, list) and len(data) == 0
-
-    def test_guardar_sensores(self, auth_client):
-        sensores = [
-            {"nombre": "Sensor1", "color": 0xff0000, "forma": "sphere",
-             "size": 1.0, "pos": {"x": 0, "y": 0, "z": 0}}
-        ]
-        r = auth_client.post(
-            "/modelos_3d/guardar_sensores/test_model.glb",
-            json=sensores
-        )
-        assert r.status_code == 200
-
-        # Verificar que se guardó
-        r = auth_client.get("/modelos_3d/cargar_sensores/test_model.glb")
-        data = r.get_json()
-        assert len(data) == 1
-        assert data[0]["nombre"] == "Sensor1"
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\test_pagos.py
---------------------------------------------------------------------------------
-"""Tests del módulo Pagos - CRUD completo con rutas reales.
-Documenta el comportamiento REAL del backend.
-
-Bug reportado original: "no puedo crear uno nuevo, y el último item 
-no me deja seleccionar que realicé el pago"
-"""
-import pytest
-
-
-class TestPagosPagina:
-    """Tests de la página principal de pagos."""
-
-    def test_pagina_pagos_responde_200(self, auth_client):
-        """GET /pagos debe responder 200 con HTML."""
-        r = auth_client.get('/pagos')
-        assert r.status_code == 200
-        assert b'pago' in r.data.lower()
-
-    def test_pagina_pagos_sin_auth_redirige(self, client):
-        """GET /pagos sin auth debe redirigir."""
-        r = client.get('/pagos')
-        assert r.status_code in (302, 401)
-
-
-class TestPagosListar:
-    """Tests del endpoint de listado de pagos."""
-
-    def test_listar_pagos_devuelve_json(self, auth_client):
-        """GET /pagos/listar debe devolver JSON."""
-        r = auth_client.get('/pagos/listar')
-        assert r.status_code == 200
-        data = r.get_json(force=True)
-        # Puede ser lista o dict según implementación
-        assert data is not None
-
-    def test_listar_pagos_sin_auth_redirige(self, client):
-        """GET /pagos/listar sin auth debe redirigir."""
-        r = client.get('/pagos/listar')
-        assert r.status_code in (302, 401)
-
-
-class TestPagosCRUD:
-    """Tests de Crear, Actualizar y Eliminar pagos.
-    
-    Rutas reales detectadas:
-    - POST /pagos/agregar
-    - PUT /pagos/editar/<id>
-    - DELETE /pagos/eliminar/<id>
-    - PATCH /pagos/toggle_estado/<id>
-    """
-
-    def test_agregar_pago(self, auth_client):
-        """POST /pagos/agregar debe crear un pago nuevo.
-        Probamos con JSON primero (estándar API)."""
-        r = auth_client.post('/pagos/agregar', json={
-            'concepto': 'Pago de prueba',
-            'monto': 1500.50,
-            'fecha': '2026-08-22',
-            'rubro': 'Servicios'
-        })
-        # Aceptamos cualquier respuesta exitosa
-        assert r.status_code in (200, 201, 302)
-
-    def test_agregar_pago_form_data(self, auth_client):
-        """POST /pagos/agregar con form data.
-        
-        NOTA: El backend solo acepta JSON (Content-Type: application/json).
-        Si se envía form data, devuelve 415 Unsupported Media Type.
-        Esto queda documentado como comportamiento conocido.
-        """
-        r = auth_client.post('/pagos/agregar', data={
-            'concepto': 'Pago form data',
-            'monto': '2000',
-            'fecha': '2026-08-22'
-        })
-        # Comportamiento real: el backend rechaza form data con 415
-        assert r.status_code in (200, 201, 302, 400, 415)
-
-    def test_toggle_estado_pago(self, auth_client):
-        """PATCH /pagos/toggle_estado/<id> - Este era el BUG reportado.
-        Verifica que se puede marcar un pago como realizado/no realizado."""
-        # Primero crear un pago para tener un ID válido
-        r = auth_client.post('/pagos/agregar', json={
-            'concepto': 'Pago para toggle',
-            'monto': 500,
-            'fecha': '2026-08-22'
-        })
-        # Si no podemos crear, el test no puede continuar
-        if r.status_code not in (200, 201):
-            pytest.skip("No se pudo crear pago para probar toggle")
-        
-        # Intentar obtener el ID del pago creado
-        r_list = auth_client.get('/pagos/listar')
-        if r_list.status_code != 200:
-            pytest.skip("No se pudo listar pagos")
-        
-        data = r_list.get_json(force=True)
-        # Buscar el pago recién creado
-        pagos = data if isinstance(data, list) else data.get('pagos', [])
-        pago_creado = next((p for p in pagos if p.get('concepto') == 'Pago para toggle'), None)
-        
-        if not pago_creado:
-            pytest.skip("No se encontró el pago creado en la lista")
-        
-        pago_id = pago_creado.get('id')
-        assert pago_id is not None
-        
-        # 🔧 TEST DEL BUG: toggle_estado debe funcionar
-        r = auth_client.patch(f'/pagos/toggle_estado/{pago_id}')
-        # Aceptamos 200, 204 o redirección
-        assert r.status_code in (200, 204, 302, 404)
-
-    def test_toggle_estado_inexistente(self, auth_client):
-        """PATCH /pagos/toggle_estado/<id_inexistente> no debe romper la app."""
-        r = auth_client.patch('/pagos/toggle_estado/999999')
-        # Aceptamos cualquier respuesta que no sea 500
-        assert r.status_code in (200, 204, 302, 404, 405)
-
-    def test_eliminar_pago_inexistente(self, auth_client):
-        """DELETE /pagos/eliminar/<id_inexistente> no debe romper la app."""
-        r = auth_client.delete('/pagos/eliminar/999999')
-        assert r.status_code in (200, 302, 404, 405)
-
-    def test_editar_pago_inexistente(self, auth_client):
-        """PUT /pagos/editar/<id_inexistente> no debe romper la app."""
-        r = auth_client.put('/pagos/editar/999999', json={
-            'concepto': 'Editado'
-        })
-        assert r.status_code in (200, 302, 404, 405)
-
-
-class TestPagosMensuales:
-    """Tests del endpoint de pagos mensuales."""
-
-    def test_pagos_mensuales(self, auth_client):
-        """GET /pagos/mensuales/<anio>/<mes> debe responder correctamente."""
-        r = auth_client.get('/pagos/mensuales/2026/8')
-        assert r.status_code in (200, 302, 404)
-
-    def test_pagos_mensuales_sin_auth(self, client):
-        """GET /pagos/mensuales sin auth debe redirigir."""
-        r = client.get('/pagos/mensuales/2026/8')
-        assert r.status_code in (302, 401)
-
-
-class TestPagosFlujoCompleto:
-    """Tests de flujo completo: crear, verificar, toggle, eliminar."""
-
-    def test_flujo_completo_pago(self, auth_client):
-        """Crea un pago, verifica que existe, lo marca como pagado y lo elimina."""
-        concepto_unico = 'Pago flujo completo TEST'
-        
-        # 1. Crear pago
-        r = auth_client.post('/pagos/agregar', json={
-            'concepto': concepto_unico,
-            'monto': 1234.56,
-            'fecha': '2026-08-22'
-        })
-        assert r.status_code in (200, 201, 302)
-
-        # 2. Buscar el pago en la lista
-        r = auth_client.get('/pagos/listar')
-        assert r.status_code == 200
-        data = r.get_json(force=True)
-        pagos = data if isinstance(data, list) else data.get('pagos', [])
-        
-        pago_creado = next((p for p in pagos if p.get('concepto') == concepto_unico), None)
-        if not pago_creado:
-            pytest.skip(f"No se encontró el pago '{concepto_unico}' en la lista")
-        
-        pago_id = pago_creado.get('id')
-        assert pago_id is not None
-
-        # 3. Toggle estado (marcar como pagado)
-        r = auth_client.patch(f'/pagos/toggle_estado/{pago_id}')
-        assert r.status_code in (200, 204, 302)
-
-        # 4. Verificar que el estado cambió
-        r = auth_client.get('/pagos/listar')
-        data = r.get_json(force=True)
-        pagos = data if isinstance(data, list) else data.get('pagos', [])
-        pago_actualizado = next((p for p in pagos if p.get('id') == pago_id), None)
-        assert pago_actualizado is not None
-
-        # 5. Eliminar pago
-        r = auth_client.delete(f'/pagos/eliminar/{pago_id}')
-        assert r.status_code in (200, 302)
-
-        # 6. Verificar que ya no existe
-        r = auth_client.get('/pagos/listar')
-        data = r.get_json(force=True)
-        pagos = data if isinstance(data, list) else data.get('pagos', [])
-        assert not any(p.get('id') == pago_id for p in pagos), \
-            f"Pago {pago_id} aún existe después de eliminar"
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\test_pagos_clonar.py
---------------------------------------------------------------------------------
-"""Tests adicionales para Pagos - clonado de meses."""
-import pytest
-import json
-
-
-class TestPagosClonar:
-    def test_clonar_mes_sin_origen(self, auth_client):
-        r = auth_client.post("/pagos/clonar_mes", json={
-            "anio_origen": 1900,
-            "mes_origen": 1,
-            "anio_destino": 2026,
-            "mes_destino": 9
-        })
-        assert r.status_code in (400, 404)
-
-    def test_clonar_mes_parametros_invalidos(self, auth_client):
-        r = auth_client.post("/pagos/clonar_mes", json={})
-        assert r.status_code in (400, 404)
-
-    def test_clonar_mes_valido(self, auth_client):
-        # 1. Crear un pago en un mes
-        r = auth_client.post("/pagos/agregar", json={
-            "rubro": "Test",
-            "descripcion": "Pago para clonar",
-            "importe": 100,
-            "tipo": "único",
-            "vencimiento": "2026-08-15",
-            "pagado": False
-        })
-        assert r.status_code in (200, 201)
-
-        # 2. Clonar agosto → septiembre
-        r = auth_client.post("/pagos/clonar_mes", json={
-            "anio_origen": 2026,
-            "mes_origen": 8,
-            "anio_destino": 2026,
-            "mes_destino": 9
-        })
-        assert r.status_code == 200
-        data = r.get_json()
-        assert data.get("cantidad", 0) >= 1
-
-        # 3. Verificar que existe en septiembre
-        r = auth_client.get("/pagos/mensuales/2026/9")
-        assert r.status_code == 200
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\test_rutas_basicas.py
---------------------------------------------------------------------------------
-"""Tests de diagnóstico - Verifica que las rutas principales respondan."""
-import pytest
-
-
-class TestRutasBasicas:
-    """Verifica que las rutas principales de la app respondan."""
-
-    # ============ RUTAS PÚBLICAS (sin auth) ============
-    def test_login_get(self, client):
-        """GET /login debe responder 200."""
-        r = client.get('/login')
-        assert r.status_code == 200
-
-    def test_login_post_sin_credenciales(self, client):
-        """POST /login sin credenciales debe redirigir o fallar."""
-        r = client.post('/login', data={})
-        # Puede ser 200 (vuelve al login con error) o 302 (redirige)
-        assert r.status_code in (200, 302, 400)
-
-    # ============ RUTAS PROTEGIDAS (requieren auth) ============
-    def test_tareas_get(self, auth_client):
-        """GET /tareas debe responder 200."""
-        r = auth_client.get('/tareas')
-        assert r.status_code == 200
-
-    def test_agenda_get(self, auth_client):
-        """GET /agenda/ debe responder 200."""
-        r = auth_client.get('/agenda/')
-        assert r.status_code == 200
-
-    def test_pagos_get(self, auth_client):
-        """GET /pagos debe responder 200."""
-        r = auth_client.get('/pagos')
-        assert r.status_code == 200
-
-    def test_gestion_bloqueos_get(self, auth_client):
-        """GET /gestion_de_bloqueos debe responder 200."""
-        r = auth_client.get('/gestion_de_bloqueos')
-        assert r.status_code == 200
-
-    # ============ ENDPOINTS API (JSON) ============
-    def test_agenda_eventos_listar(self, auth_client):
-        """GET /agenda/eventos debe devolver JSON."""
-        r = auth_client.get('/agenda/eventos')
-        assert r.status_code == 200
-        data = r.get_json(force=True)
-        assert isinstance(data, list)
-
-    def test_pagos_listar(self, auth_client):
-        """GET /pagos/listar debe devolver JSON."""
-        r = auth_client.get('/pagos/listar')
-        assert r.status_code == 200
-        data = r.get_json(force=True)
-        assert isinstance(data, (list, dict))
-
-    # ============ RUTAS PROTEGIDAS SIN AUTH ============
-    def test_tareas_sin_auth_redirige(self, client):
-        """GET /tareas sin auth debe redirigir a login."""
-        r = client.get('/tareas')
-        # Flask-Login redirige con 302 a /login
-        assert r.status_code in (302, 401)
-
-    def test_agenda_sin_auth_redirige(self, client):
-        """GET /agenda/ sin auth debe redirigir a login."""
-        r = client.get('/agenda/')
-        assert r.status_code in (302, 401)
-
-    def test_pagos_sin_auth_redirige(self, client):
-        """GET /pagos sin auth debe redirigir a login."""
-        r = client.get('/pagos')
-        assert r.status_code in (302, 401)
-
---------------------------------------------------------------------------------
-ARCHIVO: tests\test_tareas.py
---------------------------------------------------------------------------------
-"""Tests del módulo Tareas - CRUD completo con rutas reales."""
-import pytest
-
-
-class TestTareasPagina:
-    """Tests de la página principal de tareas."""
-
-    def test_pagina_tareas_responde_200(self, auth_client):
-        """GET /tareas debe responder 200 con HTML."""
-        r = auth_client.get('/tareas')
-        assert r.status_code == 200
-        assert b'tareas' in r.data.lower() or b'tarea' in r.data.lower()
-
-    def test_pagina_tareas_sin_auth_redirige(self, client):
-        """GET /tareas sin auth debe redirigir."""
-        r = client.get('/tareas')
-        assert r.status_code in (302, 401)
-
-
-class TestTareasCRUD:
-    """Tests de Crear, Leer, Actualizar y Eliminar tareas."""
-
-    def test_crear_tarea(self, auth_client):
-        """POST /agregar debe crear una tarea nueva."""
-        r = auth_client.post('/agregar', data={
-            'titulo': 'Tarea de prueba',
-            'fecha': '2026-08-22',
-            'descripcion': 'Descripción de prueba',
-            'prioridad': 'alta'
-        }, follow_redirects=True)
-        
-        # Puede responder 200 (redirige a /tareas) o 302
-        assert r.status_code == 200
-
-    def test_crear_tarea_sin_titulo(self, auth_client):
-        """POST /agregar sin título debe fallar o redirigir con error."""
-        r = auth_client.post('/agregar', data={
-            'fecha': '2026-08-22',
-            'descripcion': 'Sin título'
-        })
-        # Puede devolver 400, 200 con error, o redirigir
-        assert r.status_code in (200, 302, 400)
-
-    def test_listar_tareas_devuelve_json_o_html(self, auth_client):
-        """GET /tareas debe devolver contenido válido."""
-        r = auth_client.get('/tareas')
-        assert r.status_code == 200
-        assert len(r.data) > 0
-
-    def test_eliminar_tarea_inexistente(self, auth_client):
-        """GET /eliminar/<id_inexistente> no debe romper la app."""
-        r = auth_client.get('/eliminar/999999')
-        # Puede redirigir a /tareas o devolver 200/404
-        assert r.status_code in (200, 302, 404)
-
-    def test_editar_tarea_inexistente(self, auth_client):
-        """POST /editar/<id_inexistente> no debe romper la app."""
-        r = auth_client.post('/editar/999999', data={
-        'titulo': 'Editada'
-        })
-        # El backend devuelve 400 cuando la tarea no existe o los datos son inválidos
-        assert r.status_code in (200, 302, 400, 404)
-
-
-class TestTareasFlujoCompleto:
-    """Tests de flujo completo: crear, verificar, editar, eliminar."""
-
-    def test_flujo_completo_tarea(self, auth_client):
-        """Crea una tarea, verifica que existe, la edita y la elimina."""
-        # 1. Crear tarea
-        r = auth_client.post('/agregar', data={
-            'titulo': 'Tarea flujo completo',
-            'fecha': '2026-08-22',
-            'descripcion': 'Test de flujo',
-            'prioridad': 'media'
-        }, follow_redirects=True)
-        assert r.status_code == 200
-
-        # 2. Verificar que la página responde (la tarea debería estar en la lista)
-        r = auth_client.get('/tareas')
-        assert r.status_code == 200
-        # El título debería aparecer en el HTML
-        assert b'Tarea flujo completo' in r.data or b'tarea' in r.data.lower()
 

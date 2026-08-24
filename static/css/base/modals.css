@@ -1,49 +1,22 @@
 /* ============================================
-   MODALES
-   Estilos para modales Bootstrap y fondos
-   de formulario reutilizables.
-   ============================================ */
-
-/* Fondo de formulario (usado en modales y formularios) */
-.bg-form {
-    background-color: #4b376a;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-/* Diálogo del modal */
-.modal-dialog {
-    max-width: 90vw;
-    width: auto;
-    margin: 1.75rem auto;
-}
-
-/* Cuerpo del modal */
-.modal-body {
-    white-space: normal;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    max-height: 70vh;
-    overflow-y: auto;
-}
-
-/* ============================================
 MODALES
-Estilos para modales Bootstrap y fondos
-de formulario reutilizables.
+Estilos para modales Bootstrap con transparencia sutil
 ============================================ */
+
 /* Fondo de formulario (usado en modales y formularios) */
 .bg-form {
     background-color: #4b376a;
     padding: 20px;
     border-radius: 8px;
 }
+
 /* Diálogo del modal */
 .modal-dialog {
     max-width: 90vw;
     width: auto;
     margin: 1.75rem auto;
 }
+
 /* Cuerpo del modal */
 .modal-body {
     white-space: normal;
@@ -54,65 +27,294 @@ de formulario reutilizables.
 }
 
 /* ============================================
-MODALES UNIFICADOS (Estilo "Agregar Nuevo Pago")
+TRANSICIÓN DE APERTURA/CIERRE CON ORIGEN
 ============================================ */
-.modal-custom-dark .modal-dialog {
-    max-width: 800px;
+.modal.fade .modal-dialog {
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.modal-custom-dark .modal-content {
-    background-color: #4b376a !important;
-    color: #fff !important;
+.modal.show .modal-dialog {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ============================================
+FONDO DEL MODAL (BACKDROP) - MÁS TRANSPARENTE
+============================================ */
+.modal-backdrop {
+    background-color: rgba(15, 10, 25, 0.6) !important;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.modal-backdrop.show {
+    opacity: 1 !important;
+}
+
+/* ============================================
+CONTENIDO DEL MODAL - GLASSMORPHISM SUTIL
+============================================ */
+.modal-content {
+    background: rgba(75, 55, 106, 0.95) !important;
+    backdrop-filter: blur(10px) saturate(150%);
+    -webkit-backdrop-filter: blur(10px) saturate(150%);
+    border: 1px solid rgba(136, 201, 153, 0.2) !important;
     border-radius: 1rem !important;
-    box-shadow: 0 8px 32px rgba(136, 201, 153, 0.16) !important;
-    border: none !important;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset !important;
+    color: #fff !important;
 }
 
-.modal-custom-dark .modal-header {
-    border-bottom: 2px solid #88c999 !important;
-    background: linear-gradient(to right, #2a1e3b, #3e2d59) !important;
+/* Header del modal */
+.modal-header {
+    background: linear-gradient(
+        135deg,
+        rgba(42, 30, 59, 0.8) 0%,
+        rgba(62, 45, 89, 0.6) 100%
+    ) !important;
+    border-bottom: 1px solid rgba(136, 201, 153, 0.2) !important;
     border-top-left-radius: 1rem !important;
     border-top-right-radius: 1rem !important;
-    padding: 1rem 1.5rem !important;
 }
 
-.modal-custom-dark .modal-title {
+.modal-title {
     color: #88c999 !important;
     font-weight: 700 !important;
 }
 
-.modal-custom-dark .btn-close {
-    filter: invert(1) !important;
+/* Footer del modal */
+.modal-footer {
+    background: rgba(42, 30, 59, 0.4) !important;
+    border-top: 1px solid rgba(136, 201, 153, 0.2) !important;
 }
 
-.modal-custom-dark .modal-footer {
-    border-top: 2px solid #88c999 !important;
-    padding: 1rem 1.5rem !important;
+/* Botón cerrar */
+.modal-header .btn-close {
+    filter: invert(1) brightness(1.2) !important;
+    opacity: 0.7;
+    transition: all 0.25s ease;
 }
 
-/* Inputs y Labels dentro del modal custom */
-.modal-custom-dark .form-control,
-.modal-custom-dark .form-select {
-    background-color: #3e2d59 !important;
+.modal-header .btn-close:hover {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+/* ============================================
+INPUTS DENTRO DEL MODAL
+============================================ */
+.modal .form-control,
+.modal .form-select {
+    background: rgba(62, 45, 89, 0.6) !important;
     color: #fff !important;
-    border: 1px solid #88c999 !important;
+    border: 1px solid rgba(136, 201, 153, 0.3) !important;
+    transition: all 0.25s ease;
 }
 
-.modal-custom-dark .form-control:focus,
-.modal-custom-dark .form-select:focus {
-    background-color: #3e2d59 !important;
-    color: #fff !important;
+.modal .form-control:focus,
+.modal .form-select:focus {
+    background: rgba(62, 45, 89, 0.8) !important;
     border-color: #88c999 !important;
-    box-shadow: 0 0 0 0.25rem rgba(136, 201, 153, 0.25) !important;
+    box-shadow: 0 0 0 3px rgba(136, 201, 153, 0.15) !important;
 }
 
-.modal-custom-dark .form-label {
+.modal .form-label {
     color: #e5d64f !important;
     font-weight: 500;
 }
 
-/* Ajuste para el contenedor de formulario interno si existe */
-.modal-custom-dark .bg-form {
+/* ============================================
+SELECT2 - TEMA OSCURO (DENTRO DE MODALES)
+Aplica a TODOS los modales del sistema
+============================================ */
+
+/* Contenedor principal del Select2 */
+.modal .select2-container {
+    width: 100% !important;
+}
+
+/* Caja de selección (donde aparecen las opciones elegidas) */
+.modal .select2-container--default .select2-selection--multiple,
+.modal .select2-container--default .select2-selection--single {
+    background-color: #3e2d59 !important;
+    border: 1px solid rgba(136, 201, 153, 0.3) !important;
+    border-radius: 0.375rem !important;
+    min-height: 44px !important;
+    color: #fff !important;
+    padding: 4px !important;
+}
+
+/* Contenedor con focus o abierto */
+.modal .select2-container--default.select2-container--focus .select2-selection--multiple,
+.modal .select2-container--default.select2-container--open .select2-selection--multiple,
+.modal .select2-container--default.select2-container--focus .select2-selection--single,
+.modal .select2-container--default.select2-container--open .select2-selection--single {
+    border-color: #88c999 !important;
+    box-shadow: 0 0 0 3px rgba(136, 201, 153, 0.15) !important;
+    background-color: #3e2d59 !important;
+}
+
+/* Texto seleccionado en single select */
+.modal .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #fff !important;
     background-color: transparent !important;
-    padding: 0 !important;
+}
+
+/* Flecha del single select */
+.modal .select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #88c999 transparent transparent transparent !important;
+}
+
+/* Tags/chips de opciones seleccionadas */
+.modal .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #88c999 !important;
+    color: #222 !important;
+    border: none !important;
+    border-radius: 4px !important;
+    padding: 2px 8px !important;
+    font-weight: 500 !important;
+    margin: 3px !important;
+}
+
+/* Botón "x" para quitar una opción seleccionada */
+.modal .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+    color: #222 !important;
+    border-right: 1px solid rgba(0, 0, 0, 0.2) !important;
+    margin-right: 6px !important;
+    padding-right: 6px !important;
+    font-weight: bold !important;
+}
+
+.modal .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+    color: #dc3545 !important;
+    background: transparent !important;
+}
+
+/* Placeholder cuando no hay nada seleccionado */
+.modal .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    color: #b8b8b8 !important;
+    background-color: transparent !important;
+}
+
+/* Campo de búsqueda dentro del Select2 */
+.modal .select2-search--inline .select2-search__field {
+    background-color: transparent !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+.modal .select2-search--inline .select2-search__field::placeholder {
+    color: #b8b8b8 !important;
+}
+
+/* Dropdown (la lista desplegable) - FUERA del modal */
+.select2-dropdown {
+    background-color: #3e2d59 !important;
+    border: 1px solid rgba(136, 201, 153, 0.3) !important;
+    border-radius: 0.375rem !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5) !important;
+    z-index: 10000 !important;
+}
+
+/* Campo de búsqueda del dropdown */
+.select2-search--dropdown .select2-search__field {
+    background-color: #2a1e3b !important;
+    color: #fff !important;
+    border: 1px solid rgba(136, 201, 153, 0.3) !important;
+    border-radius: 4px !important;
+    padding: 8px !important;
+}
+
+.select2-search--dropdown .select2-search__field::placeholder {
+    color: #b8b8b8 !important;
+}
+
+/* Opciones del dropdown */
+.select2-results__option {
+    background-color: #3e2d59 !important;
+    color: #fff !important;
+    padding: 10px 12px !important;
+    transition: all 0.2s ease !important;
+}
+
+/* Opción al pasar el mouse */
+.select2-results__option--highlighted[aria-selected] {
+    background-color: #88c999 !important;
+    color: #222 !important;
+}
+
+/* Opción seleccionada */
+.select2-results__option[aria-selected="true"] {
+    background-color: rgba(136, 201, 153, 0.2) !important;
+    color: #88c999 !important;
+    font-weight: 500 !important;
+}
+
+/* Mensaje "No se encontraron resultados" */
+.select2-results__message {
+    background-color: #3e2d59 !important;
+    color: #b8b8b8 !important;
+    font-style: italic !important;
+}
+
+/* Scrollbar personalizado para el dropdown */
+.select2-results__options::-webkit-scrollbar {
+    width: 8px;
+}
+
+.select2-results__options::-webkit-scrollbar-track {
+    background: #2a1e3b;
+}
+
+.select2-results__options::-webkit-scrollbar-thumb {
+    background: #88c999;
+    border-radius: 4px;
+}
+
+.select2-results__options::-webkit-scrollbar-thumb:hover {
+    background: #77b88b;
+}
+
+/* ============================================
+ANIMACIÓN DE APERTURA DESDE PUNTO ESPECÍFICO
+============================================ */
+.modal.modal-origin-click .modal-dialog {
+    transform-origin: var(--modal-origin-x, 50%) var(--modal-origin-y, 50%);
+}
+
+/* ============================================
+RESPONSIVE
+============================================ */
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 0.5rem !important;
+        max-width: calc(100vw - 1rem) !important;
+    }
+
+    .modal-content {
+        border-radius: 0.5rem !important;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 1rem !important;
+    }
+
+    /* Select2 en mobile - opciones más grandes */
+    .modal .select2-container--default .select2-selection--multiple {
+        min-height: 48px !important;
+    }
+
+    .select2-results__option {
+        padding: 12px !important;
+        font-size: 1rem !important;
+    }
+
+    .select2-dropdown {
+        max-width: calc(100vw - 20px) !important;
+    }
 }

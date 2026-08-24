@@ -24,7 +24,6 @@ def extraer_rutas(data, rutas):
                 ruta = item.get("ruta_jerarquia")
                 if ruta:
                     rutas.append(ruta)
-                # Intentar diferentes nombres de sublistas por compatibilidad
                 sub = item.get("sububicaciones") or item.get("subcrear_almacenes") or item.get("subalmacenes") or []
                 if sub:
                     extraer_rutas(sub, rutas)
@@ -46,18 +45,19 @@ def cargar_ubicaciones():
     except Exception as e:
         print(f"[ERROR] Al leer {UBI_TEC}: {e}")
         return []
+    
     rutas = []
     extraer_rutas(data, rutas)
-    # eliminar duplicados manteniendo orden
+    
     seen = set()
     rutas_unicas = []
     for r in rutas:
         if r not in seen:
             rutas_unicas.append(r)
             seen.add(r)
+            
     print(f"[DEBUG] cargadas {len(rutas_unicas)} ubicaciones técnicas")
     return rutas_unicas
-
 
 def cargar_estados():
     if not os.path.exists(DATA_ESTADOS):
@@ -87,12 +87,10 @@ def obtener_nombres_almacenes(almacenes):
         nombre = almacen.get('ruta_jerarquia') or almacen.get('nombre')
         if nombre:
             nombres.append(nombre)
-        # soporte por si hay sublistas con nombre distinto
         sub = almacen.get('subcrear_almacenes') or almacen.get('sububicaciones') or almacen.get('subalmacenes') or []
         if sub:
             nombres.extend(obtener_nombres_almacenes(sub))
     return nombres
-
 
 def cargar_tabs():
     if not os.path.exists(PATHTABS):
@@ -104,11 +102,11 @@ def cargar_tabs():
     except Exception as e:
         print(f"[ERROR] leyendo tabs: {e}")
         return []
-    # Sanitizar los IDs de los tabs para que sean válidos en HTML
+    
     for tab in tabs:
         original_id = str(tab.get('id', ''))
-        sanitized_id = re.sub(r'\s+', '-', original_id.strip())  # Reemplaza espacios por guiones
-        sanitized_id = re.sub(r'[^\w\-]', '', sanitized_id)      # Elimina caracteres no válidos
+        sanitized_id = re.sub(r'\s+', '-', original_id.strip())
+        sanitized_id = re.sub(r'[^\w\-]', '', sanitized_id)
         tab['sanitized_id'] = sanitized_id
     return tabs
 
@@ -139,10 +137,10 @@ def indexEstadoRep():
     estados = cargar_estados()
     ubicaciones = cargar_ubicaciones()
     nombres_almacenes = obtener_nombres_almacenes(almacenes)
-
+    
     buscar = request.args.get('buscar', '').strip().lower()
     active_tab = request.args.get('active_tab') or (tabs[0]['sanitized_id'] if tabs else '')
-
+    
     for tab in tabs:
         ruta = tab.get('ruta_jerarquia', '').strip().lower()
         repuestos_filtrados = [
@@ -174,8 +172,6 @@ def api_repuestos():
     ]
     return jsonify({'repuestos': repuestos_filtrados})
 
-
-# Esta función exporta a un Archivo PDF la tabla de repuestos
 @estadoRep_bp.route("/exportar_pdf", methods=["POST"])
 @login_required
 @roles_required('viewer')
@@ -183,11 +179,12 @@ def exportar_pdf():
     ruta_jerarquia = request.form.get("ruta_jerarquia", "").strip().lower()
     buscar = request.form.get("buscar", "").strip().lower()
     repuestos = leer_repuestos()
-
+    
     repuestos_filtrados = [
         r for r in repuestos
         if any(ruta_jer.strip().lower() == ruta_jerarquia for ruta_jer in r.get('ruta_jerarquia', []))
     ]
+    
     if buscar:
         repuestos_filtrados = [
             r for r in repuestos_filtrados
@@ -198,17 +195,14 @@ def exportar_pdf():
             or buscar in str(r.get('cantidad', '')).lower()
             or buscar in ','.join(r.get('ruta_jerarquia', [])).lower()
         ]
-
+        
     return exportar_pdf_reportlab(repuestos_filtrados)
-
-
 
 @estadoRep_bp.route('/agregar_repuesto', methods=['POST'])
 @login_required
 @roles_required('viewer')
 def agregar_repuesto():
     repuestos = leer_repuestos()
-
     nombre = request.form.get('nombre', '').strip()
     codigo = request.form.get('codigo', '').strip()
     cantidad = request.form.get('cantidad', '').strip()
@@ -219,25 +213,31 @@ def agregar_repuesto():
     link = request.form.get('link', '').strip()
     estado = request.form.get('estado', '').strip()
     tab_activo = request.form.get('tab_activo', '')
+    
+    # OBTENER LA RUTA DE DESTINO (Fallback a estadosRep por defecto)
+    return_to = request.form.get('return_to', 'indexEstadoRep.indexEstadoRep')
 
-    # Validar campos obligatorios
     if not nombre or not codigo or not cantidad or not fecha_creacion or not estado:
         flash("Por favor completa los campos obligatorios.", "danger")
+        if return_to == 'indexlista_repuestos.indexlista_repuestos':
+            return redirect(url_for('indexlista_repuestos.indexlista_repuestos'))
         return redirect(url_for('indexEstadoRep.indexEstadoRep', active_tab=tab_activo))
 
     try:
         cantidad = int(cantidad)
     except ValueError:
         flash("Cantidad debe ser un número entero.", "danger")
+        if return_to == 'indexlista_repuestos.indexlista_repuestos':
+            return redirect(url_for('indexlista_repuestos.indexlista_repuestos'))
         return redirect(url_for('indexEstadoRep.indexEstadoRep', active_tab=tab_activo))
 
-    # Verificar si el código ya existe
     for repuesto in repuestos:
         if repuesto.get('codigo') == codigo:
             flash("Ya existe un repuesto con el mismo código.", "warning")
+            if return_to == 'indexlista_repuestos.indexlista_repuestos':
+                return redirect(url_for('indexlista_repuestos.indexlista_repuestos'))
             return redirect(url_for('indexEstadoRep.indexEstadoRep', active_tab=tab_activo))
 
-    # Procesar imagen
     imagen_file = request.files.get('imagen')
     filename = None
     if imagen_file and imagen_file.filename != '':
@@ -248,9 +248,10 @@ def agregar_repuesto():
             imagen_file.save(save_path)
         else:
             flash("Formato de imagen no permitido.", "danger")
+            if return_to == 'indexlista_repuestos.indexlista_repuestos':
+                return redirect(url_for('indexlista_repuestos.indexlista_repuestos'))
             return redirect(url_for('indexEstadoRep.indexEstadoRep', active_tab=tab_activo))
 
-    # Construir nuevo repuesto
     nuevo_repuesto = {
         "nombre": nombre,
         "codigo": codigo,
@@ -263,11 +264,15 @@ def agregar_repuesto():
         "link": link,
         "estado": estado
     }
-
+    
     repuestos.append(nuevo_repuesto)
     guardar_repuestos(repuestos)
-
     flash("Repuesto agregado correctamente.", "success")
+    
+    # REDIRECCIÓN DINÁMICA
+    if return_to == 'indexlista_repuestos.indexlista_repuestos':
+        return redirect(url_for('indexlista_repuestos.indexlista_repuestos'))
+    
     return redirect(url_for('indexEstadoRep.indexEstadoRep', active_tab=tab_activo))
 
 @estadoRep_bp.route('/eliminar_repuesto', methods=['POST'])
@@ -276,13 +281,22 @@ def agregar_repuesto():
 def eliminar_repuesto():
     codigo = request.form.get('codigo', '').strip()
     tab_activo = request.form.get('tab_activo', '')
+    
+    # OBTENER LA RUTA DE DESTINO
+    return_to = request.form.get('return_to', 'indexEstadoRep.indexEstadoRep')
+    
     repuestos = leer_repuestos()
     repuestos_nuevos = [r for r in repuestos if str(r.get('codigo', '')) != codigo]
+    
     if len(repuestos_nuevos) < len(repuestos):
         guardar_repuestos(repuestos_nuevos)
         flash("Repuesto eliminado correctamente.", "success")
     else:
         flash("No se encontró el repuesto a eliminar.", "danger")
+        
+    if return_to == 'indexlista_repuestos.indexlista_repuestos':
+        return redirect(url_for('indexlista_repuestos.indexlista_repuestos'))
+        
     return redirect(url_for('indexEstadoRep.indexEstadoRep', active_tab=tab_activo))
 
 @estadoRep_bp.route('/editar_repuesto', methods=['POST'])
@@ -290,15 +304,16 @@ def eliminar_repuesto():
 @roles_required('viewer')
 def editar_repuesto():
     repuestos = leer_repuestos()
-    
-    codigo_original = request.form.get('codigo_original', '').strip()  # Código viejo
-    codigo_nuevo = request.form.get('codigo', '').strip()  # Código nuevo (editable)
-
+    codigo_original = request.form.get('codigo_original', '').strip()
+    codigo_nuevo = request.form.get('codigo', '').strip()
     tab_activo = request.form.get('tab_activo', '')
+    
+    # OBTENER LA RUTA DE DESTINO
+    return_to = request.form.get('return_to', 'indexEstadoRep.indexEstadoRep')
 
     for r in repuestos:
         if str(r.get('codigo', '')) == codigo_original:
-            r['codigo'] = codigo_nuevo  # Actualiza el código
+            r['codigo'] = codigo_nuevo
             r['nombre'] = request.form.get('nombre', '').strip()
             try:
                 r['cantidad'] = int(request.form.get('cantidad', '').strip())
@@ -310,6 +325,7 @@ def editar_repuesto():
             r['fecha_fin'] = request.form.get('fecha_fin', '').strip()
             r['link'] = request.form.get('link', '').strip()
             r['estado'] = request.form.get('estado', '').strip()
+            
             imagen_file = request.files.get('imagen')
             if imagen_file and imagen_file.filename != '':
                 if allowed_file(imagen_file.filename):
@@ -320,13 +336,19 @@ def editar_repuesto():
                     r['imagen'] = filename
                 else:
                     flash("Formato de imagen no permitido.", "danger")
+                    if return_to == 'indexlista_repuestos.indexlista_repuestos':
+                        return redirect(url_for('indexlista_repuestos.indexlista_repuestos'))
                     return redirect(url_for('indexEstadoRep.indexEstadoRep', active_tab=tab_activo))
             break
-
+            
     guardar_repuestos(repuestos)
     flash("Repuesto editado correctamente.", "success")
+    
+    # REDIRECCIÓN DINÁMICA
+    if return_to == 'indexlista_repuestos.indexlista_repuestos':
+        return redirect(url_for('indexlista_repuestos.indexlista_repuestos'))
+        
     return redirect(url_for('indexEstadoRep.indexEstadoRep', active_tab=tab_activo))
-
 
 @estadoRep_bp.route('/filtrar_por_estado', methods=['GET'])
 @login_required
@@ -334,29 +356,27 @@ def editar_repuesto():
 def estado_filter():
     estado = request.args.get('estado')
     ruta_jerarquia = request.args.get('ruta_jerarquia')
-
-    # Usamos cargar_tabs para garantizar sanitized_id
+    
     pestañas = cargar_tabs()
     pestaña_activa = pestañas[0] if pestañas else {}
-
+    
     try:
         repuestos = leer_repuestos()
     except Exception:
         repuestos = []
-
+        
     estados_disponibles = sorted(set(r.get('estado', '') for r in repuestos if r.get('estado')))
-
+    
     if estado:
         repuestos_filtrados = [r for r in repuestos if r.get('estado') == estado]
     else:
         repuestos_filtrados = repuestos
-
-    # ✅ Pasar siempre ubicaciones y otros datos que usa el modal
+        
     ubicaciones = cargar_ubicaciones()
     almacenes = cargar_almacenes()
     nombres_almacenes = obtener_nombres_almacenes(almacenes)
     estados = cargar_estados()
-
+    
     return render_template(
         'Aplic/estadosderepuestos/FrontEnd/estados_de_repuestos.html',
         repuestos=repuestos_filtrados,
