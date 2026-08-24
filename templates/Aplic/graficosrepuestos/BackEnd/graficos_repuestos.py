@@ -4,20 +4,18 @@ from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template
 import json, os
 from collections import Counter
-from templates.Aplic.estadosderepuestos.BackEnd.estados_de_repuestos import  cargar_estados
 
+# ✅ IMPORTACIÓN DIRECTA DESDE HELPERS (más limpio)
+from templates.Aplic.estadosderepuestos.BackEnd.helpers import cargar_estados
 
 graficos_repuestos_bp = Blueprint('indexgraficos_repuestos', __name__)
-
 PATHREPUESTOS = 'DataBase/dataRep/REPUESTOS.json'
-
 
 def obtener_jerarquias():
     if not os.path.exists(PATHREPUESTOS):
         return []
     with open(PATHREPUESTOS, 'r', encoding='utf-8') as f:
         data = json.load(f)
-
     jerarquias = set()
     for item in data:
         rutas = item.get("ruta_jerarquia", [])
@@ -28,10 +26,8 @@ def obtener_jerarquias():
 def contar_repuestos_por_estado(jerarquia=None):
     if not os.path.exists(PATHREPUESTOS):
         return {}
-
     with open(PATHREPUESTOS, 'r', encoding='utf-8') as f:
         data = json.load(f)
-
     contador = Counter()
     estados = cargar_estados()
     for item in data:
@@ -54,8 +50,11 @@ def indexgraficos_repuestos():
         "categorias": list(datos_estado.keys()),
         "valores": list(datos_estado.values())
     }
-    return render_template('Aplic/graficosrepuestos/FrontEnd/graficos_repuestos.html',
-                           nemu=nemu, roles=current_user.roles, datos=datos, jerarquias=jerarquias)
+    return render_template(
+        'Aplic/graficosrepuestos/FrontEnd/graficos_repuestos.html',
+        nemu=nemu, roles=current_user.roles, 
+        datos=datos, jerarquias=jerarquias
+    )
 
 @graficos_repuestos_bp.route('/graficos_repuestos/datos')
 @login_required
@@ -67,4 +66,3 @@ def datos_filtrados():
         "categorias": list(datos_estado.keys()),
         "valores": list(datos_estado.values())
     })
-

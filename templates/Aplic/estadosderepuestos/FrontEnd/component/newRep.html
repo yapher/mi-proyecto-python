@@ -7,7 +7,6 @@
 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
 </div>
 <div class="modal-body">
-<!-- Campo oculto para saber a dónde redireccionar -->
 <input type="hidden" id="return_to" name="return_to" value="{{ return_to | default('indexEstadoRep.indexEstadoRep') }}">
 <input type="hidden" id="tab_activo" name="tab_activo">
 
@@ -82,4 +81,8 @@
 </div>
 </div>
 <input type="hidden" id="editar-repuesto-url" value="{{ url_for('indexEstadoRep.editar_repuesto') }}">
-<script src="/static/js/apps/newRep.js"></script>
+
+<!-- ✅ CARGA MODULAR DE JAVASCRIPT (Reemplaza la línea anterior de newRep.js) -->
+<script src="/static/js/apps/repuestoUtils.js"></script>
+<script src="/static/js/apps/repuestoForm.js"></script>
+<script src="/static/js/apps/repuestoEvents.js"></script>

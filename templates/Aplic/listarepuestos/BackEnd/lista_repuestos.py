@@ -5,21 +5,24 @@ from auth.login import roles_required
 import json, os
 from datetime import datetime
 from templates.Aplic.estadosderepuestos.BackEnd.export_pdf import exportar_pdf_reportlab
-from templates.Aplic.estadosderepuestos.BackEnd.estados_de_repuestos import cargar_tabs, cargar_almacenes, obtener_nombres_almacenes, cargar_estados, cargar_ubicaciones
 
+# ✅ IMPORTACIÓN DIRECTA DESDE HELPERS (más limpio y modular)
+from templates.Aplic.estadosderepuestos.BackEnd.helpers import (
+    cargar_tabs, cargar_almacenes, obtener_nombres_almacenes, 
+    cargar_estados, cargar_ubicaciones
+)
 
 lista_repuestos_bp = Blueprint('indexlista_repuestos', __name__)
 PATHREPUESTOS = 'DataBase/dataRep/REPUESTOS.json'
-
 
 def filtrar_repuestos(repuestos, filtros):
     resultado = []
     hoy = datetime.today().date()
     mostrar_vencidos = filtros.get('vencidos') == '1'
-
+    
     for rep in repuestos:
         cumple = True
-
+        
         # Check vencido según fecha_fin
         fecha_fin_str = rep.get('fecha_fin')
         esta_vencido = False
@@ -30,10 +33,10 @@ def filtrar_repuestos(repuestos, filtros):
                     esta_vencido = True
             except ValueError:
                 pass
-
+        
         if mostrar_vencidos and not esta_vencido:
-            continue  # Saltamos los no vencidos
-
+            continue
+        
         # Filtros
         if filtros.get('nombre') and filtros['nombre'].lower() not in rep.get('nombre', '').lower():
             cumple = False
@@ -41,6 +44,7 @@ def filtrar_repuestos(repuestos, filtros):
             cumple = False
         if filtros.get('estado') and filtros['estado'] != rep.get('estado', ''):
             cumple = False
+        
         if filtros.get('fecha_alta'):
             try:
                 fecha_alta = datetime.strptime(filtros['fecha_alta'], '%Y-%m-%d')
@@ -49,6 +53,7 @@ def filtrar_repuestos(repuestos, filtros):
                     cumple = False
             except:
                 pass
+        
         if filtros.get('fecha_baja'):
             try:
                 fecha_baja = datetime.strptime(filtros['fecha_baja'], '%Y-%m-%d')
@@ -58,9 +63,10 @@ def filtrar_repuestos(repuestos, filtros):
             except:
                 if rep.get('fecha_fin'):
                     cumple = False
-
+        
         if cumple:
             resultado.append(rep)
+    
     return resultado
 
 @lista_repuestos_bp.route('/lista_repuestos')
@@ -73,6 +79,7 @@ def indexlista_repuestos():
     almacenes = cargar_almacenes()
     ubicaciones = cargar_ubicaciones()
     nombres_almacenes = obtener_nombres_almacenes(almacenes)
+    
     filtros = {
         'nombre': request.args.get('nombre', '').strip(),
         'codigo': request.args.get('codigo', '').strip(),
@@ -81,13 +88,13 @@ def indexlista_repuestos():
         'fecha_baja': request.args.get('fecha_baja', '').strip(),
         'vencidos': request.args.get('vencidos', '').strip()
     }
-
+    
     if not os.path.exists(PATHREPUESTOS):
         repuestos = []
     else:
         with open(PATHREPUESTOS, 'r', encoding='utf-8') as f:
             repuestos = json.load(f)
-
+    
     hoy = datetime.today().date()
     cantidad_vencidos = 0
     for rep in repuestos:
@@ -98,13 +105,13 @@ def indexlista_repuestos():
                     cantidad_vencidos += 1
         except:
             pass
-
+    
     repuestos_filtrados = filtrar_repuestos(repuestos, filtros)
-
-    # ✅ Si se solicita exportar a PDF
+    
+    # Si se solicita exportar a PDF
     if request.args.get('exportar_pdf') == '1':
         return exportar_pdf_reportlab(repuestos_filtrados)
-
+    
     return render_template(
         'Aplic/listarepuestos/FrontEnd/lista_repuestos.html',
         nemu=nemu,
@@ -112,8 +119,8 @@ def indexlista_repuestos():
         repuestos=repuestos_filtrados,
         filtros=filtros,
         cantidad_vencidos=cantidad_vencidos,
-        tabs = tabs,
-        nombres_almacenes =nombres_almacenes,
+        tabs=tabs,
+        nombres_almacenes=nombres_almacenes,
         estados=estados,
-        ubicaciones = ubicaciones
+        ubicaciones=ubicaciones
     )
