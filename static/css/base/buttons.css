@@ -1,7 +1,9 @@
 /* ============================================
 BOTONES GLOBALES
 Todos los estilos de botones del sistema.
+Incluye iconos automáticos con emojis de colores.
 ============================================ */
+
 /* Botón base */
 .btn {
     border-radius: 30px;
@@ -9,47 +11,178 @@ Todos los estilos de botones del sistema.
     transition: all 0.3s ease;
     font-weight: 500;
     letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
 }
+
 .btn:active {
     animation: pulse 0.2s ease-in-out;
 }
-/* Botón primario */
+
+/* ============================================
+ICONOS AUTOMÁTICOS (Emojis de colores)
+Se agregan con ::before usando emojis reales
+============================================ */
+
+/* Botón EDITAR → ✏️ (lápiz) */
+.btn-editar::before {
+    content: "✏️";
+    font-size: 1em;
+    line-height: 1;
+    margin-right: 0.3rem;
+}
+
+/* Botón ELIMINAR → 🗑️ (basura) */
+.btn-eliminar::before {
+    content: "🗑️";
+    font-size: 1em;
+    line-height: 1;
+    margin-right: 0.3rem;
+}
+
+/* Botón AGREGAR → ➕ (más) */
+.btn-agregar::before {
+    content: "➕";
+    font-size: 1em;
+    line-height: 1;
+    margin-right: 0.3rem;
+}
+
+/* Botón CANCELAR → ❌ (cruz roja) */
+.btn-cancelar::before {
+    content: "❌";
+    font-size: 1em;
+    line-height: 1;
+    margin-right: 0.3rem;
+}
+
+/* Botón GUARDAR → 💾 (disquete) */
+.btn-guardar::before {
+    content: "💾";
+    font-size: 1em;
+    line-height: 1;
+    margin-right: 0.3rem;
+}
+
+/* Botón FILTRAR → 🔍 (lupa) */
+.btn-filtrar::before {
+    content: "🔍";
+    font-size: 1em;
+    line-height: 1;
+    margin-right: 0.3rem;
+}
+
+/* Botón EXPORTAR → 📤 (exportar) */
+.btn-exportar::before,
+.btn-exportar-pdf::before {
+    content: "📤";
+    font-size: 1em;
+    line-height: 1;
+    margin-right: 0.3rem;
+}
+
+/* Botón REFRESCAR → 🔄 (refrescar) */
+.btn-refrescar::before {
+    content: "🔄";
+    font-size: 1em;
+    line-height: 1;
+    margin-right: 0.3rem;
+}
+
+/* Botón VOLVER → ← (flecha) */
+.btn-volver::before {
+    content: "←";
+    font-size: 1em;
+    line-height: 1;
+    margin-right: 0.3rem;
+    color: #fff;
+}
+
+/* Botón CLONAR → 📋 (clipboard) */
+.btn-clonar::before {
+    content: "📋";
+    font-size: 1em;
+    line-height: 1;
+    margin-right: 0.3rem;
+}
+
+/* ============================================
+EXCEPCIONES: evitar duplicación de iconos
+============================================ */
+
+/* Si el botón ya tiene un emoji/texto al inicio, no duplicar */
+.btn-editar:has(> .emoji)::before,
+.btn-eliminar:has(> .emoji)::before,
+.btn-agregar:has(> .emoji)::before,
+.btn-cancelar:has(> .emoji)::before {
+    content: none !important;
+}
+
+/* Botones que NO deben tener icono (clase utilitaria) */
+.btn-sin-icono::before,
+.btn-icon-none::before {
+    content: none !important;
+}
+
+/* ============================================
+Botón primario
+============================================ */
 .btn-primary {
     background-color: #88c999;
     color: #222;
     border: none;
 }
+
 .btn-primary:hover {
     background-color: #77b88b;
     color: #111;
     transform: scale(1.07);
     box-shadow: 0 0 12px rgba(136, 201, 153, 0.4);
 }
-/* Botón outline claro */
+
+/* ============================================
+Botón outline claro PDF
+============================================ */
 .btn-outline-light {
     border: 2px solid #88c999;
     color: #88c999;
     background-color: transparent;
 }
+
+.btn-outline-light::before {
+    content: "📄";
+    font-size: 1em;
+    line-height: 1;
+    margin-right: 0.3rem;
+}
+
 .btn-outline-light:hover {
     background-color: #88c999;
     color: #222;
     transform: scale(1.07);
     box-shadow: 0 0 12px rgba(136, 201, 153, 0.3);
 }
-/* Botón outline primario */
+
+/* ============================================
+Botón outline primario
+============================================ */
 .btn-outline-primary {
     border: 2px solid #88c999;
     color: #88c999;
     background-color: transparent;
 }
+
 .btn-outline-primary:hover {
     background-color: #88c999;
     color: #222;
     transform: scale(1.07);
     box-shadow: 0 0 12px rgba(136, 201, 153, 0.3);
 }
-/* Botón cancelar */
+
+/* ============================================
+Botón cancelar
+============================================ */
 .btn-cancelar {
     background-color: transparent;
     border: 2px solid #dfece2;
@@ -60,13 +193,38 @@ Todos los estilos de botones del sistema.
     transition: all 0.3s ease;
     margin: 2rem;
 }
+
 .btn-cancelar:hover {
     background-color: #c4cd95;
     color: #222;
     transform: scale(1.07);
     box-shadow: 0 0 12px rgba(136, 201, 153, 0.4);
 }
-/* Botón editar (GLOBAL: siempre visible por defecto) */
+
+/* ============================================
+Botón exportar
+============================================ */
+.btn-exportar {
+    background-color: transparent;
+    border: 2px solid #dfece2;
+    color: #cfddd3;
+    border-radius: 30px;
+    padding: 0.4rem 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    margin: 2rem;
+}
+
+.btn-exportar:hover {
+    background-color: #c4cd95;
+    color: #222;
+    transform: scale(1.07);
+    box-shadow: 0 0 12px rgba(136, 201, 153, 0.4);
+}
+
+/* ============================================
+Botón editar (GLOBAL: siempre visible por defecto)
+============================================ */
 .btn-editar {
     display: inline-block !important;
     background-color: transparent;
@@ -77,13 +235,17 @@ Todos los estilos de botones del sistema.
     font-weight: 500;
     transition: all 0.3s ease;
 }
+
 .btn-editar:hover {
     background-color: #88c999;
     color: #222;
     transform: scale(1.07);
     box-shadow: 0 0 12px rgba(136, 201, 153, 0.4);
 }
-/* Botón eliminar */
+
+/* ============================================
+Botón eliminar
+============================================ */
 .btn-eliminar {
     background-color: transparent;
     border: 2px solid #dc3545;
@@ -93,13 +255,17 @@ Todos los estilos de botones del sistema.
     font-weight: 500;
     transition: all 0.3s ease;
 }
+
 .btn-eliminar:hover {
     background-color: #dc3545;
     color: #fff;
     transform: scale(1.07);
     box-shadow: 0 0 12px rgba(220, 53, 69, 0.3);
 }
-/* Botón agregar */
+
+/* ============================================
+Botón agregar
+============================================ */
 .btn-agregar {
     background-color: transparent;
     border: 2px solid #de9440;
@@ -109,9 +275,52 @@ Todos los estilos de botones del sistema.
     font-weight: 500;
     transition: all 0.3s ease;
 }
+
 .btn-agregar:hover {
     background-color: #e2b03d;
     color: #fff;
     transform: scale(1.07);
     box-shadow: 0 0 12px rgba(112, 88, 9, 0.3);
+}
+
+/* ============================================
+Botón Guardar
+============================================ */
+.btn-guardar {
+    background-color: transparent;
+    border: 2px solid #280398;
+    color: #982017;
+    border-radius: 30px;
+    padding: 0.4rem 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-guardar:hover {
+    background-color: #6ba0e9;
+    color: #fff;
+    transform: scale(1.07);
+    box-shadow: 0 0 12px rgba(112, 88, 9, 0.3);
+}
+
+/* ============================================
+Botones pequeños (btn-sm) - ajustar tamaño de icono
+============================================ */
+.btn-sm.btn-editar::before,
+.btn-sm.btn-eliminar::before,
+.btn-sm.btn-agregar::before,
+.btn-sm.btn-cancelar::before {
+    font-size: 0.9em;
+}
+
+/* ============================================
+Responsive: en mobile, iconos más pequeños
+============================================ */
+@media (max-width: 768px) {
+    .btn-editar::before,
+    .btn-eliminar::before,
+    .btn-agregar::before,
+    .btn-cancelar::before {
+        font-size: 0.95em;
+    }
 }

@@ -236,12 +236,12 @@ class ArbolCRUD {
                 <td class="nivel-${nivel}">${nodo.nombre}</td>
                 <td>${nodo.ruta || ""}</td>
                 <td>
-                    <button class="btn btn-sm btn-outline-primary"
+                    <button class="btn btn-sm btn-editar"
                         onclick="window.__arbolCRUD_editar__.call(null,
                             '${rutaAttr}','${nombreAttr}','${emojiAttr}','${rutaValorAttr}')">
                         Editar
                     </button>
-                    <button class="btn btn-sm btn-outline-danger"
+                    <button class="btn btn-sm btn-eliminar"
                         onclick="window.__arbolCRUD_eliminar__.call(null, '${rutaAttr}')">
                         Eliminar
                     </button>
