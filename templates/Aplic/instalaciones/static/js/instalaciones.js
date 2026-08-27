@@ -1,67 +1,81 @@
 /**
  * JavaScript para el componente Instalaciones
- * Maneja la funcionalidad de visualización de árbol jerárquico de ubicaciones técnicas
+ * Usa Logger e ImageUploader reutilizables
  */
-
-// Variables globales
 let ubicacionTecnicaData = null;
-
+let imageUploader = null;
 const STATIC_INSTALACIONES = '/instalaciones/static/';
+const DEFAULT_IMAGE = STATIC_INSTALACIONES + 'img/factory.png';
 
-// Inicialización cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", async () => {
+    Logger.moduleInit('Instalaciones');
     const container = document.getElementById("tree-container");
-    const svg = document.getElementById('svg-lines');
+    if (!container) { Logger.error('Contenedor tree-container no encontrado'); return; }
 
-    // Cargar datos iniciales
     await cargarDatos();
-    
-    // Crear el árbol
     const root = document.createElement('ul');
     root.style.position = 'relative';
     root.classList.add('ul-flex');
-    
     ubicacionTecnicaData.forEach(nodo => root.appendChild(crearNodo(nodo)));
     container.appendChild(root);
 
-    // Dibujar líneas y configurar event listeners
     dibujarLineas();
     window.addEventListener('resize', dibujarLineas);
     window.addEventListener('scroll', dibujarLineas);
 
-    // Configurar formularios
+    imageUploader = new ImageUploader({
+        previewId: 'modalImagen', placeholderId: 'imagenPlaceholder',
+        inputId: 'inputImagen', removeBtnId: 'btnQuitarImagen',
+        infoId: 'imagenInfo', wrapperId: 'imagenPreviewWrapper',
+        loggerPrefix: '[Instalaciones:Image]'
+    });
+
     configurarFormularios();
+    Logger.success('Módulo Instalaciones listo', { nodos: ubicacionTecnicaData.length });
 });
 
-/**
- * Carga los datos de ubicaciones técnicas desde la API
- */
 async function cargarDatos() {
-    const res = await fetch("/api/ubicacion_tecnica_json", {credentials:'same-origin'});
-    ubicacionTecnicaData = await res.json();
+    Logger.apiCall('GET', '/api/ubicacion_tecnica_json');
+    try {
+        const res = await fetch("/api/ubicacion_tecnica_json", { credentials: 'same-origin' });
+        Logger.apiResponse('GET', '/api/ubicacion_tecnica_json', res.status);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        ubicacionTecnicaData = await res.json();
+    } catch (err) {
+        Logger.error('Error al cargar datos', err);
+        mostrarNotif('Error al cargar las ubicaciones', 'error');
+        ubicacionTecnicaData = [];
+    }
 }
 
-/**
- * Busca una ubicación por su ruta jerárquica
- * @param {string} ruta_jerarquia - Ruta jerárquica a buscar
- * @param {Object} nodo - Nodo donde buscar
- * @returns {Object|null} Nodo encontrado o null
- */
-function buscarUbicacionPorJerarquia(ruta_jerarquia, nodo) {
-    if (nodo.ruta_jerarquia === ruta_jerarquia) return nodo;
+function mostrarNotif(msg, tipo = 'success') {
+    if (typeof Noty !== 'undefined') {
+        new Noty({ type: tipo, layout: 'topRight', timeout: 3000, theme: 'mint', text: msg }).show();
+    } else { alert(msg); }
+}
+
+function mostrarConfirm(titulo, texto, callback) {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: titulo, text: texto, icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#88c999', cancelButtonColor: '#dc3545',
+            confirmButtonText: 'Sí, confirmar', cancelButtonText: 'Cancelar'
+        }).then(r => { if (r.isConfirmed) callback(); });
+    } else if (confirm(texto)) callback();
+}
+
+function buscarUbicacionPorJerarquia(ruta, nodo) {
+    if (nodo.ruta_jerarquia === ruta) return nodo;
     if (nodo.sububicaciones) {
-        for (const hijo of nodo.sububicaciones) {
-            const res = buscarUbicacionPorJerarquia(ruta_jerarquia, hijo);
-            if (res) return res;
+        for (const h of nodo.sububicaciones) {
+            const r = buscarUbicacionPorJerarquia(ruta, h);
+            if (r) return r;
         }
     }
     return null;
 }
 
-/**
- * Abre el modal con la información de una ubicación
- * @param {string} rutaJerarquia - Ruta jerárquica de la ubicación
- */
 function abrirModalUbicacion(rutaJerarquia) {
     let nodo = null;
     for (const raiz of ubicacionTecnicaData) {
@@ -69,26 +83,25 @@ function abrirModalUbicacion(rutaJerarquia) {
         if (nodo) break;
     }
     if (!nodo) {
-        alert("Ubicación no encontrada");
+        Logger.warn('Ubicación no encontrada', { ruta: rutaJerarquia });
+        mostrarNotif('Ubicación no encontrada', 'warning');
         return;
     }
-    const modalEl = document.getElementById('ubicacionModal');
-    const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+    Logger.info('Abriendo modal', { nombre: nodo.nombre, ruta: nodo.ruta_jerarquia });
 
-    // Llenar el formulario con los datos del nodo
     document.getElementById('nombre').value = nodo.nombre || '';
     document.getElementById('emoji').value = nodo.emoji || '';
     document.getElementById('ruta').value = nodo.ruta || '';
     document.getElementById('ruta_jerarquia').value = nodo.ruta_jerarquia || '';
     document.getElementById('ruta_jerarquia_display').value = nodo.ruta_jerarquia || '';
-    document.getElementById('modalImagen').src =
-        nodo.imagen && nodo.imagen.trim() !== ''
-            ? (nodo.imagen.startsWith('/')
-                ? nodo.imagen
-                : STATIC_INSTALACIONES + nodo.imagen)
-            : STATIC_INSTALACIONES + 'img/factory.png';
 
-    // Mostrar sububicaciones
+    if (nodo.imagen && nodo.imagen.trim() !== '') {
+        const url = nodo.imagen.startsWith('/') ? nodo.imagen : STATIC_INSTALACIONES + 'img/' + nodo.imagen;
+        imageUploader.loadExisting(url);
+    } else {
+        imageUploader.reset();
+    }
+
     const cont = document.getElementById('sububicacionesContainer');
     cont.innerHTML = '';
     if (nodo.sububicaciones && nodo.sububicaciones.length) {
@@ -99,217 +112,176 @@ function abrirModalUbicacion(rutaJerarquia) {
             cont.appendChild(div);
         });
     }
-    modal.show();
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('ubicacionModal')).show();
 }
 
-/**
- * Crea un nodo del árbol
- * @param {Object} nodo - Datos del nodo
- * @returns {HTMLElement} Elemento li creado
- */
 function crearNodo(nodo) {
     const li = document.createElement('li');
     const nodeDiv = document.createElement('div');
-    nodeDiv.className = 'node';
-    nodeDiv.tabIndex = 0;
-
+    nodeDiv.className = 'node'; nodeDiv.tabIndex = 0;
     const img = document.createElement('img');
-
     if (nodo.imagen && nodo.imagen.trim() !== '') {
-        img.src = nodo.imagen.startsWith('/')
-            ? nodo.imagen
-            : STATIC_INSTALACIONES + nodo.imagen;
-    } else {
-        img.src = STATIC_INSTALACIONES + 'img/factory.png';
-    }
-
-img.alt = nodo.ruta || 'Sin ruta';
-
+        img.src = nodo.imagen.startsWith('/') ? nodo.imagen : STATIC_INSTALACIONES + 'img/' + nodo.imagen;
+    } else { img.src = DEFAULT_IMAGE; }
+    img.alt = nodo.ruta || 'Sin ruta';
     const label = document.createElement('div');
     label.className = 'label';
-    label.textContent = nodo.ruta && nodo.ruta.trim()!=='' ? nodo.ruta : 'Sin ruta';
+    label.textContent = nodo.ruta && nodo.ruta.trim() !== '' ? nodo.ruta : 'Sin ruta';
+    nodeDiv.appendChild(img); nodeDiv.appendChild(label); li.appendChild(nodeDiv);
+    nodeDiv.addEventListener('click', e => { e.stopPropagation(); abrirModalUbicacion(nodo.ruta_jerarquia); });
 
-    nodeDiv.appendChild(img);
-    nodeDiv.appendChild(label);
-    li.appendChild(nodeDiv);
-
-    // Event listener para abrir modal
-    nodeDiv.addEventListener('click', e=>{
-        e.stopPropagation();
-        abrirModalUbicacion(nodo.ruta_jerarquia);
-    });
-
-    // Si tiene sububicaciones, crear toggle y contenedor
     if (nodo.sububicaciones && nodo.sububicaciones.length > 0) {
         const toggle = document.createElement('button');
         toggle.className = 'toggle btn btn-outline-primary btn-sm';
-        toggle.type = 'button';
-        toggle.setAttribute('aria-expanded','false');
-        toggle.title = 'Expandir';
-        toggle.textContent = '+';
+        toggle.type = 'button'; toggle.setAttribute('aria-expanded', 'false');
+        toggle.title = 'Expandir'; toggle.textContent = '+';
         nodeDiv.appendChild(toggle);
-
         const ulHijos = document.createElement('ul');
         ulHijos.className = 'children-container ul-flex collapsed';
         nodo.sububicaciones.forEach(sub => ulHijos.appendChild(crearNodo(sub)));
         li.appendChild(ulHijos);
-
-        // Event listener para toggle
-        toggle.addEventListener('click', e=>{
+        toggle.addEventListener('click', e => {
             e.stopPropagation();
-            const colapsado = ulHijos.classList.toggle('collapsed');
-            toggle.textContent = colapsado ? '+' : '−';
-            toggle.setAttribute('aria-expanded', String(!colapsado));
+            const col = ulHijos.classList.toggle('collapsed');
+            toggle.textContent = col ? '+' : '−';
+            toggle.setAttribute('aria-expanded', String(!col));
             setTimeout(dibujarLineas, 50);
         });
-
-        // Event listener para teclado
-        nodeDiv.addEventListener('keydown', e=>{
-            if(e.key==='Enter'||e.key===' '){
-                e.preventDefault();
-                toggle.click();
-            }
-        });
     }
-
     return li;
 }
 
-/**
- * Dibuja las líneas de conexión entre nodos
- */
 function dibujarLineas() {
     const container = document.getElementById("tree-container");
     const svg = document.getElementById('svg-lines');
-    
-    while(svg.firstChild) svg.removeChild(svg.firstChild);
-    const containerRect = container.getBoundingClientRect();
-    svg.style.width = containerRect.width + 'px';
-    svg.style.height = containerRect.height + 'px';
-    svg.style.top = containerRect.top + window.scrollY + 'px';
-    svg.style.left = containerRect.left + window.scrollX + 'px';
-
-    const parentNodes = container.querySelectorAll('li > .node');
-    parentNodes.forEach(nodeDiv => {
+    if (!container || !svg) return;
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    const rect = container.getBoundingClientRect();
+    svg.style.width = rect.width + 'px'; svg.style.height = rect.height + 'px';
+    svg.style.top = rect.top + window.scrollY + 'px';
+    svg.style.left = rect.left + window.scrollX + 'px';
+    container.querySelectorAll('li > .node').forEach(nodeDiv => {
         const li = nodeDiv.parentElement;
         const ulHijos = li.querySelector('ul.children-container:not(.collapsed)');
-        if(!ulHijos) return;
+        if (!ulHijos) return;
         ulHijos.childNodes.forEach(childLi => {
-            if(childLi.nodeType !== 1) return;
-            const startImg = nodeDiv.querySelector('img').getBoundingClientRect();
-            const endNode = childLi.querySelector('.node img');
-            if(!endNode) return;
-            const endImg = endNode.getBoundingClientRect();
-
-            const x1 = startImg.left + startImg.width/2 - containerRect.left;
-            const y1 = startImg.bottom - containerRect.top;
-            const x2 = endImg.left + endImg.width/2 - containerRect.left;
-            const y2 = endImg.top - containerRect.top;
-
-            const group = document.createElementNS('http://www.w3.org/2000/svg','g');
-            group.setAttribute('stroke','#0d6efd');
-            group.setAttribute('fill','none');
-            group.setAttribute('stroke-width','2');
-
-            const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-            const d = `M ${x1} ${y1} L ${x1} ${(y1+y2)/2} L ${x2} ${(y1+y2)/2} L ${x2} ${y2}`;
-            path.setAttribute('d', d);
-            group.appendChild(path);
-            svg.appendChild(group);
+            if (childLi.nodeType !== 1) return;
+            const sImg = nodeDiv.querySelector('img').getBoundingClientRect();
+            const eImg = childLi.querySelector('.node img')?.getBoundingClientRect();
+            if (!eImg) return;
+            const x1 = sImg.left + sImg.width / 2 - rect.left;
+            const y1 = sImg.bottom - rect.top;
+            const x2 = eImg.left + eImg.width / 2 - rect.left;
+            const y2 = eImg.top - rect.top;
+            const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            g.setAttribute('stroke', '#0d6efd'); g.setAttribute('fill', 'none');
+            g.setAttribute('stroke-width', '2');
+            const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            p.setAttribute('d', `M ${x1} ${y1} L ${x1} ${(y1 + y2) / 2} L ${x2} ${(y1 + y2) / 2} L ${x2} ${y2}`);
+            g.appendChild(p); svg.appendChild(g);
         });
     });
 }
 
-/**
- * Maneja las peticiones fetch con manejo de errores
- * @param {string} url - URL de la petición
- * @param {Object} options - Opciones de la petición
- * @returns {Object} Resultado de la petición
- */
-async function manejarFetch(url, options){
+async function manejarFetch(url, options) {
+    const method = options.method || 'GET';
+    Logger.apiCall(method, url);
     try {
-        const res = await fetch(url,{...options, credentials:'same-origin'});
+        const res = await fetch(url, { ...options, credentials: 'same-origin' });
         const text = await res.text();
-        try {
-            const json = JSON.parse(text);
-            return {ok: res.ok, data: json};
-        } catch {
-            return {ok:false, data:{status:'error', msg:'Respuesta no es JSON: '+text}};
-        }
-    } catch(err){
-        return {ok:false, data:{status:'error', msg: err.message}};
+        let json;
+        try { json = JSON.parse(text); }
+        catch { return { ok: false, data: { status: 'error', msg: 'Respuesta inválida' } }; }
+        Logger.apiResponse(method, url, res.status, json);
+        return { ok: res.ok, data: json };
+    } catch (err) {
+        Logger.error(`Error ${method} ${url}`, err);
+        return { ok: false, data: { status: 'error', msg: err.message } };
     }
 }
 
-/**
- * Configura los event listeners de los formularios
- */
 function configurarFormularios() {
-    // Formulario principal de ubicación
-    document.getElementById('formUbicacion').addEventListener('submit', async e=>{
+    document.getElementById('formUbicacion').addEventListener('submit', async e => {
         e.preventDefault();
         const ruta = document.getElementById('ruta_jerarquia').value;
-        const datos = {
-            ruta_jerarquia: ruta,
-            nombre: document.getElementById('nombre').value,
-            emoji: document.getElementById('emoji').value,
-            ruta: document.getElementById('ruta').value,
-            imagen: document.getElementById('imagen').value
-        };
-        const {ok, data} = await manejarFetch('/api/editar_ubicacion',{
-            method:'PUT',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify(datos)
-        });
-        if(ok && data.status==='ok') alert('Datos guardados correctamente'), location.reload();
-        else alert('Error al guardar cambios: '+(data.msg||JSON.stringify(data)));
+        const formData = new FormData();
+        formData.append('ruta_jerarquia', ruta);
+        formData.append('nombre', document.getElementById('nombre').value);
+        formData.append('emoji', document.getElementById('emoji').value);
+        formData.append('ruta', document.getElementById('ruta').value);
+
+        const archivoSel = imageUploader.getSelectedFile();
+        const fueQuitada = imageUploader.wasRemoved();
+        if (archivoSel) formData.append('imagen', archivoSel);
+        else if (fueQuitada) formData.append('eliminar_imagen', 'true');
+
+        const { ok, data } = await manejarFetch('/api/editar_ubicacion', { method: 'PUT', body: formData });
+        if (ok && data.status === 'ok') {
+            mostrarNotif(data.msg || 'Ubicación guardada correctamente', 'success');
+            Logger.success('Ubicación actualizada', { ruta });
+            bootstrap.Modal.getInstance(document.getElementById('ubicacionModal'))?.hide();
+            setTimeout(() => location.reload(), 800);
+        } else {
+            mostrarNotif(data.msg || 'Error al guardar', 'error');
+            Logger.error('Error al guardar', data);
+        }
     });
 
-    // Botón borrar ubicación
-    document.getElementById('btnBorrarUbicacion').addEventListener('click', async ()=>{
+    document.getElementById('btnBorrarUbicacion').addEventListener('click', () => {
         const ruta = document.getElementById('ruta_jerarquia').value;
-        if(!confirm('¿Seguro que quieres borrar esta ubicación?')) return;
-        const {ok, data} = await manejarFetch('/api/borrar_ubicacion',{
-            method:'DELETE',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ruta_jerarquia: ruta})
-        });
-        if(ok && data.status==='ok') alert('Ubicación borrada'), location.reload();
-        else alert('Error al borrar ubicación: '+(data.msg||JSON.stringify(data)));
+        const nombre = document.getElementById('nombre').value;
+        mostrarConfirm('Eliminar ubicación',
+            `¿Está seguro que desea eliminar "${nombre}"? Esta acción no se puede deshacer.`,
+            async () => {
+                const { ok, data } = await manejarFetch('/api/borrar_ubicacion', {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ruta_jerarquia: ruta })
+                });
+                if (ok && data.status === 'ok') {
+                    mostrarNotif(data.msg || 'Ubicación eliminada', 'success');
+                    setTimeout(() => location.reload(), 800);
+                } else {
+                    mostrarNotif(data.msg || 'Error al eliminar', 'error');
+                }
+            });
     });
 
-    // Botón agregar hijo
     document.getElementById('btnAgregarHijo').addEventListener('click', () => {
         const cont = document.getElementById('sububicacionesContainer');
         const formDiv = document.createElement('div');
         formDiv.className = 'mb-3 mt-3 border p-2 bg-dark text-white rounded';
-
         formDiv.innerHTML = `
             <h6>Agregar sububicación</h6>
             <input type="text" id="nombreHijo" class="form-control mb-2" placeholder="Nombre" required>
             <input type="text" id="emojiHijo" class="form-control mb-2" placeholder="Emoji">
             <input type="text" id="rutaHijo" class="form-control mb-2" placeholder="Ruta">
-            <button class="btn btn-success btn-sm" id="guardarHijoBtn">Guardar sububicación</button>
+            <div class="mb-2">
+                <label class="form-label small">Imagen (opcional)</label>
+                <input type="file" id="imagenHijo" class="form-control" accept="image/*">
+            </div>
+            <button class="btn btn-success btn-sm" id="guardarHijoBtn">Guardar</button>
+            <button class="btn btn-cancelar btn-sm" id="cancelarHijoBtn">Cancelar</button>
         `;
         cont.appendChild(formDiv);
-
+        formDiv.querySelector('#cancelarHijoBtn').addEventListener('click', () => formDiv.remove());
         formDiv.querySelector('#guardarHijoBtn').addEventListener('click', async e => {
             e.preventDefault();
-            const nuevoHijo = {
-                nombre: formDiv.querySelector('#nombreHijo').value,
-                emoji: formDiv.querySelector('#emojiHijo').value,
-                ruta: formDiv.querySelector('#rutaHijo').value,
-                ruta_jerarquia: '',
-                sububicaciones: []
-            };
             const rutaPadre = document.getElementById('ruta_jerarquia').value;
-            const {ok, data} = await manejarFetch('/api/agregar_sububicacion',{
-                method:'POST',
-                headers:{'Content-Type':'application/json'},
-                body: JSON.stringify({ruta_padre: rutaPadre, nuevo_hijo: nuevoHijo})
-            });
-            if(ok && data.status==='ok') alert('Sububicación agregada'), location.reload();
-            else alert('Error al agregar sububicación: '+(data.msg||JSON.stringify(data)));
+            const imgFile = formDiv.querySelector('#imagenHijo').files[0];
+            const formData = new FormData();
+            formData.append('ruta_padre', rutaPadre);
+            formData.append('nombre', formDiv.querySelector('#nombreHijo').value);
+            formData.append('emoji', formDiv.querySelector('#emojiHijo').value);
+            formData.append('ruta', formDiv.querySelector('#rutaHijo').value);
+            if (imgFile) formData.append('imagen', imgFile);
+            const { ok, data } = await manejarFetch('/api/agregar_sububicacion', { method: 'POST', body: formData });
+            if (ok && data.status === 'ok') {
+                mostrarNotif(data.msg || 'Sububicación agregada', 'success');
+                setTimeout(() => location.reload(), 800);
+            } else {
+                mostrarNotif(data.msg || 'Error al agregar', 'error');
+            }
         });
     });
 }

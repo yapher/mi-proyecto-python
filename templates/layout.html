@@ -28,6 +28,14 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/mobile.css') }}">
     <!-- CSS genérico de árboles jerárquicos (reutilizado por varias apps) -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/arbol_crud.css') }}">
+    <!-- CSS reutilizable para componentes de subida de imágenes -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base/image_uploader.css') }}">
+    <!-- Logger profesional reutilizable -->
+    <script src="{{ url_for('static', filename='js/apps/logger.js') }}"></script>
+    <!-- Componente reutilizable de subida de imágenes -->
+    <script src="{{ url_for('static', filename='js/apps/image_uploader.js') }}"></script>
+    <!-- Animaciones de modales con origen de click -->
+    <script src="{{ url_for('static', filename='js/apps/modal_animations.js') }}"></script> 
 </head>
 
 <body>
@@ -143,6 +151,10 @@
     <script src="{{ url_for('static', filename='js/apps/arbol_crud.js') }}"></script>
     <!-- Animaciones de modales con origen de click -->
     <script src="{{ url_for('static', filename='js/apps/modal_animations.js') }}"></script>
+    <!-- Logger profesional reutilizable -->
+    <script src="{{ url_for('static', filename='js/apps/logger.js') }}"></script>
+    <!-- Componente reutilizable de subida de imágenes -->
+    <script src="{{ url_for('static', filename='js/apps/image_uploader.js') }}"></script>
 
     {% block scripts %}{% endblock %}
 </body>

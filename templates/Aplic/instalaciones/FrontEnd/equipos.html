@@ -1,16 +1,41 @@
 <div class="modal fade modal-custom-dark" id="ubicacionModal" tabindex="-1" aria-labelledby="ubicacionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <form id="formUbicacion" novalidate>
+            <form id="formUbicacion" novalidate enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ubicacionModalLabel">Detalles Ubicación</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="ruta_jerarquia" name="ruta_jerarquia">
-                    <div class="mb-3 text-center">
-                        <img id="modalImagen" src="" alt="Imagen Ubicación" style="max-width: 650px; max-height: 650px;">
+
+                    <!-- COMPONENTE IMAGE UPLOADER (reutilizable) -->
+                    <div class="image-uploader-container">
+                        <label class="form-label">Imagen</label>
+                        <div class="image-uploader-preview" id="imagenPreviewWrapper">
+                            <img id="modalImagen" src="" alt="Imagen Ubicación" class="image-preview">
+                            <div class="image-uploader-placeholder" id="imagenPlaceholder">
+                                <i class="bi bi-image"></i>
+                                <span>Sin imagen</span>
+                            </div>
+                        </div>
+                        <div class="image-uploader-controls">
+                            <label for="inputImagen" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-upload"></i> Seleccionar imagen
+                            </label>
+                            <input type="file" id="inputImagen" name="imagen" class="image-uploader-input"
+                                   accept="image/png, image/jpeg, image/jpg, image/gif, image/webp">
+                            <button type="button" class="btn btn-sm btn-outline-danger"
+                                    id="btnQuitarImagen" style="display: none;">
+                                <i class="bi bi-x-circle"></i> Quitar
+                            </button>
+                        </div>
+                        <small class="image-uploader-info" id="imagenInfo" style="display: none;"></small>
+                        <small class="image-uploader-help">
+                            Formatos: PNG, JPG, GIF, WEBP. Tamaño máximo: 5MB
+                        </small>
                     </div>
+
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" id="nombre" name="nombre" class="form-control" required>
@@ -22,10 +47,6 @@
                     <div class="mb-3">
                         <label for="ruta" class="form-label">Ruta</label>
                         <input type="text" id="ruta" name="ruta" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="imagen" class="form-label">Imagen (URL)</label>
-                        <input type="text" id="imagen" name="imagen" class="form-control" placeholder="https://...">
                     </div>
                     <div class="mb-3">
                         <label for="ruta_jerarquia_display" class="form-label">Ruta Jerarquía</label>

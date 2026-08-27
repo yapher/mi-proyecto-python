@@ -1,0 +1,109 @@
+/* ============================================================
+   IMAGE UPLOADER - Componente reutilizable
+   Uso: Agregar clase .image-uploader-container al contenedor
+   ============================================================ */
+.image-uploader-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(136, 201, 153, 0.2);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.image-uploader-container .form-label {
+    color: #e5d64f;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.image-uploader-preview {
+    width: 100%;
+    max-width: 400px;
+    height: 250px;
+    margin: 0 auto;
+    border: 2px dashed rgba(136, 201, 153, 0.4);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    transition: border-color 0.3s ease, background 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.image-uploader-preview:hover {
+    border-color: rgba(136, 201, 153, 0.7);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.image-uploader-preview.drag-over {
+    border-color: #88c999;
+    background: rgba(136, 201, 153, 0.1);
+}
+
+.image-uploader-preview .image-preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.image-uploader-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.4);
+    gap: 0.5rem;
+    text-align: center;
+    padding: 1rem;
+    pointer-events: none;
+}
+
+.image-uploader-placeholder i { font-size: 3rem; opacity: 0.5; }
+.image-uploader-placeholder span { font-size: 0.9rem; }
+
+.image-uploader-controls {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.75rem;
+}
+
+.image-uploader-controls .btn { transition: all 0.3s ease; }
+.image-uploader-controls .btn:hover { transform: translateY(-1px); }
+
+.image-uploader-info {
+    display: block;
+    text-align: center;
+    color: #88c999 !important;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.image-uploader-help {
+    display: block;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.image-uploader-input { display: none !important; }
+
+@media (max-width: 768px) {
+    .image-uploader-preview { max-width: 100%; height: 200px; }
+    .image-uploader-controls { flex-direction: column; width: 100%; }
+    .image-uploader-controls .btn { width: 100%; }
+    .image-uploader-container { padding: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+    .image-uploader-preview { height: 180px; }
+    .image-uploader-placeholder i { font-size: 2.5rem; }
+}
