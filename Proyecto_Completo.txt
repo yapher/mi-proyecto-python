@@ -1,7 +1,7 @@
 ================================================================================
 EXPORTACIÓN COMPLETA DEL PROYECTO
 Ruta del proyecto: C:\Empresa
-Fecha de generación: 2026-08-27 18:15:36
+Fecha de generación: 2026-08-27 19:56:06
 ================================================================================
 
 ESTRUCTURA DEL PROYECTO
@@ -60,6 +60,7 @@ Empresa/
 │   │       ├── cards.css
 │   │       ├── components.css
 │   │       ├── dropdowns.css
+│   │       ├── image_uploader.css
 │   │       ├── loaders.css
 │   │       ├── mobile.css
 │   │       ├── modals.css
@@ -97,9 +98,11 @@ Empresa/
 │   │   │   ├── gestion_menu.js
 │   │   │   ├── graf_pagos.js
 │   │   │   ├── graficos_repuestos.js
+│   │   │   ├── image_uploader.js
 │   │   │   ├── layout_scripts.js
 │   │   │   ├── listar_ot.js
 │   │   │   ├── listarepuestos.js
+│   │   │   ├── logger.js
 │   │   │   ├── login_facial.js
 │   │   │   ├── modal_animations.js
 │   │   │   ├── modelos_3d.js
@@ -4538,6 +4541,119 @@ ARCHIVO: static\css\base\dropdowns.css
 @keyframes fadeInRow {
     from { opacity: 0; transform: translateY(5px); }
     to   { opacity: 1; transform: translateY(0); }
+}
+
+--------------------------------------------------------------------------------
+ARCHIVO: static\css\base\image_uploader.css
+--------------------------------------------------------------------------------
+/* ============================================================
+   IMAGE UPLOADER - Componente reutilizable
+   Uso: Agregar clase .image-uploader-container al contenedor
+   ============================================================ */
+.image-uploader-container {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(136, 201, 153, 0.2);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.image-uploader-container .form-label {
+    color: #e5d64f;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.image-uploader-preview {
+    width: 100%;
+    max-width: 400px;
+    height: 250px;
+    margin: 0 auto;
+    border: 2px dashed rgba(136, 201, 153, 0.4);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    transition: border-color 0.3s ease, background 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.image-uploader-preview:hover {
+    border-color: rgba(136, 201, 153, 0.7);
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.image-uploader-preview.drag-over {
+    border-color: #88c999;
+    background: rgba(136, 201, 153, 0.1);
+}
+
+.image-uploader-preview .image-preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.image-uploader-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.4);
+    gap: 0.5rem;
+    text-align: center;
+    padding: 1rem;
+    pointer-events: none;
+}
+
+.image-uploader-placeholder i { font-size: 3rem; opacity: 0.5; }
+.image-uploader-placeholder span { font-size: 0.9rem; }
+
+.image-uploader-controls {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.75rem;
+}
+
+.image-uploader-controls .btn { transition: all 0.3s ease; }
+.image-uploader-controls .btn:hover { transform: translateY(-1px); }
+
+.image-uploader-info {
+    display: block;
+    text-align: center;
+    color: #88c999 !important;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.image-uploader-help {
+    display: block;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5) !important;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.image-uploader-input { display: none !important; }
+
+@media (max-width: 768px) {
+    .image-uploader-preview { max-width: 100%; height: 200px; }
+    .image-uploader-controls { flex-direction: column; width: 100%; }
+    .image-uploader-controls .btn { width: 100%; }
+    .image-uploader-container { padding: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+    .image-uploader-preview { height: 180px; }
+    .image-uploader-placeholder i { font-size: 2.5rem; }
 }
 
 --------------------------------------------------------------------------------
@@ -9696,6 +9812,168 @@ if (document.getElementById('exportarPdf')) {
 }
 
 --------------------------------------------------------------------------------
+ARCHIVO: static\js\apps\image_uploader.js
+--------------------------------------------------------------------------------
+/**
+ * ImageUploader - Componente reutilizable para subida de imágenes
+ */
+class ImageUploader {
+    constructor(config = {}) {
+        this.config = Object.assign({
+            previewId: null, placeholderId: null, inputId: null,
+            removeBtnId: null, infoId: null, wrapperId: null,
+            maxFileSize: 5 * 1024 * 1024,
+            acceptedTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp'],
+            loggerPrefix: '[ImageUploader]'
+        }, config);
+        this.selectedFile = null;
+        this.currentImageUrl = null;
+        this.removed = false;
+        this.els = {
+            preview: document.getElementById(this.config.previewId),
+            placeholder: document.getElementById(this.config.placeholderId),
+            input: document.getElementById(this.config.inputId),
+            removeBtn: document.getElementById(this.config.removeBtnId),
+            info: document.getElementById(this.config.infoId),
+            wrapper: document.getElementById(this.config.wrapperId)
+        };
+        this._handlers = {};
+        Logger.setPrefix(this.config.loggerPrefix);
+        this.#init();
+    }
+
+    #init() {
+        if (!this.els.preview || !this.els.input) {
+            Logger.error('Elementos DOM requeridos no encontrados');
+            return;
+        }
+        this.#bindEvents();
+        Logger.info('Componente ImageUploader inicializado');
+    }
+
+    #bindEvents() {
+        this._handlers.fileChange = (e) => this.#handleFileChange(e);
+        this.els.input.addEventListener('change', this._handlers.fileChange);
+
+        if (this.els.removeBtn) {
+            this._handlers.remove = () => this.removeImage();
+            this.els.removeBtn.addEventListener('click', this._handlers.remove);
+        }
+
+        if (this.els.wrapper) {
+            this._handlers.dragOver = (e) => { e.preventDefault(); this.els.wrapper.classList.add('drag-over'); };
+            this._handlers.dragLeave = () => this.els.wrapper.classList.remove('drag-over');
+            this._handlers.drop = (e) => {
+                e.preventDefault();
+                this.els.wrapper.classList.remove('drag-over');
+                if (e.dataTransfer.files.length > 0) {
+                    this.els.input.files = e.dataTransfer.files;
+                    this.els.input.dispatchEvent(new Event('change'));
+                }
+            };
+            this._handlers.wrapperClick = (e) => {
+                if (e.target.tagName !== 'BUTTON' && !e.target.closest('button'))
+                    this.els.input.click();
+            };
+            this.els.wrapper.addEventListener('dragover', this._handlers.dragOver);
+            this.els.wrapper.addEventListener('dragleave', this._handlers.dragLeave);
+            this.els.wrapper.addEventListener('drop', this._handlers.drop);
+            this.els.wrapper.addEventListener('click', this._handlers.wrapperClick);
+        }
+    }
+
+    #handleFileChange(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        if (!this.config.acceptedTypes.includes(file.type)) {
+            this.#notify('Tipo de archivo no permitido. Use: PNG, JPG, GIF o WEBP', 'error');
+            this.els.input.value = '';
+            return;
+        }
+        if (file.size > this.config.maxFileSize) {
+            const mb = (this.config.maxFileSize / (1024 * 1024)).toFixed(1);
+            this.#notify(`La imagen es demasiado grande. Máximo ${mb}MB`, 'error');
+            this.els.input.value = '';
+            return;
+        }
+        this.selectedFile = file;
+        this.removed = false;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            this.els.preview.src = ev.target.result;
+            this.els.preview.style.display = 'block';
+            if (this.els.placeholder) this.els.placeholder.style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+        if (this.els.info) {
+            this.els.info.innerHTML = `<i class="bi bi-file-earmark-image"></i> ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+            this.els.info.style.display = 'block';
+        }
+        if (this.els.removeBtn) this.els.removeBtn.style.display = 'inline-block';
+        Logger.success('Imagen seleccionada', { name: file.name, size: `${(file.size / 1024).toFixed(1)} KB` });
+    }
+
+    #notify(msg, type) {
+        if (typeof Noty !== 'undefined') {
+            new Noty({ type, layout: 'topRight', timeout: 3000, theme: 'mint', text: msg }).show();
+        } else {
+            alert(msg);
+        }
+    }
+
+    loadExisting(imageUrl) {
+        if (!imageUrl || imageUrl.trim() === '') { this.reset(); return; }
+        this.currentImageUrl = imageUrl;
+        this.selectedFile = null;
+        this.removed = false;
+        this.els.preview.src = imageUrl;
+        this.els.preview.style.display = 'block';
+        if (this.els.placeholder) this.els.placeholder.style.display = 'none';
+        if (this.els.info) this.els.info.style.display = 'none';
+        if (this.els.removeBtn) this.els.removeBtn.style.display = 'inline-block';
+        Logger.info('Imagen existente cargada', { url: imageUrl });
+    }
+
+    removeImage() {
+        const hadImage = this.currentImageUrl || this.selectedFile;
+        this.selectedFile = null;
+        this.currentImageUrl = null;
+        this.removed = hadImage ? true : false;
+        this.els.input.value = '';
+        this.els.preview.style.display = 'none';
+        if (this.els.placeholder) this.els.placeholder.style.display = 'flex';
+        if (this.els.removeBtn) this.els.removeBtn.style.display = 'none';
+        if (this.els.info) this.els.info.style.display = 'none';
+        Logger.info('Imagen quitada', { removed: this.removed });
+        this.#notify('Imagen quitada. Se guardará al confirmar.', 'info');
+    }
+
+    getSelectedFile() { return this.selectedFile; }
+    hasChanges() { return this.selectedFile !== null || this.removed; }
+    wasRemoved() { return this.removed; }
+
+    reset() {
+        this.selectedFile = null;
+        this.currentImageUrl = null;
+        this.removed = false;
+        this.els.input.value = '';
+        this.els.preview.style.display = 'none';
+        if (this.els.placeholder) this.els.placeholder.style.display = 'flex';
+        if (this.els.removeBtn) this.els.removeBtn.style.display = 'none';
+        if (this.els.info) this.els.info.style.display = 'none';
+    }
+
+    destroy() {
+        if (this.els.input && this._handlers.fileChange)
+            this.els.input.removeEventListener('change', this._handlers.fileChange);
+        if (this.els.removeBtn && this._handlers.remove)
+            this.els.removeBtn.removeEventListener('click', this._handlers.remove);
+        this._handlers = {};
+    }
+}
+window.ImageUploader = ImageUploader;
+
+--------------------------------------------------------------------------------
 ARCHIVO: static\js\apps\layout_scripts.js
 --------------------------------------------------------------------------------
 /* ================================================================
@@ -10002,6 +10280,68 @@ document.addEventListener('DOMContentLoaded', function () {
         if (saved === 'list') setView('list');
     } catch (e) {}
 });
+
+--------------------------------------------------------------------------------
+ARCHIVO: static\js\apps\logger.js
+--------------------------------------------------------------------------------
+/**
+ * Logger - Sistema de logs profesional y reutilizable
+ * Uso:
+ *   Logger.info('Mensaje', { datos });
+ *   Logger.success('Operación exitosa');
+ *   Logger.error('Error', error);
+ */
+class Logger {
+    static #currentPrefix = '[App]';
+    static #colors = {
+        info: '#3498db', success: '#2ecc71',
+        warn: '#f39c12', error: '#e74c3c', debug: '#9b59b6'
+    };
+    static #icons = {
+        info: 'ℹ️', success: '✅', warn: '⚠️',
+        error: '❌', debug: '🔍'
+    };
+
+    static setPrefix(prefix) { Logger.#currentPrefix = prefix; }
+
+    static #getTimestamp() {
+        const now = new Date();
+        return now.toLocaleTimeString('es-AR', { hour12: false }) +
+               '.' + String(now.getMilliseconds()).padStart(3, '0');
+    }
+
+    static #log(level, message, data = null) {
+        const header = `${Logger.#icons[level]} [${Logger.#getTimestamp()}] ${Logger.#currentPrefix} ${message}`;
+        const style = `color: ${Logger.#colors[level]}; font-weight: bold;`;
+        switch (level) {
+            case 'error': console.error(`%c${header}`, style, data || ''); break;
+            case 'warn':  console.warn(`%c${header}`, style, data || ''); break;
+            case 'debug':
+                if (localStorage.getItem('DEBUG_MODE') === 'true')
+                    console.debug(`%c${header}`, style, data || '');
+                break;
+            default: console.log(`%c${header}`, style, data !== null ? data : '');
+        }
+    }
+
+    static info(msg, data = null)    { Logger.#log('info', msg, data); }
+    static success(msg, data = null) { Logger.#log('success', msg, data); }
+    static warn(msg, data = null)    { Logger.#log('warn', msg, data); }
+    static error(msg, err = null)    { Logger.#log('error', msg, err); }
+    static debug(msg, data = null)   { Logger.#log('debug', msg, data); }
+
+    static moduleInit(name) {
+        Logger.setPrefix(`[${name}]`);
+        Logger.info('Módulo inicializado correctamente');
+    }
+
+    static apiCall(method, url) { Logger.info(`API ${method} → ${url}`); }
+    static apiResponse(method, url, status, data = null) {
+        const level = status >= 200 && status < 300 ? 'success' : 'error';
+        Logger[level](`API ${method} ← ${url} [${status}]`, data);
+    }
+}
+window.Logger = Logger;
 
 --------------------------------------------------------------------------------
 ARCHIVO: static\js\apps\login_facial.js
@@ -13432,6 +13772,14 @@ ARCHIVO: templates\layout.html
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/mobile.css') }}">
     <!-- CSS genérico de árboles jerárquicos (reutilizado por varias apps) -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/arbol_crud.css') }}">
+    <!-- CSS reutilizable para componentes de subida de imágenes -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/base/image_uploader.css') }}">
+    <!-- Logger profesional reutilizable -->
+    <script src="{{ url_for('static', filename='js/apps/logger.js') }}"></script>
+    <!-- Componente reutilizable de subida de imágenes -->
+    <script src="{{ url_for('static', filename='js/apps/image_uploader.js') }}"></script>
+    <!-- Animaciones de modales con origen de click -->
+    <script src="{{ url_for('static', filename='js/apps/modal_animations.js') }}"></script> 
 </head>
 
 <body>
@@ -13547,6 +13895,10 @@ ARCHIVO: templates\layout.html
     <script src="{{ url_for('static', filename='js/apps/arbol_crud.js') }}"></script>
     <!-- Animaciones de modales con origen de click -->
     <script src="{{ url_for('static', filename='js/apps/modal_animations.js') }}"></script>
+    <!-- Logger profesional reutilizable -->
+    <script src="{{ url_for('static', filename='js/apps/logger.js') }}"></script>
+    <!-- Componente reutilizable de subida de imágenes -->
+    <script src="{{ url_for('static', filename='js/apps/image_uploader.js') }}"></script>
 
     {% block scripts %}{% endblock %}
 </body>
@@ -18082,14 +18434,98 @@ ARCHIVO: templates\Aplic\imagenes\FrontEnd\planos.html
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\instalaciones\BackEnd\instalaciones.py
 --------------------------------------------------------------------------------
-from flask import Blueprint, jsonify, render_template, request
+from flask import Blueprint, jsonify, render_template, request, current_app
 from flask_login import current_user
 from core.menu import cargar_menu
 from auth.login import roles_required
-import json, os
+import json, os, hashlib, time
 from functools import wraps
+from werkzeug.utils import secure_filename
 
 UBI_TEC = 'DataBase/dataRep/ubicacion_tecnica.json'
+
+# ============================================================
+# CONFIGURACIÓN DE IMÁGENES (reutilizable)
+# ============================================================
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
+UPLOAD_FOLDER = os.path.join('templates', 'Aplic', 'instalaciones', 'static', 'img')
+
+
+def allowed_file(filename):
+    """Verifica si la extensión del archivo es permitida."""
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def asegurar_directorio_upload():
+    """Asegura que el directorio de uploads exista."""
+    ruta_completa = os.path.join(current_app.root_path, UPLOAD_FOLDER)
+    os.makedirs(ruta_completa, exist_ok=True)
+    return ruta_completa
+
+
+def calcular_hash_archivo(ruta_archivo):
+    """Calcula el hash MD5 de un archivo existente en disco."""
+    hash_md5 = hashlib.md5()
+    try:
+        with open(ruta_archivo, "rb") as f:
+            for chunk in iter(lambda: f.read(8192), b""):
+                hash_md5.update(chunk)
+        return hash_md5.hexdigest()
+    except (OSError, IOError):
+        return None
+
+
+def calcular_hash_bytes(data_bytes):
+    """Calcula el hash MD5 de datos en memoria (bytes)."""
+    return hashlib.md5(data_bytes).hexdigest()
+
+
+def procesar_imagen(archivo):
+    """
+    Procesa y guarda una imagen con reutilización inteligente.
+    - Si existe archivo con mismo hash → NO duplica
+    - Si existe con hash diferente → agrega timestamp
+    Retorna (nombre_archivo, error).
+    """
+    if not archivo or archivo.filename == '':
+        return None, None
+
+    if not allowed_file(archivo.filename):
+        return None, f"Formato no permitido. Use: {', '.join(ALLOWED_EXTENSIONS)}"
+
+    filename = secure_filename(archivo.filename)
+    directorio = asegurar_directorio_upload()
+    ruta_completa = os.path.join(current_app.root_path, UPLOAD_FOLDER, filename)
+
+    try:
+        archivo.seek(0)
+        contenido_nuevo = archivo.read()
+        archivo.seek(0)
+    except Exception as e:
+        return None, f"Error al leer el archivo: {str(e)}"
+
+    if os.path.exists(ruta_completa):
+        hash_existente = calcular_hash_archivo(ruta_completa)
+        hash_nuevo = calcular_hash_bytes(contenido_nuevo)
+
+        if hash_existente == hash_nuevo:
+            return filename, None
+        else:
+            nombre, extension = os.path.splitext(filename)
+            filename = f"{nombre}_{int(time.time())}{extension}"
+            ruta_completa = os.path.join(current_app.root_path, UPLOAD_FOLDER, filename)
+
+    try:
+        with open(ruta_completa, "wb") as f:
+            f.write(contenido_nuevo)
+        return filename, None
+    except Exception as e:
+        return None, f"Error al guardar imagen: {str(e)}"
+
+
+# ============================================================
+# BLUEPRINT
+# ============================================================
 instalaciones_bp = Blueprint(
     'indexinstalaciones',
     __name__,
@@ -18097,16 +18533,16 @@ instalaciones_bp = Blueprint(
     static_url_path='/instalaciones/static'
 )
 
-# ---------- Decorador login requerido JSON ----------
+
 def login_required_json(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         if not current_user.is_authenticated:
-            return jsonify({'status':'error', 'msg':'No autenticado'}), 401
+            return jsonify({'status': 'error', 'msg': 'No autenticado'}), 401
         return f(*args, **kwargs)
     return decorated
 
-# ---------- Funciones de carga y guardado ----------
+
 def cargar_ubicaciones():
     if not os.path.exists(UBI_TEC):
         return []
@@ -18116,11 +18552,12 @@ def cargar_ubicaciones():
         except json.JSONDecodeError:
             return []
 
+
 def guardar_ubicaciones(data):
     with open(UBI_TEC, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4, ensure_ascii=False)
 
-# ---------- Funciones de manipulación ----------
+
 def encontrar_y_modificar(nodos, ruta_jerarquia, nuevos_datos):
     for nodo in nodos:
         if nodo['ruta_jerarquia'] == ruta_jerarquia:
@@ -18131,6 +18568,7 @@ def encontrar_y_modificar(nodos, ruta_jerarquia, nuevos_datos):
                 return True
     return False
 
+
 def encontrar_y_borrar(nodos, ruta_jerarquia):
     for i, nodo in enumerate(nodos):
         if nodo['ruta_jerarquia'] == ruta_jerarquia:
@@ -18140,6 +18578,7 @@ def encontrar_y_borrar(nodos, ruta_jerarquia):
             if encontrar_y_borrar(nodo['sububicaciones'], ruta_jerarquia):
                 return True
     return False
+
 
 def encontrar_y_agregar(nodos, ruta_padre, nuevo_hijo):
     for nodo in nodos:
@@ -18153,7 +18592,10 @@ def encontrar_y_agregar(nodos, ruta_padre, nuevo_hijo):
                 return True
     return False
 
-# ---------- Rutas ----------
+
+# ============================================================
+# RUTAS
+# ============================================================
 @instalaciones_bp.route('/instalaciones')
 @login_required_json
 @roles_required('viewer')
@@ -18165,11 +18607,13 @@ def indexinstalaciones():
         roles=current_user.roles
     )
 
+
 @instalaciones_bp.route('/api/ubicaciones')
 @login_required_json
 @roles_required('viewer')
 def api_ubicaciones():
     return jsonify(cargar_ubicaciones())
+
 
 @instalaciones_bp.route('/api/ubicacion_tecnica_json')
 @login_required_json
@@ -18177,34 +18621,99 @@ def api_ubicaciones():
 def ubicacion_tecnica_json():
     return jsonify(cargar_ubicaciones())
 
-# ---------- API editar / borrar / agregar ----------
+
+# ============================================================
+# NUEVO ENDPOINT: Subir imagen (reutilizable)
+# ============================================================
+@instalaciones_bp.route('/api/subir_imagen', methods=['POST'])
+@login_required_json
+def subir_imagen():
+    """Endpoint reutilizable para subir imágenes."""
+    if 'imagen' not in request.files:
+        return jsonify({'status': 'error', 'msg': 'No se envió ningún archivo'}), 400
+
+    archivo = request.files['imagen']
+    filename, error = procesar_imagen(archivo)
+
+    if error:
+        return jsonify({'status': 'error', 'msg': error}), 400
+
+    if not filename:
+        return jsonify({'status': 'error', 'msg': 'No se pudo procesar la imagen'}), 400
+
+    return jsonify({
+        'status': 'ok',
+        'filename': filename,
+        'url': f"/instalaciones/static/img/{filename}"
+    })
+
+
+# ============================================================
+# API EDITAR (soporta FormData + eliminar_imagen)
+# ============================================================
 @instalaciones_bp.route('/api/editar_ubicacion', methods=['PUT'])
 @login_required_json
 @roles_required('viewer')
 def editar_ubicacion():
     data = cargar_ubicaciones()
-    modificado = request.get_json()
+
+    # Aceptar tanto JSON como FormData
+    if request.content_type and 'multipart/form-data' in request.content_type:
+        modificado = request.form.to_dict()
+        archivo_imagen = request.files.get('imagen')
+        eliminar_imagen = modificado.get('eliminar_imagen', '').lower() == 'true'
+    else:
+        modificado = request.get_json() or {}
+        archivo_imagen = None
+        eliminar_imagen = modificado.get('eliminar_imagen', False)
+
     if not modificado:
-        return jsonify({'status':'error','msg':'JSON inválido'}), 400
+        return jsonify({'status': 'error', 'msg': 'Datos inválidos'}), 400
 
     ruta_jerarquia = modificado.get('ruta_jerarquia')
     if not ruta_jerarquia:
-        return jsonify({'status':'error','msg':'Falta ruta_jerarquia'}), 400
+        return jsonify({'status': 'error', 'msg': 'Falta ruta_jerarquia'}), 400
+
+    nueva_imagen = None
+    imagen_eliminada = False
+
+    if eliminar_imagen:
+        nueva_imagen = ''
+        imagen_eliminada = True
+    elif archivo_imagen and archivo_imagen.filename:
+        filename, error = procesar_imagen(archivo_imagen)
+        if error:
+            return jsonify({'status': 'error', 'msg': error}), 400
+        if filename:
+            nueva_imagen = filename
 
     partes = ruta_jerarquia.split('-')
     nueva_ruta = '-'.join(partes[:-1] + [modificado.get('nombre', partes[-1])])
+
     nuevos_datos = {
         'nombre': modificado.get('nombre', ''),
         'emoji': modificado.get('emoji', ''),
         'ruta': modificado.get('ruta', ''),
-        'imagen': modificado.get('imagen', ''),
         'ruta_jerarquia': nueva_ruta
     }
 
+    if eliminar_imagen:
+        nuevos_datos['imagen'] = ''
+    elif nueva_imagen:
+        nuevos_datos['imagen'] = nueva_imagen
+    elif modificado.get('imagen'):
+        nuevos_datos['imagen'] = modificado.get('imagen')
+
     if encontrar_y_modificar(data, ruta_jerarquia, nuevos_datos):
         guardar_ubicaciones(data)
-        return jsonify({'status':'ok'})
-    return jsonify({'status':'no encontrado'}), 404
+        return jsonify({
+            'status': 'ok',
+            'msg': 'Ubicación actualizada correctamente',
+            'imagen_eliminada': imagen_eliminada
+        })
+
+    return jsonify({'status': 'no encontrado', 'msg': 'La ubicación no existe'}), 404
+
 
 @instalaciones_bp.route('/api/borrar_ubicacion', methods=['DELETE'])
 @login_required_json
@@ -18213,33 +18722,59 @@ def borrar_ubicacion():
     data = cargar_ubicaciones()
     ruta_jerarquia = request.json.get('ruta_jerarquia') if request.json else None
     if not ruta_jerarquia:
-        return jsonify({'status':'error','msg':'Falta ruta_jerarquia'}), 400
+        return jsonify({'status': 'error', 'msg': 'Falta ruta_jerarquia'}), 400
     if encontrar_y_borrar(data, ruta_jerarquia):
         guardar_ubicaciones(data)
-        return jsonify({'status':'ok'})
-    return jsonify({'status':'no encontrado'}), 404
+        return jsonify({'status': 'ok', 'msg': 'Ubicación eliminada correctamente'})
+    return jsonify({'status': 'no encontrado', 'msg': 'La ubicación no existe'}), 404
 
+
+# ============================================================
+# API AGREGAR SUBUBICACIÓN (soporta FormData)
+# ============================================================
 @instalaciones_bp.route('/api/agregar_sububicacion', methods=['POST'])
 @login_required_json
 @roles_required('viewer')
 def agregar_sububicacion():
     data = cargar_ubicaciones()
-    if not request.json:
-        return jsonify({'status':'error','msg':'JSON inválido'}), 400
-    ruta_padre = request.json.get('ruta_padre')
-    nuevo_hijo = request.json.get('nuevo_hijo')
+
+    if request.content_type and 'multipart/form-data' in request.content_type:
+        ruta_padre = request.form.get('ruta_padre')
+        nuevo_hijo = {
+            'nombre': request.form.get('nombre', 'nuevo'),
+            'emoji': request.form.get('emoji', ''),
+            'ruta': request.form.get('ruta', ''),
+            'ruta_jerarquia': '',
+            'sububicaciones': []
+        }
+        archivo_imagen = request.files.get('imagen')
+    else:
+        req_json = request.get_json() or {}
+        ruta_padre = req_json.get('ruta_padre')
+        nuevo_hijo = req_json.get('nuevo_hijo', {})
+        archivo_imagen = None
+
     if not ruta_padre or not nuevo_hijo:
-        return jsonify({'status':'error','msg':'Faltan datos'}), 400
+        return jsonify({'status': 'error', 'msg': 'Faltan datos'}), 400
+
+    if archivo_imagen and archivo_imagen.filename:
+        filename, error = procesar_imagen(archivo_imagen)
+        if error:
+            return jsonify({'status': 'error', 'msg': error}), 400
+        if filename:
+            nuevo_hijo['imagen'] = filename
 
     if not nuevo_hijo.get('ruta_jerarquia'):
-        nuevo_hijo['ruta_jerarquia'] = f"{ruta_padre}-{nuevo_hijo.get('nombre','nuevo')}"
+        nuevo_hijo['ruta_jerarquia'] = f"{ruta_padre}-{nuevo_hijo.get('nombre', 'nuevo')}"
+
     if 'sububicaciones' not in nuevo_hijo:
         nuevo_hijo['sububicaciones'] = []
 
     if encontrar_y_agregar(data, ruta_padre, nuevo_hijo):
         guardar_ubicaciones(data)
-        return jsonify({'status':'ok'})
-    return jsonify({'status':'no encontrado'}), 404
+        return jsonify({'status': 'ok', 'msg': 'Sububicación agregada correctamente'})
+
+    return jsonify({'status': 'no encontrado', 'msg': 'El padre no existe'}), 404
 
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\instalaciones\FrontEnd\equipos.html
@@ -18247,16 +18782,41 @@ ARCHIVO: templates\Aplic\instalaciones\FrontEnd\equipos.html
 <div class="modal fade modal-custom-dark" id="ubicacionModal" tabindex="-1" aria-labelledby="ubicacionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <form id="formUbicacion" novalidate>
+            <form id="formUbicacion" novalidate enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ubicacionModalLabel">Detalles Ubicación</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="ruta_jerarquia" name="ruta_jerarquia">
-                    <div class="mb-3 text-center">
-                        <img id="modalImagen" src="" alt="Imagen Ubicación" style="max-width: 650px; max-height: 650px;">
+
+                    <!-- COMPONENTE IMAGE UPLOADER (reutilizable) -->
+                    <div class="image-uploader-container">
+                        <label class="form-label">Imagen</label>
+                        <div class="image-uploader-preview" id="imagenPreviewWrapper">
+                            <img id="modalImagen" src="" alt="Imagen Ubicación" class="image-preview">
+                            <div class="image-uploader-placeholder" id="imagenPlaceholder">
+                                <i class="bi bi-image"></i>
+                                <span>Sin imagen</span>
+                            </div>
+                        </div>
+                        <div class="image-uploader-controls">
+                            <label for="inputImagen" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-upload"></i> Seleccionar imagen
+                            </label>
+                            <input type="file" id="inputImagen" name="imagen" class="image-uploader-input"
+                                   accept="image/png, image/jpeg, image/jpg, image/gif, image/webp">
+                            <button type="button" class="btn btn-sm btn-outline-danger"
+                                    id="btnQuitarImagen" style="display: none;">
+                                <i class="bi bi-x-circle"></i> Quitar
+                            </button>
+                        </div>
+                        <small class="image-uploader-info" id="imagenInfo" style="display: none;"></small>
+                        <small class="image-uploader-help">
+                            Formatos: PNG, JPG, GIF, WEBP. Tamaño máximo: 5MB
+                        </small>
                     </div>
+
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" id="nombre" name="nombre" class="form-control" required>
@@ -18268,10 +18828,6 @@ ARCHIVO: templates\Aplic\instalaciones\FrontEnd\equipos.html
                     <div class="mb-3">
                         <label for="ruta" class="form-label">Ruta</label>
                         <input type="text" id="ruta" name="ruta" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                        <label for="imagen" class="form-label">Imagen (URL)</label>
-                        <input type="text" id="imagen" name="imagen" class="form-control" placeholder="https://...">
                     </div>
                     <div class="mb-3">
                         <label for="ruta_jerarquia_display" class="form-label">Ruta Jerarquía</label>
@@ -18316,93 +18872,47 @@ ARCHIVO: templates\Aplic\instalaciones\FrontEnd\instalaciones.html
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\instalaciones\static\css\instalaciones.css
 --------------------------------------------------------------------------------
-.tree,
-.tree ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.tree>ul {
-    position: relative;
-    display: flex;
-    gap: 40px;
-}
-
-.collapsed {
-    display: none !important;
-}
-
-.ul-flex {
-    display: flex;
-    gap: 40px;
-    position: relative;
-}
+/* ============================================================
+   INSTALACIONES - Estilos específicos del árbol jerárquico
+   Los estilos del uploader están en: static/css/base/image_uploader.css
+   ============================================================ */
+.tree, .tree ul { list-style: none; margin: 0; padding: 0; }
+.tree > ul { position: relative; display: flex; gap: 40px; }
+.collapsed { display: none !important; }
+.ul-flex { display: flex; gap: 40px; position: relative; }
 
 .node {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-    user-select: none;
-    padding: 4px 8px;
+    display: inline-flex; flex-direction: column; align-items: center;
+    position: relative; cursor: pointer; user-select: none; padding: 4px 8px;
 }
-
 .node img {
-    width: 48px;
-    height: 48px;
-    border-radius: 8px;
+    width: 48px; height: 48px; border-radius: 8px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
-    object-fit: contain;
-    background: transparent !important;
+    object-fit: contain; background: transparent !important;
 }
-
 .node .label {
-    margin-top: 8px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: white;
-    max-width: 180px;
-    text-align: center;
-    white-space: normal;
-    user-select: text;
-    word-break: break-word;
+    margin-top: 8px; font-size: 0.95rem; font-weight: 600;
+    color: white; max-width: 180px; text-align: center;
+    white-space: normal; user-select: text; word-break: break-word;
 }
-
 .toggle {
-    margin-top: 6px;
-    padding: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    border: 1.5px solid #0d6efd;
-    background-color: white;
-    color: #0d6efd;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 24px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    user-select: none;
+    margin-top: 6px; padding: 0; width: 28px; height: 28px;
+    border-radius: 50%; border: 1.5px solid #0d6efd; background-color: white;
+    color: #0d6efd; font-weight: 700; font-size: 20px; line-height: 24px;
+    display: flex; justify-content: center; align-items: center;
+    cursor: pointer; user-select: none;
     transition: background-color 0.3s, color 0.3s;
     box-shadow: 0 1px 3px rgba(13, 110, 253, 0.4);
 }
-
-.toggle:hover,
-.toggle:focus {
-    background-color: #0d6efd;
-    color: white;
-    outline: none;
+.toggle:hover, .toggle:focus {
+    background-color: #0d6efd; color: white; outline: none;
     box-shadow: 0 0 8px rgba(13, 110, 253, 0.7);
 }
+.children-container { margin-top: 30px; padding-left: 0; position: relative; }
 
-.children-container {
-    margin-top: 30px;
-    padding-left: 0;
-    position: relative;
+@media (max-width: 768px) {
+    .node img { width: 40px; height: 40px; }
+    .node .label { font-size: 0.85rem; max-width: 140px; }
 }
 
 --------------------------------------------------------------------------------
@@ -18410,68 +18920,82 @@ ARCHIVO: templates\Aplic\instalaciones\static\js\instalaciones.js
 --------------------------------------------------------------------------------
 /**
  * JavaScript para el componente Instalaciones
- * Maneja la funcionalidad de visualización de árbol jerárquico de ubicaciones técnicas
+ * Usa Logger e ImageUploader reutilizables
  */
-
-// Variables globales
 let ubicacionTecnicaData = null;
-
+let imageUploader = null;
 const STATIC_INSTALACIONES = '/instalaciones/static/';
+const DEFAULT_IMAGE = STATIC_INSTALACIONES + 'img/factory.png';
 
-// Inicialización cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", async () => {
+    Logger.moduleInit('Instalaciones');
     const container = document.getElementById("tree-container");
-    const svg = document.getElementById('svg-lines');
+    if (!container) { Logger.error('Contenedor tree-container no encontrado'); return; }
 
-    // Cargar datos iniciales
     await cargarDatos();
-    
-    // Crear el árbol
     const root = document.createElement('ul');
     root.style.position = 'relative';
     root.classList.add('ul-flex');
-    
     ubicacionTecnicaData.forEach(nodo => root.appendChild(crearNodo(nodo)));
     container.appendChild(root);
 
-    // Dibujar líneas y configurar event listeners
     dibujarLineas();
     window.addEventListener('resize', dibujarLineas);
     window.addEventListener('scroll', dibujarLineas);
 
-    // Configurar formularios
+    imageUploader = new ImageUploader({
+        previewId: 'modalImagen', placeholderId: 'imagenPlaceholder',
+        inputId: 'inputImagen', removeBtnId: 'btnQuitarImagen',
+        infoId: 'imagenInfo', wrapperId: 'imagenPreviewWrapper',
+        loggerPrefix: '[Instalaciones:Image]'
+    });
+
     configurarFormularios();
+    Logger.success('Módulo Instalaciones listo', { nodos: ubicacionTecnicaData.length });
 });
 
-/**
- * Carga los datos de ubicaciones técnicas desde la API
- */
 async function cargarDatos() {
-    const res = await fetch("/api/ubicacion_tecnica_json", {credentials:'same-origin'});
-    ubicacionTecnicaData = await res.json();
+    Logger.apiCall('GET', '/api/ubicacion_tecnica_json');
+    try {
+        const res = await fetch("/api/ubicacion_tecnica_json", { credentials: 'same-origin' });
+        Logger.apiResponse('GET', '/api/ubicacion_tecnica_json', res.status);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        ubicacionTecnicaData = await res.json();
+    } catch (err) {
+        Logger.error('Error al cargar datos', err);
+        mostrarNotif('Error al cargar las ubicaciones', 'error');
+        ubicacionTecnicaData = [];
+    }
 }
 
-/**
- * Busca una ubicación por su ruta jerárquica
- * @param {string} ruta_jerarquia - Ruta jerárquica a buscar
- * @param {Object} nodo - Nodo donde buscar
- * @returns {Object|null} Nodo encontrado o null
- */
-function buscarUbicacionPorJerarquia(ruta_jerarquia, nodo) {
-    if (nodo.ruta_jerarquia === ruta_jerarquia) return nodo;
+function mostrarNotif(msg, tipo = 'success') {
+    if (typeof Noty !== 'undefined') {
+        new Noty({ type: tipo, layout: 'topRight', timeout: 3000, theme: 'mint', text: msg }).show();
+    } else { alert(msg); }
+}
+
+function mostrarConfirm(titulo, texto, callback) {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: titulo, text: texto, icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#88c999', cancelButtonColor: '#dc3545',
+            confirmButtonText: 'Sí, confirmar', cancelButtonText: 'Cancelar'
+        }).then(r => { if (r.isConfirmed) callback(); });
+    } else if (confirm(texto)) callback();
+}
+
+function buscarUbicacionPorJerarquia(ruta, nodo) {
+    if (nodo.ruta_jerarquia === ruta) return nodo;
     if (nodo.sububicaciones) {
-        for (const hijo of nodo.sububicaciones) {
-            const res = buscarUbicacionPorJerarquia(ruta_jerarquia, hijo);
-            if (res) return res;
+        for (const h of nodo.sububicaciones) {
+            const r = buscarUbicacionPorJerarquia(ruta, h);
+            if (r) return r;
         }
     }
     return null;
 }
 
-/**
- * Abre el modal con la información de una ubicación
- * @param {string} rutaJerarquia - Ruta jerárquica de la ubicación
- */
 function abrirModalUbicacion(rutaJerarquia) {
     let nodo = null;
     for (const raiz of ubicacionTecnicaData) {
@@ -18479,26 +19003,25 @@ function abrirModalUbicacion(rutaJerarquia) {
         if (nodo) break;
     }
     if (!nodo) {
-        alert("Ubicación no encontrada");
+        Logger.warn('Ubicación no encontrada', { ruta: rutaJerarquia });
+        mostrarNotif('Ubicación no encontrada', 'warning');
         return;
     }
-    const modalEl = document.getElementById('ubicacionModal');
-    const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+    Logger.info('Abriendo modal', { nombre: nodo.nombre, ruta: nodo.ruta_jerarquia });
 
-    // Llenar el formulario con los datos del nodo
     document.getElementById('nombre').value = nodo.nombre || '';
     document.getElementById('emoji').value = nodo.emoji || '';
     document.getElementById('ruta').value = nodo.ruta || '';
     document.getElementById('ruta_jerarquia').value = nodo.ruta_jerarquia || '';
     document.getElementById('ruta_jerarquia_display').value = nodo.ruta_jerarquia || '';
-    document.getElementById('modalImagen').src =
-        nodo.imagen && nodo.imagen.trim() !== ''
-            ? (nodo.imagen.startsWith('/')
-                ? nodo.imagen
-                : STATIC_INSTALACIONES + nodo.imagen)
-            : STATIC_INSTALACIONES + 'img/factory.png';
 
-    // Mostrar sububicaciones
+    if (nodo.imagen && nodo.imagen.trim() !== '') {
+        const url = nodo.imagen.startsWith('/') ? nodo.imagen : STATIC_INSTALACIONES + 'img/' + nodo.imagen;
+        imageUploader.loadExisting(url);
+    } else {
+        imageUploader.reset();
+    }
+
     const cont = document.getElementById('sububicacionesContainer');
     cont.innerHTML = '';
     if (nodo.sububicaciones && nodo.sububicaciones.length) {
@@ -18509,217 +19032,176 @@ function abrirModalUbicacion(rutaJerarquia) {
             cont.appendChild(div);
         });
     }
-    modal.show();
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('ubicacionModal')).show();
 }
 
-/**
- * Crea un nodo del árbol
- * @param {Object} nodo - Datos del nodo
- * @returns {HTMLElement} Elemento li creado
- */
 function crearNodo(nodo) {
     const li = document.createElement('li');
     const nodeDiv = document.createElement('div');
-    nodeDiv.className = 'node';
-    nodeDiv.tabIndex = 0;
-
+    nodeDiv.className = 'node'; nodeDiv.tabIndex = 0;
     const img = document.createElement('img');
-
     if (nodo.imagen && nodo.imagen.trim() !== '') {
-        img.src = nodo.imagen.startsWith('/')
-            ? nodo.imagen
-            : STATIC_INSTALACIONES + nodo.imagen;
-    } else {
-        img.src = STATIC_INSTALACIONES + 'img/factory.png';
-    }
-
-img.alt = nodo.ruta || 'Sin ruta';
-
+        img.src = nodo.imagen.startsWith('/') ? nodo.imagen : STATIC_INSTALACIONES + 'img/' + nodo.imagen;
+    } else { img.src = DEFAULT_IMAGE; }
+    img.alt = nodo.ruta || 'Sin ruta';
     const label = document.createElement('div');
     label.className = 'label';
-    label.textContent = nodo.ruta && nodo.ruta.trim()!=='' ? nodo.ruta : 'Sin ruta';
+    label.textContent = nodo.ruta && nodo.ruta.trim() !== '' ? nodo.ruta : 'Sin ruta';
+    nodeDiv.appendChild(img); nodeDiv.appendChild(label); li.appendChild(nodeDiv);
+    nodeDiv.addEventListener('click', e => { e.stopPropagation(); abrirModalUbicacion(nodo.ruta_jerarquia); });
 
-    nodeDiv.appendChild(img);
-    nodeDiv.appendChild(label);
-    li.appendChild(nodeDiv);
-
-    // Event listener para abrir modal
-    nodeDiv.addEventListener('click', e=>{
-        e.stopPropagation();
-        abrirModalUbicacion(nodo.ruta_jerarquia);
-    });
-
-    // Si tiene sububicaciones, crear toggle y contenedor
     if (nodo.sububicaciones && nodo.sububicaciones.length > 0) {
         const toggle = document.createElement('button');
         toggle.className = 'toggle btn btn-outline-primary btn-sm';
-        toggle.type = 'button';
-        toggle.setAttribute('aria-expanded','false');
-        toggle.title = 'Expandir';
-        toggle.textContent = '+';
+        toggle.type = 'button'; toggle.setAttribute('aria-expanded', 'false');
+        toggle.title = 'Expandir'; toggle.textContent = '+';
         nodeDiv.appendChild(toggle);
-
         const ulHijos = document.createElement('ul');
         ulHijos.className = 'children-container ul-flex collapsed';
         nodo.sububicaciones.forEach(sub => ulHijos.appendChild(crearNodo(sub)));
         li.appendChild(ulHijos);
-
-        // Event listener para toggle
-        toggle.addEventListener('click', e=>{
+        toggle.addEventListener('click', e => {
             e.stopPropagation();
-            const colapsado = ulHijos.classList.toggle('collapsed');
-            toggle.textContent = colapsado ? '+' : '−';
-            toggle.setAttribute('aria-expanded', String(!colapsado));
+            const col = ulHijos.classList.toggle('collapsed');
+            toggle.textContent = col ? '+' : '−';
+            toggle.setAttribute('aria-expanded', String(!col));
             setTimeout(dibujarLineas, 50);
         });
-
-        // Event listener para teclado
-        nodeDiv.addEventListener('keydown', e=>{
-            if(e.key==='Enter'||e.key===' '){
-                e.preventDefault();
-                toggle.click();
-            }
-        });
     }
-
     return li;
 }
 
-/**
- * Dibuja las líneas de conexión entre nodos
- */
 function dibujarLineas() {
     const container = document.getElementById("tree-container");
     const svg = document.getElementById('svg-lines');
-    
-    while(svg.firstChild) svg.removeChild(svg.firstChild);
-    const containerRect = container.getBoundingClientRect();
-    svg.style.width = containerRect.width + 'px';
-    svg.style.height = containerRect.height + 'px';
-    svg.style.top = containerRect.top + window.scrollY + 'px';
-    svg.style.left = containerRect.left + window.scrollX + 'px';
-
-    const parentNodes = container.querySelectorAll('li > .node');
-    parentNodes.forEach(nodeDiv => {
+    if (!container || !svg) return;
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    const rect = container.getBoundingClientRect();
+    svg.style.width = rect.width + 'px'; svg.style.height = rect.height + 'px';
+    svg.style.top = rect.top + window.scrollY + 'px';
+    svg.style.left = rect.left + window.scrollX + 'px';
+    container.querySelectorAll('li > .node').forEach(nodeDiv => {
         const li = nodeDiv.parentElement;
         const ulHijos = li.querySelector('ul.children-container:not(.collapsed)');
-        if(!ulHijos) return;
+        if (!ulHijos) return;
         ulHijos.childNodes.forEach(childLi => {
-            if(childLi.nodeType !== 1) return;
-            const startImg = nodeDiv.querySelector('img').getBoundingClientRect();
-            const endNode = childLi.querySelector('.node img');
-            if(!endNode) return;
-            const endImg = endNode.getBoundingClientRect();
-
-            const x1 = startImg.left + startImg.width/2 - containerRect.left;
-            const y1 = startImg.bottom - containerRect.top;
-            const x2 = endImg.left + endImg.width/2 - containerRect.left;
-            const y2 = endImg.top - containerRect.top;
-
-            const group = document.createElementNS('http://www.w3.org/2000/svg','g');
-            group.setAttribute('stroke','#0d6efd');
-            group.setAttribute('fill','none');
-            group.setAttribute('stroke-width','2');
-
-            const path = document.createElementNS('http://www.w3.org/2000/svg','path');
-            const d = `M ${x1} ${y1} L ${x1} ${(y1+y2)/2} L ${x2} ${(y1+y2)/2} L ${x2} ${y2}`;
-            path.setAttribute('d', d);
-            group.appendChild(path);
-            svg.appendChild(group);
+            if (childLi.nodeType !== 1) return;
+            const sImg = nodeDiv.querySelector('img').getBoundingClientRect();
+            const eImg = childLi.querySelector('.node img')?.getBoundingClientRect();
+            if (!eImg) return;
+            const x1 = sImg.left + sImg.width / 2 - rect.left;
+            const y1 = sImg.bottom - rect.top;
+            const x2 = eImg.left + eImg.width / 2 - rect.left;
+            const y2 = eImg.top - rect.top;
+            const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+            g.setAttribute('stroke', '#0d6efd'); g.setAttribute('fill', 'none');
+            g.setAttribute('stroke-width', '2');
+            const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            p.setAttribute('d', `M ${x1} ${y1} L ${x1} ${(y1 + y2) / 2} L ${x2} ${(y1 + y2) / 2} L ${x2} ${y2}`);
+            g.appendChild(p); svg.appendChild(g);
         });
     });
 }
 
-/**
- * Maneja las peticiones fetch con manejo de errores
- * @param {string} url - URL de la petición
- * @param {Object} options - Opciones de la petición
- * @returns {Object} Resultado de la petición
- */
-async function manejarFetch(url, options){
+async function manejarFetch(url, options) {
+    const method = options.method || 'GET';
+    Logger.apiCall(method, url);
     try {
-        const res = await fetch(url,{...options, credentials:'same-origin'});
+        const res = await fetch(url, { ...options, credentials: 'same-origin' });
         const text = await res.text();
-        try {
-            const json = JSON.parse(text);
-            return {ok: res.ok, data: json};
-        } catch {
-            return {ok:false, data:{status:'error', msg:'Respuesta no es JSON: '+text}};
-        }
-    } catch(err){
-        return {ok:false, data:{status:'error', msg: err.message}};
+        let json;
+        try { json = JSON.parse(text); }
+        catch { return { ok: false, data: { status: 'error', msg: 'Respuesta inválida' } }; }
+        Logger.apiResponse(method, url, res.status, json);
+        return { ok: res.ok, data: json };
+    } catch (err) {
+        Logger.error(`Error ${method} ${url}`, err);
+        return { ok: false, data: { status: 'error', msg: err.message } };
     }
 }
 
-/**
- * Configura los event listeners de los formularios
- */
 function configurarFormularios() {
-    // Formulario principal de ubicación
-    document.getElementById('formUbicacion').addEventListener('submit', async e=>{
+    document.getElementById('formUbicacion').addEventListener('submit', async e => {
         e.preventDefault();
         const ruta = document.getElementById('ruta_jerarquia').value;
-        const datos = {
-            ruta_jerarquia: ruta,
-            nombre: document.getElementById('nombre').value,
-            emoji: document.getElementById('emoji').value,
-            ruta: document.getElementById('ruta').value,
-            imagen: document.getElementById('imagen').value
-        };
-        const {ok, data} = await manejarFetch('/api/editar_ubicacion',{
-            method:'PUT',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify(datos)
-        });
-        if(ok && data.status==='ok') alert('Datos guardados correctamente'), location.reload();
-        else alert('Error al guardar cambios: '+(data.msg||JSON.stringify(data)));
+        const formData = new FormData();
+        formData.append('ruta_jerarquia', ruta);
+        formData.append('nombre', document.getElementById('nombre').value);
+        formData.append('emoji', document.getElementById('emoji').value);
+        formData.append('ruta', document.getElementById('ruta').value);
+
+        const archivoSel = imageUploader.getSelectedFile();
+        const fueQuitada = imageUploader.wasRemoved();
+        if (archivoSel) formData.append('imagen', archivoSel);
+        else if (fueQuitada) formData.append('eliminar_imagen', 'true');
+
+        const { ok, data } = await manejarFetch('/api/editar_ubicacion', { method: 'PUT', body: formData });
+        if (ok && data.status === 'ok') {
+            mostrarNotif(data.msg || 'Ubicación guardada correctamente', 'success');
+            Logger.success('Ubicación actualizada', { ruta });
+            bootstrap.Modal.getInstance(document.getElementById('ubicacionModal'))?.hide();
+            setTimeout(() => location.reload(), 800);
+        } else {
+            mostrarNotif(data.msg || 'Error al guardar', 'error');
+            Logger.error('Error al guardar', data);
+        }
     });
 
-    // Botón borrar ubicación
-    document.getElementById('btnBorrarUbicacion').addEventListener('click', async ()=>{
+    document.getElementById('btnBorrarUbicacion').addEventListener('click', () => {
         const ruta = document.getElementById('ruta_jerarquia').value;
-        if(!confirm('¿Seguro que quieres borrar esta ubicación?')) return;
-        const {ok, data} = await manejarFetch('/api/borrar_ubicacion',{
-            method:'DELETE',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ruta_jerarquia: ruta})
-        });
-        if(ok && data.status==='ok') alert('Ubicación borrada'), location.reload();
-        else alert('Error al borrar ubicación: '+(data.msg||JSON.stringify(data)));
+        const nombre = document.getElementById('nombre').value;
+        mostrarConfirm('Eliminar ubicación',
+            `¿Está seguro que desea eliminar "${nombre}"? Esta acción no se puede deshacer.`,
+            async () => {
+                const { ok, data } = await manejarFetch('/api/borrar_ubicacion', {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ ruta_jerarquia: ruta })
+                });
+                if (ok && data.status === 'ok') {
+                    mostrarNotif(data.msg || 'Ubicación eliminada', 'success');
+                    setTimeout(() => location.reload(), 800);
+                } else {
+                    mostrarNotif(data.msg || 'Error al eliminar', 'error');
+                }
+            });
     });
 
-    // Botón agregar hijo
     document.getElementById('btnAgregarHijo').addEventListener('click', () => {
         const cont = document.getElementById('sububicacionesContainer');
         const formDiv = document.createElement('div');
         formDiv.className = 'mb-3 mt-3 border p-2 bg-dark text-white rounded';
-
         formDiv.innerHTML = `
             <h6>Agregar sububicación</h6>
             <input type="text" id="nombreHijo" class="form-control mb-2" placeholder="Nombre" required>
             <input type="text" id="emojiHijo" class="form-control mb-2" placeholder="Emoji">
             <input type="text" id="rutaHijo" class="form-control mb-2" placeholder="Ruta">
-            <button class="btn btn-success btn-sm" id="guardarHijoBtn">Guardar sububicación</button>
+            <div class="mb-2">
+                <label class="form-label small">Imagen (opcional)</label>
+                <input type="file" id="imagenHijo" class="form-control" accept="image/*">
+            </div>
+            <button class="btn btn-success btn-sm" id="guardarHijoBtn">Guardar</button>
+            <button class="btn btn-cancelar btn-sm" id="cancelarHijoBtn">Cancelar</button>
         `;
         cont.appendChild(formDiv);
-
+        formDiv.querySelector('#cancelarHijoBtn').addEventListener('click', () => formDiv.remove());
         formDiv.querySelector('#guardarHijoBtn').addEventListener('click', async e => {
             e.preventDefault();
-            const nuevoHijo = {
-                nombre: formDiv.querySelector('#nombreHijo').value,
-                emoji: formDiv.querySelector('#emojiHijo').value,
-                ruta: formDiv.querySelector('#rutaHijo').value,
-                ruta_jerarquia: '',
-                sububicaciones: []
-            };
             const rutaPadre = document.getElementById('ruta_jerarquia').value;
-            const {ok, data} = await manejarFetch('/api/agregar_sububicacion',{
-                method:'POST',
-                headers:{'Content-Type':'application/json'},
-                body: JSON.stringify({ruta_padre: rutaPadre, nuevo_hijo: nuevoHijo})
-            });
-            if(ok && data.status==='ok') alert('Sububicación agregada'), location.reload();
-            else alert('Error al agregar sububicación: '+(data.msg||JSON.stringify(data)));
+            const imgFile = formDiv.querySelector('#imagenHijo').files[0];
+            const formData = new FormData();
+            formData.append('ruta_padre', rutaPadre);
+            formData.append('nombre', formDiv.querySelector('#nombreHijo').value);
+            formData.append('emoji', formDiv.querySelector('#emojiHijo').value);
+            formData.append('ruta', formDiv.querySelector('#rutaHijo').value);
+            if (imgFile) formData.append('imagen', imgFile);
+            const { ok, data } = await manejarFetch('/api/agregar_sububicacion', { method: 'POST', body: formData });
+            if (ok && data.status === 'ok') {
+                mostrarNotif(data.msg || 'Sububicación agregada', 'success');
+                setTimeout(() => location.reload(), 800);
+            } else {
+                mostrarNotif(data.msg || 'Error al agregar', 'error');
+            }
         });
     });
 }

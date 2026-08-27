@@ -1,131 +1,196 @@
-"""Configuración global de pytest - NO modifica archivos del proyecto."""
-import pytest
+# tests/conftest.py
+"""
+Configuración global de pytest.
+Define los fixtures 'app', 'client' y 'auth_client' que usan TODOS los tests.
+"""
 import sys
 import os
-import tempfile
-import shutil
 import json
 from pathlib import Path
-from unittest.mock import patch
 
-# Agregar raíz del proyecto al path
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT))
-os.environ['TESTING'] = '1'
+# ============================================================
+# 1. AGREGAR RAÍZ DEL PROYECTO AL PYTHONPATH
+# ============================================================
+ROOT_DIR = Path(__file__).resolve().parent.parent
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
 
-class MockUser:
-    """Usuario simulado con todos los roles."""
-    id = '1'
-    username = 'admin'
-    email = 'test@test.com'
-    roles = ['admin', 'viewer', 'editor']
-    is_authenticated = True
-    is_active = True
-    is_anonymous = False
+import pytest
+from flask import Flask
+from flask_login import UserMixin, login_user
 
-    def get_id(self):
-        return str(self.id)
 
-    def has_role(self, role_name):
-        return role_name in self.roles
+# ============================================================
+# 2. FIXTURE: app (Flask de prueba)
+# ============================================================
+@pytest.fixture
+def app(tmp_path, monkeypatch):
+    """
+    Crea una app Flask mínima configurada para testing.
+    """
+    # Forzamos rutas absolutas para que Flask encuentre static/templates sin depender del CWD
+    app = Flask(
+        "test_app",
+        root_path=str(ROOT_DIR),
+        template_folder=str(ROOT_DIR / "templates"),
+        static_folder=str(ROOT_DIR / "static"),
+        static_url_path="/static"
+    )
+    app.config["TESTING"] = True
+    app.config["SECRET_KEY"] = "test-secret-key-for-pytest"
+    app.config["WTF_CSRF_ENABLED"] = False
+    app.config["SERVER_NAME"] = "localhost"
 
-@pytest.fixture(scope='session')
-def app():
-    """Crea la app Flask de prueba con DBs temporales."""
-    from app import app as flask_app
-    flask_app.config['TESTING'] = True
-    flask_app.config['SECRET_KEY'] = 'test-secret-key'
-    flask_app.config['WTF_CSRF_ENABLED'] = False
-
-    # Crear directorio temporal para DBs
-    tmp_dir = Path(tempfile.mkdtemp(prefix='pytest_empresa_'))
+    # ============================================================
+    # Redirigir archivos JSON a tmp_path (no tocar datos reales)
+    # ============================================================
+    db_dir = tmp_path / "DataBase"
+    db_dir.mkdir(exist_ok=True)
+    (db_dir / "Config").mkdir(exist_ok=True)
+    (db_dir / "time").mkdir(exist_ok=True)
+    (db_dir / "dataOT").mkdir(exist_ok=True)
+    (db_dir / "dataRep").mkdir(exist_ok=True)
+    (db_dir / "hogar").mkdir(exist_ok=True)
+    (db_dir / "planos").mkdir(exist_ok=True)
     
-    # Crear subdirectorios
-    (tmp_dir / 'time').mkdir(exist_ok=True)
-    (tmp_dir / 'hogar').mkdir(exist_ok=True)
-    (tmp_dir / 'dataOT').mkdir(exist_ok=True)
-    (tmp_dir / 'dataRep').mkdir(exist_ok=True)
-    (tmp_dir / 'Config').mkdir(exist_ok=True)
+    # Crear también Database (por si algún módulo usa mayúscula/minúscula incorrecta)
+    db_dir_alt = tmp_path / "Database"
+    db_dir_alt.mkdir(exist_ok=True)
+    (db_dir_alt / "planos").mkdir(exist_ok=True)
 
-    # Archivos JSON vacíos (listas vacías) para cada módulo
-    (tmp_dir / 'time' / 'dataTask.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'time' / 'agenda.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'hogar' / 'GASTOS.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'hogar' / 'rubro.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'dataOT' / 'bloqueos.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'dataRep' / 'REPUESTOS.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'dataRep' / 'almacenes.json').write_text('[]', encoding='utf-8')
-    (tmp_dir / 'Config' / 'menu.json').write_text('[]', encoding='utf-8')
+    # Lista de TODOS los archivos JSON que las apps pueden intentar leer
+    json_files = [
+        db_dir / "Config" / "menu.json",
+        db_dir / "time" / "agenda.json",
+        db_dir / "time" / "dataTask.json",
+        db_dir / "dataRep" / "almacenes.json",
+        db_dir / "dataRep" / "ubicacion_tecnica.json",
+        db_dir / "dataRep" / "estados.json",
+        db_dir / "dataRep" / "REPUESTOS.json",
+        db_dir / "hogar" / "GASTOS.json",
+        db_dir / "hogar" / "rubro.json",       # <-- Corregido: rubro.json va en hogar
+        db_dir / "tabs.json",
+        db_dir / "planos.json",
+        db_dir_alt / "planos" / "nodo.json",   # <-- Para gestion_de_bloqueos
+    ]
+    
+    for jf in json_files:
+        jf.parent.mkdir(parents=True, exist_ok=True)
+        if not jf.exists():
+            if jf.name == "REPUESTOS.json":
+                # Pre-poblamos con un repuesto que coincida con el tab de prueba
+                jf.write_text(json.dumps([{
+                    "codigo": "TEST001",
+                    "nombre": "Repuesto de Prueba",
+                    "cantidad": 10,
+                    "equipo": "Planta Principal",
+                    "ruta_jerarquia": ["Planta Principal"],
+                    "fecha_creacion": "2026-08-28",
+                    "estado": "Disponible",
+                    "imagen": "test.png"
+                }]), encoding="utf-8")
+            elif jf.name == "tabs.json":
+                # Pre-poblamos con un tab que coincida con el repuesto de prueba
+                jf.write_text(json.dumps([{
+                    "id": "Planta Principal",
+                    "title": "Planta Principal",
+                    "ruta_jerarquia": "Planta Principal",
+                    "sanitized_id": "Planta_Principal"
+                }]), encoding="utf-8")
+            else:
+                jf.write_text("[]", encoding="utf-8")
 
-    # Parchear rutas de DB para que apunten al directorio temporal
-    _patch_db_paths(tmp_dir)
+    # Crear users.json en tmp_path (para auth.login)
+    users_file = tmp_path / "users.json"
+    users_file.write_text(json.dumps([{
+        "id": "1",
+        "username": "testuser",
+        "password": "testpass",
+        "roles": ["admin", "viewer", "editor"]
+    }]), encoding="utf-8")
 
-    yield flask_app
-    shutil.rmtree(tmp_dir, ignore_errors=True)
+    # Cambiar directorio de trabajo a tmp_path para que las rutas relativas apunten aquí
+    monkeypatch.chdir(tmp_path)
 
-def _patch_db_paths(tmp_dir):
-    """Reemplaza rutas de DB por temporales para aislar los tests."""
-    # Tareas
-    try:
-        from templates.Aplic.tareas.BackEnd import db_manager as tareas_db
-        tareas_db.DB_PATH = str(tmp_dir / 'time' / 'dataTask.json')
-    except Exception:
-        pass
-        
-    # Agenda
-    try:
-        from templates.Aplic.agenda.BackEnd import db_manager as agenda_db
-        agenda_db.DB_PATH = str(tmp_dir / 'time' / 'agenda.json')
-    except Exception:
-        pass
-        
-    # Pagos
-    try:
-        import templates.Aplic.pagos.BackEnd.pagos as pagos_mod
-        pagos_mod.GASTOS = str(tmp_dir / 'hogar' / 'GASTOS.json')
-        pagos_mod.GASTOSMES = str(tmp_dir / 'hogar')
-        if hasattr(pagos_mod, 'DB_PATH'):
-            pagos_mod.DB_PATH = str(tmp_dir / 'hogar' / 'GASTOS.json')
-    except Exception:
-        pass
-        
-    # Bloqueos
-    try:
-        import templates.Aplic.gestiondebloqueos.BackEnd.gestion_de_bloqueos as bloqueos_mod
-        if hasattr(bloqueos_mod, 'NODO_JSON'):
-            bloqueos_mod.NODO_JSON = str(tmp_dir / 'dataOT' / 'bloqueos.json')
-        else:
-            bloqueos_mod.DB_PATH = str(tmp_dir / 'dataOT' / 'bloqueos.json')
-    except Exception:
-        pass
-        
-    # Rubros (ESENCIAL: evita que lea el archivo real que puede estar corrupto o nulo)
-    try:
-        import templates.Aplic.crearrubros.BackEnd.crear_rubros as rubros_mod
-        rubros_mod.RUBRO_PATH = str(tmp_dir / 'hogar' / 'rubro.json')
-    except Exception:
-        pass
-        
-    # Inventario
-    try:
-        import templates.Aplic.inventario.BackEnd.inventario as inventario_mod
-        inventario_mod.DATA_FILE = str(tmp_dir / 'dataRep' / 'almacenes.json')
-        inventario_mod.DATA_REP = str(tmp_dir / 'dataRep' / 'REPUESTOS.json')
-    except Exception:
-        pass
+    # ============================================================
+    # Parchear la carga de usuarios para que SIEMPRE haya un usuario de prueba
+    # ============================================================
+    import auth.login
+    mock_users = [{
+        "id": "1",
+        "username": "testuser",
+        "password": "testpass",
+        "roles": ["admin", "viewer", "editor"]
+    }]
+    monkeypatch.setattr(auth.login, 'usuarios', mock_users)
+    monkeypatch.setattr(auth.login, 'usuarios_dict', {u['username']: u for u in mock_users})
 
+    # ============================================================
+    # Inicializar autenticación
+    # ============================================================
+    from auth.login import init_routes_login
+    init_routes_login(app)
+
+    # ============================================================
+    # Registrar blueprints usando el auto_register_blueprints del proyecto
+    # Necesitamos cambiar temporalmente a ROOT_DIR para que encuentre "templates/Aplic"
+    # ============================================================
+    from core.blueprint_registry import auto_register_blueprints
+    
+    original_cwd = os.getcwd()
+    try:
+        os.chdir(ROOT_DIR)
+        auto_register_blueprints(app)
+    finally:
+        os.chdir(original_cwd)  # Restaurar a tmp_path antes de yield
+
+    # Ruta de contexto para inyectar menu y roles (evita errores en templates)
+    @app.context_processor
+    def inject_menu():
+        from core.menu import cargar_menu
+        from flask_login import current_user
+        if current_user.is_authenticated:
+            return dict(menu=cargar_menu(), roles=current_user.roles)
+        return dict(menu=[], roles=[])
+
+    yield app
+
+
+# ============================================================
+# 3. FIXTURE: client (Flask test client sin autenticar)
+# ============================================================
 @pytest.fixture
 def client(app):
-    """Cliente de test de Flask."""
+    """Cliente de prueba de Flask sin autenticar."""
     return app.test_client()
 
+
+# ============================================================
+# 4. FIXTURE: auth_client (Flask test client AUTENTICADO)
+# ============================================================
 @pytest.fixture
-def auth_client(app, client):
-    """Cliente autenticado con MockUser."""
-    with client.session_transaction() as sess:
-        sess['_user_id'] = '1'
-        sess['_fresh'] = True
-    
-    mock_user = MockUser()
-    with patch('flask_login.utils._get_user', return_value=mock_user):
+def auth_client(app):
+    """
+    Cliente de prueba de Flask con un usuario ya logueado.
+    Inyecta directamente la sesión de Flask-Login.
+    """
+    with app.test_client() as client:
+        with client.session_transaction() as sess:
+            sess['_user_id'] = '1'
+            sess['_fresh'] = True
         yield client
+
+
+# ============================================================
+# 5. FIXTURE: _isolated_env (cambio de directorio temporal)
+# ============================================================
+@pytest.fixture(autouse=True)
+def _isolated_env(tmp_path, monkeypatch):
+    """
+    Fixture automático que asegura que cada test trabaje
+    en un directorio temporal aislado.
+    """
+    original_cwd = os.getcwd()
+    os.chdir(tmp_path)
+    yield
+    os.chdir(original_cwd)
