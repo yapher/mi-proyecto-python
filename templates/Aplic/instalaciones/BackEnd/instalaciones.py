@@ -6,7 +6,12 @@ import json, os
 from functools import wraps
 
 UBI_TEC = 'DataBase/dataRep/ubicacion_tecnica.json'
-instalaciones_bp = Blueprint('indexinstalaciones', __name__)
+instalaciones_bp = Blueprint(
+    'indexinstalaciones',
+    __name__,
+    static_folder='../static',
+    static_url_path='/instalaciones/static'
+)
 
 # ---------- Decorador login requerido JSON ----------
 def login_required_json(f):

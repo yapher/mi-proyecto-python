@@ -9,7 +9,7 @@
                 <div class="modal-body">
                     <input type="hidden" id="ruta_jerarquia" name="ruta_jerarquia">
                     <div class="mb-3 text-center">
-                        <img id="modalImagen" src="" alt="Imagen Ubicación" style="max-width: 150px; max-height: 150px;">
+                        <img id="modalImagen" src="" alt="Imagen Ubicación" style="max-width: 650px; max-height: 650px;">
                     </div>
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
@@ -32,14 +32,14 @@
                         <input type="text" id="ruta_jerarquia_display" readonly class="form-control">
                     </div>
                     <div class="mb-3">
-                        <button type="button" class="btn btn-success" id="btnAgregarHijo">Agregar sububicación</button>
+                        <button type="button" class="btn btn-agregar" id="btnAgregarHijo">Agregar sububicación</button>
                     </div>
                     <div id="sububicacionesContainer" style="max-height: 200px; overflow-y: auto;"></div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" id="btnBorrarUbicacion">Borrar Ubicación</button>
+                    <button type="button" class="btn btn-eliminar" id="btnBorrarUbicacion">Borrar Ubicación</button>
                     <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-agregar">Guardar Cambios</button>
+                    <button type="submit" class="btn btn-guardar">Guardar Cambios</button>
                 </div>
             </form>
         </div>

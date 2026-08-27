@@ -2351,7 +2351,7 @@
     },
     {
         "titulo": "pasar planos a pdf y cargarlo en el sistema",
-        "fecha": "2026-08-26",
+        "fecha": "2026-08-28",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -11349,7 +11349,8 @@
         "fecha": "2026-08-27",
         "descripcion": "INSPECCIÓN ELÉC. APIL 3. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1540,
@@ -11357,71 +11358,80 @@
         "fecha": "2026-08-27",
         "descripcion": "INSPECCIÓN ELÉC. APIL 2. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1541,
         "titulo": "PM02:2004877527",
-        "fecha": "2026-08-27",
+        "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. APIL 4. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": false,
+        "prioridad": "media"
     },
     {
         "id": 1542,
         "titulo": "PM02:2004877528",
-        "fecha": "2026-08-27",
+        "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. TB. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": false,
+        "prioridad": "media"
     },
     {
         "id": 1543,
         "titulo": "PM02:2004877521",
-        "fecha": "2026-08-27",
+        "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. NIV. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": false,
+        "prioridad": "media"
     },
     {
         "id": 1544,
         "titulo": "PM02:2004877523",
-        "fecha": "2026-08-27",
+        "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. TIJERA. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": false,
+        "prioridad": "media"
     },
     {
         "id": 1545,
         "titulo": "PM02:2004877520",
-        "fecha": "2026-08-27",
+        "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. REF. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": false,
+        "prioridad": "media"
     },
     {
         "id": 1546,
         "titulo": "PM02:2004877524",
-        "fecha": "2026-08-27",
+        "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. APIL 1. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": false,
+        "prioridad": "media"
     },
     {
         "id": 1547,
         "titulo": "PM02:2004877522",
-        "fecha": "2026-08-27",
+        "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. FEEDER. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": false,
+        "prioridad": "media"
     },
     {
         "id": 1548,
         "titulo": "PM02:2004877519",
-        "fecha": "2026-08-27",
+        "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. DEBO. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": false,
+        "prioridad": "media"
     },
     {
         "id": 1549,
@@ -11521,7 +11531,7 @@
     },
     {
         "titulo": "Hacer Ot de Rex Littell",
-        "fecha": "2026-08-25",
+        "fecha": "2026-08-28",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -11529,28 +11539,8 @@
         "id": 1561
     },
     {
-        "descripcion": "Descripción test",
-        "email": "test@test.com",
-        "fecha": "2026-08-23",
-        "prioridad": "media",
-        "realizado": false,
-        "titulo": "Evento TEST",
-        "id": 1562
-    },
-    {
-        "fecha": "2026-08-23",
-        "id": 1563,
-        "realizado": false
-    },
-    {
         "titulo": "Sin fecha",
         "id": 1564,
-        "realizado": false
-    },
-    {
-        "fecha": "2026-08-24",
-        "titulo": "Editado TEST",
-        "id": 1565,
         "realizado": false
     },
     {
@@ -11558,5 +11548,37 @@
         "realizado": true,
         "titulo": "Toggle TEST",
         "id": 1566
+    },
+    {
+        "id": 1567,
+        "titulo": "PM02:2004892487",
+        "fecha": "2026-09-03",
+        "descripcion": "REVISION SISTEMA ELEC. DELTA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1568,
+        "titulo": "PM01:2004897665",
+        "fecha": "2026-09-14",
+        "descripcion": "REALIZAR BACKUP  ROBOT 2",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1569,
+        "titulo": "PM01:2004897663",
+        "fecha": "2026-09-14",
+        "descripcion": "REALIZAR BACKUP PLC DE LINEA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1570,
+        "titulo": "PM01:2004897664",
+        "fecha": "2026-09-14",
+        "descripcion": "REALIZAR BACKUP ROBOT 1",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
     }
 ]

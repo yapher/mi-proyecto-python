@@ -16,7 +16,100 @@
                         "emoji": "1",
                         "ruta": "EMBALAJE40",
                         "ruta_jerarquia": "SD-APR-EMPA",
-                        "sububicaciones": []
+                        "sububicaciones": [
+                            {
+                                "nombre": "RED ELÉCTRICA",
+                                "emoji": "",
+                                "ruta": "RED ELÉCTRICA (TABLERO ALIMENTACIÓN GRUPO 1 SALA ELÉCTRICA)",
+                                "ruta_jerarquia": "SD-APR-EMPA-RED ELÉCTRICA",
+                                "sububicaciones": [
+                                    {
+                                        "nombre": "SDPEMTD01S0000E",
+                                        "emoji": "",
+                                        "ruta": "llave general (linea embalaje automático)",
+                                        "ruta_jerarquia": "SD-APR-EMPA-GRUPO1-SDPEMTD01S0000E",
+                                        "sububicaciones": [
+                                            {
+                                                "nombre": "SDPEMTE02S0001E",
+                                                "emoji": "",
+                                                "ruta": "TB COMANDO (PLC - Q011121)",
+                                                "ruta_jerarquia": "SD-APR-EMPA-GRUPO1-SDPEMTD01S0000E-SDPEMTE02S0001E",
+                                                "sububicaciones": [],
+                                                "imagen": "img/SDPEMTE02S0001E.jpeg"
+                                            },
+                                            {
+                                                "nombre": "SDPEMTE01S0001E",
+                                                "emoji": "",
+                                                "ruta": "TB POTENCIA (DRIVES -Q011041)",
+                                                "ruta_jerarquia": "SD-APR-EMPA-GRUPO1-SDPEMTD01S0000E-SDPEMTE01S0001E",
+                                                "sububicaciones": [
+                                                    {
+                                                        "nombre": "GM012051",
+                                                        "emoji": "",
+                                                        "ruta": "-GM012051 (TRANSPORTADOR DE ENTRADA)",
+                                                        "ruta_jerarquia": "SD-APR-EMPA-GRUPO1-SDPEMTD01S0000E-SDPEMTE01S0001E-GM012051",
+                                                        "sububicaciones": [],
+                                                        "imagen": "img/GV.jpg"
+                                                    },
+                                                    {
+                                                        "nombre": "GM012052",
+                                                        "emoji": "",
+                                                        "ruta": "-GM012052 (TRANSPORTADOR BUFFER ENTRADA #1)",
+                                                        "ruta_jerarquia": "SD-APR-EMPA-GRUPO1-SDPEMTD01S0000E-SDPEMTE01S0001E-GM012052",
+                                                        "sububicaciones": []
+                                                    }
+                                                ],
+                                                "imagen": "img/SDPEMTE02S0002E.jpeg"
+                                            },
+                                            {
+                                                "nombre": "SDPEMTE01L0001E",
+                                                "emoji": "",
+                                                "ruta": "CONTROLADOR ROBOT #1 (-Q011071)",
+                                                "ruta_jerarquia": "SD-APR-EMPA-GRUPO1-SDPEMTD01S0000E-SDPEMTE01L0001E",
+                                                "sububicaciones": [],
+                                                "imagen": "img/SDPEMTE01L0001E.png"
+                                            },
+                                            {
+                                                "nombre": "SDPEMTE01L0002E",
+                                                "emoji": "",
+                                                "ruta": "CONTROLADOR ROBOT #2 (-Q011072)",
+                                                "ruta_jerarquia": "SD-APR-EMPA-GRUPO1-SDPEMTD01S0000E-SDPEMTE01L0002E",
+                                                "sububicaciones": [],
+                                                "imagen": "img/SDPEMTE01L0002E.png"
+                                            },
+                                            {
+                                                "nombre": "servicio",
+                                                "emoji": "",
+                                                "ruta": "TB SERVICIOS",
+                                                "ruta_jerarquia": "SD-APR-EMPA-GRUPO1-SDPEMTD01S0000E-servicio",
+                                                "sububicaciones": [
+                                                    {
+                                                        "nombre": "824_C",
+                                                        "emoji": "",
+                                                        "ruta": "TB SERVICIO ROBOT #2",
+                                                        "ruta_jerarquia": "SD-APR-EMPA-GRUPO1-SDPEMTD01S0000E-servicio-824_C",
+                                                        "sububicaciones": [],
+                                                        "imagen": "img/824_C.jpeg"
+                                                    },
+                                                    {
+                                                        "nombre": "819_C",
+                                                        "emoji": "",
+                                                        "ruta": "TB SERVICIO ROBOT #1",
+                                                        "ruta_jerarquia": "SD-APR-EMPA-GRUPO1-SDPEMTD01S0000E-servicio-819_C",
+                                                        "sububicaciones": [],
+                                                        "imagen": "img/819_C.jpeg"
+                                                    }
+                                                ],
+                                                "imagen": "img/servicio.png"
+                                            }
+                                        ],
+                                        "imagen": "img/SDPEMTD01S0000E.jpeg"
+                                    }
+                                ],
+                                "imagen": "IMG/TDAGRUPO1.jpeg"
+                            }
+                        ],
+                        "imagen": "img/embalaje40.jpeg"
                     },
                     {
                         "nombre": "HALD",
@@ -77,6 +170,7 @@
                     }
                 ]
             }
-        ]
+        ],
+        "imagen": "img/Sidercrom.jpeg"
     }
 ]

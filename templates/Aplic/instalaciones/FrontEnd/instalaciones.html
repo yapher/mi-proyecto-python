@@ -4,7 +4,7 @@
 
 <div id="tree-container" class="tree"></div>
 
-<link rel="stylesheet" href="/static/css/apps/instalaciones.css">
+<link rel="stylesheet" href="{{ url_for('indexinstalaciones.static', filename='css/instalaciones.css') }}">
 
 <svg id="svg-lines" style="position:absolute; top:0; left:0; pointer-events:none; overflow: visible; z-index:0;"></svg>
 
@@ -13,5 +13,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/apps/instalaciones.js') }}"></script>
+<script src="{{ url_for('indexinstalaciones.static', filename='js/instalaciones.js') }}"></script>
 {% endblock %}

@@ -6,6 +6,8 @@
 // Variables globales
 let ubicacionTecnicaData = null;
 
+const STATIC_INSTALACIONES = '/instalaciones/static/';
+
 // Inicialización cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", async () => {
     const container = document.getElementById("tree-container");
@@ -79,7 +81,12 @@ function abrirModalUbicacion(rutaJerarquia) {
     document.getElementById('ruta').value = nodo.ruta || '';
     document.getElementById('ruta_jerarquia').value = nodo.ruta_jerarquia || '';
     document.getElementById('ruta_jerarquia_display').value = nodo.ruta_jerarquia || '';
-    document.getElementById('modalImagen').src = nodo.imagen || "/static/factory.png";
+    document.getElementById('modalImagen').src =
+        nodo.imagen && nodo.imagen.trim() !== ''
+            ? (nodo.imagen.startsWith('/')
+                ? nodo.imagen
+                : STATIC_INSTALACIONES + nodo.imagen)
+            : STATIC_INSTALACIONES + 'img/factory.png';
 
     // Mostrar sububicaciones
     const cont = document.getElementById('sububicacionesContainer');
@@ -107,8 +114,16 @@ function crearNodo(nodo) {
     nodeDiv.tabIndex = 0;
 
     const img = document.createElement('img');
-    img.src = nodo.imagen && nodo.imagen.trim()!=='' ? nodo.imagen : '/static/factory.png';
-    img.alt = nodo.ruta || 'Sin ruta';
+
+    if (nodo.imagen && nodo.imagen.trim() !== '') {
+        img.src = nodo.imagen.startsWith('/')
+            ? nodo.imagen
+            : STATIC_INSTALACIONES + nodo.imagen;
+    } else {
+        img.src = STATIC_INSTALACIONES + 'img/factory.png';
+    }
+
+img.alt = nodo.ruta || 'Sin ruta';
 
     const label = document.createElement('div');
     label.className = 'label';

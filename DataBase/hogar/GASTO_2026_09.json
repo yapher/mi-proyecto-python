@@ -108,5 +108,32 @@
         "cuota_total": 6,
         "vencimiento": "2026-09-01",
         "pagado": false
+    },
+    {
+        "id": 1787853820599,
+        "rubro": "Servicios",
+        "descripcion": "Luz",
+        "importe": 173000,
+        "tipo": "único",
+        "vencimiento": "2026-09-03",
+        "pagado": false
+    },
+    {
+        "id": 1787853939947,
+        "rubro": "Forrajería",
+        "descripcion": "Comida Perra",
+        "importe": 80000,
+        "tipo": "único",
+        "vencimiento": "2026-09-04",
+        "pagado": false
+    },
+    {
+        "id": 1787854007880,
+        "rubro": "Forrajería",
+        "descripcion": "Comida Gatos",
+        "importe": 80000,
+        "tipo": "único",
+        "vencimiento": "2026-09-03",
+        "pagado": false
     }
 ]

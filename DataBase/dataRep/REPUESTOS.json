@@ -5800,16 +5800,16 @@
     {
         "nombre": "PAÑO LIM. LIVIANA WYPALL X-75 CJ 6 ROLLO  se manda un correo 24/08/2026",
         "codigo": "72128173",
-        "cantidad": 6,
+        "cantidad": 2,
         "equipo": "GMP-COFRE2",
         "ruta_jerarquia": [
             "SD-ASE"
         ],
         "imagen": "TRAPO.jpeg",
         "fecha_creacion": "2026-01-28",
-        "fecha_fin": "2026-03-07",
+        "fecha_fin": "2030-12-21",
         "link": "",
-        "estado": "🟡"
+        "estado": "🟢"
     },
     {
         "nombre": "CINTA BROTHER 24MM BLACK/WHITE P#TZE-251  (para rotuladora E550W)",
