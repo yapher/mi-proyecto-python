@@ -1,0 +1,144 @@
+/* Estilos específicos para la aplicación Agenda */
+.evento-realizado {
+    background-color: #6c757d !important;
+    text-decoration: line-through;
+    color: #dcdcdc !important;
+}
+
+.evento-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    margin-top: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.evento-pill input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.evento-pill span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.evento-pill.prio-alta { background-color: #ff4d4d; color: #fff; }
+.evento-pill.prio-media { background-color: #ffc107; color: #222; }
+.evento-pill.prio-baja { background-color: #28a745; color: #fff; }
+
+.table {
+    background-color: transparent;
+    width: 100% !important;
+    table-layout: fixed;
+}
+
+.table th {
+    background-color: #4b376a;
+    border-color: #88c999;
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    padding: 8px 4px;
+}
+
+.table td {
+    border-color: #88c999;
+    vertical-align: top;
+    padding: 4px;
+    width: 14.28%;
+}
+
+.dia {
+    min-height: 80px;
+    padding: 6px;
+    border-radius: 8px;
+    background-color: #4b376a;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.dia:hover {
+    background-color: #5a4a7a;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dia.hoy {
+    background-color: #88c999;
+    color: #222;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(136, 201, 153, 0.6);
+    animation: pulse 1.5s infinite;
+}
+
+.numero {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.vacio {
+    background-color: transparent;
+    border: none;
+}
+
+.controls-responsive {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.controls-responsive .form-select {
+    min-width: 100px;
+    flex: 1;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 12px rgba(136, 201, 153, 0.6); }
+    50% { transform: scale(1.05); box-shadow: 0 0 18px rgba(136, 201, 153, 0.8); }
+    100% { transform: scale(1); box-shadow: 0 0 12px rgba(136, 201, 153, 0.6); }
+}
+
+@media (max-width: 767.98px) {
+    .container-fluid.full-height { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
+    h1.text-center { font-size: 1.5rem !important; margin-bottom: 1rem !important; }
+    .controls-responsive { flex-direction: column !important; align-items: stretch !important; }
+    .controls-responsive .form-select, .controls-responsive .btn { width: 100% !important; min-width: 100% !important; }
+    .table th { font-size: 0.75rem; padding: 6px 2px; }
+    .table td { padding: 2px; }
+    .dia { min-height: 60px; padding: 4px; font-size: 0.85rem; }
+    .numero { font-size: 1rem; margin-bottom: 4px; }
+    .evento-pill { font-size: 0.7rem; padding: 2px 4px; margin-top: 3px; }
+    .evento-pill input[type="checkbox"] { width: 12px; height: 12px; }
+    .evento-pill span { max-width: 100%; }
+}
+
+@media (max-width: 479.98px) {
+    .dia { min-height: 50px; padding: 3px; }
+    .numero { font-size: 0.9rem; }
+    .evento-pill { font-size: 0.65rem; padding: 1px 3px; }
+    .table th { font-size: 0.7rem; }
+}
+
+@media (max-width: 768px) {
+    .container-fluid { padding: 0.5rem !important; }
+    .table-responsive { overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; max-width: 100% !important; }
+    .table { min-width: 700px !important; width: max-content !important; }
+    .table td, .table th, .dia { min-width: 44px !important; min-height: 44px !important; width: auto !important; height: auto !important; padding: 4px !important; font-size: 0.85rem !important; vertical-align: top !important; box-sizing: border-box !important; }
+    select, .form-select, .btn, button { min-height: 44px !important; font-size: 16px !important; width: 100% !important; }
+    .evento-pill { font-size: 0.75rem !important; padding: 4px 6px !important; min-height: 28px !important; word-break: break-word !important; white-space: normal !important; margin: 2px 0 !important; }
+    .modal-dialog { margin: 0.5rem !important; max-width: calc(100vw - 1rem) !important; }
+    .modal-content { border-radius: 0.5rem !important; }
+    .modal-footer { flex-direction: column !important; gap: 0.5rem !important; }
+    .modal-footer .btn { width: 100% !important; }
+}

@@ -1,17 +1,23 @@
-from flask import Blueprint, jsonify, request, render_template, current_app
+from flask import Blueprint, jsonify, request, render_template
 from flask_login import login_required, current_user
 from auth.login import roles_required
 from core.menu import cargar_menu
+from core.event import EventStore
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-# Importa tus funciones del manager
-from templates.Aplic.agenda.BackEnd.db_manager import (
-    cargar_eventos, agregar_evento, editar_evento,
-    eliminar_evento
+# Instancia reutilizable del store de eventos
+event_store = EventStore('DataBase/time/agenda.json')
+
+# Blueprint con static_folder apuntando a la carpeta local de la app
+agenda_bp = Blueprint(
+    'agenda_bp',
+    __name__,
+    url_prefix='/agenda',
+    static_folder='../static',
+    static_url_path='/agenda/static'
 )
 
-agenda_bp = Blueprint('agenda_bp', __name__, url_prefix='/agenda')
 
 # ========== VISTA PRINCIPAL ==========
 @agenda_bp.route('/')
@@ -33,30 +39,47 @@ def indexagenda():
 @agenda_bp.route('/eventos', methods=['GET'])
 @login_required
 def listar_eventos():
-    return jsonify(cargar_eventos())
+    return jsonify(event_store.listar())
 
 
 @agenda_bp.route('/evento', methods=['POST'])
 @login_required
 @roles_required('viewer')
 def crear_evento():
-    data = request.json
-    agregar_evento(data)
-    return jsonify({"status": "ok"})
+    try:
+        data = request.get_json()
+        evento = event_store.agregar(data)
+        return jsonify({"status": "ok", "evento": evento}), 201
+    except ValueError as e:
+        return jsonify({"status": "error", "msg": str(e)}), 400
 
 
 @agenda_bp.route('/evento/<int:evento_id>', methods=['PUT'])
 @login_required
 @roles_required('viewer')
 def actualizar_evento(evento_id):
-    data = request.json
-    editar_evento(evento_id, data)
-    return jsonify({"status": "ok"})
+    try:
+        data = request.get_json()
+        if event_store.editar(evento_id, data):
+            return jsonify({"status": "ok"})
+        return jsonify({"status": "error", "msg": "Evento no encontrado"}), 404
+    except ValueError as e:
+        return jsonify({"status": "error", "msg": str(e)}), 400
 
 
 @agenda_bp.route('/evento/<int:evento_id>', methods=['DELETE'])
 @login_required
 @roles_required('viewer')
 def borrar_evento(evento_id):
-    eliminar_evento(evento_id)
-    return jsonify({"status": "ok"})
+    if event_store.eliminar(evento_id):
+        return jsonify({"status": "ok"})
+    return jsonify({"status": "error", "msg": "Evento no encontrado"}), 404
+
+
+@agenda_bp.route('/evento/<int:evento_id>/toggle', methods=['PATCH'])
+@login_required
+def toggle_realizado(evento_id):
+    nuevo_estado = event_store.toggle_realizado(evento_id)
+    if nuevo_estado is not None:
+        return jsonify({"status": "ok", "realizado": nuevo_estado})
+    return jsonify({"status": "error", "msg": "Evento no encontrado"}), 404

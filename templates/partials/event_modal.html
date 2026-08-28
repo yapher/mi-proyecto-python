@@ -1,0 +1,48 @@
+<div class="modal fade event-modal" id="modalEvento" tabindex="-1" aria-labelledby="modalEventoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEventoLabel">Evento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" style="filter: invert(1);"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formEvento">
+                    <input type="hidden" id="eventoId" name="id">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" id="titulo" name="titulo" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <input type="date" id="fecha" name="fecha" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea id="descripcion" name="descripcion" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email (para recordatorio)</label>
+                        <input type="email" id="email" name="email" class="form-control" list="lista-emails">
+                        <datalist id="lista-emails"></datalist>
+                    </div>
+                    <div class="mb-3">
+                        <label for="prioridad" class="form-label">Prioridad</label>
+                        <select id="prioridad" name="prioridad" class="form-select">
+                            <option value="alta">🔴 Alta</option>
+                            <option value="media" selected>🟡 Media</option>
+                            <option value="baja">🟢 Baja</option>
+                        </select>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="realizado" name="realizado">
+                        <label for="realizado" class="form-check-label">Evento realizado</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-eliminar" data-action="eliminar" style="display: none;">🗑️ Eliminar</button>
+                <button class="btn btn-agregar" data-action="guardar">💾 Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11083,7 +11083,8 @@
         "fecha": "2026-08-29",
         "descripcion": "INPEC. GRAL. ELECTRICA AREA SERVICIOS",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": false,
+        "prioridad": "media"
     },
     {
         "id": 1416,
@@ -11542,12 +11543,6 @@
         "titulo": "Sin fecha",
         "id": 1564,
         "realizado": false
-    },
-    {
-        "fecha": "2026-08-25",
-        "realizado": true,
-        "titulo": "Toggle TEST",
-        "id": 1566
     },
     {
         "id": 1567,
