@@ -1,7 +1,7 @@
 ================================================================================
 EXPORTACIÓN COMPLETA DEL PROYECTO
 Ruta del proyecto: C:\Empresa
-Fecha de generación: 2026-08-27 19:56:06
+Fecha de generación: 2026-08-27 20:56:48
 ================================================================================
 
 ESTRUCTURA DEL PROYECTO
@@ -337,6 +337,8 @@ Empresa/
 │   └── login.html
 ├── tests/
 │   ├── conftest.py
+│   ├── static/
+│   │   └── sensores/
 │   ├── test_agenda.py
 │   ├── test_bloqueos.py
 │   ├── test_crear_rubros.py
@@ -351,10 +353,6 @@ Empresa/
 │   ├── test_rutas_basicas.py
 │   ├── test_tareas.py
 │   └── unit/
-│       └── core/
-│           ├── __init__.py
-│           ├── test_crud_bp.py
-│           └── test_db_json.py
 └── wsgi.py
 
 ================================================================================
@@ -523,12 +521,13 @@ if __name__ == "__main__":
 ARCHIVO: pytest.ini
 --------------------------------------------------------------------------------
 [pytest]
+pythonpath = .
+testpaths = tests
+
 filterwarnings =
-    # Ignorar advertencias de deprecación de Werkzeug y AST (Python 3.13+)
-    ignore::DeprecationWarning:werkzeug
-    ignore::DeprecationWarning:ast
-    # Ignorar advertencias de dependencias del módulo requests
-    ignore::Warning:requests
+    ignore::DeprecationWarning
+    ignore::PendingDeprecationWarning
+    ignore::Warning
 
 --------------------------------------------------------------------------------
 ARCHIVO: requirements.txt

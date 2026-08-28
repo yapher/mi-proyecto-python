@@ -1,79 +1,97 @@
 ﻿{% extends 'layout.html' %}
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/tareas.css') }}">
-{% endblock %}
+
 {% block content %}
 <div class="tareas-container">
-    <h3 class="mb-3">Tareas</h3>
-    
-    <!-- Formulario de agregar (estilizado) -->
-    <div class="bg-form mb-4 p-3 rounded">
-        <form action="/agregar" method="POST">
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <input type="text" name="titulo" placeholder="Título" required class="form-control">
-                </div>
-                <div class="col-md-3">
-                    <input type="date" name="fecha" required class="form-control">
-                </div>
-                <div class="col-md-3">
-                    <input type="text" name="descripcion" placeholder="Descripción" required class="form-control">
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-agregar w-100">Agregar</button>
-                </div>
+    <h3 class="mb-4">📋 Tareas</h3>
+
+    <!-- Formulario de agregar rápido -->
+    <div class="tareas-form bg-form mb-4 p-3 rounded">
+        <form id="formAgregarTarea" class="row g-2 align-items-end">
+            <div class="col-md-4 col-12">
+                <label class="form-label text-white small">Título</label>
+                <input type="text" id="titulo" name="titulo"
+                       placeholder="Ej: Reunión con equipo"
+                       class="form-control" required>
+            </div>
+            <div class="col-md-3 col-6">
+                <label class="form-label text-white small">Fecha</label>
+                <input type="date" id="fecha" name="fecha"
+                       class="form-control" required>
+            </div>
+            <div class="col-md-3 col-6">
+                <label class="form-label text-white small">Descripción</label>
+                <input type="text" id="descripcion" name="descripcion"
+                       placeholder="Detalles opcionales"
+                       class="form-control">
+            </div>
+            <div class="col-md-2 col-12">
+                <button type="submit" class="btn btn-agregar w-100">
+                    Agregar
+                </button>
             </div>
         </form>
     </div>
 
     <!-- Lista de tareas -->
-    <ul class="event-list">
-        {% for evento in eventos|sort(attribute='fecha') %}
-        <li>
-            <div class="event-info" data-id="{{ evento.id }}" data-titulo="{{ evento.titulo | escape }}"
-                data-fecha="{{ evento.fecha }}" data-descripcion="{{ evento.descripcion | escape }}">
-                <strong>{{ evento.titulo }}</strong> - {{ evento.fecha }}<br>
-                <span class="descripcion-text">{{ evento.descripcion }}</span>
+    <ul id="listaTareas" class="event-list">
+        <li class="text-center text-muted py-4">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
             </div>
-            <a href="/eliminar/{{ evento.id }}" class="btn btn-eliminar btn-sm" onclick="event.stopPropagation();">Eliminar</a>
+            <p class="mt-2">Cargando tareas...</p>
         </li>
-        {% endfor %}
     </ul>
+</div>
 
-    <!-- Modal Bootstrap Unificado (Estilo Dark) -->
-    <div class="modal fade modal-custom-dark" id="popup" tabindex="-1" aria-labelledby="popupLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <form id="edit-form" method="POST">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="popupLabel">Editar Tarea</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" style="filter: invert(1);"></button>
+<!-- Modal de edición -->
+<div class="modal fade modal-custom-dark" id="modalEditarTarea"
+     tabindex="-1" aria-labelledby="modalEditarTareaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form id="formEditarTarea">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditarTareaLabel">Editar Tarea</h5>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal" aria-label="Cerrar"
+                            style="filter: invert(1);"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="edit-id" name="id">
+                    <div class="mb-3">
+                        <label for="edit-titulo" class="form-label">Título</label>
+                        <input type="text" id="edit-titulo" name="titulo"
+                               required class="form-control">
                     </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="id" id="edit-id">
-                        <div class="mb-3">
-                            <label for="edit-titulo" class="form-label">Título</label>
-                            <input type="text" id="edit-titulo" name="titulo" required class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit-fecha" class="form-label">Fecha</label>
-                            <input type="date" id="edit-fecha" name="fecha" required class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit-descripcion" class="form-label">Descripción</label>
-                            <textarea id="edit-descripcion" name="descripcion" rows="4" required class="form-control"></textarea>
-                        </div>
+                    <div class="mb-3">
+                        <label for="edit-fecha" class="form-label">Fecha</label>
+                        <input type="date" id="edit-fecha" name="fecha"
+                               required class="form-control">
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-agregar">Guardar Cambios</button>
+                    <div class="mb-3">
+                        <label for="edit-descripcion" class="form-label">Descripción</label>
+                        <textarea id="edit-descripcion" name="descripcion"
+                                  rows="4" class="form-control"></textarea>
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-eliminar" id="btnEliminarTarea">
+                        Eliminar
+                    </button>
+                    <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-guardar">
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<link rel="stylesheet" href="{{ url_for('indextareas.static', filename='css/tareas.css') }}">
 {% endblock %}
+
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/apps/tareas.js') }}"></script>
+<script src="{{ url_for('indextareas.static', filename='js/tareas.js') }}"></script>
 {% endblock %}

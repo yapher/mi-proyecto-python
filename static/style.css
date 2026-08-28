@@ -10,6 +10,7 @@
 @import url('css/base/alerts.css');
 @import url('css/base/loaders.css');
 @import url('css/base/mobile.css');
+@import url('css/base/list_events.css');
 
 /* Fondo general */
 body {
@@ -77,35 +78,4 @@ body {
     top: 20px;
     right: 20px;
     z-index: 9999;
-}
-
-/* Texto de descripción en la lista */
-.descripcion-text {
-    color: #88c999;
-    text-decoration: underline;
-    cursor: pointer;
-    display: inline-block;
-    margin-top: 5px;
-}
-
-/* Lista de eventos scroll */
-.event-list {
-    max-height: 300px;
-    overflow-y: auto;
-    padding-left: 0;
-    list-style: none;
-}
-
-.event-list li {
-    margin-bottom: 15px;
-    border-bottom: 1px solid #88c999;
-    padding-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.event-info {
-    cursor: pointer;
-    flex: 1 1 auto;
 }

@@ -1,0 +1,49 @@
+/* ============================================================
+TAREAS — Estilos específicos de la aplicación
+Lo reutilizable (.event-list, .event-info) está en:
+static/css/base/list_events.css
+============================================================ */
+
+/* Contenedor principal */
+.tareas-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Estado vacío */
+.tareas-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--color-texto-suave, #b8b8b8);
+}
+
+.tareas-empty i {
+    font-size: 3rem;
+    opacity: 0.5;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+/* ============================================================
+RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+    .tareas-container {
+        padding: 0.5rem;
+    }
+
+    .event-list li {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .event-list li .btn-eliminar {
+        align-self: flex-end;
+        margin-top: 0.5rem;
+    }
+
+    .event-info {
+        margin-bottom: 0.5rem;
+    }
+}
