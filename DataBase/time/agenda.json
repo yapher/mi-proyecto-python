@@ -10993,7 +10993,7 @@
         "fecha": "2026-08-31",
         "descripcion": "Desmontar estabilizador tensión porteria",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media"
     },
     {

@@ -1,7 +1,7 @@
 ================================================================================
 EXPORTACIÓN COMPLETA DEL PROYECTO
 Ruta del proyecto: C:\Empresa
-Fecha de generación: 2026-08-27 20:56:48
+Fecha de generación: 2026-08-30 20:49:19
 ================================================================================
 
 ESTRUCTURA DEL PROYECTO
@@ -23,8 +23,10 @@ Empresa/
 │   ├── __init__.py
 │   ├── arbol_bp.py
 │   ├── blueprint_registry.py
+│   ├── calendar.py
 │   ├── crud_bp.py
 │   ├── db_json.py
+│   ├── event.py
 │   ├── menu.py
 │   └── scheduler.py
 ├── pytest.ini
@@ -32,7 +34,6 @@ Empresa/
 ├── static/
 │   ├── css/
 │   │   ├── apps/
-│   │   │   ├── agenda.css
 │   │   │   ├── cargar_procedimiento.css
 │   │   │   ├── crear_almacenes.css
 │   │   │   ├── crear_procedimiento.css
@@ -57,10 +58,13 @@ Empresa/
 │   │       ├── alerts.css
 │   │       ├── arbol_crud.css
 │   │       ├── buttons.css
+│   │       ├── calendar.css
 │   │       ├── cards.css
 │   │       ├── components.css
 │   │       ├── dropdowns.css
+│   │       ├── event_modal.css
 │   │       ├── image_uploader.css
+│   │       ├── list_events.css
 │   │       ├── loaders.css
 │   │       ├── mobile.css
 │   │       ├── modals.css
@@ -76,7 +80,6 @@ Empresa/
 │   │   └── procedimiento_2025-09-04.txt
 │   ├── js/
 │   │   ├── apps/
-│   │   │   ├── agenda.js
 │   │   │   ├── arbol_crud.js
 │   │   │   ├── busqueda.js
 │   │   │   ├── cargar_procedimiento.js
@@ -90,7 +93,6 @@ Empresa/
 │   │   │   ├── detector_de_rostros.js
 │   │   │   ├── estadistica_de_paradas.js
 │   │   │   ├── estadisticas.js
-│   │   │   ├── evento.js
 │   │   │   ├── exportPDF.js
 │   │   │   ├── filtroTorta.js
 │   │   │   ├── gestion_aplicaciones.js
@@ -120,7 +122,10 @@ Empresa/
 │   │   │   ├── trayectoria.js
 │   │   │   └── verificacion_facial.js
 │   │   ├── croquis.js
-│   │   └── reloj.js
+│   │   ├── reloj.js
+│   │   └── utils/
+│   │       ├── calendar.js
+│   │       └── event_modal.js
 │   ├── modelos/
 │   │   ├── TextoEstandOperaciones.txt
 │   │   ├── avisos.txt
@@ -157,11 +162,16 @@ Empresa/
 │   │   ├── __init__.py
 │   │   ├── agenda/
 │   │   │   ├── BackEnd/
-│   │   │   │   ├── agenda.py
-│   │   │   │   └── db_manager.py
-│   │   │   └── FrontEnd/
-│   │   │       ├── agenda.html
-│   │   │       └── evento.html
+│   │   │   │   └── agenda.py
+│   │   │   ├── FrontEnd/
+│   │   │   │   ├── agenda.html
+│   │   │   │   └── evento.html
+│   │   │   └── static/
+│   │   │       ├── css/
+│   │   │       │   └── agenda.css
+│   │   │       └── js/
+│   │   │           ├── agenda.js
+│   │   │           └── evento.js
 │   │   ├── bajadadeot/
 │   │   │   ├── BackEnd/
 │   │   │   │   └── bajada_de_ot.py
@@ -324,8 +334,13 @@ Empresa/
 │   │   │   ├── BackEnd/
 │   │   │   │   ├── db_manager.py
 │   │   │   │   └── tareas.py
-│   │   │   └── FrontEnd/
-│   │   │       └── tareas.html
+│   │   │   ├── FrontEnd/
+│   │   │   │   └── tareas.html
+│   │   │   └── static/
+│   │   │       ├── css/
+│   │   │       │   └── tareas.css
+│   │   │       └── js/
+│   │   │           └── tareas.js
 │   │   └── trayectoria/
 │   │       ├── BackEnd/
 │   │       │   ├── rbf_model.py
@@ -334,7 +349,10 @@ Empresa/
 │   │           └── trayectoria.html
 │   ├── index.html
 │   ├── layout.html
-│   └── login.html
+│   ├── login.html
+│   └── partials/
+│       ├── calendar.html
+│       └── event_modal.html
 ├── tests/
 │   ├── conftest.py
 │   ├── static/
@@ -351,8 +369,7 @@ Empresa/
 │   ├── test_pagos.py
 │   ├── test_pagos_clonar.py
 │   ├── test_rutas_basicas.py
-│   ├── test_tareas.py
-│   └── unit/
+│   └── test_tareas.py
 └── wsgi.py
 
 ================================================================================
@@ -1059,6 +1076,124 @@ def auto_register_blueprints(app, base_dir="templates/Aplic"):
     return registered, errors
 
 --------------------------------------------------------------------------------
+ARCHIVO: core\calendar.py
+--------------------------------------------------------------------------------
+"""
+core/calendar.py
+================
+Lógica reutilizable para generación de calendarios mensuales.
+Puede ser importada por cualquier aplicación que necesite un calendario.
+
+Uso:
+    from core.calendar import generar_calendario, obtener_dias_mes
+    
+    calendario = generar_calendario(2026, 8)
+"""
+from datetime import date, timedelta
+import calendar
+
+
+def obtener_dias_mes(year: int, month: int) -> int:
+    """Retorna la cantidad de días de un mes específico."""
+    return calendar.monthrange(year, month)[1]
+
+
+def obtener_primer_dia_semana(year: int, month: int) -> int:
+    """
+    Retorna el día de la semana del primer día del mes (0=Lunes ... 6=Domingo).
+    Compatible con la convención ISO de Python.
+    """
+    return date(year, month, 1).weekday()
+
+
+def generar_calendario(year: int, month: int, eventos_por_fecha: dict = None) -> list:
+    """
+    Genera una estructura de calendario mensual como lista de semanas.
+    Cada semana es una lista de 7 días (lunes a domingo).
+    
+    Args:
+        year: Año del calendario
+        month: Mes del calendario (1-12)
+        eventos_por_fecha: Diccionario opcional { 'YYYY-MM-DD': [eventos] }
+    
+    Returns:
+        Lista de semanas, donde cada semana es una lista de 7 dicts:
+        [
+            {
+                'dia': 1-31 o None (si es espacio vacío),
+                'fecha': 'YYYY-MM-DD' o None,
+                'es_hoy': bool,
+                'eventos': [lista de eventos para ese día]
+            },
+            ... (7 días por semana)
+        ]
+    """
+    eventos_por_fecha = eventos_por_fecha or {}
+    hoy = date.today()
+    
+    dias_mes = obtener_dias_mes(year, month)
+    primer_dia = obtener_primer_dia_semana(year, month)
+    
+    semanas = []
+    semana_actual = []
+    
+    # Espacios vacíos antes del primer día del mes
+    for _ in range(primer_dia):
+        semana_actual.append({
+            'dia': None,
+            'fecha': None,
+            'es_hoy': False,
+            'eventos': []
+        })
+    
+    # Días del mes
+    for dia in range(1, dias_mes + 1):
+        fecha = date(year, month, dia)
+        fecha_str = fecha.strftime('%Y-%m-%d')
+        
+        semana_actual.append({
+            'dia': dia,
+            'fecha': fecha_str,
+            'es_hoy': (fecha == hoy),
+            'eventos': eventos_por_fecha.get(fecha_str, [])
+        })
+        
+        # Si la semana está completa (7 días), guardarla
+        if len(semana_actual) == 7:
+            semanas.append(semana_actual)
+            semana_actual = []
+    
+    # Completar la última semana si quedó incompleta
+    if semana_actual:
+        while len(semana_actual) < 7:
+            semana_actual.append({
+                'dia': None,
+                'fecha': None,
+                'es_hoy': False,
+                'eventos': []
+            })
+        semanas.append(semana_actual)
+    
+    return semanas
+
+
+def obtener_meses():
+    """Retorna lista de meses para selects."""
+    meses = [
+        (1, 'Enero'), (2, 'Febrero'), (3, 'Marzo'), (4, 'Abril'),
+        (5, 'Mayo'), (6, 'Junio'), (7, 'Julio'), (8, 'Agosto'),
+        (9, 'Septiembre'), (10, 'Octubre'), (11, 'Noviembre'), (12, 'Diciembre')
+    ]
+    return meses
+
+
+def obtener_rango_anios(inicio: int = 2020, fin: int = None) -> list:
+    """Retorna lista de años para selects."""
+    if fin is None:
+        fin = date.today().year + 5
+    return list(range(inicio, fin + 1))
+
+--------------------------------------------------------------------------------
 ARCHIVO: core\crud_bp.py
 --------------------------------------------------------------------------------
 # core/crud_bp.py
@@ -1399,6 +1534,139 @@ class JsonStore:
             raise
 
 --------------------------------------------------------------------------------
+ARCHIVO: core\event.py
+--------------------------------------------------------------------------------
+"""
+core/event.py
+=============
+Lógica reutilizable para gestión de eventos (CRUD sobre JSON).
+"""
+from datetime import datetime, timedelta
+from typing import List, Dict, Optional
+from core.db_json import JsonStore
+
+
+class EventStore:
+    CAMPOS_REQUERIDOS = ['titulo', 'fecha']
+    PRIORIDADES_VALIDAS = ['alta', 'media', 'baja']
+    
+    def __init__(self, db_path: str):
+        self._store = JsonStore(db_path)
+        self.db_path = db_path
+    
+    def listar(self) -> List[Dict]:
+        return self._store.cargar()
+    
+    def obtener(self, evento_id: int) -> Optional[Dict]:
+        return self._store.buscar_uno(id=evento_id)
+    
+    def agregar(self, data: Dict) -> Dict:
+        self._validar(data)
+        defaults = {
+            'descripcion': '',
+            'email': '',
+            'realizado': False,
+            'prioridad': 'media'
+        }
+        return self._store.agregar(data, defaults=defaults)
+    
+    def editar(self, evento_id: int, nuevos_datos: Dict) -> bool:
+        if not self._store.existe(evento_id):
+            return False
+        self._store.editar(evento_id, nuevos_datos, ensure_fields={'realizado': False})
+        return True
+    
+    def eliminar(self, evento_id: int) -> bool:
+        if not self._store.existe(evento_id):
+            return False
+        self._store.eliminar(evento_id)
+        return True
+    
+    def toggle_realizado(self, evento_id: int) -> Optional[bool]:
+        evento = self.obtener(evento_id)
+        if not evento:
+            return None
+        nuevo_estado = not evento.get('realizado', False)
+        self._store.editar(evento_id, {'realizado': nuevo_estado})
+        return nuevo_estado
+    
+    def obtener_por_fecha(self, fecha: str) -> List[Dict]:
+        return self._store.buscar(fecha=fecha)
+    
+    def obtener_pendientes(self) -> List[Dict]:
+        return [e for e in self.listar() if not e.get('realizado', False)]
+    
+    def agrupar_por_fecha(self) -> Dict[str, List[Dict]]:
+        agrupado = {}
+        for evento in self.listar():
+            fecha = evento.get('fecha')
+            if fecha:
+                agrupado.setdefault(fecha, []).append(evento)
+        return agrupado
+    
+    def obtener_eventos_del_dia_siguiente(self) -> List[Dict]:
+        manana = (datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d')
+        return [
+            e for e in self.listar()
+            if e.get('fecha') == manana and not e.get('realizado', False)
+        ]
+    
+    def _validar(self, data: Dict):
+        for campo in self.CAMPOS_REQUERIDOS:
+            if not data.get(campo):
+                raise ValueError(f"El campo '{campo}' es requerido")
+        try:
+            datetime.strptime(data['fecha'], '%Y-%m-%d')
+        except ValueError:
+            raise ValueError("Formato de fecha inválido. Use YYYY-MM-DD")
+
+
+def enviar_recordatorios_eventos(app, mail, store: EventStore):
+    """Envía recordatorios por email para eventos del día siguiente."""
+    from flask_mail import Message
+    from zoneinfo import ZoneInfo
+    
+    tz = ZoneInfo("America/Argentina/Buenos_Aires")
+    
+    with app.app_context():
+        try:
+            eventos = store.obtener_eventos_del_dia_siguiente()
+        except Exception as e:
+            print(f"[ERROR] No se pudieron cargar eventos: {e}")
+            return
+        
+        ahora = datetime.now(tz)
+        manana = (ahora + timedelta(days=1)).date()
+        
+        for evento in eventos:
+            try:
+                fecha_evento = datetime.strptime(evento["fecha"], "%Y-%m-%d").date()
+            except Exception:
+                continue
+            
+            if fecha_evento == manana and not evento.get("realizado", False):
+                email_destino = evento.get("email")
+                if not email_destino:
+                    continue
+                
+                try:
+                    msg = Message(
+                        subject=f"Recordatorio: {evento.get('titulo', 'Evento')}",
+                        recipients=[email_destino],
+                        body=(
+                            f"Hola,\n\n"
+                            f"Te recordamos que mañana ({fecha_evento}) tenés:\n"
+                            f"Título: {evento.get('titulo', '')}\n"
+                            f"Descripción: {evento.get('descripcion', '')}\n\n"
+                            f"Saludos."
+                        ),
+                    )
+                    mail.send(msg)
+                    print(f"[OK] Recordatorio enviado a {email_destino}")
+                except Exception as e:
+                    print(f"[ERROR] Enviando correo a {email_destino}: {e}")
+
+--------------------------------------------------------------------------------
 ARCHIVO: core\menu.py
 --------------------------------------------------------------------------------
 """
@@ -1431,23 +1699,23 @@ ARCHIVO: core\scheduler.py
 """Configuración centralizada del scheduler (recordatorios de agenda)."""
 from apscheduler.schedulers.background import BackgroundScheduler
 from functools import partial
-from zoneinfo import ZoneInfo
+from core.event import EventStore, enviar_recordatorios_eventos
 
 
 def setup_scheduler(app, mail):
     """Crea y configura el scheduler. NO lo inicia (lo hace el caller)."""
-    from templates.Aplic.agenda.BackEnd.db_manager import (
-        cargar_eventos, enviar_recordatorios
-    )
-
+    event_store = EventStore('DataBase/time/agenda.json')
+    
     scheduler = BackgroundScheduler(timezone="America/Argentina/Buenos_Aires")
+    
     job_func = partial(
-        enviar_recordatorios,
+        enviar_recordatorios_eventos,
         app=app,
         mail=mail,
-        cargar_eventos_func=cargar_eventos
+        store=event_store
     )
-    scheduler.add_job(job_func, "cron", hour=12, minute=30)
+    
+    scheduler.add_job(job_func, "cron", hour=8, minute=0)
     return scheduler
 
 --------------------------------------------------------------------------------
@@ -1465,6 +1733,7 @@ ARCHIVO: static\style.css
 @import url('css/base/alerts.css');
 @import url('css/base/loaders.css');
 @import url('css/base/mobile.css');
+@import url('css/base/list_events.css');
 
 /* Fondo general */
 body {
@@ -1532,372 +1801,6 @@ body {
     top: 20px;
     right: 20px;
     z-index: 9999;
-}
-
-/* Texto de descripción en la lista */
-.descripcion-text {
-    color: #88c999;
-    text-decoration: underline;
-    cursor: pointer;
-    display: inline-block;
-    margin-top: 5px;
-}
-
-/* Lista de eventos scroll */
-.event-list {
-    max-height: 300px;
-    overflow-y: auto;
-    padding-left: 0;
-    list-style: none;
-}
-
-.event-list li {
-    margin-bottom: 15px;
-    border-bottom: 1px solid #88c999;
-    padding-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.event-info {
-    cursor: pointer;
-    flex: 1 1 auto;
-}
-
---------------------------------------------------------------------------------
-ARCHIVO: static\css\apps\agenda.css
---------------------------------------------------------------------------------
-/* Estilos específicos para la aplicación Agenda */
-
-/* Estilo para eventos realizados */
-.evento-realizado {
-    background-color: #6c757d !important;
-    text-decoration: line-through;
-    color: #dcdcdc !important;
-}
-
-/* Ajustes mínimos para el checkbox dentro de la pill */
-.evento-pill {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 4px 6px;
-    margin-top: 6px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.evento-pill input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    margin: 0;
-    cursor: pointer;
-}
-
-.evento-pill span {
-    flex: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* PRIORIDAD: colores (solo si NO está realizado; el gris con !important gana) */
-.evento-pill.prio-alta {
-    background-color: #ff4d4d;
-    color: #fff;
-}
-
-.evento-pill.prio-media {
-    background-color: #ffc107;
-    color: #222;
-}
-
-.evento-pill.prio-baja {
-    background-color: #28a745;
-    color: #fff;
-}
-
-/* Estilos para el calendario */
-.table {
-    background-color: transparent;
-    width: 100% !important;
-    table-layout: fixed; /* Celdas de ancho uniforme */
-}
-
-.table th {
-    background-color: #4b376a;
-    border-color: #88c999;
-    color: #fff;
-    text-align: center;
-    font-weight: 600;
-    padding: 8px 4px;
-}
-
-.table td {
-    border-color: #88c999;
-    vertical-align: top;
-    padding: 4px;
-    width: 14.28%; /* 100% / 7 días */
-}
-
-.dia {
-    min-height: 80px;
-    padding: 6px;
-    border-radius: 8px;
-    background-color: #4b376a;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    word-wrap: break-word;
-    overflow: hidden;
-}
-
-.dia:hover {
-    background-color: #5a4a7a;
-    transform: scale(1.02);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.dia.hoy {
-    background-color: #88c999;
-    color: #222;
-    font-weight: bold;
-    box-shadow: 0 0 15px rgba(136, 201, 153, 0.6);
-}
-
-.numero {
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 8px;
-}
-
-.vacio {
-    background-color: transparent;
-    border: none;
-}
-
-/* Controles responsivos */
-.controls-responsive {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.controls-responsive .form-select {
-    min-width: 100px;
-    flex: 1;
-}
-
-/* ============================================
-   AGENDA - MOBILE (< 768px)
-   ============================================ */
-@media (max-width: 767.98px) {
-    /* Contenedor principal sin padding excesivo */
-    .container-fluid.full-height {
-        padding-left: 0.5rem !important;
-        padding-right: 0.5rem !important;
-    }
-
-    /* Título más compacto */
-    h1.text-center {
-        font-size: 1.5rem !important;
-        margin-bottom: 1rem !important;
-    }
-
-    /* Controles en columna para mejor uso del espacio */
-    .controls-responsive {
-        flex-direction: column !important;
-        align-items: stretch !important;
-    }
-
-    .controls-responsive .form-select {
-        width: 100% !important;
-        min-width: 100% !important;
-    }
-
-    .controls-responsive .btn {
-        width: 100% !important;
-    }
-
-    /* Calendario: celdas más chicas pero legibles */
-    .table th {
-        font-size: 0.75rem;
-        padding: 6px 2px;
-    }
-
-    .table td {
-        padding: 2px;
-    }
-
-    .dia {
-        min-height: 60px;
-        padding: 4px;
-        font-size: 0.85rem;
-    }
-
-    .numero {
-        font-size: 1rem;
-        margin-bottom: 4px;
-    }
-
-    /* Pills de eventos más chicos */
-    .evento-pill {
-        font-size: 0.7rem;
-        padding: 2px 4px;
-        margin-top: 3px;
-    }
-
-    .evento-pill input[type="checkbox"] {
-        width: 12px;
-        height: 12px;
-    }
-
-    .evento-pill span {
-        max-width: 100%;
-    }
-}
-
-/* ============================================
-   AGENDA - MOBILE MUY CHICO (< 480px)
-   ============================================ */
-@media (max-width: 479.98px) {
-    .dia {
-        min-height: 50px;
-        padding: 3px;
-    }
-
-    .numero {
-        font-size: 0.9rem;
-    }
-
-    .evento-pill {
-        font-size: 0.65rem;
-        padding: 1px 3px;
-    }
-
-    .table th {
-        font-size: 0.7rem;
-    }
-}
-
-/* =========================================================
-   FIX MOBILE AGENDA - FORZADO
-   ========================================================= */
-@media (max-width: 768px) {
-  /* Viewport y contenedor */
-  .container-fluid { padding: 0.5rem !important; }
-
-  /* TABLA DEL CALENDARIO - scroll horizontal */
-  #calendario,
-  .tabla-calendario,
-  .calendar-table,
-  table.calendar,
-  table[id*="calendario"],
-  table[class*="calendario"] {
-    display: block !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    max-width: 100% !important;
-    width: 100% !important;
-  }
-
-  #calendario table,
-  .tabla-calendario table,
-  table.calendar {
-    min-width: 700px !important;
-    width: max-content !important;
-  }
-
-  /* CELDAS - touch target 44px mínimo */
-  #calendario td,
-  #calendario th,
-  .dia,
-  .calendar-day,
-  td[class*="dia"],
-  td.dia {
-    min-width: 44px !important;
-    min-height: 44px !important;
-    width: auto !important;
-    height: auto !important;
-    padding: 4px !important;
-    font-size: 0.85rem !important;
-    vertical-align: top !important;
-    box-sizing: border-box !important;
-  }
-
-  /* CONTROLES (selectores mes/año y botones) */
-  select,
-  .form-select,
-  input[type="month"],
-  input[type="date"],
-  #mes, #año,
-  [id*="mes"], [id*="año"] {
-    min-height: 44px !important;
-    font-size: 16px !important;   /* evita zoom iOS */
-    width: 100% !important;
-    max-width: 100% !important;
-    padding: 0.5rem !important;
-  }
-
-  .btn,
-  button {
-    min-height: 44px !important;
-    min-width: 44px !important;
-    font-size: 1rem !important;
-    padding: 0.5rem 1rem !important;
-  }
-
-  /* EVENTOS / PILLS */
-  .evento-pill,
-  .event-pill,
-  .evento,
-  [class*="evento"] {
-    font-size: 0.75rem !important;
-    padding: 4px 6px !important;
-    min-height: 28px !important;
-    word-break: break-word !important;
-    white-space: normal !important;
-    margin: 2px 0 !important;
-  }
-
-  /* MODAL a pantalla completa */
-  .modal-dialog {
-    margin: 0 !important;
-    max-width: 100% !important;
-    min-height: 100vh !important;
-  }
-  .modal-content {
-    min-height: 100vh !important;
-    border-radius: 0 !important;
-  }
-  .modal-body input,
-  .modal-body textarea,
-  .modal-body select {
-    font-size: 16px !important;
-    min-height: 44px !important;
-  }
-  .modal-footer {
-    flex-direction: column !important;
-    gap: 0.5rem !important;
-  }
-  .modal-footer .btn {
-    width: 100% !important;
-  }
-
-  /* TÍTULOS */
-  h1, h2, h3 {
-    font-size: clamp(1.1rem, 5vw, 1.6rem) !important;
-  }
-}
-
-/* Pantallas muy chicas */
-@media (max-width: 400px) {
-  #calendario td, .dia {
-    min-width: 40px !important;
-    min-height: 40px !important;
-    font-size: 0.75rem !important;
-  }
 }
 
 --------------------------------------------------------------------------------
@@ -3913,6 +3816,223 @@ Responsive: en mobile, iconos más pequeños
 }
 
 --------------------------------------------------------------------------------
+ARCHIVO: static\css\base\calendar.css
+--------------------------------------------------------------------------------
+/* static/css/base/calendar.css */
+.calendar-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.calendar-header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.calendar-header h1,
+.calendar-header h2,
+.calendar-header h3 {
+    color: var(--color-primario, #88c999);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.calendar-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.calendar-controls .form-select {
+    min-width: 120px;
+    flex: 1;
+    background-color: var(--color-superficie, #4b376a);
+    border: 1px solid var(--color-primario, #88c999);
+    color: var(--color-texto, #fff);
+    min-height: 44px;
+    font-size: 16px;
+}
+
+.calendar-table {
+    width: 100%;
+    table-layout: fixed;
+    background-color: transparent;
+    border-collapse: separate;
+    border-spacing: 4px;
+}
+
+.calendar-table thead th {
+    background-color: var(--color-superficie, #4b376a);
+    color: var(--color-primario, #88c999);
+    text-align: center;
+    font-weight: 600;
+    padding: 0.75rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.calendar-table tbody td {
+    vertical-align: top;
+    padding: 0.25rem;
+    width: 14.28%;
+}
+
+.calendar-day {
+    min-height: 90px;
+    padding: 0.5rem;
+    border-radius: 0.75rem;
+    background-color: var(--color-superficie, #4b376a);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    word-wrap: break-word;
+    overflow: hidden;
+    border: 2px solid transparent;
+}
+
+.calendar-day:hover {
+    background-color: var(--color-hover, #5a4a7a);
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-color: var(--color-primario, #88c999);
+}
+
+.calendar-day.empty {
+    background-color: transparent;
+    border: none;
+    cursor: default;
+}
+
+.calendar-day.empty:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.calendar-day.today {
+    background: linear-gradient(135deg, #ffeb99, #ffd84d) !important;
+    color: #000 !important;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(255, 193, 7, 0.6);
+    border-color: #ffc107 !important;
+}
+
+.calendar-day.today * {
+    color: #000 !important;
+}
+
+.calendar-day-number {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: var(--color-texto, #fff);
+}
+
+.calendar-day.mon { background: linear-gradient(180deg, #e8f3ff, #cfe9ff); }
+.calendar-day.tue { background: linear-gradient(180deg, #e9fff3, #ccf7e4); }
+.calendar-day.wed { background: linear-gradient(180deg, #fff5e6, #ffe8c7); }
+.calendar-day.thu { background: linear-gradient(180deg, #f5e9ff, #ead6ff); }
+.calendar-day.fri { background: linear-gradient(180deg, #fff0f2, #ffd9df); }
+.calendar-day.sat { background: linear-gradient(180deg, #eefcf5, #d6f7e8); }
+.calendar-day.sun { background: linear-gradient(180deg, #f4f7ff, #e0e7ff); }
+
+.calendar-day.mon *, .calendar-day.tue *, .calendar-day.wed *,
+.calendar-day.thu *, .calendar-day.fri *, .calendar-day.sat *,
+.calendar-day.sun * {
+    color: #0f172a !important;
+}
+
+.calendar-events {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    max-height: 60px;
+    overflow-y: auto;
+}
+
+.event-pill {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    line-height: 1.2;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.event-pill:hover {
+    transform: translateX(2px);
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.event-pill.done {
+    background-color: #6c757d !important;
+    text-decoration: line-through;
+    opacity: 0.7;
+}
+
+.event-pill.prio-alta { background-color: #ff4d4d; color: #fff !important; }
+.event-pill.prio-media { background-color: #ffc107; color: #222 !important; }
+.event-pill.prio-baja { background-color: #28a745; color: #fff !important; }
+
+.event-pill input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.event-pill span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .calendar-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .calendar-controls .form-select,
+    .calendar-controls .btn {
+        width: 100%;
+    }
+    .calendar-table-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    .calendar-table {
+        min-width: 700px;
+    }
+    .calendar-day {
+        min-height: 65px;
+        padding: 0.25rem;
+    }
+    .calendar-day-number {
+        font-size: 0.9rem;
+    }
+    .event-pill {
+        font-size: 0.65rem;
+        padding: 0.15rem 0.35rem;
+    }
+}
+
+--------------------------------------------------------------------------------
 ARCHIVO: static\css\base\cards.css
 --------------------------------------------------------------------------------
 /* ============================================
@@ -4543,6 +4663,40 @@ ARCHIVO: static\css\base\dropdowns.css
 }
 
 --------------------------------------------------------------------------------
+ARCHIVO: static\css\base\event_modal.css
+--------------------------------------------------------------------------------
+.event-modal .modal-content {
+    background-color: var(--color-superficie, #4b376a) !important;
+    color: var(--color-texto, #fff) !important;
+    border-radius: 1rem !important;
+    border: 1px solid rgba(136, 201, 153, 0.2) !important;
+}
+.event-modal .modal-header {
+    border-bottom: 2px solid var(--color-primario, #88c999) !important;
+    background: linear-gradient(to right, #2a1e3b, #3e2d59) !important;
+}
+.event-modal .modal-title { color: var(--color-primario, #88c999) !important; font-weight: 700 !important; }
+.event-modal .form-label { color: var(--color-label, #e5d64f) !important; font-weight: 500; }
+.event-modal .form-control, .event-modal .form-select {
+    background-color: var(--color-fondo, #3e2d59) !important;
+    color: var(--color-texto, #fff) !important;
+    border: 1px solid var(--color-primario, #88c999) !important;
+    min-height: 44px; font-size: 16px;
+}
+.event-modal .form-check-input {
+    width: 1.25em; height: 1.25em;
+    background-color: var(--color-fondo, #3e2d59);
+    border: 1px solid var(--color-primario, #88c999);
+}
+.event-modal .form-check-input:checked { background-color: var(--color-primario, #88c999); }
+.event-modal .modal-footer { border-top: 2px solid var(--color-primario, #88c999) !important; }
+@media (max-width: 768px) {
+    .event-modal .modal-dialog { margin: 0.5rem !important; max-width: calc(100vw - 1rem) !important; }
+    .event-modal .modal-footer { flex-direction: column; }
+    .event-modal .modal-footer .btn { width: 100%; }
+}
+
+--------------------------------------------------------------------------------
 ARCHIVO: static\css\base\image_uploader.css
 --------------------------------------------------------------------------------
 /* ============================================================
@@ -4653,6 +4807,82 @@ ARCHIVO: static\css\base\image_uploader.css
 @media (max-width: 480px) {
     .image-uploader-preview { height: 180px; }
     .image-uploader-placeholder i { font-size: 2.5rem; }
+}
+
+--------------------------------------------------------------------------------
+ARCHIVO: static\css\base\list_events.css
+--------------------------------------------------------------------------------
+/* ============================================
+LISTAS DE EVENTOS / TAREAS
+Estilos reutilizables para listas de items.
+Usado por: tareas, agenda (futuro), etc.
+============================================ */
+
+/* Lista de eventos */
+.event-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.event-list li {
+    background-color: var(--color-superficie, #4b376a);
+    margin-bottom: 0.75rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--color-primario, #88c999);
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.event-list li:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-left-color: var(--color-primario-hover, #77b88b);
+}
+
+/* Información del evento (clickeable) */
+.event-info {
+    flex: 1;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    transition: background-color 0.2s ease;
+    min-width: 0;
+}
+
+.event-info:hover {
+    background-color: var(--color-hover, #5a4a7a);
+}
+
+.event-info strong {
+    color: var(--color-primario, #88c999);
+    font-size: 1.05rem;
+    display: block;
+    margin-bottom: 0.25rem;
+    word-wrap: break-word;
+}
+
+/* Texto de descripción */
+.descripcion-text {
+    color: var(--color-texto-suave, #b8b8b8);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Fecha visible */
+.event-fecha {
+    color: var(--color-label, #e5d64f);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 0.25rem;
 }
 
 --------------------------------------------------------------------------------
@@ -6617,210 +6847,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 --------------------------------------------------------------------------------
-ARCHIVO: static\js\apps\agenda.js
---------------------------------------------------------------------------------
-/**
- * JavaScript para el componente Agenda
- * Maneja la funcionalidad del calendario y gestión de eventos
- */
-
-// Prefijo del blueprint
-const BASE = "/agenda";
-
-// Variables globales
-let eventos = [];
-let modal;
-
-// Inicialización cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', function() {
-    // Obtener elementos del DOM
-    modal = new bootstrap.Modal(document.getElementById('modalEvento'));
-    
-    // Configurar event listeners
-    document.getElementById("mes").onchange = generarCalendario;
-    document.getElementById("año").onchange = generarCalendario;
-    
-    // Cargar eventos iniciales
-    cargarEventos();
-});
-
-/**
- * Carga los eventos desde la API
- */
-function cargarEventos() {
-    fetch(`${BASE}/eventos`)
-        .then(res => res.json())
-        .then(data => { 
-            eventos = data; 
-            generarCalendario(); 
-        })
-        .catch(err => {
-            console.error("Error cargando eventos:", err);
-            eventos = [];
-            generarCalendario();
-        });
-}
-
-/**
- * Obtiene la clase CSS para el día de la semana
- * @param {number} jsDay - Día de la semana (0=domingo, 1=lunes, etc.)
- * @returns {string} Clase CSS correspondiente
- */
-function clasePorDiaSemana(jsDay) {
-    const map = { 1: 'dia-lun', 2: 'dia-mar', 3: 'dia-mie', 4: 'dia-jue', 5: 'dia-vie', 6: 'dia-sab', 0: 'dia-dom' };
-    return map[jsDay] || 'dia-lun';
-}
-
-/**
- * Obtiene la etiqueta del día de la semana
- * @param {number} jsDay - Día de la semana (0=domingo, 1=lunes, etc.)
- * @returns {string} Nombre del día
- */
-function etiquetaDia(jsDay) {
-    const map = { 1: 'Lunes', 2: 'Martes', 3: 'Miércoles', 4: 'Jueves', 5: 'Viernes', 6: 'Sábado', 0: 'Domingo' };
-    return map[jsDay] || '';
-}
-
-/**
- * Genera el calendario con los eventos
- */
-function generarCalendario() {
-    const mes = parseInt(document.getElementById("mes").value);
-    const año = parseInt(document.getElementById("año").value);
-
-    // NOTA: conservo la lógica original que tenías para primerDia/ultimoDia
-    const primerDia = new Date(año, mes - 1, 0);
-    const ultimoDia = new Date(año, mes, 0);
-
-    const calendario = document.getElementById("calendario");
-    calendario.innerHTML = "";
-
-    let fila = document.createElement("tr");
-
-    // Placeholder inicial (mantengo la lógica original)
-    for (let i = 0; i < (primerDia.getDay() + 7) % 7; i++) {
-        const td = document.createElement("td");
-        td.classList.add('vacio');
-        fila.appendChild(td);
-    }
-
-    for (let d = 1; d <= ultimoDia.getDate(); d++) {
-        const fechaStr = `${año}-${String(mes).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
-        const celda = document.createElement("td");
-
-        const jsDay = new Date(año, mes - 1, d).getDay(); // 0=Dom..6=Sáb
-        const claseDia = clasePorDiaSemana(jsDay);
-
-        const cont = document.createElement("div");
-        cont.className = `dia ${claseDia}`;
-        cont.title = `Agregar/editar eventos - ${fechaStr}`;
-        cont.onclick = () => abrirModal(fechaStr);
-
-        const labelSemana = document.createElement("div");
-        labelSemana.className = "semana-label";
-        labelSemana.textContent = etiquetaDia(jsDay);
-
-        const num = document.createElement("div");
-        num.className = "numero";
-        num.textContent = d;
-
-        cont.appendChild(labelSemana);
-        cont.appendChild(num);
-
-        // >>> PRIORIDAD: ordenar por prioridad (alta, media, baja)
-        const ordenPrio = { alta: 1, media: 2, baja: 3 };
-        const eventosDia = eventos
-            .filter(e => e.fecha === fechaStr)
-            .sort((a, b) => (ordenPrio[a?.prioridad] ?? 2) - (ordenPrio[b?.prioridad] ?? 2));
-
-        eventosDia.forEach(e => {
-            const pill = document.createElement("div");
-            pill.className = "evento-pill";
-            if (e.realizado) pill.classList.add("evento-realizado");
-
-            // >>> PRIORIDAD: color visual según prioridad (si no está realizado)
-            if (!e.realizado) {
-                if (e.prioridad === "alta") pill.classList.add("prio-alta");
-                else if (e.prioridad === "media") pill.classList.add("prio-media");
-                else if (e.prioridad === "baja") pill.classList.add("prio-baja");
-            }
-
-            // Checkbox para marcar realizado (evita que abra modal)
-            const chk = document.createElement("input");
-            chk.type = "checkbox";
-            chk.checked = !!e.realizado;
-            chk.onclick = (ev) => {
-                ev.stopPropagation();
-                toggleRealizado(e.id, chk.checked);
-            };
-
-            const span = document.createElement("span");
-            span.textContent = e.titulo;
-
-            // Click en la pill (excepto el checkbox) abre modal
-            pill.onclick = (ev) => { ev.stopPropagation(); abrirModal(e.fecha, e); };
-
-            pill.appendChild(chk);
-            pill.appendChild(span);
-            cont.appendChild(pill);
-        });
-
-        // Resaltar hoy
-        const hoy = new Date();
-        const esHoy = hoy.getFullYear() === año && (hoy.getMonth() + 1) === mes && hoy.getDate() === d;
-        if (esHoy) cont.classList.add('hoy');
-
-        celda.appendChild(cont);
-        fila.appendChild(celda);
-
-        if ((primerDia.getDay() + d) % 7 === 0 || d === ultimoDia.getDate()) {
-            calendario.appendChild(fila);
-            fila = document.createElement("tr");
-        }
-    }
-}
-
-/**
- * Abre el modal para crear/editar un evento
- * @param {string} fecha - Fecha del evento
- * @param {Object} evento - Evento a editar (opcional)
- */
-function abrirModal(fecha = "", evento = null) {
-    document.getElementById("eventoId").value = evento?.id || "";
-    document.getElementById("titulo").value = evento?.titulo || "";
-    document.getElementById("fecha").value = fecha || evento?.fecha || "";
-    document.getElementById("descripcion").value = evento?.descripcion || "";
-    document.getElementById("email").value = evento?.email || "";
-    document.getElementById("realizado").checked = evento?.realizado || false;
-
-    // >>> PRIORIDAD: setear valor por defecto/actual
-    const selPrio = document.getElementById("prioridad");
-    if (selPrio) selPrio.value = evento?.prioridad || "media";
-
-    modal.show();
-}
-
-/**
- * Cambia el estado de realizado de un evento
- * @param {number} id - ID del evento
- * @param {boolean} estado - Nuevo estado de realizado
- */
-function toggleRealizado(id, estado) {
-    fetch(`${BASE}/evento/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ realizado: estado })
-    }).then(res => {
-        if (!res.ok) throw new Error('Error al actualizar');
-        cargarEventos();
-    }).catch(err => {
-        console.error("Error toggleRealizado:", err);
-        Swal.fire({ icon: 'error', title: 'Ups', text: 'No se pudo actualizar el evento.' });
-        cargarEventos();
-    });
-}
-
---------------------------------------------------------------------------------
 ARCHIVO: static\js\apps\arbol_crud.js
 --------------------------------------------------------------------------------
 /**
@@ -8763,99 +8789,6 @@ function mostrarGraficoTotal(datos) {
 }
 
 cargarDatos();
-
---------------------------------------------------------------------------------
-ARCHIVO: static\js\apps\evento.js
---------------------------------------------------------------------------------
-// evento.js
-
-function actualizarDatalistEmails() {
-    const datalist = document.getElementById('lista-emails');
-    datalist.innerHTML = '';
-    const emails = JSON.parse(localStorage.getItem('emailsGuardados') || '[]');
-    emails.forEach(email => {
-        let option = document.createElement('option');
-        option.value = email;
-        datalist.appendChild(option);
-    });
-}
-
-actualizarDatalistEmails();
-
-function guardarEvento() {
-    const id = document.getElementById("eventoId").value;
-    const titulo = document.getElementById("titulo").value.trim();
-    const fecha = document.getElementById("fecha").value;
-    const descripcion = document.getElementById("descripcion").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const realizado = document.getElementById("realizado").checked;
-    const prioridad = (document.getElementById("prioridad")?.value) || "media";
-
-    if (!titulo || !fecha || !email) {
-        Swal.fire({ icon: 'warning', title: 'Campos requeridos', text: 'Título, fecha y email son obligatorios.' });
-        return;
-    }
-    if (!validarEmail(email)) {
-        Swal.fire({ icon: 'error', title: 'Email inválido', text: 'Por favor, ingresa un correo válido.' });
-        return;
-    }
-
-    // Guardar el email en localStorage
-    if (email) {
-        let emails = JSON.parse(localStorage.getItem('emailsGuardados') || '[]');
-        if (!emails.includes(email)) {
-            emails.push(email);
-            localStorage.setItem('emailsGuardados', JSON.stringify(emails));
-            actualizarDatalistEmails();
-        }
-    }
-
-    const data = { titulo, fecha, descripcion, email, realizado, prioridad };
-    const url = id ? `${BASE}/evento/${id}` : `${BASE}/evento`;
-    const method = id ? "PUT" : "POST";
-
-    fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    }).then(res => {
-        if (!res.ok) throw new Error('Error al guardar');
-        modal.hide();
-        cargarEventos();
-        Swal.fire({ icon: 'success', title: 'Guardado', timer: 1200, showConfirmButton: false });
-    }).catch(() => {
-        Swal.fire({ icon: 'error', title: 'Ups', text: 'No se pudo guardar el evento.' });
-    });
-}
-
-function eliminarEvento() {
-    const id = document.getElementById("eventoId").value;
-    if (!id) { modal.hide(); return; }
-
-    Swal.fire({
-        title: '¿Eliminar evento?', text: 'Esta acción no se puede deshacer.',
-        icon: 'warning', showCancelButton: true,
-        confirmButtonText: 'Sí, eliminar', cancelButtonText: 'Cancelar'
-    }).then(result => {
-        if (!result.isConfirmed) return;
-
-        fetch(`${BASE}/evento/${id}`, { method: "DELETE" })
-            .then(res => {
-                if (!res.ok) throw new Error('Error al eliminar');
-                modal.hide();
-                cargarEventos();
-                Swal.fire({ icon: 'success', title: 'Eliminado', timer: 1200, showConfirmButton: false });
-            })
-            .catch(() => {
-                Swal.fire({ icon: 'error', title: 'Ups', text: 'No se pudo eliminar el evento.' });
-            });
-    });
-}
-
-function validarEmail(valor) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(valor).toLowerCase());
-}
 
 --------------------------------------------------------------------------------
 ARCHIVO: static\js\apps\exportPDF.js
@@ -12154,6 +12087,245 @@ document.getElementById('captureBtn').addEventListener('click', () => {
 });
 
 --------------------------------------------------------------------------------
+ARCHIVO: static\js\utils\calendar.js
+--------------------------------------------------------------------------------
+// static/js/utils/calendar.js
+class Calendar {
+    constructor(config = {}) {
+        if (!config.containerId) throw new Error('Calendar: falta containerId');
+        this.config = Object.assign({
+            containerId: null,
+            year: new Date().getFullYear(),
+            month: new Date().getMonth() + 1,
+            eventos: [],
+            onDayClick: null,
+            onEventClick: null,
+            onToggleRealizado: null,
+            dayNames: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+            dayClasses: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+        }, config);
+        this.container = document.getElementById(this.config.containerId);
+    }
+
+    render() {
+        if (!this.container) return;
+        const { year, month, eventos } = this.config;
+        const semanas = this._generarSemanas(year, month, eventos);
+        
+        let html = `<table class="calendar-table table text-white">
+            <thead><tr>${this.config.dayNames.map(d => `<th>${d}</th>`).join('')}</tr></thead>
+            <tbody>`;
+        
+        semanas.forEach(semana => {
+            html += '<tr>';
+            semana.forEach((dia, index) => {
+                if (dia.dia === null) {
+                    html += '<td><div class="calendar-day empty"></div></td>';
+                } else {
+                    const clases = this._clasesDia(dia, index);
+                    html += `<td>
+                        <div class="calendar-day ${clases}" data-fecha="${dia.fecha}"
+                             onclick="window.__cal_day__('${dia.fecha}')">
+                            <div class="calendar-day-number">${dia.dia}</div>
+                            <div class="calendar-events">${this._renderEventos(dia.eventos)}</div>
+                        </div>
+                    </td>`;
+                }
+            });
+            html += '</tr>';
+        });
+        
+        html += '</tbody></table>';
+        this.container.innerHTML = html;
+        
+        window.__cal_day__ = (fecha) => this.config.onDayClick && this.config.onDayClick(fecha);
+        window.__cal_event__ = (json) => {
+            if (this.config.onEventClick) this.config.onEventClick(JSON.parse(decodeURIComponent(json)));
+        };
+        window.__cal_toggle__ = (id, checked, e) => {
+            e.stopPropagation();
+            if (this.config.onToggleRealizado) this.config.onToggleRealizado(id, checked);
+        };
+    }
+
+    setEventos(eventos) { this.config.eventos = eventos; this.render(); }
+    setFecha(year, month) { this.config.year = year; this.config.month = month; this.render(); }
+
+    _generarSemanas(year, month, eventos) {
+        const diasMes = new Date(year, month, 0).getDate();
+        const primerDia = (new Date(year, month - 1, 1).getDay() + 6) % 7;
+        const hoy = new Date();
+        const esHoy = (d) => hoy.getFullYear() === year && (hoy.getMonth() + 1) === month && hoy.getDate() === d;
+        
+        const porFecha = {};
+        eventos.forEach(e => {
+            if (e.fecha) (porFecha[e.fecha] = porFecha[e.fecha] || []).push(e);
+        });
+        
+        const semanas = [];
+        let semana = [];
+        for (let i = 0; i < primerDia; i++) semana.push({ dia: null, fecha: null, eventos: [] });
+        
+        for (let d = 1; d <= diasMes; d++) {
+            const f = `${year}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+            semana.push({ dia: d, fecha: f, esHoy: esHoy(d), eventos: porFecha[f] || [] });
+            if (semana.length === 7) { semanas.push(semana); semana = []; }
+        }
+        if (semana.length) {
+            while (semana.length < 7) semana.push({ dia: null, fecha: null, eventos: [] });
+            semanas.push(semana);
+        }
+        return semanas;
+    }
+
+    _clasesDia(dia, idx) {
+        let c = this.config.dayClasses[idx] || '';
+        if (dia.esHoy) c += ' today';
+        return c.trim();
+    }
+
+    _renderEventos(eventos) {
+        if (!eventos || !eventos.length) return '';
+        return eventos.map(e => {
+            const done = e.realizado ? 'done' : '';
+            let prio = '';
+            if (!e.realizado) {
+                if (e.prioridad === 'alta') prio = 'prio-alta';
+                else if (e.prioridad === 'media') prio = 'prio-media';
+                else if (e.prioridad === 'baja') prio = 'prio-baja';
+            }
+            const json = encodeURIComponent(JSON.stringify(e));
+            return `<div class="event-pill ${done} ${prio}" onclick="window.__cal_event__('${json}')">
+                <input type="checkbox" ${e.realizado ? 'checked' : ''} 
+                       onclick="window.__cal_toggle__(${e.id}, this.checked, event)">
+                <span>${e.titulo || ''}</span>
+            </div>`;
+        }).join('');
+    }
+}
+window.Calendar = Calendar;
+
+--------------------------------------------------------------------------------
+ARCHIVO: static\js\utils\event_modal.js
+--------------------------------------------------------------------------------
+// static/js/utils/event_modal.js
+class EventModal {
+    constructor(config = {}) {
+        this.config = Object.assign({
+            modalId: null, formId: null,
+            onGuardar: null, onEliminar: null, onGuardado: null
+        }, config);
+        this.el = document.getElementById(this.config.modalId);
+        if (!this.el) return;
+        this.modal = new bootstrap.Modal(this.el);
+        this.eventoActual = null;
+        this._bind();
+    }
+
+    abrirNuevo(fecha = '') {
+        this.eventoActual = null;
+        this._limpiar();
+        if (fecha) {
+            const f = this.el.querySelector('#eventoFecha');
+            if (f) f.value = fecha;
+        }
+        this.el.querySelector('.modal-title').textContent = 'Nuevo Evento';
+        this._toggleEliminar(false);
+        this.modal.show();
+    }
+
+    abrirEditar(evento) {
+        this.eventoActual = evento;
+        this._setVal('eventoId', evento.id || '');
+        this._setVal('eventoTitulo', evento.titulo || '');
+        this._setVal('eventoFecha', evento.fecha || '');
+        this._setVal('eventoDescripcion', evento.descripcion || '');
+        this._setVal('eventoEmail', evento.email || '');
+        this._setVal('eventoPrioridad', evento.prioridad || 'media');
+        const chk = this.el.querySelector('#eventoRealizado');
+        if (chk) chk.checked = !!evento.realizado;
+        this.el.querySelector('.modal-title').textContent = 'Editar Evento';
+        this._toggleEliminar(true);
+        this.modal.show();
+    }
+
+    cerrar() { this.modal.hide(); }
+
+    _bind() {
+        this.el.querySelector('[data-action="guardar"]').addEventListener('click', () => this._guardar());
+        this.el.querySelector('[data-action="eliminar"]').addEventListener('click', () => this._eliminar());
+    }
+
+    _limpiar() {
+        this.el.querySelectorAll('input, textarea, select').forEach(i => {
+            if (i.type === 'checkbox') i.checked = false;
+            else if (i.tagName === 'SELECT') i.selectedIndex = 0;
+            else i.value = '';
+        });
+    }
+
+    _setVal(id, val) {
+        const el = this.el.querySelector(`#${id}`);
+        if (el) el.value = val || '';
+    }
+
+    _getVal(id) {
+        const el = this.el.querySelector(`#${id}`);
+        return el ? el.value.trim() : '';
+    }
+
+    _toggleEliminar(show) {
+        const btn = this.el.querySelector('[data-action="eliminar"]');
+        if (btn) btn.style.display = show ? 'inline-block' : 'none';
+    }
+
+    async _guardar() {
+        const data = {
+            id: this.eventoActual?.id || null,
+            titulo: this._getVal('eventoTitulo'),
+            fecha: this._getVal('eventoFecha'),
+            descripcion: this._getVal('eventoDescripcion'),
+            email: this._getVal('eventoEmail'),
+            prioridad: this._getVal('eventoPrioridad') || 'media',
+            realizado: this.el.querySelector('#eventoRealizado').checked
+        };
+        if (!data.titulo || !data.fecha) {
+            this._notif('Título y fecha son requeridos', 'warning');
+            return;
+        }
+        try {
+            if (this.config.onGuardar) await this.config.onGuardar(data);
+            this._notif('Evento guardado', 'success');
+            this.cerrar();
+            if (this.config.onGuardado) this.config.onGuardado();
+        } catch (e) {
+            this._notif('Error al guardar', 'error');
+        }
+    }
+
+    async _eliminar() {
+        if (!this.eventoActual?.id) return;
+        if (!confirm('¿Eliminar este evento?')) return;
+        try {
+            if (this.config.onEliminar) await this.config.onEliminar(this.eventoActual.id);
+            this._notif('Evento eliminado', 'success');
+            this.cerrar();
+        } catch (e) {
+            this._notif('Error al eliminar', 'error');
+        }
+    }
+
+    _notif(msg, tipo) {
+        if (typeof Noty !== 'undefined') {
+            new Noty({ type: tipo, layout: 'topRight', timeout: 3000, theme: 'mint', text: msg }).show();
+        } else {
+            alert(msg);
+        }
+    }
+}
+window.EventModal = EventModal;
+
+--------------------------------------------------------------------------------
 ARCHIVO: static\modelos\TextoEstandOperaciones.txt
 --------------------------------------------------------------------------------
 <U>ELEMENTOS DE PROTECCION ESPECIFICA</>:
@@ -13744,41 +13916,32 @@ ARCHIVO: templates\layout.html
 <!DOCTYPE html>
 <html lang="es">
 
+<!-- templates/layout.html (SOLO la sección <head>) -->
+
 <head>
     <meta charset="UTF-8">
-    <!-- VIEWPORT MEJORADO PARA MOBILE (notch, zoom, fullscreen) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
     <meta name="theme-color" content="#3e2d59">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=no">
-
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo_HA_1.gif') }}">
     <title>Empresa</title>
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
-    <!-- CSS de Select2 -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.2.0-beta/noty.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.2.0-beta/themes/mint.min.css" />
-
-    <!-- CSS específico para mobile -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/mobile.css') }}">
-    <!-- CSS genérico de árboles jerárquicos (reutilizado por varias apps) -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/arbol_crud.css') }}">
-    <!-- CSS reutilizable para componentes de subida de imágenes -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/base/image_uploader.css') }}">
-    <!-- Logger profesional reutilizable -->
-    <script src="{{ url_for('static', filename='js/apps/logger.js') }}"></script>
-    <!-- Componente reutilizable de subida de imágenes -->
-    <script src="{{ url_for('static', filename='js/apps/image_uploader.js') }}"></script>
-    <!-- Animaciones de modales con origen de click -->
-    <script src="{{ url_for('static', filename='js/apps/modal_animations.js') }}"></script> 
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/image_uploader.css') }}">
+
+    {# ✅ NUEVO: Block para que cada app pueda inyectar CSS específico #}
+    {% block head %}{% endblock %}
+
 </head>
 
 <body>
@@ -13790,8 +13953,8 @@ ARCHIVO: templates\layout.html
                 <span class="brand-text">Empresa</span>
             </a>
 
-            <button class="navbar-toggler nav-link" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Menú">
+            <button class="navbar-toggler nav-link" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+                aria-controls="navbar" aria-expanded="false" aria-label="Menú">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -13883,7 +14046,8 @@ ARCHIVO: templates\layout.html
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -14010,20 +14174,26 @@ ARCHIVO: templates\Aplic\__init__.py
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\agenda\BackEnd\agenda.py
 --------------------------------------------------------------------------------
-from flask import Blueprint, jsonify, request, render_template, current_app
+from flask import Blueprint, jsonify, request, render_template
 from flask_login import login_required, current_user
 from auth.login import roles_required
 from core.menu import cargar_menu
+from core.event import EventStore
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-# Importa tus funciones del manager
-from templates.Aplic.agenda.BackEnd.db_manager import (
-    cargar_eventos, agregar_evento, editar_evento,
-    eliminar_evento
+# Instancia reutilizable del store de eventos
+event_store = EventStore('DataBase/time/agenda.json')
+
+# Blueprint con static_folder apuntando a la carpeta local de la app
+agenda_bp = Blueprint(
+    'agenda_bp',
+    __name__,
+    url_prefix='/agenda',
+    static_folder='../static',
+    static_url_path='/agenda/static'
 )
 
-agenda_bp = Blueprint('agenda_bp', __name__, url_prefix='/agenda')
 
 # ========== VISTA PRINCIPAL ==========
 @agenda_bp.route('/')
@@ -14045,138 +14215,75 @@ def indexagenda():
 @agenda_bp.route('/eventos', methods=['GET'])
 @login_required
 def listar_eventos():
-    return jsonify(cargar_eventos())
+    return jsonify(event_store.listar())
 
 
 @agenda_bp.route('/evento', methods=['POST'])
 @login_required
 @roles_required('viewer')
 def crear_evento():
-    data = request.json
-    agregar_evento(data)
-    return jsonify({"status": "ok"})
+    try:
+        data = request.get_json()
+        evento = event_store.agregar(data)
+        return jsonify({"status": "ok", "evento": evento}), 201
+    except ValueError as e:
+        return jsonify({"status": "error", "msg": str(e)}), 400
 
 
 @agenda_bp.route('/evento/<int:evento_id>', methods=['PUT'])
 @login_required
 @roles_required('viewer')
 def actualizar_evento(evento_id):
-    data = request.json
-    editar_evento(evento_id, data)
-    return jsonify({"status": "ok"})
+    try:
+        data = request.get_json()
+        if event_store.editar(evento_id, data):
+            return jsonify({"status": "ok"})
+        return jsonify({"status": "error", "msg": "Evento no encontrado"}), 404
+    except ValueError as e:
+        return jsonify({"status": "error", "msg": str(e)}), 400
 
 
 @agenda_bp.route('/evento/<int:evento_id>', methods=['DELETE'])
 @login_required
 @roles_required('viewer')
 def borrar_evento(evento_id):
-    eliminar_evento(evento_id)
-    return jsonify({"status": "ok"})
-
---------------------------------------------------------------------------------
-ARCHIVO: templates\Aplic\agenda\BackEnd\db_manager.py
---------------------------------------------------------------------------------
-import json
-import os
-from datetime import datetime, timedelta
-from zoneinfo import ZoneInfo
-from flask_mail import Message
-from core.db_json import JsonStore
-
-DB_PATH = "DataBase/time/agenda.json"
-_store = JsonStore(DB_PATH)
+    if event_store.eliminar(evento_id):
+        return jsonify({"status": "ok"})
+    return jsonify({"status": "error", "msg": "Evento no encontrado"}), 404
 
 
-def cargar_eventos():
-    return _store.cargar()
-
-
-def guardar_eventos(eventos):
-    _store.guardar(eventos)
-
-
-def agregar_evento(evento):
-    # Mantiene el comportamiento original: asegura campo 'realizado'
-    return _store.agregar(evento, defaults={"realizado": False})
-
-
-def editar_evento(evento_id, nuevos_datos):
-    # Mantiene el comportamiento original: asegura 'realizado' si falta
-    _store.editar(evento_id, nuevos_datos, ensure_fields={"realizado": False})
-
-
-def eliminar_evento(evento_id):
-    _store.eliminar(evento_id)
-
-
-# =========================
-# Job para recordatorios
-# =========================
-def enviar_recordatorios(app, mail, cargar_eventos_func=cargar_eventos):
-    """Envía recordatorios por email para eventos del día siguiente."""
-    tz = ZoneInfo("America/Argentina/Buenos_Aires")
-    with app.app_context():
-        try:
-            eventos = cargar_eventos_func()
-        except Exception as e:
-            print(f"[ERROR] No se pudieron cargar eventos: {e}")
-            return
-
-        ahora = datetime.now(tz)
-        manana = (ahora + timedelta(days=1)).date()
-
-        for evento in eventos:
-            try:
-                fecha_evento = datetime.strptime(evento["fecha"], "%Y-%m-%d").date()
-            except Exception:
-                continue
-
-            if fecha_evento == manana and not evento.get("realizado", False):
-                email_destino = evento.get("email")
-                if not email_destino:
-                    continue
-
-                try:
-                    msg = Message(
-                        subject=f"Recordatorio: {evento.get('titulo', 'Evento')}",
-                        recipients=[email_destino],
-                        body=(
-                            f"Hola,\n\n"
-                            f"Te recordamos que mañana ({fecha_evento}) tenés:\n\n"
-                            f"Título: {evento.get('titulo', '')}\n"
-                            f"Descripción: {evento.get('descripcion', '')}\n\n"
-                            f"Saludos."
-                        ),
-                    )
-                    mail.send(msg)
-                    print(f"[OK] Recordatorio enviado a {email_destino}")
-                except Exception as e:
-                    print(f"[ERROR] Enviando correo a {email_destino}: {e}")
+@agenda_bp.route('/evento/<int:evento_id>/toggle', methods=['PATCH'])
+@login_required
+def toggle_realizado(evento_id):
+    nuevo_estado = event_store.toggle_realizado(evento_id)
+    if nuevo_estado is not None:
+        return jsonify({"status": "ok", "realizado": nuevo_estado})
+    return jsonify({"status": "error", "msg": "Evento no encontrado"}), 404
 
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\agenda\FrontEnd\agenda.html
 --------------------------------------------------------------------------------
 {% extends 'layout.html' %}
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/agenda.css') }}">
+<link rel="stylesheet" href="{{ url_for('agenda_bp.static', filename='css/agenda.css') }}">
 <div class="container-fluid full-height py-3">
     <h1 class="text-center mb-4">Agenda Mensual</h1>
-
+    
     <!-- Controles -->
     <div class="d-flex flex-wrap gap-2 justify-content-between mb-3 controls-responsive">
         <select id="mes" class="form-select w-auto">
             {% for m in range(1,13) %}
-                <option value="{{m}}" {% if m == mes %}selected{% endif %}>{{m}}</option>
+            <option value="{{m}}" {% if m == mes %}selected{% endif %}>{{m}}</option>
             {% endfor %}
         </select>
         <select id="año" class="form-select w-auto">
             {% for a in range(2020, 2031) %}
-                <option value="{{a}}" {% if a == año %}selected{% endif %}>{{a}}</option>
+            <option value="{{a}}" {% if a == año %}selected{% endif %}>{{a}}</option>
             {% endfor %}
         </select>
         <button class="btn btn-agregar" onclick="abrirModal()">Agregar Evento</button>
     </div>
-
+    
     <!-- Calendario -->
     <div class="table-responsive">
         <table class="table table-bordered text-white">
@@ -14194,7 +14301,7 @@ ARCHIVO: templates\Aplic\agenda\FrontEnd\agenda.html
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/apps/agenda.js') }}"></script>
+<script src="{{ url_for('agenda_bp.static', filename='js/agenda.js') }}"></script>
 {% endblock %}
 
 --------------------------------------------------------------------------------
@@ -14248,7 +14355,397 @@ ARCHIVO: templates\Aplic\agenda\FrontEnd\evento.html
         </div>
     </div>
 </div>
-<script src="/static/js/apps/evento.js"></script>
+<script src="{{ url_for('agenda_bp.static', filename='js/evento.js') }}"></script>
+
+--------------------------------------------------------------------------------
+ARCHIVO: templates\Aplic\agenda\static\css\agenda.css
+--------------------------------------------------------------------------------
+/* Estilos específicos para la aplicación Agenda */
+.evento-realizado {
+    background-color: #6c757d !important;
+    text-decoration: line-through;
+    color: #dcdcdc !important;
+}
+
+.evento-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    margin-top: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.evento-pill input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.evento-pill span {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.evento-pill.prio-alta { background-color: #ff4d4d; color: #fff; }
+.evento-pill.prio-media { background-color: #ffc107; color: #222; }
+.evento-pill.prio-baja { background-color: #28a745; color: #fff; }
+
+.table {
+    background-color: transparent;
+    width: 100% !important;
+    table-layout: fixed;
+}
+
+.table th {
+    background-color: #4b376a;
+    border-color: #88c999;
+    color: #fff;
+    text-align: center;
+    font-weight: 600;
+    padding: 8px 4px;
+}
+
+.table td {
+    border-color: #88c999;
+    vertical-align: top;
+    padding: 4px;
+    width: 14.28%;
+}
+
+.dia {
+    min-height: 80px;
+    padding: 6px;
+    border-radius: 8px;
+    background-color: #4b376a;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.dia:hover {
+    background-color: #5a4a7a;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dia.hoy {
+    background-color: #88c999;
+    color: #222;
+    font-weight: bold;
+    box-shadow: 0 0 15px rgba(136, 201, 153, 0.6);
+    animation: pulse 1.5s infinite;
+}
+
+.numero {
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.vacio {
+    background-color: transparent;
+    border: none;
+}
+
+.controls-responsive {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.controls-responsive .form-select {
+    min-width: 100px;
+    flex: 1;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 12px rgba(136, 201, 153, 0.6); }
+    50% { transform: scale(1.05); box-shadow: 0 0 18px rgba(136, 201, 153, 0.8); }
+    100% { transform: scale(1); box-shadow: 0 0 12px rgba(136, 201, 153, 0.6); }
+}
+
+@media (max-width: 767.98px) {
+    .container-fluid.full-height { padding-left: 0.5rem !important; padding-right: 0.5rem !important; }
+    h1.text-center { font-size: 1.5rem !important; margin-bottom: 1rem !important; }
+    .controls-responsive { flex-direction: column !important; align-items: stretch !important; }
+    .controls-responsive .form-select, .controls-responsive .btn { width: 100% !important; min-width: 100% !important; }
+    .table th { font-size: 0.75rem; padding: 6px 2px; }
+    .table td { padding: 2px; }
+    .dia { min-height: 60px; padding: 4px; font-size: 0.85rem; }
+    .numero { font-size: 1rem; margin-bottom: 4px; }
+    .evento-pill { font-size: 0.7rem; padding: 2px 4px; margin-top: 3px; }
+    .evento-pill input[type="checkbox"] { width: 12px; height: 12px; }
+    .evento-pill span { max-width: 100%; }
+}
+
+@media (max-width: 479.98px) {
+    .dia { min-height: 50px; padding: 3px; }
+    .numero { font-size: 0.9rem; }
+    .evento-pill { font-size: 0.65rem; padding: 1px 3px; }
+    .table th { font-size: 0.7rem; }
+}
+
+@media (max-width: 768px) {
+    .container-fluid { padding: 0.5rem !important; }
+    .table-responsive { overflow-x: auto !important; -webkit-overflow-scrolling: touch !important; max-width: 100% !important; }
+    .table { min-width: 700px !important; width: max-content !important; }
+    .table td, .table th, .dia { min-width: 44px !important; min-height: 44px !important; width: auto !important; height: auto !important; padding: 4px !important; font-size: 0.85rem !important; vertical-align: top !important; box-sizing: border-box !important; }
+    select, .form-select, .btn, button { min-height: 44px !important; font-size: 16px !important; width: 100% !important; }
+    .evento-pill { font-size: 0.75rem !important; padding: 4px 6px !important; min-height: 28px !important; word-break: break-word !important; white-space: normal !important; margin: 2px 0 !important; }
+    .modal-dialog { margin: 0.5rem !important; max-width: calc(100vw - 1rem) !important; }
+    .modal-content { border-radius: 0.5rem !important; }
+    .modal-footer { flex-direction: column !important; gap: 0.5rem !important; }
+    .modal-footer .btn { width: 100% !important; }
+}
+
+--------------------------------------------------------------------------------
+ARCHIVO: templates\Aplic\agenda\static\js\agenda.js
+--------------------------------------------------------------------------------
+const BASE = "/agenda";
+let eventos = [];
+let modal;
+
+document.addEventListener('DOMContentLoaded', function() {
+    modal = new bootstrap.Modal(document.getElementById('modalEvento'));
+    document.getElementById("mes").onchange = generarCalendario;
+    document.getElementById("año").onchange = generarCalendario;
+    cargarEventos();
+});
+
+function cargarEventos() {
+    fetch(`${BASE}/eventos`)
+        .then(res => res.json())
+        .then(data => {
+            eventos = data;
+            generarCalendario();
+        })
+        .catch(err => {
+            console.error("Error cargando eventos:", err);
+            eventos = [];
+            generarCalendario();
+        });
+}
+
+function clasePorDiaSemana(jsDay) {
+    const map = { 1: 'dia-lun', 2: 'dia-mar', 3: 'dia-mie', 4: 'dia-jue', 5: 'dia-vie', 6: 'dia-sab', 0: 'dia-dom' };
+    return map[jsDay] || 'dia-lun';
+}
+
+function etiquetaDia(jsDay) {
+    const map = { 1: 'Lunes', 2: 'Martes', 3: 'Miércoles', 4: 'Jueves', 5: 'Viernes', 6: 'Sábado', 0: 'Domingo' };
+    return map[jsDay] || '';
+}
+
+function generarCalendario() {
+    const mes = parseInt(document.getElementById("mes").value);
+    const año = parseInt(document.getElementById("año").value);
+    const primerDia = new Date(año, mes - 1, 0);
+    const ultimoDia = new Date(año, mes, 0);
+    const calendario = document.getElementById("calendario");
+    calendario.innerHTML = "";
+    let fila = document.createElement("tr");
+
+    for (let i = 0; i < (primerDia.getDay() + 7) % 7; i++) {
+        const td = document.createElement("td");
+        td.classList.add('vacio');
+        fila.appendChild(td);
+    }
+
+    for (let d = 1; d <= ultimoDia.getDate(); d++) {
+        const fechaStr = `${año}-${String(mes).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const celda = document.createElement("td");
+        const jsDay = new Date(año, mes - 1, d).getDay();
+        const claseDia = clasePorDiaSemana(jsDay);
+
+        const cont = document.createElement("div");
+        cont.className = `dia ${claseDia}`;
+        cont.title = `Agregar/editar eventos - ${fechaStr}`;
+        cont.onclick = () => abrirModal(fechaStr);
+
+        const labelSemana = document.createElement("div");
+        labelSemana.className = "semana-label";
+        labelSemana.textContent = etiquetaDia(jsDay);
+
+        const num = document.createElement("div");
+        num.className = "numero";
+        num.textContent = d;
+
+        cont.appendChild(labelSemana);
+        cont.appendChild(num);
+
+        const ordenPrio = { alta: 1, media: 2, baja: 3 };
+        const eventosDia = eventos
+            .filter(e => e.fecha === fechaStr)
+            .sort((a, b) => (ordenPrio[a?.prioridad] ?? 2) - (ordenPrio[b?.prioridad] ?? 2));
+
+        eventosDia.forEach(e => {
+            const pill = document.createElement("div");
+            pill.className = "evento-pill";
+            if (e.realizado) pill.classList.add("evento-realizado");
+
+            if (!e.realizado) {
+                if (e.prioridad === "alta") pill.classList.add("prio-alta");
+                else if (e.prioridad === "media") pill.classList.add("prio-media");
+                else if (e.prioridad === "baja") pill.classList.add("prio-baja");
+            }
+
+            const chk = document.createElement("input");
+            chk.type = "checkbox";
+            chk.checked = !!e.realizado;
+            chk.onclick = (ev) => {
+                ev.stopPropagation();
+                toggleRealizado(e.id, chk.checked);
+            };
+
+            const span = document.createElement("span");
+            span.textContent = e.titulo;
+
+            pill.onclick = (ev) => { ev.stopPropagation(); abrirModal(e.fecha, e); };
+            pill.appendChild(chk);
+            pill.appendChild(span);
+            cont.appendChild(pill);
+        });
+
+        const hoy = new Date();
+        const esHoy = hoy.getFullYear() === año && (hoy.getMonth() + 1) === mes && hoy.getDate() === d;
+        if (esHoy) cont.classList.add('hoy');
+
+        celda.appendChild(cont);
+        fila.appendChild(celda);
+
+        if ((primerDia.getDay() + d) % 7 === 0 || d === ultimoDia.getDate()) {
+            calendario.appendChild(fila);
+            fila = document.createElement("tr");
+        }
+    }
+}
+
+function abrirModal(fecha = "", evento = null) {
+    document.getElementById("eventoId").value = evento?.id || "";
+    document.getElementById("titulo").value = evento?.titulo || "";
+    document.getElementById("fecha").value = fecha || evento?.fecha || "";
+    document.getElementById("descripcion").value = evento?.descripcion || "";
+    document.getElementById("email").value = evento?.email || "";
+    document.getElementById("realizado").checked = evento?.realizado || false;
+    const selPrio = document.getElementById("prioridad");
+    if (selPrio) selPrio.value = evento?.prioridad || "media";
+    modal.show();
+}
+
+function toggleRealizado(id, estado) {
+    fetch(`${BASE}/evento/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ realizado: estado })
+    }).then(res => {
+        if (!res.ok) throw new Error('Error al actualizar');
+        cargarEventos();
+    }).catch(err => {
+        console.error("Error toggleRealizado:", err);
+        Swal.fire({ icon: 'error', title: 'Ups', text: 'No se pudo actualizar el evento.' });
+        cargarEventos();
+    });
+}
+
+--------------------------------------------------------------------------------
+ARCHIVO: templates\Aplic\agenda\static\js\evento.js
+--------------------------------------------------------------------------------
+// evento.js
+
+function actualizarDatalistEmails() {
+    const datalist = document.getElementById('lista-emails');
+    datalist.innerHTML = '';
+    const emails = JSON.parse(localStorage.getItem('emailsGuardados') || '[]');
+    emails.forEach(email => {
+        let option = document.createElement('option');
+        option.value = email;
+        datalist.appendChild(option);
+    });
+}
+
+actualizarDatalistEmails();
+
+function guardarEvento() {
+    const id = document.getElementById("eventoId").value;
+    const titulo = document.getElementById("titulo").value.trim();
+    const fecha = document.getElementById("fecha").value;
+    const descripcion = document.getElementById("descripcion").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const realizado = document.getElementById("realizado").checked;
+    const prioridad = (document.getElementById("prioridad")?.value) || "media";
+
+    if (!titulo || !fecha || !email) {
+        Swal.fire({ icon: 'warning', title: 'Campos requeridos', text: 'Título, fecha y email son obligatorios.' });
+        return;
+    }
+    if (!validarEmail(email)) {
+        Swal.fire({ icon: 'error', title: 'Email inválido', text: 'Por favor, ingresa un correo válido.' });
+        return;
+    }
+
+    // Guardar el email en localStorage
+    if (email) {
+        let emails = JSON.parse(localStorage.getItem('emailsGuardados') || '[]');
+        if (!emails.includes(email)) {
+            emails.push(email);
+            localStorage.setItem('emailsGuardados', JSON.stringify(emails));
+            actualizarDatalistEmails();
+        }
+    }
+
+    const data = { titulo, fecha, descripcion, email, realizado, prioridad };
+    const url = id ? `${BASE}/evento/${id}` : `${BASE}/evento`;
+    const method = id ? "PUT" : "POST";
+
+    fetch(url, {
+        method,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    }).then(res => {
+        if (!res.ok) throw new Error('Error al guardar');
+        modal.hide();
+        cargarEventos();
+        Swal.fire({ icon: 'success', title: 'Guardado', timer: 1200, showConfirmButton: false });
+    }).catch(() => {
+        Swal.fire({ icon: 'error', title: 'Ups', text: 'No se pudo guardar el evento.' });
+    });
+}
+
+function eliminarEvento() {
+    const id = document.getElementById("eventoId").value;
+    if (!id) { modal.hide(); return; }
+
+    Swal.fire({
+        title: '¿Eliminar evento?', text: 'Esta acción no se puede deshacer.',
+        icon: 'warning', showCancelButton: true,
+        confirmButtonText: 'Sí, eliminar', cancelButtonText: 'Cancelar'
+    }).then(result => {
+        if (!result.isConfirmed) return;
+
+        fetch(`${BASE}/evento/${id}`, { method: "DELETE" })
+            .then(res => {
+                if (!res.ok) throw new Error('Error al eliminar');
+                modal.hide();
+                cargarEventos();
+                Swal.fire({ icon: 'success', title: 'Eliminado', timer: 1200, showConfirmButton: false });
+            })
+            .catch(() => {
+                Swal.fire({ icon: 'error', title: 'Ups', text: 'No se pudo eliminar el evento.' });
+            });
+    });
+}
+
+function validarEmail(valor) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(String(valor).toLowerCase());
+}
 
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\bajadadeot\BackEnd\bajada_de_ot.py
@@ -20807,140 +21304,584 @@ def eliminar_evento(evento_id):
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\tareas\BackEnd\tareas.py
 --------------------------------------------------------------------------------
-# Archivo backend generado automáticamente
-
+"""
+Blueprint de Tareas — formato EXACTO de instalaciones.
+Usa JsonStore directamente desde core (sin db_manager).
+"""
+from flask import Blueprint, jsonify, request, render_template
 from flask_login import login_required, current_user
-from core.menu import cargar_menu
 from auth.login import roles_required
-from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash, current_app
-from templates.Aplic.tareas.BackEnd.db_manager import cargar_eventos, agregar_evento, editar_evento, eliminar_evento
+from core.menu import cargar_menu
+from core.db_json import JsonStore
 
-import json, re, os
+# ============================================================
+# CONFIGURACIÓN
+# ============================================================
+DB_PATH = "DataBase/time/dataTask.json"
+store = JsonStore(DB_PATH)
 
-tareas_bp = Blueprint('indextareas', __name__)
+tareas_bp = Blueprint(
+    'indextareas',
+    __name__,
+    static_folder='../static',
+    static_url_path='/tareas/static'
+)
 
-
+# ============================================================
+# VISTA PRINCIPAL
+# ============================================================
 @tareas_bp.route('/tareas')
 @login_required
 @roles_required('viewer')
 def indextareas():
-    eventos = cargar_eventos()
     nemu = cargar_menu()
-    return render_template('Aplic/tareas/FrontEnd/tareas.html',nemu=nemu, roles=current_user.roles, eventos=eventos)
+    return render_template(
+        'Aplic/tareas/FrontEnd/tareas.html',
+        nemu=nemu,
+        roles=current_user.roles
+    )
 
-@tareas_bp.route("/agregar", methods=["POST"])
+# ============================================================
+# API REST: Listar todas las tareas
+# ============================================================
+@tareas_bp.route('/api/tareas', methods=['GET'])
+@login_required
+def listar_tareas():
+    tareas = store.cargar()
+    tareas_sorted = sorted(
+        tareas,
+        key=lambda t: t.get('fecha', ''),
+        reverse=True
+    )
+    return jsonify(tareas_sorted)
+
+# ============================================================
+# API REST: Crear tarea
+# ============================================================
+@tareas_bp.route('/api/tareas', methods=['POST'])
 @login_required
 @roles_required('viewer')
-def agregar():
-    nuevo_evento = {
-        "titulo": request.form["titulo"],
-        "fecha": request.form["fecha"],
-        "descripcion": request.form["descripcion"]
+def crear_tarea():
+    data = request.get_json() or {}
+    titulo = (data.get('titulo') or '').strip()
+    fecha = (data.get('fecha') or '').strip()
+    if not titulo or not fecha:
+        return jsonify({
+            'status': 'error',
+            'msg': 'Título y fecha son obligatorios'
+        }), 400
+    nueva_tarea = {
+        'titulo': titulo,
+        'fecha': fecha,
+        'descripcion': (data.get('descripcion') or '').strip()
     }
-    agregar_evento(nuevo_evento)
-    return redirect("/tareas")
+    tarea_creada = store.agregar(nueva_tarea)
+    return jsonify({
+        'status': 'ok',
+        'msg': 'Tarea creada correctamente',
+        'item': tarea_creada
+    }), 201
 
-@tareas_bp.route("/editar/<int:evento_id>", methods=["POST"])
+# ============================================================
+# API REST: Actualizar tarea
+# ============================================================
+@tareas_bp.route('/api/tareas/<int:tarea_id>', methods=['PUT'])
 @login_required
 @roles_required('viewer')
-def editar(evento_id):
+def actualizar_tarea(tarea_id):
+    if not store.existe(tarea_id):
+        return jsonify({
+            'status': 'error',
+            'msg': 'Tarea no encontrada'
+        }), 404
+    data = request.get_json() or {}
     nuevos_datos = {
-        "titulo": request.form["titulo"],
-        "fecha": request.form["fecha"],
-        "descripcion": request.form["descripcion"]
+        'titulo': (data.get('titulo') or '').strip(),
+        'fecha': (data.get('fecha') or '').strip(),
+        'descripcion': (data.get('descripcion') or '').strip()
     }
-    editar_evento(evento_id, nuevos_datos)
-    return redirect("/tareas")
+    if not nuevos_datos['titulo'] or not nuevos_datos['fecha']:
+        return jsonify({
+            'status': 'error',
+            'msg': 'Título y fecha son obligatorios'
+        }), 400
+    store.editar(tarea_id, nuevos_datos)
+    return jsonify({
+        'status': 'ok',
+        'msg': 'Tarea actualizada correctamente'
+    })
 
-@tareas_bp.route("/eliminar/<int:evento_id>")
+# ============================================================
+# API REST: Eliminar tarea
+# ============================================================
+@tareas_bp.route('/api/tareas/<int:tarea_id>', methods=['DELETE'])
 @login_required
 @roles_required('viewer')
-def eliminar(evento_id):
-    eliminar_evento(evento_id)
-    return redirect("/tareas")
+def eliminar_tarea(tarea_id):
+    if not store.existe(tarea_id):
+        return jsonify({
+            'status': 'error',
+            'msg': 'Tarea no encontrada'
+        }), 404
+    store.eliminar(tarea_id)
+    return jsonify({
+        'status': 'ok',
+        'msg': 'Tarea eliminada correctamente'
+    })
 
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\tareas\FrontEnd\tareas.html
 --------------------------------------------------------------------------------
 {% extends 'layout.html' %}
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/tareas.css') }}">
-{% endblock %}
+
 {% block content %}
 <div class="tareas-container">
-    <h3 class="mb-3">Tareas</h3>
-    
-    <!-- Formulario de agregar (estilizado) -->
-    <div class="bg-form mb-4 p-3 rounded">
-        <form action="/agregar" method="POST">
-            <div class="row g-3">
-                <div class="col-md-4">
-                    <input type="text" name="titulo" placeholder="Título" required class="form-control">
-                </div>
-                <div class="col-md-3">
-                    <input type="date" name="fecha" required class="form-control">
-                </div>
-                <div class="col-md-3">
-                    <input type="text" name="descripcion" placeholder="Descripción" required class="form-control">
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" class="btn btn-agregar w-100">Agregar</button>
-                </div>
+    <h3 class="mb-4">📋 Tareas</h3>
+
+    <!-- Formulario de agregar rápido -->
+    <div class="tareas-form bg-form mb-4 p-3 rounded">
+        <form id="formAgregarTarea" class="row g-2 align-items-end">
+            <div class="col-md-4 col-12">
+                <label class="form-label text-white small">Título</label>
+                <input type="text" id="titulo" name="titulo"
+                       placeholder="Ej: Reunión con equipo"
+                       class="form-control" required>
+            </div>
+            <div class="col-md-3 col-6">
+                <label class="form-label text-white small">Fecha</label>
+                <input type="date" id="fecha" name="fecha"
+                       class="form-control" required>
+            </div>
+            <div class="col-md-3 col-6">
+                <label class="form-label text-white small">Descripción</label>
+                <input type="text" id="descripcion" name="descripcion"
+                       placeholder="Detalles opcionales"
+                       class="form-control">
+            </div>
+            <div class="col-md-2 col-12">
+                <button type="submit" class="btn btn-agregar w-100">
+                    Agregar
+                </button>
             </div>
         </form>
     </div>
 
     <!-- Lista de tareas -->
-    <ul class="event-list">
-        {% for evento in eventos|sort(attribute='fecha') %}
-        <li>
-            <div class="event-info" data-id="{{ evento.id }}" data-titulo="{{ evento.titulo | escape }}"
-                data-fecha="{{ evento.fecha }}" data-descripcion="{{ evento.descripcion | escape }}">
-                <strong>{{ evento.titulo }}</strong> - {{ evento.fecha }}<br>
-                <span class="descripcion-text">{{ evento.descripcion }}</span>
+    <ul id="listaTareas" class="event-list">
+        <li class="text-center text-muted py-4">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando...</span>
             </div>
-            <a href="/eliminar/{{ evento.id }}" class="btn btn-eliminar btn-sm" onclick="event.stopPropagation();">Eliminar</a>
+            <p class="mt-2">Cargando tareas...</p>
         </li>
-        {% endfor %}
     </ul>
+</div>
 
-    <!-- Modal Bootstrap Unificado (Estilo Dark) -->
-    <div class="modal fade modal-custom-dark" id="popup" tabindex="-1" aria-labelledby="popupLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <form id="edit-form" method="POST">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="popupLabel">Editar Tarea</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" style="filter: invert(1);"></button>
+<!-- Modal de edición -->
+<div class="modal fade modal-custom-dark" id="modalEditarTarea"
+     tabindex="-1" aria-labelledby="modalEditarTareaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form id="formEditarTarea">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalEditarTareaLabel">Editar Tarea</h5>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal" aria-label="Cerrar"
+                            style="filter: invert(1);"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="edit-id" name="id">
+                    <div class="mb-3">
+                        <label for="edit-titulo" class="form-label">Título</label>
+                        <input type="text" id="edit-titulo" name="titulo"
+                               required class="form-control">
                     </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="id" id="edit-id">
-                        <div class="mb-3">
-                            <label for="edit-titulo" class="form-label">Título</label>
-                            <input type="text" id="edit-titulo" name="titulo" required class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit-fecha" class="form-label">Fecha</label>
-                            <input type="date" id="edit-fecha" name="fecha" required class="form-control">
-                        </div>
-                        <div class="mb-3">
-                            <label for="edit-descripcion" class="form-label">Descripción</label>
-                            <textarea id="edit-descripcion" name="descripcion" rows="4" required class="form-control"></textarea>
-                        </div>
+                    <div class="mb-3">
+                        <label for="edit-fecha" class="form-label">Fecha</label>
+                        <input type="date" id="edit-fecha" name="fecha"
+                               required class="form-control">
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-agregar">Guardar Cambios</button>
+                    <div class="mb-3">
+                        <label for="edit-descripcion" class="form-label">Descripción</label>
+                        <textarea id="edit-descripcion" name="descripcion"
+                                  rows="4" class="form-control"></textarea>
                     </div>
-                </form>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-eliminar" id="btnEliminarTarea">
+                        Eliminar
+                    </button>
+                    <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-guardar">
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
+
+<link rel="stylesheet" href="{{ url_for('indextareas.static', filename='css/tareas.css') }}">
 {% endblock %}
+
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/apps/tareas.js') }}"></script>
+<script src="{{ url_for('indextareas.static', filename='js/tareas.js') }}"></script>
 {% endblock %}
+
+--------------------------------------------------------------------------------
+ARCHIVO: templates\Aplic\tareas\static\css\tareas.css
+--------------------------------------------------------------------------------
+/* ============================================================
+TAREAS — Estilos específicos de la aplicación
+Lo reutilizable (.event-list, .event-info) está en:
+static/css/base/list_events.css
+============================================================ */
+
+/* Contenedor principal */
+.tareas-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Estado vacío */
+.tareas-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--color-texto-suave, #b8b8b8);
+}
+
+.tareas-empty i {
+    font-size: 3rem;
+    opacity: 0.5;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+/* ============================================================
+RESPONSIVE
+============================================================ */
+@media (max-width: 768px) {
+    .tareas-container {
+        padding: 0.5rem;
+    }
+
+    .event-list li {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .event-list li .btn-eliminar {
+        align-self: flex-end;
+        margin-top: 0.5rem;
+    }
+
+    .event-info {
+        margin-bottom: 0.5rem;
+    }
+}
+
+--------------------------------------------------------------------------------
+ARCHIVO: templates\Aplic\tareas\static\js\tareas.js
+--------------------------------------------------------------------------------
+/**
+ * tareas.js — Módulo de gestión de tareas
+ * Usa Logger reutilizable (static/js/apps/logger.js)
+ */
+
+// ============================================================
+// CONFIGURACIÓN
+// ============================================================
+const API_BASE = '/api/tareas';
+let modalEditar = null;
+let tareaActualId = null;
+
+// ============================================================
+// INICIALIZACIÓN
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+    Logger.moduleInit('Tareas');
+
+    const modalEl = document.getElementById('modalEditarTarea');
+    if (modalEl) {
+        modalEditar = new bootstrap.Modal(modalEl);
+    }
+
+    configurarFormularios();
+    cargarTareas();
+
+    Logger.success('Módulo Tareas inicializado');
+});
+
+// ============================================================
+// API: Cargar tareas
+// ============================================================
+async function cargarTareas() {
+    Logger.apiCall('GET', API_BASE);
+    try {
+        const res = await fetch(API_BASE, { credentials: 'same-origin' });
+        Logger.apiResponse('GET', API_BASE, res.status);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const tareas = await res.json();
+        renderizarTareas(tareas);
+    } catch (err) {
+        Logger.error('Error al cargar tareas', err);
+        mostrarNotif('Error al cargar las tareas', 'error');
+        renderizarEstadoVacio();
+    }
+}
+
+// ============================================================
+// UI: Renderizar lista de tareas
+// ============================================================
+function renderizarTareas(tareas) {
+    const lista = document.getElementById('listaTareas');
+    if (!lista) return;
+
+    if (!tareas || tareas.length === 0) {
+        renderizarEstadoVacio();
+        return;
+    }
+
+    lista.innerHTML = tareas.map(tarea => `
+        <li>
+            <div class="event-info"
+                 data-id="${tarea.id}"
+                 data-titulo="${escapeHtml(tarea.titulo)}"
+                 data-fecha="${escapeHtml(tarea.fecha)}"
+                 data-descripcion="${escapeHtml(tarea.descripcion || '')}">
+                <strong>${escapeHtml(tarea.titulo)}</strong>
+                <div class="event-fecha">
+                    <i class="bi bi-calendar-event"></i> ${formatearFecha(tarea.fecha)}
+                </div>
+                ${tarea.descripcion ? `<div class="descripcion-text">${escapeHtml(tarea.descripcion)}</div>` : ''}
+            </div>
+            <button class="btn btn-eliminar btn-sm" onclick="confirmarEliminar(${tarea.id})">
+                Eliminar
+            </button>
+        </li>
+    `).join('');
+
+    lista.querySelectorAll('.event-info').forEach(el => {
+        el.addEventListener('click', () => abrirModalEdicion(el.dataset));
+    });
+
+    Logger.info('Tareas renderizadas', { cantidad: tareas.length });
+}
+
+function renderizarEstadoVacio() {
+    const lista = document.getElementById('listaTareas');
+    if (!lista) return;
+    lista.innerHTML = `
+        <li class="tareas-empty">
+            <i class="bi bi-clipboard-check"></i>
+            <p>No hay tareas registradas</p>
+            <small>Usá el formulario de arriba para agregar una nueva tarea</small>
+        </li>
+    `;
+}
+
+// ============================================================
+// UI: Modal de edición
+// ============================================================
+function abrirModalEdicion(data) {
+    if (!modalEditar) return;
+    tareaActualId = data.id;
+    document.getElementById('edit-id').value = data.id;
+    document.getElementById('edit-titulo').value = data.titulo;
+    document.getElementById('edit-fecha').value = data.fecha;
+    document.getElementById('edit-descripcion').value = data.descripcion || '';
+    modalEditar.show();
+    Logger.info('Modal de edición abierto', { id: data.id });
+}
+
+function cerrarModalEdicion() {
+    if (modalEditar) modalEditar.hide();
+    tareaActualId = null;
+}
+
+// ============================================================
+// API: Crear tarea
+// ============================================================
+async function crearTarea(data) {
+    Logger.apiCall('POST', API_BASE);
+    try {
+        const res = await fetch(API_BASE, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+            credentials: 'same-origin'
+        });
+        const json = await res.json();
+        Logger.apiResponse('POST', API_BASE, res.status, json);
+        if (!res.ok) throw new Error(json.msg || 'Error al crear');
+        mostrarNotif(json.msg || 'Tarea creada', 'success');
+        await cargarTareas();
+        return true;
+    } catch (err) {
+        Logger.error('Error al crear tarea', err);
+        mostrarNotif(err.message || 'Error al crear la tarea', 'error');
+        return false;
+    }
+}
+
+// ============================================================
+// API: Actualizar tarea
+// ============================================================
+async function actualizarTarea(id, data) {
+    const url = `${API_BASE}/${id}`;
+    Logger.apiCall('PUT', url);
+    try {
+        const res = await fetch(url, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+            credentials: 'same-origin'
+        });
+        const json = await res.json();
+        Logger.apiResponse('PUT', url, res.status, json);
+        if (!res.ok) throw new Error(json.msg || 'Error al actualizar');
+        mostrarNotif(json.msg || 'Tarea actualizada', 'success');
+        cerrarModalEdicion();
+        await cargarTareas();
+        return true;
+    } catch (err) {
+        Logger.error('Error al actualizar tarea', err);
+        mostrarNotif(err.message || 'Error al actualizar', 'error');
+        return false;
+    }
+}
+
+// ============================================================
+// API: Eliminar tarea
+// ============================================================
+async function eliminarTarea(id) {
+    const url = `${API_BASE}/${id}`;
+    Logger.apiCall('DELETE', url);
+    try {
+        const res = await fetch(url, {
+            method: 'DELETE',
+            credentials: 'same-origin'
+        });
+        const json = await res.json();
+        Logger.apiResponse('DELETE', url, res.status, json);
+        if (!res.ok) throw new Error(json.msg || 'Error al eliminar');
+        mostrarNotif(json.msg || 'Tarea eliminada', 'success');
+        cerrarModalEdicion();
+        await cargarTareas();
+        return true;
+    } catch (err) {
+        Logger.error('Error al eliminar tarea', err);
+        mostrarNotif(err.message || 'Error al eliminar', 'error');
+        return false;
+    }
+}
+
+// ============================================================
+// UI: Confirmaciones
+// ============================================================
+function confirmarEliminar(id) {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire({
+            title: '¿Eliminar tarea?',
+            text: 'Esta acción no se puede deshacer',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then(result => {
+            if (result.isConfirmed) eliminarTarea(id);
+        });
+    } else if (confirm('¿Estás seguro de eliminar esta tarea?')) {
+        eliminarTarea(id);
+    }
+}
+
+// ============================================================
+// EVENTOS DE FORMULARIOS
+// ============================================================
+function configurarFormularios() {
+    const formAgregar = document.getElementById('formAgregarTarea');
+    if (formAgregar) {
+        formAgregar.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = {
+                titulo: document.getElementById('titulo').value.trim(),
+                fecha: document.getElementById('fecha').value,
+                descripcion: document.getElementById('descripcion').value.trim()
+            };
+            if (!data.titulo || !data.fecha) {
+                mostrarNotif('Título y fecha son obligatorios', 'warning');
+                return;
+            }
+            const exito = await crearTarea(data);
+            if (exito) formAgregar.reset();
+        });
+    }
+
+    const formEditar = document.getElementById('formEditarTarea');
+    if (formEditar) {
+        formEditar.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!tareaActualId) return;
+            const data = {
+                titulo: document.getElementById('edit-titulo').value.trim(),
+                fecha: document.getElementById('edit-fecha').value,
+                descripcion: document.getElementById('edit-descripcion').value.trim()
+            };
+            if (!data.titulo || !data.fecha) {
+                mostrarNotif('Título y fecha son obligatorios', 'warning');
+                return;
+            }
+            await actualizarTarea(tareaActualId, data);
+        });
+    }
+
+    const btnEliminar = document.getElementById('btnEliminarTarea');
+    if (btnEliminar) {
+        btnEliminar.addEventListener('click', () => {
+            if (tareaActualId) confirmarEliminar(tareaActualId);
+        });
+    }
+}
+
+// ============================================================
+// UTILIDADES
+// ============================================================
+function mostrarNotif(msg, tipo = 'success') {
+    if (typeof Noty !== 'undefined') {
+        new Noty({
+            type: tipo,
+            layout: 'topRight',
+            timeout: 3000,
+            theme: 'mint',
+            text: msg
+        }).show();
+    } else {
+        alert(msg);
+    }
+}
+
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function formatearFecha(fechaStr) {
+    if (!fechaStr) return '';
+    try {
+        const [year, month, day] = fechaStr.split('-');
+        return `${day}/${month}/${year}`;
+    } catch {
+        return fechaStr;
+    }
+}
 
 --------------------------------------------------------------------------------
 ARCHIVO: templates\Aplic\trayectoria\BackEnd\rbf_model.py
@@ -21305,4 +22246,94 @@ ARCHIVO: templates\Aplic\trayectoria\FrontEnd\trayectoria.html
 {% endif %}
 
 {% endblock %}
+
+--------------------------------------------------------------------------------
+ARCHIVO: templates\partials\calendar.html
+--------------------------------------------------------------------------------
+{# templates/partials/calendar.html #}
+{% set container_id = container_id|default('calendario') %}
+{% set btn_agregar_text = btn_agregar_text|default('➕ Agregar Evento') %}
+
+<div class="calendar-controls">
+    <select id="mesSelect" class="form-select" aria-label="Mes">
+        <option value="1">Enero</option>
+        <option value="2">Febrero</option>
+        <option value="3">Marzo</option>
+        <option value="4">Abril</option>
+        <option value="5">Mayo</option>
+        <option value="6">Junio</option>
+        <option value="7">Julio</option>
+        <option value="8">Agosto</option>
+        <option value="9">Septiembre</option>
+        <option value="10">Octubre</option>
+        <option value="11">Noviembre</option>
+        <option value="12">Diciembre</option>
+    </select>
+    
+    <select id="anioSelect" class="form-select" aria-label="Año">
+        {% for anio in range(2020, 2031) %}
+            <option value="{{ anio }}">{{ anio }}</option>
+        {% endfor %}
+    </select>
+    
+    <button class="btn btn-agregar" id="btnAgregarEvento">
+        {{ btn_agregar_text }}
+    </button>
+</div>
+
+<div class="calendar-table-wrapper">
+    <div id="{{ container_id }}"></div>
+</div>
+
+--------------------------------------------------------------------------------
+ARCHIVO: templates\partials\event_modal.html
+--------------------------------------------------------------------------------
+<div class="modal fade event-modal" id="modalEvento" tabindex="-1" aria-labelledby="modalEventoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalEventoLabel">Evento</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" style="filter: invert(1);"></button>
+            </div>
+            <div class="modal-body">
+                <form id="formEvento">
+                    <input type="hidden" id="eventoId" name="id">
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título</label>
+                        <input type="text" id="titulo" name="titulo" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="fecha" class="form-label">Fecha</label>
+                        <input type="date" id="fecha" name="fecha" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea id="descripcion" name="descripcion" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email (para recordatorio)</label>
+                        <input type="email" id="email" name="email" class="form-control" list="lista-emails">
+                        <datalist id="lista-emails"></datalist>
+                    </div>
+                    <div class="mb-3">
+                        <label for="prioridad" class="form-label">Prioridad</label>
+                        <select id="prioridad" name="prioridad" class="form-select">
+                            <option value="alta">🔴 Alta</option>
+                            <option value="media" selected>🟡 Media</option>
+                            <option value="baja">🟢 Baja</option>
+                        </select>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input type="checkbox" class="form-check-input" id="realizado" name="realizado">
+                        <label for="realizado" class="form-check-label">Evento realizado</label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-eliminar" data-action="eliminar" style="display: none;">🗑️ Eliminar</button>
+                <button class="btn btn-agregar" data-action="guardar">💾 Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
 
