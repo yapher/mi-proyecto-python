@@ -80,12 +80,6 @@
                         "emoji": "🗞️​",
                         "ruta": "/planos",
                         "submenues": []
-                    },
-                    {
-                        "nombre": "Modelos 3D",
-                        "emoji": "🕋​",
-                        "ruta": "/modelos_3d",
-                        "submenues": []
                     }
                 ]
             },
@@ -139,24 +133,6 @@
                 "ruta": "",
                 "submenues": [
                     {
-                        "nombre": "Creación de Procedimientos",
-                        "emoji": "📝",
-                        "ruta": "/crearProc",
-                        "submenues": []
-                    },
-                    {
-                        "nombre": "Carga de Procedimiento",
-                        "emoji": "📝",
-                        "ruta": "/cargar_procedimiento",
-                        "submenues": []
-                    },
-                    {
-                        "nombre": "Generar Procedimiento",
-                        "emoji": "📝",
-                        "ruta": "/generar_procedimiento",
-                        "submenues": []
-                    },
-                    {
                         "nombre": "LISTAR OT",
                         "emoji": "📊​",
                         "ruta": "/listar_ot",
@@ -177,12 +153,6 @@
                 "submenues": []
             },
             {
-                "nombre": "Gestión de Herramientas",
-                "emoji": "⚙️",
-                "ruta": "/gestion_de_herramientas",
-                "submenues": []
-            },
-            {
                 "nombre": "Gestión de Avisos",
                 "emoji": "🪧",
                 "ruta": "",
@@ -194,19 +164,6 @@
                         "submenues": []
                     }
                 ]
-            }
-        ]
-    },
-    {
-        "nombre": "APPS",
-        "emoji": "📻​",
-        "ruta": "",
-        "submenues": [
-            {
-                "nombre": "SPOTIFY",
-                "emoji": "🎵",
-                "ruta": "/spotify",
-                "submenues": []
             }
         ]
     },
@@ -249,25 +206,6 @@
                         "nombre": "TAREAS",
                         "emoji": "🧾",
                         "ruta": "/agenda",
-                        "submenues": []
-                    }
-                ]
-            },
-            {
-                "nombre": "PROYECTOS",
-                "emoji": "📚​",
-                "ruta": "",
-                "submenues": [
-                    {
-                        "nombre": "Detector de rostros",
-                        "emoji": "🩻",
-                        "ruta": "/detector_de_rostros",
-                        "submenues": []
-                    },
-                    {
-                        "nombre": "Trayectorias",
-                        "emoji": "✴️",
-                        "ruta": "/trayectoria",
                         "submenues": []
                     }
                 ]

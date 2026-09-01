@@ -11083,7 +11083,7 @@
         "fecha": "2026-08-29",
         "descripcion": "INPEC. GRAL. ELECTRICA AREA SERVICIOS",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media"
     },
     {
@@ -11368,7 +11368,7 @@
         "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. APIL 4. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media"
     },
     {
@@ -11377,7 +11377,7 @@
         "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. TB. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media"
     },
     {
@@ -11386,7 +11386,7 @@
         "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. NIV. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media"
     },
     {
@@ -11395,7 +11395,7 @@
         "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. TIJERA. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media"
     },
     {
@@ -11404,7 +11404,7 @@
         "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. REF. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media"
     },
     {
@@ -11413,7 +11413,7 @@
         "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. APIL 1. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media"
     },
     {
@@ -11422,7 +11422,7 @@
         "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. FEEDER. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media"
     },
     {
@@ -11431,7 +11431,7 @@
         "fecha": "2026-08-31",
         "descripcion": "INSPECCIÓN ELÉC. DEBO. LITE",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media"
     },
     {
