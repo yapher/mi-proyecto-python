@@ -1,53 +1,56 @@
-
-<div>
-    <button type="button" class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#agregarModal">
-     Agregar nuevo rubro
+<!-- Botón para abrir modal -->
+<div class="mb-3">
+    <button type="button" class="btn btn-agregar" id="btnAbrirModal"
+            data-bs-toggle="modal" data-bs-target="#rubroModal">
+        Agregar nuevo rubro
     </button>
 </div>
 
-<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="rubroModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content bg-form"
-            style="background-color: #4b376a; color: #fff; border-radius: 1rem; box-shadow: 0 8px 32px rgba(136,201,153,0.16);">
-            <div class="modal-header"
-                style="border-bottom: 2px solid #88c999; background: linear-gradient(to right, #2a1e3b, #3e2d59); border-top-left-radius: 1rem; border-top-right-radius: 1rem;">
-                <h5 class="modal-title" id="agregarModalLabel" style="color: #88c999; font-weight: 700;">Agregar Nuevo
-                    Rubro</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"
-                    style="filter: invert(1);"></button>
+        <div class="modal-content bg-form">
+            <div class="modal-header">
+                <h5 class="modal-title" id="rubroModalLabel">Gestión de Rubros</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Cerrar" style="filter: invert(1);"></button>
             </div>
             <div class="modal-body">
-                <div class="bg-form mb-4">
-                    <form id="formulario">
-                        <!-- Selectores multinivel -->
-                       {% include "Aplic/crearrubros/FrontEnd/component/selectRubros.html" %}
+                <form id="formulario" onsubmit="return false;">
+                    {% include "Aplic/crearrubros/FrontEnd/component/selectRubros.html" %}
 
-                        <!-- Nombre, emoji y ruta -->
-                        <div class="mb-3 input-with-emoji">
-                            <span class="input-emoji">📛</span>
-                            <input type="text" class="form-control ps-5" id="nombre" placeholder="Nombre del ítem">
-                        </div>
-                        <div class="mb-3 input-with-emoji">
-                            <span class="input-emoji">😀</span>
-                            <input type="text" class="form-control ps-5" id="emoji" placeholder="Emoji">
-                        </div>
-                        <div class="mb-3 input-with-emoji">
-                            <span class="input-emoji">🔗</span>
-                            <input type="text" class="form-control ps-5" id="ruta_menu" placeholder="Ruta (opcional)">
-                        </div>
-                        <input type="hidden" id="ruta_original">
-                        <div class="button-group">
-                            <button type="button" class="btn btn-agregar" onclick="guardar()">Agregar</button>
-                            <button type="button" class="btn btn-editar" onclick="editar()"
-                                style="display:none;">Guardar cambios</button>
-                            <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal" onclick="cancelar()"
-                                style="display:none;">Cancelar</button>
-                        </div>
-                    </form>
-                </div>
+                    <div class="mb-3 input-with-emoji">
+                        <span class="input-emoji">📛</span>
+                        <input type="text" class="form-control ps-5" id="nombre"
+                               placeholder="Nombre del rubro">
+                    </div>
+                    <div class="mb-3 input-with-emoji">
+                        <span class="input-emoji">😀</span>
+                        <input type="text" class="form-control ps-5" id="emoji"
+                               placeholder="Emoji">
+                    </div>
+                    <div class="mb-3 input-with-emoji">
+                        <span class="input-emoji">🔗</span>
+                        <input type="text" class="form-control ps-5" id="ruta_menu"
+                               placeholder="Ruta (opcional)">
+                    </div>
+                    <input type="hidden" id="ruta_original">
+
+                    <div class="button-group d-flex gap-2 justify-content-end mt-4">
+                        <button type="button" class="btn btn-agregar" id="btnAgregar">
+                            Agregar
+                        </button>
+                        <button type="button" class="btn btn-editar" id="btnEditar"
+                                style="display:none;">
+                            Guardar
+                        </button>
+                        <button type="button" class="btn btn-cancelar" id="btnCancelar"
+                                style="display:none;">
+                            Cancelar
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
-
-<script src="/static/js/apps/cudRubro.js"></script>

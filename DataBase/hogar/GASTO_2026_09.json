@@ -8,7 +8,7 @@
         "cuota_numero": 9,
         "cuota_total": 12,
         "vencimiento": "2026-09-06",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1785018463286,
@@ -19,7 +19,7 @@
         "cuota_numero": 8,
         "cuota_total": 12,
         "vencimiento": "2026-09-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1785018463287,
@@ -41,7 +41,7 @@
         "cuota_numero": 8,
         "cuota_total": 12,
         "vencimiento": "2026-09-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1785018463290,
@@ -74,7 +74,7 @@
         "cuota_numero": 8,
         "cuota_total": 12,
         "vencimiento": "2026-09-23",
-        "pagado": false
+        "pagado": true
     },
     {
         "id": 1785018463293,
@@ -116,24 +116,15 @@
         "importe": 173000,
         "tipo": "único",
         "vencimiento": "2026-09-03",
-        "pagado": false
+        "pagado": true
     },
     {
-        "id": 1787853939947,
-        "rubro": "Forrajería",
-        "descripcion": "Comida Perra",
-        "importe": 80000,
-        "tipo": "único",
-        "vencimiento": "2026-09-04",
-        "pagado": false
-    },
-    {
-        "id": 1787854007880,
+        "id": 1788228325422,
         "rubro": "Forrajería",
         "descripcion": "Comida Gatos",
-        "importe": 80000,
+        "importe": 98800,
         "tipo": "único",
-        "vencimiento": "2026-09-03",
-        "pagado": false
+        "vencimiento": "2026-09-05",
+        "pagado": true
     }
 ]

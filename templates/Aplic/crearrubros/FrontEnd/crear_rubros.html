@@ -1,25 +1,31 @@
 {% extends 'layout.html' %}
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/crear_rubros.css') }}">
-{% endblock %}
-{% block content %}
-<h3 class="mb-3">Crear Rubros</h3>
-{% include "Aplic/crearrubros/FrontEnd/component/cudRubro.html" %}
-<div class="table-responsive tabla-scroll">
-    <table class="table table-hover table-striped table-dark align-middle w-100 mb-0">
-        <thead class="sticky-header">
-            <tr>
-                <th>Emoji</th>
-                <th>Nombre</th>
-                <th>Ruta</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="tabla">
-            <!-- Se llena dinámicamente -->
-        </tbody>
-    </table>
-</div>
 
-<script src="{{ url_for('static', filename='js/apps/crear_rubros.js') }}"></script>
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('indexcrear_rubros.static', filename='css/app.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="rubros-container">
+    <h3 class="mb-3">Crear Rubros</h3>
+
+    {% include "Aplic/crearrubros/FrontEnd/component/cudRubro.html" %}
+
+    <div class="table-responsive tabla-scroll">
+        <table class="table table-hover table-striped table-dark align-middle w-100 mb-0">
+            <thead class="sticky-header">
+                <tr>
+                    <th>Emoji</th>
+                    <th>Nombre</th>
+                    <th>Ruta</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tabla"></tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('indexcrear_rubros.static', filename='js/crear_rubros.js') }}"></script>
 {% endblock %}
