@@ -309,20 +309,8 @@
         ]
     },
     {
-        "nombre": "aaa",
-        "emoji": "aaa",
-        "ruta": "",
-        "submenues": []
-    },
-    {
-        "nombre": "ssss",
-        "emoji": "sss",
-        "ruta": "wwww",
-        "submenues": []
-    },
-    {
-        "nombre": "RubroTest",
-        "emoji": "🧪",
+        "nombre": "VETERINARIA",
+        "emoji": "🐶",
         "ruta": "",
         "submenues": []
     }
