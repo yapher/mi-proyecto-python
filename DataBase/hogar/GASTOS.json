@@ -3545,8 +3545,8 @@
         "id": 1785018463290,
         "rubro": "Servicios",
         "descripcion": "Internet",
-        "importe": 31000,
-        "tipo": "cuota",
+        "importe": 34000,
+        "tipo": "único",
         "cuota_numero": 8,
         "cuota_total": 12,
         "vencimiento": "2026-09-23",
@@ -3584,28 +3584,6 @@
         "cuota_total": 12,
         "vencimiento": "2026-09-23",
         "pagado": true
-    },
-    {
-        "id": 1785020447777,
-        "rubro": "Creditos",
-        "descripcion": "Waynimovil",
-        "importe": 655000,
-        "tipo": "cuotas",
-        "cuota_numero": 2,
-        "cuota_total": 6,
-        "vencimiento": "2026-09-01",
-        "pagado": false
-    },
-    {
-        "id": 1785020447778,
-        "rubro": "Creditos",
-        "descripcion": "Waynimovil",
-        "importe": 372000,
-        "tipo": "",
-        "cuota_numero": 3,
-        "cuota_total": 6,
-        "vencimiento": "2026-10-02",
-        "pagado": false
     },
     {
         "id": 1785020447779,
@@ -3666,5 +3644,140 @@
         "tipo": "único",
         "vencimiento": "2026-09-05",
         "pagado": true
+    },
+    {
+        "id": 1788402929391,
+        "rubro": "Creditos",
+        "descripcion": "Waynimovil",
+        "importe": 850000,
+        "tipo": "único",
+        "vencimiento": "2026-09-02",
+        "pagado": false
+    },
+    {
+        "id": 1788403017627,
+        "rubro": "Tarjetas de Credito",
+        "descripcion": "Mercado libre",
+        "importe": 72000,
+        "tipo": "cuota",
+        "cuota_numero": 9,
+        "cuota_total": 12,
+        "vencimiento": "2026-10-06",
+        "pagado": false
+    },
+    {
+        "id": 1788403017628,
+        "rubro": "Facultad",
+        "descripcion": "Alquiler",
+        "importe": 700000,
+        "tipo": "cuota",
+        "cuota_numero": 8,
+        "cuota_total": 12,
+        "vencimiento": "2026-10-23",
+        "pagado": false
+    },
+    {
+        "id": 1788403017630,
+        "rubro": "Servicios",
+        "descripcion": "Telefonia",
+        "importe": 45000,
+        "tipo": "cuota",
+        "cuota_numero": 8,
+        "cuota_total": 12,
+        "vencimiento": "2026-10-23",
+        "pagado": false
+    },
+    {
+        "id": 1788403017631,
+        "rubro": "Servicios",
+        "descripcion": "Gas",
+        "importe": 70000,
+        "tipo": "cuota",
+        "cuota_numero": 8,
+        "cuota_total": 12,
+        "vencimiento": "2026-10-23",
+        "pagado": false
+    },
+    {
+        "id": 1788403017632,
+        "rubro": "Almacen",
+        "descripcion": "Supermercado",
+        "importe": 350000,
+        "tipo": "cuota",
+        "cuota_numero": 8,
+        "cuota_total": 12,
+        "vencimiento": "2026-10-23",
+        "pagado": false
+    },
+    {
+        "id": 1788403017633,
+        "rubro": "Automotor",
+        "descripcion": "Combustible Sandero",
+        "importe": 150000,
+        "tipo": "cuota",
+        "cuota_numero": 8,
+        "cuota_total": 12,
+        "vencimiento": "2026-10-23",
+        "pagado": false
+    },
+    {
+        "id": 1788403017634,
+        "rubro": "Automotor",
+        "descripcion": "Seguros",
+        "importe": 88000,
+        "tipo": "cuota",
+        "cuota_numero": 8,
+        "cuota_total": 12,
+        "vencimiento": "2026-10-23",
+        "pagado": false
+    },
+    {
+        "id": 1788403017635,
+        "rubro": "Creditos",
+        "descripcion": "Naranja",
+        "importe": 79928,
+        "tipo": "cuotas",
+        "cuota_numero": 8,
+        "cuota_total": 24,
+        "vencimiento": "2026-10-25",
+        "pagado": false
+    },
+    {
+        "id": 1788403017636,
+        "rubro": "Servicios",
+        "descripcion": "Luz",
+        "importe": 173000,
+        "tipo": "único",
+        "vencimiento": "2026-10-03",
+        "pagado": false
+    },
+    {
+        "id": 1788403017637,
+        "rubro": "Forrajería",
+        "descripcion": "Comida Gatos",
+        "importe": 98800,
+        "tipo": "único",
+        "vencimiento": "2026-10-05",
+        "pagado": false
+    },
+    {
+        "id": 1788403017638,
+        "rubro": "Servicios",
+        "descripcion": "Internet",
+        "importe": 34000,
+        "tipo": "único",
+        "cuota_numero": 8,
+        "cuota_total": 12,
+        "vencimiento": "2026-10-23",
+        "pagado": false
+    },
+    {
+        "id": 1788403017639,
+        "rubro": "Creditos",
+        "descripcion": "Waynimovil",
+        "importe": 850000,
+        "tipo": "único",
+        "vencimiento": "2026-10-02",
+        "pagado": false
     }
 ]

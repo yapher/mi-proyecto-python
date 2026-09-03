@@ -1,10 +1,15 @@
-let pagoEnEdicion = null;
+/**
+ * newPagos.js - Modal de Pagos
+ * Usa SelectoresNivel reutilizable para cargar rubros desde /api/rubro_arbol
+ */
 
+let pagoEnEdicion = null;
+let selectoresRubros = null;
 
 // ------------------------ Funciones existentes ------------------------
 
 function guardarPago() {
-    let texto = obtenerRutaPadre();
+    let texto = selectoresRubros.obtenerRutaPadre();
     if (!texto && pagoEnEdicion) texto = pagoEnEdicion.rubro || '';
 
     let categoria, subcategoria;
@@ -31,6 +36,7 @@ function guardarPago() {
     }
 
     if (!vencimiento) vencimiento = new Date().toISOString().split('T')[0];
+
     const descripcion = subcategoria || document.getElementById('descripcion').value || "";
 
     if (pagoEnEdicion) {
@@ -58,7 +64,6 @@ function guardarPago() {
             mostrarFormulario(null);
             cerrarModal();
             pagoEnEdicion = null;
-
             new Noty({
                 type: 'success',
                 layout: 'topRight',
@@ -68,13 +73,11 @@ function guardarPago() {
             }).show();
         })
         .catch(err => console.error("Error real al guardar pago:", err));
-
     } else {
         let pagos = [];
         if (tipo === "cuotas") {
             const importeCuota = parseFloat((importeTotal / cuotas).toFixed(2));
             let fecha = new Date(vencimiento);
-
             for (let i = 0; i < cuotas; i++) {
                 pagos.push({
                     id: Date.now() + i,
@@ -114,7 +117,6 @@ function guardarPago() {
             filtrarPorMes();
             mostrarFormulario(null);
             cerrarModal();
-
             new Noty({
                 type: 'success',
                 layout: 'topRight',
@@ -141,18 +143,24 @@ function mostrarFormulario(p = null) {
 
         let rutaCompleta = p.rubro;
         if (p.descripcion) rutaCompleta += "." + p.descripcion;
-        renderSelectoresNiveles(rutaCompleta);
-
+        
+        if (selectoresRubros) {
+            selectoresRubros.renderSelectores(rutaCompleta);
+        }
     } else {
         pagoEnEdicion = null;
         document.getElementById('pagoId').value = '';
         document.querySelectorAll('#formulario input, #formulario select').forEach(i => i.value = '');
+        
         const hoy = new Date();
         const yyyy = hoy.getFullYear();
         const mm = String(hoy.getMonth() + 1).padStart(2, '0');
         const dd = String(hoy.getDate()).padStart(2, '0');
         document.getElementById('vencimiento').value = `${yyyy}-${mm}-${dd}`;
-        renderSelectoresNiveles();
+        
+        if (selectoresRubros) {
+            selectoresRubros.renderSelectores();
+        }
         document.querySelector(".btn-cancelar").style.display = "none";
     }
 }
@@ -161,18 +169,18 @@ function mostrarFormulario(p = null) {
 function cancelar() { mostrarFormulario(null); }
 function abrirModal() { const modal = new bootstrap.Modal(document.getElementById('agregarModal')); modal.show(); }
 function cerrarModal() { const modal = bootstrap.Modal.getInstance(document.getElementById('agregarModal'))?.hide(); }
-function obtenerRutaPadre() {
-    const selects = document.querySelectorAll('.nivel-select');
-    let ruta = '';
-    selects.forEach(sel => { if (sel.value) ruta = sel.value; });
-    return ruta;
-}
 
-// Inicializar el árbol de menús y renderizar los selectores al cargar la página
+// Inicializar selectores de rubros desde /api/rubro_arbol (NO /api/menu_arbol)
 window.addEventListener('DOMContentLoaded', () => {
-    console.log('Inicializando carga de rubros...'); // Log para depuración
-    cargarArbolMenus(() => {
-        console.log('Rubros cargados, renderizando selectores...'); // Log para depuración
-        renderSelectoresNiveles();
+    Logger.moduleInit('NewPagos');
+    
+    selectoresRubros = new SelectoresNivel({
+        containerId: 'nivelesContainer',
+        apiUrl: '/api/rubro_arbol',  // ← CLAVE: cargar RUBROS, no menú
+        separador: '.',
+        loggerPrefix: '[NewPagos:Rubros]',
+        onLoaded: (arbol) => {
+            Logger.info('Rubros cargados correctamente', { cantidad: arbol.length });
+        }
     });
 });
