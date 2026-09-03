@@ -6,35 +6,31 @@
 <h3 class="mb-3">Crear Almacenes</h3>
 <div class="bg-form mb-4">
     <form id="formulario">
-        <!-- Selectores multinivel -->
-         <label for="nivelesContainer" class="form-label">Crear Almacén</label>
+        <label for="nivelesContainer" class="form-label">Crear Almacén</label>
         <div id="nivelesContainer" class="mb-3"></div>
-
-        <!-- Nombre, emoji y ruta -->
+        
         <div class="mb-3 input-with-emoji">
             <label for="nombre" class="form-label">NOMBRE DE ALMACÉN/PAÑOL</label>
             <span class="input-emoji">📛</span>
             <input type="text" class="form-control ps-5" id="nombre" placeholder="Nombre del ítem">
         </div>
-
         <div class="mb-3 input-with-emoji">
             <label for="emoji" class="form-label">IMAGEN</label>
             <span class="input-emoji">😀</span>
             <input type="text" class="form-control ps-5" id="emoji" placeholder="Emoji">
         </div>
-
         <div class="mb-3 input-with-emoji">
             <label for="ruta_crear_almaceneses" class="form-label">DESCRIPCIÓN</label>
             <span class="input-emoji">🔗</span>
             <input type="text" class="form-control ps-5" id="ruta_crear_almaceneses" placeholder="Ruta (opcional)">
         </div>
-
         <input type="hidden" id="ruta_original">
+        
+        <!-- ✅ BOTONES SIN onclick - Se controlan desde JS -->
         <div class="button-group">
-            <button type="button" class="btn-agregar" onclick="guardar()">Agregar</button>
-            <button type="button" class="btn-guardar" onclick="editar()">Guardar
-                cambios</button>
-            <button type="button" class="btn btn-cancelar" onclick="cancelar()">Cancelar</button>
+            <button type="button" class="btn btn-agregar" id="btnAgregar">Agregar</button>
+            <button type="button" class="btn btn-editar" id="btnEditar">Guardar cambios</button>
+            <button type="button" class="btn btn-cancelar" id="btnCancelar">Cancelar</button>
         </div>
     </form>
 </div>
@@ -49,15 +45,10 @@
                 <th>Acciones</th>
             </tr>
         </thead>
-        <tbody id="tabla">
-            <!-- Se llena dinámicamente -->
-        </tbody>
+        <tbody id="tabla"></tbody>
     </table>
 </div>
-
 {% endblock %}
-
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/apps/crear_almacenes.js') }}"></script>
 {% endblock %}
-

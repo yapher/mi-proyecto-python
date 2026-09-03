@@ -1,14 +1,18 @@
 /**
- * crear_almacenes.js
- * Refactorizado: usa el módulo genérico ArbolCRUD.
+ * crear_almacenes.js - VERSIÓN FINAL
+ * Usa ArbolCRUD con addEventListener (sin onclick inline)
  */
+console.log("✅ [FINAL] crear_almacenes.js cargado");
+
 document.addEventListener("DOMContentLoaded", () => {
-    new ArbolCRUD({
-        apiArbol:   "/api/crear_almacenes_arbol",
-        apiCrud:    "/api/crear_almacenes",
-        claveHijos: "subcrear_almacenes",
-        campoRuta:  "ruta_crear_almacenes",
-        nombreItem: "almacén",
+    console.log("✅ [FINAL] Inicializando ArbolCRUD...");
+    
+    const crud = new ArbolCRUD({
+        apiArbol:     "/api/crear_almacenes_arbol",
+        apiCrud:      "/api/crear_almacenes",
+        claveHijos:   "subcrear_almacenes",
+        campoRuta:    "ruta_crear_almacenes",
+        nombreItem:   "almacén",
         selectoresId: "nivelesContainer",
         tablaId:      "tabla",
         camposForm: {
@@ -18,9 +22,27 @@ document.addEventListener("DOMContentLoaded", () => {
             original: "ruta_original"
         },
         botones: {
-            agregar:  ".btn-agregar",
-            editar:   ".btn-editar",
-            cancelar: ".btn-cancelar"
+            agregar:  "#btnAgregar",
+            editar:   "#btnEditar",
+            cancelar: "#btnCancelar"
         }
     });
+    
+    // ✅ Event listeners explícitos
+    document.getElementById("btnAgregar").addEventListener("click", async () => {
+        console.log("🔵 Click en AGREGAR");
+        await crud.guardar();
+    });
+    
+    document.getElementById("btnEditar").addEventListener("click", async () => {
+        console.log("🟢 Click en GUARDAR CAMBIOS");
+        await crud.guardarEdicion();
+    });
+    
+    document.getElementById("btnCancelar").addEventListener("click", () => {
+        console.log("🔴 Click en CANCELAR");
+        crud.cancelar();
+    });
+    
+    console.log("✅ [FINAL] Botones configurados con addEventListener");
 });

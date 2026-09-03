@@ -127,6 +127,20 @@
                         "ruta": "",
                         "ruta_jerarquia": "SALA_ELECTRICA-JAULA-GABINETE1",
                         "subcrear_almacenes": []
+                    },
+                    {
+                        "nombre": "PUERTA 7",
+                        "emoji": "🚪",
+                        "ruta": "",
+                        "ruta_jerarquia": "SALA_ELECTRICA-JAULA-PUERTA 7",
+                        "subcrear_almacenes": []
+                    },
+                    {
+                        "nombre": "PUERTA 12",
+                        "emoji": "🚪",
+                        "ruta": "",
+                        "ruta_jerarquia": "SALA_ELECTRICA-JAULA-PUERTA 12",
+                        "subcrear_almacenes": []
                     }
                 ]
             },
