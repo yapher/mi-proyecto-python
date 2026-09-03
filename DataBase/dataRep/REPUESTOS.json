@@ -1422,7 +1422,7 @@
     {
         "nombre": "MOTOR BODINE ELECTRONIC CC42A5 HP 1/4 B5 TENSION ARM. 130V  CORR. ARMAD 1,8 A  2500RPM",
         "codigo": "71333855",
-        "cantidad": 3,
+        "cantidad": 2,
         "equipo": "SALA_ELECTRICA-JAULA",
         "ruta_jerarquia": [
             "SD-APR-LITE"
@@ -7913,5 +7913,19 @@
         "fecha_fin": "",
         "link": "",
         "estado": "🟢"
+    },
+    {
+        "nombre": "Selector 3 Pos,1 Fija,2 Ret A Centro",
+        "codigo": "71377636",
+        "cantidad": 1,
+        "equipo": "GMP-PUERTA1-ESTANTE1",
+        "ruta_jerarquia": [
+            "SD-ASE"
+        ],
+        "fecha_creacion": "2026-09-01",
+        "fecha_fin": "",
+        "link": "",
+        "estado": "🟢",
+        "imagen": "9001K2108_DA19_1500.jpg"
     }
 ]

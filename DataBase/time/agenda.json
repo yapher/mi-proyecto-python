@@ -2112,8 +2112,8 @@
         "id": 265
     },
     {
-        "titulo": "hacer M6 para drive robot 2",
-        "fecha": "2026-09-01",
+        "titulo": "hacer M6 para drive robot 2 (se vence)",
+        "fecha": "2026-10-08",
         "descripcion": "se realiza Aviso M6: 154969367 se vence 01.10.2026",
         "email": "cóherasimov@ternium.com.ar",
         "realizado": false,
@@ -2351,7 +2351,7 @@
     },
     {
         "titulo": "pasar planos a pdf y cargarlo en el sistema",
-        "fecha": "2026-08-28",
+        "fecha": "2026-09-03",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -4201,7 +4201,7 @@
     },
     {
         "titulo": "Colocar carteles  de motores Littell",
-        "fecha": "2026-08-28",
+        "fecha": "2026-09-03",
         "descripcion": "ya se imprimieron, falta colocar",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -8123,7 +8123,8 @@
         "fecha": "2026-09-10",
         "descripcion": "NORMALIZAR LUMINARIAS SALA ELÉCTRICA",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1080,
@@ -8232,7 +8233,7 @@
     },
     {
         "titulo": "Colocar cartel a estantes de sala de baterias",
-        "fecha": "2026-08-28",
+        "fecha": "2026-09-03",
         "descripcion": "Agregar cartel y sistema",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -10699,7 +10700,7 @@
     },
     {
         "titulo": "ot para equipos de emergencia",
-        "fecha": "2026-09-01",
+        "fecha": "2026-09-02",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -10831,7 +10832,7 @@
     },
     {
         "titulo": "generar planes de tableros de servicios",
-        "fecha": "2026-08-28",
+        "fecha": "2026-09-03",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -10858,7 +10859,7 @@
     },
     {
         "titulo": "hacer aviso para reparación de motor saca chapas",
-        "fecha": "2026-08-28",
+        "fecha": "2026-09-03",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -10885,7 +10886,7 @@
     },
     {
         "titulo": "hacer una OT para el cambio de ficha de robot 2",
-        "fecha": "2026-08-28",
+        "fecha": "2026-09-03",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -11173,7 +11174,7 @@
     },
     {
         "titulo": "RP Emb, 40",
-        "fecha": "2026-09-14",
+        "fecha": "2026-09-18",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -11191,7 +11192,7 @@
     },
     {
         "titulo": "RP Delta",
-        "fecha": "2026-09-22",
+        "fecha": "2026-09-24",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -11437,7 +11438,7 @@
     {
         "id": 1549,
         "titulo": "PM01:2004872864",
-        "fecha": "2026-09-14",
+        "fecha": "2026-09-18",
         "descripcion": "RP-MANT. TB EMBALAJE AUTOMÁTICO",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false
@@ -11445,7 +11446,7 @@
     {
         "id": 1550,
         "titulo": "PM01:2004872861",
-        "fecha": "2026-09-14",
+        "fecha": "2026-09-18",
         "descripcion": "RP-CONTROL CERRADURAS  PUERTAS",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false
@@ -11453,7 +11454,7 @@
     {
         "id": 1551,
         "titulo": "PM01:2004872863",
-        "fecha": "2026-09-14",
+        "fecha": "2026-09-18",
         "descripcion": "RP-MANT. TIJERA CORTE FILM",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false
@@ -11461,7 +11462,7 @@
     {
         "id": 1552,
         "titulo": "PM01:2004872862",
-        "fecha": "2026-09-14",
+        "fecha": "2026-09-18",
         "descripcion": "RP- CONTROL DE SENSORES",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false
@@ -11517,7 +11518,7 @@
     {
         "id": 1559,
         "titulo": "PM01:2004872871",
-        "fecha": "2026-09-22",
+        "fecha": "2026-09-24",
         "descripcion": "RP-MANT-SENSORES-ENCODERS DELTA",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false
@@ -11525,7 +11526,7 @@
     {
         "id": 1560,
         "titulo": "PM01:2004872872",
-        "fecha": "2026-09-22",
+        "fecha": "2026-09-24",
         "descripcion": "RP-REVISION TABLEROS DELTA",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false
@@ -11535,7 +11536,7 @@
         "fecha": "2026-08-28",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "alta",
         "id": 1561
     },
@@ -11575,5 +11576,426 @@
         "descripcion": "REALIZAR BACKUP ROBOT 1",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false
+    },
+    {
+        "id": 1571,
+        "titulo": "PM02:2004921519",
+        "fecha": "2026-09-03",
+        "descripcion": "INSPECCIÓN ELÉC. APIL 3. HALD",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1572,
+        "titulo": "PM02:2004921516",
+        "fecha": "2026-09-03",
+        "descripcion": "INSPECCIÓN ELÉC. TIJERA. HALD",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1573,
+        "titulo": "PM02:2004921517",
+        "fecha": "2026-09-03",
+        "descripcion": "INSPECCIÓN ELÉC. APIL 1. HALD",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1574,
+        "titulo": "PM02:2004921518",
+        "fecha": "2026-09-03",
+        "descripcion": "INSPECCIÓN ELÉC. APIL 2. HALD",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1575,
+        "titulo": "PM02:2004921520",
+        "fecha": "2026-09-03",
+        "descripcion": "INSPECCIÓN ELÉC. TB. HALD.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1576,
+        "titulo": "PM02:2004921515",
+        "fecha": "2026-09-03",
+        "descripcion": "INSPEC. ELÉC. ROD. AGARRE HALD",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1577,
+        "titulo": "PM02:2004921514",
+        "fecha": "2026-09-03",
+        "descripcion": "INSPECCIÓN ELÉC. DEBO. HALD",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "media"
+    },
+    {
+        "id": 1578,
+        "titulo": "PM02:2004936513",
+        "fecha": "2026-09-09",
+        "descripcion": "REVISION ILUMINACION DELTA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1579,
+        "titulo": "PM11:2004915815",
+        "fecha": "2027-06-30",
+        "descripcion": "REX - LITTELL REP. SEGURIDAD",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1580,
+        "titulo": "PM11:2004915796",
+        "fecha": "2027-06-30",
+        "descripcion": "REX - LITTELL REP. CONTACTORES",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1581,
+        "titulo": "PM11:2004933284",
+        "fecha": "2027-06-30",
+        "descripcion": "REX - LITTELL REP. CLASIFICADOR CONEXION",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1582,
+        "titulo": "PM11:2004915961",
+        "fecha": "2027-06-30",
+        "descripcion": "REX - LITTELL REP. CLASI. CONTROL",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1583,
+        "titulo": "PM11:2004915931",
+        "fecha": "2027-06-30",
+        "descripcion": "REX - LITTELL REP. FRENO MOTOR ELEV.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1584,
+        "titulo": "PM11:2004915869",
+        "fecha": "2027-06-30",
+        "descripcion": "REX - LITTELL REP. CABLEADO PLC",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1585,
+        "titulo": "PM11:2004915865",
+        "fecha": "2027-06-30",
+        "descripcion": "REX - LITTELL REP. MODULOS/FUENTES",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1586,
+        "titulo": "PM11:2004915702",
+        "fecha": "2027-06-30",
+        "descripcion": "REX - LITTELL REP. CLASIFICADOR",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "titulo": "Hacer una OT para oficina gerencia",
+        "fecha": "2026-09-02",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 1587
+    },
+    {
+        "titulo": "llamar al yalero para buscar repuesto",
+        "fecha": "2026-09-02",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": true,
+        "prioridad": "baja",
+        "id": 1588
+    },
+    {
+        "id": 1589,
+        "titulo": "PM11:2004939953",
+        "fecha": "2026-12-01",
+        "descripcion": "Inspección general grúa 320",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1590,
+        "titulo": "PM11:2004940070",
+        "fecha": "2026-12-01",
+        "descripcion": "Inspección general grúa 321",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1591,
+        "titulo": "PM01:2004940445",
+        "fecha": "2027-06-06",
+        "descripcion": "REX- MANTENIMIENTO REDES NIVEL 1",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1592,
+        "titulo": "PM01:2004940444",
+        "fecha": "2027-06-06",
+        "descripcion": "REX- MANT. MOTORES CLASIFICADOR",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1593,
+        "titulo": "PM01:2004940443",
+        "fecha": "2027-06-06",
+        "descripcion": "REX- MANTENIMIENTO MOTOR SACA CHAPAS",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1594,
+        "titulo": "PM01:2004940437",
+        "fecha": "2027-06-06",
+        "descripcion": "REX- MANTENIMIENTO MOTOR DEBOBINADOR",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1595,
+        "titulo": "PM01:2004940438",
+        "fecha": "2027-06-06",
+        "descripcion": "REX- MANTENIMIENTO MOTOR RECORTADORA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1596,
+        "titulo": "PM01:2004940439",
+        "fecha": "2027-06-06",
+        "descripcion": "REX- MANTENIMIENTO MOTORES PICADORA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1597,
+        "titulo": "PM01:2004940442",
+        "fecha": "2027-06-06",
+        "descripcion": "REX- MANTENIMIENTO MOTOR TIJERA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1598,
+        "titulo": "PM01:2004940441",
+        "fecha": "2027-06-06",
+        "descripcion": "REX- MANTENIMIENTO MOTOR ALIMENTADOR",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1599,
+        "titulo": "PM01:2004940440",
+        "fecha": "2027-06-06",
+        "descripcion": "REX- MANTENIMIENTO MOTOR NIVELADOR",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1600,
+        "titulo": "PM01:2004940436",
+        "fecha": "2027-06-06",
+        "descripcion": "REX-REIDENTIFICACIÓN DE CABLEADO",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1601,
+        "titulo": "PM01:2004940431",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT GRAL TABLEROS DE CONT GENERAL Y",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1602,
+        "titulo": "PM01:2004940432",
+        "fecha": "2027-06-06",
+        "descripcion": "REX GUARDIA DE ARRANQUE ELÉCTRICA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1603,
+        "titulo": "PM01:2004940433",
+        "fecha": "2027-06-06",
+        "descripcion": "REX-MANT. SISTEMA DE SEGURIDAD",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1604,
+        "titulo": "PM01:2004940429",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT  GUIAS LAT.A",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1605,
+        "titulo": "PM01:2004940435",
+        "fecha": "2027-06-06",
+        "descripcion": "REX- NORMALIZAR BOTONERAS DE CONTROL",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1606,
+        "titulo": "PM01:2004940434",
+        "fecha": "2027-06-06",
+        "descripcion": "REX-CAMBIO DE CONTACTORES MESAS",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1607,
+        "titulo": "PM01:2004940430",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TOPES FIN.AP",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1608,
+        "titulo": "PM01:2004940427",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.PRINC.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1609,
+        "titulo": "PM01:2004940426",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.SECUN.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1610,
+        "titulo": "PM01:2004940428",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT DRIVER AC MOT TRANS.SECUN.API4",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1611,
+        "titulo": "PM01:2004940424",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.SECUN.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1612,
+        "titulo": "PM01:2004940425",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.PRINC.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1613,
+        "titulo": "PM01:2004940423",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.PRINC.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1614,
+        "titulo": "PM01:2004940422",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.SECUN.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1615,
+        "titulo": "PM01:2004940420",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT GRAL DRIVER AC MOTOR CAB DE COR",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1616,
+        "titulo": "PM01:2004940421",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT TRANS.PRINC.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1617,
+        "titulo": "PM01:2004940397",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT TABLEROS DEBOBINADOR",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1618,
+        "titulo": "PM01:2004940399",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT GRAL DRIVER AC MOTOR ALIMENTADO",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1619,
+        "titulo": "PM01:2004940398",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT GRAL DRIVER AC MOT NIVELADOR",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1620,
+        "titulo": "PM01:2004940396",
+        "fecha": "2027-06-06",
+        "descripcion": "REX MANT DRIVE AC MOT DEBOBINADOR",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "titulo": "hacer ticket herramientas electricas",
+        "fecha": "2026-09-02",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 1621
+    },
+    {
+        "titulo": "Hacer una OT para Velos",
+        "fecha": "2026-09-02",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "media",
+        "id": 1622
     }
 ]
