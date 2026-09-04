@@ -1,26 +1,19 @@
 """
-Lógica de negocio: validaciones y manejo de archivos.
+COMPATIBILIDAD: Este archivo mantiene las importaciones para otras aplicaciones.
+La lógica real ahora está en: core/image.py
+
+Las funciones se re-exportan desde core para no romper imports existentes.
 """
-import os
-from werkzeug.utils import secure_filename
-from flask import current_app
+# Re-exportar TODO desde core.image para compatibilidad
+from core.image import (  # noqa: F401
+    procesar_imagen,
+    allowed_file,
+    calcular_hash_archivo,
+    calcular_hash_bytes,
+    DEFAULT_UPLOAD_FOLDER,
+    DEFAULT_ALLOWED_EXTENSIONS,
+)
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-UPLOAD_FOLDER = os.path.join('static', 'uploads', 'Imagenes')
-
-def allowed_file(filename):
-    """Verifica si la extensión del archivo es permitida."""
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-def procesar_imagen(archivo):
-    """Procesa y guarda una imagen. Retorna (filename, error)."""
-    if not archivo or archivo.filename == '':
-        return None, None
-    if not allowed_file(archivo.filename):
-        return None, "Formato de imagen no permitido."
-    
-    filename = secure_filename(archivo.filename)
-    save_path = os.path.join(current_app.root_path, UPLOAD_FOLDER, filename)
-    os.makedirs(os.path.dirname(save_path), exist_ok=True)
-    archivo.save(save_path)
-    return filename, None
+# Alias legacy: algunas partes del código usaban UPLOAD_FOLDER y ALLOWED_EXTENSIONS
+UPLOAD_FOLDER = DEFAULT_UPLOAD_FOLDER
+ALLOWED_EXTENSIONS = DEFAULT_ALLOWED_EXTENSIONS

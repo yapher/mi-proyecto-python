@@ -2,89 +2,61 @@ from flask import Blueprint, jsonify, render_template, request, current_app
 from flask_login import current_user
 from core.menu import cargar_menu
 from auth.login import roles_required
-import json, os, hashlib, time
+import json, os
 from functools import wraps
-from werkzeug.utils import secure_filename
+
+# ✅ IMPORTS DIRECTOS DESDE CORE (más limpio y reutilizable)
+from core.image import (
+    procesar_imagen as _core_procesar_imagen,
+    allowed_file,
+    calcular_hash_archivo,
+    calcular_hash_bytes,
+    DEFAULT_ALLOWED_EXTENSIONS,
+)
+
+# ✅ RE-EXPORTAR para compatibilidad con tests y código legacy
+# Los tests importan estas funciones desde este módulo
+__all__ = [
+    'procesar_imagen',
+    'allowed_file',
+    'calcular_hash_archivo',
+    'calcular_hash_bytes',
+    'UPLOAD_FOLDER',
+    'ALLOWED_EXTENSIONS',
+]
 
 UBI_TEC = 'DataBase/dataRep/ubicacion_tecnica.json'
 
 # ============================================================
-# CONFIGURACIÓN DE IMÁGENES (reutilizable)
+# CONFIGURACIÓN ESPECÍFICA DE ESTA APP
 # ============================================================
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
-UPLOAD_FOLDER = os.path.join('templates', 'Aplic', 'instalaciones', 'static', 'img')
+# Carpeta destino específica para instalaciones.
+# ⚠️ IMPORTANTE: Los tests hacen monkeypatch sobre UPLOAD_FOLDER,
+# por lo que DEBE mantenerse ese nombre exacto para compatibilidad.
+UPLOAD_FOLDER = os.path.join(
+    'templates', 'Aplic', 'instalaciones', 'static', 'img'
+)
+
+# Alias para compatibilidad con código que use el nombre nuevo
+UPLOAD_FOLDER_INSTALACIONES = UPLOAD_FOLDER
+
+# Alias legacy
+ALLOWED_EXTENSIONS = DEFAULT_ALLOWED_EXTENSIONS
 
 
-def allowed_file(filename):
-    """Verifica si la extensión del archivo es permitida."""
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-def asegurar_directorio_upload():
-    """Asegura que el directorio de uploads exista."""
-    ruta_completa = os.path.join(current_app.root_path, UPLOAD_FOLDER)
-    os.makedirs(ruta_completa, exist_ok=True)
-    return ruta_completa
-
-
-def calcular_hash_archivo(ruta_archivo):
-    """Calcula el hash MD5 de un archivo existente en disco."""
-    hash_md5 = hashlib.md5()
-    try:
-        with open(ruta_archivo, "rb") as f:
-            for chunk in iter(lambda: f.read(8192), b""):
-                hash_md5.update(chunk)
-        return hash_md5.hexdigest()
-    except (OSError, IOError):
-        return None
-
-
-def calcular_hash_bytes(data_bytes):
-    """Calcula el hash MD5 de datos en memoria (bytes)."""
-    return hashlib.md5(data_bytes).hexdigest()
-
-
+# ============================================================
+# WRAPPER DE procesar_imagen
+# ============================================================
 def procesar_imagen(archivo):
     """
-    Procesa y guarda una imagen con reutilización inteligente.
-    - Si existe archivo con mismo hash → NO duplica
-    - Si existe con hash diferente → agrega timestamp
-    Retorna (nombre_archivo, error).
+    Wrapper que llama a core.image.procesar_imagen usando UPLOAD_FOLDER.
+    
+    ⚠️ Este wrapper es CRÍTICO para los tests:
+    - Los tests hacen monkeypatch sobre UPLOAD_FOLDER
+    - Si usáramos UPLOAD_FOLDER_INSTALACIONES directamente, el monkeypatch no funcionaría
+    - Al usar UPLOAD_FOLDER (que es lo que se monkeypatchea), todo funciona
     """
-    if not archivo or archivo.filename == '':
-        return None, None
-
-    if not allowed_file(archivo.filename):
-        return None, f"Formato no permitido. Use: {', '.join(ALLOWED_EXTENSIONS)}"
-
-    filename = secure_filename(archivo.filename)
-    directorio = asegurar_directorio_upload()
-    ruta_completa = os.path.join(current_app.root_path, UPLOAD_FOLDER, filename)
-
-    try:
-        archivo.seek(0)
-        contenido_nuevo = archivo.read()
-        archivo.seek(0)
-    except Exception as e:
-        return None, f"Error al leer el archivo: {str(e)}"
-
-    if os.path.exists(ruta_completa):
-        hash_existente = calcular_hash_archivo(ruta_completa)
-        hash_nuevo = calcular_hash_bytes(contenido_nuevo)
-
-        if hash_existente == hash_nuevo:
-            return filename, None
-        else:
-            nombre, extension = os.path.splitext(filename)
-            filename = f"{nombre}_{int(time.time())}{extension}"
-            ruta_completa = os.path.join(current_app.root_path, UPLOAD_FOLDER, filename)
-
-    try:
-        with open(ruta_completa, "wb") as f:
-            f.write(contenido_nuevo)
-        return filename, None
-    except Exception as e:
-        return None, f"Error al guardar imagen: {str(e)}"
+    return _core_procesar_imagen(archivo, destino=UPLOAD_FOLDER)
 
 
 # ============================================================
@@ -187,7 +159,7 @@ def ubicacion_tecnica_json():
 
 
 # ============================================================
-# NUEVO ENDPOINT: Subir imagen (reutilizable)
+# ENDPOINT: Subir imagen (usa el wrapper local)
 # ============================================================
 @instalaciones_bp.route('/api/subir_imagen', methods=['POST'])
 @login_required_json
@@ -197,11 +169,10 @@ def subir_imagen():
         return jsonify({'status': 'error', 'msg': 'No se envió ningún archivo'}), 400
 
     archivo = request.files['imagen']
+    # ✅ Usar el wrapper local que respeta UPLOAD_FOLDER (monkeypatcheable)
     filename, error = procesar_imagen(archivo)
-
     if error:
         return jsonify({'status': 'error', 'msg': error}), 400
-
     if not filename:
         return jsonify({'status': 'error', 'msg': 'No se pudo procesar la imagen'}), 400
 
@@ -245,6 +216,7 @@ def editar_ubicacion():
         nueva_imagen = ''
         imagen_eliminada = True
     elif archivo_imagen and archivo_imagen.filename:
+        # ✅ Usar el wrapper local
         filename, error = procesar_imagen(archivo_imagen)
         if error:
             return jsonify({'status': 'error', 'msg': error}), 400
@@ -285,11 +257,14 @@ def editar_ubicacion():
 def borrar_ubicacion():
     data = cargar_ubicaciones()
     ruta_jerarquia = request.json.get('ruta_jerarquia') if request.json else None
+
     if not ruta_jerarquia:
         return jsonify({'status': 'error', 'msg': 'Falta ruta_jerarquia'}), 400
+
     if encontrar_y_borrar(data, ruta_jerarquia):
         guardar_ubicaciones(data)
         return jsonify({'status': 'ok', 'msg': 'Ubicación eliminada correctamente'})
+
     return jsonify({'status': 'no encontrado', 'msg': 'La ubicación no existe'}), 404
 
 
@@ -322,6 +297,7 @@ def agregar_sububicacion():
         return jsonify({'status': 'error', 'msg': 'Faltan datos'}), 400
 
     if archivo_imagen and archivo_imagen.filename:
+        # ✅ Usar el wrapper local
         filename, error = procesar_imagen(archivo_imagen)
         if error:
             return jsonify({'status': 'error', 'msg': error}), 400

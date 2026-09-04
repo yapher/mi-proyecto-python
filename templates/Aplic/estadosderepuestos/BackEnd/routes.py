@@ -7,22 +7,29 @@ from flask_login import login_required, current_user
 from auth.login import roles_required
 from core.menu import cargar_menu
 
-# Importaciones modulares
-from .models import leer_repuestos, crear_repuesto, actualizar_repuesto, guardar_repuestos
-from .services import procesar_imagen
-from .helpers import (
-    cargar_tabs, cargar_almacenes, obtener_nombres_almacenes, 
-    cargar_estados, cargar_ubicaciones
+# ✅ IMPORTS DIRECTOS DESDE CORE (más limpio y reutilizable)
+from core.data_loaders import (
+    cargar_tabs,
+    cargar_almacenes,
+    obtener_nombres_almacenes,
+    cargar_estados,
+    cargar_ubicaciones,
 )
+from core.image import procesar_imagen
+
+# Importaciones locales del módulo
+from .models import leer_repuestos, crear_repuesto, actualizar_repuesto, guardar_repuestos
 from .export_pdf import exportar_pdf_reportlab
 
 estadoRep_bp = Blueprint('indexEstadoRep', __name__)
+
 
 def _redirigir(return_to, tab_activo):
     """Redirección dinámica según return_to."""
     if return_to == 'indexlista_repuestos.indexlista_repuestos':
         return redirect(url_for('indexlista_repuestos.indexlista_repuestos'))
     return redirect(url_for('indexEstadoRep.indexEstadoRep', active_tab=tab_activo))
+
 
 @estadoRep_bp.route("/estadosRep")
 @login_required
@@ -64,6 +71,7 @@ def indexEstadoRep():
         estados=estados, ubicaciones=ubicaciones
     )
 
+
 @estadoRep_bp.route('/api/repuestos')
 def api_repuestos():
     ruta_jerarquia = request.args.get('ruta_jerarquia', '').lower()
@@ -74,19 +82,19 @@ def api_repuestos():
     ]
     return jsonify({'repuestos': repuestos_filtrados})
 
+
 @estadoRep_bp.route("/exportar_pdf", methods=["POST"])
 @login_required
 @roles_required('viewer')
 def exportar_pdf():
     ruta_jerarquia = request.form.get("ruta_jerarquia", "").strip().lower()
     buscar = request.form.get("buscar", "").strip().lower()
+
     repuestos = leer_repuestos()
-    
     repuestos_filtrados = [
         r for r in repuestos
         if any(ruta_jer.strip().lower() == ruta_jerarquia for ruta_jer in r.get('ruta_jerarquia', []))
     ]
-    
     if buscar:
         repuestos_filtrados = [
             r for r in repuestos_filtrados
@@ -97,8 +105,8 @@ def exportar_pdf():
             or buscar in str(r.get('cantidad', '')).lower()
             or buscar in ','.join(r.get('ruta_jerarquia', [])).lower()
         ]
-        
     return exportar_pdf_reportlab(repuestos_filtrados)
+
 
 @estadoRep_bp.route('/agregar_repuesto', methods=['POST'])
 @login_required
@@ -141,6 +149,7 @@ def agregar_repuesto():
     flash(mensaje, "success" if exito else "warning")
     return _redirigir(return_to, tab_activo)
 
+
 @estadoRep_bp.route('/editar_repuesto', methods=['POST'])
 @login_required
 @roles_required('viewer')
@@ -177,6 +186,7 @@ def editar_repuesto():
     flash(mensaje, "success" if exito else "warning")
     return _redirigir(return_to, tab_activo)
 
+
 @estadoRep_bp.route('/eliminar_repuesto', methods=['POST'])
 @login_required
 @roles_required('viewer')
@@ -184,41 +194,39 @@ def eliminar_repuesto():
     return_to = request.form.get('return_to', 'indexEstadoRep.indexEstadoRep')
     tab_activo = request.form.get('tab_activo', '')
     codigo = request.form.get('codigo', '').strip()
-    
-    # ✅ CORRECCIÓN: Lógica en línea para evitar colisión de nombres con la función importada
+
     repuestos = leer_repuestos()
     repuestos_nuevos = [r for r in repuestos if str(r.get('codigo', '')) != str(codigo)]
-    
     if len(repuestos_nuevos) < len(repuestos):
         guardar_repuestos(repuestos_nuevos)
         flash("Repuesto eliminado correctamente.", "success")
     else:
         flash("No se encontró el repuesto a eliminar.", "danger")
-        
+
     return _redirigir(return_to, tab_activo)
+
 
 @estadoRep_bp.route('/filtrar_por_estado', methods=['GET'])
 @login_required
 @roles_required('viewer')
 def estado_filter():
     estado = request.args.get('estado')
-    
     pestañas = cargar_tabs()
     pestaña_activa = pestañas[0] if pestañas else {}
-    
+
     repuestos = leer_repuestos()
     estados_disponibles = sorted(set(r.get('estado', '') for r in repuestos if r.get('estado')))
-    
+
     if estado:
         repuestos_filtrados = [r for r in repuestos if r.get('estado') == estado]
     else:
         repuestos_filtrados = repuestos
-        
+
     ubicaciones = cargar_ubicaciones()
     almacenes = cargar_almacenes()
     nombres_almacenes = obtener_nombres_almacenes(almacenes)
     estados = cargar_estados()
-    
+
     return render_template(
         'Aplic/estadosderepuestos/FrontEnd/estados_de_repuestos.html',
         repuestos=repuestos_filtrados,
