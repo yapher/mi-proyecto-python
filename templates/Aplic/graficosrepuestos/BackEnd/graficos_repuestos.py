@@ -5,11 +5,12 @@ from flask import Blueprint, jsonify, request, render_template
 import json, os
 from collections import Counter
 
-# ✅ IMPORTACIÓN DIRECTA DESDE HELPERS (más limpio)
-from templates.Aplic.estadosderepuestos.BackEnd.helpers import cargar_estados
+# ✅ IMPORT DIRECTO DESDE CORE (más limpio)
+from core.data_loaders import cargar_estados
 
 graficos_repuestos_bp = Blueprint('indexgraficos_repuestos', __name__)
 PATHREPUESTOS = 'DataBase/dataRep/REPUESTOS.json'
+
 
 def obtener_jerarquias():
     if not os.path.exists(PATHREPUESTOS):
@@ -22,6 +23,7 @@ def obtener_jerarquias():
         if rutas:
             jerarquias.update(rutas)
     return sorted(jerarquias)
+
 
 def contar_repuestos_por_estado(jerarquia=None):
     if not os.path.exists(PATHREPUESTOS):
@@ -39,6 +41,7 @@ def contar_repuestos_por_estado(jerarquia=None):
         contador[estado_legible] += 1
     return dict(contador)
 
+
 @graficos_repuestos_bp.route('/graficos_repuestos')
 @login_required
 @roles_required('viewer')
@@ -52,9 +55,10 @@ def indexgraficos_repuestos():
     }
     return render_template(
         'Aplic/graficosrepuestos/FrontEnd/graficos_repuestos.html',
-        nemu=nemu, roles=current_user.roles, 
+        nemu=nemu, roles=current_user.roles,
         datos=datos, jerarquias=jerarquias
     )
+
 
 @graficos_repuestos_bp.route('/graficos_repuestos/datos')
 @login_required
