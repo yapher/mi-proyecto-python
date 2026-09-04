@@ -349,7 +349,7 @@
     {
         "id": 45,
         "titulo": "PM11:2002119846  hacer seguimiento",
-        "fecha": "2026-09-04",
+        "fecha": "2026-10-09",
         "descripcion": "REP. UNIDAD E/S ROBOT 1/  se manda correo 15/04/2026; se vuelve a consultar; 22/04/2026",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -384,7 +384,7 @@
     {
         "id": 49,
         "titulo": "PM11:2001620272 hacer seguimiento",
-        "fecha": "2026-09-04",
+        "fecha": "2026-10-09",
         "descripcion": "REP.  DRIVE TRANSPORTADOR EMPAQUE; no está liberada por Oldani, 19/01/2026, sigue sin liberar; a comprar por exiros 02/03/2026. Se vuelve a consultar 07/04/2026/ ;  17/04/2026;  vuelve a consultar 22/04/2026",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -674,7 +674,7 @@
     {
         "id": 83,
         "titulo": "PM11:2002726628 hacer seguimiento",
-        "fecha": "2026-09-15",
+        "fecha": "2026-10-09",
         "descripcion": "REP. SENSORES BARRERAS EMBALAJE40,   se manda correo 23/06/2026  \"SENSORES EMBALAJE 40\"",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -2351,7 +2351,7 @@
     },
     {
         "titulo": "pasar planos a pdf y cargarlo en el sistema",
-        "fecha": "2026-09-03",
+        "fecha": "2026-09-04",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -4201,7 +4201,7 @@
     },
     {
         "titulo": "Colocar carteles  de motores Littell",
-        "fecha": "2026-09-03",
+        "fecha": "2026-09-04",
         "descripcion": "ya se imprimieron, falta colocar",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -8233,7 +8233,7 @@
     },
     {
         "titulo": "Colocar cartel a estantes de sala de baterias",
-        "fecha": "2026-09-03",
+        "fecha": "2026-09-04",
         "descripcion": "Agregar cartel y sistema",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -10703,7 +10703,7 @@
         "fecha": "2026-09-02",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media",
         "id": 1372
     },
@@ -10832,7 +10832,7 @@
     },
     {
         "titulo": "generar planes de tableros de servicios",
-        "fecha": "2026-09-03",
+        "fecha": "2026-09-04",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -10859,7 +10859,7 @@
     },
     {
         "titulo": "hacer aviso para reparación de motor saca chapas",
-        "fecha": "2026-09-03",
+        "fecha": "2026-09-04",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -10889,7 +10889,7 @@
         "fecha": "2026-09-03",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media",
         "id": 1393
     },
@@ -11168,13 +11168,13 @@
         "fecha": "2026-09-02",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "alta",
         "id": 1425
     },
     {
         "titulo": "RP Emb, 40",
-        "fecha": "2026-09-18",
+        "fecha": "2026-09-11",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -11438,7 +11438,7 @@
     {
         "id": 1549,
         "titulo": "PM01:2004872864",
-        "fecha": "2026-09-18",
+        "fecha": "2026-09-11",
         "descripcion": "RP-MANT. TB EMBALAJE AUTOMÁTICO",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false
@@ -11446,7 +11446,7 @@
     {
         "id": 1550,
         "titulo": "PM01:2004872861",
-        "fecha": "2026-09-18",
+        "fecha": "2026-09-11",
         "descripcion": "RP-CONTROL CERRADURAS  PUERTAS",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false
@@ -11454,7 +11454,7 @@
     {
         "id": 1551,
         "titulo": "PM01:2004872863",
-        "fecha": "2026-09-18",
+        "fecha": "2026-09-11",
         "descripcion": "RP-MANT. TIJERA CORTE FILM",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false
@@ -11462,7 +11462,7 @@
     {
         "id": 1552,
         "titulo": "PM01:2004872862",
-        "fecha": "2026-09-18",
+        "fecha": "2026-09-11",
         "descripcion": "RP- CONTROL DE SENSORES",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false
@@ -11551,7 +11551,8 @@
         "fecha": "2026-09-03",
         "descripcion": "REVISION SISTEMA ELEC. DELTA",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1568,
@@ -11583,7 +11584,8 @@
         "fecha": "2026-09-03",
         "descripcion": "INSPECCIÓN ELÉC. APIL 3. HALD",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1572,
@@ -11591,7 +11593,8 @@
         "fecha": "2026-09-03",
         "descripcion": "INSPECCIÓN ELÉC. TIJERA. HALD",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1573,
@@ -11599,7 +11602,8 @@
         "fecha": "2026-09-03",
         "descripcion": "INSPECCIÓN ELÉC. APIL 1. HALD",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1574,
@@ -11607,7 +11611,8 @@
         "fecha": "2026-09-03",
         "descripcion": "INSPECCIÓN ELÉC. APIL 2. HALD",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1575,
@@ -11615,7 +11620,8 @@
         "fecha": "2026-09-03",
         "descripcion": "INSPECCIÓN ELÉC. TB. HALD.",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1576,
@@ -11623,7 +11629,8 @@
         "fecha": "2026-09-03",
         "descripcion": "INSPEC. ELÉC. ROD. AGARRE HALD",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false
+        "realizado": true,
+        "prioridad": "media"
     },
     {
         "id": 1577,
@@ -11711,7 +11718,7 @@
         "fecha": "2026-09-02",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media",
         "id": 1587
     },
@@ -11982,7 +11989,7 @@
     },
     {
         "titulo": "hacer ticket herramientas electricas",
-        "fecha": "2026-09-02",
+        "fecha": "2026-09-04",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
         "realizado": false,
@@ -11994,8 +12001,73 @@
         "fecha": "2026-09-02",
         "descripcion": "",
         "email": "c.oherasimov@ternium.com.ar",
-        "realizado": false,
+        "realizado": true,
         "prioridad": "media",
         "id": 1622
+    },
+    {
+        "titulo": "comprar tablero para colocar en embalaje",
+        "fecha": "2026-09-04",
+        "descripcion": "",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false,
+        "prioridad": "alta",
+        "id": 1623
+    },
+    {
+        "id": 1624,
+        "titulo": "PM11:2004953726",
+        "fecha": "2026-10-01",
+        "descripcion": "Instalación bocas de red",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1625,
+        "titulo": "PM11:2004953522",
+        "fecha": "2026-12-02",
+        "descripcion": "Realizar control de software",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1626,
+        "titulo": "PM11:2004953535",
+        "fecha": "2026-12-01",
+        "descripcion": "NORMALIZAR LUMINARIAS GERENCIA",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1627,
+        "titulo": "PM11:2004951311",
+        "fecha": "2026-12-01",
+        "descripcion": "control de luminarias de emergencia",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1628,
+        "titulo": "PM02:2004950768",
+        "fecha": "2026-09-14",
+        "descripcion": "INSP. GRAL AREAS EXTERNAS.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1629,
+        "titulo": "PM02:2004950769",
+        "fecha": "2026-09-12",
+        "descripcion": "REVISION ELECT. BAT Y ELEVADOR POTENCIA.",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
+    },
+    {
+        "id": 1630,
+        "titulo": "PM11:2004954079",
+        "fecha": "2026-09-11",
+        "descripcion": "Cambio de fichas Robot 1",
+        "email": "c.oherasimov@ternium.com.ar",
+        "realizado": false
     }
 ]
