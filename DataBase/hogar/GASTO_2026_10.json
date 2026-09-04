@@ -1,6 +1,6 @@
 [
     {
-        "id": 1788403017627,
+        "id": 1788565975726,
         "rubro": "Tarjetas de Credito",
         "descripcion": "Mercado libre",
         "importe": 72000,
@@ -11,7 +11,7 @@
         "pagado": false
     },
     {
-        "id": 1788403017628,
+        "id": 1788565975727,
         "rubro": "Facultad",
         "descripcion": "Alquiler",
         "importe": 700000,
@@ -22,7 +22,7 @@
         "pagado": false
     },
     {
-        "id": 1788403017630,
+        "id": 1788565975728,
         "rubro": "Servicios",
         "descripcion": "Telefonia",
         "importe": 45000,
@@ -33,7 +33,7 @@
         "pagado": false
     },
     {
-        "id": 1788403017631,
+        "id": 1788565975729,
         "rubro": "Servicios",
         "descripcion": "Gas",
         "importe": 70000,
@@ -44,7 +44,7 @@
         "pagado": false
     },
     {
-        "id": 1788403017632,
+        "id": 1788565975730,
         "rubro": "Almacen",
         "descripcion": "Supermercado",
         "importe": 350000,
@@ -55,7 +55,7 @@
         "pagado": false
     },
     {
-        "id": 1788403017633,
+        "id": 1788565975731,
         "rubro": "Automotor",
         "descripcion": "Combustible Sandero",
         "importe": 150000,
@@ -66,7 +66,7 @@
         "pagado": false
     },
     {
-        "id": 1788403017634,
+        "id": 1788565975732,
         "rubro": "Automotor",
         "descripcion": "Seguros",
         "importe": 88000,
@@ -77,7 +77,7 @@
         "pagado": false
     },
     {
-        "id": 1788403017635,
+        "id": 1788565975733,
         "rubro": "Creditos",
         "descripcion": "Naranja",
         "importe": 79928,
@@ -88,7 +88,7 @@
         "pagado": false
     },
     {
-        "id": 1788403017636,
+        "id": 1788565975734,
         "rubro": "Servicios",
         "descripcion": "Luz",
         "importe": 173000,
@@ -97,7 +97,7 @@
         "pagado": false
     },
     {
-        "id": 1788403017637,
+        "id": 1788565975735,
         "rubro": "Forrajería",
         "descripcion": "Comida Gatos",
         "importe": 98800,
@@ -106,7 +106,7 @@
         "pagado": false
     },
     {
-        "id": 1788403017638,
+        "id": 1788565975736,
         "rubro": "Servicios",
         "descripcion": "Internet",
         "importe": 34000,
@@ -117,10 +117,10 @@
         "pagado": false
     },
     {
-        "id": 1788403017639,
+        "id": 1788565975737,
         "rubro": "Creditos",
         "descripcion": "Waynimovil",
-        "importe": 850000,
+        "importe": 900000,
         "tipo": "único",
         "vencimiento": "2026-10-02",
         "pagado": false
