@@ -1,8 +1,11 @@
+"""
+Blueprint de Lista de Repuestos.
+AHORA USA SQL en lugar de JSON.
+"""
 from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
 from core.menu import cargar_menu
 from auth.login import roles_required
-import json, os
 from datetime import datetime
 from templates.Aplic.estadosderepuestos.BackEnd.export_pdf import exportar_pdf_reportlab
 
@@ -14,12 +17,14 @@ from core.data_loaders import (
     cargar_estados,
     cargar_ubicaciones,
 )
+# ✅ NUEVO: importar el store SQL de repuestos
+from core.db_sql_store import repuesto_store
 
 lista_repuestos_bp = Blueprint('indexlista_repuestos', __name__)
-PATHREPUESTOS = 'DataBase/dataRep/REPUESTOS.json'
 
 
 def filtrar_repuestos(repuestos, filtros):
+    """Filtra repuestos según los criterios dados."""
     resultado = []
     hoy = datetime.today().date()
     mostrar_vencidos = filtros.get('vencidos') == '1'
@@ -48,7 +53,6 @@ def filtrar_repuestos(repuestos, filtros):
             cumple = False
         if filtros.get('estado') and filtros['estado'] != rep.get('estado', ''):
             cumple = False
-
         if filtros.get('fecha_alta'):
             try:
                 fecha_alta = datetime.strptime(filtros['fecha_alta'], '%Y-%m-%d')
@@ -57,7 +61,6 @@ def filtrar_repuestos(repuestos, filtros):
                     cumple = False
             except Exception:
                 pass
-
         if filtros.get('fecha_baja'):
             try:
                 fecha_baja = datetime.strptime(filtros['fecha_baja'], '%Y-%m-%d')
@@ -79,6 +82,8 @@ def filtrar_repuestos(repuestos, filtros):
 @roles_required('viewer')
 def indexlista_repuestos():
     nemu = cargar_menu()
+
+    # ✅ Cargar datos desde SQL
     tabs = cargar_tabs()
     estados = cargar_estados()
     almacenes = cargar_almacenes()
@@ -94,11 +99,8 @@ def indexlista_repuestos():
         'vencidos': request.args.get('vencidos', '').strip()
     }
 
-    if not os.path.exists(PATHREPUESTOS):
-        repuestos = []
-    else:
-        with open(PATHREPUESTOS, 'r', encoding='utf-8') as f:
-            repuestos = json.load(f)
+    # ✅ NUEVO: cargar repuestos desde SQL en lugar de JSON
+    repuestos = repuesto_store.cargar()
 
     hoy = datetime.today().date()
     cantidad_vencidos = 0

@@ -1,24 +1,26 @@
+"""
+Blueprint de Gráficos de Repuestos.
+AHORA USA SQL en lugar de JSON.
+"""
 from flask_login import login_required, current_user
 from core.menu import cargar_menu
 from auth.login import roles_required
 from flask import Blueprint, jsonify, request, render_template
-import json, os
 from collections import Counter
 
 # ✅ IMPORT DIRECTO DESDE CORE (más limpio)
 from core.data_loaders import cargar_estados
+# ✅ NUEVO: importar el store SQL de repuestos
+from core.db_sql_store import repuesto_store
 
 graficos_repuestos_bp = Blueprint('indexgraficos_repuestos', __name__)
-PATHREPUESTOS = 'DataBase/dataRep/REPUESTOS.json'
 
 
 def obtener_jerarquias():
-    if not os.path.exists(PATHREPUESTOS):
-        return []
-    with open(PATHREPUESTOS, 'r', encoding='utf-8') as f:
-        data = json.load(f)
+    """Obtiene todas las rutas jerárquicas únicas de los repuestos."""
+    repuestos = repuesto_store.cargar()
     jerarquias = set()
-    for item in data:
+    for item in repuestos:
         rutas = item.get("ruta_jerarquia", [])
         if rutas:
             jerarquias.update(rutas)
@@ -26,19 +28,22 @@ def obtener_jerarquias():
 
 
 def contar_repuestos_por_estado(jerarquia=None):
-    if not os.path.exists(PATHREPUESTOS):
-        return {}
-    with open(PATHREPUESTOS, 'r', encoding='utf-8') as f:
-        data = json.load(f)
+    """Cuenta repuestos agrupados por estado, opcionalmente filtrado por jerarquía."""
+    repuestos = repuesto_store.cargar()
     contador = Counter()
     estados = cargar_estados()
-    for item in data:
+
+    # Mapa emoji → nombre legible
+    mapa_estados = {e['emoji']: e['nombre'] for e in estados}
+
+    for item in repuestos:
         rutas = item.get("ruta_jerarquia", [])
         if jerarquia and jerarquia not in rutas:
             continue
         estado = item.get("estado", "Otros")
-        estado_legible = {e['emoji']: e['nombre'] for e in estados}.get(estado, "Otros")
+        estado_legible = mapa_estados.get(estado, "Otros")
         contador[estado_legible] += 1
+
     return dict(contador)
 
 
@@ -55,8 +60,10 @@ def indexgraficos_repuestos():
     }
     return render_template(
         'Aplic/graficosrepuestos/FrontEnd/graficos_repuestos.html',
-        nemu=nemu, roles=current_user.roles,
-        datos=datos, jerarquias=jerarquias
+        nemu=nemu,
+        roles=current_user.roles,
+        datos=datos,
+        jerarquias=jerarquias
     )
 
 

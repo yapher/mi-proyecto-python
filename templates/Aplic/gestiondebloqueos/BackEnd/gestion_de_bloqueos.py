@@ -1,55 +1,43 @@
+"""
+Blueprint de Gestión de Bloqueos - VERSIÓN SQL
+Ahora usa SQL en lugar de JSON.
+"""
 from flask import Blueprint, render_template, request, jsonify
-import json, os
 from collections import defaultdict
+from core.db_sql_store import nodo_bloqueo_store
 
 gestion_de_bloqueos_bp = Blueprint('gestion_de_bloqueos', __name__)
 
-# Archivo JSON
-NODO_JSON = "Database/planos/nodo.json"
 
-# -----------------------------
-# Cargar / Guardar JSON
-# -----------------------------
-def cargar_nodos():
-    if os.path.exists(NODO_JSON):
-        with open(NODO_JSON, "r", encoding="utf-8") as f:
-            data = json.load(f)
-            # Asegurar campo descripción en nodos existentes
-            for n in data.values():
-                if "descripcion" not in n:
-                    n["descripcion"] = ""
-            return data
-    return {}
+def _construir_children_map():
+    """Construye mapa de hijos desde los nodos en SQL."""
+    interruptores = nodo_bloqueo_store.cargar_todos()
+    children_map = defaultdict(list)
+    for id_, n in interruptores.items():
+        if n.get('padre'):
+            children_map[n['padre']].append(id_)
+    return interruptores, children_map
 
-def guardar_nodos():
-    with open(NODO_JSON, "w", encoding="utf-8") as f:
-        json.dump(interruptores, f, ensure_ascii=False, indent=2)
-
-# -----------------------------
-# Estado en memoria
-# -----------------------------
-interruptores = cargar_nodos()
-children_map = defaultdict(list)
-for id_, n in interruptores.items():
-    if n.get("padre"):
-        children_map[n["padre"]].append(id_)
 
 def get_root_id():
+    """Obtiene el ID del nodo raíz."""
+    interruptores = nodo_bloqueo_store.cargar_todos()
     roots = [i for i, data in interruptores.items() if data.get('padre') is None]
     return roots[0] if roots else None
 
+
 def toggle_descendientes(id_, estado):
-    """Apaga todos los descendientes si se apaga el nodo"""
-    interruptores[id_]['estado'] = estado
+    """Apaga todos los descendientes si se apaga el nodo."""
+    interruptores, children_map = _construir_children_map()
+    nodo_bloqueo_store.actualizar(id_, {'estado': estado})
     if estado == 'apagado':
         for hijo in children_map.get(id_, []):
             toggle_descendientes(hijo, estado)
 
-# -----------------------------
-# Rutas
-# -----------------------------
+
 @gestion_de_bloqueos_bp.route('/gestion_de_bloqueos')
 def indexgestion_de_bloqueos():
+    interruptores = nodo_bloqueo_store.cargar_todos()
     root = get_root_id()
     return render_template(
         'Aplic/gestiondebloqueos/FrontEnd/gestion_de_bloqueos.html',
@@ -57,82 +45,61 @@ def indexgestion_de_bloqueos():
         root_id=root
     )
 
+
 @gestion_de_bloqueos_bp.route('/toggle_estado/<id>', methods=['POST'])
 def toggle_estado(id):
-    if id not in interruptores:
+    nodo = nodo_bloqueo_store.obtener(id)
+    if not nodo:
         return jsonify({'success': False, 'error': 'Nodo no encontrado'})
-    nodo = interruptores[id]
+
     nuevo_estado = 'encendido' if nodo['estado'] == 'apagado' else 'apagado'
+    padre_id = nodo.get('padre')
 
     # Solo puede encender si es raíz o si el padre está encendido
-    padre_id = nodo.get('padre')
-    if nuevo_estado == 'encendido' and padre_id and interruptores[padre_id]['estado'] != 'encendido':
-        return jsonify({'success': False, 'error': 'No se puede encender porque el padre está apagado'})
+    if nuevo_estado == 'encendido' and padre_id:
+        padre = nodo_bloqueo_store.obtener(padre_id)
+        if padre and padre['estado'] != 'encendido':
+            return jsonify({
+                'success': False,
+                'error': 'No se puede encender porque el padre está apagado'
+            })
 
     toggle_descendientes(id, nuevo_estado)
-    guardar_nodos()
-    return jsonify({'success': True, 'estado': interruptores[id]['estado']})
+    actualizado = nodo_bloqueo_store.obtener(id)
+    return jsonify({'success': True, 'estado': actualizado['estado']})
+
 
 @gestion_de_bloqueos_bp.route('/agregar_interruptor', methods=['POST'])
 def agregar_interruptor():
     data = request.json or {}
     nombre = data.get('nombre', 'Nuevo Nodo')
     padre = data.get('padre')
+    nuevo_id, data_nodo = nodo_bloqueo_store.crear(nombre, padre)
+    return jsonify({'success': True, 'id': nuevo_id, 'data': data_nodo})
 
-    # ✅ Generar ID único (evita conflictos al borrar nodos)
-    nuevo_id = str(max(map(int, interruptores.keys()), default=0) + 1)
-
-    interruptores[nuevo_id] = {
-        'id': nuevo_id,
-        'nombre': nombre,
-        'estado': 'apagado',
-        'padre': padre,
-        'descripcion': ''
-    }
-
-    if padre:
-        children_map[padre].append(nuevo_id)
-
-    guardar_nodos()
-    return jsonify({'success': True, 'id': nuevo_id, 'data': interruptores[nuevo_id]})
 
 @gestion_de_bloqueos_bp.route('/editar_interruptor/<id>', methods=['POST'])
 def editar_interruptor(id):
-    if id not in interruptores:
-        return jsonify({'success': False, 'error': 'Nodo no encontrado'})
     data = request.json or {}
-    interruptores[id]['nombre'] = data.get('nombre', interruptores[id]['nombre'])
-    interruptores[id]['estado'] = data.get('estado', interruptores[id]['estado'])
-    interruptores[id]['padre'] = data.get('padre', interruptores[id]['padre'])
-    interruptores[id]['descripcion'] = data.get('descripcion', interruptores[id]['descripcion'])
-    guardar_nodos()
-    return jsonify({'success': True, 'id': id, 'data': interruptores[id]})
+    actualizado = nodo_bloqueo_store.actualizar(id, data)
+    if not actualizado:
+        return jsonify({'success': False, 'error': 'Nodo no encontrado'})
+    return jsonify({'success': True, 'id': id, 'data': actualizado})
+
 
 @gestion_de_bloqueos_bp.route('/borrar_interruptor/<id>', methods=['POST'])
 def borrar_interruptor(id):
-    if id not in interruptores:
-        return jsonify({'success': False, 'error': 'Nodo no encontrado'})
-    padre = interruptores[id].get('padre')
-    if padre and id in children_map[padre]:
-        children_map[padre].remove(id)
-    del interruptores[id]
-    if id in children_map:
-        del children_map[id]
-    guardar_nodos()
-    return jsonify({'success': True, 'id': id})
+    if nodo_bloqueo_store.eliminar(id):
+        return jsonify({'success': True, 'id': id})
+    return jsonify({'success': False, 'error': 'Nodo no encontrado'})
+
 
 @gestion_de_bloqueos_bp.route('/mover_interruptor', methods=['POST'])
 def mover_interruptor():
     data = request.json or {}
     id_ = data.get('id')
     nuevo_padre = data.get('nuevo_padre') or None
-    if id_ not in interruptores:
+    actualizado = nodo_bloqueo_store.actualizar(id_, {'padre': nuevo_padre})
+    if not actualizado:
         return jsonify({'success': False, 'error': 'Nodo no encontrado'})
-    viejo_padre = interruptores[id_].get('padre')
-    if viejo_padre and id_ in children_map[viejo_padre]:
-        children_map[viejo_padre].remove(id_)
-    interruptores[id_]['padre'] = nuevo_padre
-    if nuevo_padre:
-        children_map[nuevo_padre].append(id_)
-    guardar_nodos()
     return jsonify({'success': True, 'id': id_, 'nuevo_padre': nuevo_padre})

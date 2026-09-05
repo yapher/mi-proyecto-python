@@ -1,23 +1,14 @@
-# Archivo backend generado automáticamente
+"""
+Módulo de estadísticas - VERSIÓN SQL
+Ahora usa SQL en lugar de JSON.
+"""
 from flask_login import login_required, current_user
 from core.menu import cargar_menu
 from auth.login import roles_required
-from flask import Blueprint, jsonify, request, render_template, redirect, url_for, flash, current_app
-import json, re, os
-from glob import glob
-from datetime import datetime
-
-# ✅ IMPORTAR MesStore desde core
-from core.mes_store import MesStore
+from flask import Blueprint, jsonify, render_template
+from core.db_sql_store import pago_store
 
 estadisticas_bp = Blueprint('indexestadisticas', __name__)
-
-# ✅ Instancia reutilizable de MesStore
-mes_store = MesStore(
-    base_dir='DataBase/hogar',
-    archivo_general='GASTOS',
-    prefijo_mensual='GASTO'
-)
 
 @estadisticas_bp.route('/estadisticas')
 @login_required
@@ -29,18 +20,13 @@ def indexestadisticas():
 @estadisticas_bp.route('/api/estadisticas')
 @login_required
 def api_estadisticas():
-    # ✅ Usar MesStore para listar meses disponibles
-    meses_disponibles = mes_store.listar_meses_disponibles()
-    
+    meses_disponibles = pago_store.listar_meses_disponibles()
     rubros = {}
     items = {}
-    
+
     for anio, mes in meses_disponibles:
         fecha_fmt = f"{anio}-{mes:02d}"
-        
-        # ✅ Usar MesStore para leer mes
-        pagos = mes_store.leer_mes(anio, mes)
-        
+        pagos = pago_store.leer_mes(anio, mes)
         for p in pagos:
             rubro = p.get("rubro", "Sin Rubro")
             descripcion = p.get("descripcion", "Sin Descripción")
@@ -55,7 +41,7 @@ def api_estadisticas():
             if descripcion not in items:
                 items[descripcion] = {}
             items[descripcion][fecha_fmt] = items[descripcion].get(fecha_fmt, 0) + importe
-    
+
     return jsonify({
         "rubros": rubros,
         "items": items
@@ -64,17 +50,14 @@ def api_estadisticas():
 @estadisticas_bp.route('/estadisticas/gasto_mensual')
 @login_required
 def gasto_mensual():
-    # ✅ Usar MesStore para listar meses y calcular totales
-    meses_disponibles = mes_store.listar_meses_disponibles()
-    
+    meses_disponibles = pago_store.listar_meses_disponibles()
     gastos_por_mes = {}
     
     for anio, mes in meses_disponibles:
         clave = f"{anio}-{mes:02d}"
-        total = mes_store.total_mes(anio, mes)
+        total = pago_store.total_mes(anio, mes)
         gastos_por_mes[clave] = total
     
     # Ordenar por fecha
     gastos_ordenados = dict(sorted(gastos_por_mes.items()))
-    
     return jsonify(gastos_ordenados)

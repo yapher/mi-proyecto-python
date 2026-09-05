@@ -1,9 +1,7 @@
 """
 Módulos centrales reutilizables del proyecto.
-Contiene funcionalidad compartida por múltiples aplicaciones.
+Versión SQL - todos los stores JSON legacy fueron migrados.
 """
-from .db_json import JsonStore
-from .json_crud import UniqueFieldStore, JsonCrudStore
 from .arbol_bp import crear_blueprint_arbol
 from .menu import cargar_menu, guardar_menu
 from .data_loaders import (
@@ -24,14 +22,23 @@ from .image import (
     DEFAULT_UPLOAD_FOLDER,
     DEFAULT_ALLOWED_EXTENSIONS,
 )
-from .mes_store import MesStore
+
+# Stores SQL (reemplazan a los JSON stores legacy)
+from .db_sql_store import (
+    menu_store,
+    rubro_store,
+    almacen_store,
+    ubicacion_store,
+    tab_store,
+    estado_store,
+    repuesto_store,
+    pago_store,
+    nodo_bloqueo_store,
+    evento_store,
+    tarea_store,
+)
 
 __all__ = [
-    # db_json
-    'JsonStore',
-    # json_crud
-    'UniqueFieldStore',
-    'JsonCrudStore',
     # arbol_bp
     'crear_blueprint_arbol',
     # menu
@@ -53,6 +60,16 @@ __all__ = [
     'url_para_imagen',
     'DEFAULT_UPLOAD_FOLDER',
     'DEFAULT_ALLOWED_EXTENSIONS',
-    # mes_store
-    'MesStore',
+    # Stores SQL
+    'menu_store',
+    'rubro_store',
+    'almacen_store',
+    'ubicacion_store',
+    'tab_store',
+    'estado_store',
+    'repuesto_store',
+    'pago_store',
+    'nodo_bloqueo_store',
+    'evento_store',
+    'tarea_store',
 ]

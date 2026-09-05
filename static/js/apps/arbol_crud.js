@@ -44,40 +44,27 @@ class ArbolCRUD {
     }
 
     // ========================================================
-    // NOTIFICACIONES (usa Noty si existe, sino alert)
+    // NOTIFICACIONES (usa Notify global unificado)
     // ========================================================
     _notif(msg, tipo = 'success') {
-        if (typeof Noty !== 'undefined') {
-            new Noty({
-                type: tipo,
-                layout: 'topRight',
-                timeout: 3000,
-                theme: 'mint',
-                text: msg
-            }).show();
+        if (typeof Notify !== 'undefined') {
+            Notify.alert(msg, tipo, 3000);
         } else {
-            alert(msg);
+            console.warn(`[Fallback] ${tipo}: ${msg}`);
         }
     }
 
     // ========================================================
-    // CONFIRMACIONES (usa SweetAlert2 si existe, sino confirm)
+    // CONFIRMACIONES (usa Notify global unificado)
     // ========================================================
     async _confirm(titulo, texto) {
-        if (typeof Swal !== 'undefined') {
-            const result = await Swal.fire({
-                title: titulo,
-                text: texto,
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#dc3545',
-                cancelButtonColor: '#6c757d',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            });
-            return result.isConfirmed;
-        }
-        return confirm(texto);
+        return new Promise((resolve) => {
+            if (typeof Notify !== 'undefined') {
+                Notify.confirm(titulo, texto, () => resolve(true), () => resolve(false));
+            } else {
+                resolve(confirm(texto));
+            }
+        });
     }
 
     // ========================================================

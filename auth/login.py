@@ -1,28 +1,20 @@
 """
 Módulo de autenticación: login por credenciales y reconocimiento facial.
+AHORA USA SQL para usuarios.
 """
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask import request, redirect, url_for, render_template, abort, flash
 from datetime import datetime
 import os
-import json
 from functools import wraps
 import cv2
 import numpy as np
-
-USERS_PATH = 'users.json'
-
-
-def cargar_usuarios():
-    """Carga la lista de usuarios desde el archivo JSON."""
-    if os.path.exists(USERS_PATH):
-        with open(USERS_PATH, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    return []
+from core.db_sql import db
+from core.models import Usuario
 
 
-usuarios = cargar_usuarios()
-usuarios_dict = {u['username']: u for u in usuarios}
+# Ruta de rostros (se mantiene en filesystem)
+ROSTROS_DIR = 'static/rostros'
 
 
 class User(UserMixin):
@@ -30,7 +22,7 @@ class User(UserMixin):
     def __init__(self, id, username, roles):
         self.id = id
         self.username = username
-        self.roles = roles
+        self.roles = roles if isinstance(roles, list) else []
 
     def has_role(self, role):
         return role in self.roles
@@ -77,9 +69,10 @@ def init_routes_login(app):
 
     @login_manager.user_loader
     def load_user(user_id):
-        for u in usuarios:
-            if u['id'] == user_id:
-                return User(u['id'], u['username'], u['roles'])
+        # ✅ USAR SQL en lugar de JSON
+        usuario = Usuario.query.get(str(user_id))
+        if usuario:
+            return User(usuario.id, usuario.username, usuario.roles)
         return None
 
     @app.template_filter('intersect')
@@ -94,14 +87,16 @@ def init_routes_login(app):
         if request.method == 'POST':
             username = request.form.get('username')
             password = request.form.get('password')
-            user_data = usuarios_dict.get(username)
-            if user_data and user_data['password'] == password:
-                user = User(user_data['id'], user_data['username'], user_data['roles'])
+            
+            # ✅ USAR SQL en lugar de JSON
+            usuario = Usuario.query.filter_by(username=username, password=password).first()
+            
+            if usuario:
+                user = User(usuario.id, usuario.username, usuario.roles)
                 login_user(user)
                 return redirect(request.args.get('next') or url_for('index'))
             else:
                 flash("Usuario o contraseña incorrectos. Puede intentar con reconocimiento facial.")
-                return render_template('login.html', error=error, current_year=datetime.now().year)
         return render_template('login.html', error=error, current_year=datetime.now().year)
 
     @app.route('/login_rostro', methods=['POST'])
@@ -122,24 +117,27 @@ def init_routes_login(app):
 
         debug_info.append("Imagen recibida y decodificada correctamente.")
 
-        for username, user_data in usuarios_dict.items():
-            ruta_rostro = f"static/rostros/{username}.png"
+        # ✅ USAR SQL en lugar de JSON
+        usuarios = Usuario.query.all()
+        
+        for usuario in usuarios:
+            ruta_rostro = f"{ROSTROS_DIR}/{usuario.username}.png"
             if not os.path.exists(ruta_rostro):
-                debug_info.append(f"Imagen de referencia no encontrada para usuario '{username}'.")
+                debug_info.append(f"Imagen de referencia no encontrada para usuario '{usuario.username}'.")
                 continue
 
             rostro_guardado = cv2.imread(ruta_rostro)
             if rostro_guardado is None:
-                debug_info.append(f"No se pudo leer la imagen de referencia para usuario '{username}'.")
+                debug_info.append(f"No se pudo leer la imagen de referencia para usuario '{usuario.username}'.")
                 continue
 
             similitud = comparar_rostros(rostro_capturado, rostro_guardado)
-            debug_info.append(f"Similitud con usuario '{username}': {similitud:.3f}")
+            debug_info.append(f"Similitud con usuario '{usuario.username}': {similitud:.3f}")
 
             if similitud > 0.4:
-                user = User(user_data['id'], user_data['username'], user_data['roles'])
+                user = User(usuario.id, usuario.username, usuario.roles)
                 login_user(user)
-                debug_info.append(f"¡Login exitoso con usuario '{username}'!")
+                debug_info.append(f"¡Login exitoso con usuario '{usuario.username}'!")
                 return redirect(request.args.get('next') or url_for('index'))
 
         flash("Rostro no coincide con ningún usuario.")

@@ -1,6 +1,6 @@
 """
 Blueprint de Tareas - VERSIÓN SQL
-Ahora usa SQL en lugar de JSON.
+Reemplaza a tareas.py (que usa JSON)
 """
 from flask import Blueprint, jsonify, request, render_template
 from flask_login import login_required, current_user
@@ -8,8 +8,8 @@ from auth.login import roles_required
 from core.menu import cargar_menu
 from core.db_sql_store import tarea_store
 
-tareas_bp = Blueprint(
-    'indextareas',
+tareas_bp_sql = Blueprint(
+    'indextareas_sql',
     __name__,
     static_folder='../static',
     static_url_path='/tareas/static'
@@ -18,7 +18,7 @@ tareas_bp = Blueprint(
 # ============================================================
 # VISTA PRINCIPAL
 # ============================================================
-@tareas_bp.route('/tareas')
+@tareas_bp_sql.route('/tareas')
 @login_required
 @roles_required('viewer')
 def indextareas():
@@ -32,7 +32,7 @@ def indextareas():
 # ============================================================
 # API REST: Listar todas las tareas
 # ============================================================
-@tareas_bp.route('/api/tareas', methods=['GET'])
+@tareas_bp_sql.route('/api/tareas', methods=['GET'])
 @login_required
 def listar_tareas():
     tareas = tarea_store.cargar()
@@ -46,7 +46,7 @@ def listar_tareas():
 # ============================================================
 # API REST: Crear tarea
 # ============================================================
-@tareas_bp.route('/api/tareas', methods=['POST'])
+@tareas_bp_sql.route('/api/tareas', methods=['POST'])
 @login_required
 @roles_required('viewer')
 def crear_tarea():
@@ -73,7 +73,7 @@ def crear_tarea():
 # ============================================================
 # API REST: Actualizar tarea
 # ============================================================
-@tareas_bp.route('/api/tareas/<int:tarea_id>', methods=['PUT'])
+@tareas_bp_sql.route('/api/tareas/<int:tarea_id>', methods=['PUT'])
 @login_required
 @roles_required('viewer')
 def actualizar_tarea(tarea_id):
@@ -102,7 +102,7 @@ def actualizar_tarea(tarea_id):
 # ============================================================
 # API REST: Eliminar tarea
 # ============================================================
-@tareas_bp.route('/api/tareas/<int:tarea_id>', methods=['DELETE'])
+@tareas_bp_sql.route('/api/tareas/<int:tarea_id>', methods=['DELETE'])
 @login_required
 @roles_required('viewer')
 def eliminar_tarea(tarea_id):

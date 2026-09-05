@@ -124,17 +124,27 @@ function guardar() {
     const emoji = document.getElementById("emoji").value.trim();
     const ruta_menu = document.getElementById("ruta_menu").value.trim();
     const ruta_padre = obtenerRutaPadre();
-    if (!nombre || !emoji) return alert("Complete todos los campos");
+
+    if (!nombre || !emoji) {
+        Notify.warning("Complete todos los campos obligatorios");
+        return;
+    }
+
     fetch('/api/menu', {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, emoji, ruta: ruta_menu, ruta_padre })
     }).then(res => res.json())
     .then(res => {
-        alert(res.msg);
-        cargarTodo();
-        cancelar();
-    });
+        if (res.type === 'success' || res.msg.includes('correctamente')) {
+            Notify.success(res.msg);
+            cargarTodo();
+            cancelar();
+        } else {
+            Notify.error(res.msg || "Error al guardar");
+        }
+    })
+    .catch(() => Notify.error("Error de conexión al guardar"));
 }
 
 /**
@@ -145,35 +155,54 @@ function editar() {
     const emoji = document.getElementById("emoji").value.trim();
     const ruta_menu = document.getElementById("ruta_menu").value.trim();
     const ruta = document.getElementById("ruta_original").value;
-    if (!nombre || !emoji || !ruta) return alert("Complete todos los campos");
+
+    if (!nombre || !emoji || !ruta) {
+        Notify.warning("Complete todos los campos obligatorios");
+        return;
+    }
+
     fetch('/api/menu', {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nombre, emoji, ruta_menu, ruta })
     }).then(res => res.json())
     .then(res => {
-        alert(res.msg);
-        cargarTodo();
-        cancelar();
-    });
+        if (res.type === 'success' || res.msg.includes('actualizado')) {
+            Notify.success(res.msg);
+            cargarTodo();
+            cancelar();
+        } else {
+            Notify.error(res.msg || "Error al actualizar");
+        }
+    })
+    .catch(() => Notify.error("Error de conexión al actualizar"));
 }
 
 /**
 * Elimina un menú
-* @param {string} ruta - Ruta del menú a eliminar
 */
 function eliminar(ruta) {
-    if (!confirm(`¿Está seguro de eliminar este ítem?`)) return;
-    fetch('/api/menu', {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ruta })
-    }).then(res => res.json())
-    .then(res => {
-        alert(res.msg);
-        cargarTodo();
-        cancelar();
-    });
+    Notify.confirm(
+        "¿Eliminar este ítem?",
+        "Esta acción no se puede deshacer y eliminará también todos sus submenús.",
+        () => {
+            fetch('/api/menu', {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ruta })
+            }).then(res => res.json())
+            .then(res => {
+                if (res.type === 'success' || res.msg.includes('eliminado')) {
+                    Notify.success(res.msg);
+                    cargarTodo();
+                    cancelar();
+                } else {
+                    Notify.error(res.msg || "Error al eliminar");
+                }
+            })
+            .catch(() => Notify.error("Error de conexión al eliminar"));
+        }
+    );
 }
 
 /**

@@ -1,8 +1,6 @@
-/**
- * crear_ubicacion_tecnica.js
- * Refactorizado: usa el módulo genérico ArbolCRUD.
- */
 document.addEventListener("DOMContentLoaded", () => {
+    Logger.moduleInit('CrearUbicacion');
+    
     new ArbolCRUD({
         apiArbol:   "/api/ubicacion_arbol",
         apiCrud:    "/api/ubicacion",

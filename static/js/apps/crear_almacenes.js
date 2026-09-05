@@ -1,11 +1,5 @@
-/**
- * crear_almacenes.js - VERSIÓN FINAL
- * Usa ArbolCRUD con addEventListener (sin onclick inline)
- */
-console.log("✅ [FINAL] crear_almacenes.js cargado");
-
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("✅ [FINAL] Inicializando ArbolCRUD...");
+    Logger.moduleInit('CrearAlmacenes');
     
     const crud = new ArbolCRUD({
         apiArbol:     "/api/crear_almacenes_arbol",
@@ -27,22 +21,16 @@ document.addEventListener("DOMContentLoaded", () => {
             cancelar: "#btnCancelar"
         }
     });
-    
-    // ✅ Event listeners explícitos
+
     document.getElementById("btnAgregar").addEventListener("click", async () => {
-        console.log("🔵 Click en AGREGAR");
         await crud.guardar();
     });
-    
+
     document.getElementById("btnEditar").addEventListener("click", async () => {
-        console.log("🟢 Click en GUARDAR CAMBIOS");
         await crud.guardarEdicion();
     });
-    
+
     document.getElementById("btnCancelar").addEventListener("click", () => {
-        console.log("🔴 Click en CANCELAR");
         crud.cancelar();
     });
-    
-    console.log("✅ [FINAL] Botones configurados con addEventListener");
 });

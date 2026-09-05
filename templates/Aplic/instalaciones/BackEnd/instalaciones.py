@@ -1,11 +1,13 @@
+"""
+Blueprint de Instalaciones - VERSIÓN SQL
+Ahora usa SQL en lugar de JSON.
+"""
 from flask import Blueprint, jsonify, render_template, request, current_app
 from flask_login import current_user
 from core.menu import cargar_menu
 from auth.login import roles_required
-import json, os
+import os
 from functools import wraps
-
-# ✅ IMPORTS DIRECTOS DESDE CORE (más limpio y reutilizable)
 from core.image import (
     procesar_imagen as _core_procesar_imagen,
     allowed_file,
@@ -13,58 +15,25 @@ from core.image import (
     calcular_hash_bytes,
     DEFAULT_ALLOWED_EXTENSIONS,
 )
+from core.db_sql_store import ubicacion_store
 
-# ✅ RE-EXPORTAR para compatibilidad con tests y código legacy
-# Los tests importan estas funciones desde este módulo
 __all__ = [
-    'procesar_imagen',
-    'allowed_file',
-    'calcular_hash_archivo',
-    'calcular_hash_bytes',
-    'UPLOAD_FOLDER',
-    'ALLOWED_EXTENSIONS',
+    'procesar_imagen', 'allowed_file',
+    'calcular_hash_archivo', 'calcular_hash_bytes',
+    'UPLOAD_FOLDER', 'ALLOWED_EXTENSIONS',
 ]
 
-UBI_TEC = 'DataBase/dataRep/ubicacion_tecnica.json'
-
-# ============================================================
-# CONFIGURACIÓN ESPECÍFICA DE ESTA APP
-# ============================================================
-# Carpeta destino específica para instalaciones.
-# ⚠️ IMPORTANTE: Los tests hacen monkeypatch sobre UPLOAD_FOLDER,
-# por lo que DEBE mantenerse ese nombre exacto para compatibilidad.
-UPLOAD_FOLDER = os.path.join(
-    'templates', 'Aplic', 'instalaciones', 'static', 'img'
-)
-
-# Alias para compatibilidad con código que use el nombre nuevo
+UPLOAD_FOLDER = os.path.join('templates', 'Aplic', 'instalaciones', 'static', 'img')
 UPLOAD_FOLDER_INSTALACIONES = UPLOAD_FOLDER
-
-# Alias legacy
 ALLOWED_EXTENSIONS = DEFAULT_ALLOWED_EXTENSIONS
 
 
-# ============================================================
-# WRAPPER DE procesar_imagen
-# ============================================================
 def procesar_imagen(archivo):
-    """
-    Wrapper que llama a core.image.procesar_imagen usando UPLOAD_FOLDER.
-    
-    ⚠️ Este wrapper es CRÍTICO para los tests:
-    - Los tests hacen monkeypatch sobre UPLOAD_FOLDER
-    - Si usáramos UPLOAD_FOLDER_INSTALACIONES directamente, el monkeypatch no funcionaría
-    - Al usar UPLOAD_FOLDER (que es lo que se monkeypatchea), todo funciona
-    """
     return _core_procesar_imagen(archivo, destino=UPLOAD_FOLDER)
 
 
-# ============================================================
-# BLUEPRINT
-# ============================================================
 instalaciones_bp = Blueprint(
-    'indexinstalaciones',
-    __name__,
+    'indexinstalaciones', __name__,
     static_folder='../static',
     static_url_path='/instalaciones/static'
 )
@@ -79,59 +48,6 @@ def login_required_json(f):
     return decorated
 
 
-def cargar_ubicaciones():
-    if not os.path.exists(UBI_TEC):
-        return []
-    with open(UBI_TEC, "r", encoding="utf-8") as f:
-        try:
-            return json.load(f)
-        except json.JSONDecodeError:
-            return []
-
-
-def guardar_ubicaciones(data):
-    with open(UBI_TEC, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
-
-
-def encontrar_y_modificar(nodos, ruta_jerarquia, nuevos_datos):
-    for nodo in nodos:
-        if nodo['ruta_jerarquia'] == ruta_jerarquia:
-            nodo.update(nuevos_datos)
-            return True
-        if nodo.get('sububicaciones'):
-            if encontrar_y_modificar(nodo['sububicaciones'], ruta_jerarquia, nuevos_datos):
-                return True
-    return False
-
-
-def encontrar_y_borrar(nodos, ruta_jerarquia):
-    for i, nodo in enumerate(nodos):
-        if nodo['ruta_jerarquia'] == ruta_jerarquia:
-            del nodos[i]
-            return True
-        if nodo.get('sububicaciones'):
-            if encontrar_y_borrar(nodo['sububicaciones'], ruta_jerarquia):
-                return True
-    return False
-
-
-def encontrar_y_agregar(nodos, ruta_padre, nuevo_hijo):
-    for nodo in nodos:
-        if nodo['ruta_jerarquia'] == ruta_padre:
-            if 'sububicaciones' not in nodo:
-                nodo['sububicaciones'] = []
-            nodo['sububicaciones'].append(nuevo_hijo)
-            return True
-        if nodo.get('sububicaciones'):
-            if encontrar_y_agregar(nodo['sububicaciones'], ruta_padre, nuevo_hijo):
-                return True
-    return False
-
-
-# ============================================================
-# RUTAS
-# ============================================================
 @instalaciones_bp.route('/instalaciones')
 @login_required_json
 @roles_required('viewer')
@@ -139,8 +55,7 @@ def indexinstalaciones():
     nemu = cargar_menu()
     return render_template(
         'Aplic/instalaciones/FrontEnd/instalaciones.html',
-        nemu=nemu,
-        roles=current_user.roles
+        nemu=nemu, roles=current_user.roles
     )
 
 
@@ -148,34 +63,27 @@ def indexinstalaciones():
 @login_required_json
 @roles_required('viewer')
 def api_ubicaciones():
-    return jsonify(cargar_ubicaciones())
+    return jsonify(ubicacion_store.cargar_arbol())
 
 
 @instalaciones_bp.route('/api/ubicacion_tecnica_json')
 @login_required_json
 @roles_required('viewer')
 def ubicacion_tecnica_json():
-    return jsonify(cargar_ubicaciones())
+    return jsonify(ubicacion_store.cargar_arbol())
 
 
-# ============================================================
-# ENDPOINT: Subir imagen (usa el wrapper local)
-# ============================================================
 @instalaciones_bp.route('/api/subir_imagen', methods=['POST'])
 @login_required_json
 def subir_imagen():
-    """Endpoint reutilizable para subir imágenes."""
     if 'imagen' not in request.files:
         return jsonify({'status': 'error', 'msg': 'No se envió ningún archivo'}), 400
-
     archivo = request.files['imagen']
-    # ✅ Usar el wrapper local que respeta UPLOAD_FOLDER (monkeypatcheable)
     filename, error = procesar_imagen(archivo)
     if error:
         return jsonify({'status': 'error', 'msg': error}), 400
     if not filename:
         return jsonify({'status': 'error', 'msg': 'No se pudo procesar la imagen'}), 400
-
     return jsonify({
         'status': 'ok',
         'filename': filename,
@@ -183,16 +91,10 @@ def subir_imagen():
     })
 
 
-# ============================================================
-# API EDITAR (soporta FormData + eliminar_imagen)
-# ============================================================
 @instalaciones_bp.route('/api/editar_ubicacion', methods=['PUT'])
 @login_required_json
 @roles_required('viewer')
 def editar_ubicacion():
-    data = cargar_ubicaciones()
-
-    # Aceptar tanto JSON como FormData
     if request.content_type and 'multipart/form-data' in request.content_type:
         modificado = request.form.to_dict()
         archivo_imagen = request.files.get('imagen')
@@ -216,15 +118,16 @@ def editar_ubicacion():
         nueva_imagen = ''
         imagen_eliminada = True
     elif archivo_imagen and archivo_imagen.filename:
-        # ✅ Usar el wrapper local
         filename, error = procesar_imagen(archivo_imagen)
         if error:
             return jsonify({'status': 'error', 'msg': error}), 400
         if filename:
             nueva_imagen = filename
 
+    # Calcular nueva ruta_jerarquia si cambió el nombre
     partes = ruta_jerarquia.split('-')
-    nueva_ruta = '-'.join(partes[:-1] + [modificado.get('nombre', partes[-1])])
+    nuevo_nombre = modificado.get('nombre', partes[-1])
+    nueva_ruta = '-'.join(partes[:-1] + [nuevo_nombre])
 
     nuevos_datos = {
         'nombre': modificado.get('nombre', ''),
@@ -240,78 +143,70 @@ def editar_ubicacion():
     elif modificado.get('imagen'):
         nuevos_datos['imagen'] = modificado.get('imagen')
 
-    if encontrar_y_modificar(data, ruta_jerarquia, nuevos_datos):
-        guardar_ubicaciones(data)
+    exito, msg = ubicacion_store.editar(ruta_jerarquia, nuevos_datos)
+    if exito:
         return jsonify({
             'status': 'ok',
             'msg': 'Ubicación actualizada correctamente',
             'imagen_eliminada': imagen_eliminada
         })
-
-    return jsonify({'status': 'no encontrado', 'msg': 'La ubicación no existe'}), 404
+    return jsonify({'status': 'no encontrado', 'msg': msg}), 404
 
 
 @instalaciones_bp.route('/api/borrar_ubicacion', methods=['DELETE'])
 @login_required_json
 @roles_required('viewer')
 def borrar_ubicacion():
-    data = cargar_ubicaciones()
-    ruta_jerarquia = request.json.get('ruta_jerarquia') if request.json else None
-
+    data = request.json or {}
+    ruta_jerarquia = data.get('ruta_jerarquia')
     if not ruta_jerarquia:
         return jsonify({'status': 'error', 'msg': 'Falta ruta_jerarquia'}), 400
 
-    if encontrar_y_borrar(data, ruta_jerarquia):
-        guardar_ubicaciones(data)
+    exito, msg = ubicacion_store.eliminar(ruta_jerarquia)
+    if exito:
         return jsonify({'status': 'ok', 'msg': 'Ubicación eliminada correctamente'})
+    return jsonify({'status': 'no encontrado', 'msg': msg}), 404
 
-    return jsonify({'status': 'no encontrado', 'msg': 'La ubicación no existe'}), 404
 
-
-# ============================================================
-# API AGREGAR SUBUBICACIÓN (soporta FormData)
-# ============================================================
 @instalaciones_bp.route('/api/agregar_sububicacion', methods=['POST'])
 @login_required_json
 @roles_required('viewer')
 def agregar_sububicacion():
-    data = cargar_ubicaciones()
-
     if request.content_type and 'multipart/form-data' in request.content_type:
         ruta_padre = request.form.get('ruta_padre')
-        nuevo_hijo = {
-            'nombre': request.form.get('nombre', 'nuevo'),
-            'emoji': request.form.get('emoji', ''),
-            'ruta': request.form.get('ruta', ''),
-            'ruta_jerarquia': '',
-            'sububicaciones': []
-        }
+        nombre = request.form.get('nombre', 'nuevo')
+        emoji = request.form.get('emoji', '')
+        ruta = request.form.get('ruta', '')
         archivo_imagen = request.files.get('imagen')
     else:
         req_json = request.get_json() or {}
         ruta_padre = req_json.get('ruta_padre')
         nuevo_hijo = req_json.get('nuevo_hijo', {})
+        nombre = nuevo_hijo.get('nombre', 'nuevo')
+        emoji = nuevo_hijo.get('emoji', '')
+        ruta = nuevo_hijo.get('ruta', '')
         archivo_imagen = None
 
-    if not ruta_padre or not nuevo_hijo:
-        return jsonify({'status': 'error', 'msg': 'Faltan datos'}), 400
+    if not ruta_padre:
+        return jsonify({'status': 'error', 'msg': 'Falta ruta_padre'}), 400
 
+    imagen_filename = None
     if archivo_imagen and archivo_imagen.filename:
-        # ✅ Usar el wrapper local
         filename, error = procesar_imagen(archivo_imagen)
         if error:
             return jsonify({'status': 'error', 'msg': error}), 400
         if filename:
-            nuevo_hijo['imagen'] = filename
+            imagen_filename = filename
 
-    if not nuevo_hijo.get('ruta_jerarquia'):
-        nuevo_hijo['ruta_jerarquia'] = f"{ruta_padre}-{nuevo_hijo.get('nombre', 'nuevo')}"
+    nuevos_datos = {
+        'nombre': nombre,
+        'emoji': emoji,
+        'ruta': ruta,
+    }
+    if imagen_filename:
+        nuevos_datos['imagen'] = imagen_filename
 
-    if 'sububicaciones' not in nuevo_hijo:
-        nuevo_hijo['sububicaciones'] = []
-
-    if encontrar_y_agregar(data, ruta_padre, nuevo_hijo):
-        guardar_ubicaciones(data)
+    exito, msg = ubicacion_store.agregar(nombre, emoji, ruta, ruta_padre)
+    if exito:
         return jsonify({'status': 'ok', 'msg': 'Sububicación agregada correctamente'})
-
-    return jsonify({'status': 'no encontrado', 'msg': 'El padre no existe'}), 404
+    return jsonify({'status': 'no encontrado', 'msg': msg}), 404
