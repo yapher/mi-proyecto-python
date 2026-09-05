@@ -140,6 +140,16 @@ def not_found(e):
 def _abrir_navegador():
     webbrowser.open("http://127.0.0.1:5000")
 
+# ============================================================
+# AUTO-SEED: Si no hay usuarios, ejecutar seed automáticamente
+# ============================================================
+with app.app_context():
+    from core.models import Usuario
+    if Usuario.query.count() == 0:
+        print("🌱 DB vacía detectada. Ejecutando seed...")
+        from scripts.seed_render import seed_todo
+        seed_todo()
+
 if __name__ == "__main__":
     os.makedirs("DataBase/Config", exist_ok=True)
     
