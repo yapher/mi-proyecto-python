@@ -120,50 +120,26 @@ function editar(p) {
 * @param {number} id - ID del pago
 */
 async function eliminar(id) {
-    // ✅ Confirmación con SweetAlert2 (igual que Crear Almacenes)
-    if (typeof Swal !== 'undefined') {
-        const result = await Swal.fire({
-            title: '¿Eliminar este pago?',
-            text: 'Esta acción no se puede deshacer',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#dc3545',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar'
-        });
-        if (!result.isConfirmed) return;
-    } else {
-        // Fallback si no está SweetAlert2
-        if (!confirm("¿Seguro que querés eliminar este pago?")) return;
-    }
-
-    fetch(`/pagos/eliminar/${id}`, {
-        method: 'DELETE'
-    })
-    .then(res => {
-        if (!res.ok) throw new Error('HTTP error');
-        return res.json();
-    })
-    .then(() => {
-        filtrarPorMes();
-        new Noty({
-            type: 'success',
-            layout: 'topRight',
-            timeout: 2500,
-            theme: 'mint',
-            text: 'Pago eliminado'
-        }).show();
-    })
-    .catch(err => {
-        console.error("Error al eliminar pago:", err);
-        new Noty({
-            type: 'error',
-            layout: 'topRight',
-            timeout: 3000,
-            theme: 'mint',
-            text: 'No se pudo eliminar el pago'
-        }).show();
+    return new Promise((resolve) => {
+        Notify.confirm(
+            '¿Eliminar este pago?',
+            'Esta acción no se puede deshacer',
+            () => {
+                fetch(`/pagos/eliminar/${id}`, { method: 'DELETE' })
+                    .then(res => {
+                        if (!res.ok) throw new Error('HTTP error');
+                        return res.json();
+                    })
+                    .then(() => {
+                        filtrarPorMes();
+                        Notify.success('Pago eliminado');
+                    })
+                    .catch(err => {
+                        console.error("Error al eliminar pago:", err);
+                        Notify.error('No se pudo eliminar el pago');
+                    });
+            }
+        );
     });
 }
 

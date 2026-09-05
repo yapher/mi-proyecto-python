@@ -108,11 +108,10 @@
         {% if messages %}
         {% for category, message in messages %}
         <script>
-            Swal.fire({
-                icon: "{{ 'success' if category == 'success' else 'info' if category == 'info' else 'warning' if category == 'warning' else 'error' }}",
-                title: "{{ message }}",
-                timer: 2500,
-                showConfirmButton: false
+            document.addEventListener('DOMContentLoaded', function () {
+                if (typeof Notify !== 'undefined') {
+                    Notify.alert("{{ message | replace('"', '\\"') }}", "{{ category }}", 3000);
+                }
             });
         </script>
         {% endfor %}
@@ -142,13 +141,15 @@
     <!-- Módulo JS genérico para árboles jerárquicos -->
     <script src="{{ url_for('static', filename='js/apps/arbol_crud.js') }}"></script>
     <!-- Módulo reutilizable para selectores multinivel -->
-<script src="{{ url_for('static', filename='js/utils/selectores_nivel.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils/selectores_nivel.js') }}"></script>
     <!-- Animaciones de modales con origen de click -->
     <script src="{{ url_for('static', filename='js/apps/modal_animations.js') }}"></script>
     <!-- Logger profesional reutilizable -->
     <script src="{{ url_for('static', filename='js/apps/logger.js') }}"></script>
     <!-- Componente reutilizable de subida de imágenes -->
     <script src="{{ url_for('static', filename='js/apps/image_uploader.js') }}"></script>
+    <!-- Sistema unificado de notificaciones -->
+    <script src="{{ url_for('static', filename='js/utils/notifications.js') }}"></script>
 
     {% block scripts %}{% endblock %}
 </body>

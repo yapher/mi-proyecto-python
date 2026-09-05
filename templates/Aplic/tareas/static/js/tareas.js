@@ -1,35 +1,22 @@
 /**
  * tareas.js — Módulo de gestión de tareas
- * Usa Logger reutilizable (static/js/apps/logger.js)
+ * Usa Logger y Notify reutilizables
  */
-
-// ============================================================
-// CONFIGURACIÓN
-// ============================================================
 const API_BASE = '/api/tareas';
 let modalEditar = null;
 let tareaActualId = null;
 
-// ============================================================
-// INICIALIZACIÓN
-// ============================================================
 document.addEventListener('DOMContentLoaded', () => {
     Logger.moduleInit('Tareas');
-
     const modalEl = document.getElementById('modalEditarTarea');
     if (modalEl) {
         modalEditar = new bootstrap.Modal(modalEl);
     }
-
     configurarFormularios();
     cargarTareas();
-
     Logger.success('Módulo Tareas inicializado');
 });
 
-// ============================================================
-// API: Cargar tareas
-// ============================================================
 async function cargarTareas() {
     Logger.apiCall('GET', API_BASE);
     try {
@@ -40,30 +27,25 @@ async function cargarTareas() {
         renderizarTareas(tareas);
     } catch (err) {
         Logger.error('Error al cargar tareas', err);
-        mostrarNotif('Error al cargar las tareas', 'error');
+        Notify.error('Error al cargar las tareas');
         renderizarEstadoVacio();
     }
 }
 
-// ============================================================
-// UI: Renderizar lista de tareas
-// ============================================================
 function renderizarTareas(tareas) {
     const lista = document.getElementById('listaTareas');
     if (!lista) return;
-
     if (!tareas || tareas.length === 0) {
         renderizarEstadoVacio();
         return;
     }
-
     lista.innerHTML = tareas.map(tarea => `
         <li>
             <div class="event-info"
-                 data-id="${tarea.id}"
-                 data-titulo="${escapeHtml(tarea.titulo)}"
-                 data-fecha="${escapeHtml(tarea.fecha)}"
-                 data-descripcion="${escapeHtml(tarea.descripcion || '')}">
+                data-id="${tarea.id}"
+                data-titulo="${escapeHtml(tarea.titulo)}"
+                data-fecha="${escapeHtml(tarea.fecha)}"
+                data-descripcion="${escapeHtml(tarea.descripcion || '')}">
                 <strong>${escapeHtml(tarea.titulo)}</strong>
                 <div class="event-fecha">
                     <i class="bi bi-calendar-event"></i> ${formatearFecha(tarea.fecha)}
@@ -79,7 +61,6 @@ function renderizarTareas(tareas) {
     lista.querySelectorAll('.event-info').forEach(el => {
         el.addEventListener('click', () => abrirModalEdicion(el.dataset));
     });
-
     Logger.info('Tareas renderizadas', { cantidad: tareas.length });
 }
 
@@ -95,9 +76,6 @@ function renderizarEstadoVacio() {
     `;
 }
 
-// ============================================================
-// UI: Modal de edición
-// ============================================================
 function abrirModalEdicion(data) {
     if (!modalEditar) return;
     tareaActualId = data.id;
@@ -106,7 +84,6 @@ function abrirModalEdicion(data) {
     document.getElementById('edit-fecha').value = data.fecha;
     document.getElementById('edit-descripcion').value = data.descripcion || '';
     modalEditar.show();
-    Logger.info('Modal de edición abierto', { id: data.id });
 }
 
 function cerrarModalEdicion() {
@@ -114,9 +91,6 @@ function cerrarModalEdicion() {
     tareaActualId = null;
 }
 
-// ============================================================
-// API: Crear tarea
-// ============================================================
 async function crearTarea(data) {
     Logger.apiCall('POST', API_BASE);
     try {
@@ -129,19 +103,16 @@ async function crearTarea(data) {
         const json = await res.json();
         Logger.apiResponse('POST', API_BASE, res.status, json);
         if (!res.ok) throw new Error(json.msg || 'Error al crear');
-        mostrarNotif(json.msg || 'Tarea creada', 'success');
+        Notify.success(json.msg || 'Tarea creada');
         await cargarTareas();
         return true;
     } catch (err) {
         Logger.error('Error al crear tarea', err);
-        mostrarNotif(err.message || 'Error al crear la tarea', 'error');
+        Notify.error(err.message || 'Error al crear la tarea');
         return false;
     }
 }
 
-// ============================================================
-// API: Actualizar tarea
-// ============================================================
 async function actualizarTarea(id, data) {
     const url = `${API_BASE}/${id}`;
     Logger.apiCall('PUT', url);
@@ -155,20 +126,17 @@ async function actualizarTarea(id, data) {
         const json = await res.json();
         Logger.apiResponse('PUT', url, res.status, json);
         if (!res.ok) throw new Error(json.msg || 'Error al actualizar');
-        mostrarNotif(json.msg || 'Tarea actualizada', 'success');
+        Notify.success(json.msg || 'Tarea actualizada');
         cerrarModalEdicion();
         await cargarTareas();
         return true;
     } catch (err) {
         Logger.error('Error al actualizar tarea', err);
-        mostrarNotif(err.message || 'Error al actualizar', 'error');
+        Notify.error(err.message || 'Error al actualizar');
         return false;
     }
 }
 
-// ============================================================
-// API: Eliminar tarea
-// ============================================================
 async function eliminarTarea(id) {
     const url = `${API_BASE}/${id}`;
     Logger.apiCall('DELETE', url);
@@ -180,42 +148,21 @@ async function eliminarTarea(id) {
         const json = await res.json();
         Logger.apiResponse('DELETE', url, res.status, json);
         if (!res.ok) throw new Error(json.msg || 'Error al eliminar');
-        mostrarNotif(json.msg || 'Tarea eliminada', 'success');
+        Notify.success(json.msg || 'Tarea eliminada');
         cerrarModalEdicion();
         await cargarTareas();
         return true;
     } catch (err) {
         Logger.error('Error al eliminar tarea', err);
-        mostrarNotif(err.message || 'Error al eliminar', 'error');
+        Notify.error(err.message || 'Error al eliminar');
         return false;
     }
 }
 
-// ============================================================
-// UI: Confirmaciones
-// ============================================================
 function confirmarEliminar(id) {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: '¿Eliminar tarea?',
-            text: 'Esta acción no se puede deshacer',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#dc3545',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Sí, eliminar',
-            cancelButtonText: 'Cancelar'
-        }).then(result => {
-            if (result.isConfirmed) eliminarTarea(id);
-        });
-    } else if (confirm('¿Estás seguro de eliminar esta tarea?')) {
-        eliminarTarea(id);
-    }
+    Notify.delete("esta tarea", () => eliminarTarea(id));
 }
 
-// ============================================================
-// EVENTOS DE FORMULARIOS
-// ============================================================
 function configurarFormularios() {
     const formAgregar = document.getElementById('formAgregarTarea');
     if (formAgregar) {
@@ -227,7 +174,7 @@ function configurarFormularios() {
                 descripcion: document.getElementById('descripcion').value.trim()
             };
             if (!data.titulo || !data.fecha) {
-                mostrarNotif('Título y fecha son obligatorios', 'warning');
+                Notify.warning('Título y fecha son obligatorios');
                 return;
             }
             const exito = await crearTarea(data);
@@ -246,7 +193,7 @@ function configurarFormularios() {
                 descripcion: document.getElementById('edit-descripcion').value.trim()
             };
             if (!data.titulo || !data.fecha) {
-                mostrarNotif('Título y fecha son obligatorios', 'warning');
+                Notify.warning('Título y fecha son obligatorios');
                 return;
             }
             await actualizarTarea(tareaActualId, data);
@@ -258,23 +205,6 @@ function configurarFormularios() {
         btnEliminar.addEventListener('click', () => {
             if (tareaActualId) confirmarEliminar(tareaActualId);
         });
-    }
-}
-
-// ============================================================
-// UTILIDADES
-// ============================================================
-function mostrarNotif(msg, tipo = 'success') {
-    if (typeof Noty !== 'undefined') {
-        new Noty({
-            type: tipo,
-            layout: 'topRight',
-            timeout: 3000,
-            theme: 'mint',
-            text: msg
-        }).show();
-    } else {
-        alert(msg);
     }
 }
 

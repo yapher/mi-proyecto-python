@@ -1,17 +1,15 @@
 /**
  * newPagos.js - Modal de Pagos
  * Usa SelectoresNivel reutilizable para cargar rubros desde /api/rubro_arbol
+ * ✅ NOTIFICACIONES UNIFICADAS: usa Notify global
  */
-
 let pagoEnEdicion = null;
 let selectoresRubros = null;
 
 // ------------------------ Funciones existentes ------------------------
-
 function guardarPago() {
     let texto = selectoresRubros.obtenerRutaPadre();
     if (!texto && pagoEnEdicion) texto = pagoEnEdicion.rubro || '';
-
     let categoria, subcategoria;
     if (texto && texto.includes(".")) {
         [categoria, subcategoria] = texto.split(".");
@@ -26,17 +24,12 @@ function guardarPago() {
     let vencimiento = document.getElementById('vencimiento').value;
 
     if (!categoria || isNaN(importeTotal) || importeTotal <= 0) {
-        return new Noty({
-            type: 'warning',
-            layout: 'topRight',
-            timeout: 3000,
-            theme: 'mint',
-            text: 'Debe seleccionar un rubro y un importe válido'
-        }).show();
+        // ✅ UNIFICADO: usa Notify en lugar de Noty directo
+        Notify.warning('Debe seleccionar un rubro y un importe válido');
+        return;
     }
 
     if (!vencimiento) vencimiento = new Date().toISOString().split('T')[0];
-
     const descripcion = subcategoria || document.getElementById('descripcion').value || "";
 
     if (pagoEnEdicion) {
@@ -49,7 +42,6 @@ function guardarPago() {
             vencimiento: vencimiento,
             pagado: pagoEnEdicion.pagado
         };
-
         fetch(`/pagos/editar/${pagoEnEdicion.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -64,13 +56,8 @@ function guardarPago() {
             mostrarFormulario(null);
             cerrarModal();
             pagoEnEdicion = null;
-            new Noty({
-                type: 'success',
-                layout: 'topRight',
-                timeout: 2500,
-                theme: 'mint',
-                text: 'Editado con éxito'
-            }).show();
+            // ✅ UNIFICADO
+            Notify.success('Editado con éxito');
         })
         .catch(err => console.error("Error real al guardar pago:", err));
     } else {
@@ -103,7 +90,6 @@ function guardarPago() {
                 pagado: false
             });
         }
-
         fetch('/pagos/agregar', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -117,13 +103,8 @@ function guardarPago() {
             filtrarPorMes();
             mostrarFormulario(null);
             cerrarModal();
-            new Noty({
-                type: 'success',
-                layout: 'topRight',
-                timeout: 2500,
-                theme: 'mint',
-                text: 'Pago creado con éxito'
-            }).show();
+            // ✅ UNIFICADO
+            Notify.success('Pago creado con éxito');
         })
         .catch(err => console.error("Error real al crear pago:", err));
     }
@@ -140,10 +121,8 @@ function mostrarFormulario(p = null) {
         document.getElementById('vencimiento').value = p.vencimiento || '';
         document.getElementById('descripcion').value = p.descripcion || '';
         document.querySelector(".btn-cancelar").style.display = "inline";
-
         let rutaCompleta = p.rubro;
         if (p.descripcion) rutaCompleta += "." + p.descripcion;
-        
         if (selectoresRubros) {
             selectoresRubros.renderSelectores(rutaCompleta);
         }
@@ -151,13 +130,11 @@ function mostrarFormulario(p = null) {
         pagoEnEdicion = null;
         document.getElementById('pagoId').value = '';
         document.querySelectorAll('#formulario input, #formulario select').forEach(i => i.value = '');
-        
         const hoy = new Date();
         const yyyy = hoy.getFullYear();
         const mm = String(hoy.getMonth() + 1).padStart(2, '0');
         const dd = String(hoy.getDate()).padStart(2, '0');
         document.getElementById('vencimiento').value = `${yyyy}-${mm}-${dd}`;
-        
         if (selectoresRubros) {
             selectoresRubros.renderSelectores();
         }
@@ -173,7 +150,6 @@ function cerrarModal() { const modal = bootstrap.Modal.getInstance(document.getE
 // Inicializar selectores de rubros desde /api/rubro_arbol (NO /api/menu_arbol)
 window.addEventListener('DOMContentLoaded', () => {
     Logger.moduleInit('NewPagos');
-    
     selectoresRubros = new SelectoresNivel({
         containerId: 'nivelesContainer',
         apiUrl: '/api/rubro_arbol',  // ← CLAVE: cargar RUBROS, no menú

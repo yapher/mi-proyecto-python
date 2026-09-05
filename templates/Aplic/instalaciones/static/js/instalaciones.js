@@ -1,6 +1,7 @@
 /**
  * JavaScript para el componente Instalaciones
  * Usa Logger e ImageUploader reutilizables
+ * ✅ NOTIFICACIONES UNIFICADAS: usa Notify global (static/js/utils/notifications.js)
  */
 let ubicacionTecnicaData = null;
 let imageUploader = null;
@@ -9,10 +10,15 @@ const DEFAULT_IMAGE = STATIC_INSTALACIONES + 'img/factory.png';
 
 document.addEventListener("DOMContentLoaded", async () => {
     Logger.moduleInit('Instalaciones');
+
     const container = document.getElementById("tree-container");
-    if (!container) { Logger.error('Contenedor tree-container no encontrado'); return; }
+    if (!container) {
+        Logger.error('Contenedor tree-container no encontrado');
+        return;
+    }
 
     await cargarDatos();
+
     const root = document.createElement('ul');
     root.style.position = 'relative';
     root.classList.add('ul-flex');
@@ -24,9 +30,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     window.addEventListener('scroll', dibujarLineas);
 
     imageUploader = new ImageUploader({
-        previewId: 'modalImagen', placeholderId: 'imagenPlaceholder',
-        inputId: 'inputImagen', removeBtnId: 'btnQuitarImagen',
-        infoId: 'imagenInfo', wrapperId: 'imagenPreviewWrapper',
+        previewId: 'modalImagen',
+        placeholderId: 'imagenPlaceholder',
+        inputId: 'inputImagen',
+        removeBtnId: 'btnQuitarImagen',
+        infoId: 'imagenInfo',
+        wrapperId: 'imagenPreviewWrapper',
         loggerPrefix: '[Instalaciones:Image]'
     });
 
@@ -34,6 +43,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     Logger.success('Módulo Instalaciones listo', { nodos: ubicacionTecnicaData.length });
 });
 
+// ============================================================
+// API: Cargar datos
+// ============================================================
 async function cargarDatos() {
     Logger.apiCall('GET', '/api/ubicacion_tecnica_json');
     try {
@@ -43,28 +55,18 @@ async function cargarDatos() {
         ubicacionTecnicaData = await res.json();
     } catch (err) {
         Logger.error('Error al cargar datos', err);
-        mostrarNotif('Error al cargar las ubicaciones', 'error');
+        // ✅ UNIFICADO: usa Notify.error en lugar de mostrarNotif
+        Notify.error('Error al cargar las ubicaciones');
         ubicacionTecnicaData = [];
     }
 }
 
-function mostrarNotif(msg, tipo = 'success') {
-    if (typeof Noty !== 'undefined') {
-        new Noty({ type: tipo, layout: 'topRight', timeout: 3000, theme: 'mint', text: msg }).show();
-    } else { alert(msg); }
-}
+// ❌ ELIMINADAS las funciones locales mostrarNotif y mostrarConfirm
+// ✅ Ahora se usa Notify global (static/js/utils/notifications.js)
 
-function mostrarConfirm(titulo, texto, callback) {
-    if (typeof Swal !== 'undefined') {
-        Swal.fire({
-            title: titulo, text: texto, icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#88c999', cancelButtonColor: '#dc3545',
-            confirmButtonText: 'Sí, confirmar', cancelButtonText: 'Cancelar'
-        }).then(r => { if (r.isConfirmed) callback(); });
-    } else if (confirm(texto)) callback();
-}
-
+// ============================================================
+// UTILIDADES DE BÚSQUEDA
+// ============================================================
 function buscarUbicacionPorJerarquia(ruta, nodo) {
     if (nodo.ruta_jerarquia === ruta) return nodo;
     if (nodo.sububicaciones) {
@@ -76,17 +78,23 @@ function buscarUbicacionPorJerarquia(ruta, nodo) {
     return null;
 }
 
+// ============================================================
+// UI: Abrir modal de ubicación
+// ============================================================
 function abrirModalUbicacion(rutaJerarquia) {
     let nodo = null;
     for (const raiz of ubicacionTecnicaData) {
         nodo = buscarUbicacionPorJerarquia(rutaJerarquia, raiz);
         if (nodo) break;
     }
+
     if (!nodo) {
         Logger.warn('Ubicación no encontrada', { ruta: rutaJerarquia });
-        mostrarNotif('Ubicación no encontrada', 'warning');
+        // ✅ UNIFICADO: usa Notify.warning
+        Notify.warning('Ubicación no encontrada');
         return;
     }
+
     Logger.info('Abriendo modal', { nombre: nodo.nombre, ruta: nodo.ruta_jerarquia });
 
     document.getElementById('nombre').value = nodo.nombre || '';
@@ -112,34 +120,54 @@ function abrirModalUbicacion(rutaJerarquia) {
             cont.appendChild(div);
         });
     }
+
     bootstrap.Modal.getOrCreateInstance(document.getElementById('ubicacionModal')).show();
 }
 
+// ============================================================
+// UI: Crear nodo del árbol
+// ============================================================
 function crearNodo(nodo) {
     const li = document.createElement('li');
     const nodeDiv = document.createElement('div');
-    nodeDiv.className = 'node'; nodeDiv.tabIndex = 0;
+    nodeDiv.className = 'node';
+    nodeDiv.tabIndex = 0;
+
     const img = document.createElement('img');
     if (nodo.imagen && nodo.imagen.trim() !== '') {
         img.src = nodo.imagen.startsWith('/') ? nodo.imagen : STATIC_INSTALACIONES + 'img/' + nodo.imagen;
-    } else { img.src = DEFAULT_IMAGE; }
+    } else {
+        img.src = DEFAULT_IMAGE;
+    }
     img.alt = nodo.ruta || 'Sin ruta';
+
     const label = document.createElement('div');
     label.className = 'label';
     label.textContent = nodo.ruta && nodo.ruta.trim() !== '' ? nodo.ruta : 'Sin ruta';
-    nodeDiv.appendChild(img); nodeDiv.appendChild(label); li.appendChild(nodeDiv);
-    nodeDiv.addEventListener('click', e => { e.stopPropagation(); abrirModalUbicacion(nodo.ruta_jerarquia); });
+
+    nodeDiv.appendChild(img);
+    nodeDiv.appendChild(label);
+    li.appendChild(nodeDiv);
+
+    nodeDiv.addEventListener('click', e => {
+        e.stopPropagation();
+        abrirModalUbicacion(nodo.ruta_jerarquia);
+    });
 
     if (nodo.sububicaciones && nodo.sububicaciones.length > 0) {
         const toggle = document.createElement('button');
         toggle.className = 'toggle btn btn-outline-primary btn-sm';
-        toggle.type = 'button'; toggle.setAttribute('aria-expanded', 'false');
-        toggle.title = 'Expandir'; toggle.textContent = '+';
+        toggle.type = 'button';
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.title = 'Expandir';
+        toggle.textContent = '+';
         nodeDiv.appendChild(toggle);
+
         const ulHijos = document.createElement('ul');
         ulHijos.className = 'children-container ul-flex collapsed';
         nodo.sububicaciones.forEach(sub => ulHijos.appendChild(crearNodo(sub)));
         li.appendChild(ulHijos);
+
         toggle.addEventListener('click', e => {
             e.stopPropagation();
             const col = ulHijos.classList.toggle('collapsed');
@@ -148,50 +176,72 @@ function crearNodo(nodo) {
             setTimeout(dibujarLineas, 50);
         });
     }
+
     return li;
 }
 
+// ============================================================
+// UI: Dibujar líneas SVG entre nodos
+// ============================================================
 function dibujarLineas() {
     const container = document.getElementById("tree-container");
     const svg = document.getElementById('svg-lines');
     if (!container || !svg) return;
+
     while (svg.firstChild) svg.removeChild(svg.firstChild);
+
     const rect = container.getBoundingClientRect();
-    svg.style.width = rect.width + 'px'; svg.style.height = rect.height + 'px';
+    svg.style.width = rect.width + 'px';
+    svg.style.height = rect.height + 'px';
     svg.style.top = rect.top + window.scrollY + 'px';
     svg.style.left = rect.left + window.scrollX + 'px';
+
     container.querySelectorAll('li > .node').forEach(nodeDiv => {
         const li = nodeDiv.parentElement;
         const ulHijos = li.querySelector('ul.children-container:not(.collapsed)');
         if (!ulHijos) return;
+
         ulHijos.childNodes.forEach(childLi => {
             if (childLi.nodeType !== 1) return;
+
             const sImg = nodeDiv.querySelector('img').getBoundingClientRect();
             const eImg = childLi.querySelector('.node img')?.getBoundingClientRect();
             if (!eImg) return;
+
             const x1 = sImg.left + sImg.width / 2 - rect.left;
             const y1 = sImg.bottom - rect.top;
             const x2 = eImg.left + eImg.width / 2 - rect.left;
             const y2 = eImg.top - rect.top;
+
             const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-            g.setAttribute('stroke', '#0d6efd'); g.setAttribute('fill', 'none');
+            g.setAttribute('stroke', '#0d6efd');
+            g.setAttribute('fill', 'none');
             g.setAttribute('stroke-width', '2');
+
             const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
             p.setAttribute('d', `M ${x1} ${y1} L ${x1} ${(y1 + y2) / 2} L ${x2} ${(y1 + y2) / 2} L ${x2} ${y2}`);
-            g.appendChild(p); svg.appendChild(g);
+            g.appendChild(p);
+            svg.appendChild(g);
         });
     });
 }
 
+// ============================================================
+// API: Fetch helper con logging
+// ============================================================
 async function manejarFetch(url, options) {
     const method = options.method || 'GET';
     Logger.apiCall(method, url);
+
     try {
         const res = await fetch(url, { ...options, credentials: 'same-origin' });
         const text = await res.text();
         let json;
-        try { json = JSON.parse(text); }
-        catch { return { ok: false, data: { status: 'error', msg: 'Respuesta inválida' } }; }
+        try {
+            json = JSON.parse(text);
+        } catch {
+            return { ok: false, data: { status: 'error', msg: 'Respuesta inválida' } };
+        }
         Logger.apiResponse(method, url, res.status, json);
         return { ok: res.ok, data: json };
     } catch (err) {
@@ -200,7 +250,11 @@ async function manejarFetch(url, options) {
     }
 }
 
+// ============================================================
+// EVENTOS DE FORMULARIOS
+// ============================================================
 function configurarFormularios() {
+    // ---------- GUARDAR EDICIÓN ----------
     document.getElementById('formUbicacion').addEventListener('submit', async e => {
         e.preventDefault();
         const ruta = document.getElementById('ruta_jerarquia').value;
@@ -215,22 +269,32 @@ function configurarFormularios() {
         if (archivoSel) formData.append('imagen', archivoSel);
         else if (fueQuitada) formData.append('eliminar_imagen', 'true');
 
-        const { ok, data } = await manejarFetch('/api/editar_ubicacion', { method: 'PUT', body: formData });
+        const { ok, data } = await manejarFetch('/api/editar_ubicacion', {
+            method: 'PUT',
+            body: formData
+        });
+
         if (ok && data.status === 'ok') {
-            mostrarNotif(data.msg || 'Ubicación guardada correctamente', 'success');
+            // ✅ UNIFICADO: usa Notify.success
+            Notify.success(data.msg || 'Ubicación guardada correctamente');
             Logger.success('Ubicación actualizada', { ruta });
             bootstrap.Modal.getInstance(document.getElementById('ubicacionModal'))?.hide();
             setTimeout(() => location.reload(), 800);
         } else {
-            mostrarNotif(data.msg || 'Error al guardar', 'error');
+            // ✅ UNIFICADO: usa Notify.error
+            Notify.error(data.msg || 'Error al guardar');
             Logger.error('Error al guardar', data);
         }
     });
 
+    // ---------- BORRAR UBICACIÓN ----------
     document.getElementById('btnBorrarUbicacion').addEventListener('click', () => {
         const ruta = document.getElementById('ruta_jerarquia').value;
         const nombre = document.getElementById('nombre').value;
-        mostrarConfirm('Eliminar ubicación',
+
+        // ✅ UNIFICADO: usa Notify.confirm en lugar de mostrarConfirm
+        Notify.confirm(
+            'Eliminar ubicación',
             `¿Está seguro que desea eliminar "${nombre}"? Esta acción no se puede deshacer.`,
             async () => {
                 const { ok, data } = await manejarFetch('/api/borrar_ubicacion', {
@@ -238,15 +302,20 @@ function configurarFormularios() {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ ruta_jerarquia: ruta })
                 });
+
                 if (ok && data.status === 'ok') {
-                    mostrarNotif(data.msg || 'Ubicación eliminada', 'success');
+                    // ✅ UNIFICADO: usa Notify.success
+                    Notify.success(data.msg || 'Ubicación eliminada');
                     setTimeout(() => location.reload(), 800);
                 } else {
-                    mostrarNotif(data.msg || 'Error al eliminar', 'error');
+                    // ✅ UNIFICADO: usa Notify.error
+                    Notify.error(data.msg || 'Error al eliminar');
                 }
-            });
+            }
+        );
     });
 
+    // ---------- AGREGAR SUBUBICACIÓN ----------
     document.getElementById('btnAgregarHijo').addEventListener('click', () => {
         const cont = document.getElementById('sububicacionesContainer');
         const formDiv = document.createElement('div');
@@ -264,23 +333,33 @@ function configurarFormularios() {
             <button class="btn btn-cancelar btn-sm" id="cancelarHijoBtn">Cancelar</button>
         `;
         cont.appendChild(formDiv);
+
         formDiv.querySelector('#cancelarHijoBtn').addEventListener('click', () => formDiv.remove());
+
         formDiv.querySelector('#guardarHijoBtn').addEventListener('click', async e => {
             e.preventDefault();
             const rutaPadre = document.getElementById('ruta_jerarquia').value;
             const imgFile = formDiv.querySelector('#imagenHijo').files[0];
+
             const formData = new FormData();
             formData.append('ruta_padre', rutaPadre);
             formData.append('nombre', formDiv.querySelector('#nombreHijo').value);
             formData.append('emoji', formDiv.querySelector('#emojiHijo').value);
             formData.append('ruta', formDiv.querySelector('#rutaHijo').value);
             if (imgFile) formData.append('imagen', imgFile);
-            const { ok, data } = await manejarFetch('/api/agregar_sububicacion', { method: 'POST', body: formData });
+
+            const { ok, data } = await manejarFetch('/api/agregar_sububicacion', {
+                method: 'POST',
+                body: formData
+            });
+
             if (ok && data.status === 'ok') {
-                mostrarNotif(data.msg || 'Sububicación agregada', 'success');
+                // ✅ UNIFICADO: usa Notify.success
+                Notify.success(data.msg || 'Sububicación agregada');
                 setTimeout(() => location.reload(), 800);
             } else {
-                mostrarNotif(data.msg || 'Error al agregar', 'error');
+                // ✅ UNIFICADO: usa Notify.error
+                Notify.error(data.msg || 'Error al agregar');
             }
         });
     });

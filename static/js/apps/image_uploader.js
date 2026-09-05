@@ -1,5 +1,6 @@
 /**
  * ImageUploader - Componente reutilizable para subida de imágenes
+ * ✅ NOTIFICACIONES UNIFICADAS: usa Notify global
  */
 class ImageUploader {
     constructor(config = {}) {
@@ -10,9 +11,11 @@ class ImageUploader {
             acceptedTypes: ['image/png', 'image/jpeg', 'image/jpg', 'image/gif', 'image/webp'],
             loggerPrefix: '[ImageUploader]'
         }, config);
+
         this.selectedFile = null;
         this.currentImageUrl = null;
         this.removed = false;
+
         this.els = {
             preview: document.getElementById(this.config.previewId),
             placeholder: document.getElementById(this.config.placeholderId),
@@ -21,6 +24,7 @@ class ImageUploader {
             info: document.getElementById(this.config.infoId),
             wrapper: document.getElementById(this.config.wrapperId)
         };
+
         this._handlers = {};
         Logger.setPrefix(this.config.loggerPrefix);
         this.#init();
@@ -69,19 +73,25 @@ class ImageUploader {
     #handleFileChange(e) {
         const file = e.target.files[0];
         if (!file) return;
+
         if (!this.config.acceptedTypes.includes(file.type)) {
+            // ✅ UNIFICADO: usa Notify en lugar de Noty directo
             this.#notify('Tipo de archivo no permitido. Use: PNG, JPG, GIF o WEBP', 'error');
             this.els.input.value = '';
             return;
         }
+
         if (file.size > this.config.maxFileSize) {
             const mb = (this.config.maxFileSize / (1024 * 1024)).toFixed(1);
+            // ✅ UNIFICADO
             this.#notify(`La imagen es demasiado grande. Máximo ${mb}MB`, 'error');
             this.els.input.value = '';
             return;
         }
+
         this.selectedFile = file;
         this.removed = false;
+
         const reader = new FileReader();
         reader.onload = (ev) => {
             this.els.preview.src = ev.target.result;
@@ -89,20 +99,20 @@ class ImageUploader {
             if (this.els.placeholder) this.els.placeholder.style.display = 'none';
         };
         reader.readAsDataURL(file);
+
         if (this.els.info) {
             this.els.info.innerHTML = `<i class="bi bi-file-earmark-image"></i> ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
             this.els.info.style.display = 'block';
         }
+
         if (this.els.removeBtn) this.els.removeBtn.style.display = 'inline-block';
+
         Logger.success('Imagen seleccionada', { name: file.name, size: `${(file.size / 1024).toFixed(1)} KB` });
     }
 
+    // ✅ UNIFICADO: usa Notify global en lugar de Noty directo
     #notify(msg, type) {
-        if (typeof Noty !== 'undefined') {
-            new Noty({ type, layout: 'topRight', timeout: 3000, theme: 'mint', text: msg }).show();
-        } else {
-            alert(msg);
-        }
+        Notify.alert(msg, type);
     }
 
     loadExisting(imageUrl) {
@@ -129,6 +139,7 @@ class ImageUploader {
         if (this.els.removeBtn) this.els.removeBtn.style.display = 'none';
         if (this.els.info) this.els.info.style.display = 'none';
         Logger.info('Imagen quitada', { removed: this.removed });
+        // ✅ UNIFICADO
         this.#notify('Imagen quitada. Se guardará al confirmar.', 'info');
     }
 
@@ -155,4 +166,5 @@ class ImageUploader {
         this._handlers = {};
     }
 }
+
 window.ImageUploader = ImageUploader;

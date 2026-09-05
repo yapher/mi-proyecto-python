@@ -1,4 +1,8 @@
 // static/js/utils/event_modal.js
+/**
+ * EventModal - Componente reutilizable para modales de eventos
+ * ✅ NOTIFICACIONES UNIFICADAS: usa Notify global
+ */
 class EventModal {
     constructor(config = {}) {
         this.config = Object.assign({
@@ -80,6 +84,7 @@ class EventModal {
             realizado: this.el.querySelector('#eventoRealizado').checked
         };
         if (!data.titulo || !data.fecha) {
+            // ✅ UNIFICADO: usa Notify en lugar de Noty directo
             this._notif('Título y fecha son requeridos', 'warning');
             return;
         }
@@ -105,12 +110,10 @@ class EventModal {
         }
     }
 
+    // ✅ UNIFICADO: usa Notify global en lugar de Noty directo
     _notif(msg, tipo) {
-        if (typeof Noty !== 'undefined') {
-            new Noty({ type: tipo, layout: 'topRight', timeout: 3000, theme: 'mint', text: msg }).show();
-        } else {
-            alert(msg);
-        }
+        Notify.alert(msg, tipo);
     }
 }
+
 window.EventModal = EventModal;

@@ -1,5 +1,4 @@
 // exportPDF.js
-
 async function exportarResumenPDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
@@ -13,7 +12,6 @@ async function exportarResumenPDF() {
     // Encabezado
     doc.setFontSize(16);
     doc.text(`Resumen de Gastos - ${anio}-${mes}`, 15, 20);
-
     doc.setFontSize(10);
     doc.text(`Exportado: ${fechaActual}`, 160, 20, { align: 'right' });
 
@@ -22,7 +20,7 @@ async function exportarResumenPDF() {
     const filas = resumenDiv.querySelectorAll('table tbody tr');
 
     if (!filas.length) {
-        alert("No hay datos de resumen para exportar.");
+        Notify.warning("No hay datos de resumen para exportar.");
         return;
     }
 
@@ -37,7 +35,6 @@ async function exportarResumenPDF() {
         const totalTexto = celdas[1].textContent.trim();
         const total = parseFloat(totalTexto.replace(/\./g, '').replace(',', '.').replace('$', '')) || 0;
         totalGeneral += total;
-
         doc.text(`• ${rubro}: ${totalTexto}`, 15, y);
         y += 8;
     });
@@ -49,7 +46,7 @@ async function exportarResumenPDF() {
         style: 'currency',
         currency: 'ARS'
     });
-    doc.text(`💰 Total General: ${totalFormateado}`, 15, y);
+    doc.text(`Total General: ${totalFormateado}`, 15, y);
     y += 10;
 
     // Pagos individuales
@@ -60,18 +57,15 @@ async function exportarResumenPDF() {
         doc.text("Pagos individuales:", 15, y);
         y += 8;
         doc.setFontSize(10);
-
         pagosFilas.forEach(fila => {
             const columnas = fila.querySelectorAll("td");
             const datos = Array.from(columnas).slice(0, 6).map(td => td.textContent.trim());
             const linea = `• ${datos.join(" | ")}`;
-
             if (y > 270) {
                 agregarFooter(doc);
                 doc.addPage();
                 y = 20;
             }
-
             doc.text(linea, 15, y);
             y += 6;
         });
@@ -83,7 +77,6 @@ async function exportarResumenPDF() {
     if (graficoCanvas) {
         const img = await html2canvas(graficoDiv);
         const imgData = img.toDataURL("image/png");
-
         if (y > 180) {
             agregarFooter(doc);
             doc.addPage();
@@ -91,7 +84,6 @@ async function exportarResumenPDF() {
         } else {
             y += 10;
         }
-
         doc.setFontSize(12);
         doc.text("Gráfico de distribución:", 15, y);
         y += 5;
@@ -99,10 +91,10 @@ async function exportarResumenPDF() {
         y += 100;
     }
 
-    // Pie de página (firma / logo / fecha)
+    // Pie de página
     agregarFooter(doc);
-
     doc.save(`Resumen_Gastos_${anio}_${mes}.pdf`);
+    Notify.success("PDF exportado correctamente");
 }
 
 function agregarFooter(doc) {
@@ -112,7 +104,4 @@ function agregarFooter(doc) {
     doc.setTextColor(150);
     doc.text(`Generado automáticamente el ${fecha}`, 15, pageHeight - 10);
     doc.text("Sistema de Gestión de Gastos", 150, pageHeight - 10, { align: 'right' });
-
-    // Si tenés un logo:
-    // doc.addImage('logo_base64.png', 'PNG', 15, pageHeight - 18, 20, 10);
 }

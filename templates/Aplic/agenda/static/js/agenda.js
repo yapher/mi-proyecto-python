@@ -53,7 +53,6 @@ function generarCalendario() {
         const celda = document.createElement("td");
         const jsDay = new Date(año, mes - 1, d).getDay();
         const claseDia = clasePorDiaSemana(jsDay);
-
         const cont = document.createElement("div");
         cont.className = `dia ${claseDia}`;
         cont.title = `Agregar/editar eventos - ${fechaStr}`;
@@ -79,7 +78,6 @@ function generarCalendario() {
             const pill = document.createElement("div");
             pill.className = "evento-pill";
             if (e.realizado) pill.classList.add("evento-realizado");
-
             if (!e.realizado) {
                 if (e.prioridad === "alta") pill.classList.add("prio-alta");
                 else if (e.prioridad === "media") pill.classList.add("prio-media");
@@ -139,7 +137,7 @@ function toggleRealizado(id, estado) {
         cargarEventos();
     }).catch(err => {
         console.error("Error toggleRealizado:", err);
-        Swal.fire({ icon: 'error', title: 'Ups', text: 'No se pudo actualizar el evento.' });
+        Notify.error("No se pudo actualizar el evento.");
         cargarEventos();
     });
 }
