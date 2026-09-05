@@ -706,3 +706,34 @@ static/logo_HA_2.gif
 !DataBase/Config/menu.json
 !DataBase/**/.gitkeep
 !static/**/.gitkeep
+# Variables de entorno
+.env
+
+# ============================================================
+# BASE DE DATOS
+# ============================================================
+# SQLite local (no subir a Git)
+DataBase/*.db
+DataBase/*.sqlite
+DataBase/*.sqlite3
+instance/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pytest
+.pytest_cache/
+htmlcov/
+.coverage

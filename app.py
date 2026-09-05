@@ -20,6 +20,35 @@ from core.scheduler import setup_scheduler
 # Crear app
 # ============================================================
 app = Flask(__name__)
+
+# ============================================================
+# Base de datos (SQLAlchemy)
+# ============================================================
+from core.db_sql import init_db
+import os
+from pathlib import Path
+from dotenv import load_dotenv
+
+# Cargar variables de entorno
+load_dotenv()
+
+# 1. Asegurar que el directorio DataBase exista (usando ruta absoluta)
+db_dir = Path(__file__).parent / 'DataBase'
+db_dir.mkdir(exist_ok=True)  # ✅ CORREGIDO: exist_ok en lugar de exexist_ok
+db_path = db_dir / 'empresa.db'
+
+# 2. Configurar URI: Si hay PostgreSQL en .env, lo usa. Si no, usa SQLite local con ruta absoluta.
+env_db_url = os.environ.get('DATABASE_URL')
+if env_db_url and env_db_url.startswith('postgresql'):
+    app.config['SQLALCHEMY_DATABASE_URI'] = env_db_url
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# 3. Inicializar base de datos
+init_db(app)
+
 app.secret_key = os.environ.get(
     "SECRET_KEY", "221d18b67f2d4705a132d532b1d12ab2"
 )
