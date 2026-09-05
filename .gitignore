@@ -190,7 +190,6 @@ logs/
 nohup.out
 hs_err_pid*
 replay_pid*
-core
 ~$*
 *.~*
 *.BACKUP.*
