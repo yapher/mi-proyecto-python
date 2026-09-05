@@ -1,58 +1,93 @@
 """
 Capa de acceso a datos para repuestos.
-Solo se preocupa por leer y guardar en REPUESTOS.json.
-"""
-import json
-import os
+Refactorizado para usar UniqueFieldStore de core.
 
-PATHREPUESTOS = 'DataBase/dataRep/REPUESTOS.json'
+Mantiene la misma API pública para no romper imports existentes:
+  - leer_repuestos()
+  - guardar_repuestos(repuestos)
+  - obtener_por_codigo(codigo)
+  - crear_repuesto(datos)
+  - actualizar_repuesto(codigo_original, nuevos_datos)
+  - eliminar_repuesto(codigo)
+"""
+from core.json_crud import UniqueFieldStore
+
+# ============================================================
+# INSTANCIA REUTILIZABLE DEL STORE
+# ============================================================
+# Configurado con "codigo" como campo único (no "id")
+# No auto-incrementa ID porque los repuestos usan "codigo" como identificador
+_store = UniqueFieldStore(
+    db_path='DataBase/dataRep/REPUESTOS.json',
+    unique_field='codigo',
+    auto_id=False
+)
+
+
+# ============================================================
+# FUNCIONES DE COMPATIBILIDAD (API pública sin cambios)
+# ============================================================
 
 def leer_repuestos():
     """Lee todos los repuestos desde el JSON."""
-    if not os.path.exists(PATHREPUESTOS):
-        return []
-    with open(PATHREPUESTOS, 'r', encoding='utf-8') as f:
-        try:
-            return json.load(f)
-        except json.JSONDecodeError:
-            return []
+    return _store.cargar()
+
 
 def guardar_repuestos(repuestos):
     """Guarda la lista completa de repuestos en el JSON."""
-    with open(PATHREPUESTOS, 'w', encoding='utf-8') as f:
-        json.dump(repuestos, f, indent=4, ensure_ascii=False)
+    _store.guardar(repuestos)
+
 
 def obtener_por_codigo(codigo):
     """Busca un repuesto por su código."""
-    repuestos = leer_repuestos()
-    return next((r for r in repuestos if str(r.get('codigo')) == str(codigo)), None)
+    return _store.buscar_por_unique(codigo)
+
 
 def crear_repuesto(datos):
-    """Crea un nuevo repuesto. Retorna (exito, mensaje)."""
-    if obtener_por_codigo(datos['codigo']):
-        return False, "Ya existe un repuesto con el mismo código."
-    repuestos = leer_repuestos()
-    repuestos.append(datos)
-    guardar_repuestos(repuestos)
-    return True, "Repuesto creado correctamente."
+    """
+    Crea un nuevo repuesto. Retorna (exito, mensaje).
+    Valida que no exista otro repuesto con el mismo código.
+    """
+    # Validar campos obligatorios antes de delegar al store
+    codigo = datos.get('codigo')
+    if not codigo or str(codigo).strip() == '':
+        return False, "El código es obligatorio"
+    
+    # Usar el store con validación de unicidad
+    return _store.crear(datos, skip_unique_check=False)
+
 
 def actualizar_repuesto(codigo_original, nuevos_datos):
-    """Actualiza un repuesto existente. Retorna (exito, mensaje)."""
-    repuestos = leer_repuestos()
-    for i, r in enumerate(repuestos):
-        if str(r.get('codigo')) == str(codigo_original):
-            if nuevos_datos['codigo'] != codigo_original and obtener_por_codigo(nuevos_datos['codigo']):
-                return False, "El nuevo código ya existe."
-            repuestos[i].update(nuevos_datos)
-            guardar_repuestos(repuestos)
-            return True, "Repuesto actualizado correctamente."
-    return False, "Repuesto no encontrado."
+    """
+    Actualiza un repuesto existente. Retorna (exito, mensaje).
+    Valida que el nuevo código (si cambia) no exista ya.
+    """
+    return _store.actualizar_por_unique(
+        valor_original=codigo_original,
+        nuevos_datos=nuevos_datos,
+        check_new_unique=True
+    )
+
 
 def eliminar_repuesto(codigo):
     """Elimina un repuesto por código. Retorna (exito, mensaje)."""
-    repuestos = leer_repuestos()
-    filtrados = [r for r in repuestos if str(r.get('codigo')) != str(codigo)]
-    if len(filtrados) < len(repuestos):
-        guardar_repuestos(filtrados)
-        return True, "Repuesto eliminado correctamente."
-    return False, "Repuesto no encontrado."
+    return _store.eliminar_por_unique(codigo)
+
+
+# ============================================================
+# FUNCIONES ADICIONALES (nuevas, usando UniqueFieldStore)
+# ============================================================
+
+def existe_codigo(codigo):
+    """Verifica si existe un repuesto con el código dado."""
+    return _store.existe_por_unique(codigo)
+
+
+def buscar_repuestos(**criterios):
+    """Busca repuestos que cumplan todos los criterios."""
+    return _store.buscar(**criterios)
+
+
+def contar_repuestos():
+    """Retorna la cantidad total de repuestos."""
+    return _store.contar()
