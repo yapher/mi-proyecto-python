@@ -2,10 +2,10 @@
 scripts/seed_render.py
 ======================
 Puebla la base de datos con datos iniciales para Render.
-Se ejecuta automáticamente si no hay usuarios.
+Se ejecuta automáticamente si la DB está vacía.
 """
 from core.db_sql import db
-from core.models import Usuario, Menu, Estado, NodoBloqueo
+from core.models import Usuario, Menu, Estado, Tab, NodoBloqueo
 
 
 def seed_usuarios():
@@ -41,22 +41,26 @@ def seed_usuarios():
 def seed_menu():
     """Crea menú inicial si no existe."""
     if Menu.query.count() > 0:
+        print("✅ Menú ya existe, saltando seed")
         return 0
 
+    # Menú básico inicial
     menu_inicial = [
         {
             'nombre': 'Inicio',
             'emoji': '🏠',
             'ruta': '/',
             'ruta_jerarquia': 'Inicio',
-            'padre_id': None
+            'padre_id': None,
+            'roles': []
         },
         {
             'nombre': 'Administración',
             'emoji': '⚙️',
             'ruta': '',
             'ruta_jerarquia': 'Administración',
-            'padre_id': None
+            'padre_id': None,
+            'roles': ['admin']
         }
     ]
 
@@ -72,6 +76,7 @@ def seed_menu():
 def seed_estados():
     """Crea estados de repuestos por defecto."""
     if Estado.query.count() > 0:
+        print("✅ Estados ya existen, saltando seed")
         return 0
 
     estados_default = [
@@ -96,6 +101,7 @@ def seed_estados():
 def seed_nodo_bloqueo():
     """Crea nodo raíz de bloqueos si no existe."""
     if NodoBloqueo.query.count() > 0:
+        print("✅ Nodos de bloqueo ya existen, saltando seed")
         return 0
 
     nodo = NodoBloqueo(
