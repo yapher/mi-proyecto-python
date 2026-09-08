@@ -2,6 +2,7 @@
 Aplicación principal.
 - Auto-registro de blueprints (no hay que tocar este archivo al agregar apps)
 - Configuración de mail, scheduler, login y context processors
+- Configuración de seguridad para producción (HTTPS en Render)
 """
 import os
 import threading
@@ -11,6 +12,7 @@ from flask import Flask, render_template
 from flask_login import login_required, current_user
 from flask_mail import Mail
 from dotenv import load_dotenv
+from werkzeug.middleware.proxy_fix import ProxyFix
 
 # 1. Cargar variables de entorno (.env) AL INICIO
 load_dotenv()
@@ -28,13 +30,18 @@ from core.db_sql import db, init_db
 app = Flask(__name__)
 
 # ============================================================
+# Configuración de PROXY (CRÍTICO para Render)
+# Render usa proxies, necesitamos confiar en ellos para detectar HTTPS
+# ============================================================
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
+
+# ============================================================
 # Configuración de Base de Datos (SQLAlchemy)
 # ============================================================
 env_db_url = os.environ.get('DATABASE_URL')
 
 if env_db_url:
     # Render a veces usa 'postgres://' en lugar de 'postgresql://'
-    # SQLAlchemy requiere 'postgresql://' obligatoriamente
     if env_db_url.startswith('postgres://'):
         env_db_url = env_db_url.replace('postgres://', 'postgresql://', 1)
     
@@ -50,6 +57,32 @@ else:
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+# ============================================================
+# Configuración de SEGURIDAD para producción (HTTPS)
+# ============================================================
+# Detectar si estamos en producción (Render)
+is_production = bool(os.environ.get('DATABASE_URL'))
+
+if is_production:
+    # Configuración para producción (HTTPS)
+    app.config['SESSION_COOKIE_SECURE'] = True      # Cookies solo por HTTPS
+    app.config['SESSION_COOKIE_HTTPONLY'] = True    # No accesible por JavaScript
+    app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'   # Protección CSRF
+    app.config['REMEMBER_COOKIE_SECURE'] = True     # Cookie "recordarme" solo por HTTPS
+    app.config['REMEMBER_COOKIE_HTTPONLY'] = True
+    app.config['REMEMBER_COOKIE_SAMESITE'] = 'Lax'
+    app.config['PREFERRED_URL_SCHEME'] = 'https'    # URLs generadas serán HTTPS
+    print("🔒 Modo PRODUCCIÓN: Cookies seguras habilitadas")
+else:
+    # Configuración para desarrollo (HTTP local)
+    app.config['SESSION_COOKIE_SECURE'] = False
+    app.config['SESSION_COOKIE_HTTPONLY'] = True
+    app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+    app.config['REMEMBER_COOKIE_SECURE'] = False
+    app.config['REMEMBER_COOKIE_HTTPONLY'] = True
+    app.config['REMEMBER_COOKIE_SAMESITE'] = 'Lax'
+    print("🔧 Modo DESARROLLO: Cookies normales")
+
 # Inicializar base de datos
 init_db(app)
 
@@ -57,7 +90,7 @@ init_db(app)
 # Crear tablas y AUTO-SEED
 # ============================================================
 with app.app_context():
-    db.create_all()  # Asegura que las tablas existan antes de consultar
+    db.create_all()
     
     # Si no hay usuarios, ejecutar seed automáticamente
     from core.models import Usuario
@@ -81,7 +114,6 @@ init_routes_login(app)
 
 # ============================================================
 # Auto-registro de TODOS los blueprints
-# Escanea templates/Aplic/*/BackEnd/*.py automáticamente
 # ============================================================
 auto_register_blueprints(app)
 
@@ -143,6 +175,13 @@ def gestion_aplicaciones():
     )
 
 # ============================================================
+# Ruta de prueba para verificar que la app funciona
+# ============================================================
+@app.route("/health")
+def health():
+    return {"status": "ok", "message": "App funcionando correctamente"}
+
+# ============================================================
 # Manejo de errores
 # ============================================================
 @app.errorhandler(403)
@@ -151,7 +190,7 @@ def forbidden(e):
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("404.html"), 404  # Asegúrate de tener 404.html, o cámbialo a "403.html"
+    return render_template("404.html"), 404
 
 # ============================================================
 # Arranque
@@ -162,7 +201,7 @@ def _abrir_navegador():
 if __name__ == "__main__":
     os.makedirs("DataBase/Config", exist_ok=True)
     
-    # Iniciar scheduler solo si no estamos en modo reload de Flask (evita duplicados en local)
+    # Iniciar scheduler solo si no estamos en modo reload de Flask
     if not os.environ.get("WERKZEUG_RUN_MAIN"):
         scheduler.start()
         threading.Timer(1.0, _abrir_navegador).start()
