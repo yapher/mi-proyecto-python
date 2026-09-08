@@ -199,6 +199,20 @@ def gestion_aplicaciones():
 def health():
     return {"status": "ok", "message": "App funcionando correctamente"}
 
+
+# ============================================================
+# RUTA DE DEPURACIÓN TEMPORAL (¡Eliminar después de arreglar!)
+# ============================================================
+@app.route("/debug_db")
+def debug_db():
+    from core.models import Usuario
+    usuarios = Usuario.query.all()
+    info = []
+    for u in usuarios:
+        info.append(f"👤 {u.username} | Pass: '{u.password}' | Roles: {u.roles}")
+    return "<h3>Usuarios en la DB de Render en vivo:</h3>" + "<br>".join(info)
+
+
 # ============================================================
 # Manejo de errores
 # ============================================================
