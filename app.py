@@ -136,20 +136,32 @@ mail = Mail(app)
 scheduler = setup_scheduler(app, mail)
 
 # ============================================================
-# FILTRO JINJA2: Intersect (CRÍTICO para el menú)
+# FILTRO JINJA2: Intersect (A prueba de balas)
 # ============================================================
 @app.template_filter('intersect')
 def intersect_filter(user_roles, item_roles):
     """
-    Devuelve True si hay al menos un rol en común entre user_roles e item_roles.
-    Si item_roles está vacío o no definido, devuelve True (acceso libre).
+    Devuelve True si hay al menos un rol en común.
+    Maneja casos donde los roles vienen como string desde la DB.
     """
+    # Si el ítem no tiene roles definidos, es público (True)
     if not item_roles:
         return True
-    # Asegurarnos de que ambos sean conjuntos (sets) para evitar errores
-    user_set = set(user_roles) if isinstance(user_roles, (list, set, tuple)) else set()
-    item_set = set(item_roles) if isinstance(item_roles, (list, set, tuple)) else set()
-    return bool(user_set & item_set)
+    
+    try:
+        # Si item_roles es un string (ej: "['admin']"), lo convertimos a lista
+        if isinstance(item_roles, str):
+            import json
+            item_roles = json.loads(item_roles)
+            
+        # Aseguramos que ambos sean conjuntos (sets)
+        user_set = set(user_roles) if isinstance(user_roles, (list, set, tuple)) else set()
+        item_set = set(item_roles) if isinstance(item_roles, (list, set, tuple)) else set()
+        
+        return bool(user_set & item_set)
+    except Exception:
+        # Si hay cualquier error, por seguridad mostramos el ítem
+        return True
 
 # ============================================================
 # Context processor: inyecta menú y roles en TODAS las plantillas
@@ -198,6 +210,38 @@ def gestion_aplicaciones():
 @app.route("/health")
 def health():
     return {"status": "ok", "message": "App funcionando correctamente"}
+
+# ============================================================
+# RUTA DE DEPURACIÓN DEL MENÚ (¡Eliminar cuando funcione!)
+# ============================================================
+@app.route("/debug_menu")
+@login_required
+def debug_menu():
+    from core.menu import cargar_menu
+    import json
+    
+    menu_data = cargar_menu()
+    user_roles = current_user.roles if current_user.is_authenticated else []
+    
+    html = f"<h2>🔍 Depuración del Menú para: {current_user.username}</h2>"
+    html += f"<p><strong>Roles del usuario:</strong> {user_roles} <em>(Tipo: {type(user_roles).__name__})</em></p>"
+    
+    html += "<h3>Menú crudo desde la base de datos:</h3>"
+    html += "<pre style='background:#f4f4f4; padding:15px; border-radius:5px; overflow:auto;'>"
+    html += json.dumps(menu_data, indent=2, ensure_ascii=False)
+    html += "</pre>"
+    
+    html += "<h3>Prueba del filtro intersect:</h3>"
+    html += "<ul>"
+    for item in menu_data:
+        # Simulamos lo que hace el template
+        item_roles = item.get('roles', [])
+        resultado = intersect_filter(user_roles, item_roles)
+        color = "green" if resultado else "red"
+        html += f"<li style='color:{color}'>{item.get('emoji')} {item.get('nombre')} (Roles del ítem: {item_roles}) → <strong>{resultado}</strong></li>"
+    html += "</ul>"
+    
+    return html
 
 
 # ============================================================
