@@ -212,33 +212,49 @@ def health():
     return {"status": "ok", "message": "App funcionando correctamente"}
 
 # ============================================================
-# RUTA DE DEPURACIÓN DEL MENÚ (¡Eliminar cuando funcione!)
+# RUTA DE DEPURACIÓN DE SESIÓN Y MENÚ (Sin login_required)
 # ============================================================
 @app.route("/debug_menu")
-@login_required
 def debug_menu():
     from core.menu import cargar_menu
     import json
+    from flask import session
     
+    is_auth = current_user.is_authenticated
+    username = current_user.username if is_auth else "Anónimo (No logueado)"
+    user_roles = current_user.roles if is_auth else []
+    
+    html = f"<h2>🔍 Depuración de Sesión y Menú</h2>"
+    html += f"<p><strong>¿Estás logueado?:</strong> {'✅ SÍ' if is_auth else '❌ NO'}</p>"
+    html += f"<p><strong>Usuario:</strong> {username}</p>"
+    html += f"<p><strong>Roles detectados:</strong> {user_roles} <em>(Tipo: {type(user_roles).__name__})</em></p>"
+    html += f"<p><strong>Session ID:</strong> {session.get('_id', 'No existe')}</p>"
+    
+    if not is_auth:
+        html += "<hr><p style='color:red;'>⚠️ <strong>Debes iniciar sesión primero.</strong> <a href='/login'>Ir al Login</a></p>"
+        return html
+
+    # Si está logueado, mostramos el menú
     menu_data = cargar_menu()
-    user_roles = current_user.roles if current_user.is_authenticated else []
     
-    html = f"<h2>🔍 Depuración del Menú para: {current_user.username}</h2>"
-    html += f"<p><strong>Roles del usuario:</strong> {user_roles} <em>(Tipo: {type(user_roles).__name__})</em></p>"
-    
-    html += "<h3>Menú crudo desde la base de datos:</h3>"
-    html += "<pre style='background:#f4f4f4; padding:15px; border-radius:5px; overflow:auto;'>"
-    html += json.dumps(menu_data, indent=2, ensure_ascii=False)
-    html += "</pre>"
-    
-    html += "<h3>Prueba del filtro intersect:</h3>"
+    html += "<h3>Prueba del filtro intersect (Lo que ve el template):</h3>"
     html += "<ul>"
     for item in menu_data:
-        # Simulamos lo que hace el template
         item_roles = item.get('roles', [])
-        resultado = intersect_filter(user_roles, item_roles)
+        
+        # Simulamos exactamente lo que hace el template
+        try:
+            if isinstance(item_roles, str):
+                import json
+                item_roles = json.loads(item_roles)
+            user_set = set(user_roles) if isinstance(user_roles, (list, set, tuple)) else set()
+            item_set = set(item_roles) if isinstance(item_roles, (list, set, tuple)) else set()
+            resultado = bool(user_set & item_set) if item_set else True
+        except Exception:
+            resultado = True
+            
         color = "green" if resultado else "red"
-        html += f"<li style='color:{color}'>{item.get('emoji')} {item.get('nombre')} (Roles del ítem: {item_roles}) → <strong>{resultado}</strong></li>"
+        html += f"<li style='color:{color}; font-weight:bold;'>{item.get('emoji')} {item.get('nombre')} (Roles del ítem: {item_roles}) → Muestra: {'✅ SÍ' if resultado else '❌ NO'}</li>"
     html += "</ul>"
     
     return html
