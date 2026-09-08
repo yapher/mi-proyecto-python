@@ -212,6 +212,25 @@ def debug_db():
         info.append(f"👤 {u.username} | Pass: '{u.password}' | Roles: {u.roles}")
     return "<h3>Usuarios en la DB de Render en vivo:</h3>" + "<br>".join(info)
 
+@app.route("/fix_usuario")
+def fix_usuario():
+    from core.models import Usuario
+    from core.db_sql import db
+    
+    # Buscar el usuario 'viewer' y cambiarlo a 'usuario'
+    u = Usuario.query.filter_by(username='viewer').first()
+    if u:
+        u.username = 'usuario'
+        u.password = 'usuario123'
+        db.session.commit()
+        return "✅ Usuario actualizado a 'usuario' / 'usuario123' en Render"
+    
+    # Si no existe 'viewer', creamos 'usuario'
+    nuevo = Usuario(id='2', username='usuario', password='usuario123', roles=['viewer'])
+    db.session.add(nuevo)
+    db.session.commit()
+    return "✅ Usuario 'usuario' creado en Render"
+
 
 # ============================================================
 # Manejo de errores
