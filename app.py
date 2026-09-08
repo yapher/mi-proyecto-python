@@ -3,18 +3,24 @@ Aplicación principal.
 - Auto-registro de blueprints (no hay que tocar este archivo al agregar apps)
 - Configuración de mail, scheduler, login y context processors
 """
-from flask import Flask, render_template, redirect, url_for
 import os
 import threading
 import webbrowser
+from pathlib import Path
+from flask import Flask, render_template
 from flask_login import login_required, current_user
 from flask_mail import Mail
+from dotenv import load_dotenv
 
-# Importar desde las nuevas ubicaciones
+# 1. Cargar variables de entorno (.env) AL INICIO
+load_dotenv()
+
+# Importar módulos internos
 from core.menu import cargar_menu
 from auth.login import init_routes_login, roles_required
 from core.blueprint_registry import auto_register_blueprints
 from core.scheduler import setup_scheduler
+from core.db_sql import db, init_db
 
 # ============================================================
 # Crear app
@@ -22,36 +28,51 @@ from core.scheduler import setup_scheduler
 app = Flask(__name__)
 
 # ============================================================
-# Base de datos (SQLAlchemy)
+# Configuración de Base de Datos (SQLAlchemy)
 # ============================================================
-from core.db_sql import init_db
-import os
-from pathlib import Path
-from dotenv import load_dotenv
-
-# Cargar variables de entorno
-load_dotenv()
-
-# 1. Asegurar que el directorio DataBase exista (usando ruta absoluta)
-db_dir = Path(__file__).parent / 'DataBase'
-db_dir.mkdir(exist_ok=True)  # ✅ CORREGIDO: exist_ok en lugar de exexist_ok
-db_path = db_dir / 'empresa.db'
-
-# 2. Configurar URI: Si hay PostgreSQL en .env, lo usa. Si no, usa SQLite local con ruta absoluta.
 env_db_url = os.environ.get('DATABASE_URL')
-if env_db_url and env_db_url.startswith('postgresql'):
+
+if env_db_url:
+    # Render a veces usa 'postgres://' en lugar de 'postgresql://'
+    # SQLAlchemy requiere 'postgresql://' obligatoriamente
+    if env_db_url.startswith('postgres://'):
+        env_db_url = env_db_url.replace('postgres://', 'postgresql://', 1)
+    
     app.config['SQLALCHEMY_DATABASE_URI'] = env_db_url
+    print("📦 Usando base de datos PostgreSQL (Render o local con .env)")
 else:
+    # Fallback: SQLite local
+    db_dir = Path(__file__).parent / 'DataBase'
+    db_dir.mkdir(exist_ok=True)
+    db_path = db_dir / 'empresa.db'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
+    print(f"📦 Usando base de datos SQLite local: {db_path}")
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# 3. Inicializar base de datos
+# Inicializar base de datos
 init_db(app)
 
-app.secret_key = os.environ.get(
-    "SECRET_KEY", "221d18b67f2d4705a132d532b1d12ab2"
-)
+# ============================================================
+# Crear tablas y AUTO-SEED
+# ============================================================
+with app.app_context():
+    db.create_all()  # Asegura que las tablas existan antes de consultar
+    
+    # Si no hay usuarios, ejecutar seed automáticamente
+    from core.models import Usuario
+    if Usuario.query.count() == 0:
+        print("🌱 DB vacía detectada. Ejecutando seed inicial...")
+        try:
+            from scripts.seed_render import seed_todo
+            seed_todo()
+        except ImportError:
+            print("⚠️ No se encontró el script de seed, continuando sin datos iniciales.")
+
+# ============================================================
+# Configuración General y Secret Key
+# ============================================================
+app.secret_key = os.environ.get("SECRET_KEY", "221d18b67f2d4705a132d532b1d12ab2")
 
 # ============================================================
 # Autenticación
@@ -70,9 +91,7 @@ auto_register_blueprints(app)
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587
 app.config["MAIL_USE_TLS"] = True
-app.config["MAIL_USERNAME"] = os.environ.get(
-    "MAIL_USERNAME", "oherasimovich730@alumnos.iua.edu.ar"
-)
+app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME", "oherasimovich730@alumnos.iua.edu.ar")
 app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD", "cvoe jyvn psqp tgjl")
 app.config["MAIL_DEFAULT_SENDER"] = app.config["MAIL_USERNAME"]
 mail = Mail(app)
@@ -132,7 +151,7 @@ def forbidden(e):
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("403.html"), 404
+    return render_template("404.html"), 404  # Asegúrate de tener 404.html, o cámbialo a "403.html"
 
 # ============================================================
 # Arranque
@@ -140,20 +159,10 @@ def not_found(e):
 def _abrir_navegador():
     webbrowser.open("http://127.0.0.1:5000")
 
-# ============================================================
-# AUTO-SEED: Si no hay usuarios, ejecutar seed automáticamente
-# ============================================================
-with app.app_context():
-    from core.models import Usuario
-    if Usuario.query.count() == 0:
-        print("🌱 DB vacía detectada. Ejecutando seed...")
-        from scripts.seed_render import seed_todo
-        seed_todo()
-
 if __name__ == "__main__":
     os.makedirs("DataBase/Config", exist_ok=True)
     
-    # Iniciar scheduler solo si no estamos en modo reload de Flask
+    # Iniciar scheduler solo si no estamos en modo reload de Flask (evita duplicados en local)
     if not os.environ.get("WERKZEUG_RUN_MAIN"):
         scheduler.start()
         threading.Timer(1.0, _abrir_navegador).start()

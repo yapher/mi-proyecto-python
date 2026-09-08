@@ -9,13 +9,13 @@ class Repuesto(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     codigo = db.Column(db.String(100), unique=True, nullable=False, index=True)
-    nombre = db.Column(db.String(255), nullable=False)
+    nombre = db.Column(db.Text, nullable=False)          # ✅ Cambiado a Text (nombres muy descriptivos)
     cantidad = db.Column(db.Integer, default=0)
-    equipo = db.Column(db.String(255), default='')
+    equipo = db.Column(db.Text, default='')              # ✅ Cambiado a Text
     imagen = db.Column(db.String(255), default='')
     fecha_creacion = db.Column(db.String(20), default='')
     fecha_fin = db.Column(db.String(20), default='')
-    link = db.Column(db.String(500), default='')
+    link = db.Column(db.Text, default='')                # ✅ Cambiado a Text (URLs de eBay/Banner son muy largas)
     estado = db.Column(db.String(50), default='')
     ruta_jerarquia_json = db.Column('ruta_jerarquia', db.Text, default='[]')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
