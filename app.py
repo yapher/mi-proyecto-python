@@ -2,7 +2,7 @@
 Aplicación principal.
 - Auto-registro de blueprints (no hay que tocar este archivo al agregar apps)
 - Configuración de mail, scheduler, login y context processors
-- Configuración de seguridad para producción (HTTPS en Render)
+- Configuración de seguridad y proxies para producción (Render)
 """
 import os
 import threading
@@ -42,6 +42,7 @@ env_db_url = os.environ.get('DATABASE_URL')
 
 if env_db_url:
     # Render a veces usa 'postgres://' en lugar de 'postgresql://'
+    # SQLAlchemy requiere 'postgresql://' obligatoriamente
     if env_db_url.startswith('postgres://'):
         env_db_url = env_db_url.replace('postgres://', 'postgresql://', 1)
     
@@ -56,6 +57,9 @@ else:
     print(f"📦 Usando base de datos SQLite local: {db_path}")
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Inicializar base de datos
+init_db(app)
 
 # ============================================================
 # Configuración de SEGURIDAD para producción (HTTPS)
@@ -83,14 +87,11 @@ else:
     app.config['REMEMBER_COOKIE_SAMESITE'] = 'Lax'
     print("🔧 Modo DESARROLLO: Cookies normales")
 
-# Inicializar base de datos
-init_db(app)
-
 # ============================================================
 # Crear tablas y AUTO-SEED
 # ============================================================
 with app.app_context():
-    db.create_all()
+    db.create_all()  # Asegura que las tablas existan antes de consultar
     
     # Si no hay usuarios, ejecutar seed automáticamente
     from core.models import Usuario
@@ -114,6 +115,7 @@ init_routes_login(app)
 
 # ============================================================
 # Auto-registro de TODOS los blueprints
+# Escanea templates/Aplic/*/BackEnd/*.py automáticamente
 # ============================================================
 auto_register_blueprints(app)
 
@@ -134,12 +136,31 @@ mail = Mail(app)
 scheduler = setup_scheduler(app, mail)
 
 # ============================================================
+# FILTRO JINJA2: Intersect (CRÍTICO para el menú)
+# ============================================================
+@app.template_filter('intersect')
+def intersect_filter(user_roles, item_roles):
+    """
+    Devuelve True si hay al menos un rol en común entre user_roles e item_roles.
+    Si item_roles está vacío o no definido, devuelve True (acceso libre).
+    """
+    if not item_roles:
+        return True
+    # Asegurarnos de que ambos sean conjuntos (sets) para evitar errores
+    user_set = set(user_roles) if isinstance(user_roles, (list, set, tuple)) else set()
+    item_set = set(item_roles) if isinstance(item_roles, (list, set, tuple)) else set()
+    return bool(user_set & item_set)
+
+# ============================================================
 # Context processor: inyecta menú y roles en TODAS las plantillas
 # ============================================================
 @app.context_processor
 def inject_menu():
     if current_user.is_authenticated:
-        return dict(menu=cargar_menu(), roles=current_user.roles)
+        return dict(
+            menu=cargar_menu(), 
+            roles=current_user.roles if current_user.roles else []
+        )
     return dict(menu=[], roles=[])
 
 # ============================================================
@@ -174,9 +195,6 @@ def gestion_aplicaciones():
         roles=current_user.roles,
     )
 
-# ============================================================
-# Ruta de prueba para verificar que la app funciona
-# ============================================================
 @app.route("/health")
 def health():
     return {"status": "ok", "message": "App funcionando correctamente"}
@@ -201,7 +219,7 @@ def _abrir_navegador():
 if __name__ == "__main__":
     os.makedirs("DataBase/Config", exist_ok=True)
     
-    # Iniciar scheduler solo si no estamos en modo reload de Flask
+    # Iniciar scheduler solo si no estamos en modo reload de Flask (evita duplicados en local)
     if not os.environ.get("WERKZEUG_RUN_MAIN"):
         scheduler.start()
         threading.Timer(1.0, _abrir_navegador).start()
