@@ -144,23 +144,19 @@ def intersect_filter(user_roles, item_roles):
     Devuelve True si hay al menos un rol en común.
     Maneja casos donde los roles vienen como string desde la DB.
     """
-    # Si el ítem no tiene roles definidos, es público (True)
     if not item_roles:
         return True
     
     try:
-        # Si item_roles es un string (ej: "['admin']"), lo convertimos a lista
         if isinstance(item_roles, str):
             import json
             item_roles = json.loads(item_roles)
             
-        # Aseguramos que ambos sean conjuntos (sets)
         user_set = set(user_roles) if isinstance(user_roles, (list, set, tuple)) else set()
         item_set = set(item_roles) if isinstance(item_roles, (list, set, tuple)) else set()
         
         return bool(user_set & item_set)
     except Exception:
-        # Si hay cualquier error, por seguridad mostramos el ítem
         return True
 
 # ============================================================
@@ -210,78 +206,6 @@ def gestion_aplicaciones():
 @app.route("/health")
 def health():
     return {"status": "ok", "message": "App funcionando correctamente"}
-
-# ============================================================
-# RUTA DE DEPURACIÓN DE MENÚ Y BASE DE DATOS (Sin login_required)
-# ============================================================
-@app.route("/debug_menu")
-def debug_menu():
-    from core.models import Menu
-    from core.menu import cargar_menu
-    import json
-    
-    is_auth = current_user.is_authenticated
-    username = current_user.username if is_auth else "Anónimo"
-    user_roles = current_user.roles if is_auth else []
-    
-    html = f"<h2>🔍 Depuración de Sesión y Menú</h2>"
-    html += f"<p><strong>¿Estás logueado?:</strong> {'✅ SÍ' if is_auth else '❌ NO'}</p>"
-    html += f"<p><strong>Usuario:</strong> {username}</p>"
-    html += f"<p><strong>Roles detectados:</strong> {user_roles} <em>(Tipo: {type(user_roles).__name__})</em></p>"
-    
-    # 1. Consulta DIRECTA a la base de datos
-    raices_db = Menu.query.filter_by(padre_id=None).all()
-    html += f"<h3>1. Nodos Raíz en la DB (padre_id=None): {len(raices_db)}</h3>"
-    html += "<ul>"
-    for r in raices_db:
-        html += f"<li>{r.emoji} <strong>{r.nombre}</strong> (ID: {r.id}, padre_id: {r.padre_id})</li>"
-    html += "</ul>"
-    
-    # 2. Ver cuántos menús hay en total en la DB
-    total_menus = Menu.query.count()
-    html += f"<p><strong>Total de menús en la DB:</strong> {total_menus}</p>"
-    
-    # 3. Qué devuelve cargar_menu()
-    menu_data = cargar_menu()
-    html += f"<h3>2. Resultado de cargar_menu(): {len(menu_data)} ítems raíz</h3>"
-    html += "<pre style='background:#f4f4f4; padding:10px; max-height:300px; overflow:auto;'>"
-    html += json.dumps(menu_data, indent=2, ensure_ascii=False)
-    html += "</pre>"
-    
-    return html
-
-
-# ============================================================
-# RUTA DE DEPURACIÓN TEMPORAL (¡Eliminar después de arreglar!)
-# ============================================================
-@app.route("/debug_db")
-def debug_db():
-    from core.models import Usuario
-    usuarios = Usuario.query.all()
-    info = []
-    for u in usuarios:
-        info.append(f"👤 {u.username} | Pass: '{u.password}' | Roles: {u.roles}")
-    return "<h3>Usuarios en la DB de Render en vivo:</h3>" + "<br>".join(info)
-
-@app.route("/fix_usuario")
-def fix_usuario():
-    from core.models import Usuario
-    from core.db_sql import db
-    
-    # Buscar el usuario 'viewer' y cambiarlo a 'usuario'
-    u = Usuario.query.filter_by(username='viewer').first()
-    if u:
-        u.username = 'usuario'
-        u.password = 'usuario123'
-        db.session.commit()
-        return "✅ Usuario actualizado a 'usuario' / 'usuario123' en Render"
-    
-    # Si no existe 'viewer', creamos 'usuario'
-    nuevo = Usuario(id='2', username='usuario', password='usuario123', roles=['viewer'])
-    db.session.add(nuevo)
-    db.session.commit()
-    return "✅ Usuario 'usuario' creado en Render"
-
 
 # ============================================================
 # Manejo de errores
