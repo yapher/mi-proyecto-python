@@ -1,4 +1,4 @@
 @echo off
 cd /d "C:\Empresa"
-python app.py
+".venv\Scripts\python.exe" app.py
 pause
