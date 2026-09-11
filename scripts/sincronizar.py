@@ -2,8 +2,8 @@
 scripts/sincronizar.py
 ======================
 Sincroniza datos entre SQLite local y PostgreSQL de Render.
-Versión corregida para manejar jerarquías, claves foráneas y mapeo de columnas especiales.
-Incluye tabla 'planos'.
+Versión corregida para manejar jerarquías, claves foráneas,
+mapeo de columnas especiales (Tab) y tabla de Planos.
 """
 import sys
 import os
@@ -20,7 +20,8 @@ from app import app
 from core.db_sql import db
 from core.models import (
     Usuario, Menu, Evento, Tarea, Estado, Repuesto,
-    Pago, NodoBloqueo, Rubro, Almacen, Ubicacion, Tab, OrdenTrabajo, Plano
+    Pago, NodoBloqueo, Rubro, Almacen, Ubicacion, Tab,
+    OrdenTrabajo, Plano
 )
 
 
@@ -41,7 +42,7 @@ def exportar_datos():
             'almacenes': [a.to_dict(include_hijos=True) for a in Almacen.query.filter_by(padre_id=None).all()],
             'ubicaciones': [u.to_dict(include_hijos=True) for u in Ubicacion.query.filter_by(padre_id=None).all()],
             'tabs': [t.to_dict() for t in Tab.query.all()],
-            'planos': [p.to_dict() for p in Plano.query.all()],  # ✅ NUEVO
+            'planos': [p.to_dict() for p in Plano.query.all()],
         }
         
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -61,7 +62,8 @@ def importar_dict_a_db(datos, db_uri):
     from core.db_sql import db as _db
     from core.models import (
         Usuario, Menu, Evento, Tarea, Estado, Repuesto,
-        Pago, NodoBloqueo, Rubro, Almacen, Ubicacion, Tab, OrdenTrabajo, Plano
+        Pago, NodoBloqueo, Rubro, Almacen, Ubicacion, Tab,
+        OrdenTrabajo, Plano
     )
     
     app_temp = Flask(__name__)
@@ -73,13 +75,13 @@ def importar_dict_a_db(datos, db_uri):
         _db.create_all()
         
         # 1. Limpiar tablas (en orden por dependencias)
-        for modelo in [OrdenTrabajo, Pago, Repuesto, Plano, Tab, Estado,  # ✅ Plano agregado
+        for modelo in [OrdenTrabajo, Pago, Repuesto, Plano, Tab, Estado,  
                        Ubicacion, Almacen, Rubro, Menu, NodoBloqueo, 
                        Tarea, Evento, Usuario]:
             modelo.query.delete()
         _db.session.commit()
         
-        # 2. Importar datos planos (simples)
+        # 2. Importar datos planos
         for u in datos.get('usuarios', []):
             _db.session.add(Usuario(**u))
         
@@ -98,6 +100,7 @@ def importar_dict_a_db(datos, db_uri):
             e_copy.pop('id', None)
             _db.session.add(Estado(**e_copy))
         
+        # Mapear 'id' de vuelta a 'tab_id'
         for t in datos.get('tabs', []):
             t_copy = t.copy()
             tab_id_val = t_copy.pop('id', None)
@@ -125,24 +128,31 @@ def importar_dict_a_db(datos, db_uri):
         for p in datos.get('planos', []):
             p_copy = p.copy()
             p_copy.pop('id', None)
-            # Eliminar claves de compatibilidad que no son columnas reales
-            p_copy.pop('archivo', None)
-            p_copy.pop('carpeta', None)
-            # Convertir fecha_carga de string a datetime si es necesario
-            if isinstance(p_copy.get('fecha_carga'), str) and p_copy['fecha_carga']:
+            p_copy.pop('carpeta', None)   # carpeta es un alias de nombre_linea en to_dict()
+            p_copy.pop('archivo', None)   # archivo es un alias de nombre_archivo en to_dict()
+            fecha_str = p_copy.get('fecha_carga', '')
+            if isinstance(fecha_str, str) and fecha_str:
                 try:
-                    p_copy['fecha_carga'] = datetime.fromisoformat(p_copy['fecha_carga'])
-                except Exception:
+                    p_copy['fecha_carga'] = datetime.fromisoformat(fecha_str)
+                except ValueError:
                     p_copy['fecha_carga'] = datetime.utcnow()
             _db.session.add(Plano(**p_copy))
         
-        # 3. Importar nodos de bloqueo (ORDENADO PARA EVITAR FK VIOLATION)
+        # 3. Importar nodos de bloqueo (LÓGICA ROBUSTA PARA EVITAR FK VIOLATION)
         nodos_data = datos.get('nodos_bloqueo', {})
         if isinstance(nodos_data, dict):
+            # Recopilar todos los IDs presentes en los datos para validar referencias
+            ids_presentes = set(str(k) for k in nodos_data.keys())
+            
+            # 3a. Insertar primero los nodos raíz (sin padre o con padre inexistente en los datos)
             for n_id, n_data in nodos_data.items():
-                if not n_data.get('padre') and not n_data.get('padre_id'):
+                n_id_str = str(n_id)
+                padre = n_data.get('padre') or n_data.get('padre_id')
+                padre_str = str(padre) if padre else None
+                
+                if not padre_str or padre_str not in ids_presentes:
                     nodo = NodoBloqueo(
-                        id=str(n_data.get('id', n_id)),
+                        id=n_id_str,
                         nombre=n_data.get('nombre', ''),
                         estado=n_data.get('estado', 'apagado'),
                         descripcion=n_data.get('descripcion', ''),
@@ -150,17 +160,21 @@ def importar_dict_a_db(datos, db_uri):
                     )
                     _db.session.add(nodo)
             
-            _db.session.flush()
+            _db.session.flush() # Asegurar que los padres existen en la DB antes de insertar hijos
             
+            # 3b. Insertar los nodos hijos
             for n_id, n_data in nodos_data.items():
+                n_id_str = str(n_id)
                 padre = n_data.get('padre') or n_data.get('padre_id')
-                if padre:
+                padre_str = str(padre) if padre else None
+                
+                if padre_str and padre_str in ids_presentes:
                     nodo = NodoBloqueo(
-                        id=str(n_data.get('id', n_id)),
+                        id=n_id_str,
                         nombre=n_data.get('nombre', ''),
                         estado=n_data.get('estado', 'apagado'),
                         descripcion=n_data.get('descripcion', ''),
-                        padre_id=str(padre)
+                        padre_id=padre_str
                     )
                     _db.session.add(nodo)
         
@@ -182,7 +196,7 @@ def importar_dict_a_db(datos, db_uri):
                 if hasattr(nodo, 'imagen'):
                     nodo.imagen = item.get('imagen', '')
                 _db.session.add(nodo)
-                _db.session.flush()
+                _db.session.flush() # Flush para obtener el ID generado y usarlo como padre_id en hijos
                 hijos = item.get(clave_hijos, [])
                 if hijos:
                     importar_arbol(hijos, modelo_cls, clave_hijos, nodo.id)
