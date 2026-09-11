@@ -1,0 +1,27 @@
+<form method="POST" action="{{ url_for('indeximagenes.agregar_plano') }}" enctype="multipart/form-data">
+    <div class="col-md-4">
+        <label for="nombre_linea" class="form-label">Nombre de la línea</label>
+        <select class="form-select" id="nombre_linea" name="nombre_linea" required>
+            <option value="" disabled selected>Seleccione una ubicación</option>
+            {% if rutas %}
+                {% for ruta in rutas %}
+                    <option value="{{ ruta }}">{{ ruta }}</option>
+                {% endfor %}
+            {% endif %}
+        </select>
+        <div id="rutas-empty" class="alert alert-warning mt-2 d-none">
+            No se encontraron ubicaciones.
+        </div>
+    </div>
+    <div class="col-md-4">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+    </div>
+    <div class="col-md-4">
+        <label for="archivo" class="form-label">Archivo PDF</label>
+        <input type="file" class="form-control" id="archivo" name="archivo" accept="application/pdf" required>
+    </div>
+    <div class="col-12 text-end">
+        <button type="submit" class="btn btn-primary btn-agregar-plano">Agregar Plano</button>
+    </div>
+</form>

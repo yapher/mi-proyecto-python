@@ -36,6 +36,7 @@ from .db_sql_store import (
     nodo_bloqueo_store,
     evento_store,
     tarea_store,
+    plano_store,
 )
 
 __all__ = [
@@ -72,4 +73,5 @@ __all__ = [
     'nodo_bloqueo_store',
     'evento_store',
     'tarea_store',
+    'plano_store',
 ]

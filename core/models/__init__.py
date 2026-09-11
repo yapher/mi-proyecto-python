@@ -20,6 +20,8 @@ from .repuesto import Repuesto
 from .pago import Pago
 from .nodo_bloqueo import NodoBloqueo
 from .orden_trabajo import OrdenTrabajo
+# ... (imports existentes)
+from .plano import Plano  # <-- AGREGAR ESTA LÍNEA
 
 __all__ = [
     'db',
@@ -28,5 +30,5 @@ __all__ = [
     # Nuevos
     'Menu', 'Rubro', 'Almacen', 'Ubicacion',
     'Tab', 'Estado', 'Repuesto', 'Pago',
-    'NodoBloqueo', 'OrdenTrabajo',
+    'NodoBloqueo', 'OrdenTrabajo', 'Plano'
 ]

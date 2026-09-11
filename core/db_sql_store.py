@@ -20,7 +20,7 @@ from sqlalchemy import func
 from core.db_sql import db
 from core.models import (
     Menu, Rubro, Almacen, Ubicacion, Tab, Estado,
-    Repuesto, Pago, NodoBloqueo, Evento, Tarea
+    Repuesto, Pago, NodoBloqueo, Evento, Tarea, 
 )
 
 
@@ -744,6 +744,35 @@ class NodoBloqueoSQLStore:
         db.session.commit()
         return n.estado
 
+# ============================================================
+# 7. PlanoSQLStore - Para gestión de planos PDF
+# ============================================================
+class PlanoSQLStore:
+    """Store SQL para planos. Reemplaza la lectura/escritura de planos.json."""
+    def __init__(self):
+        from core.models import Plano
+        self.model = Plano
+
+    def cargar_todos(self):
+        """Retorna todos los planos como lista de dicts."""
+        return [p.to_dict() for p in self.model.query.order_by(self.model.nombre_linea).all()]
+
+    def agregar(self, datos):
+        """Agrega un nuevo plano."""
+        nuevo = self.model(**datos)
+        db.session.add(nuevo)
+        db.session.commit()
+        return nuevo.id
+
+    def eliminar(self, plano_id):
+        """Elimina un plano por su ID."""
+        plano = self.model.query.get(plano_id)
+        if plano:
+            db.session.delete(plano)
+            db.session.commit()
+            return True
+        return False
+
 
 # ============================================================
 # INSTANCIAS GLOBALES REUTILIZABLES
@@ -766,3 +795,4 @@ tarea_store = SQLStore(Tarea)
 repuesto_store = RepuestoSQLStore()
 pago_store = PagoSQLStore()
 nodo_bloqueo_store = NodoBloqueoSQLStore()
+plano_store = PlanoSQLStore()
