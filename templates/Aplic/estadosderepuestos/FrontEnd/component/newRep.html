@@ -9,7 +9,6 @@
 <div class="modal-body">
 <input type="hidden" id="return_to" name="return_to" value="{{ return_to | default('indexEstadoRep.indexEstadoRep') }}">
 <input type="hidden" id="tab_activo" name="tab_activo">
-
 <div class="mb-3">
 <label class="form-label">Imagen actual</label><br>
 <img id="imgPreview" style="max-width:100px;display:none;">
@@ -81,8 +80,7 @@
 </div>
 </div>
 <input type="hidden" id="editar-repuesto-url" value="{{ url_for('indexEstadoRep.editar_repuesto') }}">
-
-<!-- ✅ CARGA MODULAR DE JAVASCRIPT (Reemplaza la línea anterior de newRep.js) -->
-<script src="/static/js/apps/repuestoUtils.js"></script>
-<script src="/static/js/apps/repuestoForm.js"></script>
-<script src="/static/js/apps/repuestoEvents.js"></script>
+<!-- ✅ CARGA MODULAR DE JAVASCRIPT (desde static local de la app) -->
+<script src="{{ url_for('indexEstadoRep.static', filename='js/repuestoUtils.js') }}"></script>
+<script src="{{ url_for('indexEstadoRep.static', filename='js/repuestoForm.js') }}"></script>
+<script src="{{ url_for('indexEstadoRep.static', filename='js/repuestoEvents.js') }}"></script>

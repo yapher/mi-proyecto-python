@@ -1,36 +1,35 @@
 <!-- details.html -->
 <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-dark text-white">
-      <div class="modal-header border-0">
-        <h5 class="modal-title" id="modalTitle"></h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
-      <div class="modal-body">
-        <div class="text-center mb-3">
-          <img id="modalImage" src="" alt="" class="img-fluid rounded" style="max-height: 300px;">
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item bg-dark text-white"><strong> Código:</strong> <span id="modalCodigo"></span></li>
-          <li class="list-group-item bg-dark text-white"><strong> Link:</strong> <span id="modalLink"></span></li>
-          <li class="list-group-item bg-dark text-white"><strong> Cantidad:</strong> <span id="modalCantidad"></span></li>
-          <li class="list-group-item bg-dark text-white"><strong> Fecha Creación:</strong> <span id="modalFecha"></span></li>
-          <!-- Fecha Fin: solo visible si existe -->
-          <li class="list-group-item bg-dark text-white" id="modalFechaFinLi" style="display:none;">
-            <strong>Fecha Fin:</strong> <span id="modalFechaFin"></span>
-          </li>
-          <li class="list-group-item bg-dark text-white"><strong>Equipo:</strong> <span id="modalEquipo"></span></li>
-          <li class="list-group-item bg-dark text-white"><strong> Ubicación Técnica:</strong> <span id="modalUbicacion"></span></li>
-          <li class="list-group-item bg-dark text-white">
-            <strong>Estado:</strong> <span id="modalEmojy"></span>
-          </li>
-        </ul>
-      </div>
-      <div class="modal-footer border-0">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
+<div class="modal-dialog modal-dialog-centered">
+<div class="modal-content bg-dark text-white">
+<div class="modal-header border-0">
+<h5 class="modal-title" id="modalTitle"></h5>
+<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
 </div>
-
-<script src="/static/js/apps/details_modal.js"></script>
+<div class="modal-body">
+<div class="text-center mb-3">
+<img id="modalImage" src="" alt="" class="img-fluid rounded" style="max-height: 300px;">
+</div>
+<ul class="list-group list-group-flush">
+<li class="list-group-item bg-dark text-white"><strong> Código:</strong> <span id="modalCodigo"></span></li>
+<li class="list-group-item bg-dark text-white"><strong> Link:</strong> <span id="modalLink"></span></li>
+<li class="list-group-item bg-dark text-white"><strong> Cantidad:</strong> <span id="modalCantidad"></span></li>
+<li class="list-group-item bg-dark text-white"><strong> Fecha Creación:</strong> <span id="modalFecha"></span></li>
+<!-- Fecha Fin: solo visible si existe -->
+<li class="list-group-item bg-dark text-white" id="modalFechaFinLi" style="display:none;">
+<strong>Fecha Fin:</strong> <span id="modalFechaFin"></span>
+</li>
+<li class="list-group-item bg-dark text-white"><strong>Equipo:</strong> <span id="modalEquipo"></span></li>
+<li class="list-group-item bg-dark text-white"><strong> Ubicación Técnica:</strong> <span id="modalUbicacion"></span></li>
+<li class="list-group-item bg-dark text-white">
+<strong>Estado:</strong> <span id="modalEmojy"></span>
+</li>
+</ul>
+</div>
+<div class="modal-footer border-0">
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+</div>
+</div>
+</div>
+</div>
+<script src="{{ url_for('indexEstadoRep.static', filename='js/details_modal.js') }}"></script>
