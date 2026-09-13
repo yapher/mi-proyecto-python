@@ -30,7 +30,7 @@ const RepuestoForm = {
      */
     cargarDatos: (btn) => {
         document.getElementById('agregarModalLabel').textContent = "Editar Repuesto";
-        document.getElementById('codigo').readOnly = true;
+        document.getElementById('codigo').readOnly = false;
         
         const btnSubmit = document.querySelector('#formAgregarRepuesto button[type="submit"]');
         if (btnSubmit) btnSubmit.textContent = "Guardar Cambios";

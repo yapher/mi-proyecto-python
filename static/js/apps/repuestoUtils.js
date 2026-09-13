@@ -28,8 +28,7 @@ const RepuestoUtils = {
             }
         } catch (e) {
             console.warn("⚠️ Error al parsear ruta_jerarquia:", e);
-ا
-        }
+      }
         return rutas;
     },
 
