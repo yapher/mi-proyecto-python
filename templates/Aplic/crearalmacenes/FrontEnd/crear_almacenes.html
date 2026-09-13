@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/crear_almacenes.css') }}">
+<link rel="stylesheet" href="{{ url_for('indexcrear_almacenes.static', filename='css/crear_almacenes.css') }}">
 {% endblock %}
 {% block content %}
 <h3 class="mb-3">Crear Almacenes</h3>
@@ -8,7 +8,6 @@
     <form id="formulario">
         <label for="nivelesContainer" class="form-label">Crear Almacén</label>
         <div id="nivelesContainer" class="mb-3"></div>
-        
         <div class="mb-3 input-with-emoji">
             <label for="nombre" class="form-label">NOMBRE DE ALMACÉN/PAÑOL</label>
             <span class="input-emoji">📛</span>
@@ -25,8 +24,6 @@
             <input type="text" class="form-control ps-5" id="ruta_crear_almaceneses" placeholder="Ruta (opcional)">
         </div>
         <input type="hidden" id="ruta_original">
-        
-        <!-- ✅ BOTONES SIN onclick - Se controlan desde JS -->
         <div class="button-group">
             <button type="button" class="btn btn-agregar" id="btnAgregar">Agregar</button>
             <button type="button" class="btn btn-editar" id="btnEditar">Guardar cambios</button>
@@ -34,7 +31,6 @@
         </div>
     </form>
 </div>
-
 <div class="table-responsive tabla-scroll">
     <table class="table table-hover table-striped table-dark align-middle w-100 mb-0">
         <thead class="sticky-header">
@@ -50,5 +46,5 @@
 </div>
 {% endblock %}
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/apps/crear_almacenes.js') }}"></script>
+<script src="{{ url_for('indexcrear_almacenes.static', filename='js/crear_almacenes.js') }}"></script>
 {% endblock %}
