@@ -1,17 +1,18 @@
 {% extends 'layout.html' %}
+
 {% block head %}
 {{ super() }}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/listarepuestos.css') }}">
+<link rel="stylesheet" href="{{ url_for('indexlista_repuestos.static', filename='css/listarepuestos.css') }}">
 {% endblock %}
 
 {% block content %}
 {% set return_to = 'indexlista_repuestos.indexlista_repuestos' %}
+
 <div class="container-fluid mt-4 px-0">
 
-    <!-- ========== CABECERA FIJA (con estilos en línea) ========== -->
-    <div style="position: fixed !important; top: 70px !important; left: 0 !important; right: 0 !important; width: 100% !important; z-index: 1000 !important; background: linear-gradient(to bottom, #3e2d59 0%, #3e2d59 90%, rgba(62, 45, 89, 0.98) 100%) !important; padding: 1rem 0.5rem 0.75rem 0.5rem !important; border-bottom: 2px solid rgba(136, 201, 153, 0.4) !important; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important; backdrop-filter: blur(8px) !important;">
-        
-        <h3 class="mb-3" style="color: #ffffff !important; font-weight: 600 !important;">
+    <!-- ========== CABECERA FIJA ========== -->
+    <div class="repuestos-fixed-header">
+        <h3 class="mb-3">
             Lista de Repuestos
             <span class="badge bg-secondary">{{ repuestos|length }}</span>
             {% if cantidad_vencidos > 0 %}
@@ -28,13 +29,13 @@
 
         <form method="get" class="row g-2 mb-3">
             <div class="col-md-2 col-6">
-                <input type="text" name="nombre" placeholder="Nombre" value="{{ filtros.nombre }}" class="form-control" style="background-color: rgba(75, 55, 106, 0.9) !important; border: 1px solid rgba(136, 201, 153, 0.3) !important; color: #ffffff !important;">
+                <input type="text" name="nombre" placeholder="Nombre" value="{{ filtros.nombre }}" class="form-control">
             </div>
             <div class="col-md-2 col-6">
-                <input type="text" name="codigo" placeholder="Código" value="{{ filtros.codigo }}" class="form-control" style="background-color: rgba(75, 55, 106, 0.9) !important; border: 1px solid rgba(136, 201, 153, 0.3) !important; color: #ffffff !important;">
+                <input type="text" name="codigo" placeholder="Código" value="{{ filtros.codigo }}" class="form-control">
             </div>
             <div class="col-md-2 col-6">
-                <select name="estado" class="form-select" style="background-color: rgba(75, 55, 106, 0.9) !important; border: 1px solid rgba(136, 201, 153, 0.3) !important; color: #ffffff !important;">
+                <select name="estado" class="form-select">
                     <option value="">-- Todos los estados --</option>
                     {% for estado in estados %}
                     <option value="{{ estado.emoji }}" {% if filtros.estado==estado.emoji %}selected{% endif %}>
@@ -44,10 +45,10 @@
                 </select>
             </div>
             <div class="col-md-2 col-6">
-                <input type="date" name="fecha_alta" value="{{ filtros.fecha_alta }}" class="form-control" style="background-color: rgba(75, 55, 106, 0.9) !important; border: 1px solid rgba(136, 201, 153, 0.3) !important; color: #ffffff !important;">
+                <input type="date" name="fecha_alta" value="{{ filtros.fecha_alta }}" class="form-control">
             </div>
             <div class="col-md-2 col-6">
-                <input type="date" name="fecha_baja" value="{{ filtros.fecha_baja }}" class="form-control" style="background-color: rgba(75, 55, 106, 0.9) !important; border: 1px solid rgba(136, 201, 153, 0.3) !important; color: #ffffff !important;">
+                <input type="date" name="fecha_baja" value="{{ filtros.fecha_baja }}" class="form-control">
             </div>
             <div class="col-md-2 col-12">
                 <button type="submit" class="btn btn-primary w-100">Filtrar</button>
@@ -68,7 +69,7 @@
             </form>
             <div>
                 <button type="button" class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#agregarModal">
-                Agregar nuevo repuesto
+                    Agregar nuevo repuesto
                 </button>
             </div>
         </div>
@@ -76,12 +77,12 @@
     </div>
     <!-- ========== FIN CABECERA FIJA ========== -->
 
-    <!-- ========== CARDS (con padding-top para compensar la cabecera fija) ========== -->
-    <div style="padding-top: 280px !important;">
+    <!-- ========== CARDS ========== -->
+    <div class="repuestos-content-area">
         {% if repuestos %}
-        <div class="repuestos-grid" id="repuestosContainer" style="display: grid !important; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important; gap: 1.5rem !important; padding: 1rem !important; width: 100% !important; box-sizing: border-box !important;">
+        <div class="repuestos-grid" id="repuestosContainer">
             {% for r in repuestos %}
-                {% include 'Aplic/listarepuestos/FrontEnd/component/cardRepuesto.html' %}
+            {% include 'Aplic/listarepuestos/FrontEnd/component/cardRepuesto.html' %}
             {% endfor %}
         </div>
         {% else %}
@@ -94,4 +95,9 @@
 {% include "Aplic/estadosderepuestos/FrontEnd/component/details.html" %}
 {% set ubicaciones = ubicaciones %}
 {% include "Aplic/estadosderepuestos/FrontEnd/component/newRep.html" %}
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('indexlista_repuestos.static', filename='js/listarepuestos.js') }}"></script>
 {% endblock %}

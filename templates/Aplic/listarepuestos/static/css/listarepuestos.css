@@ -1,0 +1,271 @@
+/* ============================================================
+   LISTA REPUESTOS - Estilos específicos
+   ============================================================ */
+
+/* ========== CABECERA FIJA ========== */
+.repuestos-fixed-header {
+    position: fixed !important;
+    top: 70px !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 1000 !important;
+    background: linear-gradient(to bottom, #3e2d59 0%, #3e2d59 90%, rgba(62, 45, 89, 0.98) 100%) !important;
+    padding: 1rem 0.5rem 0.75rem 0.5rem !important;
+    border-bottom: 2px solid rgba(136, 201, 153, 0.4) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(8px) !important;
+}
+
+.repuestos-fixed-header h3 {
+    color: #ffffff !important;
+    font-weight: 600 !important;
+}
+
+.repuestos-fixed-header .form-control,
+.repuestos-fixed-header .form-select {
+    background-color: rgba(75, 55, 106, 0.9) !important;
+    border: 1px solid rgba(136, 201, 153, 0.3) !important;
+    color: #ffffff !important;
+}
+
+/* ========== ÁREA DE CONTENIDO ========== */
+.repuestos-content-area {
+    padding-top: 280px !important;
+}
+
+/* ========== GRID DE CARDS ========== */
+.repuestos-grid {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)) !important;
+    gap: 1.5rem !important;
+    padding: 1rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+/* ========== CARD ========== */
+.rep-card {
+    background-color: var(--color-superficie, #4b376a);
+    border: 1px solid rgba(136, 201, 153, 0.3);
+    border-radius: 1rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+    height: 100%;
+    position: relative;
+}
+
+.rep-card-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background-color: var(--color-primario, #88c999);
+    color: #222;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    z-index: 2;
+}
+
+/* ========== IMAGEN ========== */
+.rep-card-image {
+    width: 100% !important;
+    height: 200px !important;
+    overflow: hidden !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: var(--color-fondo, #3e2d59) !important;
+}
+
+.rep-card-image img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    display: block !important;
+}
+
+.rep-card-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-texto-suave, #b8b8b8);
+    gap: 0.5rem;
+}
+
+.rep-card-placeholder i {
+    font-size: 3.5rem;
+    color: var(--color-primario, #88c999);
+    opacity: 0.6;
+}
+
+/* ========== BODY ========== */
+.rep-card-body {
+    padding: 1.25rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.rep-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    border-bottom: 1px solid rgba(136, 201, 153, 0.15);
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.rep-card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-texto, #ffffff);
+    margin: 0;
+    line-height: 1.3;
+    flex: 1;
+    word-wrap: break-word;
+}
+
+.rep-card-code {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primario, #88c999);
+    background-color: rgba(136, 201, 153, 0.1);
+    padding: 0.25rem 0.6rem;
+    border-radius: 0.375rem;
+    white-space: nowrap;
+}
+
+/* ========== INFO ROWS ========== */
+.rep-card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.rep-card-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--color-texto-suave, #b8b8b8);
+}
+
+.rep-card-row i {
+    color: var(--color-primario, #88c999);
+    width: 1.25rem;
+    text-align: center;
+}
+
+.rep-label {
+    font-weight: 600;
+    color: var(--color-texto, #ffffff);
+    min-width: 75px;
+}
+
+.rep-value {
+    color: var(--color-texto-suave, #b8b8b8);
+}
+
+/* ========== UBICACIONES ========== */
+.rep-card-locations {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(136, 201, 153, 0.15);
+}
+
+.rep-card-locations small {
+    display: block;
+    color: var(--color-texto-suave, #b8b8b8);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.rep-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.rep-chip {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--color-texto-suave, #b8b8b8);
+    font-size: 0.75rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 0.375rem;
+    border: 1px solid rgba(136, 201, 153, 0.1);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.rep-chip-more {
+    background-color: rgba(136, 201, 153, 0.15);
+    color: var(--color-primario, #88c999);
+    font-weight: 600;
+}
+
+/* ========== FOOTER ========== */
+.rep-card-footer {
+    padding: 1rem 1.25rem;
+    background-color: rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    border-top: 1px solid rgba(136, 201, 153, 0.1);
+}
+
+/* ========== VENCIDO ========== */
+.rep-warn .rep-value {
+    color: var(--color-peligro, #ff6b6b) !important;
+    font-weight: 600 !important;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .repuestos-content-area {
+        padding-top: 420px !important;
+    }
+    .repuestos-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+        padding: 0.5rem !important;
+    }
+    .rep-card-image {
+        height: 160px !important;
+    }
+    .rep-card-body {
+        padding: 1rem;
+    }
+    .rep-card-footer {
+        padding: 0.75rem 1rem;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 480px) {
+    .repuestos-content-area {
+        padding-top: 480px !important;
+    }
+    .rep-card-image {
+        height: 140px !important;
+    }
+    .rep-card-title {
+        font-size: 1rem;
+    }
+    .rep-card-row {
+        font-size: 0.85rem;
+        gap: 0.5rem;
+    }
+}

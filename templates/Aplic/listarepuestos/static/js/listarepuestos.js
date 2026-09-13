@@ -5,7 +5,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const toggleBtns = document.querySelectorAll('.lr-view-btn');
     const container = document.getElementById('repuestosContainer');
-    
     if (!toggleBtns.length || !container) return;
     
     const setView = (view) => {
@@ -18,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.addEventListener('click', () => setView(btn.dataset.view));
     });
     
-    // Restaurar preferencia
     try {
         const saved = localStorage.getItem('lr-view');
         if (saved === 'list') setView('list');
