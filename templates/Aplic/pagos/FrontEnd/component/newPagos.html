@@ -1,5 +1,4 @@
 <button class="btn btn-agregar m-1" data-bs-toggle="modal" data-bs-target="#agregarModal" onclick="mostrarFormulario(null)">Agregar Pago</button>
-
 <div class="modal fade modal-custom-dark" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
@@ -12,19 +11,16 @@
                     {% include "Aplic/crearrubros/FrontEnd/component/selectRubros.html" %}
                     <div id="nivelesContainer" class="mb-3"></div>
                     <input type="hidden" id="pagoId">
-                    
                     <div class="mb-3 input-with-emoji">
                         <label for="descripcion" class="form-label">Descripción</label>
                         <span class="input-emoji">📝</span>
                         <input type="text" class="form-control ps-5" id="descripcion" placeholder="Descripción">
                     </div>
-                    
                     <div class="mb-3 input-with-emoji">
                         <label for="importe" class="form-label">Importe</label>
                         <span class="input-emoji">💲</span>
                         <input type="number" class="form-control ps-5" id="importe" placeholder="Importe">
                     </div>
-                    
                     <div class="mb-3 input-with-emoji">
                         <label for="tipo" class="form-label">Tipo</label>
                         <span class="input-emoji">📌</span>
@@ -33,19 +29,16 @@
                             <option value="cuotas">Cuotas</option>
                         </select>
                     </div>
-                    
                     <div class="mb-3 input-with-emoji">
                         <label for="cuotas" class="form-label">Cuotas</label>
                         <span class="input-emoji">#️⃣</span>
                         <input type="number" class="form-control ps-5" id="cuotas" placeholder="Cuotas">
                     </div>
-                    
                     <div class="mb-3 input-with-emoji">
                         <label for="vencimiento" class="form-label">Vencimiento</label>
                         <span class="input-emoji">📅</span>
                         <input type="date" class="form-control ps-5" id="vencimiento" placeholder="Vencimiento">
                     </div>
-                    
                     <div class="button-group d-flex gap-2 justify-content-end mt-4">
                         <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal" onclick="cancelar()">Cancelar</button>
                         <button type="button" class="btn btn-agregar" onclick="guardarPago()">Guardar</button>
@@ -55,4 +48,4 @@
         </div>
     </div>
 </div>
-<script src="/static/js/apps/newPagos.js"></script>
+<script src="{{ url_for('indexpagos.static', filename='js/newPagos.js') }}"></script>
