@@ -28,7 +28,6 @@
                 {% for plano in planos %}
                 {% set _ = agrupados.setdefault(plano.nombre_linea, []).append(plano) %}
                 {% endfor %}
-
                 {% if agrupados %}
                 {% for linea, planos_linea in agrupados.items() %}
                 {{ macros.fila_principal(linea, loop.index) }}
@@ -53,8 +52,10 @@
         </table>
     </div>
 </div>
+{% endblock %}
 
-<script src="{{ url_for('static', filename='js/apps/select.js') }}"></script>
-<script src="{{ url_for('static', filename='js/apps/busqueda.js') }}"></script>
-<script src="{{ url_for('static', filename='js/apps/planos.js') }}"></script>
+{% block scripts %}
+<script src="{{ url_for('indeximagenes.static', filename='js/select.js') }}"></script>
+<script src="{{ url_for('indeximagenes.static', filename='js/busqueda.js') }}"></script>
+<script src="{{ url_for('indeximagenes.static', filename='js/planos.js') }}"></script>
 {% endblock %}
