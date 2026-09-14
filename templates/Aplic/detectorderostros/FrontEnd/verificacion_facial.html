@@ -1,27 +1,23 @@
+<!-- templates/Aplic/detectorderostros/FrontEnd/verificacion_facial.html -->
 {% extends 'layout.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('indexdetector_de_rostros.static', filename='css/verificacion_facial.css') }}">
+{% endblock %}
 {% block content %}
-
-<link rel="stylesheet" href="/static/css/apps/verificacion_facial.css">
-
 <div class="canvas-container">
-  <h3 class="titulo-simulacion">Verificación Facial de Acceso</h3>
-  <div id="fpsCounter" style="color: #00ffaa; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px;"></div>
-
-  <canvas id="outputCanvas"></canvas>
+    <h3 class="titulo-simulacion">Verificación Facial de Acceso</h3>
+    <div id="fpsCounter" style="color: #00ffaa; font-weight: bold; font-size: 1.2rem; margin-bottom: 10px;"></div>
+    <canvas id="outputCanvas"></canvas>
 </div>
-
 <div class="text-center mt-3">
-  <button id="captureBtn" class="btn btn-success">Verificar Rostro</button>
-  <div id="mensaje" class="mt-3 text-white"></div>
+    <button id="captureBtn" class="btn btn-success">Verificar Rostro</button>
+    <div id="mensaje" class="mt-3 text-white"></div>
 </div>
-
 <video hidden id="inputVideo" autoplay muted></video>
-
-<!-- MediaPipe -->
+{% endblock %}
+{% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
-
-<script src="/static/js/apps/verificacion_facial.js"></script>
-
+<script src="{{ url_for('indexdetector_de_rostros.static', filename='js/verificacion_facial.js') }}"></script>
 {% endblock %}

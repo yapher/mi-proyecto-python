@@ -1,7 +1,6 @@
+<!-- templates/layout.html -->
 <!DOCTYPE html>
 <html lang="es">
-
-<!-- templates/layout.html (SOLO la sección <head>) -->
 
 <head>
     <meta charset="UTF-8">
@@ -23,10 +22,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/mobile.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/arbol_crud.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/image_uploader.css') }}">
-
-    {# ✅ NUEVO: Block para que cada app pueda inyectar CSS específico #}
     {% block head %}{% endblock %}
-
 </head>
 
 <body>
@@ -37,12 +33,10 @@
                     class="rounded me-2">
                 <span class="brand-text">Empresa</span>
             </a>
-
             <button class="navbar-toggler nav-link" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
                 aria-controls="navbar" aria-expanded="false" aria-label="Menú">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
                     {% for item in menu %}
@@ -89,20 +83,14 @@
                     {% endif %}
                     {% endfor %}
                 </ul>
-
-                <!-- RELOJ: dentro del collapse, alineado a la derecha con ms-auto -->
                 <span id="reloj-digital" class="reloj-desktop text-white fs-5 ms-3 d-none d-lg-inline"
                     style="font-family: 'Inter', sans-serif;"></span>
             </div>
         </div>
     </nav>
-
-    <!-- Spinner de carga -->
     <div id="loader" style="display: none;">
         <div class="spinner"></div>
     </div>
-
-    <!-- MAIN: container-fluid para usar 100% del ancho, con padding lateral controlado en pantallas grandes -->
     <main class="container-fluid px-2 px-md-3 px-lg-4 px-xl-5 mt-4">
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -117,10 +105,8 @@
         {% endfor %}
         {% endif %}
         {% endwith %}
-
         {% block content %}{% endblock %}
     </main>
-
     <!-- JS externos -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.2.0-beta/noty.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -134,23 +120,15 @@
         src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- Scripts del layout -->
-    <script src="/static/js/apps/layout_scripts.js"></script>
-    <script src="{{ url_for('static', filename='js/reloj.js') }}"></script>
-    <!-- Módulo JS genérico para árboles jerárquicos -->
-    <script src="{{ url_for('static', filename='js/apps/arbol_crud.js') }}"></script>
-    <!-- Módulo reutilizable para selectores multinivel -->
+    <!-- ✅ Scripts reutilizables desde static/js/utils/ -->
+    <script src="{{ url_for('static', filename='js/utils/layout_scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils/reloj.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils/arbol_crud.js') }}"></script>
     <script src="{{ url_for('static', filename='js/utils/selectores_nivel.js') }}"></script>
-    <!-- Animaciones de modales con origen de click -->
-    <script src="{{ url_for('static', filename='js/apps/modal_animations.js') }}"></script>
-    <!-- Logger profesional reutilizable -->
-    <script src="{{ url_for('static', filename='js/apps/logger.js') }}"></script>
-    <!-- Componente reutilizable de subida de imágenes -->
-    <script src="{{ url_for('static', filename='js/apps/image_uploader.js') }}"></script>
-    <!-- Sistema unificado de notificaciones -->
+    <script src="{{ url_for('static', filename='js/utils/modal_animations.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils/logger.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils/image_uploader.js') }}"></script>
     <script src="{{ url_for('static', filename='js/utils/notifications.js') }}"></script>
-
     {% block scripts %}{% endblock %}
 </body>
 
