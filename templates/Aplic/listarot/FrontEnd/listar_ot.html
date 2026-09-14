@@ -1,56 +1,54 @@
 {% extends 'layout.html' %}
-{% block content %}
-<link rel="stylesheet" href="/static/css/apps/listar_ot.css">
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('indexlistar_ot.static', filename='css/listar_ot.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js"></script>
+{% endblock %}
 
-<div class="container-fluid full-height py-3">
-    <h1 class="text-center" style="color: #1f9336;">Órdenes de Mantenimiento</h1>
-    <h2 id="contador-filas" class="text-white text-center mb-4">
-        Cantidad total de ordenes: {{ num_filas }}
+{% block content %}
+<div class="listarot-container">
+    <h1 class="titulo-principal">📋 Órdenes de Mantenimiento</h1>
+    <h2 id="contador-filas" class="contador-ot">
+        Cantidad total de órdenes: {{ num_filas }}
     </h2>
 
-    <!-- Selector de archivo -->
-    <div class="mb-3">
-        <label class="text-white">Seleccionar fecha de archivo:</label>
-        <select id="archivoSelector" class="form-select" onchange="cambiarArchivo()">
+    <div class="mb-3 text-center">
+        <label class="text-white me-2">📁 Archivo:</label>
+        <select id="archivoSelector" class="form-select d-inline-block w-auto" onchange="cambiarArchivo()">
             {% for archivo, fecha in selector %}
-            <option value="{{ archivo }}" {% if archivo==archivo_actual %}selected{% endif %}>
+            <option value="{{ archivo }}" {% if archivo == archivo_actual %}selected{% endif %}>
                 {{ fecha }}
             </option>
             {% endfor %}
         </select>
     </div>
 
-    <!-- Gráfico -->
-    <div class="grafico-container mb-4">
-        <canvas id="graficoTorta"></canvas>
+    <div class="grafico-box">
+        <div id="graficoTorta"></div>
+        <div id="graficoModo" class="modo-indicator"></div>
     </div>
 
-    <!-- Selector de columna y búsqueda -->
-    <div class="mb-3 row g-2">
+    <div class="row g-2 controles-container">
         <div class="col-md-6">
             <select id="columnaSelector" class="form-select" onchange="generarGrafico()">
-                <option value="">Seleccionar columna a graficar</option>
+                <option value="">📊 Seleccionar columna a graficar</option>
             </select>
         </div>
         <div class="col-md-6">
             <input type="text" id="busqueda" class="form-control" onkeyup="buscar()"
-                placeholder="Buscar en la tabla..." />
+                placeholder="🔍 Buscar en la tabla..." />
         </div>
     </div>
 
-    <!-- Tabla -->
-    <div class="table-responsive tabla-scroll sticky-header">
-        {# 🔹 Reemplazar valores vacíos por "sin valor" #}
+    <div class="table-responsive tabla-scroll mt-3">
         {% set safe_tables = tables | replace('><td></td><', '><td>sin valor</td><') %}
         {{ safe_tables | safe }}
     </div>
 </div>
 
-<!-- Contenedor para cargar modales -->
 <div id="modalContainer"></div>
-
 {% endblock %}
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/apps/listar_ot.js') }}"></script>
+<script src="{{ url_for('indexlistar_ot.static', filename='js/listar_ot.js') }}"></script>
 {% endblock %}

@@ -1,0 +1,109 @@
+﻿/* ============================================================
+   LISTAR OT — Estilos (usa variables del proyecto)
+   ============================================================ */
+
+.listarot-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.titulo-principal {
+    color: var(--color-primario, #88c999);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.contador-ot {
+    color: var(--color-primario, #88c999);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.grafico-box {
+    background: var(--color-superficie, #4b376a);
+    border: 1px solid var(--color-primario, #88c999);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    margin: 0 auto 1.5rem;
+    max-width: 700px;
+    width: 100%;
+    position: relative;
+}
+
+#graficoTorta {
+    width: 100%;
+    height: 500px;
+}
+
+.modo-indicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+}
+
+.modo-indicator.modo-3d { background: linear-gradient(135deg, #88c999, #4CAF50); }
+.modo-indicator.modo-2d { background: linear-gradient(135deg, #FF9800, #F57C00); }
+
+.controles-container {
+    max-width: 1000px;
+    margin: 1.5rem auto;
+}
+
+#archivoSelector,
+#columnaSelector,
+#busqueda {
+    background-color: var(--color-superficie, #4b376a);
+    color: #fff;
+    border: 1px solid var(--color-primario, #88c999);
+    border-radius: 0.5rem;
+}
+
+#busqueda::placeholder { color: #aaa; }
+
+.tabla-scroll {
+    max-height: 60vh;
+    overflow-y: auto;
+    border-radius: 0.5rem;
+}
+
+.tabla-scroll table { font-size: 0.85rem; }
+
+.tabla-scroll thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-fondo, #3e2d59);
+    z-index: 10;
+    border-bottom: 2px solid var(--color-primario, #88c999);
+}
+
+.tabla-scroll tbody tr:hover {
+    background-color: var(--color-hover, #5a4a7a) !important;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .listarot-container { padding: 0.5rem; }
+    .grafico-box { padding: 0.5rem; }
+    #graficoTorta { height: 400px; }
+    .tabla-scroll { max-height: 50vh; }
+    .tabla-scroll table { font-size: 0.75rem; }
+    .contador-ot { font-size: 1rem; }
+    .titulo-principal { font-size: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+    #graficoTorta { height: 350px; }
+    .tabla-scroll table { font-size: 0.7rem; }
+    .titulo-principal { font-size: 1.3rem; }
+}
