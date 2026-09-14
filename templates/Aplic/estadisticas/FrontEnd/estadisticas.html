@@ -1,23 +1,19 @@
 {% extends 'layout.html' %}
 {% block content %}
-
 <h3 class="mb-4">📊 Evolución de Precios</h3>
-
 <div class="row mb-4">
-  <div class="col-md-6">
-    <label for="selectRubro" class="form-label">Seleccionar Rubro:</label>
-    <select id="selectRubro" class="form-select"></select>
-  </div>
-  <div class="col-md-6">
-    <label for="selectItem" class="form-label">Seleccionar Descripción:</label>
-    <select id="selectItem" class="form-select"></select>
-  </div>
+    <div class="col-md-6">
+        <label for="selectRubro" class="form-label">Seleccionar Rubro:</label>
+        <select id="selectRubro" class="form-select"></select>
+    </div>
+    <div class="col-md-6">
+        <label for="selectItem" class="form-label">Seleccionar Descripción:</label>
+        <select id="selectItem" class="form-select"></select>
+    </div>
 </div>
-
 <div id="graficoEvolucion" style="height: 400px; width: 100%; background: #fff; border-radius: 10px;"></div>
-
 <div id="graficoGastoMensual" style="width: 100%; max-width: 800px; height: 400px; margin-top: 50px;"></div>
-
-<script src="/static/js/apps/estadisticas.js"></script>
-
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('indexestadisticas.static', filename='js/estadisticas.js') }}"></script>
 {% endblock %}

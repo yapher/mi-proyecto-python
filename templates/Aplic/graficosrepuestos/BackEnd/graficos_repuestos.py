@@ -3,6 +3,7 @@
 Blueprint de Gráficos de Repuestos.
 USA core/repuestos.py para funciones reutilizables.
 """
+import os
 from flask_login import login_required, current_user
 from core.menu import cargar_menu
 from auth.login import roles_required
@@ -12,7 +13,15 @@ from core.repuestos import (
     contar_repuestos_por_estado,
 )
 
-graficos_repuestos_bp = Blueprint('indexgraficos_repuestos', __name__)
+_APP_DIR = os.path.dirname(os.path.abspath(__file__))
+_STATIC_DIR = os.path.abspath(os.path.join(_APP_DIR, '..', 'static'))
+
+graficos_repuestos_bp = Blueprint(
+    'indexgraficos_repuestos',
+    __name__,
+    static_folder=_STATIC_DIR,
+    static_url_path='/graficosrepuestos/static'
+)
 
 
 def obtener_jerarquias():
@@ -32,15 +41,11 @@ def obtener_jerarquias():
 def indexgraficos_repuestos():
     nemu = cargar_menu()
     jerarquias = obtener_jerarquias()
-
-    # ✅ Usar función reutilizable
     datos_estado = contar_repuestos_por_estado()
-
     datos = {
         "categorias": list(datos_estado.keys()),
         "valores": list(datos_estado.values())
     }
-
     return render_template(
         'Aplic/graficosrepuestos/FrontEnd/graficos_repuestos.html',
         nemu=nemu,
@@ -55,10 +60,7 @@ def indexgraficos_repuestos():
 @roles_required('viewer')
 def datos_filtrados():
     jerarquia_seleccionada = request.args.get('jerarquia', None)
-
-    # ✅ Usar función reutilizable
     datos_estado = contar_repuestos_por_estado(filtro_jerarquia=jerarquia_seleccionada)
-
     return jsonify({
         "categorias": list(datos_estado.keys()),
         "valores": list(datos_estado.values())

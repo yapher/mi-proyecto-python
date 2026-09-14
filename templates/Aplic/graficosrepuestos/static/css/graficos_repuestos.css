@@ -1,0 +1,55 @@
+/* templates/Aplic/graficosrepuestos/static/css/graficos_repuestos.css */
+.graficos-repuestos-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.graficos-repuestos-container h2 {
+    color: var(--color-primario, #88c999);
+    margin-bottom: 20px;
+}
+
+.graficos-repuestos-container select {
+    font-size: 1rem;
+    padding: 6px 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background: var(--color-superficie, #4b376a);
+    color: #fff;
+    border: 1px solid var(--color-primario, #88c999);
+}
+
+.chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.chart-box {
+    width: 500px;
+    height: 500px;
+    background: #111;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #000;
+}
+
+#exportarPdf {
+    margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .chart-box {
+        width: 100%;
+        max-width: 400px;
+        height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .chart-box {
+        height: 300px;
+    }
+}

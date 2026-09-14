@@ -1,18 +1,16 @@
 {% extends 'layout.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('gestion_de_bloqueos.static', filename='css/gestion_de_bloqueos.css') }}">
+{% endblock %}
 {% block content %}
-
-
-<link rel="stylesheet" href="/static/css/apps/gestion_de_bloqueos.css">
-
 <h2 style="color:white; text-align:center; padding:10px;">Diagrama de Interruptores</h2>
 <svg id="diagrama"></svg>
-
-<!-- Modal -->
 {% include 'Aplic/gestiondebloqueos/FrontEnd/nodo.html' %}
-
 <script>
-  window.interruptores = {{ interruptores | tojson | safe }};
-  window.rootId = {{ root_id | tojson | safe }};
+    window.interruptores = {{ interruptores | tojson | safe }};
+    window.rootId = {{ root_id | tojson | safe }};
 </script>
-<script src="/static/js/apps/gestion_de_bloqueos.js"></script>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('gestion_de_bloqueos.static', filename='js/gestion_de_bloqueos.js') }}"></script>
 {% endblock %}

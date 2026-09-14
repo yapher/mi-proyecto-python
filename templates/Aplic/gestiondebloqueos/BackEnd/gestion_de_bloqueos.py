@@ -1,16 +1,23 @@
 """
 Blueprint de Gestión de Bloqueos - VERSIÓN SQL
-Ahora usa SQL en lugar de JSON.
 """
 from flask import Blueprint, render_template, request, jsonify
 from collections import defaultdict
 from core.db_sql_store import nodo_bloqueo_store
+import os
 
-gestion_de_bloqueos_bp = Blueprint('gestion_de_bloqueos', __name__)
+_APP_DIR = os.path.dirname(os.path.abspath(__file__))
+_STATIC_DIR = os.path.abspath(os.path.join(_APP_DIR, '..', 'static'))
+
+gestion_de_bloqueos_bp = Blueprint(
+    'gestion_de_bloqueos',
+    __name__,
+    static_folder=_STATIC_DIR,
+    static_url_path='/gestiondebloqueos/static'
+)
 
 
 def _construir_children_map():
-    """Construye mapa de hijos desde los nodos en SQL."""
     interruptores = nodo_bloqueo_store.cargar_todos()
     children_map = defaultdict(list)
     for id_, n in interruptores.items():
@@ -20,14 +27,12 @@ def _construir_children_map():
 
 
 def get_root_id():
-    """Obtiene el ID del nodo raíz."""
     interruptores = nodo_bloqueo_store.cargar_todos()
     roots = [i for i, data in interruptores.items() if data.get('padre') is None]
     return roots[0] if roots else None
 
 
 def toggle_descendientes(id_, estado):
-    """Apaga todos los descendientes si se apaga el nodo."""
     interruptores, children_map = _construir_children_map()
     nodo_bloqueo_store.actualizar(id_, {'estado': estado})
     if estado == 'apagado':
@@ -55,7 +60,6 @@ def toggle_estado(id):
     nuevo_estado = 'encendido' if nodo['estado'] == 'apagado' else 'apagado'
     padre_id = nodo.get('padre')
 
-    # Solo puede encender si es raíz o si el padre está encendido
     if nuevo_estado == 'encendido' and padre_id:
         padre = nodo_bloqueo_store.obtener(padre_id)
         if padre and padre['estado'] != 'encendido':
