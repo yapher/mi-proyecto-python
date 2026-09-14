@@ -1,16 +1,14 @@
-/* ==========================================
-BOTONES EDITAR/CANCELAR (patrón CRUD específico de Gestión de Menú)
-========================================== */
-.btn-editar-menu,
-.btn-cancelar-menu {
+/* ============================================
+ESTILOS ESPECÍFICOS: Gestión de Aplicaciones
+============================================ */
+.btn-agregar {
     display: none !important;
 }
-.btn-editar-menu.active,
-.btn-cancelar-menu.active {
+
+.btn-agregar.active {
     display: inline-block !important;
 }
 
-/* Botón de crear aplicación (gradiente azul único) */
 .btn-crear-app {
     background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
     border: none;
@@ -21,18 +19,21 @@ BOTONES EDITAR/CANCELAR (patrón CRUD específico de Gestión de Menú)
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
 }
+
 .btn-crear-app:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 123, 255, 0.4);
     background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
 }
+
 .btn-crear-app:active {
     transform: translateY(0);
 }
-/* Animación para el botón cuando aparece */
+
 .btn-agregar {
     animation: fadeInUp 0.3s ease-out;
 }
+
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -43,7 +44,7 @@ BOTONES EDITAR/CANCELAR (patrón CRUD específico de Gestión de Menú)
         transform: translateY(0);
     }
 }
-/* Responsive específico */
+
 @media (max-width: 768px) {
     .btn-crear-app {
         width: 100%;

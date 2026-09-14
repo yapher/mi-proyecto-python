@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/gestion_menu.css') }}">
+<link rel="stylesheet" href="{{ url_for('menu_api.static', filename='css/gestion_menu.css') }}">
 {% endblock %}
 {% block content %}
 <h3 class="mb-3">Gestión de Menú</h3>
@@ -40,11 +40,11 @@
             </tr>
         </thead>
         <tbody id="tabla">
-            <!-- Se llena dinámicamente -->
+        <!-- Se llena dinámicamente -->
         </tbody>
     </table>
 </div>
 {% endblock %}
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/apps/gestion_menu.js') }}"></script>
+<script src="{{ url_for('menu_api.static', filename='js/gestion_menu.js') }}"></script>
 {% endblock %}

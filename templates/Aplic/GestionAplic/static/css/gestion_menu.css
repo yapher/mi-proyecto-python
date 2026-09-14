@@ -1,18 +1,16 @@
-/* ============================================
-   ESTILOS ESPECÍFICOS: Gestión de Aplicaciones
-   Todo lo compartido está en css/base/components.css
-   ============================================ */
-
-/* Botón de agregar oculto por defecto (lógica específica de esta app) */
-.btn-agregar {
+/* ==========================================
+BOTONES EDITAR/CANCELAR - Gestión de Menú
+========================================== */
+.btn-editar-menu,
+.btn-cancelar-menu {
     display: none !important;
 }
 
-.btn-agregar.active {
+.btn-editar-menu.active,
+.btn-cancelar-menu.active {
     display: inline-block !important;
 }
 
-/* Botón de crear aplicación (gradiente azul único) */
 .btn-crear-app {
     background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
     border: none;
@@ -34,7 +32,6 @@
     transform: translateY(0);
 }
 
-/* Animación para el botón cuando aparece */
 .btn-agregar {
     animation: fadeInUp 0.3s ease-out;
 }
@@ -50,7 +47,6 @@
     }
 }
 
-/* Responsive específico */
 @media (max-width: 768px) {
     .btn-crear-app {
         width: 100%;

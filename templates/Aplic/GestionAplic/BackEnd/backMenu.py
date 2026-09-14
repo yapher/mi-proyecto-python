@@ -1,6 +1,5 @@
 """
-Blueprint de Gestión de Menú - VERSIÓN SQL
-Ahora usa SQL en lugar de JSON.
+Blueprint de Gestión de Menú y Aplicaciones - VERSIÓN SQL
 """
 from flask import Blueprint, request, jsonify, current_app
 import os
@@ -9,7 +8,15 @@ import re
 from core.menu import cargar_menu, guardar_menu
 from core.db_sql_store import menu_store
 
-menu_api = Blueprint('menu_api', __name__)
+_APP_DIR = os.path.dirname(os.path.abspath(__file__))
+_STATIC_DIR = os.path.abspath(os.path.join(_APP_DIR, '..', 'static'))
+
+menu_api = Blueprint(
+    'menu_api',
+    __name__,
+    static_folder=_STATIC_DIR,
+    static_url_path='/gestionaplic/static'
+)
 
 
 def buscar_nodo_por_ruta(data, ruta):
@@ -59,7 +66,6 @@ def crear_menu():
     if not nombre or not emoji:
         return jsonify({"msg": "Faltan datos"}), 400
 
-    # Usar store SQL directamente
     exito, msg = menu_store.agregar(nombre, emoji, ruta_menu, ruta_padre)
     if not exito:
         return jsonify({"msg": msg}), 400
@@ -82,6 +88,7 @@ def editar_menu():
         'emoji': emoji,
         'ruta': ruta_menu,
     }
+
     exito, msg = menu_store.editar(ruta_jerarquia, nuevos_datos)
     if not exito:
         return jsonify({"msg": msg}), 404
@@ -106,7 +113,10 @@ def obtener_arbol_menu():
     return jsonify(menu_store.cargar_arbol())
 
 
-# --- Funciones para crear estructura de carpetas ---
+# ============================================================
+# CREAR ESTRUCTURA DE NUEVA APP
+# ============================================================
+
 def slugify(text):
     text = text.lower()
     text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
@@ -137,16 +147,16 @@ def crear_app():
     ruta_app = os.path.join(base_path, nombre_carpeta)
     ruta_backend = os.path.join(ruta_app, 'BackEnd')
     ruta_frontend = os.path.join(ruta_app, 'FrontEnd')
-    ruta_css = os.path.join(current_app.root_path, 'static', 'css', 'apps')
+    ruta_static_css = os.path.join(ruta_app, 'static', 'css')
+    ruta_static_js = os.path.join(ruta_app, 'static', 'js')
 
     try:
         os.makedirs(ruta_backend, exist_ok=True)
         os.makedirs(ruta_frontend, exist_ok=True)
-        os.makedirs(ruta_css, exist_ok=True)
+        os.makedirs(ruta_static_css, exist_ok=True)
+        os.makedirs(ruta_static_js, exist_ok=True)
 
-        # ============================================================
-        # Archivo Python en BackEnd
-        # ============================================================
+        # === Archivo Python ===
         archivo_py = os.path.join(ruta_backend, f'{nombre_archivo}.py')
         if not os.path.exists(archivo_py):
             with open(archivo_py, 'w', encoding='utf-8') as f:
@@ -155,43 +165,49 @@ def crear_app():
                 f.write('from core.menu import cargar_menu\n')
                 f.write('from auth.login import roles_required\n')
                 f.write('from flask import Blueprint, render_template\n')
-                f.write(f"\n{nomBreBlue} = Blueprint('index{nombre_archivo}', __name__)\n\n")
+                f.write('import os\n\n')
+                f.write('_APP_DIR = os.path.dirname(os.path.abspath(__file__))\n')
+                f.write("_STATIC_DIR = os.path.abspath(os.path.join(_APP_DIR, '..', 'static'))\n\n")
+                f.write(f"{nomBreBlue} = Blueprint(\n")
+                f.write(f"    'index{nombre_archivo}',\n")
+                f.write(f"    __name__,\n")
+                f.write(f"    static_folder=_STATIC_DIR,\n")
+                f.write(f"    static_url_path='/{nombre_carpeta}/static'\n")
+                f.write(f")\n\n")
                 f.write(f"@{nomBreBlue}.route('/{nombre_archivo}')\n")
                 f.write('@login_required\n')
                 f.write("@roles_required('viewer')\n")
                 f.write(f'def index{nombre_archivo}():\n')
                 f.write('    nemu = cargar_menu()\n')
-                f.write(
-                    f"    return render_template("
-                    f"'Aplic/{nombre_carpeta}/FrontEnd/{nombre_archivo}.html', "
-                    f"nemu=nemu, roles=current_user.roles)\n"
-                )
+                f.write(f"    return render_template(\n")
+                f.write(f"        'Aplic/{nombre_carpeta}/FrontEnd/{nombre_archivo}.html',\n")
+                f.write(f"        nemu=nemu, roles=current_user.roles)\n")
 
-        # ============================================================
-        # Archivo HTML (f-strings corregidos con llaves escapadas)
-        # ============================================================
+        # === Archivo HTML ===
         archivo_html = os.path.join(ruta_frontend, f'{nombre_archivo}.html')
         if not os.path.exists(archivo_html):
             with open(archivo_html, 'w', encoding='utf-8') as f:
                 f.write("{% extends 'layout.html' %}\n")
                 f.write("{% block head %}\n")
-                f.write(
-                    '<link rel="stylesheet" href='
-                    '"{{ url_for(\'static\', filename=\'css/apps/'
-                    f'{nombre_archivo}'
-                    ".css') }}\">\n"
-                )
+                f.write('<link rel="stylesheet" href="')
+                f.write("{{ url_for('index" + nombre_archivo + ".static', filename='css/")
+                f.write(nombre_archivo)
+                f.write(".css') }}\">\n")
                 f.write("{% endblock %}\n")
                 f.write("{% block content %}\n")
                 f.write(f'<div class="{nombre_archivo}-container">\n')
                 f.write(f'    <h3 class="mb-3">{nombre}</h3>\n')
                 f.write('</div>\n')
                 f.write("{% endblock %}\n")
+                f.write("{% block scripts %}\n")
+                f.write('<script src="')
+                f.write("{{ url_for('index" + nombre_archivo + ".static', filename='js/")
+                f.write(nombre_archivo)
+                f.write(".js') }}\"></script>\n")
+                f.write("{% endblock %}\n")
 
-        # ============================================================
-        # Archivo CSS (f-strings corregidos: llaves de CSS escapadas)
-        # ============================================================
-        archivo_css = os.path.join(ruta_css, f'{nombre_archivo}.css')
+        # === Archivo CSS ===
+        archivo_css = os.path.join(ruta_static_css, f'{nombre_archivo}.css')
         if not os.path.exists(archivo_css):
             with open(archivo_css, 'w', encoding='utf-8') as f:
                 f.write(f'/* Estilos para {nombre} */\n')
@@ -201,12 +217,8 @@ def crear_app():
                 f.write('    padding: 1rem;\n')
                 f.write('}\n')
 
-        # ============================================================
-        # Archivo JS
-        # ============================================================
-        ruta_js = os.path.join(current_app.root_path, 'static', 'js', 'apps')
-        os.makedirs(ruta_js, exist_ok=True)
-        archivo_js = os.path.join(ruta_js, f'{nombre_archivo}.js')
+        # === Archivo JS ===
+        archivo_js = os.path.join(ruta_static_js, f'{nombre_archivo}.js')
         if not os.path.exists(archivo_js):
             with open(archivo_js, 'w', encoding='utf-8') as f:
                 f.write(f'// JavaScript para {nombre}\n')
