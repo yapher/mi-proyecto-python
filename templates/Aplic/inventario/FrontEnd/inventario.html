@@ -1,15 +1,18 @@
-﻿{% extends 'layout.html' %}
-{% from 'Aplic/inventario/FrontEnd/_tabs_recursivos.html' import render_tabs %}
-
+﻿<!-- templates/Aplic/inventario/FrontEnd/inventario.html -->
+{% extends 'layout.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('indexinventario.static', filename='css/inventario.css') }}">
+{% endblock %}
 {% block content %}
-
-<!-- Incluir estilos específicos de la aplicación -->
-<link rel="stylesheet" href="{{ url_for('static', filename='css/apps/inventario.css') }}">
-
 <div class="inventario-container">
-<h3>Inventario de Almacenes</h3>
+    <header class="app-header">
+        <h3>📦 Inventario de Almacenes</h3>
+    </header>
 
-{{ render_tabs(almacenes, repuestos_por_equipo) }}
+    {% from 'Aplic/inventario/FrontEnd/component/_tabs_recursivos.html' import render_tabs %}
+    {{ render_tabs(almacenes, repuestos_por_equipo) }}
 </div>
-
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('indexinventario.static', filename='js/inventario.js') }}"></script>
 {% endblock %}

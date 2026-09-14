@@ -1,0 +1,155 @@
+/* templates/Aplic/inventario/static/css/inventario.css */
+/* ============================================================
+   INVENTARIO — Estilos específicos
+   ============================================================ */
+
+.inventario-container {
+    padding: 1rem;
+}
+
+.inventario-container .app-header {
+    margin-bottom: 1.5rem;
+}
+
+.inventario-container .app-header h3 {
+    color: var(--color-primario, #88c999);
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Tabs */
+.inventario-tabs {
+    border-bottom: 2px solid var(--color-primario, #88c999);
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-primario, #88c999) var(--color-fondo, #3e2d59);
+}
+
+.inventario-tabs::-webkit-scrollbar {
+    height: 6px;
+}
+
+.inventario-tabs::-webkit-scrollbar-track {
+    background: var(--color-fondo, #3e2d59);
+}
+
+.inventario-tabs::-webkit-scrollbar-thumb {
+    background: var(--color-primario, #88c999);
+    border-radius: 3px;
+}
+
+.inventario-tabs .nav-link {
+    color: #fff;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.inventario-tabs .nav-link:hover {
+    border-color: var(--color-primario, #88c999) var(--color-primario, #88c999) var(--color-fondo, #3e2d59);
+    color: var(--color-primario, #88c999);
+    transform: scale(1.03);
+}
+
+.inventario-tabs .nav-link.active {
+    background-color: var(--color-superficie, #4b376a);
+    color: var(--color-primario, #88c999);
+    border-color: var(--color-primario, #88c999) var(--color-primario, #88c999) var(--color-superficie, #4b376a);
+    font-weight: 600;
+}
+
+/* Contenido de tabs */
+.inventario-tab-content {
+    background-color: var(--color-superficie, #4b376a);
+    border-color: var(--color-primario, #88c999) !important;
+    border-top: none !important;
+    min-height: 200px;
+    border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.inventario-tab-title {
+    color: var(--color-primario, #88c999);
+    margin-bottom: 1rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-primario, #88c999);
+    padding-bottom: 0.5rem;
+}
+
+.inventario-tab-title small {
+    color: #ccc;
+    font-size: 0.8rem;
+    font-weight: 400;
+}
+
+/* Lista de repuestos */
+.inventario-repuestos-list {
+    background-color: transparent;
+}
+
+.inventario-repuesto-item {
+    background-color: var(--color-hover, #5a4a7a);
+    border: 1px solid var(--color-primario, #88c999);
+    color: #fff;
+    margin-bottom: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.inventario-repuesto-item:hover {
+    background-color: var(--color-superficie, #4b376a);
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.inventario-repuesto-item strong {
+    color: var(--color-primario, #88c999);
+}
+
+/* Niveles anidados */
+.inventario-tab-content .inventario-tabs {
+    margin-top: 1rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+    .inventario-container {
+        padding: 0.5rem;
+    }
+
+    .inventario-tabs .nav-link {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.7rem;
+    }
+
+    .inventario-tab-content {
+        padding: 0.75rem !important;
+    }
+
+    .inventario-repuesto-item {
+        font-size: 0.9rem;
+    }
+
+    .inventario-tab-title {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .inventario-tabs .nav-link {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.5rem;
+    }
+
+    .inventario-repuesto-item .d-flex {
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+}

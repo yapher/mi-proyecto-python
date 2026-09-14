@@ -1,14 +1,24 @@
+# templates/Aplic/inventario/BackEnd/inventario.py
 """
-Blueprint de Inventario — VERSIÓN SQL
-Lee almacenes y repuestos desde SQL.
+Blueprint de Inventario — VERSIÓN SQL CORREGIDA
+Usa el módulo reutilizable core/repuestos.py para el mapeo.
 """
 from flask_login import login_required, current_user
 from core.menu import cargar_menu
 from auth.login import roles_required
 from flask import Blueprint, render_template
-from core.db_sql_store import almacen_store, repuesto_store
+from core.repuestos import (
+    cargar_todos_repuestos,
+    cargar_arbol_almacenes,
+    construir_mapeo_repuestos_por_almacen,
+)
 
-inventario_bp = Blueprint('indexinventario', __name__)
+inventario_bp = Blueprint(
+    'indexinventario',
+    __name__,
+    static_folder='../static',
+    static_url_path='/inventario/static'
+)
 
 
 @inventario_bp.route('/inventario')
@@ -16,16 +26,14 @@ inventario_bp = Blueprint('indexinventario', __name__)
 @roles_required('viewer')
 def indexinventario():
     nemu = cargar_menu()
+    almacenes = cargar_arbol_almacenes()
+    repuestos = cargar_todos_repuestos()
 
-    # ✅ Leer desde SQL
-    almacenes = almacen_store.cargar_arbol()
-    repuestos = repuesto_store.cargar()
-
-    # Crear diccionario de repuestos por equipo (ruta_jerarquia del almacén)
-    repuestos_por_equipo = {}
-    for r in repuestos:
-        equipo = r.get("equipo", "")
-        repuestos_por_equipo.setdefault(equipo, []).append(r)
+    # ✅ Mapeo robusto que cubre TODOS los casos de asignación
+    repuestos_por_equipo = construir_mapeo_repuestos_por_almacen(
+        repuestos=repuestos,
+        almacenes=almacenes
+    )
 
     return render_template(
         'Aplic/inventario/FrontEnd/inventario.html',

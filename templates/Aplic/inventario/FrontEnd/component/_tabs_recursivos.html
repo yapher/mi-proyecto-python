@@ -1,0 +1,63 @@
+<!-- templates/Aplic/inventario/FrontEnd/component/_tabs_recursivos.html -->
+{#
+  Macro recursivo para renderizar tabs de almacenes.
+  Usa múltiples claves de búsqueda para encontrar repuestos.
+#}
+{% macro render_tabs(almacenes, repuestos_por_equipo, nivel=0, padre_activo=True) %}
+{% if almacenes %}
+<ul class="nav nav-tabs mt-3 inventario-tabs" id="tabs-nivel-{{ nivel }}" role="tablist">
+    {% for almacen in almacenes %}
+    {% set tab_id = almacen.ruta_jerarquia | replace(' ', '_') | replace('.', '-') %}
+    <li class="nav-item" role="presentation">
+        <button class="nav-link {% if loop.first and padre_activo %}active{% endif %}"
+                id="tab-{{ tab_id }}-nivel-{{ nivel }}"
+                data-bs-toggle="tab"
+                data-bs-target="#tab-pane-{{ tab_id }}-nivel-{{ nivel }}"
+                type="button" role="tab"
+                aria-selected="{{ 'true' if loop.first and padre_activo else 'false' }}">
+            {{ almacen.emoji }} {{ almacen.nombre }}
+            {% set reps_ruta = repuestos_por_equipo.get(almacen.ruta_jerarquia, []) %}
+            {% set reps_nombre = repuestos_por_equipo.get(almacen.nombre, []) %}
+            {% set total_reps = reps_ruta|length + reps_nombre|length %}
+            {% if total_reps > 0 %}
+            <span class="badge bg-primary ms-1">{{ total_reps }}</span>
+            {% endif %}
+        </button>
+    </li>
+    {% endfor %}
+</ul>
+<div class="tab-content border border-top-0 p-3 inventario-tab-content" id="tabs-content-nivel-{{ nivel }}">
+    {% for almacen in almacenes %}
+    {% set tab_id = almacen.ruta_jerarquia | replace(' ', '_') | replace('.', '-') %}
+    <div class="tab-pane fade {% if loop.first and padre_activo %}show active{% endif %}"
+         id="tab-pane-{{ tab_id }}-nivel-{{ nivel }}" role="tabpanel">
+
+        <h5 class="inventario-tab-title">
+            {{ almacen.emoji }} {{ almacen.nombre }}
+            <small class="text-muted">({{ almacen.ruta_jerarquia }})</small>
+        </h5>
+
+        {# ✅ BÚSQUEDA ROBUSTA: probar múltiples claves #}
+        {% set repuestos = repuestos_por_equipo.get(almacen.ruta_jerarquia, []) %}
+        {% if not repuestos %}
+            {% set repuestos = repuestos_por_equipo.get(almacen.nombre, []) %}
+        {% endif %}
+        {% if not repuestos and '.' in almacen.ruta_jerarquia %}
+            {% set ultimo_segmento = almacen.ruta_jerarquia.split('.')[-1] %}
+            {% set repuestos = repuestos_por_equipo.get(ultimo_segmento, []) %}
+        {% endif %}
+
+        {% if repuestos %}
+            {% include 'Aplic/inventario/FrontEnd/component/_repuestos_list.html' %}
+        {% else %}
+            <p class="text-muted fst-italic py-2">No hay repuestos para este almacén.</p>
+        {% endif %}
+
+        {# Recursión para subalmacenes #}
+        {% set sub_almacenes = almacen.subcrear_almacenes or [] %}
+        {{ render_tabs(sub_almacenes, repuestos_por_equipo, nivel + 1, padre_activo=(loop.first and padre_activo)) }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endmacro %}

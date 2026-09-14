@@ -1,76 +1,61 @@
+# templates/Aplic/estadosderepuestos/BackEnd/models.py
 """
 Capa de acceso a datos para repuestos.
-AHORA USA SQL en lugar de JSON.
-Mantiene la misma API pública para no romper imports existentes:
-- leer_repuestos()
-- guardar_repuestos(repuestos)
-- obtener_por_codigo(codigo)
-- crear_repuesto(datos)
-- actualizar_repuesto(codigo_original, nuevos_datos)
-- eliminar_repuesto(codigo)
+AHORA USA core/repuestos.py como punto único de acceso.
+Mantiene la misma API pública para no romper imports existentes.
 """
-from core.db_sql_store import repuesto_store
-
+# ✅ IMPORTAR TODO DESDE core/repuestos.py
+from core.repuestos import (
+    cargar_todos_repuestos,
+    guardar_todos_repuestos,
+    obtener_repuesto_por_codigo,
+    crear_repuesto as _core_crear_repuesto,
+    actualizar_repuesto as _core_actualizar_repuesto,
+    eliminar_repuesto as _core_eliminar_repuesto,
+    existe_codigo,
+)
 
 # ============================================================
 # FUNCIONES DE COMPATIBILIDAD (API pública sin cambios)
 # ============================================================
+
 def leer_repuestos():
     """Lee todos los repuestos desde SQL."""
-    return repuesto_store.cargar()
+    return cargar_todos_repuestos()
 
 
 def guardar_repuestos(repuestos):
-    """Guarda la lista completa de repuestos en SQL (reemplaza todos)."""
-    repuesto_store.guardar(repuestos)
+    """Guarda la lista completa de repuestos en SQL."""
+    guardar_todos_repuestos(repuestos)
 
 
 def obtener_por_codigo(codigo):
     """Busca un repuesto por su código."""
-    return repuesto_store.buscar_por_codigo(codigo)
+    return obtener_repuesto_por_codigo(codigo)
 
 
 def crear_repuesto(datos):
-    """
-    Crea un nuevo repuesto. Retorna (exito, mensaje).
-    Valida que no exista otro repuesto con el mismo código.
-    """
-    codigo = datos.get('codigo')
-    if not codigo or str(codigo).strip() == '':
-        return False, "El código es obligatorio"
-    return repuesto_store.crear(datos, skip_unique_check=False)
+    """Crea un nuevo repuesto. Retorna (exito, mensaje)."""
+    return _core_crear_repuesto(datos)
 
 
 def actualizar_repuesto(codigo_original, nuevos_datos):
-    """
-    Actualiza un repuesto existente. Retorna (exito, mensaje).
-    Valida que el nuevo código (si cambia) no exista ya.
-    """
-    return repuesto_store.actualizar_por_codigo(
-        codigo_original=codigo_original,
-        nuevos_datos=nuevos_datos,
-        check_new_unique=True
-    )
+    """Actualiza un repuesto existente. Retorna (exito, mensaje)."""
+    return _core_actualizar_repuesto(codigo_original, nuevos_datos)
 
 
 def eliminar_repuesto(codigo):
     """Elimina un repuesto por código. Retorna (exito, mensaje)."""
-    return repuesto_store.eliminar_por_codigo(codigo)
-
-
-# ============================================================
-# FUNCIONES ADICIONALES
-# ============================================================
-def existe_codigo(codigo):
-    """Verifica si existe un repuesto con el código dado."""
-    return repuesto_store.existe_codigo(codigo)
+    return _core_eliminar_repuesto(codigo)
 
 
 def buscar_repuestos(**criterios):
     """Busca repuestos que cumplan todos los criterios."""
+    from core.db_sql_store import repuesto_store
     return repuesto_store.buscar(**criterios)
 
 
 def contar_repuestos():
     """Retorna la cantidad total de repuestos."""
+    from core.db_sql_store import repuesto_store
     return repuesto_store.contar()
