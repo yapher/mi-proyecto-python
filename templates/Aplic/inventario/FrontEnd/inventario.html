@@ -1,18 +1,28 @@
-﻿<!-- templates/Aplic/inventario/FrontEnd/inventario.html -->
-{% extends 'layout.html' %}
+﻿{% extends 'layout.html' %}
+{% from 'Aplic/inventario/FrontEnd/component/_tabs_recursivos.html' import render_tabs %}
+
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('indexinventario.static', filename='css/inventario.css') }}">
 {% endblock %}
+
 {% block content %}
 <div class="inventario-container">
     <header class="app-header">
         <h3>📦 Inventario de Almacenes</h3>
     </header>
-
-    {% from 'Aplic/inventario/FrontEnd/component/_tabs_recursivos.html' import render_tabs %}
     {{ render_tabs(almacenes, repuestos_por_equipo) }}
 </div>
+
+{# ✅ AGREGAR: Variable return_to para que el modal redirija a inventario #}
+{% set return_to = 'indexinventario.indexinventario' %}
+{% set ubicaciones = ubicaciones %}
+{% include "Aplic/estadosderepuestos/FrontEnd/component/details.html" %}
+{% include "Aplic/estadosderepuestos/FrontEnd/component/newRep.html" %}
 {% endblock %}
+
 {% block scripts %}
 <script src="{{ url_for('indexinventario.static', filename='js/inventario.js') }}"></script>
+<script src="{{ url_for('indexEstadoRep.static', filename='js/repuestoUtils.js') }}"></script>
+<script src="{{ url_for('indexEstadoRep.static', filename='js/repuestoForm.js') }}"></script>
+<script src="{{ url_for('indexEstadoRep.static', filename='js/repuestoEvents.js') }}"></script>
 {% endblock %}

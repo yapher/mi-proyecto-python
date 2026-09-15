@@ -1,25 +1,37 @@
-<!-- templates/Aplic/inventario/FrontEnd/component/_repuestos_list.html -->
-{#
-  Componente reutilizable: Lista de repuestos dentro de un almacén.
-  Variables esperadas: repuestos (lista)
-#}
 <ul class="list-group inventario-repuestos-list mb-3">
-    {% for repuesto in repuestos %}
-    <li class="list-group-item inventario-repuesto-item">
-        <div class="d-flex justify-content-between align-items-start">
-            <div>
-                <strong>{{ repuesto.nombre }}</strong>
-                <span class="badge bg-secondary ms-2">#{{ repuesto.codigo }}</span>
+    {% for r in repuestos %}
+    <li class="list-group-item inventario-repuesto-item p-0">
+        <button type="button" 
+                class="btn-editar w-100 text-start p-3 bg-transparent border-0"
+                data-bs-toggle="modal" 
+                data-bs-target="#agregarModal"
+                data-codigo="{{ r.codigo }}"
+                data-nombre="{{ r.nombre }}"
+                data-cantidad="{{ r.cantidad }}"
+                data-equipo="{{ r.equipo }}"
+                data-ruta_jerarquia='{{ r.ruta_jerarquia | tojson }}'
+                data-fecha_creacion="{{ r.fecha_creacion }}"
+                data-fecha_fin="{{ r.fecha_fin | default('') }}"
+                data-link="{{ r.link | default('') }}"
+                data-emojy="{{ r.estado }}"
+                data-imagen="{{ r.imagen | default('') }}"
+                data-tab_activo="">
+            
+            <div class="d-flex justify-content-between align-items-start">
+                <div>
+                    <strong>{{ r.nombre }}</strong>
+                    <span class="badge bg-secondary ms-2">#{{ r.codigo }}</span>
+                </div>
+                <span class="badge {% if r.cantidad > 0 %}bg-success{% else %}bg-danger{% endif %}">
+                    Cant: {{ r.cantidad }}
+                </span>
             </div>
-            <span class="badge {% if repuesto.cantidad > 0 %}bg-success{% else %}bg-danger{% endif %}">
-                Cant: {{ repuesto.cantidad }}
-            </span>
-        </div>
-        {% if repuesto.estado %}
-        <div class="mt-1">
-            <small class="text-muted">Estado: {{ repuesto.estado }}</small>
-        </div>
-        {% endif %}
+            {% if r.estado %}
+            <div class="mt-1">
+                <small class="text-muted">Estado: {{ r.estado }}</small>
+            </div>
+            {% endif %}
+        </button>
     </li>
     {% endfor %}
 </ul>
