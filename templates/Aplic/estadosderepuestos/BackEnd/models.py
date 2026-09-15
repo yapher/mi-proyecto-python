@@ -59,3 +59,20 @@ def contar_repuestos():
     """Retorna la cantidad total de repuestos."""
     from core.db_sql_store import repuesto_store
     return repuesto_store.contar()
+
+"""
+Capa de acceso a datos para repuestos.
+Delegamos todo a core/repuestos.py y core.data_loaders para evitar duplicación.
+"""
+from core.repuestos import (
+    cargar_todos_repuestos as leer_repuestos,
+    guardar_todos_repuestos as guardar_repuestos,
+    obtener_repuesto_por_codigo,
+    crear_repuesto,
+    actualizar_repuesto,
+    eliminar_repuesto,
+    existe_codigo,
+)
+
+# ✅ AGREGADO: Alias para que los imports antiguos no fallen
+from core.data_loaders import cargar_tabs as leer_tabs
