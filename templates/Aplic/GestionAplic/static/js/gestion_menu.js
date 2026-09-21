@@ -1,229 +1,72 @@
 /**
- * JavaScript para Gestión de Menú
+ * Gestión de Menú - Lógica de la aplicación
+ * ✅ Usa ArbolCRUD reutilizable (static/js/utils/arbol_crud.js)
+ * ✅ Usa Logger y Notify globales
  */
-let arbolMenus = [];
+document.addEventListener("DOMContentLoaded", () => {
+    Logger.moduleInit('GestionMenu');
 
-function cargarArbolMenus(cb) {
-    fetch('/api/menu_arbol')
-        .then(res => res.json())
-        .then(data => {
-            arbolMenus = data;
-            if (cb) cb();
-        });
-}
+    // ========================================================
+    // Instancia única de ArbolCRUD
+    // ========================================================
+    const crud = new ArbolCRUD({
+        apiArbol:     "/api/menu_arbol",
+        apiCrud:      "/api/menu",
+        claveHijos:   "submenues",
+        campoRuta:    "ruta_menu",
+        nombreItem:   "menú",
+        selectoresId: "nivelesContainer",
+        tablaId:      "tabla",
+        camposForm: {
+            nombre:   "nombre",
+            emoji:    "emoji",
+            ruta:     "ruta_menu",
+            original: "ruta_original"
+        },
+        botones: {
+            agregar:  ".btn-agregar",
+            editar:   ".btn-editar-menu",
+            cancelar: ".btn-cancelar-menu"
+        },
+        // ====================================================
+        // Render personalizado de filas (con botones específicos)
+        // ====================================================
+        onRenderFila: (nodo, nivel, crudInstance) => {
+            const rutaAttr = crudInstance._escapeAttr(nodo.ruta_jerarquia);
+            const nombreAttr = crudInstance._escapeAttr(nodo.nombre);
+            const emojiAttr = crudInstance._escapeAttr(nodo.emoji || "");
+            const rutaValorAttr = crudInstance._escapeAttr(nodo.ruta || "");
 
-function renderSelectoresNiveles() {
-    const cont = document.getElementById('nivelesContainer');
-    cont.innerHTML = '';
-    let nivel = 0;
-    let actual = arbolMenus;
-    let seguir = true;
-
-    while (seguir) {
-        const select = document.createElement('select');
-        select.className = 'form-control nivel-select mb-2';
-        select.setAttribute('data-nivel', nivel);
-        select.innerHTML = `<option value="" selected>Sin seleccionar</option>`;
-        actual.forEach(item => {
-            select.innerHTML += `<option value="${item.ruta_jerarquia}">${item.emoji} ${item.nombre}</option>`;
-        });
-        cont.appendChild(select);
-        select.onchange = function () {
-            let next = this.nextElementSibling;
-            while (next) {
-                next.remove();
-                next = this.nextElementSibling;
-            }
-            if (this.value) {
-                const seleccionado = buscarNodoPorRuta(arbolMenus, this.value);
-                if (seleccionado && seleccionado.submenues && seleccionado.submenues.length > 0) {
-                    renderSubnivel(seleccionado.submenues, nivel + 1, this.value);
-                }
-            }
-        };
-        seguir = false;
-    }
-}
-
-function renderSubnivel(submenues, nivel, rutaPadre) {
-    const cont = document.getElementById('nivelesContainer');
-    const select = document.createElement('select');
-    select.className = 'form-control nivel-select mb-2';
-    select.setAttribute('data-nivel', nivel);
-    select.innerHTML = `<option value="" selected>Sin seleccionar</option>`;
-    submenues.forEach(item => {
-        select.innerHTML += `<option value="${item.ruta_jerarquia}">${item.emoji} ${item.nombre}</option>`;
+            return `
+                <tr>
+                    <td>${nodo.emoji || ""}</td>
+                    <td class="nivel-${nivel}">${nodo.nombre}</td>
+                    <td>${nodo.ruta || ""}</td>
+                    <td>
+                        <button class="btn btn-sm btn-editar"
+                            onclick="prepararEdicion('${rutaAttr}','${nombreAttr}','${emojiAttr}','${rutaValorAttr}')">
+                            Editar
+                        </button>
+                        <button class="btn btn-sm btn-eliminar"
+                            onclick="eliminar('${rutaAttr}')">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            `;
+        }
     });
-    cont.appendChild(select);
-    select.onchange = function () {
-        let next = this.nextElementSibling;
-        while (next) {
-            next.remove();
-            next = this.nextElementSibling;
-        }
-        if (this.value) {
-            const seleccionado = buscarNodoPorRuta(arbolMenus, this.value);
-            if (seleccionado && seleccionado.submenues && seleccionado.submenues.length > 0) {
-                renderSubnivel(seleccionado.submenues, nivel + 1, this.value);
-            }
-        }
+
+    // ========================================================
+    // Exponer funciones globales para los onclick del HTML
+    // ========================================================
+    window.guardar = () => crud.guardar();
+    window.editar = () => crud.guardarEdicion();
+    window.cancelar = () => crud.cancelar();
+    window.eliminar = (ruta) => crud.eliminarItem(ruta);
+    window.prepararEdicion = (ruta, nombre, emoji, rutaValor) => {
+        crud.prepararEdicion(ruta, nombre, emoji, rutaValor);
     };
-}
 
-function buscarNodoPorRuta(arbol, ruta) {
-    const partes = ruta.split('.');
-    let actual = arbol;
-    for (let parte of partes) {
-        if (!parte) continue;
-        let encontrado = actual.find(item => item.nombre === parte);
-        if (!encontrado) return null;
-        actual = encontrado.submenues;
-        if (partes[partes.length - 1] === parte) return encontrado;
-    }
-    return null;
-}
-
-function obtenerRutaPadre() {
-    const selects = document.querySelectorAll('.nivel-select');
-    let ruta = '';
-    selects.forEach(sel => {
-        if (sel.value) ruta = sel.value;
-    });
-    return ruta;
-}
-
-function guardar() {
-    const nombre = document.getElementById("nombre").value.trim();
-    const emoji = document.getElementById("emoji").value.trim();
-    const ruta_menu = document.getElementById("ruta_menu").value.trim();
-    const ruta_padre = obtenerRutaPadre();
-
-    if (!nombre || !emoji) {
-        Notify.warning("Complete todos los campos obligatorios");
-        return;
-    }
-
-    fetch('/api/menu', {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, emoji, ruta: ruta_menu, ruta_padre })
-    }).then(res => res.json())
-    .then(res => {
-        if (res.type === 'success' || res.msg.includes('correctamente')) {
-            Notify.success(res.msg);
-            cargarTodo();
-            cancelar();
-        } else {
-            Notify.error(res.msg || "Error al guardar");
-        }
-    })
-    .catch(() => Notify.error("Error de conexión al guardar"));
-}
-
-function editar() {
-    const nombre = document.getElementById("nombre").value.trim();
-    const emoji = document.getElementById("emoji").value.trim();
-    const ruta_menu = document.getElementById("ruta_menu").value.trim();
-    const ruta = document.getElementById("ruta_original").value;
-
-    if (!nombre || !emoji || !ruta) {
-        Notify.warning("Complete todos los campos obligatorios");
-        return;
-    }
-
-    fetch('/api/menu', {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nombre, emoji, ruta_menu, ruta })
-    }).then(res => res.json())
-    .then(res => {
-        if (res.type === 'success' || res.msg.includes('actualizado')) {
-            Notify.success(res.msg);
-            cargarTodo();
-            cancelar();
-        } else {
-            Notify.error(res.msg || "Error al actualizar");
-        }
-    })
-    .catch(() => Notify.error("Error de conexión al actualizar"));
-}
-
-function eliminar(ruta) {
-    Notify.confirm(
-        "¿Eliminar este ítem?",
-        "Esta acción no se puede deshacer y eliminará también todos sus submenús.",
-        () => {
-            fetch('/api/menu', {
-                method: "DELETE",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ ruta })
-            }).then(res => res.json())
-            .then(res => {
-                if (res.type === 'success' || res.msg.includes('eliminado')) {
-                    Notify.success(res.msg);
-                    cargarTodo();
-                    cancelar();
-                } else {
-                    Notify.error(res.msg || "Error al eliminar");
-                }
-            })
-            .catch(() => Notify.error("Error de conexión al eliminar"));
-        }
-    );
-}
-
-function prepararEdicion(ruta_jerarquia, nombre, emoji, ruta_menu) {
-    document.getElementById("nombre").value = nombre;
-    document.getElementById("emoji").value = emoji;
-    document.getElementById("ruta_menu").value = ruta_menu || "";
-    document.getElementById("ruta_original").value = ruta_jerarquia;
-    document.querySelector(".btn-agregar").style.display = "none";
-    document.querySelector(".btn-editar-menu").classList.add("active");
-    document.querySelector(".btn-cancelar-menu").classList.add("active");
-}
-
-function cancelar() {
-    document.getElementById("nombre").value = "";
-    document.getElementById("emoji").value = "";
-    document.getElementById("ruta_menu").value = "";
-    document.getElementById("ruta_original").value = "";
-    document.querySelector(".btn-agregar").style.display = "inline";
-    document.querySelector(".btn-editar-menu").classList.remove("active");
-    document.querySelector(".btn-cancelar-menu").classList.remove("active");
-}
-
-function cargarTabla() {
-    fetch('/api/menu_arbol')
-        .then(res => res.json())
-        .then(data => {
-            const tabla = document.getElementById("tabla");
-            tabla.innerHTML = "";
-            function recorrer(menus, nivel = 0) {
-                menus.forEach(menu => {
-                    tabla.innerHTML += `
-                    <tr>
-                        <td>${menu.emoji}</td>
-                        <td class="nivel-${nivel}">${menu.nombre}</td>
-                        <td>${menu.ruta || ''}</td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-primary" onclick="prepararEdicion('${menu.ruta_jerarquia}','${menu.nombre}','${menu.emoji}','${menu.ruta || ""}')">Editar</button>
-                            <button class="btn btn-sm btn-outline-danger" onclick="eliminar('${menu.ruta_jerarquia}')">Eliminar</button>
-                        </td>
-                    </tr>`;
-                    if (menu.submenues && menu.submenues.length > 0) {
-                        recorrer(menu.submenues, nivel + 1);
-                    }
-                });
-            }
-            recorrer(data);
-        });
-}
-
-function cargarTodo() {
-    cargarArbolMenus(() => {
-        renderSelectoresNiveles();
-        cargarTabla();
-    });
-}
-
-document.addEventListener("DOMContentLoaded", cargarTodo);
+    Logger.success('Módulo GestionMenu inicializado correctamente');
+});

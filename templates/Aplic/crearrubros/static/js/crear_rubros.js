@@ -1,7 +1,7 @@
 /**
- * Crear Rubros - Lógica de la aplicación
- * Usa el módulo genérico ArbolCRUD, Logger y Notify reutilizables
- */
+* Crear Rubros - Lógica de la aplicación
+* Usa el módulo genérico ArbolCRUD, Logger y Notify reutilizables
+*/
 document.addEventListener("DOMContentLoaded", () => {
     Logger.moduleInit('CrearRubros');
 
@@ -29,6 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const nombreAttr = crudInstance._escapeAttr(nodo.nombre);
             const emojiAttr = crudInstance._escapeAttr(nodo.emoji || "");
             const rutaValorAttr = crudInstance._escapeAttr(nodo.ruta || "");
+            
+            // ✅ CORRECCIÓN: Obtener el instanceId para vincular los onclick correctamente
+            const instanceId = crudInstance.instanceId;
+
             return `
                 <tr>
                     <td>${nodo.emoji || ""}</td>
@@ -36,12 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${nodo.ruta || ""}</td>
                     <td>
                         <button class="btn btn-sm btn-editar"
-                            onclick="window.__arbolCRUD_editar__.call(null,
+                            onclick="window.__arbolCRUD_editar_${instanceId}__.call(null,
                             '${rutaAttr}','${nombreAttr}','${emojiAttr}','${rutaValorAttr}')">
                             Editar
                         </button>
                         <button class="btn btn-sm btn-eliminar"
-                            onclick="window.__arbolCRUD_eliminar__.call(null, '${rutaAttr}')">
+                            onclick="window.__arbolCRUD_eliminar_${instanceId}__.call(null, '${rutaAttr}')">
                             Eliminar
                         </button>
                     </td>
@@ -53,6 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modalEl = document.getElementById('rubroModal');
     const modal = new bootstrap.Modal(modalEl);
 
+    // Sobreescribir prepararEdicion para mostrar el modal
     const prepararEdicionOriginal = crud.prepararEdicion.bind(crud);
     crud.prepararEdicion = function(ruta, nombre, emoji, rutaValor) {
         Logger.info('Preparando edición de rubro', { ruta, nombre, emoji });
@@ -60,6 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.show();
     };
 
+    // Sobreescribir eliminarItem para usar Notify.confirm
     crud.eliminarItem = async function(ruta) {
         Logger.info('Solicitando eliminación de rubro', { ruta });
         Notify.delete("este rubro", async () => {
