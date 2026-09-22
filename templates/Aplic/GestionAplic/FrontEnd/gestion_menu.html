@@ -8,6 +8,7 @@
     <form id="formulario">
         <!-- Selectores multinivel -->
         <div id="nivelesContainer" class="mb-3"></div>
+
         <!-- Nombre, emoji y ruta -->
         <div class="mb-3 input-with-emoji">
             <span class="input-emoji">📛</span>
@@ -21,6 +22,37 @@
             <span class="input-emoji">🔗</span>
             <input type="text" class="form-control ps-5" id="ruta_menu" placeholder="Ruta (opcional)">
         </div>
+
+        <!-- ✅ NUEVO: Checkboxes de roles (más intuitivo que select multiple) -->
+        <div class="mb-3">
+            <label class="form-label" style="color: #e5d64f;">
+                🔒 Roles permitidos
+            </label>
+            <div class="roles-container">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="roleAdmin" value="admin">
+                    <label class="form-check-label" for="roleAdmin">
+                        👑 Administrador
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="roleEditor" value="editor">
+                    <label class="form-check-label" for="roleEditor">
+                        ✏️ Editor
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="roleViewer" value="viewer">
+                    <label class="form-check-label" for="roleViewer">
+                        👁️ Viewer
+                    </label>
+                </div>
+            </div>
+            <small class="form-text" style="color: #b8b8b8;">
+                <strong>Importante:</strong> Si <strong>NO seleccionás ningún rol</strong>, el ítem será visible para <strong>TODOS</strong> los usuarios autenticados.
+            </small>
+        </div>
+
         <input type="hidden" id="ruta_original">
         <div class="button-group">
             <button type="button" class="btn btn-agregar" onclick="guardar()">Agregar</button>
@@ -29,6 +61,7 @@
         </div>
     </form>
 </div>
+
 <div class="table-responsive tabla-scroll">
     <table class="table table-hover table-striped table-dark align-middle w-100 mb-0">
         <thead class="sticky-header">
@@ -36,11 +69,12 @@
                 <th>Emoji</th>
                 <th>Nombre</th>
                 <th>Ruta</th>
+                <th>Roles</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody id="tabla">
-        <!-- Se llena dinámicamente -->
+            <!-- Se llena dinámicamente -->
         </tbody>
     </table>
 </div>

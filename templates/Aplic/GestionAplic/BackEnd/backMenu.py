@@ -18,7 +18,6 @@ menu_api = Blueprint(
     static_url_path='/gestionaplic/static'
 )
 
-
 def buscar_nodo_por_ruta(data, ruta):
     """Busca un nodo en el árbol por su ruta jerárquica."""
     if not ruta:
@@ -39,7 +38,6 @@ def buscar_nodo_por_ruta(data, ruta):
             return None
     return nodo
 
-
 @menu_api.route("/api/menu", methods=["GET"])
 def listar_menus():
     data = cargar_menu()
@@ -49,11 +47,9 @@ def listar_menus():
     ]
     return jsonify(items)
 
-
 @menu_api.route("/api/menu_list", methods=["GET"])
 def listar_menu():
     return jsonify(cargar_menu())
-
 
 @menu_api.route("/api/menu", methods=["POST"])
 def crear_menu():
@@ -62,15 +58,15 @@ def crear_menu():
     emoji = (datos.get("emoji") or "").strip()
     ruta_menu = datos.get("ruta", "")
     ruta_padre = datos.get("ruta_padre", "")
+    roles = datos.get("roles", [])  # ✅ NUEVO: lista de roles
 
     if not nombre or not emoji:
         return jsonify({"msg": "Faltan datos"}), 400
 
-    exito, msg = menu_store.agregar(nombre, emoji, ruta_menu, ruta_padre)
+    exito, msg = menu_store.agregar(nombre, emoji, ruta_menu, ruta_padre, roles=roles)
     if not exito:
         return jsonify({"msg": msg}), 400
     return jsonify({"msg": "Menú creado correctamente"})
-
 
 @menu_api.route("/api/menu", methods=["PUT"])
 def editar_menu():
@@ -79,6 +75,7 @@ def editar_menu():
     nombre = (datos.get("nombre") or "").strip()
     emoji = (datos.get("emoji") or "").strip()
     ruta_menu = datos.get("ruta_menu", "")
+    roles = datos.get("roles", [])  # ✅ NUEVO: lista de roles
 
     if not ruta_jerarquia or not nombre or not emoji:
         return jsonify({"msg": "Faltan datos"}), 400
@@ -87,13 +84,12 @@ def editar_menu():
         'nombre': nombre,
         'emoji': emoji,
         'ruta': ruta_menu,
+        'roles': roles,  # ✅ NUEVO
     }
-
     exito, msg = menu_store.editar(ruta_jerarquia, nuevos_datos)
     if not exito:
         return jsonify({"msg": msg}), 404
     return jsonify({"msg": "Menú actualizado correctamente"})
-
 
 @menu_api.route("/api/menu", methods=["DELETE"])
 def eliminar_menu():
@@ -101,28 +97,23 @@ def eliminar_menu():
     ruta = datos.get("ruta")
     if not ruta:
         return jsonify({"msg": "Ruta requerida"}), 400
-
     exito, msg = menu_store.eliminar(ruta)
     if not exito:
         return jsonify({"msg": msg}), 404
     return jsonify({"msg": "Menú eliminado correctamente"})
 
-
 @menu_api.route("/api/menu_arbol", methods=["GET"])
 def obtener_arbol_menu():
     return jsonify(menu_store.cargar_arbol())
 
-
 # ============================================================
 # CREAR ESTRUCTURA DE NUEVA APP
 # ============================================================
-
 def slugify(text):
     text = text.lower()
     text = unicodedata.normalize('NFKD', text).encode('ascii', 'ignore').decode('ascii')
     text = re.sub(r'\s+', '', text)
     return text
-
 
 def snake_case(text):
     text = text.lower()
@@ -130,7 +121,6 @@ def snake_case(text):
     text = re.sub(r'\s+', '_', text)
     text = re.sub(r'[^a-z0-9_]', '', text)
     return text
-
 
 @menu_api.route('/crear_app', methods=['POST'])
 def crear_app():
@@ -165,15 +155,15 @@ def crear_app():
                 f.write('from core.menu import cargar_menu\n')
                 f.write('from auth.login import roles_required\n')
                 f.write('from flask import Blueprint, render_template\n')
-                f.write('import os\n\n')
+                f.write('import os\n')
                 f.write('_APP_DIR = os.path.dirname(os.path.abspath(__file__))\n')
-                f.write("_STATIC_DIR = os.path.abspath(os.path.join(_APP_DIR, '..', 'static'))\n\n")
+                f.write("_STATIC_DIR = os.path.abspath(os.path.join(_APP_DIR, '..', 'static'))\n")
                 f.write(f"{nomBreBlue} = Blueprint(\n")
                 f.write(f"    'index{nombre_archivo}',\n")
                 f.write(f"    __name__,\n")
                 f.write(f"    static_folder=_STATIC_DIR,\n")
                 f.write(f"    static_url_path='/{nombre_carpeta}/static'\n")
-                f.write(f")\n\n")
+                f.write(f")\n")
                 f.write(f"@{nomBreBlue}.route('/{nombre_archivo}')\n")
                 f.write('@login_required\n')
                 f.write("@roles_required('viewer')\n")

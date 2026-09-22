@@ -148,6 +148,9 @@ class ArbolSQLStore:
         # Campo específico de Ubicacion
         if hasattr(nodo, 'imagen'):
             data['imagen'] = nodo.imagen
+        # ✅ NUEVO: Campo roles (para Menu)
+        if hasattr(nodo, 'roles'):
+            data['roles'] = nodo.roles or []
         for hijo in nodo.hijos:
             data[self.clave_hijos].append(self._construir_nodo(hijo))
         return data
@@ -156,7 +159,7 @@ class ArbolSQLStore:
         """Busca un nodo por su ruta_jerarquia."""
         return self.model.query.filter_by(ruta_jerarquia=ruta_jerarquia).first()
 
-    def agregar(self, nombre, emoji, ruta, ruta_padre):
+    def agregar(self, nombre, emoji, ruta, ruta_padre, roles=None):
         """
         Agrega un nodo hijo bajo ruta_padre.
         Retorna (exito, mensaje).
@@ -183,6 +186,10 @@ class ArbolSQLStore:
             ruta_jerarquia=nueva_ruta,
             padre_id=padre_id
         )
+        # ✅ NUEVO: asignar roles si el modelo lo soporta
+        if roles is not None and hasattr(nuevo, 'roles'):
+            nuevo.roles = roles
+
         db.session.add(nuevo)
         db.session.commit()
         return True, "Agregado correctamente"
@@ -213,6 +220,9 @@ class ArbolSQLStore:
             nodo.ruta = nuevos_datos['ruta']
         if hasattr(nodo, 'imagen') and 'imagen' in nuevos_datos:
             nodo.imagen = nuevos_datos['imagen']
+        # ✅ NUEVO: actualizar roles si el modelo lo soporta
+        if hasattr(nodo, 'roles') and 'roles' in nuevos_datos:
+            nodo.roles = nuevos_datos['roles']
 
         db.session.commit()
         return True, "Actualizado correctamente"
@@ -232,7 +242,7 @@ class ArbolSQLStore:
         db.session.delete(nodo)  # cascade='all, delete-orphan' elimina hijos
         db.session.commit()
         return True, "Eliminado correctamente"
-
+    
 
 # ============================================================
 # 3. EventSQLStore - Reemplaza EventStore (agenda)
