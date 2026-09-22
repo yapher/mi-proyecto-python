@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('indexgestion_usuarios.static', filename='css/gestion_usuarios.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="gestion-usuarios-container">
+    <h3 class="mb-4">👥 Gestión de Usuarios</h3>
+
+    <!-- Botón agregar -->
+    <div class="mb-3">
+        <button type="button" class="btn btn-agregar" id="btnAgregarUsuario" data-bs-toggle="modal" data-bs-target="#modalUsuario">
+            Agregar Usuario
+        </button>
+    </div>
+
+    <!-- Tabla de usuarios -->
+    <div class="table-responsive tabla-scroll">
+        <table class="table table-hover table-striped table-dark align-middle w-100 mb-0">
+            <thead class="sticky-header">
+                <tr>
+                    <th>Usuario</th>
+                    <th>Roles</th>
+                    <th>Fecha Creación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tablaUsuarios">
+                <tr>
+                    <td colspan="4" class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Cargando...</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal de formulario (crear/editar) -->
+{% include 'Aplic/gestionusuarios/FrontEnd/component/usuario_form.html' %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('indexgestion_usuarios.static', filename='js/gestion_usuarios.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,71 @@
+/* ============================================
+GESTIÓN DE USUARIOS - Estilos específicos
+============================================ */
+.gestion-usuarios-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.gestion-usuarios-container h3 {
+    color: #88c999;
+    font-weight: 600;
+}
+
+/* Roles container */
+.roles-container {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(136, 201, 153, 0.3);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.roles-container .form-check {
+    margin-bottom: 0.5rem;
+}
+
+.roles-container .form-check-label {
+    color: #fff;
+    font-weight: 500;
+}
+
+/* Badges de roles en tabla */
+.role-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    margin: 0.15rem;
+    border-radius: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.role-badge.admin {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #222;
+}
+
+.role-badge.editor {
+    background: linear-gradient(135deg, #4CAF50, #66BB6A);
+    color: #fff;
+}
+
+.role-badge.viewer {
+    background: linear-gradient(135deg, #2196F3, #42A5F5);
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .gestion-usuarios-container {
+        padding: 0.5rem;
+    }
+
+    .roles-container {
+        padding: 0.75rem;
+    }
+
+    .role-badge {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.6rem;
+    }
+}
