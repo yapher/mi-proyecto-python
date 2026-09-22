@@ -41,24 +41,3 @@
         </div>
     </div>
 </div>
-
-<script>
-const rutas = {{ rutas|tojson|safe }};
-const modal = document.getElementById('modalAgregarPlano');
-modal.addEventListener('show.bs.modal', function () {
-    const select = document.getElementById('nombre_linea');
-    if (!select) return;
-    select.querySelectorAll('option:not([disabled])').forEach(o => o.remove());
-    if (Array.isArray(rutas) && rutas.length) {
-        rutas.forEach(r => {
-            const opt = document.createElement('option');
-            opt.value = r;
-            opt.textContent = r;
-            select.appendChild(opt);
-        });
-        document.getElementById('rutas-empty')?.classList.add('d-none');
-    } else {
-        document.getElementById('rutas-empty')?.classList.remove('d-none');
-    }
-});
-</script>

@@ -33,5 +33,9 @@
 {% include "Aplic/pagos/FrontEnd/component/graf.html" %}
 {% endblock %}
 {% block scripts %}
+<!-- Scripts de la aplicación Pagos centralizados -->
 <script src="{{ url_for('indexpagos.static', filename='js/pagos.js') }}"></script>
+<script src="{{ url_for('indexpagos.static', filename='js/newPagos.js') }}"></script>
+<script src="{{ url_for('indexpagos.static', filename='js/graf_pagos.js') }}"></script>
+<script src="{{ url_for('indexpagos.static', filename='js/exportPDF.js') }}"></script>
 {% endblock %}

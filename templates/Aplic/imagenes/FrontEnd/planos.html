@@ -55,7 +55,14 @@
 {% endblock %}
 
 {% block scripts %}
+<!-- Inyección segura de datos del backend para JS externo -->
+<script>
+    window.rutasPlanos = {{ rutas|tojson|safe }};
+</script>
+
+<!-- Scripts de la aplicación Imágenes centralizados -->
 <script src="{{ url_for('indeximagenes.static', filename='js/select.js') }}"></script>
 <script src="{{ url_for('indeximagenes.static', filename='js/busqueda.js') }}"></script>
 <script src="{{ url_for('indeximagenes.static', filename='js/planos.js') }}"></script>
+<script src="{{ url_for('indeximagenes.static', filename='js/modal_agregar_plano.js') }}"></script>
 {% endblock %}
