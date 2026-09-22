@@ -43,3 +43,31 @@ def guardar_menu(menu):
 
     _crear_nodos(menu if isinstance(menu, list) else [])
     db.session.commit()
+
+
+def obtener_roles_por_ruta(ruta):
+    """
+    Busca en el menú los roles requeridos para una ruta específica.
+    Retorna lista de roles o [] si no hay restricciones.
+    
+    Uso:
+        roles = obtener_roles_por_ruta('/gestion_usuarios')
+        # Retorna: ['admin'] o [] si no hay restricciones
+    """
+    menu = cargar_menu()
+    
+    def buscar_en_nodos(nodos):
+        for nodo in nodos:
+            # Verificar ruta exacta
+            if nodo.get('ruta') == ruta:
+                return nodo.get('roles', [])
+            # Buscar recursivamente en submenús
+            sub = nodo.get('submenues', [])
+            if sub:
+                resultado = buscar_en_nodos(sub)
+                if resultado is not None:
+                    return resultado
+        return None
+    
+    roles = buscar_en_nodos(menu)
+    return roles if roles is not None else []

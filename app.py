@@ -171,6 +171,55 @@ def inject_menu():
         )
     return dict(menu=[], roles=[])
 
+
+# ============================================================
+# MIDDLEWARE: Verificación dinámica de acceso por roles del menú
+# ============================================================
+@app.before_request
+def verificar_acceso_menu():
+    """
+    Verifica que el usuario tenga acceso a la ruta según los roles del menú.
+    Si el menú tiene roles definidos y el usuario no tiene ninguno, retorna 403.
+    
+    Comportamiento:
+    - Rutas públicas (login, static, health): acceso libre
+    - Rutas sin roles en el menú: acceso permitido (compatibilidad)
+    - Rutas con roles: solo usuarios con al menos 1 rol coincidente
+    """
+    from flask import request
+    from flask_login import current_user
+    
+    # 1. Rutas públicas que NO requieren verificación
+    rutas_publicas = [
+        '/login', '/logout', '/health', '/static',
+        '/login_rostro', '/favicon.ico'
+    ]
+    if any(request.path.startswith(ruta) for ruta in rutas_publicas):
+        return None
+    
+    # 2. Si no está autenticado, dejar que @login_required lo maneje
+    if not current_user.is_authenticated:
+        return None
+    
+    # 3. Buscar roles requeridos para esta ruta en el menú
+    from core.menu import obtener_roles_por_ruta
+    roles_requeridos = obtener_roles_por_ruta(request.path)
+    
+    # 4. Si no hay roles definidos en el menú, acceso permitido
+    if not roles_requeridos:
+        return None
+    
+    # 5. Verificar si el usuario tiene al menos 1 rol requerido
+    user_roles = set(current_user.roles or [])
+    required_roles = set(roles_requeridos)
+    
+    if not user_roles & required_roles:
+        # Usuario no tiene acceso → 403 Forbidden
+        from flask import abort
+        abort(403)
+    
+    return None
+
 # ============================================================
 # Rutas principales
 # ============================================================
