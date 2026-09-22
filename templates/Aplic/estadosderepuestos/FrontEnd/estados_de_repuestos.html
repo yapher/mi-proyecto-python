@@ -33,13 +33,13 @@ role="tabpanel"
 aria-labelledby="tab-{{ tab.sanitized_id }}">
 {% set repuestos = tab.repuestos_filtrados %}
 {% set active_tab = active_tab %}
-{% include 'Aplic/estadosderepuestos/FrontEnd/component/tablaRepuestos.html' %}
+{% include 'partials/repuestos/tablaRepuestos.html' %}
 </div>
 {% endfor %}
 </div>
 
-{% include "Aplic/estadosderepuestos/FrontEnd/component/details.html" %}
+{% include "partials/repuestos/details.html" %}
 {% set tabs = tabs %}
 {% set ubicaciones = ubicaciones %}
-{% include "Aplic/estadosderepuestos/FrontEnd/component/newRep.html" %}
+{% include "partials/repuestos/newRep.html" %}
 {% endblock %}

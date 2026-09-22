@@ -11,24 +11,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const select = document.getElementById('nombre_linea');
         if (!select) return;
 
-        // Limpiar opciones existentes (excepto la primera deshabilitada)
+        // 1. Limpiar opciones existentes (mantener solo la opción por defecto deshabilitada)
         select.querySelectorAll('option:not([disabled])').forEach(o => o.remove());
 
-        // Usar la variable global inyectada de forma segura
+        // 2. Usar la variable global inyectada de forma segura
         const rutas = window.rutasPlanos || [];
-
         const emptyWarning = document.getElementById('rutas-empty');
 
-        if (Array.isArray(rutas) && rutas.length) {
+        // 3. Poblar el select
+        if (Array.isArray(rutas) && rutas.length > 0) {
             rutas.forEach(r => {
                 const opt = document.createElement('option');
                 opt.value = r;
                 opt.textContent = r;
                 select.appendChild(opt);
             });
+            
+            // Ocultar advertencia de vacío
             if (emptyWarning) emptyWarning.classList.add('d-none');
         } else {
+            // Mostrar advertencia si no hay rutas
             if (emptyWarning) emptyWarning.classList.remove('d-none');
+            console.warn('⚠️ No se encontraron rutas técnicas para cargar en el select.');
         }
     });
 });

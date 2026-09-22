@@ -16,8 +16,8 @@
 {# ✅ AGREGAR: Variable return_to para que el modal redirija a inventario #}
 {% set return_to = 'indexinventario.indexinventario' %}
 {% set ubicaciones = ubicaciones %}
-{% include "Aplic/estadosderepuestos/FrontEnd/component/details.html" %}
-{% include "Aplic/estadosderepuestos/FrontEnd/component/newRep.html" %}
+{% include "partials/repuestos/details.html" %}
+{% include "partials/repuestos/newRep.html" %}
 {% endblock %}
 
 {% block scripts %}

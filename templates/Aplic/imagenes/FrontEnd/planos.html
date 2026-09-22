@@ -2,15 +2,15 @@
 {% block content %}
 <div class="container-fluid mt-4 px-0">
     <h2 class="mb-4">Gestión de Planos PDF</h2>
-
+    
     <!-- Partial que incluye botón + modal -->
     {% include 'Aplic/imagenes/FrontEnd/_modal_agregar_plano.html' %}
-
+    
     <!-- Buscador -->
     <div class="mb-3">
         <input type="text" class="form-control" id="buscarPlano" placeholder="🔍 Buscar en todos los campos...">
     </div>
-
+    
     <!-- Tabla de Planos -->
     <div class="table-responsive tabla-scroll">
         <table class="table table-bordered table-hover table-striped table-dark align-middle w-100 table-fixed">
@@ -26,27 +26,28 @@
                 {% import 'Aplic/imagenes/FrontEnd/_macros.html' as macros %}
                 {% set agrupados = {} %}
                 {% for plano in planos %}
-                {% set _ = agrupados.setdefault(plano.nombre_linea, []).append(plano) %}
+                    {% set _ = agrupados.setdefault(plano.nombre_linea, []).append(plano) %}
                 {% endfor %}
+                
                 {% if agrupados %}
-                {% for linea, planos_linea in agrupados.items() %}
-                {{ macros.fila_principal(linea, loop.index) }}
-                <tr class="collapse" id="collapse{{ loop.index }}">
-                    <td colspan="5" class="p-0">
-                        <table class="table table-dark mb-0 table-fixed">
-                            <tbody>
-                                {% for plano in planos_linea %}
-                                {{ macros.fila_plano(plano, loop.index, loop.index0) }}
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </td>
-                </tr>
-                {% endfor %}
+                    {% for linea, planos_linea in agrupados.items() %}
+                        {{ macros.fila_principal(linea, loop.index) }}
+                        <tr class="collapse" id="collapse{{ loop.index }}">
+                            <td colspan="5" class="p-0">
+                                <table class="table table-dark mb-0 table-fixed">
+                                    <tbody>
+                                        {% for plano in planos_linea %}
+                                            {{ macros.fila_plano(plano, loop.index, loop.index0) }}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    {% endfor %}
                 {% else %}
-                <tr>
-                    <td colspan="5" class="text-center">No hay planos cargados.</td>
-                </tr>
+                    <tr>
+                        <td colspan="5" class="text-center">No hay planos cargados.</td>
+                    </tr>
                 {% endif %}
             </tbody>
         </table>
@@ -55,13 +56,12 @@
 {% endblock %}
 
 {% block scripts %}
-<!-- Inyección segura de datos del backend para JS externo -->
+<!-- ✅ 1. Inyección segura de datos del backend para JS externo -->
 <script>
     window.rutasPlanos = {{ rutas|tojson|safe }};
 </script>
 
-<!-- Scripts de la aplicación Imágenes centralizados -->
-<script src="{{ url_for('indeximagenes.static', filename='js/select.js') }}"></script>
+<!-- ✅ 2. Scripts de la aplicación Imágenes centralizados (select.js ELIMINADO para evitar conflictos) -->
 <script src="{{ url_for('indeximagenes.static', filename='js/busqueda.js') }}"></script>
 <script src="{{ url_for('indeximagenes.static', filename='js/planos.js') }}"></script>
 <script src="{{ url_for('indeximagenes.static', filename='js/modal_agregar_plano.js') }}"></script>

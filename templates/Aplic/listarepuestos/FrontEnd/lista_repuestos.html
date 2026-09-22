@@ -16,12 +16,14 @@
             Lista de Repuestos
             <span class="badge bg-secondary">{{ repuestos|length }}</span>
             {% if cantidad_vencidos > 0 %}
-            <a href="{{ url_for('indexlista_repuestos.indexlista_repuestos', vencidos='1') }}" class="badge bg-danger ms-2" title="Mostrar solo repuestos vencidos">
+            <a href="{{ url_for('indexlista_repuestos.indexlista_repuestos', vencidos='1') }}"
+                class="badge bg-danger ms-2" title="Mostrar solo repuestos vencidos">
                 Vencidos {{ cantidad_vencidos }}
             </a>
             {% endif %}
             {% if filtros.vencidos == '1' %}
-            <a href="{{ url_for('indexlista_repuestos.indexlista_repuestos') }}" class="badge bg-info ms-2" title="Mostrar todos los repuestos">
+            <a href="{{ url_for('indexlista_repuestos.indexlista_repuestos') }}" class="badge bg-info ms-2"
+                title="Mostrar todos los repuestos">
                 Mostrar todos
             </a>
             {% endif %}
@@ -57,7 +59,8 @@
 
         {% if repuestos %}
         <div class="d-flex gap-3 align-items-center mb-2 flex-wrap">
-            <form class="form-exportar-pdf no-loader" action="{{ url_for('indexlista_repuestos.indexlista_repuestos') }}" method="get">
+            <form class="form-exportar-pdf no-loader"
+                action="{{ url_for('indexlista_repuestos.indexlista_repuestos') }}" method="get">
                 <input type="hidden" name="nombre" value="{{ filtros.nombre }}">
                 <input type="hidden" name="codigo" value="{{ filtros.codigo }}">
                 <input type="hidden" name="estado" value="{{ filtros.estado }}">
@@ -92,9 +95,9 @@
 
 </div>
 
-{% include "Aplic/estadosderepuestos/FrontEnd/component/details.html" %}
+{% include "partials/repuestos/details.html" %}
 {% set ubicaciones = ubicaciones %}
-{% include "Aplic/estadosderepuestos/FrontEnd/component/newRep.html" %}
+{% include "partials/repuestos/newRep.html" %}
 
 {% endblock %}
 
