@@ -1,0 +1,77 @@
+{# templates/partials/login_modal.html #}
+{# Modal de login reutilizable - se muestra automáticamente si no hay sesión #}
+<div class="modal fade login-modal" id="loginModal" tabindex="-1" 
+     aria-labelledby="loginModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="loginModalLabel">
+                    <i class="bi bi-lock-fill"></i> Iniciar Sesión
+                </h5>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm" method="POST" action="{{ url_for('login') }}">
+                    <div class="mb-3">
+                        <label for="loginUsername" class="form-label">Usuario</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-person-fill"></i>
+                            </span>
+                            <input type="text" id="loginUsername" name="username" 
+                                   class="form-control" required autofocus>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="loginPassword" class="form-label">Contraseña</label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-key-fill"></i>
+                            </span>
+                            <input type="password" id="loginPassword" name="password" 
+                                   class="form-control" required>
+                            <button type="button" class="btn btn-outline-secondary" 
+                                    id="togglePasswordBtn" title="Mostrar/Ocultar contraseña">
+                                <i class="bi bi-eye-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        {% for message in messages %}
+                        {{ message }}
+                        {% endfor %}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-login">
+                            <i class="bi bi-box-arrow-in-right"></i> Ingresar
+                        </button>
+                        <button type="button" class="btn btn-outline-secondary" 
+                                id="showFaceRecBtn">
+                            <i class="bi bi-camera-video-fill"></i> Usar reconocimiento facial
+                        </button>
+                    </div>
+                </form>
+                
+                {# Sección de reconocimiento facial (oculta inicialmente) #}
+                <div id="faceRecognitionSection" style="display: none;">
+                    <div class="text-center mt-3">
+                        <h6 class="titulo-simulacion">Detección Facial</h6>
+                        <div id="fpsCounter" class="fps-counter"></div>
+                        <canvas id="outputCanvas" class="face-canvas"></canvas>
+                        <button id="captureBtn" class="btn btn-success mt-2">
+                            <i class="bi bi-camera-fill"></i> Capturar Rostro
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<video hidden id="inputVideo" autoplay muted></video>

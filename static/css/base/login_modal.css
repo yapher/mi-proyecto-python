@@ -1,0 +1,102 @@
+/* static/css/base/login_modal.css */
+/* Estilos reutilizables para el modal de login */
+
+.login-modal .modal-content {
+    background: linear-gradient(135deg, #4b376a 0%, #3e2d59 100%);
+    border: 2px solid rgba(136, 201, 153, 0.3);
+    border-radius: 1rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.login-modal .modal-header {
+    background: linear-gradient(to right, #2a1e3b, #3e2d59);
+    border-bottom: 2px solid #88c999;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.login-modal .modal-title {
+    color: #88c999;
+    font-weight: 700;
+}
+
+.login-modal .form-label {
+    color: #e5d64f;
+    font-weight: 500;
+}
+
+.login-modal .form-control {
+    background-color: #3e2d59;
+    border: 1px solid #88c999;
+    color: #fff;
+}
+
+.login-modal .form-control:focus {
+    background-color: #3e2d59;
+    border-color: #88c999;
+    box-shadow: 0 0 0 0.2rem rgba(136, 201, 153, 0.25);
+    color: #fff;
+}
+
+.login-modal .input-group-text {
+    background-color: #3e2d59;
+    border: 1px solid #88c999;
+    color: #88c999;
+}
+
+.login-modal .btn-login {
+    background: linear-gradient(135deg, #88c999 0%, #77b88b 100%);
+    border: none;
+    color: #222;
+    font-weight: 600;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.login-modal .btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(136, 201, 153, 0.4);
+}
+
+/* Canvas de reconocimiento facial */
+.face-canvas {
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 255, 200, 0.4);
+    max-width: 100%;
+    height: auto;
+    background-color: #000;
+    margin: 1rem auto;
+    display: block;
+}
+
+.titulo-simulacion {
+    color: #00ffaa;
+    font-weight: bold;
+    text-shadow: 0 0 8px rgba(0, 255, 200, 0.6);
+}
+
+.fps-counter {
+    color: #00ffaa;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+}
+
+/* Alertas dentro del modal */
+.login-modal .alert {
+    background-color: rgba(255, 193, 7, 0.1);
+    border: 1px solid #ffc107;
+    color: #ffc107;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .login-modal .modal-dialog {
+        margin: 0.5rem;
+        max-width: calc(100vw - 1rem);
+    }
+    
+    .face-canvas {
+        width: 100%;
+        height: auto;
+    }
+}

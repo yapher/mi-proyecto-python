@@ -22,10 +22,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/mobile.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/arbol_crud.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/image_uploader.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/login_modal.css') }}">
     {% block head %}{% endblock %}
 </head>
 
-<body>
+<body data-require-login="{{ 'true' if not current_user.is_authenticated else 'false' }}">
     <nav class="navbar navbar-expand-lg bg-gradient bg-dark border-bottom shadow-sm sticky-top">
         <div class="container-fluid">
             <a class="navbar-brand nav-link d-flex align-items-center" href="/">
@@ -105,6 +106,10 @@
         {% endfor %}
         {% endif %}
         {% endwith %}
+        {# Modal de login (se muestra si el usuario no está autenticado) #}
+        {% if not current_user.is_authenticated %}
+        {% include 'partials/login_modal.html' %}
+        {% endif %}
         {% block content %}{% endblock %}
     </main>
     <!-- JS externos -->
@@ -121,7 +126,7 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    
+
     <!-- ✅ Scripts reutilizables desde static/js/utils/ -->
     <script src="{{ url_for('static', filename='js/utils/layout_scripts.js') }}"></script>
     <script src="{{ url_for('static', filename='js/utils/reloj.js') }}"></script>
@@ -132,6 +137,14 @@
     <script src="{{ url_for('static', filename='js/utils/image_uploader.js') }}"></script>
     <script src="{{ url_for('static', filename='js/utils/notifications.js') }}"></script>
     <script src="{{ url_for('static', filename='js/utils/face_mesh_tracker.js') }}"></script>
+    {# Scripts del modal de login (solo si no está autenticado) #}
+    {% if not current_user.is_authenticated %}
+    <script src="{{ url_for('static', filename='js/utils/login_modal.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="{{ url_for('static', filename='js/utils/login_facial.js') }}"></script>
+    {% endif %}
     {% block scripts %}{% endblock %}
 </body>
 
