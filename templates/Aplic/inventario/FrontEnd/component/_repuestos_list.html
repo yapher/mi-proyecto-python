@@ -1,9 +1,9 @@
 <ul class="list-group inventario-repuestos-list mb-3">
     {% for r in repuestos %}
     <li class="list-group-item inventario-repuesto-item p-0">
-        <button type="button" 
+        <button type="button"
                 class="btn-editar w-100 text-start p-3 bg-transparent border-0"
-                data-bs-toggle="modal" 
+                data-bs-toggle="modal"
                 data-bs-target="#agregarModal"
                 data-codigo="{{ r.codigo }}"
                 data-nombre="{{ r.nombre }}"
@@ -15,8 +15,8 @@
                 data-link="{{ r.link | default('') }}"
                 data-emojy="{{ r.estado }}"
                 data-imagen="{{ r.imagen | default('') }}"
+                data-comentario="{{ r.comentario | default('') }}"
                 data-tab_activo="">
-            
             <div class="d-flex justify-content-between align-items-start">
                 <div>
                     <strong>{{ r.nombre }}</strong>
@@ -29,6 +29,12 @@
             {% if r.estado %}
             <div class="mt-1">
                 <small class="text-muted">Estado: {{ r.estado }}</small>
+            </div>
+            {% endif %}
+            <!-- ✅ NUEVO: Comentario visible en inventario -->
+            {% if r.comentario %}
+            <div class="mt-1">
+                <small class="text-muted"><i class="bi bi-chat-left-text"></i> {{ r.comentario }}</small>
             </div>
             {% endif %}
         </button>

@@ -11,6 +11,7 @@ from PIL import Image as PILImage, UnidentifiedImageError
 
 UPLOAD_FOLDER = 'static/uploads/Imagenes'
 
+
 def imagen_valida(ruta):
     try:
         with PILImage.open(ruta) as im:
@@ -19,11 +20,11 @@ def imagen_valida(ruta):
     except (UnidentifiedImageError, OSError):
         return False
 
+
 def exportar_pdf_reportlab(repuestos):
     buffer = BytesIO()
     doc = SimpleDocTemplate(buffer, pagesize=landscape(letter),
                             leftMargin=40, rightMargin=40, topMargin=60, bottomMargin=40)
-
     styles = getSampleStyleSheet()
 
     if 'CustomTitle' not in styles:
@@ -36,6 +37,7 @@ def exportar_pdf_reportlab(repuestos):
             spaceAfter=12,
             textColor=colors.HexColor('#003366')
         ))
+
     if 'CustomDate' not in styles:
         styles.add(ParagraphStyle(
             name='CustomDate',
@@ -46,6 +48,7 @@ def exportar_pdf_reportlab(repuestos):
             spaceAfter=20,
             textColor=colors.HexColor('#666666')
         ))
+
     if 'CustomTotal' not in styles:
         styles.add(ParagraphStyle(
             name='CustomTotal',
@@ -67,13 +70,16 @@ def exportar_pdf_reportlab(repuestos):
         Paragraph("<u>Código</u>", styles['Heading4']),
         Paragraph("<u>Cantidad</u>", styles['Heading4']),
         Paragraph("<u>Almacén</u>", styles['Heading4']),
-        Paragraph("<u>Ubicación Técnica</u>", styles['Heading4'])
+        Paragraph("<u>Ubicación Técnica</u>", styles['Heading4']),
+        Paragraph("<u>Comentario</u>", styles['Heading4']),          # ✅ NUEVO
     ]]
 
     for r in repuestos:
         ubicacion = r.get("ruta_jerarquia", [])
         if isinstance(ubicacion, list):
             ubicacion = ", ".join(ubicacion)
+
+        comentario = r.get("comentario", "") or ""                    # ✅ NUEVO
 
         img_rel_path = r.get("imagen", None)
         if img_rel_path:
@@ -104,6 +110,7 @@ def exportar_pdf_reportlab(repuestos):
             Paragraph(str(r.get("cantidad", "")), styles['Normal']),
             Paragraph(str(r.get("equipo", "")), styles['Normal']),
             Paragraph(ubicacion, styles['Normal']),
+            Paragraph(comentario, styles['Normal']),                  # ✅ NUEVO
         ])
 
     table = Table(data, repeatRows=1, hAlign='CENTER')
@@ -123,8 +130,8 @@ def exportar_pdf_reportlab(repuestos):
 
     elements = [titulo, fecha, table, total_text]
     doc.build(elements)
-    buffer.seek(0)
 
+    buffer.seek(0)
     response = make_response(buffer.read())
     response.headers['Content-Type'] = 'application/pdf'
     response.headers['Content-Disposition'] = 'attachment; filename=repuestos.pdf'

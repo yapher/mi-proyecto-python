@@ -3,20 +3,20 @@ from core.db_sql import db
 from datetime import datetime
 import json
 
-
 class Repuesto(db.Model):
     __tablename__ = 'repuestos'
 
     id = db.Column(db.Integer, primary_key=True)
     codigo = db.Column(db.String(100), unique=True, nullable=False, index=True)
-    nombre = db.Column(db.Text, nullable=False)          # ✅ Cambiado a Text (nombres muy descriptivos)
+    nombre = db.Column(db.Text, nullable=False)
     cantidad = db.Column(db.Integer, default=0)
-    equipo = db.Column(db.Text, default='')              # ✅ Cambiado a Text
+    equipo = db.Column(db.Text, default='')
     imagen = db.Column(db.String(255), default='')
     fecha_creacion = db.Column(db.String(20), default='')
     fecha_fin = db.Column(db.String(20), default='')
-    link = db.Column(db.Text, default='')                # ✅ Cambiado a Text (URLs de eBay/Banner son muy largas)
+    link = db.Column(db.Text, default='')
     estado = db.Column(db.String(50), default='')
+    comentario = db.Column(db.Text, default='')              # ✅ NUEVO
     ruta_jerarquia_json = db.Column('ruta_jerarquia', db.Text, default='[]')
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
@@ -26,6 +26,7 @@ class Repuesto(db.Model):
             rutas = json.loads(self.ruta_jerarquia_json or '[]')
         except Exception:
             rutas = []
+
         return {
             'id': self.id,
             'codigo': self.codigo,
@@ -37,5 +38,6 @@ class Repuesto(db.Model):
             'fecha_fin': self.fecha_fin,
             'link': self.link,
             'estado': self.estado,
+            'comentario': self.comentario or '',              # ✅ NUEVO
             'ruta_jerarquia': rutas,
         }

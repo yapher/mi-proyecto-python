@@ -4,23 +4,24 @@
  * Responsabilidad: Resetear campos, cargar datos de edición y manejar la imagen.
  */
 const RepuestoForm = {
+
     /**
      * Resetea el formulario a su estado inicial (modo "Agregar")
      */
     resetear: () => {
         const form = document.getElementById('formAgregarRepuesto');
         if (form) form.reset();
-        
+
         if (typeof $ !== 'undefined' && $('#ubicacion').length) {
             $('#ubicacion').val(null).trigger('change');
         }
-        
+
         document.getElementById('agregarModalLabel').textContent = "Agregar Nuevo Repuesto";
         document.getElementById('codigo').readOnly = false;
         document.getElementById('codigo_original').value = '';
         document.getElementById('imgPreview').style.display = 'none';
         document.getElementById('imgNombre').textContent = '';
-        
+
         const btnSubmit = document.querySelector('#formAgregarRepuesto button[type="submit"]');
         if (btnSubmit) btnSubmit.textContent = "Guardar Repuesto";
     },
@@ -31,7 +32,7 @@ const RepuestoForm = {
     cargarDatos: (btn) => {
         document.getElementById('agregarModalLabel').textContent = "Editar Repuesto";
         document.getElementById('codigo').readOnly = false;
-        
+
         const btnSubmit = document.querySelector('#formAgregarRepuesto button[type="submit"]');
         if (btnSubmit) btnSubmit.textContent = "Guardar Cambios";
 
@@ -46,6 +47,7 @@ const RepuestoForm = {
         document.getElementById('link').value = RepuestoUtils.limpiar(btn.getAttribute('data-link'));
         document.getElementById('estado').value = RepuestoUtils.limpiar(btn.getAttribute('data-emojy'));
         document.getElementById('tab_activo').value = RepuestoUtils.limpiar(btn.getAttribute('data-tab_activo'));
+        document.getElementById('comentario').value = RepuestoUtils.limpiar(btn.getAttribute('data-comentario'));   // ✅ NUEVO
 
         // 2. Select2 (Ubicaciones)
         const rutas = RepuestoUtils.parsearRutas(btn.getAttribute('data-ruta_jerarquia'));
@@ -57,7 +59,7 @@ const RepuestoForm = {
         const imagen = RepuestoUtils.limpiar(btn.getAttribute('data-imagen'));
         const imgPreview = document.getElementById('imgPreview');
         const imgNombre = document.getElementById('imgNombre');
-        
+
         if (imagen && imagen !== '') {
             imgPreview.src = '/static/uploads/Imagenes/' + imagen;
             imgPreview.style.display = 'block';
@@ -71,6 +73,7 @@ const RepuestoForm = {
             codigo: document.getElementById('codigo').value,
             nombre: document.getElementById('nombre').value,
             estado: document.getElementById('estado').value,
+            comentario: document.getElementById('comentario').value,
             ubicaciones: rutas
         });
     },
@@ -82,11 +85,11 @@ const RepuestoForm = {
         const form = document.getElementById('formAgregarRepuesto');
         const editarUrl = document.getElementById('editar-repuesto-url')?.value;
         const agregarUrl = form?.getAttribute('action');
-        
+
         if (form) {
             form.action = esEdicion && editarUrl ? editarUrl : agregarUrl;
         }
-        
+
         const inputTab = document.getElementById('tab_activo');
         if (inputTab) inputTab.value = tabActivo;
     }

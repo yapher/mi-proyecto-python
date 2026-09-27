@@ -33,7 +33,6 @@ from .export_pdf import exportar_pdf_reportlab
 
 # ============================================================
 # Alias para mantener compatibilidad con el código existente
-# (evita cambiar todas las llamadas internas)
 # ============================================================
 leer_repuestos = cargar_todos_repuestos
 
@@ -58,9 +57,7 @@ def _redirigir(return_to, tab_activo):
 @login_required
 @roles_required('viewer')
 def indexEstadoRep():
-    # ✅ NUEVO: Log de acceso
     logger.info(f"Acceso a estadosRep - Usuario: {current_user.username}")
-    
     nemu = cargar_menu()
     tabs = cargar_tabs()
     repuestos = leer_repuestos()
@@ -78,7 +75,6 @@ def indexEstadoRep():
             r for r in repuestos
             if any(ruta_jer.strip().lower() == ruta for ruta_jer in r.get('ruta_jerarquia', []))
         ]
-
         if buscar:
             repuestos_filtrados = [
                 r for r in repuestos_filtrados
@@ -86,9 +82,9 @@ def indexEstadoRep():
                 or buscar in str(r.get('codigo', '')).lower()
                 or buscar in str(r.get('equipo', '')).lower()
                 or buscar in str(r.get('cantidad', '')).lower()
+                or buscar in str(r.get('comentario', '')).lower()          # ✅ NUEVO
                 or buscar in ','.join(r.get('ruta_jerarquia', [])).lower()
             ]
-
         tab['repuestos_filtrados'] = repuestos_filtrados
 
     return render_template(
@@ -117,8 +113,8 @@ def api_repuestos():
 def exportar_pdf():
     ruta_jerarquia = request.form.get("ruta_jerarquia", "").strip().lower()
     buscar = request.form.get("buscar", "").strip().lower()
-
     repuestos = leer_repuestos()
+
     repuestos_filtrados = [
         r for r in repuestos
         if any(ruta_jer.strip().lower() == ruta_jerarquia for ruta_jer in r.get('ruta_jerarquia', []))
@@ -132,6 +128,7 @@ def exportar_pdf():
             or buscar in str(r.get('equipo', '')).lower()
             or buscar in str(r.get('estado', '')).lower()
             or buscar in str(r.get('cantidad', '')).lower()
+            or buscar in str(r.get('comentario', '')).lower()              # ✅ NUEVO
             or buscar in ','.join(r.get('ruta_jerarquia', [])).lower()
         ]
 
@@ -155,6 +152,7 @@ def agregar_repuesto():
         "fecha_fin": request.form.get('fecha_fin', '').strip(),
         "link": request.form.get('link', '').strip(),
         "estado": request.form.get('estado', '').strip(),
+        "comentario": request.form.get('comentario', '').strip(),           # ✅ NUEVO
         "imagen": None
     }
 
@@ -172,20 +170,18 @@ def agregar_repuesto():
     if error:
         flash(error, "danger")
         return _redirigir(return_to, tab_activo)
-
     if filename:
         datos['imagen'] = filename
 
     exito, mensaje = crear_repuesto(datos)
-    
-    # ✅ NUEVO: Log de resultado
+
     if exito:
         logger.info(f"✅ Repuesto creado: {datos['codigo']} por {current_user.username}")
         flash(mensaje, "success")
     else:
         logger.warning(f"⚠️ Error creando repuesto: {mensaje}")
         flash(mensaje, "warning")
-    
+
     return _redirigir(return_to, tab_activo)
 
 
@@ -206,7 +202,8 @@ def editar_repuesto():
         "fecha_creacion": request.form.get('fecha_creacion', '').strip(),
         "fecha_fin": request.form.get('fecha_fin', '').strip(),
         "link": request.form.get('link', '').strip(),
-        "estado": request.form.get('estado', '').strip()
+        "estado": request.form.get('estado', '').strip(),
+        "comentario": request.form.get('comentario', '').strip(),           # ✅ NUEVO
     }
 
     try:
@@ -218,20 +215,18 @@ def editar_repuesto():
     if error:
         flash(error, "danger")
         return _redirigir(return_to, tab_activo)
-
     if filename:
         nuevos_datos['imagen'] = filename
 
     exito, mensaje = actualizar_repuesto(codigo_original, nuevos_datos)
-    
-    # ✅ NUEVO: Log de resultado
+
     if exito:
         logger.info(f"✅ Repuesto actualizado: {nuevos_datos['codigo']} por {current_user.username}")
         flash(mensaje, "success")
     else:
         logger.warning(f"⚠️ Error actualizando repuesto: {mensaje}")
         flash(mensaje, "warning")
-    
+
     return _redirigir(return_to, tab_activo)
 
 
@@ -264,8 +259,8 @@ def estado_filter():
     estado = request.args.get('estado')
     tabs = cargar_tabs()
     tab_activo = tabs[0] if tabs else {}
-
     repuestos = leer_repuestos()
+
     estados_disponibles = sorted(set(r.get('estado', '') for r in repuestos if r.get('estado')))
 
     if estado:

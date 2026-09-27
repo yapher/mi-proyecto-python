@@ -1,5 +1,4 @@
 <article class="rep-card">
-
     <!-- Badge de estado -->
     <span class="rep-card-badge">{{ r.estado }}</span>
 
@@ -17,6 +16,7 @@
              data-equipo="{{ r.equipo }}"
              data-fechafin="{{ r.fecha_fin }}"
              data-ubicacion="{{ r.ruta_jerarquia | join(', ') }}"
+             data-comentario="{{ r.comentario | default('') }}"
              data-imagen="{{ url_for('static', filename='uploads/Imagenes/' ~ r.imagen) }}"
              data-emojy="{{ r.estado }}">
         {% else %}
@@ -29,7 +29,6 @@
 
     <!-- Cuerpo -->
     <div class="rep-card-body">
-
         <!-- Título + Código -->
         <div class="rep-card-header">
             <h5 class="rep-card-title">{{ r.nombre }}</h5>
@@ -64,6 +63,15 @@
             {% endif %}
         </div>
 
+        <!-- ✅ NUEVO: Comentario -->
+        {% if r.comentario %}
+        <div class="rep-card-row">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="rep-label">Nota:</span>
+            <span class="rep-value">{{ r.comentario }}</span>
+        </div>
+        {% endif %}
+
         <!-- Ubicaciones -->
         {% if r.ruta_jerarquia %}
         <div class="rep-card-locations">
@@ -78,7 +86,6 @@
             </div>
         </div>
         {% endif %}
-
     </div>
 
     <!-- Acciones -->
@@ -86,5 +93,4 @@
         {% include 'partials/repuestos/buttonEdit.html' %}
         {% include 'partials/repuestos/buttonDelete.html' %}
     </div>
-
 </article>

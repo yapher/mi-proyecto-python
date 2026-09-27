@@ -3,7 +3,6 @@ core/db_sql_store.py
 ====================
 Stores SQL que reemplazan a los JSON stores.
 Mantienen la MISMA API pública para migrar módulo por módulo.
-
 Stores disponibles:
 - SQLStore: reemplaza JsonStore (listas planas con ID autoincremental)
 - ArbolSQLStore: reemplaza lógica de arbol_bp.py (árboles jerárquicos)
@@ -17,12 +16,12 @@ import re
 from datetime import datetime
 from calendar import monthrange
 from sqlalchemy import func
+
 from core.db_sql import db
 from core.models import (
     Menu, Rubro, Almacen, Ubicacion, Tab, Estado,
-    Repuesto, Pago, NodoBloqueo, Evento, Tarea, 
+    Repuesto, Pago, NodoBloqueo, Evento, Tarea,
 )
-
 
 # ============================================================
 # 1. SQLStore - Reemplaza JsonStore (listas planas con ID)
@@ -44,7 +43,6 @@ class SQLStore:
         self.model.query.delete()
         db.session.commit()
         for data in items_dicts:
-            # Remover id para que SQLAlchemy lo auto-genere
             data_copy = {k: v for k, v in data.items() if k != 'id'}
             item = self.model(**data_copy)
             db.session.add(item)
@@ -55,7 +53,6 @@ class SQLStore:
         if defaults:
             for clave, valor in defaults.items():
                 item_data.setdefault(clave, valor)
-        # Remover id si viene (SQLAlchemy lo genera)
         data_copy = {k: v for k, v in item_data.items() if k != 'id'}
         item = self.model(**data_copy)
         db.session.add(item)
@@ -124,7 +121,6 @@ class SQLStore:
 class ArbolSQLStore:
     """
     Store SQL para árboles jerárquicos (menú, rubros, almacenes, ubicaciones).
-    Imita la API que usa arbol_bp.py internamente.
     """
     def __init__(self, model_class, clave_hijos='submenues', separador='.'):
         self.model = model_class
@@ -145,10 +141,8 @@ class ArbolSQLStore:
             'ruta_jerarquia': nodo.ruta_jerarquia,
             self.clave_hijos: []
         }
-        # Campo específico de Ubicacion
         if hasattr(nodo, 'imagen'):
             data['imagen'] = nodo.imagen
-        # ✅ NUEVO: Campo roles (para Menu)
         if hasattr(nodo, 'roles'):
             data['roles'] = nodo.roles or []
         for hijo in nodo.hijos:
@@ -160,10 +154,7 @@ class ArbolSQLStore:
         return self.model.query.filter_by(ruta_jerarquia=ruta_jerarquia).first()
 
     def agregar(self, nombre, emoji, ruta, ruta_padre, roles=None):
-        """
-        Agrega un nodo hijo bajo ruta_padre.
-        Retorna (exito, mensaje).
-        """
+        """Agrega un nodo hijo bajo ruta_padre."""
         if ruta_padre:
             padre = self.model.query.filter_by(ruta_jerarquia=ruta_padre).first()
             if not padre:
@@ -174,7 +165,6 @@ class ArbolSQLStore:
             padre_id = None
             nueva_ruta = nombre
 
-        # Verificar unicidad
         existente = self.model.query.filter_by(ruta_jerarquia=nueva_ruta).first()
         if existente:
             return False, f"Ya existe un nodo con esa ruta"
@@ -186,7 +176,6 @@ class ArbolSQLStore:
             ruta_jerarquia=nueva_ruta,
             padre_id=padre_id
         )
-        # ✅ NUEVO: asignar roles si el modelo lo soporta
         if roles is not None and hasattr(nuevo, 'roles'):
             nuevo.roles = roles
 
@@ -195,18 +184,13 @@ class ArbolSQLStore:
         return True, "Agregado correctamente"
 
     def editar(self, ruta_original, nuevos_datos):
-        """
-        Edita un nodo por su ruta_jerarquia.
-        Si cambia el nombre, actualiza la ruta_jerarquia de todos los descendientes.
-        Retorna (exito, mensaje).
-        """
+        """Edita un nodo por su ruta_jerarquia."""
         nodo = self.model.query.filter_by(ruta_jerarquia=ruta_original).first()
         if not nodo:
             return False, "Nodo no encontrado"
 
         nuevo_nombre = nuevos_datos.get('nombre', nodo.nombre)
 
-        # Si cambió el nombre, actualizar ruta_jerarquia de descendientes
         if nuevo_nombre != nodo.nombre:
             partes = nodo.ruta_jerarquia.split(self.separador)
             partes[-1] = nuevo_nombre
@@ -216,11 +200,11 @@ class ArbolSQLStore:
 
         nodo.nombre = nuevo_nombre
         nodo.emoji = nuevos_datos.get('emoji', nodo.emoji)
+
         if 'ruta' in nuevos_datos:
             nodo.ruta = nuevos_datos['ruta']
         if hasattr(nodo, 'imagen') and 'imagen' in nuevos_datos:
             nodo.imagen = nuevos_datos['imagen']
-        # ✅ NUEVO: actualizar roles si el modelo lo soporta
         if hasattr(nodo, 'roles') and 'roles' in nuevos_datos:
             nodo.roles = nuevos_datos['roles']
 
@@ -239,19 +223,16 @@ class ArbolSQLStore:
         nodo = self.model.query.filter_by(ruta_jerarquia=ruta_jerarquia).first()
         if not nodo:
             return False, "Nodo no encontrado"
-        db.session.delete(nodo)  # cascade='all, delete-orphan' elimina hijos
+        db.session.delete(nodo)
         db.session.commit()
         return True, "Eliminado correctamente"
-    
+
 
 # ============================================================
 # 3. EventSQLStore - Reemplaza EventStore (agenda)
 # ============================================================
 class EventSQLStore:
-    """
-    Store SQL para eventos de agenda.
-    Imita la API de EventStore de core/event.py.
-    """
+    """Store SQL para eventos de agenda."""
     CAMPOS_REQUERIDOS = ['titulo', 'fecha']
     PRIORIDADES_VALIDAS = ['alta', 'media', 'baja']
 
@@ -284,6 +265,7 @@ class EventSQLStore:
         }
         for k, v in defaults.items():
             data.setdefault(k, v)
+
         evento = self.model(
             titulo=data['titulo'],
             fecha=data['fecha'],
@@ -372,6 +354,7 @@ class RepuestoSQLStore:
         """Crea un repuesto desde un dict (sin validar unicidad)."""
         rutas = data.get('ruta_jerarquia', [])
         rutas_json = json.dumps(rutas if isinstance(rutas, list) else [])
+
         r = self.model(
             codigo=str(data.get('codigo', '')),
             nombre=data.get('nombre', ''),
@@ -382,6 +365,7 @@ class RepuestoSQLStore:
             fecha_fin=data.get('fecha_fin', ''),
             link=data.get('link', ''),
             estado=data.get('estado', ''),
+            comentario=data.get('comentario', ''),              # ✅ NUEVO
             ruta_jerarquia_json=rutas_json
         )
         db.session.add(r)
@@ -391,13 +375,11 @@ class RepuestoSQLStore:
         r = self.model.query.filter_by(codigo=str(codigo)).first()
         return r.to_dict() if r else None
 
-    # Alias para compatibilidad con UniqueFieldStore.buscar_por_unique
     buscar_por_unique = buscar_por_codigo
 
     def existe_codigo(self, codigo):
         return self.model.query.filter_by(codigo=str(codigo)).first() is not None
 
-    # Alias para compatibilidad
     existe_por_unique = existe_codigo
 
     def crear(self, datos, skip_unique_check=False):
@@ -405,8 +387,10 @@ class RepuestoSQLStore:
         codigo = datos.get('codigo')
         if not codigo or str(codigo).strip() == '':
             return False, "El campo 'codigo' es obligatorio"
+
         if not skip_unique_check and self.existe_codigo(codigo):
             return False, f"Ya existe un repuesto con codigo='{codigo}'"
+
         self._crear_desde_dict(datos)
         db.session.commit()
         return True, "Creado correctamente"
@@ -423,15 +407,17 @@ class RepuestoSQLStore:
                 and self.existe_codigo(nuevo_codigo)):
             return False, f"El nuevo codigo='{nuevo_codigo}' ya existe"
 
-        # Actualizar campos
         for campo in ['nombre', 'equipo', 'imagen', 'fecha_creacion',
-                      'fecha_fin', 'link', 'estado']:
+                       'fecha_fin', 'link', 'estado', 'comentario']:   # ✅ NUEVO: comentario
             if campo in nuevos_datos:
                 setattr(r, campo, nuevos_datos[campo])
+
         if 'cantidad' in nuevos_datos:
             r.cantidad = int(nuevos_datos['cantidad'] or 0)
+
         if 'codigo' in nuevos_datos:
             r.codigo = str(nuevos_datos['codigo'])
+
         if 'ruta_jerarquia' in nuevos_datos:
             rutas = nuevos_datos['ruta_jerarquia']
             r.ruta_jerarquia_json = json.dumps(
@@ -441,7 +427,6 @@ class RepuestoSQLStore:
         db.session.commit()
         return True, "Actualizado correctamente"
 
-    # Alias para compatibilidad con UniqueFieldStore
     def actualizar_por_unique(self, valor_original, nuevos_datos, check_new_unique=True):
         return self.actualizar_por_codigo(valor_original, nuevos_datos, check_new_unique)
 
@@ -453,7 +438,6 @@ class RepuestoSQLStore:
         db.session.commit()
         return True, "Eliminado correctamente"
 
-    # Alias
     eliminar_por_unique = eliminar_por_codigo
 
     def contar(self):
@@ -461,7 +445,6 @@ class RepuestoSQLStore:
 
     def buscar(self, **criterios):
         """Busca repuestos que cumplan criterios."""
-        # Para repuestos, la búsqueda por ruta_jerarquia es especial
         if 'ruta_jerarquia' in criterios:
             ruta = criterios.pop('ruta_jerarquia')
             resultados = []
@@ -473,7 +456,7 @@ class RepuestoSQLStore:
                 if ruta in rutas:
                     resultados.append(r.to_dict())
             return resultados
-        # Búsqueda normal por campos
+
         query = self.model.query
         for clave, valor in criterios.items():
             if hasattr(self.model, clave):
@@ -485,20 +468,14 @@ class RepuestoSQLStore:
 # 5. PagoSQLStore - Reemplaza MesStore (pagos mensuales)
 # ============================================================
 class PagoSQLStore:
-    """
-    Store SQL para pagos/gastos.
-    Reemplaza MesStore (que usaba archivos JSON).
-    """
+    """Store SQL para pagos/gastos."""
     def __init__(self):
         self.model = Pago
 
-    # --- Archivo general ---
     def leer_general(self):
-        """Lee todos los pagos."""
         return [p.to_dict() for p in self.model.query.all()]
 
     def guardar_general(self, pagos_dicts):
-        """Reemplaza todos los pagos."""
         self.model.query.delete()
         db.session.commit()
         for data in pagos_dicts:
@@ -506,7 +483,6 @@ class PagoSQLStore:
         db.session.commit()
 
     def _crear_desde_dict(self, data):
-        """Crea un pago desde un dict."""
         p = self.model(
             rubro=data.get('rubro', ''),
             descripcion=data.get('descripcion', ''),
@@ -521,15 +497,11 @@ class PagoSQLStore:
         db.session.add(p)
         return p
 
-    # --- MÉTODO FALTANTE: Agregar a general ---
     def agregar_a_general(self, registro):
-        """Agrega un pago a la tabla general."""
         self._crear_desde_dict(registro)
         db.session.commit()
 
-    # --- Archivo mensual ---
     def leer_mes(self, anio, mes):
-        """Lee pagos de un mes específico."""
         prefix = f"{anio}-{mes:02d}"
         pagos = self.model.query.filter(
             self.model.vencimiento.like(f"{prefix}%")
@@ -537,24 +509,19 @@ class PagoSQLStore:
         return [p.to_dict() for p in pagos]
 
     def guardar_mes(self, anio, mes, data):
-        """No-op en SQL (todo está en una tabla)."""
         pass
 
     def existe_mes(self, anio, mes):
-        """Verifica si hay pagos en ese mes."""
         prefix = f"{anio}-{mes:02d}"
         return self.model.query.filter(
             self.model.vencimiento.like(f"{prefix}%")
         ).count() > 0
 
-    # --- Operaciones avanzadas ---
     def agregar_a_mes(self, anio, mes, registro):
-        """Agrega un registro (en SQL es agregar a la tabla general)."""
         self._crear_desde_dict(registro)
         db.session.commit()
 
     def eliminar_de_mes(self, anio, mes, registro_id):
-        """Elimina un pago por ID."""
         p = self.model.query.get(registro_id)
         if not p:
             return False
@@ -562,9 +529,7 @@ class PagoSQLStore:
         db.session.commit()
         return True
 
-    # --- MÉTODO FALTANTE: Actualizar pago ---
     def actualizar_pago(self, pago_id, nuevos_datos):
-        """Actualiza un pago por ID."""
         p = self.model.query.get(pago_id)
         if not p:
             return False
@@ -574,9 +539,7 @@ class PagoSQLStore:
         db.session.commit()
         return True
 
-    # --- MÉTODO FALTANTE: Eliminar pago ---
     def eliminar_pago(self, pago_id):
-        """Elimina un pago por ID."""
         p = self.model.query.get(pago_id)
         if not p:
             return False
@@ -584,9 +547,7 @@ class PagoSQLStore:
         db.session.commit()
         return True
 
-    # --- MÉTODO FALTANTE: Toggle pagado ---
     def toggle_pagado(self, pago_id):
-        """Alterna el estado de pagado."""
         p = self.model.query.get(pago_id)
         if not p:
             return None
@@ -594,9 +555,7 @@ class PagoSQLStore:
         db.session.commit()
         return p.pagado
 
-    # --- Sincronización ---
     def sincronizar_registro(self, registro):
-        """Sincroniza un registro (no-op en SQL)."""
         registro_id = registro.get('id')
         p = self.model.query.get(registro_id)
         if not p:
@@ -606,9 +565,7 @@ class PagoSQLStore:
                 setattr(p, k, v)
         db.session.commit()
 
-    # --- Agregaciones ---
     def totales_por_rubro(self, anio, mes):
-        """Calcula totales agrupados por rubro."""
         prefix = f"{anio}-{mes:02d}"
         pagos = self.model.query.filter(
             self.model.vencimiento.like(f"{prefix}%")
@@ -620,7 +577,6 @@ class PagoSQLStore:
         return totales
 
     def total_mes(self, anio, mes):
-        """Calcula el total de un mes."""
         prefix = f"{anio}-{mes:02d}"
         total = db.session.query(func.sum(self.model.importe)).filter(
             self.model.vencimiento.like(f"{prefix}%")
@@ -628,7 +584,6 @@ class PagoSQLStore:
         return round(total or 0, 2)
 
     def listar_meses_disponibles(self):
-        """Lista todos los meses que tienen pagos."""
         resultados = db.session.query(
             func.substr(self.model.vencimiento, 1, 4).label('anio'),
             func.substr(self.model.vencimiento, 6, 2).label('mes')
@@ -647,12 +602,9 @@ class PagoSQLStore:
         meses.sort(reverse=True)
         return meses
 
-    # --- Clonación ---
     def clonar_mes(self, anio_origen, mes_origen, anio_destino, mes_destino,
                    resetear_pagado=True):
-        """Clona pagos de un mes a otro."""
         from calendar import monthrange
-
         pagos_origen = self.leer_mes(anio_origen, mes_origen)
         if not pagos_origen:
             raise ValueError(f"No hay pagos en {anio_origen}/{mes_origen:02d}")
@@ -663,7 +615,6 @@ class PagoSQLStore:
         for p_dict in pagos_origen:
             nuevo = dict(p_dict)
             nuevo.pop('id', None)
-
             try:
                 fecha_origen = datetime.strptime(p_dict['vencimiento'], "%Y-%m-%d")
                 dia = min(fecha_origen.day, ultimo_dia)
@@ -680,19 +631,16 @@ class PagoSQLStore:
         db.session.commit()
         return len(registros_clonados), registros_clonados
 
+
 # ============================================================
 # 6. NodoBloqueoSQLStore - Reemplaza lógica de gestion_de_bloqueos.py
 # ============================================================
 class NodoBloqueoSQLStore:
-    """
-    Store SQL para nodos de bloqueo (árbol de interruptores).
-    Imita la API que usa gestion_de_bloqueos.py.
-    """
+    """Store SQL para nodos de bloqueo."""
     def __init__(self):
         self.model = NodoBloqueo
 
     def cargar_todos(self):
-        """Retorna dict {id: {datos}} como el JSON original."""
         nodos = self.model.query.all()
         return {n.id: n.to_dict() for n in nodos}
 
@@ -701,8 +649,6 @@ class NodoBloqueoSQLStore:
         return n.to_dict() if n else None
 
     def crear(self, nombre, padre_id=None):
-        """Crea un nuevo nodo. Retorna (nuevo_id, datos)."""
-        # Generar ID único
         todos = self.model.query.all()
         max_id = 0
         for n in todos:
@@ -724,7 +670,6 @@ class NodoBloqueoSQLStore:
         return nuevo_id, nodo.to_dict()
 
     def actualizar(self, nodo_id, datos):
-        """Actualiza un nodo. Retorna datos actualizados o None."""
         n = self.model.query.get(str(nodo_id))
         if not n:
             return None
@@ -737,7 +682,6 @@ class NodoBloqueoSQLStore:
         return n.to_dict()
 
     def eliminar(self, nodo_id):
-        """Elimina un nodo."""
         n = self.model.query.get(str(nodo_id))
         if not n:
             return False
@@ -746,7 +690,6 @@ class NodoBloqueoSQLStore:
         return True
 
     def toggle_estado(self, nodo_id):
-        """Alterna el estado de un nodo. Retorna nuevo estado o None."""
         n = self.model.query.get(str(nodo_id))
         if not n:
             return None
@@ -754,28 +697,26 @@ class NodoBloqueoSQLStore:
         db.session.commit()
         return n.estado
 
+
 # ============================================================
 # 7. PlanoSQLStore - Para gestión de planos PDF
 # ============================================================
 class PlanoSQLStore:
-    """Store SQL para planos. Reemplaza la lectura/escritura de planos.json."""
+    """Store SQL para planos."""
     def __init__(self):
         from core.models import Plano
         self.model = Plano
 
     def cargar_todos(self):
-        """Retorna todos los planos como lista de dicts."""
         return [p.to_dict() for p in self.model.query.order_by(self.model.nombre_linea).all()]
 
     def agregar(self, datos):
-        """Agrega un nuevo plano."""
         nuevo = self.model(**datos)
         db.session.add(nuevo)
         db.session.commit()
         return nuevo.id
 
     def eliminar(self, plano_id):
-        """Elimina un plano por su ID."""
         plano = self.model.query.get(plano_id)
         if plano:
             db.session.delete(plano)
@@ -787,19 +728,14 @@ class PlanoSQLStore:
 # ============================================================
 # INSTANCIAS GLOBALES REUTILIZABLES
 # ============================================================
-# Para usar en blueprints (reemplazan las instancias JSON actuales)
-
-# Árboles jerárquicos
 menu_store = ArbolSQLStore(Menu, 'submenues', '.')
 rubro_store = ArbolSQLStore(Rubro, 'submenues', '.')
 almacen_store = ArbolSQLStore(Almacen, 'subcrear_almacenes', '.')
 ubicacion_store = ArbolSQLStore(Ubicacion, 'sububicaciones', '-')
 
-# Listas planas
 tab_store = SQLStore(Tab)
 estado_store = SQLStore(Estado)
 
-# Stores especializados
 evento_store = EventSQLStore()
 tarea_store = SQLStore(Tarea)
 repuesto_store = RepuestoSQLStore()
