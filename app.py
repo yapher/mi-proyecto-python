@@ -3,6 +3,7 @@ Aplicación principal.
 - Auto-registro de blueprints (no hay que tocar este archivo al agregar apps)
 - Configuración de mail, scheduler, login y context processors
 - Configuración de seguridad y proxies para producción (Render)
+- Logging centralizado
 """
 import os
 import threading
@@ -13,6 +14,9 @@ from flask_login import login_required, current_user
 from flask_mail import Mail
 from dotenv import load_dotenv
 from werkzeug.middleware.proxy_fix import ProxyFix
+
+# ✅ NUEVO: Importar logging centralizado
+from core.logging_config import setup_logging, get_logger
 
 # 1. Cargar variables de entorno (.env) AL INICIO
 load_dotenv()
@@ -29,6 +33,11 @@ from core.db_sql import db, init_db
 # ============================================================
 app = Flask(__name__)
 
+# ✅ NUEVO: Configurar logging centralizado
+setup_logging("Empresa")
+logger = get_logger("app")
+logger.info("🚀 Iniciando aplicación Flask")
+
 # ============================================================
 # Configuración de PROXY (CRÍTICO para Render)
 # Render usa proxies, necesitamos confiar en ellos para detectar HTTPS
@@ -39,22 +48,20 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 # Configuración de Base de Datos (SQLAlchemy)
 # ============================================================
 env_db_url = os.environ.get('DATABASE_URL')
-
 if env_db_url:
     # Render a veces usa 'postgres://' en lugar de 'postgresql://'
     # SQLAlchemy requiere 'postgresql://' obligatoriamente
     if env_db_url.startswith('postgres://'):
         env_db_url = env_db_url.replace('postgres://', 'postgresql://', 1)
-    
     app.config['SQLALCHEMY_DATABASE_URI'] = env_db_url
-    print("📦 Usando base de datos PostgreSQL (Render o local con .env)")
+    logger.info("📦 Usando base de datos PostgreSQL (Render o local con .env)")
 else:
     # Fallback: SQLite local
     db_dir = Path(__file__).parent / 'DataBase'
     db_dir.mkdir(exist_ok=True)
     db_path = db_dir / 'empresa.db'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
-    print(f"📦 Usando base de datos SQLite local: {db_path}")
+    logger.info(f"📦 Usando base de datos SQLite local: {db_path}")
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -66,7 +73,6 @@ init_db(app)
 # ============================================================
 # Detectar si estamos en producción (Render)
 is_production = bool(os.environ.get('DATABASE_URL'))
-
 if is_production:
     # Configuración para producción (HTTPS)
     app.config['SESSION_COOKIE_SECURE'] = True      # Cookies solo por HTTPS
@@ -76,7 +82,7 @@ if is_production:
     app.config['REMEMBER_COOKIE_HTTPONLY'] = True
     app.config['REMEMBER_COOKIE_SAMESITE'] = 'Lax'
     app.config['PREFERRED_URL_SCHEME'] = 'https'    # URLs generadas serán HTTPS
-    print("🔒 Modo PRODUCCIÓN: Cookies seguras habilitadas")
+    logger.info("🔒 Modo PRODUCCIÓN: Cookies seguras habilitadas")
 else:
     # Configuración para desarrollo (HTTP local)
     app.config['SESSION_COOKIE_SECURE'] = False
@@ -85,7 +91,7 @@ else:
     app.config['REMEMBER_COOKIE_SECURE'] = False
     app.config['REMEMBER_COOKIE_HTTPONLY'] = True
     app.config['REMEMBER_COOKIE_SAMESITE'] = 'Lax'
-    print("🔧 Modo DESARROLLO: Cookies normales")
+    logger.info("🔧 Modo DESARROLLO: Cookies normales")
 
 # ============================================================
 # Crear tablas y AUTO-SEED
@@ -96,12 +102,12 @@ with app.app_context():
     # Si no hay usuarios, ejecutar seed automáticamente
     from core.models import Usuario
     if Usuario.query.count() == 0:
-        print("🌱 DB vacía detectada. Ejecutando seed inicial...")
+        logger.warning("🌱 DB vacía detectada. Ejecutando seed inicial...")
         try:
             from scripts.seed_render import seed_todo
             seed_todo()
         except ImportError:
-            print("⚠️ No se encontró el script de seed, continuando sin datos iniciales.")
+            logger.warning("⚠️ No se encontró el script de seed, continuando sin datos iniciales.")
 
 # ============================================================
 # Configuración General y Secret Key
@@ -146,15 +152,12 @@ def intersect_filter(user_roles, item_roles):
     """
     if not item_roles:
         return True
-    
     try:
         if isinstance(item_roles, str):
             import json
             item_roles = json.loads(item_roles)
-            
         user_set = set(user_roles) if isinstance(user_roles, (list, set, tuple)) else set()
         item_set = set(item_roles) if isinstance(item_roles, (list, set, tuple)) else set()
-        
         return bool(user_set & item_set)
     except Exception:
         return True
@@ -166,11 +169,10 @@ def intersect_filter(user_roles, item_roles):
 def inject_menu():
     if current_user.is_authenticated:
         return dict(
-            menu=cargar_menu(), 
+            menu=cargar_menu(),
             roles=current_user.roles if current_user.roles else []
         )
     return dict(menu=[], roles=[])
-
 
 # ============================================================
 # MIDDLEWARE: Verificación dinámica de acceso por roles del menú
@@ -215,6 +217,7 @@ def verificar_acceso_menu():
     
     if not user_roles & required_roles:
         # Usuario no tiene acceso → 403 Forbidden
+        logger.warning(f"🚫 Acceso denegado: {current_user.username} intentó acceder a {request.path}")
         from flask import abort
         abort(403)
     
@@ -279,7 +282,7 @@ if __name__ == "__main__":
     # Iniciar scheduler solo si no estamos en modo reload de Flask (evita duplicados en local)
     if not os.environ.get("WERKZEUG_RUN_MAIN"):
         scheduler.start()
-        threading.Timer(1.0, _abrir_navegador).start()
     
+    threading.Timer(1.0, _abrir_navegador).start()
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)

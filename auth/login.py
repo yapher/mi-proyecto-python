@@ -1,6 +1,8 @@
 """
 Módulo de autenticación: login por credenciales y reconocimiento facial.
 AHORA USA SQL para usuarios.
+✅ SEGURIDAD: Contraseñas hasheadas con werkzeug.security
+✅ MIGRACIÓN GRADUAL: Usuarios existentes se migran al hacer login
 """
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask import request, redirect, url_for, render_template, abort, flash
@@ -9,9 +11,13 @@ import os
 from functools import wraps
 import cv2
 import numpy as np
+from werkzeug.security import generate_password_hash, check_password_hash
 from core.db_sql import db
 from core.models import Usuario
 
+# ✅ NUEVO: Logger centralizado
+from core.logging_config import get_logger
+logger = get_logger(__name__)
 
 # Ruta de rostros (se mantiene en filesystem)
 ROSTROS_DIR = 'static/rostros'
@@ -36,6 +42,11 @@ def roles_required(*roles):
             if not current_user.is_authenticated:
                 return redirect(url_for('login'))
             if not any(current_user.has_role(role) for role in roles):
+                logger.warning(
+                    f"Acceso denegado: {current_user.username} "
+                    f"intentó acceder a {request.path} "
+                    f"(roles requeridos: {roles}, roles usuario: {current_user.roles})"
+                )
                 return abort(403)
             return f(*args, **kwargs)
         return wrapped
@@ -55,6 +66,61 @@ def comparar_rostros(rostro1, rostro2):
     return max_val
 
 
+# ============================================================
+# ✅ NUEVAS FUNCIONES DE HASH (reutilizables)
+# ============================================================
+def hash_password(password_plano):
+    """
+    Hashea una contraseña en texto plano usando pbkdf2:sha256.
+    Uso:
+        hash = hash_password("mi_password")
+    """
+    return generate_password_hash(password_plano)
+
+
+def verify_password(password_plano, password_hash):
+    """
+    Verifica si una contraseña en texto plano coincide con un hash.
+    Uso:
+        if verify_password("mi_password", usuario.password):
+            # acceso concedido
+    """
+    return check_password_hash(password_hash, password_plano)
+
+
+def migrar_password_si_corresponde(usuario, password_plano):
+    """
+    ✅ MIGRACIÓN GRADUAL:
+    Si la contraseña guardada NO es un hash válido,
+    significa que está en texto plano (usuarios legacy).
+    Si coincide, la actualizamos a hash automáticamente.
+    
+    Retorna: True si el login es válido, False si no
+    """
+    password_guardada = usuario.password
+    
+    # Caso 1: La contraseña guardada ES un hash (formato pbkdf2:...)
+    if password_guardada and password_guardada.startswith(('pbkdf2:', 'scrypt:', 'argon2')):
+        return check_password_hash(password_guardada, password_plano)
+    
+    # Caso 2: La contraseña guardada está en texto plano (legacy)
+    if password_guardada == password_plano:
+        # ✅ Migrar a hash automáticamente
+        try:
+            usuario.password = generate_password_hash(password_plano)
+            db.session.commit()
+            logger.info(f"Contraseña migrada a hash para usuario: {usuario.username}")
+            return True
+        except Exception as e:
+            logger.error(f"Error migrando contraseña de {usuario.username}: {e}")
+            db.session.rollback()
+            # Si falla la migración, igual permitimos el login (no bloquear al usuario)
+            return True
+    
+    # Caso 3: No coincide
+    return False
+
+
 def init_routes_login(app):
     """Inicializa las rutas de login y Flask-Login."""
     login_manager = LoginManager()
@@ -64,12 +130,12 @@ def init_routes_login(app):
     @app.route('/logout')
     @login_required
     def logout():
+        logger.info(f"Logout: {current_user.username}")
         logout_user()
         return redirect(url_for('login'))
 
     @login_manager.user_loader
     def load_user(user_id):
-        # ✅ USAR SQL en lugar de JSON
         usuario = Usuario.query.get(str(user_id))
         if usuario:
             return User(usuario.id, usuario.username, usuario.roles)
@@ -87,16 +153,19 @@ def init_routes_login(app):
         if request.method == 'POST':
             username = request.form.get('username')
             password = request.form.get('password')
+
+            usuario = Usuario.query.filter_by(username=username).first()
             
-            # ✅ USAR SQL en lugar de JSON
-            usuario = Usuario.query.filter_by(username=username, password=password).first()
-            
-            if usuario:
+            # ✅ USAR migración gradual en lugar de comparación directa
+            if usuario and migrar_password_si_corresponde(usuario, password):
                 user = User(usuario.id, usuario.username, usuario.roles)
                 login_user(user)
+                logger.info(f"Login exitoso: {username}")
                 return redirect(request.args.get('next') or url_for('index'))
             else:
+                logger.warning(f"Intento de login fallido: {username}")
                 flash("Usuario o contraseña incorrectos. Puede intentar con reconocimiento facial.")
+
         return render_template('login.html', error=error, current_year=datetime.now().year)
 
     @app.route('/login_rostro', methods=['POST'])
@@ -117,9 +186,7 @@ def init_routes_login(app):
 
         debug_info.append("Imagen recibida y decodificada correctamente.")
 
-        # ✅ USAR SQL en lugar de JSON
         usuarios = Usuario.query.all()
-        
         for usuario in usuarios:
             ruta_rostro = f"{ROSTROS_DIR}/{usuario.username}.png"
             if not os.path.exists(ruta_rostro):
@@ -137,6 +204,7 @@ def init_routes_login(app):
             if similitud > 0.4:
                 user = User(usuario.id, usuario.username, usuario.roles)
                 login_user(user)
+                logger.info(f"Login facial exitoso: {usuario.username} (similitud: {similitud:.3f})")
                 debug_info.append(f"¡Login exitoso con usuario '{usuario.username}'!")
                 return redirect(request.args.get('next') or url_for('index'))
 

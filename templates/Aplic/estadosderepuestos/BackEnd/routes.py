@@ -1,11 +1,16 @@
 """
 Rutas HTTP del módulo de Estados de Repuestos.
 ✅ Importa directamente desde core/ (sin wrappers intermedios)
+✅ Usa logging centralizado
 """
 from flask import Blueprint, request, render_template, redirect, url_for, flash, jsonify
 from flask_login import login_required, current_user
 from auth.login import roles_required
 from core.menu import cargar_menu
+
+# ✅ NUEVO: Importar logging
+from core.logging_config import get_logger
+logger = get_logger(__name__)
 
 # ✅ Imports directos desde core/ (sin wrappers)
 from core.data_loaders import (
@@ -53,6 +58,9 @@ def _redirigir(return_to, tab_activo):
 @login_required
 @roles_required('viewer')
 def indexEstadoRep():
+    # ✅ NUEVO: Log de acceso
+    logger.info(f"Acceso a estadosRep - Usuario: {current_user.username}")
+    
     nemu = cargar_menu()
     tabs = cargar_tabs()
     repuestos = leer_repuestos()
@@ -169,7 +177,15 @@ def agregar_repuesto():
         datos['imagen'] = filename
 
     exito, mensaje = crear_repuesto(datos)
-    flash(mensaje, "success" if exito else "warning")
+    
+    # ✅ NUEVO: Log de resultado
+    if exito:
+        logger.info(f"✅ Repuesto creado: {datos['codigo']} por {current_user.username}")
+        flash(mensaje, "success")
+    else:
+        logger.warning(f"⚠️ Error creando repuesto: {mensaje}")
+        flash(mensaje, "warning")
+    
     return _redirigir(return_to, tab_activo)
 
 
@@ -207,7 +223,15 @@ def editar_repuesto():
         nuevos_datos['imagen'] = filename
 
     exito, mensaje = actualizar_repuesto(codigo_original, nuevos_datos)
-    flash(mensaje, "success" if exito else "warning")
+    
+    # ✅ NUEVO: Log de resultado
+    if exito:
+        logger.info(f"✅ Repuesto actualizado: {nuevos_datos['codigo']} por {current_user.username}")
+        flash(mensaje, "success")
+    else:
+        logger.warning(f"⚠️ Error actualizando repuesto: {mensaje}")
+        flash(mensaje, "warning")
+    
     return _redirigir(return_to, tab_activo)
 
 
@@ -224,8 +248,10 @@ def eliminar_repuesto():
 
     if len(repuestos_nuevos) < len(repuestos):
         guardar_todos_repuestos(repuestos_nuevos)
+        logger.info(f"✅ Repuesto eliminado: {codigo} por {current_user.username}")
         flash("Repuesto eliminado correctamente.", "success")
     else:
+        logger.warning(f"⚠️ No se encontró repuesto para eliminar: {codigo}")
         flash("No se encontró el repuesto a eliminar.", "danger")
 
     return _redirigir(return_to, tab_activo)
