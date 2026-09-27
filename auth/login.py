@@ -19,6 +19,9 @@ from core.models import Usuario
 from core.logging_config import get_logger
 logger = get_logger(__name__)
 
+# ✅ NUEVO: CSRF
+from core.csrf import csrf_protect
+
 # Ruta de rostros (se mantiene en filesystem)
 ROSTROS_DIR = 'static/rostros'
 
@@ -67,24 +70,15 @@ def comparar_rostros(rostro1, rostro2):
 
 
 # ============================================================
-# ✅ NUEVAS FUNCIONES DE HASH (reutilizables)
+# ✅ FUNCIONES DE HASH (reutilizables)
 # ============================================================
 def hash_password(password_plano):
-    """
-    Hashea una contraseña en texto plano usando pbkdf2:sha256.
-    Uso:
-        hash = hash_password("mi_password")
-    """
+    """Hashea una contraseña en texto plano usando pbkdf2:sha256."""
     return generate_password_hash(password_plano)
 
 
 def verify_password(password_plano, password_hash):
-    """
-    Verifica si una contraseña en texto plano coincide con un hash.
-    Uso:
-        if verify_password("mi_password", usuario.password):
-            # acceso concedido
-    """
+    """Verifica si una contraseña en texto plano coincide con un hash."""
     return check_password_hash(password_hash, password_plano)
 
 
@@ -94,18 +88,15 @@ def migrar_password_si_corresponde(usuario, password_plano):
     Si la contraseña guardada NO es un hash válido,
     significa que está en texto plano (usuarios legacy).
     Si coincide, la actualizamos a hash automáticamente.
-    
-    Retorna: True si el login es válido, False si no
     """
     password_guardada = usuario.password
-    
-    # Caso 1: La contraseña guardada ES un hash (formato pbkdf2:...)
+
+    # Caso 1: La contraseña guardada ES un hash
     if password_guardada and password_guardada.startswith(('pbkdf2:', 'scrypt:', 'argon2')):
         return check_password_hash(password_guardada, password_plano)
-    
+
     # Caso 2: La contraseña guardada está en texto plano (legacy)
     if password_guardada == password_plano:
-        # ✅ Migrar a hash automáticamente
         try:
             usuario.password = generate_password_hash(password_plano)
             db.session.commit()
@@ -114,9 +105,8 @@ def migrar_password_si_corresponde(usuario, password_plano):
         except Exception as e:
             logger.error(f"Error migrando contraseña de {usuario.username}: {e}")
             db.session.rollback()
-            # Si falla la migración, igual permitimos el login (no bloquear al usuario)
             return True
-    
+
     # Caso 3: No coincide
     return False
 
@@ -147,16 +137,19 @@ def init_routes_login(app):
             return True
         return bool(set(user_roles) & set(item_roles))
 
+    # ✅ AHORA PROTEGIDO CON CSRF
     @app.route('/login', methods=['GET', 'POST'])
+    @csrf_protect
     def login():
         error = None
         if request.method == 'POST':
             username = request.form.get('username')
             password = request.form.get('password')
 
+           
+        # ✅ USAR migración gradual en lugar de comparación directa
             usuario = Usuario.query.filter_by(username=username).first()
-            
-            # ✅ USAR migración gradual en lugar de comparación directa
+
             if usuario and migrar_password_si_corresponde(usuario, password):
                 user = User(usuario.id, usuario.username, usuario.roles)
                 login_user(user)
@@ -169,6 +162,7 @@ def init_routes_login(app):
         return render_template('login.html', error=error, current_year=datetime.now().year)
 
     @app.route('/login_rostro', methods=['POST'])
+    @csrf_protect
     def login_rostro():
         debug_info = []
         if 'rostro' not in request.files:

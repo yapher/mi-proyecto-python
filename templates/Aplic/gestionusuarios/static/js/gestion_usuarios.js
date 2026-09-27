@@ -1,6 +1,7 @@
 /**
  * Gestión de Usuarios - Lógica específica
- * Usa Logger y Notify reutilizables
+ * ✅ USA CSRF utility para todas las operaciones de escritura
+ * ✅ Usa Logger y Notify reutilizables
  */
 document.addEventListener('DOMContentLoaded', () => {
     Logger.moduleInit('GestionUsuarios');
@@ -8,31 +9,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = new bootstrap.Modal(document.getElementById('modalUsuario'));
     let usuarioEnEdicion = null;
 
-    // ========================================================
-    // Cargar usuarios al iniciar
-    // ========================================================
     cargarUsuarios();
 
-    // ========================================================
-    // Event listeners
-    // ========================================================
-
-    // Botón agregar (limpiar formulario)
     document.getElementById('btnAgregarUsuario').addEventListener('click', () => {
         limpiarFormulario();
         document.getElementById('modalUsuarioLabel').textContent = 'Agregar Usuario';
         document.getElementById('password').required = true;
     });
 
-    // Submit del formulario
     document.getElementById('formUsuario').addEventListener('submit', async (e) => {
         e.preventDefault();
         await guardarUsuario();
     });
-
-    // ========================================================
-    // Funciones principales
-    // ========================================================
 
     async function cargarUsuarios() {
         Logger.apiCall('GET', '/api/usuarios');
@@ -48,7 +36,6 @@ document.addEventListener('DOMContentLoaded', () => {
             Logger.error('Error al cargar usuarios', err);
             Notify.error('Error al cargar los usuarios');
         } finally {
-            // ✅ FIX: Ocultar loader siempre al terminar
             if (typeof ocultarLoader === 'function') ocultarLoader();
         }
     }
@@ -102,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = document.getElementById('password').value;
         const roles = obtenerRolesSeleccionados();
 
-        // Validaciones
         if (!username) {
             Notify.warning('El nombre de usuario es obligatorio');
             return;
@@ -131,11 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         Logger.apiCall(method, url);
         try {
-            const res = await fetch(url, {
+            // ✅ USA CSRF utility en lugar de fetch directo
+            const res = await CSRF.fetch(url, {
                 method,
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-                credentials: 'same-origin'
+                body: data
             });
 
             const json = await res.json();
@@ -151,7 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
             Logger.error('Error al guardar usuario', err);
             Notify.error(err.message || 'Error al guardar el usuario');
         } finally {
-            // ✅ FIX: Ocultar loader siempre al terminar
             if (typeof ocultarLoader === 'function') ocultarLoader();
         }
     }
@@ -170,10 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
         usuarioEnEdicion = null;
     }
 
-    // ========================================================
-    // Funciones globales (para onclick en tabla)
-    // ========================================================
-
     window.editarUsuario = async (id) => {
         Logger.info('Editando usuario', { id });
 
@@ -190,10 +170,9 @@ document.addEventListener('DOMContentLoaded', () => {
             usuarioEnEdicion = id;
             document.getElementById('usuarioId').value = usuario.id;
             document.getElementById('username').value = usuario.username;
-            document.getElementById('password').value = ''; // No mostrar password
+            document.getElementById('password').value = '';
             document.getElementById('password').required = false;
 
-            // Marcar roles
             document.getElementById('roleAdmin').checked = usuario.roles.includes('admin');
             document.getElementById('roleEditor').checked = usuario.roles.includes('editor');
             document.getElementById('roleViewer').checked = usuario.roles.includes('viewer');
@@ -204,7 +183,6 @@ document.addEventListener('DOMContentLoaded', () => {
             Logger.error('Error al cargar usuario para edición', err);
             Notify.error('Error al cargar los datos del usuario');
         } finally {
-            // ✅ FIX: Ocultar loader siempre al terminar
             if (typeof ocultarLoader === 'function') ocultarLoader();
         }
     };
@@ -216,11 +194,8 @@ document.addEventListener('DOMContentLoaded', () => {
             async () => {
                 Logger.apiCall('DELETE', `/api/usuarios/${id}`);
                 try {
-                    const res = await fetch(`/api/usuarios/${id}`, {
-                        method: 'DELETE',
-                        credentials: 'same-origin'
-                    });
-
+                    // ✅ USA CSRF utility
+                    const res = await CSRF.delete(`/api/usuarios/${id}`);
                     const json = await res.json();
                     Logger.apiResponse('DELETE', `/api/usuarios/${id}`, res.status, json);
 
@@ -232,16 +207,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     Logger.error('Error al eliminar usuario', err);
                     Notify.error(err.message || 'Error al eliminar el usuario');
                 } finally {
-                    // ✅ FIX: Ocultar loader siempre al terminar
                     if (typeof ocultarLoader === 'function') ocultarLoader();
                 }
             }
         );
     };
-
-    // ========================================================
-    // Utilidades
-    // ========================================================
 
     function escapeHtml(text) {
         if (!text) return '';

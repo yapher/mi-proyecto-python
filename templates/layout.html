@@ -1,7 +1,6 @@
 <!-- templates/layout.html -->
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
@@ -10,6 +9,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=no">
+    <!-- ✅ NUEVO: Meta tag CSRF para JavaScript -->
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo_HA_1.gif') }}">
     <title>Empresa</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -25,7 +26,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/base/login_modal.css') }}">
     {% block head %}{% endblock %}
 </head>
-
 <body data-require-login="{{ 'true' if not current_user.is_authenticated else 'false' }}">
     <nav class="navbar navbar-expand-lg bg-gradient bg-dark border-bottom shadow-sm sticky-top">
         <div class="container-fluid">
@@ -121,12 +121,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script
-        src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-
     <!-- ✅ Scripts reutilizables desde static/js/utils/ -->
     <script src="{{ url_for('static', filename='js/utils/layout_scripts.js') }}"></script>
     <script src="{{ url_for('static', filename='js/utils/reloj.js') }}"></script>
@@ -137,6 +134,8 @@
     <script src="{{ url_for('static', filename='js/utils/image_uploader.js') }}"></script>
     <script src="{{ url_for('static', filename='js/utils/notifications.js') }}"></script>
     <script src="{{ url_for('static', filename='js/utils/face_mesh_tracker.js') }}"></script>
+    <!-- ✅ NUEVO: Utilidad CSRF para AJAX -->
+    <script src="{{ url_for('static', filename='js/utils/csrf.js') }}"></script>
     {# Scripts del modal de login (solo si no está autenticado) #}
     {% if not current_user.is_authenticated %}
     <script src="{{ url_for('static', filename='js/utils/login_modal.js') }}"></script>
@@ -147,5 +146,4 @@
     {% endif %}
     {% block scripts %}{% endblock %}
 </body>
-
 </html>

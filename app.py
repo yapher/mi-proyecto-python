@@ -4,12 +4,13 @@ Aplicación principal.
 - Configuración de mail, scheduler, login y context processors
 - Configuración de seguridad y proxies para producción (Render)
 - Logging centralizado
+- Protección CSRF
 """
 import os
 import threading
 import webbrowser
 from pathlib import Path
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_login import login_required, current_user
 from flask_mail import Mail
 from dotenv import load_dotenv
@@ -17,6 +18,9 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 # ✅ NUEVO: Importar logging centralizado
 from core.logging_config import setup_logging, get_logger
+
+# ✅ NUEVO: Importar CSRF
+from core.csrf import init_csrf, generate_csrf_token
 
 # 1. Cargar variables de entorno (.env) AL INICIO
 load_dotenv()
@@ -40,7 +44,6 @@ logger.info("🚀 Iniciando aplicación Flask")
 
 # ============================================================
 # Configuración de PROXY (CRÍTICO para Render)
-# Render usa proxies, necesitamos confiar en ellos para detectar HTTPS
 # ============================================================
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 
@@ -49,14 +52,11 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1)
 # ============================================================
 env_db_url = os.environ.get('DATABASE_URL')
 if env_db_url:
-    # Render a veces usa 'postgres://' en lugar de 'postgresql://'
-    # SQLAlchemy requiere 'postgresql://' obligatoriamente
     if env_db_url.startswith('postgres://'):
         env_db_url = env_db_url.replace('postgres://', 'postgresql://', 1)
     app.config['SQLALCHEMY_DATABASE_URI'] = env_db_url
     logger.info("📦 Usando base de datos PostgreSQL (Render o local con .env)")
 else:
-    # Fallback: SQLite local
     db_dir = Path(__file__).parent / 'DataBase'
     db_dir.mkdir(exist_ok=True)
     db_path = db_dir / 'empresa.db'
@@ -71,20 +71,17 @@ init_db(app)
 # ============================================================
 # Configuración de SEGURIDAD para producción (HTTPS)
 # ============================================================
-# Detectar si estamos en producción (Render)
 is_production = bool(os.environ.get('DATABASE_URL'))
 if is_production:
-    # Configuración para producción (HTTPS)
-    app.config['SESSION_COOKIE_SECURE'] = True      # Cookies solo por HTTPS
-    app.config['SESSION_COOKIE_HTTPONLY'] = True    # No accesible por JavaScript
-    app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'   # Protección CSRF
-    app.config['REMEMBER_COOKIE_SECURE'] = True     # Cookie "recordarme" solo por HTTPS
+    app.config['SESSION_COOKIE_SECURE'] = True
+    app.config['SESSION_COOKIE_HTTPONLY'] = True
+    app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+    app.config['REMEMBER_COOKIE_SECURE'] = True
     app.config['REMEMBER_COOKIE_HTTPONLY'] = True
     app.config['REMEMBER_COOKIE_SAMESITE'] = 'Lax'
-    app.config['PREFERRED_URL_SCHEME'] = 'https'    # URLs generadas serán HTTPS
+    app.config['PREFERRED_URL_SCHEME'] = 'https'
     logger.info("🔒 Modo PRODUCCIÓN: Cookies seguras habilitadas")
 else:
-    # Configuración para desarrollo (HTTP local)
     app.config['SESSION_COOKIE_SECURE'] = False
     app.config['SESSION_COOKIE_HTTPONLY'] = True
     app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
@@ -97,9 +94,8 @@ else:
 # Crear tablas y AUTO-SEED
 # ============================================================
 with app.app_context():
-    db.create_all()  # Asegura que las tablas existan antes de consultar
-    
-    # Si no hay usuarios, ejecutar seed automáticamente
+    db.create_all()
+
     from core.models import Usuario
     if Usuario.query.count() == 0:
         logger.warning("🌱 DB vacía detectada. Ejecutando seed inicial...")
@@ -115,13 +111,17 @@ with app.app_context():
 app.secret_key = os.environ.get("SECRET_KEY", "221d18b67f2d4705a132d532b1d12ab2")
 
 # ============================================================
+# ✅ NUEVO: Inicializar CSRF
+# ============================================================
+init_csrf(app)
+
+# ============================================================
 # Autenticación
 # ============================================================
 init_routes_login(app)
 
 # ============================================================
 # Auto-registro de TODOS los blueprints
-# Escanea templates/Aplic/*/BackEnd/*.py automáticamente
 # ============================================================
 auto_register_blueprints(app)
 
@@ -137,19 +137,15 @@ app.config["MAIL_DEFAULT_SENDER"] = app.config["MAIL_USERNAME"]
 mail = Mail(app)
 
 # ============================================================
-# Scheduler (solo se inicia en el proceso principal)
+# Scheduler
 # ============================================================
 scheduler = setup_scheduler(app, mail)
 
 # ============================================================
-# FILTRO JINJA2: Intersect (A prueba de balas)
+# FILTRO JINJA2: Intersect
 # ============================================================
 @app.template_filter('intersect')
 def intersect_filter(user_roles, item_roles):
-    """
-    Devuelve True si hay al menos un rol en común.
-    Maneja casos donde los roles vienen como string desde la DB.
-    """
     if not item_roles:
         return True
     try:
@@ -179,49 +175,43 @@ def inject_menu():
 # ============================================================
 @app.before_request
 def verificar_acceso_menu():
-    """
-    Verifica que el usuario tenga acceso a la ruta según los roles del menú.
-    Si el menú tiene roles definidos y el usuario no tiene ninguno, retorna 403.
-    
-    Comportamiento:
-    - Rutas públicas (login, static, health): acceso libre
-    - Rutas sin roles en el menú: acceso permitido (compatibilidad)
-    - Rutas con roles: solo usuarios con al menos 1 rol coincidente
-    """
     from flask import request
     from flask_login import current_user
-    
-    # 1. Rutas públicas que NO requieren verificación
+
     rutas_publicas = [
         '/login', '/logout', '/health', '/static',
-        '/login_rostro', '/favicon.ico'
+        '/login_rostro', '/favicon.ico', '/api/csrf-token'
     ]
     if any(request.path.startswith(ruta) for ruta in rutas_publicas):
         return None
-    
-    # 2. Si no está autenticado, dejar que @login_required lo maneje
+
     if not current_user.is_authenticated:
         return None
-    
-    # 3. Buscar roles requeridos para esta ruta en el menú
+
     from core.menu import obtener_roles_por_ruta
     roles_requeridos = obtener_roles_por_ruta(request.path)
-    
-    # 4. Si no hay roles definidos en el menú, acceso permitido
+
     if not roles_requeridos:
         return None
-    
-    # 5. Verificar si el usuario tiene al menos 1 rol requerido
+
     user_roles = set(current_user.roles or [])
     required_roles = set(roles_requeridos)
-    
+
     if not user_roles & required_roles:
-        # Usuario no tiene acceso → 403 Forbidden
         logger.warning(f"🚫 Acceso denegado: {current_user.username} intentó acceder a {request.path}")
         from flask import abort
         abort(403)
-    
+
     return None
+
+# ============================================================
+# ✅ NUEVO: Endpoint para obtener token CSRF (útil para AJAX)
+# ============================================================
+@app.route('/api/csrf-token', methods=['GET'])
+@login_required
+def get_csrf_token():
+    """Retorna el token CSRF actual para usar en requests AJAX."""
+    return jsonify({'csrf_token': generate_csrf_token()})
 
 # ============================================================
 # Rutas principales
@@ -278,11 +268,10 @@ def _abrir_navegador():
 
 if __name__ == "__main__":
     os.makedirs("DataBase/Config", exist_ok=True)
-    
-    # Iniciar scheduler solo si no estamos en modo reload de Flask (evita duplicados en local)
+
     if not os.environ.get("WERKZEUG_RUN_MAIN"):
         scheduler.start()
-    
+
     threading.Timer(1.0, _abrir_navegador).start()
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=False)

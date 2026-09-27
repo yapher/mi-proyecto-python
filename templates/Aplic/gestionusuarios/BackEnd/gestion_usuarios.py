@@ -3,6 +3,7 @@ Blueprint de Gestión de Usuarios.
 Solo accesible para administradores.
 Permite crear, editar, eliminar usuarios y asignar roles.
 ✅ SEGURIDAD: Contraseñas hasheadas con werkzeug.security
+✅ CSRF: Endpoints críticos protegidos
 """
 from flask import Blueprint, request, jsonify, render_template
 from flask_login import login_required, current_user
@@ -10,6 +11,7 @@ from auth.login import roles_required, hash_password
 from core.menu import cargar_menu
 from core.db_sql import db
 from core.models import Usuario
+from core.csrf import csrf_protect
 import os
 
 # ✅ NUEVO: Logger centralizado
@@ -66,6 +68,7 @@ def listar_usuarios():
 @gestion_usuarios_bp.route('/api/usuarios', methods=['POST'])
 @login_required
 @roles_required('admin')
+@csrf_protect  # ✅ NUEVO: Protección CSRF
 def crear_usuario():
     """Crea un nuevo usuario con contraseña hasheada."""
     data = request.get_json() or {}
@@ -73,32 +76,27 @@ def crear_usuario():
     password = (data.get('password') or '').strip()
     roles = data.get('roles', [])
 
-    # Validaciones
     if not username or not password:
         return jsonify({'msg': 'Usuario y contraseña son obligatorios', 'type': 'error'}), 400
 
     if len(password) < 4:
         return jsonify({'msg': 'La contraseña debe tener al menos 4 caracteres', 'type': 'error'}), 400
 
-    # Verificar unicidad de username
     if Usuario.query.filter_by(username=username).first():
         return jsonify({'msg': f'El usuario "{username}" ya existe', 'type': 'error'}), 400
 
-    # Validar roles
     roles_validos = ['admin', 'editor', 'viewer']
     roles_filtrados = [r for r in roles if r in roles_validos]
 
     if not roles_filtrados:
         return jsonify({'msg': 'Debe asignar al menos un rol válido', 'type': 'error'}), 400
 
-    # ✅ NUEVO: Hashear contraseña antes de guardar
     password_hash = hash_password(password)
 
-    # Crear usuario
     nuevo_usuario = Usuario(
         id=username,
         username=username,
-        password=password_hash,  # ✅ Hash en lugar de texto plano
+        password=password_hash,
         roles=roles_filtrados
     )
     db.session.add(nuevo_usuario)
@@ -123,6 +121,7 @@ def crear_usuario():
 @gestion_usuarios_bp.route('/api/usuarios/<string:usuario_id>', methods=['PUT'])
 @login_required
 @roles_required('admin')
+@csrf_protect  # ✅ NUEVO: Protección CSRF
 def actualizar_usuario(usuario_id):
     """Actualiza un usuario existente."""
     usuario = Usuario.query.get(usuario_id)
@@ -134,28 +133,24 @@ def actualizar_usuario(usuario_id):
     password = (data.get('password') or '').strip()
     roles = data.get('roles', [])
 
-    # Validar username si cambió
     if username and username != usuario.username:
         if Usuario.query.filter_by(username=username).first():
             return jsonify({'msg': f'El usuario "{username}" ya existe', 'type': 'error'}), 400
         usuario.username = username
         usuario.id = username
 
-    # ✅ NUEVO: Si se proporciona nueva contraseña, hashearla
     if password:
         if len(password) < 4:
             return jsonify({'msg': 'La contraseña debe tener al menos 4 caracteres', 'type': 'error'}), 400
-        usuario.password = hash_password(password)  # ✅ Hash
+        usuario.password = hash_password(password)
         logger.info(f"Contraseña actualizada para usuario: {username}")
 
-    # Validar roles
     roles_validos = ['admin', 'editor', 'viewer']
     roles_filtrados = [r for r in roles if r in roles_validos]
 
     if not roles_filtrados:
         return jsonify({'msg': 'Debe asignar al menos un rol válido', 'type': 'error'}), 400
 
-    # Verificar que no se quede sin admins
     if 'admin' not in roles_filtrados and usuario.username == current_user.username:
         return jsonify({'msg': 'No puedes quitarte el rol de administrador', 'type': 'error'}), 400
 
@@ -181,17 +176,16 @@ def actualizar_usuario(usuario_id):
 @gestion_usuarios_bp.route('/api/usuarios/<string:usuario_id>', methods=['DELETE'])
 @login_required
 @roles_required('admin')
+@csrf_protect  # ✅ NUEVO: Protección CSRF
 def eliminar_usuario(usuario_id):
     """Elimina un usuario."""
     usuario = Usuario.query.get(usuario_id)
     if not usuario:
         return jsonify({'msg': 'Usuario no encontrado', 'type': 'error'}), 404
 
-    # No permitir eliminar el propio usuario
     if usuario.username == current_user.username:
         return jsonify({'msg': 'No puedes eliminar tu propio usuario', 'type': 'error'}), 400
 
-    # Verificar que no sea el último admin
     if 'admin' in usuario.roles:
         total_admins = Usuario.query.filter(Usuario.roles.contains(['admin'])).count()
         if total_admins <= 1:
