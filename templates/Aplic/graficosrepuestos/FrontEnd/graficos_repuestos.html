@@ -5,11 +5,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 {% endblock %}
-
 {% block content %}
 <div class="graficos-repuestos-container">
     <h2>Gráficos de Repuestos por Estado</h2>
-
     <label for="jerarquiaSelect">Filtrar por Ubicación Técnica:</label>
     <select id="jerarquiaSelect">
         <option value="">-- Todas --</option>
@@ -17,20 +15,31 @@
         <option value="{{ jerarquia }}">{{ jerarquia }}</option>
         {% endfor %}
     </select>
-
     <div id="grafico" class="chart-container">
         <div id="graficoTorta" class="chart-box"></div>
         <div id="graficoBarras" class="chart-box"></div>
     </div>
-
     <button id="exportarPdf" class="btn btn-outline-light">Exportar Gráficos a PDF</button>
+</div>
+
+<!-- ✅ NUEVO: Modal de detalle por estado -->
+<div class="modal fade modal-custom-dark" id="modalDetalleEstado" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div id="modalDetalleContenido">
+                <div class="modal-body text-center py-5">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p class="mt-3">Cargando repuestos...</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>
     window.datos_iniciales = {{ datos | tojson | safe }};
 </script>
 {% endblock %}
-
 {% block scripts %}
 <script src="{{ url_for('indexgraficos_repuestos.static', filename='js/graficos_repuestos.js') }}"></script>
 {% endblock %}
