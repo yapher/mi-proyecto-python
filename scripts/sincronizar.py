@@ -1,9 +1,11 @@
+# scripts/sincronizar.py
 """
 scripts/sincronizar.py
 ======================
 Sincroniza datos entre SQLite local y PostgreSQL de Render.
 Versión corregida para manejar jerarquías, claves foráneas,
 mapeo de columnas especiales (Tab) y tabla de Planos.
+✅ ROBUSTO: Filtra campos que no existen en el modelo actual
 """
 import sys
 import os
@@ -23,7 +25,6 @@ from core.models import (
     Pago, NodoBloqueo, Rubro, Almacen, Ubicacion, Tab,
     OrdenTrabajo, Plano
 )
-
 
 def exportar_datos():
     """Exporta todos los datos de la DB actual a JSON"""
@@ -55,6 +56,27 @@ def exportar_datos():
         print(f"✅ Exportados {total} registros a {archivo}")
         return archivo
 
+def filtrar_campos_modelo(datos_dict, modelo_cls):
+    """
+    ✅ NUEVO: Filtra un diccionario para incluir solo campos que existen en el modelo.
+    Esto evita errores cuando el backup tiene campos que ya no están en el modelo.
+    """
+    # Obtener los nombres de las columnas del modelo
+    campos_modelo = {c.key for c in modelo_cls.__table__.columns}
+    
+    # Filtrar el diccionario
+    datos_filtrados = {}
+    for clave, valor in datos_dict.items():
+        # Mapeo especial para campos con nombres diferentes
+        if clave == 'id' and modelo_cls == Tab:
+            datos_filtrados['tab_id'] = valor
+        elif clave == 'ruta_jerarquia' and modelo_cls == Repuesto:
+            datos_filtrados['ruta_jerarquia_json'] = json.dumps(valor) if isinstance(valor, list) else valor
+        elif clave in campos_modelo:
+            datos_filtrados[clave] = valor
+        # Ignorar campos que no existen en el modelo
+    
+    return datos_filtrados
 
 def importar_dict_a_db(datos, db_uri):
     """Importa un diccionario de datos a una DB respetando jerarquías y mapeos especiales."""
@@ -75,54 +97,61 @@ def importar_dict_a_db(datos, db_uri):
         _db.create_all()
         
         # 1. Limpiar tablas (en orden por dependencias)
-        for modelo in [OrdenTrabajo, Pago, Repuesto, Plano, Tab, Estado,  
-                       Ubicacion, Almacen, Rubro, Menu, NodoBloqueo, 
-                       Tarea, Evento, Usuario]:
+        for modelo in [OrdenTrabajo, Pago, Repuesto, Plano, Tab, Estado,
+                      Ubicacion, Almacen, Rubro, Menu, NodoBloqueo,
+                      Tarea, Evento, Usuario]:
             modelo.query.delete()
         _db.session.commit()
         
         # 2. Importar datos planos
         for u in datos.get('usuarios', []):
-            _db.session.add(Usuario(**u))
+            u_filtrado = filtrar_campos_modelo(u, Usuario)
+            _db.session.add(Usuario(**u_filtrado))
         
         for e in datos.get('eventos', []):
             e_copy = e.copy()
             e_copy.pop('id', None)
-            _db.session.add(Evento(**e_copy))
+            e_filtrado = filtrar_campos_modelo(e_copy, Evento)
+            _db.session.add(Evento(**e_filtrado))
         
         for t in datos.get('tareas', []):
             t_copy = t.copy()
             t_copy.pop('id', None)
-            _db.session.add(Tarea(**t_copy))
+            t_filtrado = filtrar_campos_modelo(t_copy, Tarea)
+            _db.session.add(Tarea(**t_filtrado))
         
         for e in datos.get('estados', []):
             e_copy = e.copy()
             e_copy.pop('id', None)
-            _db.session.add(Estado(**e_copy))
+            e_filtrado = filtrar_campos_modelo(e_copy, Estado)
+            _db.session.add(Estado(**e_filtrado))
         
         # Mapear 'id' de vuelta a 'tab_id'
         for t in datos.get('tabs', []):
             t_copy = t.copy()
             tab_id_val = t_copy.pop('id', None)
             t_copy['tab_id'] = tab_id_val
-            _db.session.add(Tab(**t_copy))
+            t_filtrado = filtrar_campos_modelo(t_copy, Tab)
+            _db.session.add(Tab(**t_filtrado))
         
         for r in datos.get('repuestos', []):
             r_copy = r.copy()
             r_copy.pop('id', None)
-            if 'ruta_jerarquia' in r_copy:
-                r_copy['ruta_jerarquia_json'] = json.dumps(r_copy.pop('ruta_jerarquia'))
-            _db.session.add(Repuesto(**r_copy))
+            # ✅ Filtrar solo campos que existen en el modelo
+            r_filtrado = filtrar_campos_modelo(r_copy, Repuesto)
+            _db.session.add(Repuesto(**r_filtrado))
         
         for p in datos.get('pagos', []):
             p_copy = p.copy()
             p_copy.pop('id', None)
-            _db.session.add(Pago(**p_copy))
-            
+            p_filtrado = filtrar_campos_modelo(p_copy, Pago)
+            _db.session.add(Pago(**p_filtrado))
+        
         for o in datos.get('ordenes_trabajo', []):
             o_copy = o.copy()
             o_copy.pop('id', None)
-            _db.session.add(OrdenTrabajo(**o_copy))
+            o_filtrado = filtrar_campos_modelo(o_copy, OrdenTrabajo)
+            _db.session.add(OrdenTrabajo(**o_filtrado))
         
         # ✅ NUEVO: Importar planos
         for p in datos.get('planos', []):
@@ -136,7 +165,8 @@ def importar_dict_a_db(datos, db_uri):
                     p_copy['fecha_carga'] = datetime.fromisoformat(fecha_str)
                 except ValueError:
                     p_copy['fecha_carga'] = datetime.utcnow()
-            _db.session.add(Plano(**p_copy))
+            p_filtrado = filtrar_campos_modelo(p_copy, Plano)
+            _db.session.add(Plano(**p_filtrado))
         
         # 3. Importar nodos de bloqueo (LÓGICA ROBUSTA PARA EVITAR FK VIOLATION)
         nodos_data = datos.get('nodos_bloqueo', {})
@@ -184,6 +214,7 @@ def importar_dict_a_db(datos, db_uri):
                 nombre = item.get('nombre', '')
                 if not nombre:
                     continue
+                
                 nodo = modelo_cls(
                     nombre=nombre,
                     emoji=item.get('emoji', ''),
@@ -191,12 +222,15 @@ def importar_dict_a_db(datos, db_uri):
                     ruta_jerarquia=item.get('ruta_jerarquia', nombre),
                     padre_id=padre_id
                 )
+                
                 if hasattr(nodo, 'roles'):
                     nodo.roles = item.get('roles', [])
                 if hasattr(nodo, 'imagen'):
                     nodo.imagen = item.get('imagen', '')
+                
                 _db.session.add(nodo)
                 _db.session.flush() # Flush para obtener el ID generado y usarlo como padre_id en hijos
+                
                 hijos = item.get(clave_hijos, [])
                 if hijos:
                     importar_arbol(hijos, modelo_cls, clave_hijos, nodo.id)
@@ -208,7 +242,6 @@ def importar_dict_a_db(datos, db_uri):
         
         _db.session.commit()
         print(f"✅ Datos importados correctamente")
-
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
@@ -224,7 +257,6 @@ if __name__ == '__main__':
         else:
             with open(archivo_json, 'r', encoding='utf-8') as f:
                 datos = json.load(f)
-            
             importar_dict_a_db(datos, app.config['SQLALCHEMY_DATABASE_URI'])
             print(f"🎉 Sincronización completada desde {archivo_json}")
     else:
