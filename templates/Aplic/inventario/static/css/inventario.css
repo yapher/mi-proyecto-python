@@ -153,3 +153,51 @@
         gap: 0.25rem;
     }
 }
+
+/* ============================================================
+MODAL DE GESTIÓN DE ALMACENES
+============================================================ */
+#modalGestionAlmacenes .modal-xl {
+    max-width: 1100px;
+}
+
+#modalGestionAlmacenes .bg-form {
+    background-color: rgba(75, 55, 106, 0.5);
+    border: 1px solid rgba(136, 201, 153, 0.2);
+}
+
+#modalGestionAlmacenes .table {
+    font-size: 0.85rem;
+}
+
+#modalGestionAlmacenes .table td {
+    vertical-align: middle;
+}
+
+#modalGestionAlmacenes .nivel-0 { padding-left: 10px !important; }
+#modalGestionAlmacenes .nivel-1 { padding-left: 30px !important; }
+#modalGestionAlmacenes .nivel-2 { padding-left: 50px !important; }
+#modalGestionAlmacenes .nivel-3 { padding-left: 70px !important; }
+#modalGestionAlmacenes .nivel-4 { padding-left: 90px !important; }
+
+#modalGestionAlmacenes .btn-sm {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #modalGestionAlmacenes .modal-dialog {
+        margin: 0.5rem;
+    }
+    #modalGestionAlmacenes .col-lg-5,
+    #modalGestionAlmacenes .col-lg-7 {
+        margin-bottom: 1rem;
+    }
+    #modalGestionAlmacenes .button-group {
+        flex-direction: column;
+    }
+    #modalGestionAlmacenes .button-group .btn {
+        width: 100%;
+    }
+}
