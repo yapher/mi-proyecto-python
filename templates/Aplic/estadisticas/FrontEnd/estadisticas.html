@@ -1,18 +1,29 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h3 class="mb-4">📊 Evolución de Precios</h3>
-<div class="row mb-4">
-    <div class="col-md-6">
-        <label for="selectRubro" class="form-label">Seleccionar Rubro:</label>
-        <select id="selectRubro" class="form-select"></select>
-    </div>
-    <div class="col-md-6">
-        <label for="selectItem" class="form-label">Seleccionar Descripción:</label>
-        <select id="selectItem" class="form-select"></select>
+<div class="chart-section-header">
+    <h3>📊 Evolución de Precios</h3>
+</div>
+
+<div class="chart-controls">
+    <div class="row w-100 g-3">
+        <div class="col-md-6 col-12">
+            <label for="selectRubro" class="form-label">Seleccionar Rubro:</label>
+            <select id="selectRubro" class="form-select"></select>
+        </div>
+        <div class="col-md-6 col-12">
+            <label for="selectItem" class="form-label">Seleccionar Descripción:</label>
+            <select id="selectItem" class="form-select"></select>
+        </div>
     </div>
 </div>
-<div id="graficoEvolucion" style="height: 400px; width: 100%; background: #fff; border-radius: 10px;"></div>
-<div id="graficoGastoMensual" style="width: 100%; max-width: 800px; height: 400px; margin-top: 50px;"></div>
+
+<div class="chart-container">
+    <div id="graficoEvolucion" class="chart-box" style="max-width: 100%;"></div>
+</div>
+
+<div class="chart-container mt-4">
+    <div id="graficoGastoMensual" class="chart-box" style="max-width: 800px;"></div>
+</div>
 {% endblock %}
 {% block scripts %}
 <script src="{{ url_for('indexestadisticas.static', filename='js/estadisticas.js') }}"></script>

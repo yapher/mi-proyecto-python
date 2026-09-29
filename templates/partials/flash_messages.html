@@ -1,0 +1,9 @@
+{# templates/partials/flash_messages.html
+   Extrae la lógica de flash messages del layout para reutilización.
+   Sin <script> inline: usa data-attributes + JS externo.
+#}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div id="flashMessages" data-messages='{{ messages | tojson | e }}' style="display:none;"></div>
+    {% endif %}
+{% endwith %}

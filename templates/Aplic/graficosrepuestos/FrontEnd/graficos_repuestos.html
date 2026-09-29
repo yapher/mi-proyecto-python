@@ -1,86 +1,75 @@
 {% extends 'layout.html' %}
-
 {% block head %}
-    {{ super() }}
-
-    <link rel="stylesheet" href="{{ url_for('indexgraficos_repuestos.static', filename='css/graficos_repuestos.css') }}">
-
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('indexgraficos_repuestos.static', filename='css/graficos_repuestos.css') }}">
 {% endblock %}
-
 {% block content %}
-    {% set return_to = return_to|default('indexgraficos_repuestos.indexgraficos_repuestos') %}
-    {% set active_tab = active_tab|default('') %}
+{% set return_to = return_to|default('indexgraficos_repuestos.indexgraficos_repuestos') %}
+{% set active_tab = active_tab|default('') %}
+{% set estados = estados|default([]) %}
+{% set ubicaciones = ubicaciones|default([]) %}
+{% set nombres_almacenes = nombres_almacenes|default([]) %}
 
-    {% set estados = estados|default([]) %}
-    {% set ubicaciones = ubicaciones|default([]) %}
-    {% set nombres_almacenes = nombres_almacenes|default([]) %}
-
-    <div class="graficos-repuestos-container">
+<div class="graficos-repuestos-container">
+    <div class="chart-section-header">
         <h2>Gráficos de Repuestos por Estado</h2>
+    </div>
 
+    <div class="chart-controls">
         <label for="jerarquiaSelect">Filtrar por Ubicación Técnica:</label>
         <select id="jerarquiaSelect">
             <option value="">-- Todas --</option>
             {% for jerarquia in jerarquias %}
-                <option
-                    value="{{ jerarquia }}"
-                    {% if jerarquia_inicial and jerarquia == jerarquia_inicial %}selected{% endif %}>
-                    {{ jerarquia }}
-                </option>
+            <option value="{{ jerarquia }}"
+                {% if jerarquia_inicial and jerarquia == jerarquia_inicial %}selected{% endif %}>
+                {{ jerarquia }}
+            </option>
             {% endfor %}
         </select>
-
-        <div id="grafico" class="chart-container">
-            <div id="graficoTorta" class="chart-box"></div>
-            <div id="graficoBarras" class="chart-box"></div>
-        </div>
-
-        <button id="exportarPdf" class="btn btn-outline-light">
+        <button id="exportarPdf" class="btn btn-outline-light btn-sm">
             Exportar Gráficos a PDF
         </button>
     </div>
 
-    <div class="modal fade modal-custom-dark" id="modalDetalleEstado" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div id="modalDetalleContenido">
-                    <div class="modal-body text-center py-5">
-                        <div class="spinner-border text-primary" role="status"></div>
-                        <p class="mt-3">Cargando repuestos...</p>
-                    </div>
+    <div id="grafico" class="chart-container">
+        <div id="graficoTorta" class="chart-box"></div>
+        <div id="graficoBarras" class="chart-box"></div>
+    </div>
+</div>
+
+<div class="modal fade modal-custom-dark" id="modalDetalleEstado" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div id="modalDetalleContenido">
+                <div class="modal-body text-center py-5">
+                    <div class="spinner-border text-primary" role="status"></div>
+                    <p class="mt-3">Cargando repuestos...</p>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    {% include 'partials/ui/imageModal.html' %}
-    {% include 'partials/repuestos/details.html' %}
-    {% include 'partials/repuestos/newRep.html' %}
+{% include 'partials/ui/imageModal.html' %}
+{% include 'partials/repuestos/details.html' %}
+{% include 'partials/repuestos/newRep.html' %}
 
-    <script>
-        window.datos_iniciales = {{ datos|tojson|safe }};
-
-        window.RepuestoEndpoints = {
-            agregar: "{{ url_for('indexEstadoRep.agregar_repuesto') }}",
-            editar: "{{ url_for('indexEstadoRep.editar_repuesto') }}",
-            eliminar: "{{ url_for('indexEstadoRep.eliminar_repuesto') }}",
-            returnTo: "indexgraficos_repuestos.indexgraficos_repuestos"
-        };
-    </script>
+<script>
+    window.datos_iniciales = {{ datos|tojson|safe }};
+    window.RepuestoEndpoints = {
+        agregar: "{{ url_for('indexEstadoRep.agregar_repuesto') }}",
+        editar: "{{ url_for('indexEstadoRep.editar_repuesto') }}",
+        eliminar: "{{ url_for('indexEstadoRep.eliminar_repuesto') }}",
+        returnTo: "indexgraficos_repuestos.indexgraficos_repuestos"
+    };
+</script>
 {% endblock %}
-
 {% block scripts %}
-    {{ super() }}
-
-    <script src="{{ url_for('static', filename='js/utils/modal.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/utils/table.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/utils/image.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/utils/chart.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/utils/pdf.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/utils/repuesto_form.js') }}"></script>
-
-    <script src="{{ url_for('indexgraficos_repuestos.static', filename='js/graficos_repuestos.js') }}"></script>
+{{ super() }}
+<script src="{{ url_for('static', filename='js/utils/modal.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils/table.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils/image.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils/pdf.js') }}"></script>
+<script src="{{ url_for('static', filename='js/utils/repuesto_form.js') }}"></script>
+<script src="{{ url_for('indexgraficos_repuestos.static', filename='js/graficos_repuestos.js') }}"></script>
 {% endblock %}

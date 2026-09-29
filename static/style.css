@@ -1,3 +1,4 @@
+/* static/style.css - Importa todos los CSS base */
 @import url('css/base/variables.css');
 @import url('css/base/components.css');
 @import url('css/base/buttons.css');
@@ -12,34 +13,20 @@
 @import url('css/base/mobile.css');
 @import url('css/base/list_events.css');
 @import url('css/base/repuestos.css');
+@import url('css/base/calendar.css');
+@import url('css/base/cards.css');
+@import url('css/base/formularios.css');
+@import url('css/base/graficos.css');
 
 /* Fondo general */
 body {
     background-color: #3e2d59;
     color: white;
     overflow-x: hidden;
+    font-family: 'Inter', sans-serif;
 }
 
-/* Input con emoji */
-.input-with-emoji {
-    position: relative;
-}
-
-.input-emoji {
-    position: absolute;
-    left: 12px;
-    top: 70%;
-    transform: translateY(-50%);
-    pointer-events: none;
-    font-size: 1.3rem;
-    user-select: none;
-    line-height: 1;
-}
-
-.ps-5 {
-    padding-left: 2.5rem !important;
-}
-
+/* Contenedor de imagen principal */
 .image-container {
     width: 100vw;
     height: 100vh;
@@ -55,28 +42,4 @@ body {
     object-fit: cover;
     display: block;
     transform: translateY(-20%);
-}
-
-.noty_type__success {
-    background-color: #28a745;
-}
-
-.noty_type__error {
-    background-color: #dc3545;
-}
-
-.noty_type__warning {
-    background-color: #ffc107;
-    color: black;
-}
-
-.noty_type__info {
-    background-color: #17a2b8;
-}
-
-.noty_layout__topRight {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 9999;
 }
