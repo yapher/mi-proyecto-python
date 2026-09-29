@@ -1,4 +1,5 @@
-/* static/style.css - Importa todos los CSS base */
+/* static/style.css */
+
 @import url('css/base/variables.css');
 @import url('css/base/components.css');
 @import url('css/base/buttons.css');
@@ -13,10 +14,9 @@
 @import url('css/base/mobile.css');
 @import url('css/base/list_events.css');
 @import url('css/base/repuestos.css');
-@import url('css/base/calendar.css');
-@import url('css/base/cards.css');
-@import url('css/base/formularios.css');
-@import url('css/base/graficos.css');
+@import url('css/base/arbol_crud.css');
+@import url('css/base/image_uploader.css');
+@import url('css/base/login_modal.css');
 
 /* Fondo general */
 body {

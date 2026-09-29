@@ -1,38 +1,52 @@
 /**
  * modal_agregar_plano.js
- * Maneja la carga dinámica de rutas en el modal de agregar plano.
- * Usa la variable global window.rutasPlanos inyectada desde el template principal.
+ * Carga dinámica de rutas en el modal de agregar plano.
+ * Lee los datos desde data-attributes del DOM.
  */
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('modalAgregarPlano');
-    if (!modal) return;
+(function () {
+    'use strict';
 
-    modal.addEventListener('show.bs.modal', function () {
-        const select = document.getElementById('nombre_linea');
-        if (!select) return;
+    if (window.__modalAgregarPlanoInitialized) return;
+    window.__modalAgregarPlanoInitialized = true;
 
-        // 1. Limpiar opciones existentes (mantener solo la opción por defecto deshabilitada)
-        select.querySelectorAll('option:not([disabled])').forEach(o => o.remove());
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('modalAgregarPlano');
+        if (!modal) return;
 
-        // 2. Usar la variable global inyectada de forma segura
-        const rutas = window.rutasPlanos || [];
-        const emptyWarning = document.getElementById('rutas-empty');
+        modal.addEventListener('show.bs.modal', function () {
+            const select = document.getElementById('nombre_linea');
+            if (!select) return;
 
-        // 3. Poblar el select
-        if (Array.isArray(rutas) && rutas.length > 0) {
-            rutas.forEach(r => {
-                const opt = document.createElement('option');
-                opt.value = r;
-                opt.textContent = r;
-                select.appendChild(opt);
+            // Limpiar opciones (mantener solo la disabled)
+            select.querySelectorAll('option:not([disabled])').forEach(function (o) {
+                o.remove();
             });
-            
-            // Ocultar advertencia de vacío
-            if (emptyWarning) emptyWarning.classList.add('d-none');
-        } else {
-            // Mostrar advertencia si no hay rutas
-            if (emptyWarning) emptyWarning.classList.remove('d-none');
-            console.warn('⚠️ No se encontraron rutas técnicas para cargar en el select.');
-        }
+
+            // Leer rutas desde data-attribute
+            const dataNode = document.getElementById('planos-data');
+            let rutas = [];
+            try {
+                const raw = dataNode ? dataNode.getAttribute('data-rutas') : null;
+                rutas = raw ? JSON.parse(raw) : [];
+            } catch (error) {
+                console.error('Error parseando rutas de planos:', error);
+                rutas = [];
+            }
+
+            const emptyWarning = document.getElementById('rutas-empty');
+
+            if (Array.isArray(rutas) && rutas.length > 0) {
+                rutas.forEach(function (r) {
+                    const opt = document.createElement('option');
+                    opt.value = r;
+                    opt.textContent = r;
+                    select.appendChild(opt);
+                });
+                if (emptyWarning) emptyWarning.classList.add('d-none');
+            } else {
+                if (emptyWarning) emptyWarning.classList.remove('d-none');
+                console.warn('No se encontraron rutas técnicas para cargar en el select.');
+            }
+        });
     });
-});
+})();

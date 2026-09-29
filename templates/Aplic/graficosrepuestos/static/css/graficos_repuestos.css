@@ -1,7 +1,7 @@
 /* ============================================================
 graficos_repuestos.css
 Solo estilos ESPECÍFICOS de esta app.
-Lo reutilizable está en: static/css/base/graficos.css
+Lo reutilizable está en: static/css/base/graficos.css (futuro)
 ============================================================ */
 
 .graficos-repuestos-container {
@@ -9,7 +9,82 @@ Lo reutilizable está en: static/css/base/graficos.css
     text-align: center;
 }
 
-/* Modal de detalle */
+.graficos-repuestos-container h2 {
+    color: var(--color-primario, #88c999);
+    margin-bottom: 20px;
+}
+
+/* Controles (select + botón exportar) */
+.graficos-repuestos-container .chart-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(136, 201, 153, 0.15);
+    border-radius: 0.75rem;
+}
+
+.graficos-repuestos-container .chart-controls label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.graficos-repuestos-container .chart-controls select {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background: var(--color-superficie, #4b376a);
+    color: #fff;
+    border: 2px solid var(--color-primario, #88c999);
+    cursor: pointer;
+    min-height: 44px;
+    transition: all 0.3s ease;
+}
+
+.graficos-repuestos-container .chart-controls select:hover,
+.graficos-repuestos-container .chart-controls select:focus {
+    border-color: #88c999;
+    box-shadow: 0 0 0 3px rgba(136, 201, 153, 0.15);
+    outline: none;
+}
+
+/* Contenedor de gráficos */
+.chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.chart-box {
+    width: 100%;
+    max-width: 600px;
+    height: 500px;
+    background: #1a1a2e;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.chart-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+#exportarPdf {
+    margin-top: 10px;
+}
+
+/* ============================================================
+MODAL DE DETALLE
+============================================================ */
 #modalDetalleEstado .modal-content {
     background: var(--color-superficie, #4b376a);
     color: #fff;
@@ -63,8 +138,46 @@ Lo reutilizable está en: static/css/base/graficos.css
     box-shadow: 0 0 0 3px rgba(136, 201, 153, 0.15);
 }
 
-/* Responsive */
+/* ============================================================
+RESPONSIVE
+============================================================ */
+@media (max-width: 1280px) {
+    .chart-box {
+        max-width: 500px;
+        height: 450px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .chart-box {
+        max-width: 450px;
+        height: 400px;
+    }
+}
+
 @media (max-width: 768px) {
+    .graficos-repuestos-container {
+        padding: 10px;
+    }
+
+    .chart-container {
+        gap: 1rem;
+    }
+
+    .chart-box {
+        max-width: 100%;
+        height: 350px;
+    }
+
+    .graficos-repuestos-container .chart-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .graficos-repuestos-container .chart-controls select {
+        width: 100%;
+    }
+
     #modalDetalleEstado .modal-dialog {
         margin: 0.5rem;
         max-width: calc(100vw - 1rem);
@@ -77,5 +190,22 @@ Lo reutilizable está en: static/css/base/graficos.css
     #modalDetalleEstado .table th,
     #modalDetalleEstado .table td {
         padding: 0.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .chart-box {
+        height: 300px;
+    }
+
+    .graficos-repuestos-container h2 {
+        font-size: 1.3rem;
+    }
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .chart-box:hover {
+        transform: none;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     }
 }

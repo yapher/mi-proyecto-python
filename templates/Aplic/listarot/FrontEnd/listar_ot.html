@@ -1,20 +1,20 @@
 {% extends 'layout.html' %}
+
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('indexlistar_ot.static', filename='css/listar_ot.css') }}">
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js"></script>
 {% endblock %}
 
 {% block content %}
 <div class="listarot-container">
     <h1 class="titulo-principal">📋 Órdenes de Mantenimiento</h1>
+
     <h2 id="contador-filas" class="contador-ot">
         Cantidad total de órdenes: {{ num_filas }}
     </h2>
 
     <div class="mb-3 text-center">
         <label class="text-white me-2">📁 Archivo:</label>
-        <select id="archivoSelector" class="form-select d-inline-block w-auto" onchange="cambiarArchivo()">
+        <select id="archivoSelector" class="form-select d-inline-block w-auto">
             {% for archivo, fecha in selector %}
             <option value="{{ archivo }}" {% if archivo == archivo_actual %}selected{% endif %}>
                 {{ fecha }}
@@ -30,13 +30,16 @@
 
     <div class="row g-2 controles-container">
         <div class="col-md-6">
-            <select id="columnaSelector" class="form-select" onchange="generarGrafico()">
+            <select id="columnaSelector" class="form-select">
                 <option value="">📊 Seleccionar columna a graficar</option>
             </select>
         </div>
+
         <div class="col-md-6">
-            <input type="text" id="busqueda" class="form-control" onkeyup="buscar()"
-                placeholder="🔍 Buscar en la tabla..." />
+            <input type="text"
+                   id="busqueda"
+                   class="form-control"
+                   placeholder="🔍 Buscar en la tabla...">
         </div>
     </div>
 
@@ -50,5 +53,6 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/echarts-gl@2.0.9/dist/echarts-gl.min.js"></script>
 <script src="{{ url_for('indexlistar_ot.static', filename='js/listar_ot.js') }}"></script>
 {% endblock %}

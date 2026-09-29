@@ -1,8 +1,10 @@
 {% extends 'layout.html' %}
+
 {% block head %}
 {{ super() }}
 <link rel="stylesheet" href="{{ url_for('indexgraficos_repuestos.static', filename='css/graficos_repuestos.css') }}">
 {% endblock %}
+
 {% block content %}
 {% set return_to = return_to|default('indexgraficos_repuestos.indexgraficos_repuestos') %}
 {% set active_tab = active_tab|default('') %}
@@ -54,16 +56,16 @@
 {% include 'partials/repuestos/details.html' %}
 {% include 'partials/repuestos/newRep.html' %}
 
-<script>
-    window.datos_iniciales = {{ datos|tojson|safe }};
-    window.RepuestoEndpoints = {
-        agregar: "{{ url_for('indexEstadoRep.agregar_repuesto') }}",
-        editar: "{{ url_for('indexEstadoRep.editar_repuesto') }}",
-        eliminar: "{{ url_for('indexEstadoRep.eliminar_repuesto') }}",
-        returnTo: "indexgraficos_repuestos.indexgraficos_repuestos"
-    };
-</script>
+<!-- ✅ Datos como data-attributes, sin script inline -->
+<div id="graficosRepuestosData"
+     data-datos='{{ datos|tojson|e }}'
+     data-endpoint-agregar="{{ url_for('indexEstadoRep.agregar_repuesto') }}"
+     data-endpoint-editar="{{ url_for('indexEstadoRep.editar_repuesto') }}"
+     data-endpoint-eliminar="{{ url_for('indexEstadoRep.eliminar_repuesto') }}"
+     data-return-to="indexgraficos_repuestos.indexgraficos_repuestos"
+     hidden></div>
 {% endblock %}
+
 {% block scripts %}
 {{ super() }}
 <script src="{{ url_for('static', filename='js/utils/modal.js') }}"></script>

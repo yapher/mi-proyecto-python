@@ -1,22 +1,31 @@
 /**
- * cambiar_password.js - Lógica de cambio de contraseña
- * ✅ USA CSRF utility para la operación de cambio
- * ✅ Usa Logger y Notify reutilizables
+ * cambiar_password.js
+ * Lógica de cambio de contraseña.
+ * - Abre automáticamente el modal si corresponde.
+ * - Usa CSRF utility.
+ * - Usa Logger y Notify reutilizables.
  */
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     Logger.moduleInit('CambiarPassword');
 
+    const page = document.getElementById('cambiarPasswordPage');
     const form = document.getElementById('formCambiarPassword');
-    if (!form) {
-        Logger.warn('Formulario de cambio de password no encontrado');
+    const modalEl = document.getElementById('modalCambiarPassword');
+
+    if (!form || !modalEl) {
+        Logger.warn('Formulario o modal de cambio de password no encontrados');
         return;
     }
 
+    if (page && page.dataset.autoOpen === 'true') {
+        const modal = new bootstrap.Modal(modalEl);
+        modal.show();
+    }
+
     document.querySelectorAll('.btn-toggle-pass').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function () {
             const targetId = this.dataset.target;
             const input = document.getElementById(targetId);
-
             if (!input) return;
 
             const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -36,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const strengthContainer = document.getElementById('passwordStrength');
 
     if (passwordNueva && strengthContainer) {
-        passwordNueva.addEventListener('input', function() {
+        passwordNueva.addEventListener('input', function () {
             const password = this.value;
             const fortaleza = calcularFortaleza(password);
 
@@ -49,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
         const passwordActual = document.getElementById('passwordActual').value;
@@ -83,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function() {
         try {
             Logger.apiCall('POST', '/api/cambiar_password');
 
-            // ✅ USA CSRF utility
             const response = await CSRF.post('/api/cambiar_password', {
                 password_actual: passwordActual,
                 password_nueva: passwordNueva,
@@ -96,18 +104,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (data.status === 'ok') {
                 Notify.success(data.msg || 'Contraseña cambiada exitosamente');
 
-                const modalEl = document.getElementById('modalCambiarPassword');
-                if (modalEl) {
-                    const modal = bootstrap.Modal.getInstance(modalEl);
-                    if (modal) modal.hide();
-                }
+                const modal = bootstrap.Modal.getInstance(modalEl);
+                if (modal) modal.hide();
 
                 form.reset();
                 if (strengthContainer) strengthContainer.innerHTML = '';
             } else {
                 Notify.error(data.msg || 'Error al cambiar la contraseña');
             }
-
         } catch (err) {
             Logger.error('Error al cambiar contraseña', err);
             Notify.error('Error de conexión al cambiar la contraseña');
@@ -129,7 +133,6 @@ function calcularFortaleza(password) {
     if (password.length >= 4) score++;
     if (password.length >= 8) score++;
     if (password.length >= 12) score++;
-
     if (/[a-z]/.test(password)) score++;
     if (/[A-Z]/.test(password)) score++;
     if (/[0-9]/.test(password)) score++;

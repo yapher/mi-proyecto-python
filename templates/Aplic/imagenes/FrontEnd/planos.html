@@ -1,17 +1,19 @@
 {% extends 'layout.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('indeximagenes.static', filename='css/planos.css') }}">
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid mt-4 px-0">
     <h2 class="mb-4">Gestión de Planos PDF</h2>
-    
-    <!-- Partial que incluye botón + modal -->
+
     {% include 'Aplic/imagenes/FrontEnd/_modal_agregar_plano.html' %}
-    
-    <!-- Buscador -->
+
     <div class="mb-3">
         <input type="text" class="form-control" id="buscarPlano" placeholder="🔍 Buscar en todos los campos...">
     </div>
-    
-    <!-- Tabla de Planos -->
+
     <div class="table-responsive tabla-scroll">
         <table class="table table-bordered table-hover table-striped table-dark align-middle w-100 table-fixed">
             <thead class="sticky-header">
@@ -24,11 +26,12 @@
             </thead>
             <tbody>
                 {% import 'Aplic/imagenes/FrontEnd/_macros.html' as macros %}
+
                 {% set agrupados = {} %}
                 {% for plano in planos %}
                     {% set _ = agrupados.setdefault(plano.nombre_linea, []).append(plano) %}
                 {% endfor %}
-                
+
                 {% if agrupados %}
                     {% for linea, planos_linea in agrupados.items() %}
                         {{ macros.fila_principal(linea, loop.index) }}
@@ -53,15 +56,14 @@
         </table>
     </div>
 </div>
+
+<!-- Datos para JS externo (NO inline) -->
+<div id="planos-data"
+     data-rutas='{{ rutas|tojson }}'
+     hidden></div>
 {% endblock %}
 
 {% block scripts %}
-<!-- ✅ 1. Inyección segura de datos del backend para JS externo -->
-<script>
-    window.rutasPlanos = {{ rutas|tojson|safe }};
-</script>
-
-<!-- ✅ 2. Scripts de la aplicación Imágenes centralizados (select.js ELIMINADO para evitar conflictos) -->
 <script src="{{ url_for('indeximagenes.static', filename='js/busqueda.js') }}"></script>
 <script src="{{ url_for('indeximagenes.static', filename='js/planos.js') }}"></script>
 <script src="{{ url_for('indeximagenes.static', filename='js/modal_agregar_plano.js') }}"></script>
