@@ -1,24 +1,21 @@
-<div class="d-flex gap-3 align-items-center mb-3 mt-3">
-    <form class="form-exportar-pdf no-loader" method="POST" action="{{ url_for('indexEstadoRep.exportar_pdf') }}">
-        <input type="hidden" name="ruta_jerarquia" value="{{ tab.ruta_jerarquia }}">
-        <input type="hidden" name="buscar" class="buscar_pdf">
-        <button type="submit" class="btn btn-outline-light">Exportar a PDF</button>
-    </form>
-    <input type="hidden" data-ruta_jerarquia="{{ tab.ruta_jerarquia }}" data-sanitized_id="{{ tab.sanitized_id }}">
-    <div>
-        <button type="button" class="btn btn-agregar" data-bs-toggle="modal" data-bs-target="#agregarModal">
-            Agregar nuevo repuesto
-        </button>
-    </div>
-</div>
-<div id="tabla-container">
-    <input type="text" class="form-control mb-3 buscar_input" placeholder="🔍 Buscar en todos los campos..."
-        onkeyup="filtrarTabla(this)">
-    <div class="mb-3">
-        {% include 'partials/repuestos/selectEstados.html' %}
-    </div>
+{#
+    templates/partials/repuestos/tablaRepuestos.html
+
+    Tabla común de repuestos.
+    Espera variable: repuestos
+    Opcional: empty_message, active_tab
+#}
+
+{% set active_tab = active_tab|default('') %}
+{% set empty_message = empty_message|default('No hay repuestos para mostrar.') %}
+
+<div class="tabla-container" data-tabla-repuestos>
+    <input type="text"
+           class="form-control mb-3 js-filtrar-tabla"
+           placeholder="🔍 Buscar en todos los campos...">
+
     <div class="table-responsive tabla-scroll">
-        <table class="table table-hover table-striped table-dark align-middle w-100 mb-0">
+        <table class="table table-hover table-striped table-dark align-middle w-100 mb-0 js-tabla-repuestos">
             <thead class="sticky-header">
                 <tr>
                     <th>Imagen</th>
@@ -31,40 +28,46 @@
                     <th>Acciones</th>
                 </tr>
             </thead>
+
             <tbody>
                 {% if repuestos and repuestos|length > 0 %}
-                {% for r in repuestos %}
-                <tr>
-                    <td>
-                        {% include 'partials/repuestos/imageRep.html' %}
-                    </td>
-                    <td>{{ r.nombre }}</td>
-                    <td>{{ r.codigo }}</td>
-                    <td>{{ r.cantidad }}</td>
-                    <td>{{ r.equipo }}</td>
-                    <td>
-                        <ul class="mb-0">
-                            {% for ruta in r.ruta_jerarquia %}
-                            <li>{{ ruta }}</li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td>{{ r.estado }}</td>
-                    <td>
-                        <div class="d-flex flex-row gap-2 justify-content-center">
-                            {% include 'partials/repuestos/buttonEdit.html' %}
-                            {% include 'partials/repuestos/buttonDelete.html' %}
-                        </div>
-                    </td>
-                </tr>
-                {% endfor %}
+                    {% for r in repuestos %}
+                        <tr>
+                            <td>
+                                {% include 'partials/repuestos/imageRep.html' %}
+                            </td>
+                            <td>{{ r.nombre|default('') }}</td>
+                            <td>{{ r.codigo|default('') }}</td>
+                            <td>{{ r.cantidad|default(0) }}</td>
+                            <td>{{ r.equipo|default('') }}</td>
+                            <td>
+                                {% if r.ruta_jerarquia %}
+                                    {% if r.ruta_jerarquia is string %}
+                                        {{ r.ruta_jerarquia }}
+                                    {% else %}
+                                        {{ r.ruta_jerarquia|join(' > ') }}
+                                    {% endif %}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td>{{ r.estado|default('') }}</td>
+                            <td>
+                                <div class="d-flex flex-row gap-2 justify-content-center">
+                                    {% include 'partials/repuestos/buttonEdit.html' %}
+                                    {% include 'partials/repuestos/buttonDelete.html' %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
                 {% else %}
-                <tr>
-                    <td colspan="8" class="text-center">No hay repuestos para esta categoría.</td>
-                </tr>
+                    <tr>
+                        <td colspan="8" class="text-center">
+                            {{ empty_message }}
+                        </td>
+                    </tr>
                 {% endif %}
             </tbody>
         </table>
     </div>
 </div>
-<script src="{{ url_for('indexEstadoRep.static', filename='js/tabla_repuestos.js') }}"></script>

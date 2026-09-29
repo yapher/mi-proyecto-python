@@ -1,0 +1,67 @@
+{#
+    templates/partials/repuestos/ubicacionTecnicaSelect.html
+
+    Macro reutilizable para seleccionar ubicación técnica.
+    Soporta:
+    - árbol de ubicaciones: [{'nombre': ..., 'ruta_jerarquia': ..., 'sububicaciones': [...]}]
+    - lista plana de strings: ['Línea 1', 'Sector A']
+#}
+
+{% macro _ubicacion_opciones(items, selected_list, nivel=0) -%}
+    {%- for u in items or [] -%}
+        {%- if u is mapping -%}
+            {%- set valor = u.ruta_jerarquia or u.ruta or u.nombre or '' -%}
+            {%- set nombre = u.nombre or valor -%}
+            {%- set emoji = u.emoji or '' -%}
+            {%- set hijos = u.sububicaciones or u.hijos or [] -%}
+        {%- else -%}
+            {%- set valor = u|string|trim -%}
+            {%- set nombre = valor -%}
+            {%- set emoji = '' -%}
+            {%- set hijos = [] -%}
+        {%- endif -%}
+
+        {%- if valor -%}
+            <option
+                value="{{ valor|e }}"
+                class="rep-ubicacion-option rep-ubicacion-nivel-{{ nivel }}"
+                {%- if valor in selected_list %} selected{%- endif %}
+            >
+                {{ emoji }} {{ nombre|e }}
+            </option>
+        {%- endif -%}
+
+        {%- if hijos -%}
+            {{ _ubicacion_opciones(hijos, selected_list, nivel + 1) }}
+        {%- endif -%}
+    {%- endfor -%}
+{%- endmacro %}
+
+
+{% macro ubicacion_select(
+    id='ubicacion',
+    name='ruta_jerarquia[]',
+    ubicaciones=[],
+    selected=[],
+    placeholder='Seleccioná una o más ubicaciones técnicas',
+    multiple=true,
+    required=false,
+    clase_extra=''
+) -%}
+    {%- set selected_list = selected if selected is iterable and selected is not string else ([] if not selected else [selected]) -%}
+
+    <div class="rep-ubicacion-select-wrapper">
+        <select
+            id="{{ id }}"
+            name="{{ name }}"
+            class="form-select select2 rep-ubicacion-select {{ clase_extra }}"
+            {%- if multiple %} multiple{%- endif %}
+            {%- if required %} required{%- endif %}
+            data-placeholder="{{ placeholder|e }}"
+            aria-label="{{ placeholder|e }}"
+        >
+            <option value=""></option>
+            {{ _ubicacion_opciones(ubicaciones or [], selected_list, 0) }}
+        </select>
+    </div>
+{%- endmacro %}

@@ -1,0 +1,181 @@
+{#
+    templates/partials/repuestos/repuesto_macros.html
+
+    Macros reutilizables para repuestos.
+    Consumidas por:
+    - cardRepuesto.html
+    - imageRep.html
+    - buttonEdit.html
+    - tablaRepuestos.html (futuro)
+    - inventario / graficos / lista_repuestos / estadosderepuestos
+#}
+
+{% macro ubicacion_texto(rutas, separador=', ') -%}
+    {%- set ns = namespace(partes=[]) -%}
+
+    {%- if rutas is string -%}
+        {%- set txt = rutas|trim -%}
+        {%- if txt and txt != 'None' and txt != '[]' and txt != '{}' -%}
+            {%- if txt.startswith('[') and txt.endswith(']') -%}
+                {%- set interior = txt|replace('[', '')|replace(']', '') -%}
+                {%- for parte in interior.split(',') -%}
+                    {%- set limpio = parte|trim|replace("'", "")|replace('"', '') -%}
+                    {%- if limpio -%}
+                        {%- set ns.partes = ns.partes + [limpio] -%}
+                    {%- endif -%}
+                {%- endfor -%}
+            {%- else -%}
+                {%- set ns.partes = [txt] -%}
+            {%- endif -%}
+        {%- endif -%}
+
+    {%- elif rutas is mapping -%}
+        {%- set val = rutas.get('ruta_jerarquia') or rutas.get('rutas') or rutas.get('ruta') or rutas.get('nombre') or rutas.get('value') or '' -%}
+        {%- if val -%}
+            {%- set txt = val|string|trim -%}
+            {%- if txt and txt != 'None' -%}
+                {%- set ns.partes = [txt] -%}
+            {%- endif -%}
+        {%- else -%}
+            {%- for v in rutas.values() -%}
+                {%- set txt = v|string|trim -%}
+                {%- if txt and txt != 'None' and txt != '[]' and txt != '{}' -%}
+                    {%- set ns.partes = ns.partes + [txt] -%}
+                {%- endif -%}
+            {%- endfor -%}
+        {%- endif -%}
+
+    {%- elif rutas is iterable -%}
+        {%- for item in rutas -%}
+            {%- if item is mapping -%}
+                {%- set val = item.get('ruta_jerarquia') or item.get('ruta') or item.get('nombre') or item.get('value') or '' -%}
+            {%- else -%}
+                {%- set val = item -%}
+            {%- endif -%}
+
+            {%- set txt = val|string|trim -%}
+            {%- if txt and txt != 'None' and txt != '[]' and txt != '{}' -%}
+                {%- set ns.partes = ns.partes + [txt] -%}
+            {%- endif -%}
+        {%- endfor -%}
+    {%- endif -%}
+
+    {{ ns.partes|join(separador) }}
+{%- endmacro %}
+
+
+{% macro ubicacion_chips(rutas, max_visible=3, vacio='Sin ubicación') -%}
+    {%- set separador_interno = '|@|' -%}
+    {%- set texto = ubicacion_texto(rutas, separador_interno) -%}
+
+    {%- if texto -%}
+        {%- set partes = texto.split(separador_interno) -%}
+        {%- set ns = namespace(mostradas=0, restantes=[]) -%}
+
+        <span class="rep-chips">
+            {%- for ruta in partes -%}
+                {%- set ruta_txt = ruta|trim -%}
+                {%- if ruta_txt -%}
+                    {%- if ns.mostradas < max_visible -%}
+                        <span class="rep-chip rep-chip-ubicacion" title="{{ ruta_txt|e }}">
+                            {{ ruta_txt }}
+                        </span>
+                        {%- set ns.mostradas = ns.mostradas + 1 -%}
+                    {%- else -%}
+                        {%- set ns.restantes = ns.restantes + [ruta_txt] -%}
+                    {%- endif -%}
+                {%- endif -%}
+            {%- endfor -%}
+
+            {%- if ns.restantes|length > 0 -%}
+                <span class="rep-chip rep-chip-more" title="{{ ns.restantes|join(', ')|e }}">
+                    +{{ ns.restantes|length }}
+                </span>
+            {%- endif -%}
+        </span>
+    {%- else -%}
+        <span class="rep-chip rep-chip-vacio">{{ vacio }}</span>
+    {%- endif -%}
+{%- endmacro %}
+
+
+{% macro repuesto_comentario(r, mostrar_vacio=false) -%}
+    {%- set _r = r if r is mapping else {} -%}
+    {%- set comentario = (_r.get('comentario', '') or '')|string|trim -%}
+
+    {%- if comentario -%}
+        <div class="rep-card-row rep-card-comment-row">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="rep-label">Nota:</span>
+            <span class="rep-value rep-card-comment">{{ comentario }}</span>
+        </div>
+    {%- elif mostrar_vacio -%}
+        <div class="rep-card-row rep-card-comment-row rep-card-comment-empty">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="rep-label">Nota:</span>
+            <span class="rep-value">Sin comentario</span>
+        </div>
+    {%- endif -%}
+{%- endmacro %}
+
+
+{% macro repuesto_imagen(r) -%}
+    {%- set _r = r if r is mapping else {} -%}
+
+    {%- set imagen_raw = (_r.get('imagen', '') or '')|string|trim -%}
+    {%- set nombre = (_r.get('nombre', '') or '')|string|trim -%}
+    {%- set codigo = (_r.get('codigo', '') or '')|string|trim -%}
+    {%- set cantidad = (_r.get('cantidad', 0) or 0) -%}
+    {%- set equipo = (_r.get('equipo', '') or '')|string|trim -%}
+    {%- set estado = (_r.get('estado', '') or '')|string|trim -%}
+    {%- set link = (_r.get('link', '') or '')|string|trim -%}
+    {%- set fecha_creacion = (_r.get('fecha_creacion', '') or '')|string|trim -%}
+    {%- set fecha_fin = (_r.get('fecha_fin', '') or '')|string|trim -%}
+    {%- set comentario = (_r.get('comentario', '') or '')|string|trim -%}
+    {%- set rutas = _r.get('ruta_jerarquia', []) -%}
+    {%- set ubicacion = ubicacion_texto(rutas) -%}
+    {%- set rutas_json = rutas | tojson | e -%}
+
+    {%- if imagen_raw -%}
+        {%- set imagen_path = imagen_raw|replace('\\', '/') -%}
+        {%- set sin_query = imagen_path.split('?')[0] -%}
+        {%- set archivo = sin_query.split('/')[-1] -%}
+
+        {%- if not archivo -%}
+            {%- set archivo = imagen_path -%}
+        {%- endif -%}
+
+        {%- if sin_query.startswith('http') or sin_query.startswith('//') or sin_query.startswith('/') -%}
+            {%- set src = sin_query -%}
+        {%- else -%}
+            {%- set src = url_for('static', filename='uploads/Imagenes/' ~ archivo) -%}
+        {%- endif -%}
+
+        <img
+            src="{{ src|e }}"
+            alt="{{ (nombre or codigo or 'Repuesto')|e }}"
+            class="rep-card-img product-image"
+            data-nombre="{{ nombre|e }}"
+            data-codigo="{{ codigo|e }}"
+            data-cantidad="{{ cantidad|e }}"
+            data-equipo="{{ equipo|e }}"
+            data-estado="{{ estado|e }}"
+            data-emojy="{{ estado|e }}"
+            data-link="{{ link|e }}"
+            data-fecha="{{ fecha_creacion|e }}"
+            data-fecha_creacion="{{ fecha_creacion|e }}"
+            data-fechafin="{{ fecha_fin|e }}"
+            data-fecha_fin="{{ fecha_fin|e }}"
+            data-comentario="{{ comentario|e }}"
+            data-ubicacion="{{ ubicacion|e }}"
+            data-ruta_jerarquia="{{ rutas_json }}"
+            data-imagen="{{ archivo|e }}"
+            loading="lazy"
+        >
+    {%- else -%}
+        <div class="rep-card-image-placeholder" aria-hidden="true">
+            <i class="bi bi-image"></i>
+            <span>Sin imagen</span>
+        </div>
+    {%- endif -%}
+{%- endmacro %}

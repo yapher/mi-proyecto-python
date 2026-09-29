@@ -25,7 +25,11 @@
         <select id="jerarquiaSelect">
             <option value="">-- Todas --</option>
             {% for jerarquia in jerarquias %}
-                <option value="{{ jerarquia }}">{{ jerarquia }}</option>
+                <option
+                    value="{{ jerarquia }}"
+                    {% if jerarquia_inicial and jerarquia == jerarquia_inicial %}selected{% endif %}>
+                    {{ jerarquia }}
+                </option>
             {% endfor %}
         </select>
 
@@ -39,7 +43,6 @@
         </button>
     </div>
 
-    <!-- Modal de detalle por estado -->
     <div class="modal fade modal-custom-dark" id="modalDetalleEstado" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
@@ -53,37 +56,31 @@
         </div>
     </div>
 
-    <!-- Modal simple para ampliar imagen, fuera del modal de detalle para evitar anidación -->
-    <div class="modal fade" id="modalImagenAmpliada" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content bg-dark">
-                <div class="modal-header border-0">
-                    <h6 class="modal-title text-white" id="tituloImagenAmpliada"></h6>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <img id="imagenAmpliada" src="" class="img-fluid rounded" style="max-height:60vh;">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Reutilizar modal de alta/edición de repuesto ya existente en el proyecto -->
+    {% include 'partials/ui/imageModal.html' %}
+    {% include 'partials/repuestos/details.html' %}
     {% include 'partials/repuestos/newRep.html' %}
 
     <script>
         window.datos_iniciales = {{ datos|tojson|safe }};
+
+        window.RepuestoEndpoints = {
+            agregar: "{{ url_for('indexEstadoRep.agregar_repuesto') }}",
+            editar: "{{ url_for('indexEstadoRep.editar_repuesto') }}",
+            eliminar: "{{ url_for('indexEstadoRep.eliminar_repuesto') }}",
+            returnTo: "indexgraficos_repuestos.indexgraficos_repuestos"
+        };
     </script>
 {% endblock %}
 
 {% block scripts %}
     {{ super() }}
 
-    <!-- JS específico de gráficos -->
-    <script src="{{ url_for('indexgraficos_repuestos.static', filename='js/graficos_repuestos.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils/modal.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils/table.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils/image.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils/chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils/pdf.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/utils/repuesto_form.js') }}"></script>
 
-    <!-- Reutilizar JS existente de estadosRep para poblar modal de edición -->
-    <script src="{{ url_for('indexEstadoRep.static', filename='js/repuestoUtils.js') }}"></script>
-    <script src="{{ url_for('indexEstadoRep.static', filename='js/repuestoForm.js') }}"></script>
-    <script src="{{ url_for('indexEstadoRep.static', filename='js/repuestoEvents.js') }}"></script>
+    <script src="{{ url_for('indexgraficos_repuestos.static', filename='js/graficos_repuestos.js') }}"></script>
 {% endblock %}

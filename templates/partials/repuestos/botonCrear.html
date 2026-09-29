@@ -1,0 +1,14 @@
+{#
+    templates/partials/repuestos/botonCrear.html
+
+    Trigger de alta de repuesto. Reutilizable en cualquier app.
+    Clase neutra para no chocar con .btn-agregar / .btn-editar de ArbolCRUD.
+    El modo "agregar" lo garantiza el listener show.bs.modal (reset si el
+    relatedTarget no es .btn-editar), no la clase del botón.
+#}
+<button type="button"
+        class="btn btn-primary js-crear-repuesto"
+        data-bs-toggle="modal"
+        data-bs-target="#agregarModal">
+    ➕ Agregar nuevo repuesto
+</button>

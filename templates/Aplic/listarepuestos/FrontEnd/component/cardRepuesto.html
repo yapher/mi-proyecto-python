@@ -1,96 +1,78 @@
-<article class="rep-card">
-    <!-- Badge de estado -->
-    <span class="rep-card-badge">{{ r.estado }}</span>
+{% from 'partials/repuestos/repuesto_macros.html' import ubicacion_chips, repuesto_comentario, repuesto_imagen %}
 
-    <!-- Imagen -->
+{% set _r = r if r is mapping else {} %}
+{% set return_to = return_to|default('indexlista_repuestos.indexlista_repuestos') %}
+{% set tab_activo = tab_activo|default('') %}
+
+{% set codigo = (_r.get('codigo', '') or '')|string|trim %}
+{% set nombre = (_r.get('nombre', '') or '')|string|trim %}
+{% set estado = (_r.get('estado', '') or '')|string|trim %}
+{% set cantidad = _r.get('cantidad', 0) %}
+{% set equipo = (_r.get('equipo', '') or '')|string|trim %}
+{% set fecha_creacion = (_r.get('fecha_creacion', '') or '')|string|trim %}
+{% set fecha_fin = (_r.get('fecha_fin', '') or '')|string|trim %}
+
+<article class="rep-card" data-repuesto="1" data-codigo="{{ codigo|e }}">
+    {% if estado %}
+        <span class="rep-card-badge" title="{{ estado|e }}">{{ estado }}</span>
+    {% endif %}
+
     <div class="rep-card-image">
-        {% if r.imagen %}
-        <img src="{{ url_for('static', filename='uploads/Imagenes/' ~ r.imagen) }}"
-             alt="{{ r.nombre }}"
-             class="product-image"
-             data-codigo="{{ r.codigo }}"
-             data-nombre="{{ r.nombre }}"
-             data-link="{{ r.link }}"
-             data-cantidad="{{ r.cantidad }}"
-             data-fecha="{{ r.fecha_creacion }}"
-             data-equipo="{{ r.equipo }}"
-             data-fechafin="{{ r.fecha_fin }}"
-             data-ubicacion="{{ r.ruta_jerarquia | join(', ') }}"
-             data-comentario="{{ r.comentario | default('') }}"
-             data-imagen="{{ url_for('static', filename='uploads/Imagenes/' ~ r.imagen) }}"
-             data-emojy="{{ r.estado }}">
-        {% else %}
-        <div class="rep-card-placeholder">
-            <i class="bi bi-box-seam"></i>
-            <span>Sin imagen</span>
-        </div>
-        {% endif %}
+        {{ repuesto_imagen(_r) }}
     </div>
 
-    <!-- Cuerpo -->
     <div class="rep-card-body">
-        <!-- Título + Código -->
         <div class="rep-card-header">
-            <h5 class="rep-card-title">{{ r.nombre }}</h5>
-            <span class="rep-card-code">#{{ r.codigo }}</span>
+            <h5 class="rep-card-title" title="{{ nombre|e }}">
+                {{ nombre or 'Sin nombre' }}
+            </h5>
+            <span class="rep-card-code">#{{ codigo or 'S/C' }}</span>
         </div>
 
-        <!-- Info -->
         <div class="rep-card-info">
             <div class="rep-card-row">
                 <i class="bi bi-boxes"></i>
                 <span class="rep-label">Cantidad:</span>
-                <span class="rep-value">{{ r.cantidad }}</span>
+                <span class="rep-value">{{ cantidad }}</span>
             </div>
+
             <div class="rep-card-row">
                 <i class="bi bi-building"></i>
                 <span class="rep-label">Almacén:</span>
-                <span class="rep-value">{{ r.equipo or 'N/A' }}</span>
+                <span class="rep-value">{{ equipo or 'N/A' }}</span>
             </div>
-            {% if r.fecha_creacion %}
-            <div class="rep-card-row">
-                <i class="bi bi-calendar-check"></i>
-                <span class="rep-label">Alta:</span>
-                <span class="rep-value">{{ r.fecha_creacion }}</span>
-            </div>
+
+            {% if fecha_creacion %}
+                <div class="rep-card-row">
+                    <i class="bi bi-calendar-check"></i>
+                    <span class="rep-label">Alta:</span>
+                    <span class="rep-value">{{ fecha_creacion }}</span>
+                </div>
             {% endif %}
-            {% if r.fecha_fin %}
-            <div class="rep-card-row {% if r.fecha_fin < hoy_str %}rep-warn{% endif %}">
-                <i class="bi bi-calendar-x"></i>
-                <span class="rep-label">Baja:</span>
-                <span class="rep-value">{{ r.fecha_fin }}</span>
-            </div>
+
+            {% if fecha_fin %}
+                <div class="rep-card-row">
+                    <i class="bi bi-calendar-x"></i>
+                    <span class="rep-label">Baja:</span>
+                    <span class="rep-value">{{ fecha_fin }}</span>
+                </div>
             {% endif %}
+
+            {{ repuesto_comentario(_r, mostrar_vacio=true) }}
         </div>
 
-        <!-- ✅ NUEVO: Comentario -->
-        {% if r.comentario %}
-        <div class="rep-card-row">
-            <i class="bi bi-chat-left-text"></i>
-            <span class="rep-label">Nota:</span>
-            <span class="rep-value">{{ r.comentario }}</span>
-        </div>
-        {% endif %}
-
-        <!-- Ubicaciones -->
-        {% if r.ruta_jerarquia %}
         <div class="rep-card-locations">
-            <small><i class="bi bi-geo-alt"></i> Ubicaciones:</small>
-            <div class="rep-chips">
-                {% for ruta in r.ruta_jerarquia[:2] %}
-                <span class="rep-chip" title="{{ ruta }}">{{ ruta }}</span>
-                {% endfor %}
-                {% if r.ruta_jerarquia|length > 2 %}
-                <span class="rep-chip rep-chip-more">+{{ r.ruta_jerarquia|length - 2 }}</span>
-                {% endif %}
-            </div>
+            <small>
+                <i class="bi bi-geo-alt"></i>
+                Ubicación técnica:
+            </small>
+
+            {{ ubicacion_chips(_r.get('ruta_jerarquia', []), max_visible=3, vacio='Sin ubicación') }}
         </div>
-        {% endif %}
     </div>
 
-    <!-- Acciones -->
     <div class="rep-card-footer">
-        {% include 'partials/repuestos/buttonEdit.html' %}
-        {% include 'partials/repuestos/buttonDelete.html' %}
+        {% include 'partials/repuestos/buttonEdit.html' ignore missing %}
+        {% include 'partials/repuestos/buttonDelete.html' ignore missing %}
     </div>
 </article>

@@ -1,8 +1,46 @@
-<button type="button" class="btn btn-warning btn-sm btn-editar" data-bs-toggle="modal" data-bs-target="#agregarModal"
-    data-codigo="{{ r.codigo }}" data-nombre="{{ r.nombre }}" data-cantidad="{{ r.cantidad }}"
-    data-equipo="{{ r.equipo }}" data-ruta_jerarquia='{{ r.ruta_jerarquia  | tojson }}'
-    data-fecha_creacion="{{ r.fecha_creacion }}" data-fecha_fin="{{ r.fecha_fin|default('') }}"
-    data-link="{{ r.link|default('') }}" data-emojy="{{ r.estado }}" data-imagen="{{ r.imagen|default('') }}"
-    data-tab_activo="{{ active_tab }}">
+{% from 'partials/repuestos/repuesto_macros.html' import ubicacion_texto %}
+
+{%- set _r = r if r is mapping else {} -%}
+{%- set codigo = (_r.get('codigo', '') or '')|string|trim -%}
+{%- set nombre = (_r.get('nombre', '') or '')|string|trim -%}
+{%- set cantidad = (_r.get('cantidad', 0) or 0) -%}
+{%- set equipo = (_r.get('equipo', '') or '')|string|trim -%}
+{%- set estado = (_r.get('estado', '') or '')|string|trim -%}
+{%- set link = (_r.get('link', '') or '')|string|trim -%}
+{%- set comentario = (_r.get('comentario', '') or '')|string|trim -%}
+{%- set imagen = (_r.get('imagen', '') or '')|string|trim -%}
+{%- set fecha_creacion = (_r.get('fecha_creacion', '') or '')|string|trim -%}
+{%- set fecha_fin = (_r.get('fecha_fin', '') or '')|string|trim -%}
+{%- set rutas = _r.get('ruta_jerarquia', []) -%}
+{%- set ubicacion = ubicacion_texto(rutas) -%}
+{%- set rutas_json = rutas | tojson | e -%}
+{%- set return_to = return_to|default('indexEstadoRep.indexEstadoRep') -%}
+{%- set tab_activo = tab_activo|default(active_tab|default('')) -%}
+
+<button
+    type="button"
+    class="btn btn-sm btn-editar repuesto-btn-editar"
+    data-repuesto="1"
+    data-bs-toggle="modal"
+    data-bs-target="#agregarModal"
+    data-codigo="{{ codigo|e }}"
+    data-sanitized_id="{{ codigo|e }}"
+    data-nombre="{{ nombre|e }}"
+    data-cantidad="{{ cantidad|e }}"
+    data-equipo="{{ equipo|e }}"
+    data-estado="{{ estado|e }}"
+    data-emojy="{{ estado|e }}"
+    data-link="{{ link|e }}"
+    data-comentario="{{ comentario|e }}"
+    data-imagen="{{ imagen|e }}"
+    data-fecha="{{ fecha_creacion|e }}"
+    data-fecha_creacion="{{ fecha_creacion|e }}"
+    data-fechafin="{{ fecha_fin|e }}"
+    data-fecha_fin="{{ fecha_fin|e }}"
+    data-ubicacion="{{ ubicacion|e }}"
+    data-ruta_jerarquia="{{ rutas_json }}"
+    data-return_to="{{ return_to|e }}"
+    data-tab_activo="{{ tab_activo|e }}"
+>
     Editar
 </button>

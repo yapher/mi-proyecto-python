@@ -280,15 +280,4 @@ class Notify {
     }
 }
 
-// ============================================================
-// ALIAS PARA COMPATIBILIDAD
-// ============================================================
 window.Notify = Notify;
-
-// Alias para uso más corto
-window.showSuccess = (msg, timeout) => Notify.success(msg, timeout);
-window.showError = (msg, timeout) => Notify.error(msg, timeout);
-window.showWarning = (msg, timeout) => Notify.warning(msg, timeout);
-window.showInfo = (msg, timeout) => Notify.info(msg, timeout);
-window.showConfirm = (title, text, onConfirm, onCancel) => 
-    Notify.confirm(title, text, onConfirm, onCancel);

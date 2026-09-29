@@ -1,48 +1,48 @@
-/**
- * repuestoUtils.js
- * Funciones auxiliares y de utilidad para el manejo de repuestos.
- * Responsabilidad: Limpieza de datos, parseo y configuración de plugins.
- */
-const RepuestoUtils = {
-    /**
-     * Limpia valores nulos, "None" o "null" que vienen de Jinja/Backend
-     */
-    limpiar: (valor) => {
-        if (valor === null || valor === undefined) return '';
-        const str = String(valor).trim();
-        if (str === 'None' || str === 'null' || str === 'undefined') return '';
-        return str;
-    },
+// templates/Aplic/estadosderepuestos/static/js/repuestoUtils.js
+/*
+    Compatibilidad mínima.
+    La lógica real está en:
+    - /static/js/utils/table.js
+    - /static/js/utils/repuesto_form.js
+*/
 
-    /**
-     * Parsea de forma segura el atributo data-ruta_jerarquia (que viene como JSON string)
-     */
-    parsearRutas: (rawRutas) => {
-        let rutas = [];
-        try {
-            const parsed = JSON.parse(rawRutas || '[]');
-            if (Array.isArray(parsed)) {
-                rutas = parsed;
-            } else if (parsed) {
-                rutas = [parsed];
-            }
-        } catch (e) {
-            console.warn("⚠️ Error al parsear ruta_jerarquia:", e);
-      }
-        return rutas;
-    },
+(function () {
+    'use strict';
 
-    /**
-     * Inicializa Select2 de forma segura si la librería está disponible
-     */
-    initSelect2: () => {
-        if (typeof $ !== 'undefined' && $('#ubicacion').length) {
-            $('#ubicacion').select2({
-                placeholder: "Selecciona una o más ubicaciones técnicas",
-                allowClear: true,
-                width: '100%',
-                dropdownParent: $('#agregarModal')
-            });
-        }
+    window.RepuestoUtils = window.RepuestoUtils || {};
+    window.RepuestoUtils.limpiar = function (valor) {
+        return String(valor || '').trim();
+    };
+
+    if (window.__repuestoCompatLoader) {
+        return;
     }
-};
+
+    window.__repuestoCompatLoader = true;
+
+    var files = [
+        '/static/js/utils/table.js',
+        '/static/js/utils/repuesto_form.js'
+    ];
+
+    function load(index) {
+        if (index >= files.length) {
+            return;
+        }
+
+        var script = document.createElement('script');
+        script.src = files[index];
+        script.onload = function () {
+            load(index + 1);
+        };
+        document.head.appendChild(script);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function () {
+            load(0);
+        });
+    } else {
+        load(0);
+    }
+})();

@@ -1,0 +1,23 @@
+{% macro ubicacion_chips(rutas, vacio='Sin ubicación') -%}
+    {%- set es_iterable = rutas is iterable and rutas is not string -%}
+    {%- set rutas_lista = rutas if es_iterable else ([] if not rutas else [rutas]) -%}
+
+    {%- if rutas_lista and rutas_lista|length > 0 -%}
+        <span class="rep-ubicacion-chips">
+            {%- for ruta in rutas_lista -%}
+                {%- set ruta_txt = ruta|string|trim -%}
+                {%- if ruta_txt -%}
+                    <span class="rep-chip rep-chip-ubicacion">{{ ruta_txt }}</span>
+                {%- endif -%}
+            {%- endfor -%}
+        </span>
+    {%- else -%}
+        <span class="rep-chip rep-chip-vacio">{{ vacio }}</span>
+    {%- endif -%}
+{%- endmacro %}
+
+{% macro ubicacion_texto(rutas, separador=', ') -%}
+    {%- set es_iterable = rutas is iterable and rutas is not string -%}
+    {%- set rutas_lista = rutas if es_iterable else ([] if not rutas else [rutas]) -%}
+    {{ rutas_lista|join(separador) }}
+{%- endmacro %}

@@ -1,107 +1,137 @@
-<div class="modal fade modal-custom-dark" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
+{% from 'partials/repuestos/ubicacionTecnicaSelect.html' import ubicacion_select %}
+
+{%- set return_to = return_to|default('indexEstadoRep.indexEstadoRep') -%}
+{%- set tab_activo = tab_activo|default(active_tab|default('')) -%}
+{%- set ubicaciones = ubicaciones|default([]) -%}
+{%- set estados = estados|default([]) -%}
+{%- set nombres_almacenes = nombres_almacenes|default([]) -%}
+
+<!-- Modal agregar/editar repuesto -->
+<div class="modal fade" id="agregarModal" tabindex="-1" aria-labelledby="agregarModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
-            <form method="POST" action="{{ url_for('indexEstadoRep.agregar_repuesto') }}" enctype="multipart/form-data" id="formAgregarRepuesto">
+            <form id="formAgregarRepuesto" method="POST" action="{{ url_for('indexEstadoRep.agregar_repuesto') }}" enctype="multipart/form-data">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="agregarModalLabel">Agregar Nuevo Repuesto</h5>
+                    <h5 class="modal-title" id="agregarModalLabel">Agregar nuevo repuesto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
+
                 <div class="modal-body">
-                    <input type="hidden" id="return_to" name="return_to" value="{{ return_to | default('indexEstadoRep.indexEstadoRep') }}">
-                    <input type="hidden" id="tab_activo" name="tab_activo">
+                    <!-- URLs auxiliares -->
+                    <input type="hidden" id="agregar-repuesto-url" value="{{ url_for('indexEstadoRep.agregar_repuesto') }}">
+                    <input type="hidden" id="editar-repuesto-url" value="{{ url_for('indexEstadoRep.editar_repuesto') }}">
+                    <input type="hidden" id="eliminar-repuesto-url" value="{{ url_for('indexEstadoRep.eliminar_repuesto') }}">
 
-                    <div class="mb-3">
-                        <label class="form-label">Imagen actual</label><br>
-                        <img id="imgPreview" style="max-width:100px;display:none;">
-                        <span id="imgNombre" style="color:#e5d64f;"></span>
+                    <!-- Contexto de redirección -->
+                    <input type="hidden" id="return_to" name="return_to" value="{{ return_to }}">
+                    <input type="hidden" id="tab_activo" name="tab_activo" value="{{ tab_activo }}">
+
+                    <!-- Identificación en edición -->
+                    <input type="hidden" id="sanitized_id" name="sanitized_id" value="">
+                    <input type="hidden" id="codigo_original" name="codigo_original" value="">
+
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="codigo" class="form-label">Código *</label>
+                            <input type="text" class="form-control" id="codigo" name="codigo" required>
+                        </div>
+
+                        <div class="col-md-8">
+                            <label for="nombre" class="form-label">Nombre *</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="cantidad" class="form-label">Cantidad</label>
+                            <input type="number" class="form-control" id="cantidad" name="cantidad" value="0" min="0">
+                        </div>
+
+                        <div class="col-md-8">
+                            <label for="equipo" class="form-label">Almacén</label>
+
+                            {% if nombres_almacenes %}
+                                <select class="form-select" id="equipo" name="equipo">
+                                    <option value="">-- Selecciona un almacén --</option>
+                                    {% for nombre in nombres_almacenes %}
+                                        <option value="{{ nombre }}">{{ nombre }}</option>
+                                    {% endfor %}
+                                </select>
+                            {% else %}
+                                <input type="text" class="form-control" id="equipo" name="equipo" placeholder="Ej: SA-APR-CIZ1">
+                            {% endif %}
+                        </div>
+
+                        <div class="col-12">
+                            <label for="ubicacion" class="form-label">Ubicación técnica</label>
+
+                            {{ ubicacion_select(
+                                id='ubicacion',
+                                name='ruta_jerarquia[]',
+                                ubicaciones=ubicaciones,
+                                selected=[],
+                                placeholder='Seleccioná una o más ubicaciones técnicas'
+                            ) }}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="imagen" class="form-label">Imagen (opcional)</label>
+                            <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="link" class="form-label">Link (opcional)</label>
+                            <input type="url" class="form-control" id="link" name="link" placeholder="https://">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="estado" class="form-label">Estado</label>
+
+                            {% if estados %}
+                                <select class="form-select" id="estado" name="estado">
+                                    <option value="">-- Todos los estados --</option>
+                                    {% for estado in estados %}
+                                        <option value="{{ estado.emoji|default('') }}">
+                                            {{ estado.nombre|default('') }} {{ estado.emoji|default('') }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            {% else %}
+                                <input type="text" class="form-control" id="estado" name="estado" placeholder="Ej: 🟢 Operativo">
+                            {% endif %}
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="fecha_creacion" class="form-label">Fecha de alta</label>
+                            <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="fecha_fin" class="form-label">Fecha de baja</label>
+                            <input type="date" class="form-control" id="fecha_fin" name="fecha_fin">
+                        </div>
+
+                        <div class="col-12">
+                            <label for="comentario" class="form-label">Comentario (opcional)</label>
+                            <textarea
+                                class="form-control"
+                                id="comentario"
+                                name="comentario"
+                                rows="3"
+                                placeholder="Ej: Se compraron 20 unidades. También está en almacén SA-APR-CIZ1. Proveedor: ..."
+                            ></textarea>
+                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="codigo" class="form-label">Código</label>
-                        <input type="text" class="form-control" id="codigo" name="codigo" required>
-                        <input type="hidden" id="codigo_original" name="codigo_original">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="cantidad" class="form-label">Cantidad</label>
-                        <input type="number" class="form-control" id="cantidad" name="cantidad" min="1" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="equipo" class="form-label">ALMACÉN</label>
-                        <select class="form-select" id="equipo" name="equipo">
-                            <option value="">-- Selecciona un equipo --</option>
-                            {% for nombre in nombres_almacenes %}
-                            <option value="{{ nombre }}">{{ nombre }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="ubicacion" class="form-label">Ubicación Técnica</label>
-                        <select class="form-select" id="ubicacion" name="ruta_jerarquia[]" multiple style="width: 100%;">
-                            <option value="">-- Seleccionar ubicaciones técnica --</option>
-                            {% for ubic in ubicaciones %}
-                            <option value="{{ ubic }}">{{ ubic }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="imagen" class="form-label">Imagen (opcional)</label>
-                        <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="fecha_creacion" class="form-label">Fecha de Creación</label>
-                        <input type="date" class="form-control" id="fecha_creacion" name="fecha_creacion" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="fecha_fin" class="form-label">Fecha Fin (opcional)</label>
-                        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="link" class="form-label">Link (opcional)</label>
-                        <input type="url" class="form-control" id="link" name="link" placeholder="https://">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="estado" class="form-label">Estado</label>
-                        <select class="form-select" id="estado" name="estado">
-                            <option value="">-- Todos los estados --</option>
-                            {% for estado in estados %}
-                            <option value="{{ estado.emoji }}">{{ estado.nombre }} {{ estado.emoji }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <!-- ✅ NUEVO: Campo Comentario -->
-                    <div class="mb-3">
-                        <label for="comentario" class="form-label">Comentario (opcional)</label>
-                        <textarea class="form-control" id="comentario" name="comentario" rows="3"
-                                  placeholder="Ej: Se compraron 20 unidades. También está en almacén SA-APR-CIZ1. Proveedor: ..."></textarea>
-                    </div>
-
                 </div>
+
                 <div class="modal-footer">
-                    <button type="button" class="btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn-guardar" id="btnSubmitRepuesto">Guardar Repuesto</button>
+                    <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-guardar" id="btnSubmitRepuesto">Guardar Repuesto</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
-<input type="hidden" id="editar-repuesto-url" value="{{ url_for('indexEstadoRep.editar_repuesto') }}">
-
-<!-- ✅ CARGA MODULAR DE JAVASCRIPT (desde static local de la app) -->
-<script src="{{ url_for('indexEstadoRep.static', filename='js/repuestoUtils.js') }}"></script>
-<script src="{{ url_for('indexEstadoRep.static', filename='js/repuestoForm.js') }}"></script>
-<script src="{{ url_for('indexEstadoRep.static', filename='js/repuestoEvents.js') }}"></script>
+<!-- Scripts comunes de repuestos -->
+<script defer src="{{ url_for('static', filename='js/utils/table.js') }}"></script>
+<script defer src="{{ url_for('static', filename='js/utils/repuesto_form.js') }}"></script>

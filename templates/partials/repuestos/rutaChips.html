@@ -1,0 +1,25 @@
+{#
+    templates/partials/repuestos/rutaChips.html
+
+    Render de ubicación técnica como chips (estética verde original),
+    en vez de <ul><li>. Espera r.ruta_jerarquia como list[str]
+    (garantizado por normalizar_repuesto en core/repuestos_filtros.py).
+
+    Uso: {% include 'partials/repuestos/rutaChips.html' %} dentro del
+    <td>/<div> que hoy muestra la ubicación técnica.
+#}
+{% set rutas = r.ruta_jerarquia|default([]) %}
+{% if rutas is string %}{% set rutas = [rutas] %}{% endif %}
+
+{% if rutas and rutas|length > 0 %}
+    <div class="ruta-jerarquia d-flex flex-wrap align-items-center gap-1">
+        {% for ruta in rutas %}
+            {% if ruta %}
+                <span class="rep-chip" title="{{ ruta }}">{{ ruta }}</span>
+                {% if not loop.last %}<span class="text-muted small">›</span>{% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+{% else %}
+    <span class="text-muted">—</span>
+{% endif %}
