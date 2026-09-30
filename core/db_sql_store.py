@@ -159,11 +159,17 @@ class ArbolSQLStore:
         nuevo_nombre = nuevos_datos.get('nombre', nodo.nombre)
 
         if nuevo_nombre != nodo.nombre:
-            partes = nodo.ruta_jerarquia.split(self.separador)
+            ruta_vieja = nodo.ruta_jerarquia
+            partes = ruta_vieja.split(self.separador)
             partes[-1] = nuevo_nombre
             nueva_ruta = self.separador.join(partes)
+
             self._actualizar_rutas_descendientes(nodo, nueva_ruta)
             nodo.ruta_jerarquia = nueva_ruta
+
+            # ✅ NUEVO: si es un almacén, actualizar los repuestos asociados
+            if self.model is Almacen:
+                self._propagar_renombre_a_repuestos(ruta_vieja, nueva_ruta)
 
         nodo.nombre = nuevo_nombre
         nodo.emoji = nuevos_datos.get('emoji', nodo.emoji)
@@ -179,6 +185,20 @@ class ArbolSQLStore:
 
         db.session.commit()
         return True, "Actualizado correctamente"
+
+    def _propagar_renombre_a_repuestos(self, ruta_vieja, ruta_nueva):
+        """
+        Repuesto.equipo guarda la ruta del almacén como texto.
+        Al renombrar un almacén (o un ancestro), reemplaza el prefijo viejo por el nuevo.
+        """
+        prefijo_viejo = ruta_vieja + self.separador
+        for r in Repuesto.query.filter(Repuesto.equipo != '').all():
+            equipo = r.equipo or ''
+            if equipo == ruta_vieja:
+                r.equipo = ruta_nueva
+            elif equipo.startswith(prefijo_viejo):
+                r.equipo = ruta_nueva + self.separador + equipo[len(prefijo_viejo):]
+
 
     def _actualizar_rutas_descendientes(self, nodo, nueva_ruta_padre):
         for hijo in nodo.hijos:

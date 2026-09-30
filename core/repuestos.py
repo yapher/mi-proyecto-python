@@ -68,50 +68,33 @@ def guardar_todos_repuestos(repuestos):
 # CONSULTAS / MAPEO
 # ============================================================
 
-def _extraer_todas_rutas_almacenes(arbol):
-    """Extrae recursivamente todas las rutas_jerarquia y nombres."""
-    resultado = {}
+def _indexar_almacenes(arbol):
+    """Devuelve (set de rutas_jerarquia, dict nombre -> [rutas])."""
+    rutas, por_nombre = set(), {}
 
-    def _recorrer(items):
-        if not items:
-            return
-        for item in items:
-            if not isinstance(item, dict):
+    def _rec(items):
+        for it in items or []:
+            if not isinstance(it, dict):
                 continue
-            ruta_jer = (item.get('ruta_jerarquia') or '').strip()
-            nombre = (item.get('nombre') or '').strip()
-            if ruta_jer:
-                resultado[ruta_jer] = {'ruta_jerarquia': ruta_jer, 'nombre': nombre}
-            if nombre:
-                resultado[nombre] = {'ruta_jerarquia': ruta_jer, 'nombre': nombre}
-            if '.' in ruta_jer:
-                ultimo = ruta_jer.split('.')[-1].strip()
-                if ultimo:
-                    resultado[ultimo] = {'ruta_jerarquia': ruta_jer, 'nombre': nombre}
-            subs = (
-                item.get('subcrear_almacenes')
-                or item.get('subalmacenes')
-                or item.get('sububicaciones')
-                or []
-            )
-            if subs:
-                _recorrer(subs)
+            ruta = (it.get('ruta_jerarquia') or '').strip()
+            nombre = (it.get('nombre') or '').strip()
+            if ruta:
+                rutas.add(ruta)
+                por_nombre.setdefault(nombre or ruta.split('.')[-1], []).append(ruta)
+            _rec(it.get('subcrear_almacenes') or [])
 
-    _recorrer(arbol)
-    return resultado
+    _rec(arbol)
+    return rutas, por_nombre
 
 
 def construir_mapeo_repuestos_por_almacen(repuestos=None, almacenes=None):
-    """
-    Construye un mapeo robusto de repuestos por almacén.
-    Cubre TODOS los casos posibles de asignación.
-    """
+    """Cada repuesto queda en UN solo almacén (clave = ruta_jerarquia exacta)."""
     if repuestos is None:
         repuestos = cargar_todos_repuestos()
     if almacenes is None:
         almacenes = cargar_arbol_almacenes()
 
-    claves_almacen = _extraer_todas_rutas_almacenes(almacenes)
+    rutas, por_nombre = _indexar_almacenes(almacenes)
     mapeo = {}
 
     for rep in repuestos:
@@ -119,37 +102,21 @@ def construir_mapeo_repuestos_por_almacen(repuestos=None, almacenes=None):
         if not equipo:
             continue
 
-        mapeo.setdefault(equipo, []).append(rep)
+        if equipo in rutas:
+            clave = equipo                       # caso normal
+        else:
+            # Dato viejo (solo nombre): se asigna solo si es inequívoco
+            candidatos = por_nombre.get(equipo, [])
+            clave = candidatos[0] if len(candidatos) == 1 else equipo
 
-        if '.' in equipo:
-            ultimo = equipo.split('.')[-1].strip()
-            if ultimo and ultimo != equipo:
-                mapeo.setdefault(ultimo, []).append(rep)
-
-        if equipo not in claves_almacen:
-            for clave, info in claves_almacen.items():
-                if clave.endswith('.' + equipo) or clave == equipo:
-                    mapeo.setdefault(clave, []).append(rep)
-                    break
+        mapeo.setdefault(clave, []).append(rep)
 
     return mapeo
 
 
 def obtener_repuestos_para_almacen(mapeo, almacen):
-    """Obtiene todos los repuestos de un almacén específico."""
     ruta_jer = (almacen.get('ruta_jerarquia') or '').strip()
-    nombre = (almacen.get('nombre') or '').strip()
-
-    if ruta_jer and ruta_jer in mapeo:
-        return mapeo[ruta_jer]
-    if nombre and nombre in mapeo:
-        return mapeo[nombre]
-    if '.' in ruta_jer:
-        ultimo = ruta_jer.split('.')[-1].strip()
-        if ultimo in mapeo:
-            return mapeo[ultimo]
-    return []
-
+    return mapeo.get(ruta_jer, [])
 
 def contar_repuestos_por_estado(repuestos=None, filtro_jerarquia=None):
     """Cuenta repuestos agrupados por estado."""
