@@ -9,7 +9,7 @@
         <select class="form-control" id="ruta" name="ruta" required>
             <option value="">Seleccione una línea</option>
             {% for item in rutas %}
-                <option value="{{ item.ruta }}">{{ item.ruta }}</option>
+              <option value="{{ item.ruta_jerarquia }}">{{ item.ruta_jerarquia }}</option>
             {% endfor %}
         </select>
     </div>

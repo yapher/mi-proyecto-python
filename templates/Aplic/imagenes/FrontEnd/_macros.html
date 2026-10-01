@@ -28,7 +28,7 @@
                 Editar
             </button>
             <form method="POST"
-                action="{{ url_for('indeximagenes.eliminar_plano', nombre_linea=plano.nombre_linea, archivo=plano.archivo) }}"
+                action="{{ url_for('indeximagenes.eliminar_plano', plano_id=plano.id) }}"
                 style="display:inline;" class="form-eliminar-plano">
                 <button type="button" class="btn btn-eliminar btn-sm d-flex align-items-center gap-1 btn-eliminar-plano"
                     title="Eliminar">
@@ -46,7 +46,7 @@
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <form method="POST"
-                        action="{{ url_for('indeximagenes.editar_plano', nombre_linea=plano.nombre_linea, archivo=plano.archivo) }}">
+                        action="{{ url_for('indeximagenes.editar_plano', plano_id=plano.id) }}">
                         <div class="modal-header">
                             <h5 class="modal-title">Editar descripción</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

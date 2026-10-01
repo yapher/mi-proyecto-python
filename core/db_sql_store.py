@@ -6,8 +6,9 @@ from sqlalchemy import func
 from core.db_sql import db
 from core.models import (
     Menu, Rubro, Almacen, Ubicacion, Tab, Estado,
-    Repuesto, Pago, NodoBloqueo, Evento, Tarea,
+    Repuesto, Pago, NodoBloqueo, Evento, Tarea, Plano,
 )
+from core.models.repuesto import repuesto_ubicacion
 
 
 class SQLStore:
@@ -159,17 +160,12 @@ class ArbolSQLStore:
         nuevo_nombre = nuevos_datos.get('nombre', nodo.nombre)
 
         if nuevo_nombre != nodo.nombre:
-            ruta_vieja = nodo.ruta_jerarquia
-            partes = ruta_vieja.split(self.separador)
-            partes[-1] = nuevo_nombre
-            nueva_ruta = self.separador.join(partes)
-
+            if nodo.padre is not None:
+                nueva_ruta = f"{nodo.padre.ruta_jerarquia}{self.separador}{nuevo_nombre}"
+            else:
+                nueva_ruta = nuevo_nombre
             self._actualizar_rutas_descendientes(nodo, nueva_ruta)
             nodo.ruta_jerarquia = nueva_ruta
-
-            # ✅ NUEVO: si es un almacén, actualizar los repuestos asociados
-            if self.model is Almacen:
-                self._propagar_renombre_a_repuestos(ruta_vieja, nueva_ruta)
 
         nodo.nombre = nuevo_nombre
         nodo.emoji = nuevos_datos.get('emoji', nodo.emoji)
@@ -186,19 +182,7 @@ class ArbolSQLStore:
         db.session.commit()
         return True, "Actualizado correctamente"
 
-    def _propagar_renombre_a_repuestos(self, ruta_vieja, ruta_nueva):
-        """
-        Repuesto.equipo guarda la ruta del almacén como texto.
-        Al renombrar un almacén (o un ancestro), reemplaza el prefijo viejo por el nuevo.
-        """
-        prefijo_viejo = ruta_vieja + self.separador
-        for r in Repuesto.query.filter(Repuesto.equipo != '').all():
-            equipo = r.equipo or ''
-            if equipo == ruta_vieja:
-                r.equipo = ruta_nueva
-            elif equipo.startswith(prefijo_viejo):
-                r.equipo = ruta_nueva + self.separador + equipo[len(prefijo_viejo):]
-
+    
 
     def _actualizar_rutas_descendientes(self, nodo, nueva_ruta_padre):
         for hijo in nodo.hijos:
@@ -211,9 +195,50 @@ class ArbolSQLStore:
         if not nodo:
             return False, "Nodo no encontrado"
 
+        if self.model is Almacen:
+            ids = self._ids_subarbol(nodo)
+            cantidad = Repuesto.query.filter(Repuesto.almacen_id.in_(ids)).count()
+            if cantidad:
+                return False, (
+                    f"No se puede eliminar: hay {cantidad} repuesto(s) en este "
+                    f"almacén o en sus sub-almacenes. Movelos antes."
+                )
+
+        elif self.model is Ubicacion:
+            ids = self._ids_subarbol(nodo)
+
+            cantidad = Repuesto.query.filter(
+                Repuesto.ubicaciones.any(Ubicacion.id.in_(ids))
+            ).count()
+            if cantidad:
+                return False, (
+                    f"No se puede eliminar: hay {cantidad} repuesto(s) con esta "
+                    f"ubicación técnica (o sus sub-ubicaciones). Quitala de esos repuestos antes."
+                )
+
+            pestanias = Tab.query.filter(Tab.ubicacion_id.in_(ids)).count()
+            if pestanias:
+                return False, (
+                    f"No se puede eliminar: hay {pestanias} pestaña(s) de repuestos "
+                    f"asociadas a esta ubicación técnica (o sus sub-ubicaciones)."
+                )
+            
+            planos = Plano.query.filter(Plano.ubicacion_id.in_(ids)).count()
+            if planos:
+                return False, (
+                    f"No se puede eliminar: hay {planos} plano(s) PDF asociados "
+                    f"a esta ubicación técnica (o sus sub-ubicaciones)."
+                )
+
         db.session.delete(nodo)
         db.session.commit()
         return True, "Eliminado correctamente"
+
+    def _ids_subarbol(self, nodo):
+        ids = [nodo.id]
+        for hijo in nodo.hijos:
+            ids.extend(self._ids_subarbol(hijo))
+        return ids
 
 
 class EventSQLStore:
@@ -324,6 +349,7 @@ class RepuestoSQLStore:
         return [r.to_dict() for r in self.model.query.all()]
 
     def guardar(self, repuestos_dicts):
+        db.session.execute(repuesto_ubicacion.delete())
         self.model.query.delete()
         db.session.commit()
         for data in repuestos_dicts:
@@ -392,7 +418,7 @@ class RepuestoSQLStore:
             return False, f"El nuevo codigo='{nuevo_codigo}' ya existe"
 
         for campo in [
-            'nombre', 'equipo', 'imagen', 'fecha_creacion',
+            'nombre', 'imagen', 'fecha_creacion',
             'fecha_fin', 'link', 'estado', 'comentario'
         ]:
             if campo in nuevos_datos:
@@ -401,6 +427,10 @@ class RepuestoSQLStore:
                     valor = '' if valor is None else str(valor)
                 setattr(r, campo, valor)
 
+        # ✅ NUEVO: almacén por clave foránea
+        if 'equipo' in nuevos_datos or 'almacen_id' in nuevos_datos:
+            r.almacen_id, r.equipo_legacy = self._resolver_almacen(nuevos_datos)
+
         if 'cantidad' in nuevos_datos:
             r.cantidad = int(nuevos_datos['cantidad'] or 0)
 
@@ -408,10 +438,9 @@ class RepuestoSQLStore:
             r.codigo = str(nuevos_datos['codigo'])
 
         if 'ruta_jerarquia' in nuevos_datos:
-            rutas = nuevos_datos['ruta_jerarquia']
-            r.ruta_jerarquia_json = json.dumps(
-                rutas if isinstance(rutas, list) else []
-            )
+            ubicaciones, sueltas = self._resolver_ubicaciones(nuevos_datos['ruta_jerarquia'])
+            r.ubicaciones = ubicaciones
+            r.ruta_jerarquia_json = json.dumps(sueltas)
 
         db.session.commit()
         return True, "Actualizado correctamente"
@@ -436,21 +465,65 @@ class RepuestoSQLStore:
     def buscar(self, **criterios):
         if 'ruta_jerarquia' in criterios:
             ruta = criterios.pop('ruta_jerarquia')
-            resultados = []
-            for r in self.model.query.all():
-                try:
-                    rutas = json.loads(r.ruta_jerarquia_json or '[]')
-                except Exception:
-                    rutas = []
-                if ruta in rutas:
-                    resultados.append(r.to_dict())
-            return resultados
+            repuestos = self.model.query.filter(
+                self.model.ubicaciones.any(Ubicacion.ruta_jerarquia == ruta)
+            ).all()
+            return [r.to_dict() for r in repuestos]
 
         query = self.model.query
         for clave, valor in criterios.items():
             if hasattr(self.model, clave):
                 query = query.filter(getattr(self.model, clave) == valor)
         return [r.to_dict() for r in query.all()]
+    
+    def _resolver_almacen(self, data):
+        """
+        Devuelve (almacen_id, texto_legacy).
+        Acepta 'almacen_id' o 'equipo' (ruta_jerarquia que manda el select).
+        """
+        aid = data.get('almacen_id')
+        if aid not in (None, ''):
+            try:
+                aid = int(aid)
+                if Almacen.query.get(aid):
+                    return aid, ''
+            except (ValueError, TypeError):
+                pass
+
+        ruta = (data.get('equipo') or '').strip()
+        if not ruta:
+            return None, ''
+
+        almacen = Almacen.query.filter_by(ruta_jerarquia=ruta).first()
+        if almacen:
+            return almacen.id, ''
+        return None, ruta  # texto libre que no coincide con ningún almacén
+
+
+    def _resolver_ubicaciones(self, rutas):
+        """
+        Convierte una lista de rutas (texto) en (objetos Ubicacion, rutas sueltas).
+        Las sueltas son las que no coinciden con ninguna ubicación existente.
+        """
+        if not isinstance(rutas, (list, tuple)):
+            rutas = []
+
+        limpias = []
+        for x in rutas:
+            x = str(x).strip()
+            if x and x not in limpias:
+                limpias.append(x)
+
+        if not limpias:
+            return [], []
+
+        encontradas = {
+            u.ruta_jerarquia: u
+            for u in Ubicacion.query.filter(Ubicacion.ruta_jerarquia.in_(limpias)).all()
+        }
+        ubicaciones = [encontradas[x] for x in limpias if x in encontradas]
+        sueltas = [x for x in limpias if x not in encontradas]
+        return ubicaciones, sueltas
 
 
 class PagoSQLStore:
@@ -468,19 +541,31 @@ class PagoSQLStore:
         db.session.commit()
 
     def _crear_desde_dict(self, data):
-        p = self.model(
-            rubro=data.get('rubro', ''),
-            descripcion=data.get('descripcion', ''),
-            importe=float(data.get('importe', 0) or 0),
-            tipo=data.get('tipo', 'único'),
-            cuotas=int(data.get('cuotas', 1) or 1),
-            cuota_numero=data.get('cuota_numero'),
-            cuota_total=data.get('cuota_total'),
-            vencimiento=data.get('vencimiento', ''),
-            pagado=bool(data.get('pagado', False))
+        ubicaciones, sueltas = self._resolver_ubicaciones(data.get('ruta_jerarquia', []))
+
+        comentario = data.get('comentario', '')
+        if comentario is None:
+            comentario = ''
+
+        almacen_id, equipo_txt = self._resolver_almacen(data)
+
+        r = self.model(
+            codigo=str(data.get('codigo', '')),
+            nombre=data.get('nombre', ''),
+            cantidad=int(data.get('cantidad', 0) or 0),
+            almacen_id=almacen_id,
+            equipo_legacy=equipo_txt,
+            imagen=data.get('imagen', ''),
+            fecha_creacion=data.get('fecha_creacion', ''),
+            fecha_fin=data.get('fecha_fin', ''),
+            link=data.get('link', ''),
+            estado=data.get('estado', ''),
+            comentario=str(comentario),
+            ruta_jerarquia_json=json.dumps(sueltas)
         )
-        db.session.add(p)
-        return p
+        r.ubicaciones = ubicaciones
+        db.session.add(r)
+        return r
 
     def agregar_a_general(self, registro):
         self._crear_desde_dict(registro)
@@ -692,25 +777,49 @@ class NodoBloqueoSQLStore:
 
 class PlanoSQLStore:
     def __init__(self):
-        from core.models import Plano
         self.model = Plano
 
     def cargar_todos(self):
-        return [p.to_dict() for p in self.model.query.order_by(self.model.nombre_linea).all()]
+        planos = self.model.query.all()
+        planos.sort(key=lambda p: (p.nombre_linea or '').lower())
+        return [p.to_dict() for p in planos]
 
-    def agregar(self, datos):
-        nuevo = self.model(**datos)
+    def obtener(self, plano_id):
+        return self.model.query.get(plano_id)
+
+    def existe(self, ubicacion_id, nombre_archivo):
+        return self.model.query.filter_by(
+            ubicacion_id=ubicacion_id, nombre_archivo=nombre_archivo
+        ).first() is not None
+
+    def agregar(self, ubicacion, carpeta, nombre_archivo, descripcion, usuario):
+        nuevo = self.model(
+            ubicacion_id=ubicacion.id,
+            nombre_linea_legacy=(ubicacion.ruta_jerarquia or '')[:100],
+            carpeta=carpeta,
+            nombre_archivo=nombre_archivo,
+            descripcion=descripcion,
+            usuario_carga=usuario,
+        )
         db.session.add(nuevo)
         db.session.commit()
         return nuevo.id
 
+    def editar_descripcion(self, plano_id, descripcion):
+        plano = self.model.query.get(plano_id)
+        if not plano:
+            return False
+        plano.descripcion = descripcion
+        db.session.commit()
+        return True
+
     def eliminar(self, plano_id):
         plano = self.model.query.get(plano_id)
-        if plano:
-            db.session.delete(plano)
-            db.session.commit()
-            return True
-        return False
+        if not plano:
+            return False
+        db.session.delete(plano)
+        db.session.commit()
+        return True
 
 
 menu_store = ArbolSQLStore(Menu, 'submenues', '.')

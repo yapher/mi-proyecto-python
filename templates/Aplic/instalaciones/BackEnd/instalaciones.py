@@ -165,7 +165,7 @@ def borrar_ubicacion():
     exito, msg = ubicacion_store.eliminar(ruta_jerarquia)
     if exito:
         return jsonify({'status': 'ok', 'msg': 'Ubicación eliminada correctamente'})
-    return jsonify({'status': 'no encontrado', 'msg': msg}), 404
+    return jsonify({'status': 'error', 'msg': msg}), 409
 
 
 @instalaciones_bp.route('/api/agregar_sububicacion', methods=['POST'])

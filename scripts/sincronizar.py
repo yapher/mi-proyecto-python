@@ -13,6 +13,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 
+
 # Asegurar que se ejecuta desde la raíz
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_root)
@@ -87,6 +88,7 @@ def importar_dict_a_db(datos, db_uri):
         Pago, NodoBloqueo, Rubro, Almacen, Ubicacion, Tab,
         OrdenTrabajo, Plano
     )
+    from core.models.repuesto import repuesto_ubicacion
     
     app_temp = Flask(__name__)
     app_temp.config['SQLALCHEMY_DATABASE_URI'] = db_uri
@@ -95,7 +97,9 @@ def importar_dict_a_db(datos, db_uri):
     
     with app_temp.app_context():
         _db.create_all()
-        
+
+        _db.session.execute(repuesto_ubicacion.delete())
+
         # 1. Limpiar tablas (en orden por dependencias)
         for modelo in [OrdenTrabajo, Pago, Repuesto, Plano, Tab, Estado,
                       Ubicacion, Almacen, Rubro, Menu, NodoBloqueo,
@@ -157,7 +161,6 @@ def importar_dict_a_db(datos, db_uri):
         for p in datos.get('planos', []):
             p_copy = p.copy()
             p_copy.pop('id', None)
-            p_copy.pop('carpeta', None)   # carpeta es un alias de nombre_linea en to_dict()
             p_copy.pop('archivo', None)   # archivo es un alias de nombre_archivo en to_dict()
             fecha_str = p_copy.get('fecha_carga', '')
             if isinstance(fecha_str, str) and fecha_str:
@@ -239,7 +242,49 @@ def importar_dict_a_db(datos, db_uri):
         importar_arbol(datos.get('rubros', []), Rubro, 'submenues')
         importar_arbol(datos.get('almacenes', []), Almacen, 'subcrear_almacenes')
         importar_arbol(datos.get('ubicaciones', []), Ubicacion, 'sububicaciones')
-        
+
+        # ✅ Reconstruir vínculo pestaña <-> ubicación a partir de la ruta exportada
+        _db.session.flush()
+        ubic_por_ruta_tabs = {u.ruta_jerarquia: u for u in Ubicacion.query.all()}
+        for t in Tab.query.all():
+            u = ubic_por_ruta_tabs.get((t.ruta_jerarquia_legacy or '').strip())
+            if u is not None:
+                t.ubicacion_id = u.id
+
+        # ✅ Resolver almacen_id de los repuestos a partir de la ruta exportada
+        _db.session.flush()
+        por_ruta = {a.ruta_jerarquia: a.id for a in Almacen.query.all()}
+        for r in Repuesto.query.all():
+            ruta = (r.equipo_legacy or '').strip()
+            if ruta in por_ruta:
+                r.almacen_id = por_ruta[ruta]
+                r.equipo_legacy = ''
+
+        # ✅ Reconstruir vínculos repuesto <-> ubicación a partir de las rutas exportadas
+        _db.session.flush()
+        ubic_por_ruta = {u.ruta_jerarquia: u for u in Ubicacion.query.all()}
+        for r in Repuesto.query.all():
+            try:
+                rutas = json.loads(r.ruta_jerarquia_json or '[]')
+            except Exception:
+                rutas = []
+            sueltas = []
+            for ruta in rutas:
+                u = ubic_por_ruta.get(ruta)
+                if u is None:
+                    sueltas.append(ruta)
+                elif u not in r.ubicaciones:
+                    r.ubicaciones.append(u)
+            r.ruta_jerarquia_json = json.dumps(sueltas)
+
+        # ✅ Reconstruir vínculo plano <-> ubicación a partir de la ruta exportada
+        _db.session.flush()
+        ubic_planos = {u.ruta_jerarquia: u for u in Ubicacion.query.all()}
+        for p in Plano.query.all():
+            u = ubic_planos.get((p.nombre_linea_legacy or '').strip())
+            if u is not None:
+                p.ubicacion_id = u.id
+                    
         _db.session.commit()
         print(f"✅ Datos importados correctamente")
 
