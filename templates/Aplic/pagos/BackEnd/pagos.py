@@ -6,9 +6,13 @@ from flask_login import login_required, current_user
 from core.menu import cargar_menu
 from auth.login import roles_required
 from flask import Blueprint, render_template, jsonify, request
+from core.db_sql import db
 from core.db_sql_store import pago_store, rubro_store
+from core.logging_config import get_logger
 from datetime import datetime
 import os
+
+logger = get_logger(__name__)
 
 _APP_DIR = os.path.dirname(os.path.abspath(__file__))
 _STATIC_DIR = os.path.abspath(os.path.join(_APP_DIR, '..', 'static'))
@@ -38,7 +42,7 @@ def indexpagos():
 
 
 # ============================================================
-# RUTAS API - COINCIDEN CON EL JS ORIGINAL
+# RUTAS API
 # ============================================================
 
 @pagos_bp.route('/pagos/listar')
@@ -48,29 +52,63 @@ def listar_pagos():
     return jsonify(pago_store.leer_general())
 
 
+def _validar_pago(p):
+    """Valida y normaliza un pago. Lanza ValueError con un mensaje claro."""
+    if not isinstance(p, dict):
+        raise ValueError("Formato de pago inválido")
+
+    rubro = str(p.get('rubro') or '').strip()
+    if not rubro:
+        raise ValueError("Falta el rubro")
+
+    try:
+        importe = float(p.get('importe'))
+    except (TypeError, ValueError):
+        raise ValueError("El importe no es válido")
+    if importe <= 0:
+        raise ValueError("El importe debe ser mayor a 0")
+
+    venc = str(p.get('vencimiento') or '').strip()
+    try:
+        datetime.strptime(venc, '%Y-%m-%d')
+    except ValueError:
+        raise ValueError("El vencimiento debe tener formato AAAA-MM-DD")
+
+    p['rubro'] = rubro
+    p['importe'] = importe
+    p['vencimiento'] = venc
+    return p
+
+
 @pagos_bp.route('/pagos/agregar', methods=['POST'])
 @login_required
 def agregar_pago():
     """
-    Crea uno o varios pagos.
-    El JS envía un ARRAY de pagos (cuotas o único).
+    Crea uno o varios pagos (cuotas o único) en UNA sola transacción:
+    si falla uno, no se guarda ninguno.
     """
-    nuevos = request.json
-    # Si no es JSON, intentar leer como form-data
+    nuevos = request.get_json(silent=True)
     if nuevos is None and request.form:
-        nuevos = dict(request.form)
-    # Asegurar que sea una lista
+        nuevos = request.form.to_dict()
     if isinstance(nuevos, dict):
         nuevos = [nuevos]
-    if not nuevos:
+    if not nuevos or not isinstance(nuevos, list):
         return jsonify({"error": "No se recibieron datos"}), 400
 
-    for nuevo in nuevos:
-        if 'id' not in nuevo:
-            nuevo['id'] = int(datetime.now().timestamp() * 1000)
-        pago_store.agregar_a_general(nuevo)
+    try:
+        for nuevo in nuevos:
+            _validar_pago(nuevo)
+            pago_store._crear_desde_dict(nuevo)
+        db.session.commit()
+    except ValueError as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 400
+    except Exception as e:
+        db.session.rollback()
+        logger.error(f"Error agregando pagos: {e}")
+        return jsonify({"error": f"Error al guardar en la base de datos: {e}"}), 500
 
-    return jsonify({"mensaje": "Pagos agregados correctamente"})
+    return jsonify({"mensaje": f"{len(nuevos)} pago(s) agregado(s) correctamente"})
 
 
 @pagos_bp.route('/pagos/editar/<int:pid>', methods=['PUT'])
@@ -78,13 +116,14 @@ def agregar_pago():
 def editar_pago(pid):
     """Actualiza un pago por ID."""
     try:
-        modificado = request.json
+        modificado = request.get_json(silent=True) or {}
         if pago_store.actualizar_pago(pid, modificado):
             return jsonify({"mensaje": "Pago actualizado"}), 200
         return jsonify({"error": "Pago no encontrado"}), 404
     except Exception as e:
-        print("Error inesperado en editar_pago:", e)
-        return jsonify({"mensaje": "Pago actualizado"}), 200
+        db.session.rollback()
+        logger.error(f"Error editando pago {pid}: {e}")
+        return jsonify({"error": f"No se pudo actualizar el pago: {e}"}), 500
 
 
 @pagos_bp.route('/pagos/eliminar/<int:pid>', methods=['DELETE'])
@@ -119,7 +158,7 @@ def toggle_estado_pago(id):
 @login_required
 def clonar_mes():
     """Clona los pagos de un mes a otro."""
-    data = request.json
+    data = request.get_json(silent=True) or {}
     try:
         anio_origen = int(data['anio_origen'])
         mes_origen = int(data['mes_origen'])

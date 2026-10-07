@@ -7,9 +7,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <form id="formulario">
+                <form id="formulario" onsubmit="return false;">
+                    {# Este include ya trae <div id="nivelesContainer"> #}
                     {% include "Aplic/crearrubros/FrontEnd/component/selectRubros.html" %}
-                    <div id="nivelesContainer" class="mb-3"></div>
                     <input type="hidden" id="pagoId">
                     <div class="mb-3 input-with-emoji">
                         <label for="descripcion" class="form-label">Descripción</label>
@@ -19,7 +19,7 @@
                     <div class="mb-3 input-with-emoji">
                         <label for="importe" class="form-label">Importe</label>
                         <span class="input-emoji">💲</span>
-                        <input type="number" class="form-control ps-5" id="importe" placeholder="Importe">
+                        <input type="number" step="0.01" min="0" class="form-control ps-5" id="importe" placeholder="Importe">
                     </div>
                     <div class="mb-3 input-with-emoji">
                         <label for="tipo" class="form-label">Tipo</label>
@@ -32,7 +32,7 @@
                     <div class="mb-3 input-with-emoji">
                         <label for="cuotas" class="form-label">Cuotas</label>
                         <span class="input-emoji">#️⃣</span>
-                        <input type="number" class="form-control ps-5" id="cuotas" placeholder="Cuotas">
+                        <input type="number" min="1" class="form-control ps-5" id="cuotas" placeholder="Cuotas">
                     </div>
                     <div class="mb-3 input-with-emoji">
                         <label for="vencimiento" class="form-label">Vencimiento</label>

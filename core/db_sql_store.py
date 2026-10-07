@@ -541,31 +541,19 @@ class PagoSQLStore:
         db.session.commit()
 
     def _crear_desde_dict(self, data):
-        ubicaciones, sueltas = self._resolver_ubicaciones(data.get('ruta_jerarquia', []))
-
-        comentario = data.get('comentario', '')
-        if comentario is None:
-            comentario = ''
-
-        almacen_id, equipo_txt = self._resolver_almacen(data)
-
-        r = self.model(
-            codigo=str(data.get('codigo', '')),
-            nombre=data.get('nombre', ''),
-            cantidad=int(data.get('cantidad', 0) or 0),
-            almacen_id=almacen_id,
-            equipo_legacy=equipo_txt,
-            imagen=data.get('imagen', ''),
-            fecha_creacion=data.get('fecha_creacion', ''),
-            fecha_fin=data.get('fecha_fin', ''),
-            link=data.get('link', ''),
-            estado=data.get('estado', ''),
-            comentario=str(comentario),
-            ruta_jerarquia_json=json.dumps(sueltas)
+        p = self.model(
+            rubro=data.get('rubro', ''),
+            descripcion=data.get('descripcion', ''),
+            importe=float(data.get('importe', 0) or 0),
+            tipo=data.get('tipo', 'único'),
+            cuotas=int(data.get('cuotas', 1) or 1),
+            cuota_numero=data.get('cuota_numero'),
+            cuota_total=data.get('cuota_total'),
+            vencimiento=data.get('vencimiento', ''),
+            pagado=bool(data.get('pagado', False))
         )
-        r.ubicaciones = ubicaciones
-        db.session.add(r)
-        return r
+        db.session.add(p)
+        return p
 
     def agregar_a_general(self, registro):
         self._crear_desde_dict(registro)
