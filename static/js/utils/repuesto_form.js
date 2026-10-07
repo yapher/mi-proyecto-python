@@ -28,6 +28,8 @@
         pendingCodigo: null
     };
 
+    const IMAGES_BASE = '/static/uploads/Imagenes/';
+
     const PATH_TO_ENDPOINT = [
         ['/graficos_repuestos', 'indexgraficos_repuestos.indexgraficos_repuestos'],
         ['/lista_repuestos', 'indexlista_repuestos.indexlista_repuestos'],
@@ -64,6 +66,51 @@
 
     function findForm() {
         return qs('#formAgregarRepuesto');
+    }
+
+    // ============================================================
+    // IMAGE UPLOADER (componente reutilizable, el mismo de Instalaciones)
+    // ============================================================
+    let uploader = null;
+
+    function getUploader() {
+        if (uploader) {
+            return uploader;
+        }
+
+        if (typeof window.ImageUploader !== 'function' || !qs('#repImagenInput')) {
+            return null;
+        }
+
+        uploader = new window.ImageUploader({
+            previewId: 'repImagenPreview',
+            placeholderId: 'repImagenPlaceholder',
+            inputId: 'repImagenInput',
+            removeBtnId: 'repImagenQuitar',
+            infoId: 'repImagenInfo',
+            wrapperId: 'repImagenWrapper',
+            loggerPrefix: '[Repuestos:Image]'
+        });
+
+        return uploader;
+    }
+
+    function imageUrlFromButton(btn) {
+        const raw = getAttr(btn, ['data-imagen']).replace(/\\/g, '/');
+
+        if (!raw) {
+            return '';
+        }
+
+        const sinQuery = raw.split('?')[0];
+
+        if (/^(https?:)?\/\//.test(sinQuery) || sinQuery.charAt(0) === '/') {
+            return sinQuery;
+        }
+
+        const archivo = sinQuery.split('/').pop();
+
+        return archivo ? IMAGES_BASE + encodeURIComponent(archivo) : '';
     }
 
     function getUrlById(id, fallback) {
@@ -267,6 +314,7 @@
         setVal('#fecha_fin', '');
         setVal('#sanitized_id', '');
         setVal('#codigo_original', '');
+        setVal('#repEliminarImagen', '');
 
         if (!keepContext) {
             setVal('#return_to', defaultReturnTo());
@@ -274,6 +322,11 @@
         }
 
         setLocations([]);
+
+        const up = getUploader();
+        if (up) {
+            up.reset();
+        }
 
         setModalTitle('Agregar nuevo repuesto');
         setSubmitText('Guardar Repuesto');
@@ -322,8 +375,21 @@
 
         setVal('#return_to', resolveReturnTo(btn));
         setVal('#tab_activo', resolveTab(btn));
+        setVal('#repEliminarImagen', '');
 
         setLocations(parseLocations(btn));
+
+        // ✅ Imagen actual del repuesto en el uploader
+        const up = getUploader();
+        if (up) {
+            const url = imageUrlFromButton(btn);
+
+            if (url) {
+                up.loadExisting(url);
+            } else {
+                up.reset();
+            }
+        }
 
         setModalTitle('Editar repuesto');
         setSubmitText('Guardar cambios');
@@ -416,6 +482,7 @@
         }
 
         ensureSelect2();
+        getUploader();
 
         if (state.mode === 'add') {
             resetForm(false);
@@ -442,6 +509,11 @@
 
         setVal('#return_to', returnTo);
         setVal('#tab_activo', tabActivo);
+
+        // ✅ Si se quitó la imagen y no se eligió otra, avisar al backend
+        const up = getUploader();
+        const quitada = !!(up && up.wasRemoved() && !up.getSelectedFile());
+        setVal('#repEliminarImagen', quitada ? 'true' : '');
 
         if (state.mode === 'edit') {
             const codigoOriginal = state.pendingCodigo ||

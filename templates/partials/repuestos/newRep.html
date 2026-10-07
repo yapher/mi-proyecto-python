@@ -30,6 +30,9 @@
                     <input type="hidden" id="sanitized_id" name="sanitized_id" value="">
                     <input type="hidden" id="codigo_original" name="codigo_original" value="">
 
+                    <!-- ✅ NUEVO: indica al backend que se quitó la imagen -->
+                    <input type="hidden" id="repEliminarImagen" name="eliminar_imagen" value="">
+
                     <div class="row g-3">
                         <div class="col-md-4">
                             <label for="codigo" class="form-label">Código *</label>
@@ -73,12 +76,37 @@
                             ) }}
                         </div>
 
-                        <div class="col-md-6">
-                            <label for="imagen" class="form-label">Imagen (opcional)</label>
-                            <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                        <!-- ✅ COMPONENTE IMAGE UPLOADER (el mismo de Instalaciones) -->
+                        <div class="col-12">
+                            <div class="image-uploader-container">
+                                <label class="form-label">Imagen (opcional)</label>
+                                <div class="image-uploader-preview" id="repImagenWrapper">
+                                    <img id="repImagenPreview" src="" alt="Imagen del repuesto"
+                                         class="image-preview" style="display:none;">
+                                    <div class="image-uploader-placeholder" id="repImagenPlaceholder">
+                                        <i class="bi bi-image"></i>
+                                        <span>Sin imagen</span>
+                                    </div>
+                                </div>
+                                <div class="image-uploader-controls">
+                                    <label for="repImagenInput" class="btn btn-sm btn-outline-primary">
+                                        <i class="bi bi-upload"></i> Seleccionar imagen
+                                    </label>
+                                    <input type="file" id="repImagenInput" name="imagen" class="image-uploader-input"
+                                           accept="image/png, image/jpeg, image/jpg, image/gif, image/webp">
+                                    <button type="button" class="btn btn-sm btn-outline-danger"
+                                            id="repImagenQuitar" style="display: none;">
+                                        <i class="bi bi-x-circle"></i> Quitar
+                                    </button>
+                                </div>
+                                <small class="image-uploader-info" id="repImagenInfo" style="display: none;"></small>
+                                <small class="image-uploader-help">
+                                    Formatos: PNG, JPG, GIF, WEBP. Tamaño máximo: 5MB
+                                </small>
+                            </div>
                         </div>
 
-                        <div class="col-md-6">
+                        <div class="col-12">
                             <label for="link" class="form-label">Link (opcional)</label>
                             <input type="url" class="form-control" id="link" name="link" placeholder="https://">
                         </div>

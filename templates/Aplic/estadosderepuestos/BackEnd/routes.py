@@ -275,7 +275,13 @@ def editar_repuesto():
         return _redirigir(return_to, tab_activo)
 
     if filename:
+        # Se subió una imagen nueva: reemplaza a la anterior
         nuevos_datos['imagen'] = filename
+    elif request.form.get('eliminar_imagen', '').strip().lower() == 'true':
+        # ✅ Se quitó la imagen y no se subió otra.
+        # Solo se desvincula del repuesto: el archivo NO se borra del disco
+        # porque otros repuestos pueden estar usando el mismo archivo.
+        nuevos_datos['imagen'] = ''
 
     exito, mensaje = actualizar_repuesto_core(codigo_original, nuevos_datos)
 
