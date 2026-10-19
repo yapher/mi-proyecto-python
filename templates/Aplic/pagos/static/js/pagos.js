@@ -143,68 +143,128 @@ async function eliminar(id) {
     });
 }
 
+// ============================================================
+// CLONAR MES
+// ============================================================
+
 /**
 * Abre el modal de clonado, sugiriendo el mes siguiente al filtrado
 */
 function abrirModalClonar() {
     const anio = document.getElementById('filtroAnio').value;
     const mes = document.getElementById('filtroMes').value;
-    if (!anio || !mes) return alert("Primero filtrá un mes para clonar");
-    
-    document.getElementById('mesOrigenTexto').textContent = `${mes}/${anio}`;
-    
-    let mesDestino = parseInt(mes) + 1;
-    let anioDestino = parseInt(anio);
+    if (!anio || !mes) {
+        Notify.warning('Primero filtrá el mes que querés clonar');
+        return;
+    }
+
+    document.getElementById('mesOrigenTexto').textContent = `${String(mes).padStart(2, '0')}/${anio}`;
+
+    let mesDestino = parseInt(mes, 10) + 1;
+    let anioDestino = parseInt(anio, 10);
     if (mesDestino > 12) { mesDestino = 1; anioDestino++; }
-    
+
     document.getElementById('clonarAnioDestino').value = anioDestino;
     document.getElementById('clonarMesDestino').value = mesDestino;
-    
-    new bootstrap.Modal(document.getElementById('clonarModal')).show();
+
+    bootstrap.Modal.getOrCreateInstance(document.getElementById('clonarModal')).show();
+}
+
+/**
+* Valida los datos, avisa si el destino ya tiene pagos y envía el clonado
+*/
+async function clonarMes() {
+    const anioOrigen = parseInt(document.getElementById('filtroAnio').value, 10);
+    const mesOrigen = parseInt(document.getElementById('filtroMes').value, 10);
+    const anioDestino = parseInt(document.getElementById('clonarAnioDestino').value, 10);
+    const mesDestino = parseInt(document.getElementById('clonarMesDestino').value, 10);
+
+    if (!anioDestino || !mesDestino || mesDestino < 1 || mesDestino > 12) {
+        Notify.warning('Completá un año y un mes destino válidos (mes de 1 a 12)');
+        return;
+    }
+
+    if (anioDestino === anioOrigen && mesDestino === mesOrigen) {
+        Notify.warning('El mes destino tiene que ser distinto al mes origen');
+        return;
+    }
+
+    const btn = document.getElementById('btnConfirmarClonar');
+    if (btn) btn.disabled = true;
+
+    try {
+        // ¿El destino ya tiene pagos? Clonar dos veces duplicaría todo.
+        let existentes = 0;
+        try {
+            const r = await fetch(`/pagos/mensuales/${anioDestino}/${mesDestino}`, { credentials: 'same-origin' });
+            const d = await r.json();
+            existentes = (d.pagos || []).length;
+        } catch (e) {
+            existentes = 0;
+        }
+
+        if (existentes > 0) {
+            Notify.confirm(
+                'El mes destino ya tiene pagos',
+                `${String(mesDestino).padStart(2, '0')}/${anioDestino} ya tiene ${existentes} pago(s). ` +
+                'Si clonás, se agregarán los del mes origen y pueden quedar duplicados. ¿Continuar?',
+                () => ejecutarClonado(anioOrigen, mesOrigen, anioDestino, mesDestino),
+                () => { if (btn) btn.disabled = false; }
+            );
+            return;
+        }
+
+        await ejecutarClonado(anioOrigen, mesOrigen, anioDestino, mesDestino);
+    } finally {
+        // Si se abrió la confirmación, el botón se rehabilita al cancelar o al terminar
+        if (btn && !document.querySelector('.swal2-container')) btn.disabled = false;
+    }
 }
 
 /**
 * Envía la solicitud de clonado al backend
 */
-function clonarMes() {
-    const anioOrigen = document.getElementById('filtroAnio').value;
-    const mesOrigen = document.getElementById('filtroMes').value;
-    const anioDestino = document.getElementById('clonarAnioDestino').value;
-    const mesDestino = document.getElementById('clonarMesDestino').value;
-    
-    if (!anioDestino || !mesDestino) return alert('Completar año y mes destino');
-    
-    fetch('/pagos/clonar_mes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            anio_origen: anioOrigen,
-            mes_origen: mesOrigen,
-            anio_destino: anioDestino,
-            mes_destino: mesDestino
-        })
-    })
-    .then(res => res.json().then(data => ({ ok: res.ok, data })))
-    .then(({ ok, data }) => {
-        if (!ok) throw new Error(data.error || 'Error al clonar');
-        
-        bootstrap.Modal.getInstance(document.getElementById('clonarModal')).hide();
-        
-        new Noty({
-            type: 'success',
-            layout: 'topRight',
-            timeout: 3000,
-            theme: 'mint',
-            text: data.mensaje
-        }).show();
-        
-        if (parseInt(anioDestino) === parseInt(document.getElementById('filtroAnio').value) &&
-            parseInt(mesDestino) === parseInt(document.getElementById('filtroMes').value)) {
-            filtrarPorMes();
+async function ejecutarClonado(anioOrigen, mesOrigen, anioDestino, mesDestino) {
+    const btn = document.getElementById('btnConfirmarClonar');
+
+    try {
+        const res = await fetch('/pagos/clonar_mes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+                anio_origen: anioOrigen,
+                mes_origen: mesOrigen,
+                anio_destino: anioDestino,
+                mes_destino: mesDestino
+            })
+        });
+
+        if (res.redirected) {
+            throw new Error('Tu sesión expiró. Volvé a iniciar sesión.');
         }
-    })
-    .catch(err => {
-        console.error(err);
-        alert(err.message);
-    });
+
+        let data = {};
+        try { data = await res.json(); } catch (e) { /* sin JSON */ }
+
+        if (!res.ok) {
+            throw new Error(data.error || data.msg || `Error del servidor (HTTP ${res.status})`);
+        }
+
+        const modalEl = document.getElementById('clonarModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        if (modal) modal.hide();
+
+        Notify.success(data.mensaje || 'Mes clonado correctamente');
+
+        // Mostrar el mes destino para ver el resultado
+        document.getElementById('filtroAnio').value = anioDestino;
+        document.getElementById('filtroMes').value = mesDestino;
+        filtrarPorMes();
+    } catch (err) {
+        console.error('Error al clonar mes:', err);
+        Notify.error(err.message || 'No se pudo clonar el mes');
+    } finally {
+        if (btn) btn.disabled = false;
+    }
 }

@@ -667,15 +667,37 @@ class PagoSQLStore:
         return meses
 
     def clonar_mes(self, anio_origen, mes_origen, anio_destino, mes_destino,
-                   resetear_pagado=True):
+                   resetear_pagado=True, incluir_cuotas=False):
+        """
+        Clona los pagos de un mes a otro.
+        Por defecto NO copia las cuotas: al crearlas se generan todas de una vez,
+        así que ya existen en cada mes y clonarlas las duplicaría.
+
+        Retorna (cantidad_clonada, registros_clonados, cuotas_omitidas).
+        """
         pagos_origen = self.leer_mes(anio_origen, mes_origen)
         if not pagos_origen:
             raise ValueError(f"No hay pagos en {anio_origen}/{mes_origen:02d}")
 
+        omitidas = 0
+        a_clonar = []
+        for p_dict in pagos_origen:
+            if p_dict.get('tipo') == 'cuota' and not incluir_cuotas:
+                omitidas += 1
+                continue
+            a_clonar.append(p_dict)
+
+        if not a_clonar:
+            raise ValueError(
+                f"Los {omitidas} pago(s) de {anio_origen}/{mes_origen:02d} son cuotas, "
+                "que ya están cargadas en cada mes. Marcá «Incluir cuotas» si querés "
+                "copiarlas igual."
+            )
+
         ultimo_dia = monthrange(anio_destino, mes_destino)[1]
         registros_clonados = []
 
-        for p_dict in pagos_origen:
+        for p_dict in a_clonar:
             nuevo = dict(p_dict)
             nuevo.pop('id', None)
 
@@ -693,8 +715,7 @@ class PagoSQLStore:
             registros_clonados.append(nuevo)
 
         db.session.commit()
-        return len(registros_clonados), registros_clonados
-
+        return len(registros_clonados), registros_clonados, omitidas
 
 class NodoBloqueoSQLStore:
     def __init__(self):

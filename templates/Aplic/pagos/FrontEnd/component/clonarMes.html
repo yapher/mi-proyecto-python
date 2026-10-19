@@ -1,0 +1,31 @@
+<div class="modal fade modal-custom-dark" id="clonarModal" tabindex="-1" aria-labelledby="clonarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="clonarModalLabel">📋 Clonar mes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <p class="mb-3">
+                    Se copiarán todos los pagos de
+                    <strong id="mesOrigenTexto"></strong>
+                    al mes destino, con el estado <em>pendiente</em>.
+                </p>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <label for="clonarAnioDestino" class="form-label">Año destino</label>
+                        <input type="number" class="form-control" id="clonarAnioDestino" min="2000" max="2100">
+                    </div>
+                    <div class="col-6">
+                        <label for="clonarMesDestino" class="form-label">Mes destino</label>
+                        <input type="number" class="form-control" id="clonarMesDestino" min="1" max="12">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-cancelar" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-agregar" id="btnConfirmarClonar" onclick="clonarMes()">Clonar</button>
+            </div>
+        </div>
+    </div>
+</div>
