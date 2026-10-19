@@ -1,9 +1,9 @@
 # templates/Aplic/inventario/BackEnd/inventario.py
 """
 Blueprint de Inventario — VERSIÓN SQL
-Incluye CRUD de almacenes (antes en crear_almacenes)
+Incluye CRUD de almacenes (antes en crear_almacenes) y exportación a PDF por almacén.
 """
-from flask import Blueprint, jsonify, request, render_template
+from flask import Blueprint, jsonify, request, render_template, flash, redirect, url_for
 from flask_login import login_required, current_user
 from core.menu import cargar_menu
 from auth.login import roles_required
@@ -18,6 +18,10 @@ from core.data_loaders import (
     obtener_nombres_almacenes,
 )
 from core.db_sql_store import almacen_store
+from templates.Aplic.estadosderepuestos.BackEnd.export_pdf import (
+    exportar_pdf_reportlab,
+    nombre_pdf,
+)
 
 inventario_bp = Blueprint(
     'indexinventario',
@@ -52,6 +56,36 @@ def indexinventario():
         ubicaciones=ubicaciones,
         estados=estados,
         nombres_almacenes=nombres_almacenes,
+    )
+
+# ============================================================
+# EXPORTAR PDF DE UN ALMACÉN
+# ============================================================
+@inventario_bp.route('/inventario/exportar_pdf', methods=['POST'])
+@login_required
+@roles_required('viewer')
+def exportar_pdf_almacen():
+    """PDF con los repuestos de UN almacén (los mismos que muestra su pestaña)."""
+    ruta = (request.form.get('almacen') or '').strip()
+
+    if not ruta:
+        flash("No se indicó el almacén a exportar.", "warning")
+        return redirect(url_for('indexinventario.indexinventario'))
+
+    mapeo = construir_mapeo_repuestos_por_almacen(
+        repuestos=cargar_todos_repuestos(),
+        almacenes=cargar_almacenes()
+    )
+    repuestos = mapeo.get(ruta, [])
+
+    if not repuestos:
+        flash(f'El almacén "{ruta}" no tiene repuestos para exportar.', "warning")
+        return redirect(url_for('indexinventario.indexinventario'))
+
+    return exportar_pdf_reportlab(
+        repuestos,
+        titulo=f"Inventario de Almacén - {ruta}",
+        nombre_archivo=nombre_pdf('inventario', ruta)
     )
 
 # ============================================================
@@ -130,7 +164,7 @@ def api_almacenes_editar():
 @login_required
 @roles_required('viewer')
 def api_almacenes_eliminar():
-    """Eliminar un nodo de almacén y sus descendientes."""
+    """Eliminar un nodo de almacén y sus descendientes (si no tienen repuestos)."""
     payload = request.get_json() or {}
     ruta = payload.get('ruta') or payload.get('ruta_jerarquia')
 
@@ -139,7 +173,7 @@ def api_almacenes_eliminar():
 
     exito, msg = almacen_store.eliminar(ruta)
     if not exito:
-        return jsonify({'msg': 'No se encontró el almacén', 'type': 'error'}), 404
+        return jsonify({'msg': msg, 'type': 'error'}), 409
 
     return jsonify({
         'msg': 'Almacén eliminado correctamente',

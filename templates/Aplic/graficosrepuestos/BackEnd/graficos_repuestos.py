@@ -44,13 +44,17 @@ except ImportError:
         return []
 
 
+# ✅ Mismo exportador que usan Estados de repuestos e Inventario
 try:
-    from core.pdf import exportar_pdf_reportlab
+    from templates.Aplic.estadosderepuestos.BackEnd.export_pdf import (
+        exportar_pdf_reportlab,
+        nombre_pdf,
+    )
 except ImportError:
-    try:
-        from core import exportar_pdf_reportlab
-    except ImportError:
-        exportar_pdf_reportlab = None
+    exportar_pdf_reportlab = None
+
+    def nombre_pdf(*partes):
+        return 'repuestos.pdf'
 
 
 logger = logging.getLogger(__name__)
@@ -179,4 +183,12 @@ def exportar_pdf_estado(estado):
         f"(usuario: {current_user.username})"
     )
 
-    return exportar_pdf_reportlab(repuestos)
+    titulo = f"Repuestos por estado - {estado}"
+    if jerarquia_seleccionada:
+        titulo += f" ({jerarquia_seleccionada})"
+
+    return exportar_pdf_reportlab(
+        repuestos,
+        titulo=titulo,
+        nombre_archivo=nombre_pdf('repuestos', estado, jerarquia_seleccionada)
+    )

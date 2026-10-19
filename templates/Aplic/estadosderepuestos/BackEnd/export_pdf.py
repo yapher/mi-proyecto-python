@@ -1,6 +1,9 @@
 import os
+import re
+import unicodedata
 from io import BytesIO
 from datetime import datetime
+from xml.sax.saxutils import escape
 from flask import make_response, current_app
 from reportlab.lib.pagesizes import letter, landscape
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Image as RLImage
@@ -21,7 +24,15 @@ def imagen_valida(ruta):
         return False
 
 
-def exportar_pdf_reportlab(repuestos):
+def nombre_pdf(*partes):
+    """Arma un nombre de archivo seguro: nombre_pdf('repuestos', 'SD-APR') -> repuestos_SD-APR.pdf"""
+    base = "_".join(str(p) for p in partes if p)
+    base = unicodedata.normalize('NFKD', base).encode('ascii', 'ignore').decode('ascii')
+    base = re.sub(r'[^A-Za-z0-9._-]+', '_', base).strip('_')
+    return (base or 'repuestos') + '.pdf'
+
+
+def exportar_pdf_reportlab(repuestos, titulo=None, nombre_archivo='repuestos.pdf'):
     buffer = BytesIO()
     doc = SimpleDocTemplate(buffer, pagesize=landscape(letter),
                             leftMargin=40, rightMargin=40, topMargin=60, bottomMargin=40)
@@ -60,7 +71,8 @@ def exportar_pdf_reportlab(repuestos):
             spaceBefore=20
         ))
 
-    titulo = Paragraph("Informe de Estado de Repuestos", styles['CustomTitle'])
+    titulo_txt = escape(titulo) if titulo else "Informe de Estado de Repuestos"
+    titulo_p = Paragraph(titulo_txt, styles['CustomTitle'])
     fecha_str = datetime.now().strftime("%d/%m/%Y %H:%M")
     fecha = Paragraph(f"Fecha de generación: {fecha_str}", styles['CustomDate'])
 
@@ -71,7 +83,7 @@ def exportar_pdf_reportlab(repuestos):
         Paragraph("<u>Cantidad</u>", styles['Heading4']),
         Paragraph("<u>Almacén</u>", styles['Heading4']),
         Paragraph("<u>Ubicación Técnica</u>", styles['Heading4']),
-        Paragraph("<u>Comentario</u>", styles['Heading4']),          # ✅ NUEVO
+        Paragraph("<u>Comentario</u>", styles['Heading4']),
     ]]
 
     for r in repuestos:
@@ -79,7 +91,7 @@ def exportar_pdf_reportlab(repuestos):
         if isinstance(ubicacion, list):
             ubicacion = ", ".join(ubicacion)
 
-        comentario = r.get("comentario", "") or ""                    # ✅ NUEVO
+        comentario = r.get("comentario", "") or ""
 
         img_rel_path = r.get("imagen", None)
         if img_rel_path:
@@ -110,7 +122,7 @@ def exportar_pdf_reportlab(repuestos):
             Paragraph(str(r.get("cantidad", "")), styles['Normal']),
             Paragraph(str(r.get("equipo", "")), styles['Normal']),
             Paragraph(ubicacion, styles['Normal']),
-            Paragraph(comentario, styles['Normal']),                  # ✅ NUEVO
+            Paragraph(comentario, styles['Normal']),
         ])
 
     table = Table(data, repeatRows=1, hAlign='CENTER')
@@ -128,11 +140,11 @@ def exportar_pdf_reportlab(repuestos):
     cantidad_items = len(repuestos)
     total_text = Paragraph(f"Cantidad de ítems listados: <b>{cantidad_items}</b>", styles['CustomTotal'])
 
-    elements = [titulo, fecha, table, total_text]
+    elements = [titulo_p, fecha, table, total_text]
     doc.build(elements)
 
     buffer.seek(0)
     response = make_response(buffer.read())
     response.headers['Content-Type'] = 'application/pdf'
-    response.headers['Content-Disposition'] = 'attachment; filename=repuestos.pdf'
+    response.headers['Content-Disposition'] = f'attachment; filename="{nombre_archivo}"'
     return response

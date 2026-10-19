@@ -80,6 +80,23 @@
 
         document.addEventListener('input', handler);
         document.addEventListener('keyup', handler);
+
+        // ✅ Exportar PDF: enviar el texto del buscador de la misma pestaña
+        document.addEventListener('submit', function (event) {
+            const form = event.target;
+
+            if (!form || !form.classList || !form.classList.contains('js-exportar-pdf-repuestos')) {
+                return;
+            }
+
+            const scope = form.closest('.tab-pane') || form.closest('[data-tabla-repuestos]') || document;
+            const input = scope.querySelector('.js-filtrar-tabla');
+            const hidden = form.querySelector('input[name="buscar"]');
+
+            if (input && hidden && (input.value || '').trim()) {
+                hidden.value = input.value.trim();
+            }
+        });
     }
 
     window.TableFilter = {

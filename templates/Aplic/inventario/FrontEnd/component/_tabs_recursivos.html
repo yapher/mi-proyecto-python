@@ -17,7 +17,6 @@
                 type="button" role="tab"
                 aria-selected="{{ 'true' if loop.first and padre_activo else 'false' }}">
             {{ almacen.emoji }} {{ almacen.nombre }}
-            {# CAMBIO 1: contar solo por ruta exacta #}
             {% set total_reps = repuestos_por_equipo.get(almacen.ruta_jerarquia, [])|length %}
             {% if total_reps > 0 %}
             <span class="badge bg-primary ms-1">{{ total_reps }}</span>
@@ -37,10 +36,21 @@
             <small class="text-muted">({{ almacen.ruta_jerarquia }})</small>
         </h5>
 
-        {# CAMBIO 2: una sola búsqueda, sin fallbacks por nombre ni último segmento #}
         {% set repuestos = repuestos_por_equipo.get(almacen.ruta_jerarquia, []) %}
 
         {% if repuestos %}
+            {# ✅ Exportar PDF de ESTE almacén #}
+            <div class="d-flex justify-content-end mb-2">
+                <form method="POST"
+                      action="{{ url_for('indexinventario.exportar_pdf_almacen') }}"
+                      class="no-loader">
+                    <input type="hidden" name="almacen" value="{{ almacen.ruta_jerarquia }}">
+                    <button type="submit" class="btn btn-outline-light btn-sm">
+                        Exportar PDF
+                    </button>
+                </form>
+            </div>
+
             {% include 'Aplic/inventario/FrontEnd/component/_repuestos_list.html' %}
         {% else %}
             <p class="text-muted fst-italic py-2">No hay repuestos para este almacén.</p>

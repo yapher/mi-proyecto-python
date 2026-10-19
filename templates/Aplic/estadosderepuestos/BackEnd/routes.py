@@ -52,12 +52,17 @@ except ImportError:
             return None, None
 
 try:
-    from .export_pdf import exportar_pdf_reportlab
+    from .export_pdf import exportar_pdf_reportlab, nombre_pdf
 except ImportError:
     try:
-        from templates.Aplic.estadosderepuestos.BackEnd.export_pdf import exportar_pdf_reportlab
+        from templates.Aplic.estadosderepuestos.BackEnd.export_pdf import (
+            exportar_pdf_reportlab, nombre_pdf
+        )
     except ImportError:
         exportar_pdf_reportlab = None
+
+        def nombre_pdf(*partes):
+            return 'repuestos.pdf'
 
 try:
     from core.logging_config import get_logger
@@ -181,7 +186,8 @@ def exportar_pdf():
         logger.error("No se pudo importar exportar_pdf_reportlab.")
         return jsonify({"error": "Exportador PDF no disponible"}), 500
 
-    ruta_jerarquia = normalizar_texto(request.form.get("ruta_jerarquia", "")).lower()
+    ruta_original = normalizar_texto(request.form.get("ruta_jerarquia", ""))
+    ruta_jerarquia = ruta_original.lower()
     buscar = normalizar_texto(request.form.get("buscar", "")).lower()
 
     repuestos = leer_repuestos()
@@ -196,7 +202,16 @@ def exportar_pdf():
 
     repuestos_filtrados = filtro_buscar(repuestos_filtrados, buscar)
 
-    return exportar_pdf_reportlab(repuestos_filtrados)
+    titulo = (
+        f"Repuestos por línea - {ruta_original}"
+        if ruta_original else "Informe de Estado de Repuestos"
+    )
+
+    return exportar_pdf_reportlab(
+        repuestos_filtrados,
+        titulo=titulo,
+        nombre_archivo=nombre_pdf('repuestos', ruta_original)
+    )
 
 
 @estadoRep_bp.route('/agregar_repuesto', methods=['POST'])
@@ -275,12 +290,9 @@ def editar_repuesto():
         return _redirigir(return_to, tab_activo)
 
     if filename:
-        # Se subió una imagen nueva: reemplaza a la anterior
         nuevos_datos['imagen'] = filename
     elif request.form.get('eliminar_imagen', '').strip().lower() == 'true':
-        # ✅ Se quitó la imagen y no se subió otra.
-        # Solo se desvincula del repuesto: el archivo NO se borra del disco
-        # porque otros repuestos pueden estar usando el mismo archivo.
+        # Solo se desvincula: el archivo no se borra porque otros repuestos pueden usarlo
         nuevos_datos['imagen'] = ''
 
     exito, mensaje = actualizar_repuesto_core(codigo_original, nuevos_datos)
