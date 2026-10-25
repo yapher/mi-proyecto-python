@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% from 'partials/repuestos/filtroBusqueda.html' import filtros_repuestos %}
 
 {% block head %}
 {{ super() }}
@@ -8,7 +9,7 @@
 {% block content %}
 {% set return_to = 'indexlista_repuestos.indexlista_repuestos' %}
 
-<div class="container-fluid mt-4 px-0">
+<div class="container-fluid mt-4 px-0" data-repuesto-filtro data-filtro-contador="#repuestosContador">
 
     <!-- ========== CABECERA FIJA ========== -->
     <div class="repuestos-fixed-header">
@@ -29,31 +30,8 @@
             {% endif %}
         </h3>
 
-        <form method="get" class="row g-2 mb-3" id="formFiltrosRepuestos">
-            <div class="col-md-2 col-6">
-                <input type="text" name="nombre" id="filtroNombre" autocomplete="off"
-                    placeholder="Nombre o comentario" value="{{ filtros.nombre }}" class="form-control">
-            </div>
-            <div class="col-md-2 col-6">
-                <input type="text" name="codigo" id="filtroCodigo" autocomplete="off"
-                    placeholder="Código" value="{{ filtros.codigo }}" class="form-control">
-            </div>
-            <div class="col-md-2 col-6">
-                <select name="estado" class="form-select">
-                    <option value="">-- Todos los estados --</option>
-                    {% for estado in estados %}
-                    <option value="{{ estado.emoji }}" {% if filtros.estado==estado.emoji %}selected{% endif %}>
-                        {{ estado.nombre }} {{ estado.emoji }}
-                    </option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="col-md-2 col-6">
-                <input type="date" name="fecha_alta" value="{{ filtros.fecha_alta }}" class="form-control">
-            </div>
-            <div class="col-md-2 col-6">
-                <input type="date" name="fecha_baja" value="{{ filtros.fecha_baja }}" class="form-control">
-            </div>
+        <form method="get" class="row g-2 mb-3">
+            {{ filtros_repuestos(filtros=filtros, estados=estados, con_name=true) }}
             <div class="col-md-2 col-12">
                 <button type="submit" class="btn btn-primary w-100">Filtrar</button>
             </div>
@@ -61,10 +39,10 @@
 
         {% if repuestos %}
         <div class="d-flex gap-3 align-items-center mb-2 flex-wrap">
-            <form class="form-exportar-pdf no-loader"
+            <form class="form-exportar-pdf no-loader" data-filtro-pdf
                 action="{{ url_for('indexlista_repuestos.indexlista_repuestos') }}" method="get">
-                <input type="hidden" name="nombre" id="exportNombre" value="{{ filtros.nombre }}">
-                <input type="hidden" name="codigo" id="exportCodigo" value="{{ filtros.codigo }}">
+                <input type="hidden" name="nombre" value="{{ filtros.nombre }}">
+                <input type="hidden" name="codigo" value="{{ filtros.codigo }}">
                 <input type="hidden" name="estado" value="{{ filtros.estado }}">
                 <input type="hidden" name="fecha_alta" value="{{ filtros.fecha_alta }}">
                 <input type="hidden" name="fecha_baja" value="{{ filtros.fecha_baja }}">
@@ -90,7 +68,7 @@
             {% include 'Aplic/listarepuestos/FrontEnd/component/cardRepuesto.html' %}
             {% endfor %}
         </div>
-        <div class="alert alert-warning d-none" id="repuestosSinResultados">
+        <div class="alert alert-warning d-none" data-filtro-vacio>
             No se encontraron repuestos con esa búsqueda.
         </div>
         {% else %}

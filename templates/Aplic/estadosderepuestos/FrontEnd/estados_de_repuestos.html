@@ -18,7 +18,7 @@ data-bs-target="#tab-pane-{{ tab.sanitized_id }}"
 type="button" role="tab"
 aria-controls="tab-pane-{{ tab.sanitized_id }}"
 aria-selected="{% if tab.sanitized_id == active_tab %}true{% else %}false{% endif %}">
-{{ tab.title }}<span class="badge bg-primary">{{ tab.repuestos_filtrados|length }}</span>
+{{ tab.title }}<span class="badge bg-primary" id="badge-{{ tab.sanitized_id }}">{{ tab.repuestos_filtrados|length }}</span>
 </button>
 </li>
 {% endfor %}
@@ -34,19 +34,11 @@ aria-labelledby="tab-{{ tab.sanitized_id }}">
 {% set repuestos = tab.repuestos_filtrados %}
 {% set active_tab = active_tab %}
 
-{# ✅ Exportar PDF de ESTA pestaña (usa /exportar_pdf) #}
-<div class="d-flex justify-content-end my-2">
-    <form method="POST"
-          action="{{ url_for('indexEstadoRep.exportar_pdf') }}"
-          class="no-loader js-exportar-pdf-repuestos">
-        <input type="hidden" name="ruta_jerarquia" value="{{ tab.ruta_jerarquia|default('') }}">
-        <input type="hidden" name="buscar" value="{{ buscar|default('') }}">
-        <button type="submit" class="btn btn-outline-light btn-sm"
-                {% if not repuestos %}disabled title="No hay repuestos para exportar"{% endif %}>
-            Exportar PDF
-        </button>
-    </form>
-</div>
+{# Partial compartido: mismos filtros que Lista + exportar PDF de ESTA pestaña #}
+{% set filtro_completo = true %}
+{% set pdf_action = url_for('indexEstadoRep.exportar_pdf') %}
+{% set pdf_ruta = tab.ruta_jerarquia|default('') %}
+{% set contador_selector = '#badge-' ~ tab.sanitized_id %}
 
 {% include 'partials/repuestos/tablaRepuestos.html' %}
 </div>

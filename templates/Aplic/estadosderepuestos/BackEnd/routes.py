@@ -27,6 +27,7 @@ from core.repuestos import (
     cargar_todos_repuestos,
     obtener_repuesto_por_codigo,
     existe_codigo,
+    filtrar_repuestos,
     crear_repuesto as crear_repuesto_core,
     actualizar_repuesto as actualizar_repuesto_core,
     eliminar_repuesto as eliminar_repuesto_core,
@@ -201,6 +202,16 @@ def exportar_pdf():
         repuestos_filtrados = list(repuestos)
 
     repuestos_filtrados = filtro_buscar(repuestos_filtrados, buscar)
+
+    # Mismos filtros que Lista de repuestos
+    repuestos_filtrados = filtrar_repuestos(repuestos_filtrados, {
+        'nombre': request.form.get('nombre', ''),
+        'codigo': request.form.get('codigo', ''),
+        'estado': request.form.get('estado', ''),
+        'fecha_alta': request.form.get('fecha_alta', ''),
+        'fecha_baja': request.form.get('fecha_baja', ''),
+        'vencidos': request.form.get('vencidos', ''),
+    })
 
     titulo = (
         f"Repuestos por línea - {ruta_original}"

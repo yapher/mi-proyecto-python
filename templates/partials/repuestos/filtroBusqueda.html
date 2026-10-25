@@ -1,0 +1,68 @@
+{#
+    templates/partials/repuestos/filtroBusqueda.html
+
+    Filtros de repuestos reutilizables, en vivo (static/js/utils/repuesto_filtro.js):
+    nombre/comentario, código, estado, fecha de alta y fecha de baja.
+
+    Uso:
+      {% from 'partials/repuestos/filtroBusqueda.html' import filtros_repuestos %}
+      {{ filtros_repuestos(filtros=filtros, estados=estados, con_name=true) }}
+
+    Parámetros:
+      filtros       dict con valores iniciales (nombre, codigo, estado, fecha_alta, fecha_baja)
+      estados       lista de {nombre, emoji} para el select de estado
+      con_name      agrega name="..." (para formularios GET con botón Filtrar)
+      completo      false = solo nombre/comentario y código
+      con_vencidos  agrega la casilla "Solo vencidos" (filtro en vivo)
+      clase_col     clases de columna de cada campo
+#}
+{% macro filtros_repuestos(filtros=None, estados=None, con_name=false, completo=true, con_vencidos=false, clase_col='col-md-2 col-6') -%}
+{%- set f = filtros or {} -%}
+<div class="{{ clase_col }}">
+    <input type="text" class="form-control" autocomplete="off"
+           placeholder="Nombre o comentario" value="{{ f.nombre or '' }}"
+           data-filtro-campos="nombre,comentario" data-filtro-param="nombre"
+           {%- if con_name %} name="nombre"{% endif %}>
+</div>
+<div class="{{ clase_col }}">
+    <input type="text" class="form-control" autocomplete="off"
+           placeholder="Código" value="{{ f.codigo or '' }}"
+           data-filtro-campos="codigo" data-filtro-param="codigo"
+           {%- if con_name %} name="codigo"{% endif %}>
+</div>
+{% if completo %}
+<div class="{{ clase_col }}">
+    <select class="form-select"
+            data-filtro-igual="estado" data-filtro-param="estado"
+            {%- if con_name %} name="estado"{% endif %}>
+        <option value="">-- Todos los estados --</option>
+        {% for estado in estados or [] %}
+        <option value="{{ estado.emoji }}" {% if f.estado == estado.emoji %}selected{% endif %}>
+            {{ estado.nombre }} {{ estado.emoji }}
+        </option>
+        {% endfor %}
+    </select>
+</div>
+<div class="{{ clase_col }}">
+    <input type="date" class="form-control" title="Fecha de alta"
+           value="{{ f.fecha_alta or '' }}"
+           data-filtro-igual="fecha_creacion" data-filtro-param="fecha_alta"
+           {%- if con_name %} name="fecha_alta"{% endif %}>
+</div>
+<div class="{{ clase_col }}">
+    <input type="date" class="form-control" title="Fecha de baja"
+           value="{{ f.fecha_baja or '' }}"
+           data-filtro-igual="fecha_fin" data-filtro-param="fecha_baja"
+           {%- if con_name %} name="fecha_baja"{% endif %}>
+</div>
+{% if con_vencidos %}
+<div class="{{ clase_col }} d-flex align-items-center">
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="1"
+               data-filtro-vencidos data-filtro-param="vencidos">
+        <label class="form-check-label">Solo vencidos</label>
+    </div>
+</div>
+{% endif %}
+{% endif %}
+{%- endmacro %}

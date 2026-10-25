@@ -13,10 +13,13 @@
 {% set fecha_fin = (_r.get('fecha_fin', '') or '')|string|trim %}
 {% set comentario_txt = (_r.get('comentario', '') or '')|string|trim %}
 
-<article class="rep-card" data-repuesto="1"
+<article class="rep-card" data-repuesto="1" data-filtro-item
          data-codigo="{{ codigo|e }}"
          data-nombre="{{ nombre|e }}"
-         data-comentario="{{ comentario_txt|e }}">
+         data-comentario="{{ comentario_txt|e }}"
+         data-estado="{{ estado|e }}"
+         data-fecha_creacion="{{ fecha_creacion|e }}"
+         data-fecha_fin="{{ fecha_fin|e }}">
     {% if estado %}
         <span class="rep-card-badge" title="{{ estado|e }}">{{ estado }}</span>
     {% endif %}

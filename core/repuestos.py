@@ -158,68 +158,51 @@ def contar_repuestos_por_estado(repuestos=None, filtro_jerarquia=None):
 
 def filtrar_repuestos(repuestos, filtros):
     """
-    Filtra repuestos según múltiples criterios.
-    - 'nombre' busca en el nombre Y en el comentario.
-    - 'nombre' y 'codigo' ignoran mayúsculas y tildes.
+    Filtro único de repuestos (Lista, Estados y PDF).
+    - 'nombre' busca en nombre Y comentario; 'nombre' y 'codigo' ignoran tildes/mayúsculas.
+    - 'estado' coincide exacto.
+    - 'fecha_alta' / 'fecha_baja' exigen la misma fecha (YYYY-MM-DD).
+    - 'vencidos' == '1' deja solo los de fecha de baja anterior a hoy.
     """
     from datetime import datetime
 
     resultado = []
     hoy = datetime.today().date()
-    mostrar_vencidos = filtros.get('vencidos') == '1'
+    mostrar_vencidos = str(filtros.get('vencidos') or '').strip() == '1'
 
     termino_nombre = _normalizar(filtros.get('nombre'))
     termino_codigo = _normalizar(filtros.get('codigo'))
+    estado = str(filtros.get('estado') or '').strip()
+    fecha_alta = str(filtros.get('fecha_alta') or '').strip()
+    fecha_baja = str(filtros.get('fecha_baja') or '').strip()
 
     for rep in repuestos:
-        cumple = True
+        fecha_fin_str = str(rep.get('fecha_fin') or '').strip()
 
-        fecha_fin_str = rep.get('fecha_fin')
-        esta_vencido = False
-        if fecha_fin_str:
+        if mostrar_vencidos:
             try:
-                fecha_fin = datetime.strptime(fecha_fin_str, '%Y-%m-%d').date()
-                if fecha_fin < hoy:
-                    esta_vencido = True
+                if datetime.strptime(fecha_fin_str, '%Y-%m-%d').date() >= hoy:
+                    continue
             except ValueError:
-                pass
+                continue
 
-        if mostrar_vencidos and not esta_vencido:
-            continue
-
-        # Nombre O comentario (sin tildes)
         if termino_nombre:
             if (termino_nombre not in _normalizar(rep.get('nombre'))
                     and termino_nombre not in _normalizar(rep.get('comentario'))):
-                cumple = False
+                continue
 
-        # Código (sin tildes / mayúsculas)
         if termino_codigo and termino_codigo not in _normalizar(rep.get('codigo')):
-            cumple = False
+            continue
 
-        if filtros.get('estado') and filtros['estado'] != rep.get('estado', ''):
-            cumple = False
+        if estado and estado != str(rep.get('estado') or '').strip():
+            continue
 
-        if filtros.get('fecha_alta'):
-            try:
-                fecha_alta = datetime.strptime(filtros['fecha_alta'], '%Y-%m-%d')
-                rep_fecha = datetime.strptime(rep.get('fecha_creacion', ''), '%Y-%m-%d')
-                if rep_fecha.date() != fecha_alta.date():
-                    cumple = False
-            except Exception:
-                pass
+        if fecha_alta and fecha_alta != str(rep.get('fecha_creacion') or '').strip():
+            continue
 
-        if filtros.get('fecha_baja'):
-            try:
-                fecha_baja = datetime.strptime(filtros['fecha_baja'], '%Y-%m-%d')
-                rep_fecha = datetime.strptime(rep.get('fecha_fin', ''), '%Y-%m-%d')
-                if rep_fecha.date() != fecha_baja.date():
-                    cumple = False
-            except Exception:
-                if rep.get('fecha_fin'):
-                    cumple = False
+        if fecha_baja and fecha_baja != fecha_fin_str:
+            continue
 
-        if cumple:
-            resultado.append(rep)
+        resultado.append(rep)
 
     return resultado

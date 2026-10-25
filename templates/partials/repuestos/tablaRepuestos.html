@@ -1,18 +1,54 @@
 {#
     templates/partials/repuestos/tablaRepuestos.html
 
-    Tabla común de repuestos.
+    Tabla común de repuestos con filtro en vivo (repuesto_filtro.js).
     Espera variable: repuestos
-    Opcional: empty_message, active_tab
+    Opcionales:
+      empty_message
+      active_tab
+      filtro_completo   -> true = mismos filtros que Lista (estado, fechas, vencidos)
+      estados           -> lista de estados (para el select, si filtro_completo)
+      pdf_action        -> URL del exportador; si existe, muestra "Exportar PDF"
+      pdf_ruta          -> ruta_jerarquia que se envía al exportador
+      contador_selector -> selector CSS de un badge con la cantidad visible
 #}
+{% from 'partials/repuestos/filtroBusqueda.html' import filtros_repuestos %}
 
 {% set active_tab = active_tab|default('') %}
 {% set empty_message = empty_message|default('No hay repuestos para mostrar.') %}
+{% set filtro_completo = filtro_completo|default(false) %}
+{% set pdf_action = pdf_action|default('') %}
+{% set pdf_ruta = pdf_ruta|default('') %}
+{% set contador_selector = contador_selector|default('') %}
 
-<div class="tabla-container" data-tabla-repuestos>
-    <input type="text"
-           class="form-control mb-3 js-filtrar-tabla"
-           placeholder="🔍 Buscar en todos los campos...">
+<div class="tabla-container" data-tabla-repuestos data-repuesto-filtro
+     {%- if contador_selector %} data-filtro-contador="{{ contador_selector }}"{% endif %}>
+
+    <div class="row g-2 mb-3 align-items-center">
+        {% if filtro_completo %}
+            {{ filtros_repuestos(estados=estados|default([]), completo=true, con_vencidos=true) }}
+        {% else %}
+            {{ filtros_repuestos(completo=false, clase_col='col-md-4 col-6') }}
+        {% endif %}
+
+        {% if pdf_action %}
+        <div class="col-md-2 col-12 text-md-end">
+            <form method="POST" action="{{ pdf_action }}" class="no-loader d-inline-block" data-filtro-pdf>
+                <input type="hidden" name="ruta_jerarquia" value="{{ pdf_ruta }}">
+                <input type="hidden" name="nombre" value="">
+                <input type="hidden" name="codigo" value="">
+                <input type="hidden" name="estado" value="">
+                <input type="hidden" name="fecha_alta" value="">
+                <input type="hidden" name="fecha_baja" value="">
+                <input type="hidden" name="vencidos" value="">
+                <button type="submit" class="btn btn-outline-light btn-sm"
+                        {% if not repuestos %}disabled title="No hay repuestos para exportar"{% endif %}>
+                    Exportar PDF
+                </button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
 
     <div class="table-responsive tabla-scroll">
         <table class="table table-hover table-striped table-dark align-middle w-100 mb-0 js-tabla-repuestos">
@@ -32,7 +68,13 @@
             <tbody>
                 {% if repuestos and repuestos|length > 0 %}
                     {% for r in repuestos %}
-                        <tr>
+                        <tr data-filtro-item
+                            data-nombre="{{ (r.nombre or '')|e }}"
+                            data-codigo="{{ (r.codigo or '')|e }}"
+                            data-comentario="{{ (r.comentario or '')|e }}"
+                            data-estado="{{ (r.estado or '')|e }}"
+                            data-fecha_creacion="{{ (r.fecha_creacion or '')|e }}"
+                            data-fecha_fin="{{ (r.fecha_fin or '')|e }}">
                             <td>
                                 {% include 'partials/repuestos/imageRep.html' %}
                             </td>
@@ -69,5 +111,9 @@
                 {% endif %}
             </tbody>
         </table>
+    </div>
+
+    <div class="alert alert-warning d-none mt-3" data-filtro-vacio>
+        No se encontraron repuestos con esa búsqueda.
     </div>
 </div>
