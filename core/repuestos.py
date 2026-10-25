@@ -3,7 +3,20 @@
 Módulo reutilizable para operaciones con repuestos.
 Usado por: inventario, listarepuestos, estadosderepuestos, graficosrepuestos.
 """
+import unicodedata
+
 from core.db_sql_store import repuesto_store, almacen_store
+
+
+# ============================================================
+# UTILIDADES
+# ============================================================
+
+def _normalizar(valor):
+    """Minúsculas y sin tildes: 'Válvula' -> 'valvula'. Tolera None."""
+    texto = unicodedata.normalize('NFD', str(valor or ''))
+    texto = ''.join(c for c in texto if unicodedata.category(c) != 'Mn')
+    return texto.lower().strip()
 
 
 # ============================================================
@@ -103,7 +116,7 @@ def construir_mapeo_repuestos_por_almacen(repuestos=None, almacenes=None):
             continue
 
         if equipo in rutas:
-            clave = equipo                       # caso normal
+            clave = equipo
         else:
             # Dato viejo (solo nombre): se asigna solo si es inequívoco
             candidatos = por_nombre.get(equipo, [])
@@ -117,6 +130,7 @@ def construir_mapeo_repuestos_por_almacen(repuestos=None, almacenes=None):
 def obtener_repuestos_para_almacen(mapeo, almacen):
     ruta_jer = (almacen.get('ruta_jerarquia') or '').strip()
     return mapeo.get(ruta_jer, [])
+
 
 def contar_repuestos_por_estado(repuestos=None, filtro_jerarquia=None):
     """Cuenta repuestos agrupados por estado."""
@@ -143,12 +157,19 @@ def contar_repuestos_por_estado(repuestos=None, filtro_jerarquia=None):
 
 
 def filtrar_repuestos(repuestos, filtros):
-    """Filtra repuestos según múltiples criterios."""
+    """
+    Filtra repuestos según múltiples criterios.
+    - 'nombre' busca en el nombre Y en el comentario.
+    - 'nombre' y 'codigo' ignoran mayúsculas y tildes.
+    """
     from datetime import datetime
 
     resultado = []
     hoy = datetime.today().date()
     mostrar_vencidos = filtros.get('vencidos') == '1'
+
+    termino_nombre = _normalizar(filtros.get('nombre'))
+    termino_codigo = _normalizar(filtros.get('codigo'))
 
     for rep in repuestos:
         cumple = True
@@ -166,10 +187,16 @@ def filtrar_repuestos(repuestos, filtros):
         if mostrar_vencidos and not esta_vencido:
             continue
 
-        if filtros.get('nombre') and filtros['nombre'].lower() not in rep.get('nombre', '').lower():
+        # Nombre O comentario (sin tildes)
+        if termino_nombre:
+            if (termino_nombre not in _normalizar(rep.get('nombre'))
+                    and termino_nombre not in _normalizar(rep.get('comentario'))):
+                cumple = False
+
+        # Código (sin tildes / mayúsculas)
+        if termino_codigo and termino_codigo not in _normalizar(rep.get('codigo')):
             cumple = False
-        if filtros.get('codigo') and filtros['codigo'].lower() not in rep.get('codigo', '').lower():
-            cumple = False
+
         if filtros.get('estado') and filtros['estado'] != rep.get('estado', ''):
             cumple = False
 

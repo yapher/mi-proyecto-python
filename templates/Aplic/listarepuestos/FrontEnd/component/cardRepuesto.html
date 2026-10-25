@@ -11,8 +11,12 @@
 {% set equipo = (_r.get('equipo', '') or '')|string|trim %}
 {% set fecha_creacion = (_r.get('fecha_creacion', '') or '')|string|trim %}
 {% set fecha_fin = (_r.get('fecha_fin', '') or '')|string|trim %}
+{% set comentario_txt = (_r.get('comentario', '') or '')|string|trim %}
 
-<article class="rep-card" data-repuesto="1" data-codigo="{{ codigo|e }}">
+<article class="rep-card" data-repuesto="1"
+         data-codigo="{{ codigo|e }}"
+         data-nombre="{{ nombre|e }}"
+         data-comentario="{{ comentario_txt|e }}">
     {% if estado %}
         <span class="rep-card-badge" title="{{ estado|e }}">{{ estado }}</span>
     {% endif %}
